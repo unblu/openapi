@@ -15,6 +15,8 @@ import com.unblu.webapi.jersey.v3.invoker.Pair;
 import com.unblu.webapi.model.v3.ConversationInvitationData;
 import com.unblu.webapi.model.v3.ConversationInvitationQuery;
 import com.unblu.webapi.model.v3.ConversationInvitationResult;
+import com.unblu.webapi.model.v3.InvitationsAddSecondaryInvitationTargetBody;
+import com.unblu.webapi.model.v3.InvitationsCancelSecondaryInvitationTargetBody;
 import com.unblu.webapi.model.v3.InvitationsForwardConversationToAgentBody;
 import com.unblu.webapi.model.v3.InvitationsForwardConversationToTeamBody;
 import com.unblu.webapi.model.v3.InvitationsInviteAgentToConversationBody;
@@ -41,6 +43,136 @@ public class InvitationsApi {
 
 	public void setApiClient(ApiClient apiClient) {
 		this.apiClient = apiClient;
+	}
+
+	/**
+	 * addSecondaryInvitationTarget Add a secondary invitation target to the given invitation. This target agent will be informed additionally to the main target
+	 * agent and can accept the invitation as well.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; This is only possible for conversation requests for a specific agent.
+	 * Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; The secondary target person has to be a different one than the target of the
+	 * invitation. Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; There can only be one pending secondary invitation target per person.
+	 * If there is already one defined which is in pending state, an exception will be thrown.&lt;br&gt; To cancel this secondary invitation, see
+	 * &#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * 
+	 * @param invitationId The invitation to which the secondary target should be added. (required)
+	 * @param invitationsAddSecondaryInvitationTargetBody (required)
+	 * @return ConversationInvitationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationInvitationData invitationsAddSecondaryInvitationTarget(String invitationId, InvitationsAddSecondaryInvitationTargetBody invitationsAddSecondaryInvitationTargetBody) throws ApiException {
+		return invitationsAddSecondaryInvitationTargetWithHttpInfo(invitationId, invitationsAddSecondaryInvitationTargetBody).getData();
+	}
+
+	/**
+	 * addSecondaryInvitationTarget Add a secondary invitation target to the given invitation. This target agent will be informed additionally to the main target
+	 * agent and can accept the invitation as well.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; This is only possible for conversation requests for a specific agent.
+	 * Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; The secondary target person has to be a different one than the target of the
+	 * invitation. Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; There can only be one pending secondary invitation target per person.
+	 * If there is already one defined which is in pending state, an exception will be thrown.&lt;br&gt; To cancel this secondary invitation, see
+	 * &#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * 
+	 * @param invitationId The invitation to which the secondary target should be added. (required)
+	 * @param invitationsAddSecondaryInvitationTargetBody (required)
+	 * @return ApiResponse&lt;ConversationInvitationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationInvitationData> invitationsAddSecondaryInvitationTargetWithHttpInfo(String invitationId, InvitationsAddSecondaryInvitationTargetBody invitationsAddSecondaryInvitationTargetBody) throws ApiException {
+		Object localVarPostBody = invitationsAddSecondaryInvitationTargetBody;
+
+		// verify the required parameter 'invitationId' is set
+		if (invitationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'invitationId' when calling invitationsAddSecondaryInvitationTarget");
+		}
+
+		// verify the required parameter 'invitationsAddSecondaryInvitationTargetBody' is set
+		if (invitationsAddSecondaryInvitationTargetBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'invitationsAddSecondaryInvitationTargetBody' when calling invitationsAddSecondaryInvitationTarget");
+		}
+
+		// create path and map variables
+		String localVarPath = "/invitations/{invitationId}/addSecondaryInvitationTarget"
+				.replaceAll("\\{" + "invitationId" + "\\}", apiClient.escapeString(invitationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * cancelSecondaryInvitationTarget Cancels the invitation send to a secondary target. The secondary target agent will no longer be able to accept the
+	 * invitation.&lt;br&gt; See also &#x60;addSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * 
+	 * @param invitationId The invitation to which the secondary target belongs to. (required)
+	 * @param invitationsCancelSecondaryInvitationTargetBody (required)
+	 * @return ConversationInvitationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationInvitationData invitationsCancelSecondaryInvitationTarget(String invitationId, InvitationsCancelSecondaryInvitationTargetBody invitationsCancelSecondaryInvitationTargetBody) throws ApiException {
+		return invitationsCancelSecondaryInvitationTargetWithHttpInfo(invitationId, invitationsCancelSecondaryInvitationTargetBody).getData();
+	}
+
+	/**
+	 * cancelSecondaryInvitationTarget Cancels the invitation send to a secondary target. The secondary target agent will no longer be able to accept the
+	 * invitation.&lt;br&gt; See also &#x60;addSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * 
+	 * @param invitationId The invitation to which the secondary target belongs to. (required)
+	 * @param invitationsCancelSecondaryInvitationTargetBody (required)
+	 * @return ApiResponse&lt;ConversationInvitationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationInvitationData> invitationsCancelSecondaryInvitationTargetWithHttpInfo(String invitationId, InvitationsCancelSecondaryInvitationTargetBody invitationsCancelSecondaryInvitationTargetBody) throws ApiException {
+		Object localVarPostBody = invitationsCancelSecondaryInvitationTargetBody;
+
+		// verify the required parameter 'invitationId' is set
+		if (invitationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'invitationId' when calling invitationsCancelSecondaryInvitationTarget");
+		}
+
+		// verify the required parameter 'invitationsCancelSecondaryInvitationTargetBody' is set
+		if (invitationsCancelSecondaryInvitationTargetBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'invitationsCancelSecondaryInvitationTargetBody' when calling invitationsCancelSecondaryInvitationTarget");
+		}
+
+		// create path and map variables
+		String localVarPath = "/invitations/{invitationId}/cancelSecondaryInvitationTarget"
+				.replaceAll("\\{" + "invitationId" + "\\}", apiClient.escapeString(invitationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**
@@ -211,8 +343,8 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * inviteAnonymousVisitorToConversationWithEmail Invites an authenticated visitor to join a conversation by email. Calling this method sends an email to the
-	 * email address provided containing a link that opens the conversation in the Visitor Desk.&lt;br&gt;
+	 * inviteAnonymousVisitorToConversationWithEmail Invites a visitor to join a conversation by email. Calling this method sends an email to the email address
+	 * provided containing a link that opens the conversation in the Visitor Desk.&lt;br&gt;
 	 * 
 	 * @param invitationsInviteAnonymousVisitorToConversationWithEmailBody (required)
 	 * @return ConversationInvitationData
@@ -223,8 +355,8 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * inviteAnonymousVisitorToConversationWithEmail Invites an authenticated visitor to join a conversation by email. Calling this method sends an email to the
-	 * email address provided containing a link that opens the conversation in the Visitor Desk.&lt;br&gt;
+	 * inviteAnonymousVisitorToConversationWithEmail Invites a visitor to join a conversation by email. Calling this method sends an email to the email address
+	 * provided containing a link that opens the conversation in the Visitor Desk.&lt;br&gt;
 	 * 
 	 * @param invitationsInviteAnonymousVisitorToConversationWithEmailBody (required)
 	 * @return ApiResponse&lt;ConversationInvitationData&gt;
@@ -264,8 +396,8 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * inviteAnonymousVisitorToConversationWithLink Invites an authenticated visitor to a join conversation using a link. The returned invitation data contains a
-	 * link of the type \&quot;ACCEPT_IN_VISITOR_DESK\&quot; which can be passed on to the invited visitor.&lt;br&gt;
+	 * inviteAnonymousVisitorToConversationWithLink Invites a visitor to a join conversation using a link. The returned invitation data contains a link of the type
+	 * \&quot;ACCEPT_IN_VISITOR_DESK\&quot; which can be passed on to the invited visitor.&lt;br&gt;
 	 * 
 	 * @param invitationsInviteAnonymousVisitorToConversationWithLinkBody (required)
 	 * @return ConversationInvitationData
@@ -276,8 +408,8 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * inviteAnonymousVisitorToConversationWithLink Invites an authenticated visitor to a join conversation using a link. The returned invitation data contains a
-	 * link of the type \&quot;ACCEPT_IN_VISITOR_DESK\&quot; which can be passed on to the invited visitor.&lt;br&gt;
+	 * inviteAnonymousVisitorToConversationWithLink Invites a visitor to a join conversation using a link. The returned invitation data contains a link of the type
+	 * \&quot;ACCEPT_IN_VISITOR_DESK\&quot; which can be passed on to the invited visitor.&lt;br&gt;
 	 * 
 	 * @param invitationsInviteAnonymousVisitorToConversationWithLinkBody (required)
 	 * @return ApiResponse&lt;ConversationInvitationData&gt;
@@ -317,8 +449,8 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * inviteAnonymousVisitorToConversationWithPin Invites an authenticated visitor to join a conversation using a PIN. The PIN con be found in the
-	 * \&quot;token\&quot; field of the returned invitation. It can be redeemed by entering it in the embedded or floating site integration UI.&lt;br&gt;
+	 * inviteAnonymousVisitorToConversationWithPin Invites a visitor to join a conversation using a PIN. The PIN can be found in the \&quot;token\&quot; field of
+	 * the returned invitation. It can be redeemed by entering it in the embedded or floating site integration UI.&lt;br&gt;
 	 * 
 	 * @param invitationsInviteAnonymousVisitorToConversationWithPinBody (required)
 	 * @return ConversationInvitationData
@@ -329,8 +461,8 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * inviteAnonymousVisitorToConversationWithPin Invites an authenticated visitor to join a conversation using a PIN. The PIN con be found in the
-	 * \&quot;token\&quot; field of the returned invitation. It can be redeemed by entering it in the embedded or floating site integration UI.&lt;br&gt;
+	 * inviteAnonymousVisitorToConversationWithPin Invites a visitor to join a conversation using a PIN. The PIN can be found in the \&quot;token\&quot; field of
+	 * the returned invitation. It can be redeemed by entering it in the embedded or floating site integration UI.&lt;br&gt;
 	 * 
 	 * @param invitationsInviteAnonymousVisitorToConversationWithPinBody (required)
 	 * @return ApiResponse&lt;ConversationInvitationData&gt;

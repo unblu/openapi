@@ -35,6 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ReplyMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	ReplyMessageData.JSON_PROPERTY_ACTION_ID,
 	ReplyMessageData.JSON_PROPERTY_SOURCE_ID,
+	ReplyMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	ReplyMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	ReplyMessageData.JSON_PROPERTY_VALUE,
 })
@@ -129,6 +130,10 @@ public class ReplyMessageData implements MessageData {
 	@JsonProperty(JSON_PROPERTY_SOURCE_ID)
 	private String sourceId;
 
+	public static final String JSON_PROPERTY_BOT_THREAD_ID = "botThreadId";
+	@JsonProperty(JSON_PROPERTY_BOT_THREAD_ID)
+	private String botThreadId;
+
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
 	private String questionMessageId;
@@ -162,11 +167,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * The ID of the message.&lt;br&gt;
+	 * The ID of the message&lt;br&gt;
 	 * 
 	 * @return id
 	 **/
-	@ApiModelProperty(value = "The ID of the message.<br>")
+	@ApiModelProperty(value = "The ID of the message<br>")
 	public String getId() {
 		return id;
 	}
@@ -181,11 +186,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * Conversation ID to which this message belongs to
+	 * Conversation ID this message belongs to
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "Conversation ID to which this message belongs to")
+	@ApiModelProperty(value = "Conversation ID this message belongs to")
 	public String getConversationId() {
 		return conversationId;
 	}
@@ -219,11 +224,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * Account ID to which this message and conversation belongs to.
+	 * ID of the account this message and conversation belong to
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account ID to which this message and conversation belongs to.")
+	@ApiModelProperty(value = "ID of the account this message and conversation belong to")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -257,11 +262,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * Id of the person presence that sends the message. &lt;p&gt; May be null if the message was sent by the system.
+	 * ID of the person presence who sent the message. &lt;p&gt; May be null if the message was sent by the system.
 	 * 
 	 * @return senderPersonPresenceId
 	 **/
-	@ApiModelProperty(value = "Id of the person presence that sends the message. <p> May be null if the message was sent by the system.")
+	@ApiModelProperty(value = "ID of the person presence who sent the message. <p> May be null if the message was sent by the system.")
 	public String getSenderPersonPresenceId() {
 		return senderPersonPresenceId;
 	}
@@ -276,11 +281,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * utc timestamp when the message was received on the server.&lt;br&gt; Empty when sending a new message to the collaboration server
+	 * UTC timestamp when the message was received by the server&lt;br&gt; Empty when sending a new message to the collaboration server
 	 * 
 	 * @return serverTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the message was received on the server.<br> Empty when sending a new message to the collaboration server")
+	@ApiModelProperty(value = "UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server")
 	public Long getServerTimestamp() {
 		return serverTimestamp;
 	}
@@ -295,11 +300,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * utc timestamp when the message was sent from the client&lt;br&gt; Empty when sending a new message to the collaboration server
+	 * UTC timestamp when the message was sent by the client.&lt;br&gt; Empty when sending a new message to the collaboration server
 	 * 
 	 * @return sendTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the message was sent from the client<br> Empty when sending a new message to the collaboration server")
+	@ApiModelProperty(value = "UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server")
 	public Long getSendTimestamp() {
 		return sendTimestamp;
 	}
@@ -341,11 +346,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * Person IDs of the recipients of the message. If it is null, all active participations are recipients
+	 * Person IDs of the recipients of the message. If null, all active participations are recipients.
 	 * 
 	 * @return recipientPersonIds
 	 **/
-	@ApiModelProperty(value = "Person IDs of the recipients of the message. If it is null, all active participations are recipients")
+	@ApiModelProperty(value = "Person IDs of the recipients of the message. If null, all active participations are recipients.")
 	public List<String> getRecipientPersonIds() {
 		return recipientPersonIds;
 	}
@@ -361,13 +366,13 @@ public class ReplyMessageData implements MessageData {
 
 	/**
 	 * Text representation of the message which is used in following cases: &lt;ul&gt; &lt;li&gt;Unblu cannot restore the complex content of the message
-	 * anymore&lt;/li&gt; &lt;li&gt;push notifications&lt;/li&gt; &lt;li&gt;for the last message in the conversation overview&lt;/li&gt; &lt;/ul&gt; The text
-	 * doesn&#39;t contain markdown.&lt;br&gt; The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. This may
-	 * however not always be a perfect textual representation of the message.&lt;br&gt;
+	 * anymore&lt;/li&gt; &lt;li&gt;Push notifications&lt;/li&gt; &lt;li&gt;For the last message in the conversation overview&lt;/li&gt; &lt;/ul&gt; The text
+	 * doesn&#39;t contain markdown.&lt;br&gt; The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may,
+	 * however, not always be a perfect textual representation of the message.&lt;br&gt;
 	 * 
 	 * @return fallbackText
 	 **/
-	@ApiModelProperty(value = "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>push notifications</li> <li>for the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. This may however not always be a perfect textual representation of the message.<br>")
+	@ApiModelProperty(value = "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>")
 	public String getFallbackText() {
 		return fallbackText;
 	}
@@ -382,11 +387,11 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * An ID of the action triggering the message to be able to identify a message created by an action.
+	 * An ID of the action triggering the message to be able to identify a message created by an action
 	 * 
 	 * @return actionId
 	 **/
-	@ApiModelProperty(value = "An ID of the action triggering the message to be able to identify a message created by an action.")
+	@ApiModelProperty(value = "An ID of the action triggering the message to be able to identify a message created by an action")
 	public String getActionId() {
 		return actionId;
 	}
@@ -401,17 +406,36 @@ public class ReplyMessageData implements MessageData {
 	}
 
 	/**
-	 * A custom ID which identifies where this message initially came from.
+	 * A custom ID which identifies where this message initially came from
 	 * 
 	 * @return sourceId
 	 **/
-	@ApiModelProperty(value = "A custom ID which identifies where this message initially came from.")
+	@ApiModelProperty(value = "A custom ID which identifies where this message initially came from")
 	public String getSourceId() {
 		return sourceId;
 	}
 
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
+	}
+
+	public ReplyMessageData botThreadId(String botThreadId) {
+		this.botThreadId = botThreadId;
+		return this;
+	}
+
+	/**
+	 * An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+	 * 
+	 * @return botThreadId
+	 **/
+	@ApiModelProperty(value = "An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.")
+	public String getBotThreadId() {
+		return botThreadId;
+	}
+
+	public void setBotThreadId(String botThreadId) {
+		this.botThreadId = botThreadId;
 	}
 
 	public ReplyMessageData questionMessageId(String questionMessageId) {
@@ -475,13 +499,14 @@ public class ReplyMessageData implements MessageData {
 				Objects.equals(this.fallbackText, replyMessageData.fallbackText) &&
 				Objects.equals(this.actionId, replyMessageData.actionId) &&
 				Objects.equals(this.sourceId, replyMessageData.sourceId) &&
+				Objects.equals(this.botThreadId, replyMessageData.botThreadId) &&
 				Objects.equals(this.questionMessageId, replyMessageData.questionMessageId) &&
 				Objects.equals(this.value, replyMessageData.value);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, questionMessageId, value);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, questionMessageId, value);
 	}
 
 	@Override
@@ -502,6 +527,7 @@ public class ReplyMessageData implements MessageData {
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    actionId: ").append(toIndentedString(actionId)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
+		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("}");

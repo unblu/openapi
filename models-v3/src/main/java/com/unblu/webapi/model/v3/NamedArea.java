@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	NamedArea.JSON_PROPERTY_DESCRIPTION,
 	NamedArea.JSON_PROPERTY_TYPE,
 	NamedArea.JSON_PROPERTY_SITE_ID,
+	NamedArea.JSON_PROPERTY_TRANSLATIONS,
 	NamedArea.JSON_PROPERTY_CONFIGURATION,
 	NamedArea.JSON_PROPERTY_TEXT,
 	NamedArea.JSON_PROPERTY_METADATA,
@@ -114,6 +115,10 @@ public class NamedArea {
 	public static final String JSON_PROPERTY_SITE_ID = "siteId";
 	@JsonProperty(JSON_PROPERTY_SITE_ID)
 	private String siteId;
+
+	public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
+	@JsonProperty(JSON_PROPERTY_TRANSLATIONS)
+	private Map<String, NamedAreaTranslation> translations = null;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -233,12 +238,12 @@ public class NamedArea {
 	}
 
 	/**
-	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the
+	 * user currently logged in. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -343,6 +348,33 @@ public class NamedArea {
 		this.siteId = siteId;
 	}
 
+	public NamedArea translations(Map<String, NamedAreaTranslation> translations) {
+		this.translations = translations;
+		return this;
+	}
+
+	public NamedArea putTranslationsItem(String key, NamedAreaTranslation translationsItem) {
+		if (this.translations == null) {
+			this.translations = new HashMap<>();
+		}
+		this.translations.put(key, translationsItem);
+		return this;
+	}
+
+	/**
+	 * A map of localized versions of the name and description of this entity
+	 * 
+	 * @return translations
+	 **/
+	@ApiModelProperty(value = "A map of localized versions of the name and description of this entity")
+	public Map<String, NamedAreaTranslation> getTranslations() {
+		return translations;
+	}
+
+	public void setTranslations(Map<String, NamedAreaTranslation> translations) {
+		this.translations = translations;
+	}
+
 	public NamedArea _configuration(Map<String, String> _configuration) {
 		this._configuration = _configuration;
 		return this;
@@ -444,6 +476,7 @@ public class NamedArea {
 				Objects.equals(this.description, namedArea.description) &&
 				Objects.equals(this.type, namedArea.type) &&
 				Objects.equals(this.siteId, namedArea.siteId) &&
+				Objects.equals(this.translations, namedArea.translations) &&
 				Objects.equals(this._configuration, namedArea._configuration) &&
 				Objects.equals(this.text, namedArea.text) &&
 				Objects.equals(this.metadata, namedArea.metadata);
@@ -451,7 +484,7 @@ public class NamedArea {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, name, description, type, siteId, _configuration, text, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, name, description, type, siteId, translations, _configuration, text, metadata);
 	}
 
 	@Override
@@ -469,6 +502,7 @@ public class NamedArea {
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    siteId: ").append(toIndentedString(siteId)).append("\n");
+		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");

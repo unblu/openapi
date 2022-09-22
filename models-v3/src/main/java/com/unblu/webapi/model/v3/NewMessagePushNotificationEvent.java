@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	NewMessagePushNotificationEvent.JSON_PROPERTY_SENDER_NAME,
 	NewMessagePushNotificationEvent.JSON_PROPERTY_SENDER_PERSON_ID,
 	NewMessagePushNotificationEvent.JSON_PROPERTY_NOTIFICATION_COUNT,
+	NewMessagePushNotificationEvent.JSON_PROPERTY_RECIPIENT_NOTIFICATION_COUNT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class NewMessagePushNotificationEvent {
@@ -132,6 +133,10 @@ public class NewMessagePushNotificationEvent {
 	@JsonProperty(JSON_PROPERTY_NOTIFICATION_COUNT)
 	private Integer notificationCount;
 
+	public static final String JSON_PROPERTY_RECIPIENT_NOTIFICATION_COUNT = "recipientNotificationCount";
+	@JsonProperty(JSON_PROPERTY_RECIPIENT_NOTIFICATION_COUNT)
+	private Integer recipientNotificationCount;
+
 	public NewMessagePushNotificationEvent $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
@@ -157,11 +162,11 @@ public class NewMessagePushNotificationEvent {
 	}
 
 	/**
-	 * The time (unix time in millies) that the event was generated.
+	 * The time (Unix time in ms) when the event was generated
 	 * 
 	 * @return timestamp
 	 **/
-	@ApiModelProperty(value = "The time (unix time in millies) that the event was generated.")
+	@ApiModelProperty(value = "The time (Unix time in ms) when the event was generated")
 	public Long getTimestamp() {
 		return timestamp;
 	}
@@ -195,11 +200,11 @@ public class NewMessagePushNotificationEvent {
 	}
 
 	/**
-	 * The account ID the event originated from.
+	 * The account ID the event originated from
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "The account ID the event originated from.")
+	@ApiModelProperty(value = "The account ID the event originated from")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -425,6 +430,25 @@ public class NewMessagePushNotificationEvent {
 		this.notificationCount = notificationCount;
 	}
 
+	public NewMessagePushNotificationEvent recipientNotificationCount(Integer recipientNotificationCount) {
+		this.recipientNotificationCount = recipientNotificationCount;
+		return this;
+	}
+
+	/**
+	 * Number of notifications (i.e. unread messages) the recipient person has in total
+	 * 
+	 * @return recipientNotificationCount
+	 **/
+	@ApiModelProperty(value = "Number of notifications (i.e. unread messages) the recipient person has in total")
+	public Integer getRecipientNotificationCount() {
+		return recipientNotificationCount;
+	}
+
+	public void setRecipientNotificationCount(Integer recipientNotificationCount) {
+		this.recipientNotificationCount = recipientNotificationCount;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -448,12 +472,13 @@ public class NewMessagePushNotificationEvent {
 				Objects.equals(this.messageServerTimestamp, newMessagePushNotificationEvent.messageServerTimestamp) &&
 				Objects.equals(this.senderName, newMessagePushNotificationEvent.senderName) &&
 				Objects.equals(this.senderPersonId, newMessagePushNotificationEvent.senderPersonId) &&
-				Objects.equals(this.notificationCount, newMessagePushNotificationEvent.notificationCount);
+				Objects.equals(this.notificationCount, newMessagePushNotificationEvent.notificationCount) &&
+				Objects.equals(this.recipientNotificationCount, newMessagePushNotificationEvent.recipientNotificationCount);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, messageId, messageText, messageSendTimestamp, messageServerTimestamp, senderName, senderPersonId, notificationCount);
+		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, messageId, messageText, messageSendTimestamp, messageServerTimestamp, senderName, senderPersonId, notificationCount, recipientNotificationCount);
 	}
 
 	@Override
@@ -475,6 +500,7 @@ public class NewMessagePushNotificationEvent {
 		sb.append("    senderName: ").append(toIndentedString(senderName)).append("\n");
 		sb.append("    senderPersonId: ").append(toIndentedString(senderPersonId)).append("\n");
 		sb.append("    notificationCount: ").append(toIndentedString(notificationCount)).append("\n");
+		sb.append("    recipientNotificationCount: ").append(toIndentedString(recipientNotificationCount)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = AuthorizationRoleUserSearchFilter.class, name = "AUTHORIZATION_ROLE"),
 	@JsonSubTypes.Type(value = CreationTimestampUserSearchFilter.class, name = "CREATION_TIMESTAMP"),
 	@JsonSubTypes.Type(value = EmailUserSearchFilter.class, name = "EMAIL"),
+	@JsonSubTypes.Type(value = ExternallyManagedUserSearchFilter.class, name = "EXTERNALLY_MANAGED"),
 	@JsonSubTypes.Type(value = FirstNameUserSearchFilter.class, name = "FIRST_NAME"),
 	@JsonSubTypes.Type(value = LastNameUserSearchFilter.class, name = "LAST_NAME"),
 	@JsonSubTypes.Type(value = ModificationTimestampUserSearchFilter.class, name = "MODIFICATION_TIMESTAMP"),

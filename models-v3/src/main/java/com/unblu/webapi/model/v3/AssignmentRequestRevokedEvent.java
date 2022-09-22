@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_ACCOUNT_ID,
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_INVITATION_ID,
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_CONVERSATION_ID,
+	AssignmentRequestRevokedEvent.JSON_PROPERTY_CONVERSATION,
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_TOKEN,
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_DATE_CREATED,
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_CREATOR_TYPE,
@@ -91,6 +92,10 @@ public class AssignmentRequestRevokedEvent {
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
 	private String conversationId;
 
+	public static final String JSON_PROPERTY_CONVERSATION = "conversation";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION)
+	private ConversationData conversation = null;
+
 	public static final String JSON_PROPERTY_TOKEN = "token";
 	@JsonProperty(JSON_PROPERTY_TOKEN)
 	private String token;
@@ -140,11 +145,11 @@ public class AssignmentRequestRevokedEvent {
 	}
 
 	/**
-	 * The time (unix time in millies) that the event was generated.
+	 * The time (Unix time in ms) when the event was generated
 	 * 
 	 * @return timestamp
 	 **/
-	@ApiModelProperty(value = "The time (unix time in millies) that the event was generated.")
+	@ApiModelProperty(value = "The time (Unix time in ms) when the event was generated")
 	public Long getTimestamp() {
 		return timestamp;
 	}
@@ -178,11 +183,11 @@ public class AssignmentRequestRevokedEvent {
 	}
 
 	/**
-	 * The account ID the event originated from.
+	 * The account ID the event originated from
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "The account ID the event originated from.")
+	@ApiModelProperty(value = "The account ID the event originated from")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -216,17 +221,36 @@ public class AssignmentRequestRevokedEvent {
 	}
 
 	/**
-	 * Id of the conversation
+	 * Id of the conversation. Duplicate: Use conversation.id instead.
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "Id of the conversation")
+	@ApiModelProperty(value = "Id of the conversation. Duplicate: Use conversation.id instead.")
 	public String getConversationId() {
 		return conversationId;
 	}
 
 	public void setConversationId(String conversationId) {
 		this.conversationId = conversationId;
+	}
+
+	public AssignmentRequestRevokedEvent conversation(ConversationData conversation) {
+		this.conversation = conversation;
+		return this;
+	}
+
+	/**
+	 * Get conversation
+	 * 
+	 * @return conversation
+	 **/
+	@ApiModelProperty(value = "")
+	public ConversationData getConversation() {
+		return conversation;
+	}
+
+	public void setConversation(ConversationData conversation) {
+		this.conversation = conversation;
 	}
 
 	public AssignmentRequestRevokedEvent token(String token) {
@@ -254,11 +278,11 @@ public class AssignmentRequestRevokedEvent {
 	}
 
 	/**
-	 * Unix timestamp when the event was created
+	 * Unix timestamp (ms) when the event was created
 	 * 
 	 * @return dateCreated
 	 **/
-	@ApiModelProperty(value = "Unix timestamp when the event was created")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the event was created")
 	public Long getDateCreated() {
 		return dateCreated;
 	}
@@ -358,6 +382,7 @@ public class AssignmentRequestRevokedEvent {
 				Objects.equals(this.accountId, assignmentRequestRevokedEvent.accountId) &&
 				Objects.equals(this.invitationId, assignmentRequestRevokedEvent.invitationId) &&
 				Objects.equals(this.conversationId, assignmentRequestRevokedEvent.conversationId) &&
+				Objects.equals(this.conversation, assignmentRequestRevokedEvent.conversation) &&
 				Objects.equals(this.token, assignmentRequestRevokedEvent.token) &&
 				Objects.equals(this.dateCreated, assignmentRequestRevokedEvent.dateCreated) &&
 				Objects.equals(this.creatorType, assignmentRequestRevokedEvent.creatorType) &&
@@ -368,7 +393,7 @@ public class AssignmentRequestRevokedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversationId, token, dateCreated, creatorType, creatorPerson, contextPersonInfo, target);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversationId, conversation, token, dateCreated, creatorType, creatorPerson, contextPersonInfo, target);
 	}
 
 	@Override
@@ -381,6 +406,7 @@ public class AssignmentRequestRevokedEvent {
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    invitationId: ").append(toIndentedString(invitationId)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+		sb.append("    conversation: ").append(toIndentedString(conversation)).append("\n");
 		sb.append("    token: ").append(toIndentedString(token)).append("\n");
 		sb.append("    dateCreated: ").append(toIndentedString(dateCreated)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");

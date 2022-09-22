@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryMessageData.JSON_PROPERTY_SENDER_PERSON_ID,
 	ConversationHistoryMessageData.JSON_PROPERTY_TYPE,
 	ConversationHistoryMessageData.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
+	ConversationHistoryMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	ConversationHistoryMessageData.JSON_PROPERTY_TEXT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -97,6 +98,10 @@ public class ConversationHistoryMessageData {
 	public static final String JSON_PROPERTY_RECIPIENT_PERSON_IDS = "recipientPersonIds";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_PERSON_IDS)
 	private List<String> recipientPersonIds = null;
+
+	public static final String JSON_PROPERTY_BOT_THREAD_ID = "botThreadId";
+	@JsonProperty(JSON_PROPERTY_BOT_THREAD_ID)
+	private String botThreadId;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -262,6 +267,25 @@ public class ConversationHistoryMessageData {
 		this.recipientPersonIds = recipientPersonIds;
 	}
 
+	public ConversationHistoryMessageData botThreadId(String botThreadId) {
+		this.botThreadId = botThreadId;
+		return this;
+	}
+
+	/**
+	 * ID of the bot thread the message is part of. Always null for messages outside bot threads.
+	 * 
+	 * @return botThreadId
+	 **/
+	@ApiModelProperty(value = "ID of the bot thread the message is part of. Always null for messages outside bot threads.")
+	public String getBotThreadId() {
+		return botThreadId;
+	}
+
+	public void setBotThreadId(String botThreadId) {
+		this.botThreadId = botThreadId;
+	}
+
 	public ConversationHistoryMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -298,12 +322,13 @@ public class ConversationHistoryMessageData {
 				Objects.equals(this.senderPersonId, conversationHistoryMessageData.senderPersonId) &&
 				Objects.equals(this.type, conversationHistoryMessageData.type) &&
 				Objects.equals(this.recipientPersonIds, conversationHistoryMessageData.recipientPersonIds) &&
+				Objects.equals(this.botThreadId, conversationHistoryMessageData.botThreadId) &&
 				Objects.equals(this.text, conversationHistoryMessageData.text);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, recipientPersonIds, text);
+		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, recipientPersonIds, botThreadId, text);
 	}
 
 	@Override
@@ -318,6 +343,7 @@ public class ConversationHistoryMessageData {
 		sb.append("    senderPersonId: ").append(toIndentedString(senderPersonId)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
+		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("}");
 		return sb.toString();

@@ -39,7 +39,13 @@ public enum EConversationLinkType {
 	/**
 	 * OPEN_IN_VISITOR_DESK: Link to open an existing conversation in a visitor desk
 	 */
-	OPEN_IN_VISITOR_DESK("OPEN_IN_VISITOR_DESK");
+	OPEN_IN_VISITOR_DESK("OPEN_IN_VISITOR_DESK"),
+
+	/**
+	 * OPEN_PUBLIC_LINK: Link to open an existing conversation. It will first go to the visitor desk, it it can be detected, that the user is an agent, it will
+	 * redirect to the single view for the agent.
+	 */
+	OPEN_PUBLIC_LINK("OPEN_PUBLIC_LINK");
 
 	private String value;
 

@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EIdOperatorType {
 
 	/**
-	 * EQUALS: Check if the value is equals to the one provided in the operator
+	 * EQUALS: Check if the value is equal to the one provided in the operator
 	 */
 	EQUALS("EQUALS"),
 
 	/**
-	 * NOT_EQUALS: Check if the value not is equals to the one provided in the operator
+	 * NOT_EQUALS: Check if the value is different from the one provided in the operator
 	 */
 	NOT_EQUALS("NOT_EQUALS"),
 
@@ -37,7 +37,12 @@ public enum EIdOperatorType {
 	/**
 	 * IS_NOT_NULL: Check if the value is not null
 	 */
-	IS_NOT_NULL("IS_NOT_NULL");
+	IS_NOT_NULL("IS_NOT_NULL"),
+
+	/**
+	 * STARTS_WITH: Check if the value starts with the given value provided in the operator.
+	 */
+	STARTS_WITH("STARTS_WITH");
 
 	private String value;
 

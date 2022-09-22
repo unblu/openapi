@@ -80,8 +80,12 @@ public enum EInitialEngagementType {
 	SCREEN_SHARING_PIN("SCREEN_SHARING_PIN"),
 
 	/**
-	 * CHAT_INVITE: (Agent initiated, agent centered) An agent creates a chat conversation (this is the recommended initial engagement type for conversation created
-	 * with the Web API).
+	 * CHAT_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a chat conversation.
+	 */
+	CHAT_PIN("CHAT_PIN"),
+
+	/**
+	 * CHAT_INVITE: (Web-API initiated, agent centered) A chat conversation is created for a visitor to join a chat conversation.
 	 */
 	CHAT_INVITE("CHAT_INVITE"),
 
@@ -93,7 +97,12 @@ public enum EInitialEngagementType {
 	/**
 	 * SCREEN_SHARING_INVITE: (Agent initiated, agent centered) An agent creates screen sharing conversation and invites customer later.
 	 */
-	SCREEN_SHARING_INVITE("SCREEN_SHARING_INVITE");
+	SCREEN_SHARING_INVITE("SCREEN_SHARING_INVITE"),
+
+	/**
+	 * SCHEDULED_CONVERSATION: (Agent initiated, agent centered) Conversation created with a certain topic and scheduled for some point in time.
+	 */
+	SCHEDULED_CONVERSATION("SCHEDULED_CONVERSATION");
 
 	private String value;
 

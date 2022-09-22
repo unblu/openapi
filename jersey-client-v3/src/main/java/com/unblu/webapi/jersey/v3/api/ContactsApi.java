@@ -36,7 +36,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param contact The entity to create (required)
 	 * @return Contact
@@ -47,7 +47,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param contact The entity to create (required)
 	 * @return ApiResponse&lt;Contact&gt;
@@ -87,9 +87,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void contactsDelete(String id) throws ApiException {
@@ -98,9 +98,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> contactsDeleteWithHttpInfo(String id) throws ApiException {
@@ -132,9 +132,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -145,9 +145,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -181,9 +181,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @return Contact
 	 * @throws ApiException if fails to make API call
 	 */
@@ -192,9 +192,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @return ApiResponse&lt;Contact&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -229,9 +229,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @return List&lt;Contact&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -240,9 +240,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @return ApiResponse&lt;List&lt;Contact&gt;&gt;
 	 * @throws ApiException if fails to make API call
 	 */

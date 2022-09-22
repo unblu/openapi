@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_MESSAGE_ID,
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_READ_TIMESTAMP,
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_NOTIFICATION_COUNT,
+	ReadMessagePushNotificationEvent.JSON_PROPERTY_RECIPIENT_NOTIFICATION_COUNT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ReadMessagePushNotificationEvent {
@@ -112,6 +113,10 @@ public class ReadMessagePushNotificationEvent {
 	@JsonProperty(JSON_PROPERTY_NOTIFICATION_COUNT)
 	private Integer notificationCount;
 
+	public static final String JSON_PROPERTY_RECIPIENT_NOTIFICATION_COUNT = "recipientNotificationCount";
+	@JsonProperty(JSON_PROPERTY_RECIPIENT_NOTIFICATION_COUNT)
+	private Integer recipientNotificationCount;
+
 	public ReadMessagePushNotificationEvent $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
@@ -137,11 +142,11 @@ public class ReadMessagePushNotificationEvent {
 	}
 
 	/**
-	 * The time (unix time in millies) that the event was generated.
+	 * The time (Unix time in ms) when the event was generated
 	 * 
 	 * @return timestamp
 	 **/
-	@ApiModelProperty(value = "The time (unix time in millies) that the event was generated.")
+	@ApiModelProperty(value = "The time (Unix time in ms) when the event was generated")
 	public Long getTimestamp() {
 		return timestamp;
 	}
@@ -175,11 +180,11 @@ public class ReadMessagePushNotificationEvent {
 	}
 
 	/**
-	 * The account ID the event originated from.
+	 * The account ID the event originated from
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "The account ID the event originated from.")
+	@ApiModelProperty(value = "The account ID the event originated from")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -329,6 +334,25 @@ public class ReadMessagePushNotificationEvent {
 		this.notificationCount = notificationCount;
 	}
 
+	public ReadMessagePushNotificationEvent recipientNotificationCount(Integer recipientNotificationCount) {
+		this.recipientNotificationCount = recipientNotificationCount;
+		return this;
+	}
+
+	/**
+	 * Number of notifications (i.e. unread messages) the recipient person has in total
+	 * 
+	 * @return recipientNotificationCount
+	 **/
+	@ApiModelProperty(value = "Number of notifications (i.e. unread messages) the recipient person has in total")
+	public Integer getRecipientNotificationCount() {
+		return recipientNotificationCount;
+	}
+
+	public void setRecipientNotificationCount(Integer recipientNotificationCount) {
+		this.recipientNotificationCount = recipientNotificationCount;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -348,12 +372,13 @@ public class ReadMessagePushNotificationEvent {
 				Objects.equals(this.deviceTokens, readMessagePushNotificationEvent.deviceTokens) &&
 				Objects.equals(this.messageId, readMessagePushNotificationEvent.messageId) &&
 				Objects.equals(this.readTimestamp, readMessagePushNotificationEvent.readTimestamp) &&
-				Objects.equals(this.notificationCount, readMessagePushNotificationEvent.notificationCount);
+				Objects.equals(this.notificationCount, readMessagePushNotificationEvent.notificationCount) &&
+				Objects.equals(this.recipientNotificationCount, readMessagePushNotificationEvent.recipientNotificationCount);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, messageId, readTimestamp, notificationCount);
+		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, messageId, readTimestamp, notificationCount, recipientNotificationCount);
 	}
 
 	@Override
@@ -371,6 +396,7 @@ public class ReadMessagePushNotificationEvent {
 		sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
 		sb.append("    readTimestamp: ").append(toIndentedString(readTimestamp)).append("\n");
 		sb.append("    notificationCount: ").append(toIndentedString(notificationCount)).append("\n");
+		sb.append("    recipientNotificationCount: ").append(toIndentedString(recipientNotificationCount)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

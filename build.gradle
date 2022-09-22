@@ -62,7 +62,7 @@ nexusStaging {
 release {
     buildTasks = ['releaseBuild']
     git {
-        requireBranch = 'main/6.x.x'
+        requireBranch = 'main/7.x.x'
     }
 }
 

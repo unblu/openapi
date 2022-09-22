@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AgentForwardingRedeemedEvent.JSON_PROPERTY_ACCOUNT_ID,
 	AgentForwardingRedeemedEvent.JSON_PROPERTY_INVITATION_ID,
 	AgentForwardingRedeemedEvent.JSON_PROPERTY_CONVERSATION_ID,
+	AgentForwardingRedeemedEvent.JSON_PROPERTY_CONVERSATION,
 	AgentForwardingRedeemedEvent.JSON_PROPERTY_TOKEN,
 	AgentForwardingRedeemedEvent.JSON_PROPERTY_DATE_CREATED,
 	AgentForwardingRedeemedEvent.JSON_PROPERTY_CREATOR_TYPE,
@@ -93,6 +94,10 @@ public class AgentForwardingRedeemedEvent {
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
 	private String conversationId;
 
+	public static final String JSON_PROPERTY_CONVERSATION = "conversation";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION)
+	private ConversationData conversation = null;
+
 	public static final String JSON_PROPERTY_TOKEN = "token";
 	@JsonProperty(JSON_PROPERTY_TOKEN)
 	private String token;
@@ -150,11 +155,11 @@ public class AgentForwardingRedeemedEvent {
 	}
 
 	/**
-	 * The time (unix time in millies) that the event was generated.
+	 * The time (Unix time in ms) when the event was generated
 	 * 
 	 * @return timestamp
 	 **/
-	@ApiModelProperty(value = "The time (unix time in millies) that the event was generated.")
+	@ApiModelProperty(value = "The time (Unix time in ms) when the event was generated")
 	public Long getTimestamp() {
 		return timestamp;
 	}
@@ -188,11 +193,11 @@ public class AgentForwardingRedeemedEvent {
 	}
 
 	/**
-	 * The account ID the event originated from.
+	 * The account ID the event originated from
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "The account ID the event originated from.")
+	@ApiModelProperty(value = "The account ID the event originated from")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -226,17 +231,36 @@ public class AgentForwardingRedeemedEvent {
 	}
 
 	/**
-	 * Id of the conversation
+	 * Id of the conversation. Duplicate: Use conversation.id instead.
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "Id of the conversation")
+	@ApiModelProperty(value = "Id of the conversation. Duplicate: Use conversation.id instead.")
 	public String getConversationId() {
 		return conversationId;
 	}
 
 	public void setConversationId(String conversationId) {
 		this.conversationId = conversationId;
+	}
+
+	public AgentForwardingRedeemedEvent conversation(ConversationData conversation) {
+		this.conversation = conversation;
+		return this;
+	}
+
+	/**
+	 * Get conversation
+	 * 
+	 * @return conversation
+	 **/
+	@ApiModelProperty(value = "")
+	public ConversationData getConversation() {
+		return conversation;
+	}
+
+	public void setConversation(ConversationData conversation) {
+		this.conversation = conversation;
 	}
 
 	public AgentForwardingRedeemedEvent token(String token) {
@@ -264,11 +288,11 @@ public class AgentForwardingRedeemedEvent {
 	}
 
 	/**
-	 * Unix timestamp when the event was created
+	 * Unix timestamp (ms) when the event was created
 	 * 
 	 * @return dateCreated
 	 **/
-	@ApiModelProperty(value = "Unix timestamp when the event was created")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the event was created")
 	public Long getDateCreated() {
 		return dateCreated;
 	}
@@ -406,6 +430,7 @@ public class AgentForwardingRedeemedEvent {
 				Objects.equals(this.accountId, agentForwardingRedeemedEvent.accountId) &&
 				Objects.equals(this.invitationId, agentForwardingRedeemedEvent.invitationId) &&
 				Objects.equals(this.conversationId, agentForwardingRedeemedEvent.conversationId) &&
+				Objects.equals(this.conversation, agentForwardingRedeemedEvent.conversation) &&
 				Objects.equals(this.token, agentForwardingRedeemedEvent.token) &&
 				Objects.equals(this.dateCreated, agentForwardingRedeemedEvent.dateCreated) &&
 				Objects.equals(this.creatorType, agentForwardingRedeemedEvent.creatorType) &&
@@ -418,7 +443,7 @@ public class AgentForwardingRedeemedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversationId, token, dateCreated, creatorType, creatorPerson, contextPersonInfo, target, comment, redeemingPerson);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversationId, conversation, token, dateCreated, creatorType, creatorPerson, contextPersonInfo, target, comment, redeemingPerson);
 	}
 
 	@Override
@@ -431,6 +456,7 @@ public class AgentForwardingRedeemedEvent {
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    invitationId: ").append(toIndentedString(invitationId)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+		sb.append("    conversation: ").append(toIndentedString(conversation)).append("\n");
 		sb.append("    token: ").append(toIndentedString(token)).append("\n");
 		sb.append("    dateCreated: ").append(toIndentedString(dateCreated)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");

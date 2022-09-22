@@ -38,7 +38,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param user The entity to create (required)
 	 * @param expand (optional)
@@ -50,7 +50,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param user The entity to create (required)
 	 * @param expand (optional)
@@ -205,9 +205,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void usersDelete(String id) throws ApiException {
@@ -216,9 +216,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> usersDeleteWithHttpInfo(String id) throws ApiException {
@@ -250,9 +250,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -263,9 +263,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */

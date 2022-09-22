@@ -281,12 +281,12 @@ public class WebhookCallLog {
 	}
 
 	/**
-	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the
+	 * user currently logged in. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -339,11 +339,11 @@ public class WebhookCallLog {
 	}
 
 	/**
-	 * utc timestamp when the request to the webhook was executed
+	 * Unix timestamp (ms) when the request to the webhook was executed
 	 * 
 	 * @return executionTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the request to the webhook was executed")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the request to the webhook was executed")
 	public Long getExecutionTimestamp() {
 		return executionTimestamp;
 	}

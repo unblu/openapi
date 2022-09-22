@@ -126,11 +126,11 @@ public class LicenseData {
 	}
 
 	/**
-	 * Id of the current license. Is null when no license is installed. This is read only information that will changed when a new license is installed.
+	 * ID of the current license. Is null when no license is installed. This is read only information that will changed when a new license is installed.
 	 * 
 	 * @return licenseId
 	 **/
-	@ApiModelProperty(value = "Id of the current license. Is null when no license is installed. This is read only information that will changed when a new license is installed.")
+	@ApiModelProperty(value = "ID of the current license. Is null when no license is installed. This is read only information that will changed when a new license is installed.")
 	public String getLicenseId() {
 		return licenseId;
 	}
@@ -145,12 +145,12 @@ public class LicenseData {
 	}
 
 	/**
-	 * utc timestamp when the current license will expires. Is null when no license is installed. This is read only information that will changed when a new license
-	 * is installed.
+	 * Unix timestamp (ms) when the current license will expires. Is null when no license is installed. This is read only information that will changed when a new
+	 * license is installed.
 	 * 
 	 * @return expirationTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the current license will expires. Is null when no license is installed. This is read only information that will changed when a new license is installed.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the current license will expires. Is null when no license is installed. This is read only information that will changed when a new license is installed.")
 	public Long getExpirationTimestamp() {
 		return expirationTimestamp;
 	}

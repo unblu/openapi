@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Container to return list of cannedresponses
+ * Container to return list of canned responses
  */
-@ApiModel(description = "Container to return list of cannedresponses")
+@ApiModel(description = "Container to return list of canned responses")
 
 @JsonPropertyOrder({
 	CannedResponseResult.JSON_PROPERTY_$_TYPE,

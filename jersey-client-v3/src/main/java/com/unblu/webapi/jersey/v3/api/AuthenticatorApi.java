@@ -1185,8 +1185,9 @@ public class AuthenticatorApi {
 	}
 
 	/**
-	 * loginWithSecureToken Start a session using a signed JWT as the login credentials, a new user with role WEBUSER is automatically created.
-	 * &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
+	 * loginWithSecureToken Start a session using a signed JWT as the login credentials. A new user with the role WEBUSER is created automatically. If
+	 * authentication is successful, the response includes an authentication cookie; the response body is empty. &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a
+	 * mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
 	 * 
 	 * @param secureTokenRequest (required)
 	 * @throws ApiException if fails to make API call
@@ -1197,8 +1198,9 @@ public class AuthenticatorApi {
 	}
 
 	/**
-	 * loginWithSecureToken Start a session using a signed JWT as the login credentials, a new user with role WEBUSER is automatically created.
-	 * &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
+	 * loginWithSecureToken Start a session using a signed JWT as the login credentials. A new user with the role WEBUSER is created automatically. If
+	 * authentication is successful, the response includes an authentication cookie; the response body is empty. &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a
+	 * mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
 	 * 
 	 * @param secureTokenRequest (required)
 	 * @throws ApiException if fails to make API call

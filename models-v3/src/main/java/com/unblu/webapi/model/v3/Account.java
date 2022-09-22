@@ -30,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 	Account.JSON_PROPERTY_BILLING_ADDRESS,
 	Account.JSON_PROPERTY_CONTACT_ADDRESS,
 	Account.JSON_PROPERTY_AVATAR,
+	Account.JSON_PROPERTY_TRANSLATIONS,
 	Account.JSON_PROPERTY_CONFIGURATION,
 	Account.JSON_PROPERTY_METADATA,
 	Account.JSON_PROPERTY_TEXT,
@@ -104,6 +105,10 @@ public class Account {
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
 	private ExpandableField<Avatar> avatar = null;
+
+	public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
+	@JsonProperty(JSON_PROPERTY_TRANSLATIONS)
+	private Map<String, AccountTranslation> translations = null;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -297,6 +302,33 @@ public class Account {
 		this.avatar = avatar;
 	}
 
+	public Account translations(Map<String, AccountTranslation> translations) {
+		this.translations = translations;
+		return this;
+	}
+
+	public Account putTranslationsItem(String key, AccountTranslation translationsItem) {
+		if (this.translations == null) {
+			this.translations = new HashMap<>();
+		}
+		this.translations.put(key, translationsItem);
+		return this;
+	}
+
+	/**
+	 * A map of localized versions of the name of this entity
+	 * 
+	 * @return translations
+	 **/
+	@ApiModelProperty(value = "A map of localized versions of the name of this entity")
+	public Map<String, AccountTranslation> getTranslations() {
+		return translations;
+	}
+
+	public void setTranslations(Map<String, AccountTranslation> translations) {
+		this.translations = translations;
+	}
+
 	public Account _configuration(Map<String, String> _configuration) {
 		this._configuration = _configuration;
 		return this;
@@ -396,6 +428,7 @@ public class Account {
 				Objects.equals(this.billingAddress, account.billingAddress) &&
 				Objects.equals(this.contactAddress, account.contactAddress) &&
 				Objects.equals(this.avatar, account.avatar) &&
+				Objects.equals(this.translations, account.translations) &&
 				Objects.equals(this._configuration, account._configuration) &&
 				Objects.equals(this.metadata, account.metadata) &&
 				Objects.equals(this.text, account.text);
@@ -403,7 +436,7 @@ public class Account {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, name, billingAddress, contactAddress, avatar, _configuration, metadata, text);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, name, billingAddress, contactAddress, avatar, translations, _configuration, metadata, text);
 	}
 
 	@Override
@@ -419,6 +452,7 @@ public class Account {
 		sb.append("    billingAddress: ").append(toIndentedString(billingAddress)).append("\n");
 		sb.append("    contactAddress: ").append(toIndentedString(contactAddress)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");

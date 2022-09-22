@@ -36,7 +36,7 @@ public class TeamsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param team The entity to create (required)
 	 * @param expand (optional)
@@ -48,7 +48,7 @@ public class TeamsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param team The entity to create (required)
 	 * @param expand (optional)
@@ -91,9 +91,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void teamsDelete(String id) throws ApiException {
@@ -102,9 +102,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> teamsDeleteWithHttpInfo(String id) throws ApiException {
@@ -136,9 +136,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -149,9 +149,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */

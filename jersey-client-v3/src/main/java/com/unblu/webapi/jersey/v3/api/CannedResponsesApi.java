@@ -37,7 +37,7 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param cannedResponse The entity to create (required)
 	 * @return CannedResponse
@@ -48,7 +48,7 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param cannedResponse The entity to create (required)
 	 * @return ApiResponse&lt;CannedResponse&gt;
@@ -88,9 +88,9 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void cannedResponsesDelete(String id) throws ApiException {
@@ -99,9 +99,9 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> cannedResponsesDeleteWithHttpInfo(String id) throws ApiException {
@@ -133,9 +133,9 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -146,9 +146,9 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */

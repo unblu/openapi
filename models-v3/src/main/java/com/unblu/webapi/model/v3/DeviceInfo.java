@@ -37,6 +37,8 @@ import io.swagger.annotations.ApiModelProperty;
 	DeviceInfo.JSON_PROPERTY_IDENTIFIER,
 	DeviceInfo.JSON_PROPERTY_IDENTIFIER_SOURCE,
 	DeviceInfo.JSON_PROPERTY_PUSH_TOKEN,
+	DeviceInfo.JSON_PROPERTY_PUSH_KIT_TOKEN,
+	DeviceInfo.JSON_PROPERTY_MOBILE_PUSH_NOTIFICATION_VERSION,
 	DeviceInfo.JSON_PROPERTY_OWNER_PERSON_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -142,6 +144,14 @@ public class DeviceInfo {
 	@JsonProperty(JSON_PROPERTY_PUSH_TOKEN)
 	private String pushToken;
 
+	public static final String JSON_PROPERTY_PUSH_KIT_TOKEN = "pushKitToken";
+	@JsonProperty(JSON_PROPERTY_PUSH_KIT_TOKEN)
+	private String pushKitToken;
+
+	public static final String JSON_PROPERTY_MOBILE_PUSH_NOTIFICATION_VERSION = "mobilePushNotificationVersion";
+	@JsonProperty(JSON_PROPERTY_MOBILE_PUSH_NOTIFICATION_VERSION)
+	private Integer mobilePushNotificationVersion;
+
 	public static final String JSON_PROPERTY_OWNER_PERSON_ID = "ownerPersonId";
 	@JsonProperty(JSON_PROPERTY_OWNER_PERSON_ID)
 	private String ownerPersonId;
@@ -232,12 +242,12 @@ public class DeviceInfo {
 	}
 
 	/**
-	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the
+	 * user currently logged in. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -461,17 +471,55 @@ public class DeviceInfo {
 	}
 
 	/**
-	 * Token for pushing via FireBase.
+	 * Token for pushing mobile notifications.
 	 * 
 	 * @return pushToken
 	 **/
-	@ApiModelProperty(value = "Token for pushing via FireBase.")
+	@ApiModelProperty(value = "Token for pushing mobile notifications.")
 	public String getPushToken() {
 		return pushToken;
 	}
 
 	public void setPushToken(String pushToken) {
 		this.pushToken = pushToken;
+	}
+
+	public DeviceInfo pushKitToken(String pushKitToken) {
+		this.pushKitToken = pushKitToken;
+		return this;
+	}
+
+	/**
+	 * Token for pushing mobile ios voip notifications.
+	 * 
+	 * @return pushKitToken
+	 **/
+	@ApiModelProperty(value = "Token for pushing mobile ios voip notifications.")
+	public String getPushKitToken() {
+		return pushKitToken;
+	}
+
+	public void setPushKitToken(String pushKitToken) {
+		this.pushKitToken = pushKitToken;
+	}
+
+	public DeviceInfo mobilePushNotificationVersion(Integer mobilePushNotificationVersion) {
+		this.mobilePushNotificationVersion = mobilePushNotificationVersion;
+		return this;
+	}
+
+	/**
+	 * Push Notification version supported by the device.
+	 * 
+	 * @return mobilePushNotificationVersion
+	 **/
+	@ApiModelProperty(value = "Push Notification version supported by the device.")
+	public Integer getMobilePushNotificationVersion() {
+		return mobilePushNotificationVersion;
+	}
+
+	public void setMobilePushNotificationVersion(Integer mobilePushNotificationVersion) {
+		this.mobilePushNotificationVersion = mobilePushNotificationVersion;
 	}
 
 	public DeviceInfo ownerPersonId(String ownerPersonId) {
@@ -519,12 +567,14 @@ public class DeviceInfo {
 				Objects.equals(this.identifier, deviceInfo.identifier) &&
 				Objects.equals(this.identifierSource, deviceInfo.identifierSource) &&
 				Objects.equals(this.pushToken, deviceInfo.pushToken) &&
+				Objects.equals(this.pushKitToken, deviceInfo.pushKitToken) &&
+				Objects.equals(this.mobilePushNotificationVersion, deviceInfo.mobilePushNotificationVersion) &&
 				Objects.equals(this.ownerPersonId, deviceInfo.ownerPersonId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, accountId, osName, osVersion, browserName, browserVersion, userAgent, screenWidth, screenHeight, screenPixelRatio, type, identifier, identifierSource, pushToken, ownerPersonId);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, accountId, osName, osVersion, browserName, browserVersion, userAgent, screenWidth, screenHeight, screenPixelRatio, type, identifier, identifierSource, pushToken, pushKitToken, mobilePushNotificationVersion, ownerPersonId);
 	}
 
 	@Override
@@ -548,6 +598,8 @@ public class DeviceInfo {
 		sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
 		sb.append("    identifierSource: ").append(toIndentedString(identifierSource)).append("\n");
 		sb.append("    pushToken: ").append(toIndentedString(pushToken)).append("\n");
+		sb.append("    pushKitToken: ").append(toIndentedString(pushKitToken)).append("\n");
+		sb.append("    mobilePushNotificationVersion: ").append(toIndentedString(mobilePushNotificationVersion)).append("\n");
 		sb.append("    ownerPersonId: ").append(toIndentedString(ownerPersonId)).append("\n");
 		sb.append("}");
 		return sb.toString();

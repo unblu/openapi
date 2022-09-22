@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v3;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -23,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TeamData.JSON_PROPERTY_ID,
 	TeamData.JSON_PROPERTY_ACCOUNT_ID,
 	TeamData.JSON_PROPERTY_DISPLAY_NAME,
+	TeamData.JSON_PROPERTY_DISPLAY_NAME_TRANSLATIONS,
 	TeamData.JSON_PROPERTY_AVATAR,
 	TeamData.JSON_PROPERTY_PARENT_ID,
 })
@@ -76,6 +79,10 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
 	@JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
 	private String displayName;
+
+	public static final String JSON_PROPERTY_DISPLAY_NAME_TRANSLATIONS = "displayNameTranslations";
+	@JsonProperty(JSON_PROPERTY_DISPLAY_NAME_TRANSLATIONS)
+	private Map<String, String> displayNameTranslations = null;
 
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
@@ -161,6 +168,33 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 		this.displayName = displayName;
 	}
 
+	public TeamData displayNameTranslations(Map<String, String> displayNameTranslations) {
+		this.displayNameTranslations = displayNameTranslations;
+		return this;
+	}
+
+	public TeamData putDisplayNameTranslationsItem(String key, String displayNameTranslationsItem) {
+		if (this.displayNameTranslations == null) {
+			this.displayNameTranslations = new HashMap<>();
+		}
+		this.displayNameTranslations.put(key, displayNameTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Localized Display-Name of the team
+	 * 
+	 * @return displayNameTranslations
+	 **/
+	@ApiModelProperty(value = "Localized Display-Name of the team")
+	public Map<String, String> getDisplayNameTranslations() {
+		return displayNameTranslations;
+	}
+
+	public void setDisplayNameTranslations(Map<String, String> displayNameTranslations) {
+		this.displayNameTranslations = displayNameTranslations;
+	}
+
 	public TeamData avatar(ExpandableField<Avatar> avatar) {
 		this.avatar = avatar;
 		return this;
@@ -213,13 +247,14 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.id, teamData.id) &&
 				Objects.equals(this.accountId, teamData.accountId) &&
 				Objects.equals(this.displayName, teamData.displayName) &&
+				Objects.equals(this.displayNameTranslations, teamData.displayNameTranslations) &&
 				Objects.equals(this.avatar, teamData.avatar) &&
 				Objects.equals(this.parentId, teamData.parentId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, displayName, avatar, parentId);
+		return Objects.hash($type, id, accountId, displayName, displayNameTranslations, avatar, parentId);
 	}
 
 	@Override
@@ -230,6 +265,7 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+		sb.append("    displayNameTranslations: ").append(toIndentedString(displayNameTranslations)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
 		sb.append("}");

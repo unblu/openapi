@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ETimestampOperatorType {
 
 	/**
-	 * EQUALS: Check if the value is equals to the one provided in the operator
+	 * EQUALS: Check if the value is equal to the one provided in the operator
 	 */
 	EQUALS("EQUALS"),
 
 	/**
-	 * NOT_EQUALS: Check if the value not is equals to the one provided in the operator
+	 * NOT_EQUALS: Check if the value is different from the one provided in the operator
 	 */
 	NOT_EQUALS("NOT_EQUALS"),
 
@@ -25,9 +25,19 @@ public enum ETimestampOperatorType {
 	GREATER_THAN("GREATER_THAN"),
 
 	/**
+	 * GREATER_THAN_OR_NULL: Check if the value is null or greater than the one provided in the operator
+	 */
+	GREATER_THAN_OR_NULL("GREATER_THAN_OR_NULL"),
+
+	/**
 	 * LOWER_THAN: Check if the value is lower than the one provided in the operator
 	 */
 	LOWER_THAN("LOWER_THAN"),
+
+	/**
+	 * LOWER_THAN_OR_NULL: Check if the value is null or lower than the one provided in the operator
+	 */
+	LOWER_THAN_OR_NULL("LOWER_THAN_OR_NULL"),
 
 	/**
 	 * IN: Check if the value is one of the one provided in the operator

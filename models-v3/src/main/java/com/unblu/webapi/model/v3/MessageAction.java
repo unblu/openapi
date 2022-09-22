@@ -14,9 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Message action used in card and list messages. &lt;p&gt; Reply actions are displayed as buttons whereas internal and external links are rendered as links.
+ * Message action used in card messages and on list items. &lt;p&gt; Links are rendered with their labels below the body text of the card or list item. Reply
+ * actions are only rendered in card messages. They aren&#39;t rendered on list items.
  */
-@ApiModel(description = "Message action used in card and list messages. <p> Reply actions are displayed as buttons whereas internal and external links are rendered as links.")
+@ApiModel(description = "Message action used in card messages and on list items. <p> Links are rendered with their labels below the body text of the card or list item. Reply actions are only rendered in card messages. They aren't rendered on list items.")
 
 @JsonPropertyOrder({
 	MessageAction.JSON_PROPERTY_$_TYPE,

@@ -258,12 +258,12 @@ public class User {
 	}
 
 	/**
-	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the
+	 * user currently logged in. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -297,12 +297,12 @@ public class User {
 	}
 
 	/**
-	 * The username for the login. Depending on the configuration, this is may also the email. Maximum length of 250 characters. Can not be omitted. When
-	 * creating/updating a user and configuration &#39;storage.user.useEmailAsUsername&#39; is enabled, this value must be the same as the email address.
+	 * The username for the login. Depending on the configuration, this may also be the email address. Maximum length of 250 characters. Cannot be omitted. When
+	 * creating or updating a user, and &#39;storage.user.useEmailAsUsername&#39; is enabled, this value must be the same as the email address.
 	 * 
 	 * @return username
 	 **/
-	@ApiModelProperty(value = "The username for the login. Depending on the configuration, this is may also the email. Maximum length of 250 characters. Can not be omitted. When creating/updating a user and configuration 'storage.user.useEmailAsUsername' is enabled, this value must be the same as the email address.")
+	@ApiModelProperty(value = "The username for the login. Depending on the configuration, this may also be the email address. Maximum length of 250 characters. Cannot be omitted. When creating or updating a user, and 'storage.user.useEmailAsUsername' is enabled, this value must be the same as the email address.")
 	public String getUsername() {
 		return username;
 	}
@@ -317,12 +317,12 @@ public class User {
 	}
 
 	/**
-	 * The email address of the user. Maximum length of 250 characters. Can not be omitted, but can be an empty string, if storage.user.useEmailAsUsername is not
-	 * used.
+	 * The email address of the user. Maximum length of 250 characters. If &#39;storage.user.useEmailAsUsername&#39; is set to &#39;false&#39;, the email may be an
+	 * empty string or set to null.
 	 * 
 	 * @return email
 	 **/
-	@ApiModelProperty(value = "The email address of the user. Maximum length of 250 characters. Can not be omitted, but can be an empty string, if storage.user.useEmailAsUsername is not used.")
+	@ApiModelProperty(value = "The email address of the user. Maximum length of 250 characters. If 'storage.user.useEmailAsUsername' is set to 'false', the email may be an empty string or set to null.")
 	public String getEmail() {
 		return email;
 	}
@@ -356,11 +356,11 @@ public class User {
 	}
 
 	/**
-	 * The id of the team the user belongs to. This can be omitted, when creating a user and will be filled by the server with the default team id of the account.
+	 * The ID of the team the user belongs to. If omitted when creating a user, it is filled by the server with the ID of the account&#39;s default team.
 	 * 
 	 * @return teamId
 	 **/
-	@ApiModelProperty(value = "The id of the team the user belongs to. This can be omitted, when creating a user and will be filled by the server with the default team id of the account.")
+	@ApiModelProperty(value = "The ID of the team the user belongs to. If omitted when creating a user, it is filled by the server with the ID of the account's default team.")
 	public String getTeamId() {
 		return teamId;
 	}
@@ -394,11 +394,11 @@ public class User {
 	}
 
 	/**
-	 * The display name of the user. Will be calculated by the server. Can be omitted while creating a user.
+	 * The display name of the user. Calculated by the server. Can be omitted when creating a user.
 	 * 
 	 * @return displayName
 	 **/
-	@ApiModelProperty(value = "The display name of the user. Will be calculated by the server. Can be omitted while creating a user.")
+	@ApiModelProperty(value = "The display name of the user. Calculated by the server. Can be omitted when creating a user.")
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -413,11 +413,11 @@ public class User {
 	}
 
 	/**
-	 * The first name of the user. Maximum length of 250 characters. Can not be omitted.
+	 * The first name of the user. Maximum length of 250 characters. Cannot be omitted.
 	 * 
 	 * @return firstName
 	 **/
-	@ApiModelProperty(value = "The first name of the user. Maximum length of 250 characters. Can not be omitted.")
+	@ApiModelProperty(value = "The first name of the user. Maximum length of 250 characters. Cannot be omitted.")
 	public String getFirstName() {
 		return firstName;
 	}

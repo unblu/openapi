@@ -37,7 +37,7 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param conversationTemplate The entity to create (required)
 	 * @param expand (optional)
@@ -49,7 +49,7 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param conversationTemplate The entity to create (required)
 	 * @param expand (optional)
@@ -92,9 +92,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void conversationTemplatesDelete(String id) throws ApiException {
@@ -103,9 +103,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> conversationTemplatesDeleteWithHttpInfo(String id) throws ApiException {
@@ -137,9 +137,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -150,9 +150,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -237,9 +237,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @param expand (optional)
 	 * @return ConversationTemplate
 	 * @throws ApiException if fails to make API call
@@ -249,9 +249,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;ConversationTemplate&gt;
 	 * @throws ApiException if fails to make API call
@@ -288,9 +288,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @param expand (optional)
 	 * @return List&lt;ConversationTemplate&gt;
 	 * @throws ApiException if fails to make API call
@@ -300,9 +300,9 @@ public class ConversationTemplatesApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;List&lt;ConversationTemplate&gt;&gt;
 	 * @throws ApiException if fails to make API call

@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ResourceMetadata.JSON_PROPERTY_$_TYPE,
 	ResourceMetadata.JSON_PROPERTY_DOCUMENTATION,
 	ResourceMetadata.JSON_PROPERTY_REQUIRED_ROLE,
-	ResourceMetadata.JSON_PROPERTY_REQUIRED_CALL_ORIGIN,
+	ResourceMetadata.JSON_PROPERTY_REQUIRED_ENTRY_PATH,
 	ResourceMetadata.JSON_PROPERTY_PATH,
 	ResourceMetadata.JSON_PROPERTY_QUERY_PARAMETERS,
 	ResourceMetadata.JSON_PROPERTY_BODY,
@@ -80,9 +80,9 @@ public class ResourceMetadata {
 	@JsonProperty(JSON_PROPERTY_REQUIRED_ROLE)
 	private List<String> requiredRole = null;
 
-	public static final String JSON_PROPERTY_REQUIRED_CALL_ORIGIN = "requiredCallOrigin";
-	@JsonProperty(JSON_PROPERTY_REQUIRED_CALL_ORIGIN)
-	private String requiredCallOrigin;
+	public static final String JSON_PROPERTY_REQUIRED_ENTRY_PATH = "requiredEntryPath";
+	@JsonProperty(JSON_PROPERTY_REQUIRED_ENTRY_PATH)
+	private String requiredEntryPath;
 
 	public static final String JSON_PROPERTY_PATH = "path";
 	@JsonProperty(JSON_PROPERTY_PATH)
@@ -177,23 +177,23 @@ public class ResourceMetadata {
 		this.requiredRole = requiredRole;
 	}
 
-	public ResourceMetadata requiredCallOrigin(String requiredCallOrigin) {
-		this.requiredCallOrigin = requiredCallOrigin;
+	public ResourceMetadata requiredEntryPath(String requiredEntryPath) {
+		this.requiredEntryPath = requiredEntryPath;
 		return this;
 	}
 
 	/**
 	 * Origin required to call the resource. One of EOrigin
 	 * 
-	 * @return requiredCallOrigin
+	 * @return requiredEntryPath
 	 **/
 	@ApiModelProperty(value = "Origin required to call the resource. One of EOrigin")
-	public String getRequiredCallOrigin() {
-		return requiredCallOrigin;
+	public String getRequiredEntryPath() {
+		return requiredEntryPath;
 	}
 
-	public void setRequiredCallOrigin(String requiredCallOrigin) {
-		this.requiredCallOrigin = requiredCallOrigin;
+	public void setRequiredEntryPath(String requiredEntryPath) {
+		this.requiredEntryPath = requiredEntryPath;
 	}
 
 	public ResourceMetadata path(List<ResourcePathElement> path) {
@@ -357,7 +357,7 @@ public class ResourceMetadata {
 		return Objects.equals(this.$type, resourceMetadata.$type) &&
 				Objects.equals(this.documentation, resourceMetadata.documentation) &&
 				Objects.equals(this.requiredRole, resourceMetadata.requiredRole) &&
-				Objects.equals(this.requiredCallOrigin, resourceMetadata.requiredCallOrigin) &&
+				Objects.equals(this.requiredEntryPath, resourceMetadata.requiredEntryPath) &&
 				Objects.equals(this.path, resourceMetadata.path) &&
 				Objects.equals(this.queryParameters, resourceMetadata.queryParameters) &&
 				Objects.equals(this.body, resourceMetadata.body) &&
@@ -369,7 +369,7 @@ public class ResourceMetadata {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, documentation, requiredRole, requiredCallOrigin, path, queryParameters, body, returnDocumentation, returnType, isGetAll, methodType);
+		return Objects.hash($type, documentation, requiredRole, requiredEntryPath, path, queryParameters, body, returnDocumentation, returnType, isGetAll, methodType);
 	}
 
 	@Override
@@ -379,7 +379,7 @@ public class ResourceMetadata {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    documentation: ").append(toIndentedString(documentation)).append("\n");
 		sb.append("    requiredRole: ").append(toIndentedString(requiredRole)).append("\n");
-		sb.append("    requiredCallOrigin: ").append(toIndentedString(requiredCallOrigin)).append("\n");
+		sb.append("    requiredEntryPath: ").append(toIndentedString(requiredEntryPath)).append("\n");
 		sb.append("    path: ").append(toIndentedString(path)).append("\n");
 		sb.append("    queryParameters: ").append(toIndentedString(queryParameters)).append("\n");
 		sb.append("    body: ").append(toIndentedString(body)).append("\n");

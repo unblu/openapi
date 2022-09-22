@@ -24,7 +24,9 @@ import com.unblu.webapi.model.v3.ConversationsOffboardParticipantBody;
 import com.unblu.webapi.model.v3.ConversationsSetAssigneePersonBody;
 import com.unblu.webapi.model.v3.ConversationsSetContextPersonBody;
 import com.unblu.webapi.model.v3.ConversationsSetLocaleBody;
+import com.unblu.webapi.model.v3.ConversationsSetScheduledTimestampBody;
 import com.unblu.webapi.model.v3.ConversationsSetStarredBody;
+import com.unblu.webapi.model.v3.ConversationsSetTopicBody;
 import com.unblu.webapi.model.v3.ConversationsSetVisitorDataBody;
 import com.unblu.webapi.model.v3.EConversationEndReason;
 import com.unblu.webapi.model.v3.EConversationLeftReason;
@@ -370,7 +372,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given id&lt;br&gt;
+	 * delete Deletes the conversation for the given ID&lt;br&gt;
 	 * 
 	 * @param id The id of the conversation which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -381,7 +383,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given id&lt;br&gt;
+	 * delete Deletes the conversation for the given ID&lt;br&gt;
 	 * 
 	 * @param id The id of the conversation which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -415,7 +417,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given id&lt;br&gt;
+	 * delete Deletes the conversation for the given ID&lt;br&gt;
 	 * 
 	 * @param id The id of the conversation which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -428,7 +430,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given id&lt;br&gt;
+	 * delete Deletes the conversation for the given ID&lt;br&gt;
 	 * 
 	 * @param id The id of the conversation which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -831,9 +833,9 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * read Returns the conversation for the given id&lt;br&gt;
+	 * read Returns the conversation for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the conversation which should be returned (optional)
+	 * @param id ID of the conversation which should be returned (optional)
 	 * @param expand (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
@@ -843,9 +845,9 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * read Returns the conversation for the given id&lt;br&gt;
+	 * read Returns the conversation for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the conversation which should be returned (optional)
+	 * @param id ID of the conversation which should be returned (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
@@ -1197,7 +1199,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetLocaleBody (required)
@@ -1210,7 +1212,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetLocaleBody (required)
@@ -1260,7 +1262,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -1275,7 +1277,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -1386,6 +1388,71 @@ public class ConversationsApi {
 	}
 
 	/**
+	 * setScheduledTimestamp Set the scheduled time of the conversation. Unix timestamp (ms) when the conversation is scheduled for, which will be rounded to the
+	 * nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;.&lt;br&gt;
+	 * 
+	 * @param conversationId the conversation that is updated (required)
+	 * @param conversationsSetScheduledTimestampBody (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsSetScheduledTimestamp(String conversationId, ConversationsSetScheduledTimestampBody conversationsSetScheduledTimestampBody, String expand) throws ApiException {
+		return conversationsSetScheduledTimestampWithHttpInfo(conversationId, conversationsSetScheduledTimestampBody, expand).getData();
+	}
+
+	/**
+	 * setScheduledTimestamp Set the scheduled time of the conversation. Unix timestamp (ms) when the conversation is scheduled for, which will be rounded to the
+	 * nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;.&lt;br&gt;
+	 * 
+	 * @param conversationId the conversation that is updated (required)
+	 * @param conversationsSetScheduledTimestampBody (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsSetScheduledTimestampWithHttpInfo(String conversationId, ConversationsSetScheduledTimestampBody conversationsSetScheduledTimestampBody, String expand) throws ApiException {
+		Object localVarPostBody = conversationsSetScheduledTimestampBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsSetScheduledTimestamp");
+		}
+
+		// verify the required parameter 'conversationsSetScheduledTimestampBody' is set
+		if (conversationsSetScheduledTimestampBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationsSetScheduledTimestampBody' when calling conversationsSetScheduledTimestamp");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/setScheduledTimestamp"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * setStarred Set the starred status of a conversation for a particular person&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation to be starred/unstarred (required)
@@ -1422,6 +1489,71 @@ public class ConversationsApi {
 
 		// create path and map variables
 		String localVarPath = "/conversations/{conversationId}/setStarred"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * setTopic Set the topic of the conversation. Setting it to null deletes the topic, if it is not mandatory to have a topic defined for the conversation type
+	 * (e.g. SCHEDULED_CONVERSATION).&lt;br&gt;
+	 * 
+	 * @param conversationId the conversation that is updated (required)
+	 * @param conversationsSetTopicBody (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsSetTopic(String conversationId, ConversationsSetTopicBody conversationsSetTopicBody, String expand) throws ApiException {
+		return conversationsSetTopicWithHttpInfo(conversationId, conversationsSetTopicBody, expand).getData();
+	}
+
+	/**
+	 * setTopic Set the topic of the conversation. Setting it to null deletes the topic, if it is not mandatory to have a topic defined for the conversation type
+	 * (e.g. SCHEDULED_CONVERSATION).&lt;br&gt;
+	 * 
+	 * @param conversationId the conversation that is updated (required)
+	 * @param conversationsSetTopicBody (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsSetTopicWithHttpInfo(String conversationId, ConversationsSetTopicBody conversationsSetTopicBody, String expand) throws ApiException {
+		Object localVarPostBody = conversationsSetTopicBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsSetTopic");
+		}
+
+		// verify the required parameter 'conversationsSetTopicBody' is set
+		if (conversationsSetTopicBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationsSetTopicBody' when calling conversationsSetTopic");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/setTopic"
 				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
 
 		// query params

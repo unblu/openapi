@@ -222,11 +222,11 @@ public class PersonPresenceData {
 
 	/**
 	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * account of the currently logged in user. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -241,11 +241,11 @@ public class PersonPresenceData {
 	}
 
 	/**
-	 * utc timestamp when the person has joined
+	 * Unix timestamp (ms) when the person has joined
 	 * 
 	 * @return joinedTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the person has joined")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person has joined")
 	public Long getJoinedTimestamp() {
 		return joinedTimestamp;
 	}
@@ -260,11 +260,11 @@ public class PersonPresenceData {
 	}
 
 	/**
-	 * utc timestamp when the person has left (may not be present or -1 if still online)
+	 * Unix timestamp (ms) when the person has left (may not be present or -1 if still online)
 	 * 
 	 * @return leftTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the person has left (may not be present or -1 if still online)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person has left (may not be present or -1 if still online)")
 	public Long getLeftTimestamp() {
 		return leftTimestamp;
 	}

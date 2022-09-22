@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationTemplate.JSON_PROPERTY_DESCRIPTION,
 	ConversationTemplate.JSON_PROPERTY_DEFAULT_TEMPLATE,
 	ConversationTemplate.JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE,
+	ConversationTemplate.JSON_PROPERTY_TRANSLATIONS,
 	ConversationTemplate.JSON_PROPERTY_CONFIGURATION,
 	ConversationTemplate.JSON_PROPERTY_TEXT,
 	ConversationTemplate.JSON_PROPERTY_METADATA,
@@ -109,6 +110,10 @@ public class ConversationTemplate {
 	public static final String JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE = "initialEngagementType";
 	@JsonProperty(JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE)
 	private EInitialEngagementType initialEngagementType;
+
+	public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
+	@JsonProperty(JSON_PROPERTY_TRANSLATIONS)
+	private Map<String, ConversationTemplateTranslation> translations = null;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -228,12 +233,12 @@ public class ConversationTemplate {
 	}
 
 	/**
-	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the
+	 * user currently logged in. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -316,6 +321,33 @@ public class ConversationTemplate {
 
 	public void setInitialEngagementType(EInitialEngagementType initialEngagementType) {
 		this.initialEngagementType = initialEngagementType;
+	}
+
+	public ConversationTemplate translations(Map<String, ConversationTemplateTranslation> translations) {
+		this.translations = translations;
+		return this;
+	}
+
+	public ConversationTemplate putTranslationsItem(String key, ConversationTemplateTranslation translationsItem) {
+		if (this.translations == null) {
+			this.translations = new HashMap<>();
+		}
+		this.translations.put(key, translationsItem);
+		return this;
+	}
+
+	/**
+	 * A map of localized versions of the name and description of this entity
+	 * 
+	 * @return translations
+	 **/
+	@ApiModelProperty(value = "A map of localized versions of the name and description of this entity")
+	public Map<String, ConversationTemplateTranslation> getTranslations() {
+		return translations;
+	}
+
+	public void setTranslations(Map<String, ConversationTemplateTranslation> translations) {
+		this.translations = translations;
 	}
 
 	public ConversationTemplate _configuration(Map<String, String> _configuration) {
@@ -418,6 +450,7 @@ public class ConversationTemplate {
 				Objects.equals(this.description, conversationTemplate.description) &&
 				Objects.equals(this.defaultTemplate, conversationTemplate.defaultTemplate) &&
 				Objects.equals(this.initialEngagementType, conversationTemplate.initialEngagementType) &&
+				Objects.equals(this.translations, conversationTemplate.translations) &&
 				Objects.equals(this._configuration, conversationTemplate._configuration) &&
 				Objects.equals(this.text, conversationTemplate.text) &&
 				Objects.equals(this.metadata, conversationTemplate.metadata);
@@ -425,7 +458,7 @@ public class ConversationTemplate {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, defaultTemplate, initialEngagementType, _configuration, text, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, defaultTemplate, initialEngagementType, translations, _configuration, text, metadata);
 	}
 
 	@Override
@@ -442,6 +475,7 @@ public class ConversationTemplate {
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    defaultTemplate: ").append(toIndentedString(defaultTemplate)).append("\n");
 		sb.append("    initialEngagementType: ").append(toIndentedString(initialEngagementType)).append("\n");
+		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");

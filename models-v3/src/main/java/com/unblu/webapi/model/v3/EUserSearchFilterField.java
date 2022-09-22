@@ -52,7 +52,12 @@ public enum EUserSearchFilterField {
 	/**
 	 * VIRTUAL_USER: Filter by the &#39;virtualUser&#39; attribute
 	 */
-	VIRTUAL_USER("VIRTUAL_USER");
+	VIRTUAL_USER("VIRTUAL_USER"),
+
+	/**
+	 * EXTERNALLY_MANAGED: Filter by the &#39;externallyManaged&#39; attribute
+	 */
+	EXTERNALLY_MANAGED("EXTERNALLY_MANAGED");
 
 	private String value;
 

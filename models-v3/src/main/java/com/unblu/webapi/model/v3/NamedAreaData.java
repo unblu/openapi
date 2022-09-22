@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v3;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -23,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	NamedAreaData.JSON_PROPERTY_ID,
 	NamedAreaData.JSON_PROPERTY_ACCOUNT_ID,
 	NamedAreaData.JSON_PROPERTY_DISPLAY_NAME,
+	NamedAreaData.JSON_PROPERTY_DISPLAY_NAME_TRANSLATIONS,
 	NamedAreaData.JSON_PROPERTY_AVATAR,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -75,6 +78,10 @@ public class NamedAreaData implements ConversationRecipientData {
 	public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
 	@JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
 	private String displayName;
+
+	public static final String JSON_PROPERTY_DISPLAY_NAME_TRANSLATIONS = "displayNameTranslations";
+	@JsonProperty(JSON_PROPERTY_DISPLAY_NAME_TRANSLATIONS)
+	private Map<String, String> displayNameTranslations = null;
 
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
@@ -156,6 +163,33 @@ public class NamedAreaData implements ConversationRecipientData {
 		this.displayName = displayName;
 	}
 
+	public NamedAreaData displayNameTranslations(Map<String, String> displayNameTranslations) {
+		this.displayNameTranslations = displayNameTranslations;
+		return this;
+	}
+
+	public NamedAreaData putDisplayNameTranslationsItem(String key, String displayNameTranslationsItem) {
+		if (this.displayNameTranslations == null) {
+			this.displayNameTranslations = new HashMap<>();
+		}
+		this.displayNameTranslations.put(key, displayNameTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Localized Display-Name of the named area
+	 * 
+	 * @return displayNameTranslations
+	 **/
+	@ApiModelProperty(value = "Localized Display-Name of the named area")
+	public Map<String, String> getDisplayNameTranslations() {
+		return displayNameTranslations;
+	}
+
+	public void setDisplayNameTranslations(Map<String, String> displayNameTranslations) {
+		this.displayNameTranslations = displayNameTranslations;
+	}
+
 	public NamedAreaData avatar(ExpandableField<Avatar> avatar) {
 		this.avatar = avatar;
 		return this;
@@ -188,12 +222,13 @@ public class NamedAreaData implements ConversationRecipientData {
 				Objects.equals(this.id, namedAreaData.id) &&
 				Objects.equals(this.accountId, namedAreaData.accountId) &&
 				Objects.equals(this.displayName, namedAreaData.displayName) &&
+				Objects.equals(this.displayNameTranslations, namedAreaData.displayNameTranslations) &&
 				Objects.equals(this.avatar, namedAreaData.avatar);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, displayName, avatar);
+		return Objects.hash($type, id, accountId, displayName, displayNameTranslations, avatar);
 	}
 
 	@Override
@@ -204,6 +239,7 @@ public class NamedAreaData implements ConversationRecipientData {
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+		sb.append("    displayNameTranslations: ").append(toIndentedString(displayNameTranslations)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("}");
 		return sb.toString();

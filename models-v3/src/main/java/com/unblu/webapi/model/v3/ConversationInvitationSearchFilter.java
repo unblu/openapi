@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = CreatorPersonIdConversationInvitationSearchFilter.class, name = "CREATOR_PERSON_ID"),
 	@JsonSubTypes.Type(value = CreatorTypeConversationInvitationSearchFilter.class, name = "CREATOR_TYPE"),
 	@JsonSubTypes.Type(value = ExpirationTimestampConversationInvitationSearchFilter.class, name = "EXPIRATION_TIMESTAMP"),
+	@JsonSubTypes.Type(value = InvitationStateConversationInvitationSearchFilter.class, name = "INVITATION_STATE"),
 	@JsonSubTypes.Type(value = InvitationTypeConversationInvitationSearchFilter.class, name = "INVITATION_TYPE"),
 	@JsonSubTypes.Type(value = RedeemingPersonIdConversationInvitationSearchFilter.class, name = "REDEEMING_PERSON_ID"),
 	@JsonSubTypes.Type(value = TargetIdConversationInvitationSearchFilter.class, name = "TARGET_ID"),

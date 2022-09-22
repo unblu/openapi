@@ -15,14 +15,19 @@ public enum ECallParticipationEndReason {
 	MISSED_BECAUSE_TIMEOUT("MISSED_BECAUSE_TIMEOUT"),
 
 	/**
-	 * MISSED_BECAUSE_TERMINATED: The participation ended because the initiator terminated the call before the other participant answered it.
+	 * MISSED_BECAUSE_TERMINATED: The participation ended because the initiator terminated the call before the other participant answered it
 	 */
 	MISSED_BECAUSE_TERMINATED("MISSED_BECAUSE_TERMINATED"),
 
 	/**
 	 * TERMINATED_BY_PARTICIPANT: The participation ended normally
 	 */
-	TERMINATED_BY_PARTICIPANT("TERMINATED_BY_PARTICIPANT");
+	TERMINATED_BY_PARTICIPANT("TERMINATED_BY_PARTICIPANT"),
+
+	/**
+	 * TERMINATED_BY_SYSTEM_ABORT: The participation ended because the system aborted the call
+	 */
+	TERMINATED_BY_SYSTEM_ABORT("TERMINATED_BY_SYSTEM_ABORT");
 
 	private String value;
 

@@ -154,11 +154,11 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the person participation was created (timestamp when the state was set to &#x60;EConversationParticipationState.CREATED&#x60;)
+	 * Unix timestamp (ms) when the person participation was created (timestamp when the state was set to &#x60;EConversationParticipationState.CREATED&#x60;)
 	 * 
 	 * @return createdTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the person participation was created (timestamp when the state was set to `EConversationParticipationState.CREATED`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person participation was created (timestamp when the state was set to `EConversationParticipationState.CREATED`)")
 	public Long getCreatedTimestamp() {
 		return createdTimestamp;
 	}
@@ -173,11 +173,11 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the person has joined (timestamp when the state was set to &#x60;EConversationParticipationState.ONBOARDING&#x60;)
+	 * Unix timestamp (ms) when the person has joined (timestamp when the state was set to &#x60;EConversationParticipationState.ONBOARDING&#x60;)
 	 * 
 	 * @return joinedTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the person has joined (timestamp when the state was set to `EConversationParticipationState.ONBOARDING`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person has joined (timestamp when the state was set to `EConversationParticipationState.ONBOARDING`)")
 	public Long getJoinedTimestamp() {
 		return joinedTimestamp;
 	}
@@ -192,11 +192,12 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the participation was activated, can be null (timestamp when the state was set to &#x60;EConversationParticipationState.ACTIVE&#x60;)
+	 * Unix timestamp (ms) when the participation was activated, can be null (timestamp when the state was set to
+	 * &#x60;EConversationParticipationState.ACTIVE&#x60;)
 	 * 
 	 * @return activationTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the participation was activated, can be null (timestamp when the state was set to `EConversationParticipationState.ACTIVE`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the participation was activated, can be null (timestamp when the state was set to `EConversationParticipationState.ACTIVE`)")
 	public Long getActivationTimestamp() {
 		return activationTimestamp;
 	}
@@ -211,11 +212,12 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the person started offboarding, can be null (timestamp when the state was set to &#x60;EConversationParticipationState.OFFBOARDING&#x60;)
+	 * Unix timestamp (ms) when the person started offboarding, can be null (timestamp when the state was set
+	 * to&#x60;EConversationParticipationState.OFFBOARDING&#x60;)
 	 * 
 	 * @return offboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the person started offboarding, can be null (timestamp when the state was set to `EConversationParticipationState.OFFBOARDING`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person started offboarding, can be null (timestamp when the state was set to`EConversationParticipationState.OFFBOARDING`)")
 	public Long getOffboardingTimestamp() {
 		return offboardingTimestamp;
 	}
@@ -230,11 +232,11 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the person has left, can be null (timestamp when the state was set to &#x60;EConversationParticipationState.ENDED&#x60;)
+	 * Unix timestamp (ms) when the person has left, can be null (timestamp when the state was set to &#x60;EConversationParticipationState.ENDED&#x60;)
 	 * 
 	 * @return leftTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the person has left, can be null (timestamp when the state was set to `EConversationParticipationState.ENDED`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person has left, can be null (timestamp when the state was set to `EConversationParticipationState.ENDED`)")
 	public Long getLeftTimestamp() {
 		return leftTimestamp;
 	}

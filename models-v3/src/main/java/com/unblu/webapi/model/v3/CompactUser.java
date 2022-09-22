@@ -168,11 +168,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * Id of the user
+	 * Database ID of the user
 	 * 
 	 * @return id
 	 **/
-	@ApiModelProperty(value = "Id of the user")
+	@ApiModelProperty(value = "Database ID of the user")
 	public String getId() {
 		return id;
 	}
@@ -187,11 +187,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * Account id of the user
+	 * ID of the account that the user belongs to
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id of the user")
+	@ApiModelProperty(value = "ID of the account that the user belongs to")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -206,11 +206,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * username for login
+	 * Username of the user. For propagated, virtual users this is the propagated user-id
 	 * 
 	 * @return username
 	 **/
-	@ApiModelProperty(value = "username for login")
+	@ApiModelProperty(value = "Username of the user. For propagated, virtual users this is the propagated user-id")
 	public String getUsername() {
 		return username;
 	}
@@ -301,11 +301,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * id of the team the user belongs to
+	 * ID of the team the user belongs to
 	 * 
 	 * @return teamId
 	 **/
-	@ApiModelProperty(value = "id of the team the user belongs to")
+	@ApiModelProperty(value = "ID of the team the user belongs to")
 	public String getTeamId() {
 		return teamId;
 	}
@@ -328,11 +328,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * Ids of the parent teams. That are recursively the parent team of each parent team
+	 * IDs of the parent teams. That are recursively the parent team of each parent team
 	 * 
 	 * @return parentTeamIds
 	 **/
-	@ApiModelProperty(value = "Ids of the parent teams. That are recursively the parent team of each parent team")
+	@ApiModelProperty(value = "IDs of the parent teams. That are recursively the parent team of each parent team")
 	public List<String> getParentTeamIds() {
 		return parentTeamIds;
 	}
@@ -423,11 +423,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * True if the user is propagated (did not log in locally but identity was propagateds);
+	 * True if the user is propagated (did not log in locally but identity was propagated);
 	 * 
 	 * @return propagated
 	 **/
-	@ApiModelProperty(value = "True if the user is propagated (did not log in locally but identity was propagateds);")
+	@ApiModelProperty(value = "True if the user is propagated (did not log in locally but identity was propagated);")
 	public Boolean isPropagated() {
 		return propagated;
 	}
@@ -442,11 +442,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * id of the user from which the impersonation was initiated. Null if no impersonation is used.
+	 * ID of the user from which the impersonation was initiated. Null if no impersonation is used.
 	 * 
 	 * @return impersonatedFromUserId
 	 **/
-	@ApiModelProperty(value = "id of the user from which the impersonation was initiated. Null if no impersonation is used.")
+	@ApiModelProperty(value = "ID of the user from which the impersonation was initiated. Null if no impersonation is used.")
 	public String getImpersonatedFromUserId() {
 		return impersonatedFromUserId;
 	}
@@ -461,11 +461,11 @@ public class CompactUser {
 	}
 
 	/**
-	 * id of the account from which the impersonation was initiated. Null if no impersonation is used.
+	 * ID of the account from which the impersonation was initiated. Null if no impersonation is used.
 	 * 
 	 * @return impersonatedFromAccountId
 	 **/
-	@ApiModelProperty(value = "id of the account from which the impersonation was initiated. Null if no impersonation is used.")
+	@ApiModelProperty(value = "ID of the account from which the impersonation was initiated. Null if no impersonation is used.")
 	public String getImpersonatedFromAccountId() {
 		return impersonatedFromAccountId;
 	}

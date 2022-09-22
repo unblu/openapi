@@ -182,6 +182,54 @@ public class GlobalApi {
 	}
 
 	/**
+	 * removeLicense Remove a license from the global server if it was previously added via the UI or the installLicense WebAPI call.&lt;br&gt;
+	 * 
+	 * @param expand (optional)
+	 * @return GlobalData
+	 * @throws ApiException if fails to make API call
+	 */
+	public GlobalData globalRemoveLicense(String expand) throws ApiException {
+		return globalRemoveLicenseWithHttpInfo(expand).getData();
+	}
+
+	/**
+	 * removeLicense Remove a license from the global server if it was previously added via the UI or the installLicense WebAPI call.&lt;br&gt;
+	 * 
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;GlobalData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<GlobalData> globalRemoveLicenseWithHttpInfo(String expand) throws ApiException {
+		Object localVarPostBody = new Object();
+
+		// create path and map variables
+		String localVarPath = "/global/removeLicense";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<GlobalData> localVarReturnType = new GenericType<GlobalData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * update Updates the GlobalData object. Since the properties of the Global object are read-only, this methods only make sense when used with the expand
 	 * parameter.&lt;br&gt;
 	 * 

@@ -22,6 +22,12 @@ public enum EConversationMessageActionType {
 	LINK_EXTERNAL("LINK_EXTERNAL"),
 
 	/**
+	 * LINK_COBROWSABLE: A link that will start universal co-browsing session of provided address when clicked. &lt;p&gt; The action will be displayed as a link
+	 * with a &quot;collaborate on website&quot; icon using the action&#39;s label as text.
+	 */
+	LINK_COBROWSABLE("LINK_COBROWSABLE"),
+
+	/**
 	 * REPLY_MESSAGE: A reply message will be sent in the name of the clicking person. &lt;p&gt; The action will be displayed as a button with the action&#39;s
 	 * label as text &lt;p&gt; If the action is clicked, a message of the type TextMessage will be sent in the name of the clicking person containing the
 	 * action&#39;s value as the message text.

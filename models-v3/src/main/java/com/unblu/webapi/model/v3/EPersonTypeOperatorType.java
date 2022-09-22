@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EPersonTypeOperatorType {
 
 	/**
-	 * EQUALS: Check if the value is equals to the one provided in the operator
+	 * EQUALS: Check if the value is equal to the one provided in the operator
 	 */
 	EQUALS("EQUALS"),
 
 	/**
-	 * NOT_EQUALS: Check if the value not is equals to the one provided in the operator
+	 * NOT_EQUALS: Check if the value is different from the one provided in the operator
 	 */
 	NOT_EQUALS("NOT_EQUALS"),
 

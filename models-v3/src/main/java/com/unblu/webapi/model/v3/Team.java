@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	Team.JSON_PROPERTY_PARENT_ID,
 	Team.JSON_PROPERTY_DESCRIPTION,
 	Team.JSON_PROPERTY_EXTERNALLY_MANAGED,
+	Team.JSON_PROPERTY_TRANSLATIONS,
 	Team.JSON_PROPERTY_CONFIGURATION,
 	Team.JSON_PROPERTY_METADATA,
 })
@@ -113,6 +114,10 @@ public class Team {
 	public static final String JSON_PROPERTY_EXTERNALLY_MANAGED = "externallyManaged";
 	@JsonProperty(JSON_PROPERTY_EXTERNALLY_MANAGED)
 	private Boolean externallyManaged;
+
+	public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
+	@JsonProperty(JSON_PROPERTY_TRANSLATIONS)
+	private Map<String, TeamTranslation> translations = null;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -228,12 +233,12 @@ public class Team {
 	}
 
 	/**
-	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the
+	 * user currently logged in. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -338,6 +343,33 @@ public class Team {
 		this.externallyManaged = externallyManaged;
 	}
 
+	public Team translations(Map<String, TeamTranslation> translations) {
+		this.translations = translations;
+		return this;
+	}
+
+	public Team putTranslationsItem(String key, TeamTranslation translationsItem) {
+		if (this.translations == null) {
+			this.translations = new HashMap<>();
+		}
+		this.translations.put(key, translationsItem);
+		return this;
+	}
+
+	/**
+	 * A map of localized versions of the name and description of this entity
+	 * 
+	 * @return translations
+	 **/
+	@ApiModelProperty(value = "A map of localized versions of the name and description of this entity")
+	public Map<String, TeamTranslation> getTranslations() {
+		return translations;
+	}
+
+	public void setTranslations(Map<String, TeamTranslation> translations) {
+		this.translations = translations;
+	}
+
 	public Team _configuration(Map<String, String> _configuration) {
 		this._configuration = _configuration;
 		return this;
@@ -412,13 +444,14 @@ public class Team {
 				Objects.equals(this.parentId, team.parentId) &&
 				Objects.equals(this.description, team.description) &&
 				Objects.equals(this.externallyManaged, team.externallyManaged) &&
+				Objects.equals(this.translations, team.translations) &&
 				Objects.equals(this._configuration, team._configuration) &&
 				Objects.equals(this.metadata, team.metadata);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, name, parentId, description, externallyManaged, _configuration, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, name, parentId, description, externallyManaged, translations, _configuration, metadata);
 	}
 
 	@Override
@@ -436,6 +469,7 @@ public class Team {
 		sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    externallyManaged: ").append(toIndentedString(externallyManaged)).append("\n");
+		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("}");

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = IsNullIdOperator.class, name = "IS_NULL"),
 	@JsonSubTypes.Type(value = NotEqualsIdOperator.class, name = "NOT_EQUALS"),
 	@JsonSubTypes.Type(value = NotInIdOperator.class, name = "NOT_IN"),
+	@JsonSubTypes.Type(value = StartsWithIdOperator.class, name = "STARTS_WITH"),
 })
 public interface IdOperator {
 	void setType(EIdOperatorType type);

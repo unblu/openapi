@@ -52,7 +52,12 @@ public enum EConversationInvitationSearchFilterField {
 	/**
 	 * REDEEMING_PERSON_ID: Filter by the &#39;redeemerPersonId&#39; attribute
 	 */
-	REDEEMING_PERSON_ID("REDEEMING_PERSON_ID");
+	REDEEMING_PERSON_ID("REDEEMING_PERSON_ID"),
+
+	/**
+	 * INVITATION_STATE: Filter by the &#39;invitationState&#39; attribute
+	 */
+	INVITATION_STATE("INVITATION_STATE");
 
 	private String value;
 

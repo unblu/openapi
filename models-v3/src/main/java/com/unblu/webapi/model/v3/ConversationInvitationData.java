@@ -36,6 +36,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationInvitationData.JSON_PROPERTY_COMMENT,
 	ConversationInvitationData.JSON_PROPERTY_EMAIL,
 	ConversationInvitationData.JSON_PROPERTY_NICKNAME,
+	ConversationInvitationData.JSON_PROPERTY_TARGET_RESPONSE_STATUS,
+	ConversationInvitationData.JSON_PROPERTY_SECONDARY_INVITATION_TARGETS,
 	ConversationInvitationData.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -140,6 +142,14 @@ public class ConversationInvitationData {
 	public static final String JSON_PROPERTY_NICKNAME = "nickname";
 	@JsonProperty(JSON_PROPERTY_NICKNAME)
 	private String nickname;
+
+	public static final String JSON_PROPERTY_TARGET_RESPONSE_STATUS = "targetResponseStatus";
+	@JsonProperty(JSON_PROPERTY_TARGET_RESPONSE_STATUS)
+	private EInvitationResponseState targetResponseStatus;
+
+	public static final String JSON_PROPERTY_SECONDARY_INVITATION_TARGETS = "secondaryInvitationTargets";
+	@JsonProperty(JSON_PROPERTY_SECONDARY_INVITATION_TARGETS)
+	private List<ConversationInvitationSecondaryTargetData> secondaryInvitationTargets = null;
 
 	public static final String JSON_PROPERTY_EXPIRATION_TIMESTAMP = "expirationTimestamp";
 	@JsonProperty(JSON_PROPERTY_EXPIRATION_TIMESTAMP)
@@ -387,11 +397,11 @@ public class ConversationInvitationData {
 	}
 
 	/**
-	 * List of links that can be used to accept this invitation and open the corresponding conversation.&lt;br&gt; Only one link can be used.
+	 * List of links to accept this invitation and open the corresponding conversation.&lt;br&gt; Only one link may be used.
 	 * 
 	 * @return links
 	 **/
-	@ApiModelProperty(value = "List of links that can be used to accept this invitation and open the corresponding conversation.<br> Only one link can be used.")
+	@ApiModelProperty(value = "List of links to accept this invitation and open the corresponding conversation.<br> Only one link may be used.")
 	public List<ConversationLink> getLinks() {
 		return links;
 	}
@@ -478,6 +488,52 @@ public class ConversationInvitationData {
 		this.nickname = nickname;
 	}
 
+	public ConversationInvitationData targetResponseStatus(EInvitationResponseState targetResponseStatus) {
+		this.targetResponseStatus = targetResponseStatus;
+		return this;
+	}
+
+	/**
+	 * Get targetResponseStatus
+	 * 
+	 * @return targetResponseStatus
+	 **/
+	@ApiModelProperty(value = "")
+	public EInvitationResponseState getTargetResponseStatus() {
+		return targetResponseStatus;
+	}
+
+	public void setTargetResponseStatus(EInvitationResponseState targetResponseStatus) {
+		this.targetResponseStatus = targetResponseStatus;
+	}
+
+	public ConversationInvitationData secondaryInvitationTargets(List<ConversationInvitationSecondaryTargetData> secondaryInvitationTargets) {
+		this.secondaryInvitationTargets = secondaryInvitationTargets;
+		return this;
+	}
+
+	public ConversationInvitationData addSecondaryInvitationTargetsItem(ConversationInvitationSecondaryTargetData secondaryInvitationTargetsItem) {
+		if (this.secondaryInvitationTargets == null) {
+			this.secondaryInvitationTargets = new ArrayList<>();
+		}
+		this.secondaryInvitationTargets.add(secondaryInvitationTargetsItem);
+		return this;
+	}
+
+	/**
+	 * The secondary invitation targets for this invitation
+	 * 
+	 * @return secondaryInvitationTargets
+	 **/
+	@ApiModelProperty(value = "The secondary invitation targets for this invitation")
+	public List<ConversationInvitationSecondaryTargetData> getSecondaryInvitationTargets() {
+		return secondaryInvitationTargets;
+	}
+
+	public void setSecondaryInvitationTargets(List<ConversationInvitationSecondaryTargetData> secondaryInvitationTargets) {
+		this.secondaryInvitationTargets = secondaryInvitationTargets;
+	}
+
 	public ConversationInvitationData expirationTimestamp(Long expirationTimestamp) {
 		this.expirationTimestamp = expirationTimestamp;
 		return this;
@@ -523,12 +579,14 @@ public class ConversationInvitationData {
 				Objects.equals(this.comment, conversationInvitationData.comment) &&
 				Objects.equals(this.email, conversationInvitationData.email) &&
 				Objects.equals(this.nickname, conversationInvitationData.nickname) &&
+				Objects.equals(this.targetResponseStatus, conversationInvitationData.targetResponseStatus) &&
+				Objects.equals(this.secondaryInvitationTargets, conversationInvitationData.secondaryInvitationTargets) &&
 				Objects.equals(this.expirationTimestamp, conversationInvitationData.expirationTimestamp);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, accountId, invitationType, invitationState, id, conversationId, token, createdTimestamp, creatorType, creatorPersonId, targetId, targetType, links, redeemingPersonId, comment, email, nickname, expirationTimestamp);
+		return Objects.hash($type, accountId, invitationType, invitationState, id, conversationId, token, createdTimestamp, creatorType, creatorPersonId, targetId, targetType, links, redeemingPersonId, comment, email, nickname, targetResponseStatus, secondaryInvitationTargets, expirationTimestamp);
 	}
 
 	@Override
@@ -552,6 +610,8 @@ public class ConversationInvitationData {
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
 		sb.append("    email: ").append(toIndentedString(email)).append("\n");
 		sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
+		sb.append("    targetResponseStatus: ").append(toIndentedString(targetResponseStatus)).append("\n");
+		sb.append("    secondaryInvitationTargets: ").append(toIndentedString(secondaryInvitationTargets)).append("\n");
 		sb.append("    expirationTimestamp: ").append(toIndentedString(expirationTimestamp)).append("\n");
 		sb.append("}");
 		return sb.toString();

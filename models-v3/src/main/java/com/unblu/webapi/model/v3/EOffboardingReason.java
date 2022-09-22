@@ -55,6 +55,11 @@ public enum EOffboardingReason {
 	EXTERNAL_CHANNEL_CLOSED("EXTERNAL_CHANNEL_CLOSED"),
 
 	/**
+	 * CONVERSATION_CANCELED: The conversation was canceled before it was started
+	 */
+	CONVERSATION_CANCELED("CONVERSATION_CANCELED"),
+
+	/**
 	 * CONVERSATION_ENDED: The conversation has ended
 	 */
 	CONVERSATION_ENDED("CONVERSATION_ENDED"),

@@ -35,6 +35,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryData.JSON_PROPERTY_REBOARDING_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_OFFBOARDING_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_END_TIMESTAMP,
+	ConversationHistoryData.JSON_PROPERTY_LAST_MESSAGE_TIMESTAMP,
+	ConversationHistoryData.JSON_PROPERTY_LAST_COMPLETED_RECORDING_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_QUEUED_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_STATE,
 	ConversationHistoryData.JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE,
@@ -44,6 +46,10 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryData.JSON_PROPERTY_CONVERSATION_TEMPLATE_ID,
 	ConversationHistoryData.JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ICON_ID,
 	ConversationHistoryData.JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_NAME,
+	ConversationHistoryData.JSON_PROPERTY_TOPIC,
+	ConversationHistoryData.JSON_PROPERTY_SOURCE_URL,
+	ConversationHistoryData.JSON_PROPERTY_SCHEDULED_TIMESTAMP,
+	ConversationHistoryData.JSON_PROPERTY_INITIAL_ENGAGEMENT_URL,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationHistoryData {
@@ -136,6 +142,14 @@ public class ConversationHistoryData {
 	@JsonProperty(JSON_PROPERTY_END_TIMESTAMP)
 	private Long endTimestamp;
 
+	public static final String JSON_PROPERTY_LAST_MESSAGE_TIMESTAMP = "lastMessageTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_MESSAGE_TIMESTAMP)
+	private Long lastMessageTimestamp;
+
+	public static final String JSON_PROPERTY_LAST_COMPLETED_RECORDING_TIMESTAMP = "lastCompletedRecordingTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_COMPLETED_RECORDING_TIMESTAMP)
+	private Long lastCompletedRecordingTimestamp;
+
 	public static final String JSON_PROPERTY_QUEUED_TIMESTAMP = "queuedTimestamp";
 	@JsonProperty(JSON_PROPERTY_QUEUED_TIMESTAMP)
 	private Long queuedTimestamp;
@@ -171,6 +185,22 @@ public class ConversationHistoryData {
 	public static final String JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_NAME = "externalMessengerChannelName";
 	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_NAME)
 	private String externalMessengerChannelName;
+
+	public static final String JSON_PROPERTY_TOPIC = "topic";
+	@JsonProperty(JSON_PROPERTY_TOPIC)
+	private String topic;
+
+	public static final String JSON_PROPERTY_SOURCE_URL = "sourceUrl";
+	@JsonProperty(JSON_PROPERTY_SOURCE_URL)
+	private String sourceUrl;
+
+	public static final String JSON_PROPERTY_SCHEDULED_TIMESTAMP = "scheduledTimestamp";
+	@JsonProperty(JSON_PROPERTY_SCHEDULED_TIMESTAMP)
+	private Long scheduledTimestamp;
+
+	public static final String JSON_PROPERTY_INITIAL_ENGAGEMENT_URL = "initialEngagementUrl";
+	@JsonProperty(JSON_PROPERTY_INITIAL_ENGAGEMENT_URL)
+	private String initialEngagementUrl;
 
 	public ConversationHistoryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -319,11 +349,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the conversation was created (timestamp when the state was set to &#x60;EConversationState.CREATED&#x60;)
+	 * Unix timestamp (ms) when the conversation was created (timestamp when the state was set to &#x60;EConversationState.CREATED&#x60;)
 	 * 
 	 * @return createdTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the conversation was created (timestamp when the state was set to `EConversationState.CREATED`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation was created (timestamp when the state was set to `EConversationState.CREATED`)")
 	public Long getCreatedTimestamp() {
 		return createdTimestamp;
 	}
@@ -338,11 +368,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the onboarding of the conversation started (timestamp when the state was set to &#x60;EConversationState.ONBOARDING&#x60;)
+	 * Unix timestamp (ms) when the onboarding of the conversation started (timestamp when the state was set to &#x60;EConversationState.ONBOARDING&#x60;)
 	 * 
 	 * @return onboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the onboarding of the conversation started (timestamp when the state was set to `EConversationState.ONBOARDING`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the onboarding of the conversation started (timestamp when the state was set to `EConversationState.ONBOARDING`)")
 	public Long getOnboardingTimestamp() {
 		return onboardingTimestamp;
 	}
@@ -357,11 +387,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the conversation was activated (timestamp when the state was set to &#x60;EConversationState.ACTIVE&#x60;)
+	 * Unix timestamp (ms) when the conversation was activated (timestamp when the state was set to &#x60;EConversationState.ACTIVE&#x60;)
 	 * 
 	 * @return activationTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the conversation was activated (timestamp when the state was set to `EConversationState.ACTIVE`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation was activated (timestamp when the state was set to `EConversationState.ACTIVE`)")
 	public Long getActivationTimestamp() {
 		return activationTimestamp;
 	}
@@ -376,12 +406,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the assignee joined the conversation (timestamp when the state of the first agent participant was set
+	 * Unix timestamp (ms) when the assignee joined the conversation (timestamp when the state of the first agent participant was set
 	 * to&#x60;EConversationParticipationState.ACTIVE&#x60;) Value is null of no assignee has joined yet.
 	 * 
 	 * @return assigneeJoinTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the assignee joined the conversation (timestamp when the state of the first agent participant was set to`EConversationParticipationState.ACTIVE`) Value is null of no assignee has joined yet.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the assignee joined the conversation (timestamp when the state of the first agent participant was set to`EConversationParticipationState.ACTIVE`) Value is null of no assignee has joined yet.")
 	public Long getAssigneeJoinTimestamp() {
 		return assigneeJoinTimestamp;
 	}
@@ -396,12 +426,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the reboarding of the conversation last started, i.e. when the conversation state was last set to
-	 * &#x60;EConversationState.REBOARDING&#x60;)
+	 * Unix timestamp (ms) when the reboarding of the conversation last started, i.e. when the conversation state was last set
+	 * to&#x60;EConversationState.REBOARDING&#x60;)
 	 * 
 	 * @return reboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the reboarding of the conversation last started, i.e. when the conversation state was last set to `EConversationState.REBOARDING`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the reboarding of the conversation last started, i.e. when the conversation state was last set to`EConversationState.REBOARDING`)")
 	public Long getReboardingTimestamp() {
 		return reboardingTimestamp;
 	}
@@ -416,11 +446,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the offboarding of the conversation started (timestamp when the state was set to &#x60;EConversationState.OFFBOARDING&#x60;)
+	 * Unix timestamp (ms) when the offboarding of the conversation started (timestamp when the state was set to &#x60;EConversationState.OFFBOARDING&#x60;)
 	 * 
 	 * @return offboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the offboarding of the conversation started (timestamp when the state was set to `EConversationState.OFFBOARDING`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the offboarding of the conversation started (timestamp when the state was set to `EConversationState.OFFBOARDING`)")
 	public Long getOffboardingTimestamp() {
 		return offboardingTimestamp;
 	}
@@ -435,12 +465,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * utc timestamp when the conversation has ended (all active participants have finished their offboarding; timestamp when the state was set
+	 * Unix timestamp (ms) when the conversation has ended (all active participants have finished their offboarding; timestamp when the state was set
 	 * to&#x60;EConversationState.ENDED&#x60;)
 	 * 
 	 * @return endTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the conversation has ended (all active participants have finished their offboarding; timestamp when the state was set to`EConversationState.ENDED`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation has ended (all active participants have finished their offboarding; timestamp when the state was set to`EConversationState.ENDED`)")
 	public Long getEndTimestamp() {
 		return endTimestamp;
 	}
@@ -449,17 +479,55 @@ public class ConversationHistoryData {
 		this.endTimestamp = endTimestamp;
 	}
 
+	public ConversationHistoryData lastMessageTimestamp(Long lastMessageTimestamp) {
+		this.lastMessageTimestamp = lastMessageTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the last conversation message was sent. Null if there hasn&#39;t been any yet.
+	 * 
+	 * @return lastMessageTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the last conversation message was sent. Null if there hasn't been any yet.")
+	public Long getLastMessageTimestamp() {
+		return lastMessageTimestamp;
+	}
+
+	public void setLastMessageTimestamp(Long lastMessageTimestamp) {
+		this.lastMessageTimestamp = lastMessageTimestamp;
+	}
+
+	public ConversationHistoryData lastCompletedRecordingTimestamp(Long lastCompletedRecordingTimestamp) {
+		this.lastCompletedRecordingTimestamp = lastCompletedRecordingTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the last recording was completed. Null if there hasn&#39;t been any yet.
+	 * 
+	 * @return lastCompletedRecordingTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the last recording was completed. Null if there hasn't been any yet.")
+	public Long getLastCompletedRecordingTimestamp() {
+		return lastCompletedRecordingTimestamp;
+	}
+
+	public void setLastCompletedRecordingTimestamp(Long lastCompletedRecordingTimestamp) {
+		this.lastCompletedRecordingTimestamp = lastCompletedRecordingTimestamp;
+	}
+
 	public ConversationHistoryData queuedTimestamp(Long queuedTimestamp) {
 		this.queuedTimestamp = queuedTimestamp;
 		return this;
 	}
 
 	/**
-	 * utc timestamp when the conversation was last queued. Null if the conversation was never be queued.
+	 * Unix timestamp (ms) when the conversation was last queued. Null if the conversation has never been queued.
 	 * 
 	 * @return queuedTimestamp
 	 **/
-	@ApiModelProperty(value = "utc timestamp when the conversation was last queued. Null if the conversation was never be queued.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation was last queued. Null if the conversation has never been queued.")
 	public Long getQueuedTimestamp() {
 		return queuedTimestamp;
 	}
@@ -569,11 +637,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Template id of this conversation. If omitted, the default conversationTemplate will be retrieved based on the initialEngagementType
+	 * Template ID of the conversation.
 	 * 
 	 * @return conversationTemplateId
 	 **/
-	@ApiModelProperty(value = "Template id of this conversation. If omitted, the default conversationTemplate will be retrieved based on the initialEngagementType")
+	@ApiModelProperty(value = "Template ID of the conversation.")
 	public String getConversationTemplateId() {
 		return conversationTemplateId;
 	}
@@ -620,6 +688,85 @@ public class ConversationHistoryData {
 		this.externalMessengerChannelName = externalMessengerChannelName;
 	}
 
+	public ConversationHistoryData topic(String topic) {
+		this.topic = topic;
+		return this;
+	}
+
+	/**
+	 * Topic of the conversation.
+	 * 
+	 * @return topic
+	 **/
+	@ApiModelProperty(value = "Topic of the conversation.")
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public ConversationHistoryData sourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+		return this;
+	}
+
+	/**
+	 * Source URL of the conversation.
+	 * 
+	 * @return sourceUrl
+	 **/
+	@ApiModelProperty(value = "Source URL of the conversation.")
+	public String getSourceUrl() {
+		return sourceUrl;
+	}
+
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+	}
+
+	public ConversationHistoryData scheduledTimestamp(Long scheduledTimestamp) {
+		this.scheduledTimestamp = scheduledTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the conversation is scheduled for. Can be set only for conversations with initialEngagementType
+	 * :&#x60;EInitialEngagementType.SCHEDULED_CONVERSATION&#x60;
+	 * 
+	 * @return scheduledTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation is scheduled for. Can be set only for conversations with initialEngagementType :`EInitialEngagementType.SCHEDULED_CONVERSATION`")
+	public Long getScheduledTimestamp() {
+		return scheduledTimestamp;
+	}
+
+	public void setScheduledTimestamp(Long scheduledTimestamp) {
+		this.scheduledTimestamp = scheduledTimestamp;
+	}
+
+	public ConversationHistoryData initialEngagementUrl(String initialEngagementUrl) {
+		this.initialEngagementUrl = initialEngagementUrl;
+		return this;
+	}
+
+	/**
+	 * The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer&#39;s website will have a value.
+	 * Conversely, conversations initiated from the mobile SDK won&#39;t have an initial engagement URL.&lt;br&gt; Conversations created using the Web API can also
+	 * contain an initial engagement URL if one was provided at creation time.
+	 * 
+	 * @return initialEngagementUrl
+	 **/
+	@ApiModelProperty(value = "The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer's website will have a value. Conversely, conversations initiated from the mobile SDK won't have an initial engagement URL.<br> Conversations created using the Web API can also contain an initial engagement URL if one was provided at creation time.")
+	public String getInitialEngagementUrl() {
+		return initialEngagementUrl;
+	}
+
+	public void setInitialEngagementUrl(String initialEngagementUrl) {
+		this.initialEngagementUrl = initialEngagementUrl;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -643,6 +790,8 @@ public class ConversationHistoryData {
 				Objects.equals(this.reboardingTimestamp, conversationHistoryData.reboardingTimestamp) &&
 				Objects.equals(this.offboardingTimestamp, conversationHistoryData.offboardingTimestamp) &&
 				Objects.equals(this.endTimestamp, conversationHistoryData.endTimestamp) &&
+				Objects.equals(this.lastMessageTimestamp, conversationHistoryData.lastMessageTimestamp) &&
+				Objects.equals(this.lastCompletedRecordingTimestamp, conversationHistoryData.lastCompletedRecordingTimestamp) &&
 				Objects.equals(this.queuedTimestamp, conversationHistoryData.queuedTimestamp) &&
 				Objects.equals(this.state, conversationHistoryData.state) &&
 				Objects.equals(this.initialEngagementType, conversationHistoryData.initialEngagementType) &&
@@ -651,12 +800,16 @@ public class ConversationHistoryData {
 				Objects.equals(this.tokboxSessionId, conversationHistoryData.tokboxSessionId) &&
 				Objects.equals(this.conversationTemplateId, conversationHistoryData.conversationTemplateId) &&
 				Objects.equals(this.externalMessengerChannelIconId, conversationHistoryData.externalMessengerChannelIconId) &&
-				Objects.equals(this.externalMessengerChannelName, conversationHistoryData.externalMessengerChannelName);
+				Objects.equals(this.externalMessengerChannelName, conversationHistoryData.externalMessengerChannelName) &&
+				Objects.equals(this.topic, conversationHistoryData.topic) &&
+				Objects.equals(this.sourceUrl, conversationHistoryData.sourceUrl) &&
+				Objects.equals(this.scheduledTimestamp, conversationHistoryData.scheduledTimestamp) &&
+				Objects.equals(this.initialEngagementUrl, conversationHistoryData.initialEngagementUrl);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, recipient, assigneePerson, contextPerson, endPerson, participants, createdTimestamp, onboardingTimestamp, activationTimestamp, assigneeJoinTimestamp, reboardingTimestamp, offboardingTimestamp, endTimestamp, queuedTimestamp, state, initialEngagementType, locale, endReason, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName);
+		return Objects.hash($type, id, recipient, assigneePerson, contextPerson, endPerson, participants, createdTimestamp, onboardingTimestamp, activationTimestamp, assigneeJoinTimestamp, reboardingTimestamp, offboardingTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, queuedTimestamp, state, initialEngagementType, locale, endReason, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, initialEngagementUrl);
 	}
 
 	@Override
@@ -677,6 +830,8 @@ public class ConversationHistoryData {
 		sb.append("    reboardingTimestamp: ").append(toIndentedString(reboardingTimestamp)).append("\n");
 		sb.append("    offboardingTimestamp: ").append(toIndentedString(offboardingTimestamp)).append("\n");
 		sb.append("    endTimestamp: ").append(toIndentedString(endTimestamp)).append("\n");
+		sb.append("    lastMessageTimestamp: ").append(toIndentedString(lastMessageTimestamp)).append("\n");
+		sb.append("    lastCompletedRecordingTimestamp: ").append(toIndentedString(lastCompletedRecordingTimestamp)).append("\n");
 		sb.append("    queuedTimestamp: ").append(toIndentedString(queuedTimestamp)).append("\n");
 		sb.append("    state: ").append(toIndentedString(state)).append("\n");
 		sb.append("    initialEngagementType: ").append(toIndentedString(initialEngagementType)).append("\n");
@@ -686,6 +841,10 @@ public class ConversationHistoryData {
 		sb.append("    conversationTemplateId: ").append(toIndentedString(conversationTemplateId)).append("\n");
 		sb.append("    externalMessengerChannelIconId: ").append(toIndentedString(externalMessengerChannelIconId)).append("\n");
 		sb.append("    externalMessengerChannelName: ").append(toIndentedString(externalMessengerChannelName)).append("\n");
+		sb.append("    topic: ").append(toIndentedString(topic)).append("\n");
+		sb.append("    sourceUrl: ").append(toIndentedString(sourceUrl)).append("\n");
+		sb.append("    scheduledTimestamp: ").append(toIndentedString(scheduledTimestamp)).append("\n");
+		sb.append("    initialEngagementUrl: ").append(toIndentedString(initialEngagementUrl)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -7,11 +7,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
 	@JsonSubTypes.Type(value = EqualsTimestampOperator.class, name = "EQUALS"),
 	@JsonSubTypes.Type(value = GreaterThanTimestampOperator.class, name = "GREATER_THAN"),
+	@JsonSubTypes.Type(value = GreaterThanOrNullTimestampOperator.class, name = "GREATER_THAN_OR_NULL"),
 	@JsonSubTypes.Type(value = InTimestampOperator.class, name = "IN"),
 	@JsonSubTypes.Type(value = InRangeTimestampOperator.class, name = "IN_RANGE"),
 	@JsonSubTypes.Type(value = IsNotNullTimestampOperator.class, name = "IS_NOT_NULL"),
 	@JsonSubTypes.Type(value = IsNullTimestampOperator.class, name = "IS_NULL"),
 	@JsonSubTypes.Type(value = LowerThanTimestampOperator.class, name = "LOWER_THAN"),
+	@JsonSubTypes.Type(value = LowerThanOrNullTimestampOperator.class, name = "LOWER_THAN_OR_NULL"),
 	@JsonSubTypes.Type(value = NotEqualsTimestampOperator.class, name = "NOT_EQUALS"),
 	@JsonSubTypes.Type(value = NotInTimestampOperator.class, name = "NOT_IN"),
 	@JsonSubTypes.Type(value = NotInRangeTimestampOperator.class, name = "NOT_IN_RANGE"),

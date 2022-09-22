@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = MultichoiceQuestionMessageData.class, name = "MULTICHOICE_QUESTION"),
 	@JsonSubTypes.Type(value = QuestionAbortedMessageData.class, name = "QUESTION_ABORTED"),
 	@JsonSubTypes.Type(value = RatingQuestionMessageData.class, name = "RATING_QUESTION"),
+	@JsonSubTypes.Type(value = RecordingAvailableMessageData.class, name = "RECORDING_AVAILABLE"),
 	@JsonSubTypes.Type(value = ReplyMessageData.class, name = "REPLY"),
 	@JsonSubTypes.Type(value = TextMessageData.class, name = "TEXT"),
 	@JsonSubTypes.Type(value = TextQuestionMessageData.class, name = "TEXT_QUESTION"),
@@ -96,5 +97,11 @@ public interface MessageData {
 	String getSourceId();
 
 	MessageData sourceId(String sourceId);
+
+	void setBotThreadId(String botThreadId);
+
+	String getBotThreadId();
+
+	MessageData botThreadId(String botThreadId);
 
 }

@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v3;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -27,9 +29,11 @@ import io.swagger.annotations.ApiModelProperty;
 	CannedResponse.JSON_PROPERTY_ACCOUNT_ID,
 	CannedResponse.JSON_PROPERTY_OWNER_ID,
 	CannedResponse.JSON_PROPERTY_OWNER_TYPE,
+	CannedResponse.JSON_PROPERTY_PLACEHOLDERS,
 	CannedResponse.JSON_PROPERTY_KEY,
 	CannedResponse.JSON_PROPERTY_TITLE,
 	CannedResponse.JSON_PROPERTY_TEXT,
+	CannedResponse.JSON_PROPERTY_LANGUAGE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class CannedResponse {
@@ -98,6 +102,10 @@ public class CannedResponse {
 	@JsonProperty(JSON_PROPERTY_OWNER_TYPE)
 	private EPropertyOwnerType ownerType;
 
+	public static final String JSON_PROPERTY_PLACEHOLDERS = "placeholders";
+	@JsonProperty(JSON_PROPERTY_PLACEHOLDERS)
+	private List<Placeholder> placeholders = null;
+
 	public static final String JSON_PROPERTY_KEY = "key";
 	@JsonProperty(JSON_PROPERTY_KEY)
 	private String key;
@@ -109,6 +117,10 @@ public class CannedResponse {
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private String text;
+
+	public static final String JSON_PROPERTY_LANGUAGE = "language";
+	@JsonProperty(JSON_PROPERTY_LANGUAGE)
+	private String language;
 
 	public CannedResponse $type(TypeEnum $type) {
 		this.$type = $type;
@@ -216,12 +228,12 @@ public class CannedResponse {
 	}
 
 	/**
-	 * Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the
+	 * user currently logged in. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which an entity belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -268,17 +280,44 @@ public class CannedResponse {
 		this.ownerType = ownerType;
 	}
 
+	public CannedResponse placeholders(List<Placeholder> placeholders) {
+		this.placeholders = placeholders;
+		return this;
+	}
+
+	public CannedResponse addPlaceholdersItem(Placeholder placeholdersItem) {
+		if (this.placeholders == null) {
+			this.placeholders = new ArrayList<>();
+		}
+		this.placeholders.add(placeholdersItem);
+		return this;
+	}
+
+	/**
+	 * Get placeholders
+	 * 
+	 * @return placeholders
+	 **/
+	@ApiModelProperty(value = "")
+	public List<Placeholder> getPlaceholders() {
+		return placeholders;
+	}
+
+	public void setPlaceholders(List<Placeholder> placeholders) {
+		this.placeholders = placeholders;
+	}
+
 	public CannedResponse key(String key) {
 		this.key = key;
 		return this;
 	}
 
 	/**
-	 * The key of a canned response to access it quickly. Maximum of 250 characters. Can not be omitted.
+	 * Unused since Unblu7 and same as title for backward compatibility.
 	 * 
 	 * @return key
 	 **/
-	@ApiModelProperty(value = "The key of a canned response to access it quickly. Maximum of 250 characters. Can not be omitted.")
+	@ApiModelProperty(value = "Unused since Unblu7 and same as title for backward compatibility.")
 	public String getKey() {
 		return key;
 	}
@@ -293,11 +332,11 @@ public class CannedResponse {
 	}
 
 	/**
-	 * The title of a canned response. Maximum of 250 characters. Can be omitted, but should not.
+	 * The title of a canned response as unique identifier. Maximum of 250 characters.
 	 * 
 	 * @return title
 	 **/
-	@ApiModelProperty(value = "The title of a canned response. Maximum of 250 characters. Can be omitted, but should not.")
+	@ApiModelProperty(value = "The title of a canned response as unique identifier. Maximum of 250 characters.")
 	public String getTitle() {
 		return title;
 	}
@@ -325,6 +364,25 @@ public class CannedResponse {
 		this.text = text;
 	}
 
+	public CannedResponse language(String language) {
+		this.language = language;
+		return this;
+	}
+
+	/**
+	 * Get language
+	 * 
+	 * @return language
+	 **/
+	@ApiModelProperty(value = "")
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -342,14 +400,16 @@ public class CannedResponse {
 				Objects.equals(this.accountId, cannedResponse.accountId) &&
 				Objects.equals(this.ownerId, cannedResponse.ownerId) &&
 				Objects.equals(this.ownerType, cannedResponse.ownerType) &&
+				Objects.equals(this.placeholders, cannedResponse.placeholders) &&
 				Objects.equals(this.key, cannedResponse.key) &&
 				Objects.equals(this.title, cannedResponse.title) &&
-				Objects.equals(this.text, cannedResponse.text);
+				Objects.equals(this.text, cannedResponse.text) &&
+				Objects.equals(this.language, cannedResponse.language);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, ownerId, ownerType, key, title, text);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, ownerId, ownerType, placeholders, key, title, text, language);
 	}
 
 	@Override
@@ -364,9 +424,11 @@ public class CannedResponse {
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
 		sb.append("    ownerType: ").append(toIndentedString(ownerType)).append("\n");
+		sb.append("    placeholders: ").append(toIndentedString(placeholders)).append("\n");
 		sb.append("    key: ").append(toIndentedString(key)).append("\n");
 		sb.append("    title: ").append(toIndentedString(title)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
+		sb.append("    language: ").append(toIndentedString(language)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

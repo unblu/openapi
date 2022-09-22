@@ -36,7 +36,7 @@ public class DomainsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param domain The entity to create (required)
 	 * @return Domain
@@ -47,7 +47,7 @@ public class DomainsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param domain The entity to create (required)
 	 * @return ApiResponse&lt;Domain&gt;
@@ -87,9 +87,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void domainsDelete(String id) throws ApiException {
@@ -98,9 +98,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> domainsDeleteWithHttpInfo(String id) throws ApiException {
@@ -132,9 +132,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -145,9 +145,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -269,9 +269,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @return Domain
 	 * @throws ApiException if fails to make API call
 	 */
@@ -280,9 +280,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @return ApiResponse&lt;Domain&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -317,9 +317,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @return List&lt;Domain&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -328,9 +328,9 @@ public class DomainsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @return ApiResponse&lt;List&lt;Domain&gt;&gt;
 	 * @throws ApiException if fails to make API call
 	 */

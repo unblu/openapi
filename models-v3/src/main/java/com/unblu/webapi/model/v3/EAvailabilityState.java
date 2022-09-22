@@ -23,13 +23,7 @@ public enum EAvailabilityState {
 	/**
 	 * UNAVAILABLE: There is currently no agent handling any inbound queue items. It is very unlikely, that an agent will be available in a short time.
 	 */
-	UNAVAILABLE("UNAVAILABLE"),
-
-	/**
-	 * OFFLINE: There is no agent watching the inbound queue for the specified named area and locale. It is unlikely, that an agent will be available in a short
-	 * time.
-	 */
-	OFFLINE("OFFLINE");
+	UNAVAILABLE("UNAVAILABLE");
 
 	private String value;
 

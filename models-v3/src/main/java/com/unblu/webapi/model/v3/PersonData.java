@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PersonData.JSON_PROPERTY_ACCOUNT_ID,
 	PersonData.JSON_PROPERTY_PERSON_SOURCE,
 	PersonData.JSON_PROPERTY_SOURCE_ID,
+	PersonData.JSON_PROPERTY_SOURCE_URL,
 	PersonData.JSON_PROPERTY_SOURCE_DATA,
 	PersonData.JSON_PROPERTY_FIRST_NAME,
 	PersonData.JSON_PROPERTY_LAST_NAME,
@@ -95,6 +96,10 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_SOURCE_ID = "sourceId";
 	@JsonProperty(JSON_PROPERTY_SOURCE_ID)
 	private String sourceId;
+
+	public static final String JSON_PROPERTY_SOURCE_URL = "sourceUrl";
+	@JsonProperty(JSON_PROPERTY_SOURCE_URL)
+	private String sourceUrl;
 
 	public static final String JSON_PROPERTY_SOURCE_DATA = "sourceData";
 	@JsonProperty(JSON_PROPERTY_SOURCE_DATA)
@@ -197,11 +202,11 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	/**
 	 * Account id to which a Person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
-	 * account of the currently logged in user. When editing an entity, the accountId must be send.
+	 * account of the currently logged in user. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which a Person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, the accountId must be send.")
+	@ApiModelProperty(value = "Account id to which a Person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -248,6 +253,26 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
+	}
+
+	public PersonData sourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+		return this;
+	}
+
+	/**
+	 * URL identifying the source of the person. Maximum length of 2000 characters. Only available for virtual persons in conversations that were created outside
+	 * Unblu.
+	 * 
+	 * @return sourceUrl
+	 **/
+	@ApiModelProperty(value = "URL identifying the source of the person. Maximum length of 2000 characters. Only available for virtual persons in conversations that were created outside Unblu.")
+	public String getSourceUrl() {
+		return sourceUrl;
+	}
+
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
 	}
 
 	public PersonData sourceData(String sourceData) {
@@ -540,6 +565,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.accountId, personData.accountId) &&
 				Objects.equals(this.personSource, personData.personSource) &&
 				Objects.equals(this.sourceId, personData.sourceId) &&
+				Objects.equals(this.sourceUrl, personData.sourceUrl) &&
 				Objects.equals(this.sourceData, personData.sourceData) &&
 				Objects.equals(this.firstName, personData.firstName) &&
 				Objects.equals(this.lastName, personData.lastName) &&
@@ -558,7 +584,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceData, firstName, lastName, username, nickname, displayName, personType, authorizationRole, email, phone, teamId, teamName, avatar, metadata);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, personType, authorizationRole, email, phone, teamId, teamName, avatar, metadata);
 	}
 
 	@Override
@@ -570,6 +596,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    personSource: ").append(toIndentedString(personSource)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
+		sb.append("    sourceUrl: ").append(toIndentedString(sourceUrl)).append("\n");
 		sb.append("    sourceData: ").append(toIndentedString(sourceData)).append("\n");
 		sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
 		sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");

@@ -118,11 +118,11 @@ public class BotDialogCounterpartChanged {
 	}
 
 	/**
-	 * The time (unix time in millies) that the event was generated.
+	 * The time (Unix time in ms) when the event was generated
 	 * 
 	 * @return timestamp
 	 **/
-	@ApiModelProperty(value = "The time (unix time in millies) that the event was generated.")
+	@ApiModelProperty(value = "The time (Unix time in ms) when the event was generated")
 	public Long getTimestamp() {
 		return timestamp;
 	}
@@ -156,11 +156,11 @@ public class BotDialogCounterpartChanged {
 	}
 
 	/**
-	 * The account ID the event originated from.
+	 * The account ID the event originated from
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "The account ID the event originated from.")
+	@ApiModelProperty(value = "The account ID the event originated from")
 	public String getAccountId() {
 		return accountId;
 	}

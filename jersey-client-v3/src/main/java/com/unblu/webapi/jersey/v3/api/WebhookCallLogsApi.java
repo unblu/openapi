@@ -36,9 +36,9 @@ public class WebhookCallLogsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @return WebhookCallLog
 	 * @throws ApiException if fails to make API call
 	 */
@@ -47,9 +47,9 @@ public class WebhookCallLogsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @return ApiResponse&lt;WebhookCallLog&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -84,9 +84,9 @@ public class WebhookCallLogsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @return List&lt;WebhookCallLog&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -95,9 +95,9 @@ public class WebhookCallLogsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @return ApiResponse&lt;List&lt;WebhookCallLog&gt;&gt;
 	 * @throws ApiException if fails to make API call
 	 */

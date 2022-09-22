@@ -37,7 +37,7 @@ public class AccountsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param account The entity to create (required)
 	 * @param expand (optional)
@@ -49,7 +49,7 @@ public class AccountsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The id of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param account The entity to create (required)
 	 * @param expand (optional)
@@ -147,9 +147,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void accountsDelete(String id) throws ApiException {
@@ -158,9 +158,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> accountsDeleteWithHttpInfo(String id) throws ApiException {
@@ -192,9 +192,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -205,9 +205,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given id&lt;br&gt;
+	 * delete Deletes the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id The id of the entity which should be deleted (optional)
+	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -393,9 +393,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @param expand (optional)
 	 * @return Account
 	 * @throws ApiException if fails to make API call
@@ -405,9 +405,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given id&lt;br&gt;
+	 * read Returns the entity for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the entity which should be returned (optional)
+	 * @param id ID of the entity which should be returned (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
@@ -444,9 +444,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @param expand (optional)
 	 * @return List&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
@@ -456,9 +456,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;List&lt;Account&gt;&gt;
 	 * @throws ApiException if fails to make API call
