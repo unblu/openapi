@@ -1,0 +1,20 @@
+[versions]
+jackson = "2.10.1"
+jersey = "2.26"
+junit = "5.7.1"
+
+[libraries]
+assertj-core = { module = "org.assertj:assertj-core", version = "3.11.1" }
+
+jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "jackson" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
+jackson-jdk8 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8", version.ref = "jackson" }
+jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
+
+
+jersey-client = { module = "org.glassfish.jersey.core:jersey-client", version.ref = "jersey" }
+jersey-media-multipart = { module = "org.glassfish.jersey.media:jersey-media-multipart", version.ref = "jersey" }
+jersey-media-json-jackson = { module = "org.glassfish.jersey.media:jersey-media-json-jackson", version.ref = "jersey" }
+jersey-hk2 = { module = "org.glassfish.jersey.inject:jersey-hk2", version.ref = "jersey" }
+swagger-annotations = { module = "io.swagger:swagger-annotations", version = "1.5.15" }

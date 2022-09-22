@@ -1,0 +1,17 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: 8
+        distribution: 'zulu'
+    - name: print Java version
+      run: java -version
+    - name: Build
+      run: ./gradlew clean build

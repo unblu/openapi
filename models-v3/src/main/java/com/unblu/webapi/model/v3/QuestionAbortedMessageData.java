@@ -1,0 +1,547 @@
+
+package com.unblu.webapi.model.v3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * Special case of a reply that informs, that a question was not answered because of a certain reason.
+ */
+@ApiModel(description = "Special case of a reply that informs, that a question was not answered because of a certain reason.")
+
+@JsonPropertyOrder({
+	QuestionAbortedMessageData.JSON_PROPERTY_$_TYPE,
+	QuestionAbortedMessageData.JSON_PROPERTY_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_CONVERSATION_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_ACCOUNT_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_SENDER_PERSON,
+	QuestionAbortedMessageData.JSON_PROPERTY_SENDER_PERSON_PRESENCE_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_SERVER_TIMESTAMP,
+	QuestionAbortedMessageData.JSON_PROPERTY_SEND_TIMESTAMP,
+	QuestionAbortedMessageData.JSON_PROPERTY_TYPE,
+	QuestionAbortedMessageData.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
+	QuestionAbortedMessageData.JSON_PROPERTY_FALLBACK_TEXT,
+	QuestionAbortedMessageData.JSON_PROPERTY_ACTION_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_SOURCE_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_VALUE,
+	QuestionAbortedMessageData.JSON_PROPERTY_REASON,
+})
+@JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
+public class QuestionAbortedMessageData implements MessageData {
+	/**
+	 * Gets or Sets $type
+	 */
+	public enum TypeEnum {
+		QUESTIONABORTEDMESSAGEDATA("QuestionAbortedMessageData");
+
+		private String value;
+
+		TypeEnum(String value) {
+			this.value = value;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+
+		@JsonCreator
+		public static TypeEnum fromValue(String value) {
+			for (TypeEnum b : TypeEnum.values()) {
+				if (b.value.equals(value)) {
+					return b;
+				}
+			}
+			return TypeEnum.QUESTIONABORTEDMESSAGEDATA;
+		}
+	}
+
+	public static final String JSON_PROPERTY_$_TYPE = "$_type";
+	@JsonProperty(JSON_PROPERTY_$_TYPE)
+	private TypeEnum $type = TypeEnum.QUESTIONABORTEDMESSAGEDATA;
+
+	public static final String JSON_PROPERTY_ID = "id";
+	@JsonProperty(JSON_PROPERTY_ID)
+	private String id;
+
+	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
+	private String conversationId;
+
+	public static final String JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ID = "externalMessengerChannelId";
+	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ID)
+	private String externalMessengerChannelId;
+
+	public static final String JSON_PROPERTY_ACCOUNT_ID = "accountId";
+	@JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
+	private String accountId;
+
+	public static final String JSON_PROPERTY_SENDER_PERSON = "senderPerson";
+	@JsonProperty(JSON_PROPERTY_SENDER_PERSON)
+	private PersonData senderPerson = null;
+
+	public static final String JSON_PROPERTY_SENDER_PERSON_PRESENCE_ID = "senderPersonPresenceId";
+	@JsonProperty(JSON_PROPERTY_SENDER_PERSON_PRESENCE_ID)
+	private String senderPersonPresenceId;
+
+	public static final String JSON_PROPERTY_SERVER_TIMESTAMP = "serverTimestamp";
+	@JsonProperty(JSON_PROPERTY_SERVER_TIMESTAMP)
+	private Long serverTimestamp;
+
+	public static final String JSON_PROPERTY_SEND_TIMESTAMP = "sendTimestamp";
+	@JsonProperty(JSON_PROPERTY_SEND_TIMESTAMP)
+	private Long sendTimestamp;
+
+	public static final String JSON_PROPERTY_TYPE = "type";
+	@JsonProperty(JSON_PROPERTY_TYPE)
+	private EMessageType type = EMessageType.QUESTION_ABORTED;
+
+	public static final String JSON_PROPERTY_RECIPIENT_PERSON_IDS = "recipientPersonIds";
+	@JsonProperty(JSON_PROPERTY_RECIPIENT_PERSON_IDS)
+	private List<String> recipientPersonIds = null;
+
+	public static final String JSON_PROPERTY_FALLBACK_TEXT = "fallbackText";
+	@JsonProperty(JSON_PROPERTY_FALLBACK_TEXT)
+	private String fallbackText;
+
+	public static final String JSON_PROPERTY_ACTION_ID = "actionId";
+	@JsonProperty(JSON_PROPERTY_ACTION_ID)
+	private String actionId;
+
+	public static final String JSON_PROPERTY_SOURCE_ID = "sourceId";
+	@JsonProperty(JSON_PROPERTY_SOURCE_ID)
+	private String sourceId;
+
+	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
+	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
+	private String questionMessageId;
+
+	public static final String JSON_PROPERTY_VALUE = "value";
+	@JsonProperty(JSON_PROPERTY_VALUE)
+	private String value;
+
+	public static final String JSON_PROPERTY_REASON = "reason";
+	@JsonProperty(JSON_PROPERTY_REASON)
+	private EQuestionMessageAbortReason reason;
+
+	public QuestionAbortedMessageData $type(TypeEnum $type) {
+		this.$type = $type;
+		return this;
+	}
+
+	/**
+	 * Get $type
+	 * 
+	 * @return $type
+	 **/
+	@ApiModelProperty(value = "")
+	public TypeEnum get$Type() {
+		return $type;
+	}
+
+	public void set$Type(TypeEnum $type) {
+		this.$type = $type;
+	}
+
+	public QuestionAbortedMessageData id(String id) {
+		this.id = id;
+		return this;
+	}
+
+	/**
+	 * The ID of the message.&lt;br&gt;
+	 * 
+	 * @return id
+	 **/
+	@ApiModelProperty(value = "The ID of the message.<br>")
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public QuestionAbortedMessageData conversationId(String conversationId) {
+		this.conversationId = conversationId;
+		return this;
+	}
+
+	/**
+	 * Conversation ID to which this message belongs to
+	 * 
+	 * @return conversationId
+	 **/
+	@ApiModelProperty(value = "Conversation ID to which this message belongs to")
+	public String getConversationId() {
+		return conversationId;
+	}
+
+	public void setConversationId(String conversationId) {
+		this.conversationId = conversationId;
+	}
+
+	public QuestionAbortedMessageData externalMessengerChannelId(String externalMessengerChannelId) {
+		this.externalMessengerChannelId = externalMessengerChannelId;
+		return this;
+	}
+
+	/**
+	 * ID of the external messenger channel connected to the conversation. Null if the conversation is not connected to an external messenger.
+	 * 
+	 * @return externalMessengerChannelId
+	 **/
+	@ApiModelProperty(value = "ID of the external messenger channel connected to the conversation. Null if the conversation is not connected to an external messenger.")
+	public String getExternalMessengerChannelId() {
+		return externalMessengerChannelId;
+	}
+
+	public void setExternalMessengerChannelId(String externalMessengerChannelId) {
+		this.externalMessengerChannelId = externalMessengerChannelId;
+	}
+
+	public QuestionAbortedMessageData accountId(String accountId) {
+		this.accountId = accountId;
+		return this;
+	}
+
+	/**
+	 * Account ID to which this message and conversation belongs to.
+	 * 
+	 * @return accountId
+	 **/
+	@ApiModelProperty(value = "Account ID to which this message and conversation belongs to.")
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+
+	public QuestionAbortedMessageData senderPerson(PersonData senderPerson) {
+		this.senderPerson = senderPerson;
+		return this;
+	}
+
+	/**
+	 * Get senderPerson
+	 * 
+	 * @return senderPerson
+	 **/
+	@ApiModelProperty(value = "")
+	public PersonData getSenderPerson() {
+		return senderPerson;
+	}
+
+	public void setSenderPerson(PersonData senderPerson) {
+		this.senderPerson = senderPerson;
+	}
+
+	public QuestionAbortedMessageData senderPersonPresenceId(String senderPersonPresenceId) {
+		this.senderPersonPresenceId = senderPersonPresenceId;
+		return this;
+	}
+
+	/**
+	 * Id of the person presence that sends the message. &lt;p&gt; May be null if the message was sent by the system.
+	 * 
+	 * @return senderPersonPresenceId
+	 **/
+	@ApiModelProperty(value = "Id of the person presence that sends the message. <p> May be null if the message was sent by the system.")
+	public String getSenderPersonPresenceId() {
+		return senderPersonPresenceId;
+	}
+
+	public void setSenderPersonPresenceId(String senderPersonPresenceId) {
+		this.senderPersonPresenceId = senderPersonPresenceId;
+	}
+
+	public QuestionAbortedMessageData serverTimestamp(Long serverTimestamp) {
+		this.serverTimestamp = serverTimestamp;
+		return this;
+	}
+
+	/**
+	 * utc timestamp when the message was received on the server.&lt;br&gt; Empty when sending a new message to the collaboration server
+	 * 
+	 * @return serverTimestamp
+	 **/
+	@ApiModelProperty(value = "utc timestamp when the message was received on the server.<br> Empty when sending a new message to the collaboration server")
+	public Long getServerTimestamp() {
+		return serverTimestamp;
+	}
+
+	public void setServerTimestamp(Long serverTimestamp) {
+		this.serverTimestamp = serverTimestamp;
+	}
+
+	public QuestionAbortedMessageData sendTimestamp(Long sendTimestamp) {
+		this.sendTimestamp = sendTimestamp;
+		return this;
+	}
+
+	/**
+	 * utc timestamp when the message was sent from the client&lt;br&gt; Empty when sending a new message to the collaboration server
+	 * 
+	 * @return sendTimestamp
+	 **/
+	@ApiModelProperty(value = "utc timestamp when the message was sent from the client<br> Empty when sending a new message to the collaboration server")
+	public Long getSendTimestamp() {
+		return sendTimestamp;
+	}
+
+	public void setSendTimestamp(Long sendTimestamp) {
+		this.sendTimestamp = sendTimestamp;
+	}
+
+	public QuestionAbortedMessageData type(EMessageType type) {
+		this.type = type;
+		return this;
+	}
+
+	/**
+	 * Get type
+	 * 
+	 * @return type
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageType getType() {
+		return type;
+	}
+
+	public void setType(EMessageType type) {
+		this.type = type;
+	}
+
+	public QuestionAbortedMessageData recipientPersonIds(List<String> recipientPersonIds) {
+		this.recipientPersonIds = recipientPersonIds;
+		return this;
+	}
+
+	public QuestionAbortedMessageData addRecipientPersonIdsItem(String recipientPersonIdsItem) {
+		if (this.recipientPersonIds == null) {
+			this.recipientPersonIds = new ArrayList<>();
+		}
+		this.recipientPersonIds.add(recipientPersonIdsItem);
+		return this;
+	}
+
+	/**
+	 * Person IDs of the recipients of the message. If it is null, all active participations are recipients
+	 * 
+	 * @return recipientPersonIds
+	 **/
+	@ApiModelProperty(value = "Person IDs of the recipients of the message. If it is null, all active participations are recipients")
+	public List<String> getRecipientPersonIds() {
+		return recipientPersonIds;
+	}
+
+	public void setRecipientPersonIds(List<String> recipientPersonIds) {
+		this.recipientPersonIds = recipientPersonIds;
+	}
+
+	public QuestionAbortedMessageData fallbackText(String fallbackText) {
+		this.fallbackText = fallbackText;
+		return this;
+	}
+
+	/**
+	 * Text representation of the message which is used in following cases: &lt;ul&gt; &lt;li&gt;Unblu cannot restore the complex content of the message
+	 * anymore&lt;/li&gt; &lt;li&gt;push notifications&lt;/li&gt; &lt;li&gt;for the last message in the conversation overview&lt;/li&gt; &lt;/ul&gt; The text
+	 * doesn&#39;t contain markdown.&lt;br&gt; The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. This may
+	 * however not always be a perfect textual representation of the message.&lt;br&gt;
+	 * 
+	 * @return fallbackText
+	 **/
+	@ApiModelProperty(value = "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>push notifications</li> <li>for the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. This may however not always be a perfect textual representation of the message.<br>")
+	public String getFallbackText() {
+		return fallbackText;
+	}
+
+	public void setFallbackText(String fallbackText) {
+		this.fallbackText = fallbackText;
+	}
+
+	public QuestionAbortedMessageData actionId(String actionId) {
+		this.actionId = actionId;
+		return this;
+	}
+
+	/**
+	 * An ID of the action triggering the message to be able to identify a message created by an action.
+	 * 
+	 * @return actionId
+	 **/
+	@ApiModelProperty(value = "An ID of the action triggering the message to be able to identify a message created by an action.")
+	public String getActionId() {
+		return actionId;
+	}
+
+	public void setActionId(String actionId) {
+		this.actionId = actionId;
+	}
+
+	public QuestionAbortedMessageData sourceId(String sourceId) {
+		this.sourceId = sourceId;
+		return this;
+	}
+
+	/**
+	 * A custom ID which identifies where this message initially came from.
+	 * 
+	 * @return sourceId
+	 **/
+	@ApiModelProperty(value = "A custom ID which identifies where this message initially came from.")
+	public String getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
+	}
+
+	public QuestionAbortedMessageData questionMessageId(String questionMessageId) {
+		this.questionMessageId = questionMessageId;
+		return this;
+	}
+
+	/**
+	 * ID of the question message for which this reply is
+	 * 
+	 * @return questionMessageId
+	 **/
+	@ApiModelProperty(value = "ID of the question message for which this reply is")
+	public String getQuestionMessageId() {
+		return questionMessageId;
+	}
+
+	public void setQuestionMessageId(String questionMessageId) {
+		this.questionMessageId = questionMessageId;
+	}
+
+	public QuestionAbortedMessageData value(String value) {
+		this.value = value;
+		return this;
+	}
+
+	/**
+	 * The reply value for the question message.
+	 * 
+	 * @return value
+	 **/
+	@ApiModelProperty(value = "The reply value for the question message.")
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public QuestionAbortedMessageData reason(EQuestionMessageAbortReason reason) {
+		this.reason = reason;
+		return this;
+	}
+
+	/**
+	 * Get reason
+	 * 
+	 * @return reason
+	 **/
+	@ApiModelProperty(value = "")
+	public EQuestionMessageAbortReason getReason() {
+		return reason;
+	}
+
+	public void setReason(EQuestionMessageAbortReason reason) {
+		this.reason = reason;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		QuestionAbortedMessageData questionAbortedMessageData = (QuestionAbortedMessageData) o;
+		return Objects.equals(this.$type, questionAbortedMessageData.$type) &&
+				Objects.equals(this.id, questionAbortedMessageData.id) &&
+				Objects.equals(this.conversationId, questionAbortedMessageData.conversationId) &&
+				Objects.equals(this.externalMessengerChannelId, questionAbortedMessageData.externalMessengerChannelId) &&
+				Objects.equals(this.accountId, questionAbortedMessageData.accountId) &&
+				Objects.equals(this.senderPerson, questionAbortedMessageData.senderPerson) &&
+				Objects.equals(this.senderPersonPresenceId, questionAbortedMessageData.senderPersonPresenceId) &&
+				Objects.equals(this.serverTimestamp, questionAbortedMessageData.serverTimestamp) &&
+				Objects.equals(this.sendTimestamp, questionAbortedMessageData.sendTimestamp) &&
+				Objects.equals(this.type, questionAbortedMessageData.type) &&
+				Objects.equals(this.recipientPersonIds, questionAbortedMessageData.recipientPersonIds) &&
+				Objects.equals(this.fallbackText, questionAbortedMessageData.fallbackText) &&
+				Objects.equals(this.actionId, questionAbortedMessageData.actionId) &&
+				Objects.equals(this.sourceId, questionAbortedMessageData.sourceId) &&
+				Objects.equals(this.questionMessageId, questionAbortedMessageData.questionMessageId) &&
+				Objects.equals(this.value, questionAbortedMessageData.value) &&
+				Objects.equals(this.reason, questionAbortedMessageData.reason);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, questionMessageId, value, reason);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class QuestionAbortedMessageData {\n");
+		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
+		sb.append("    id: ").append(toIndentedString(id)).append("\n");
+		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+		sb.append("    externalMessengerChannelId: ").append(toIndentedString(externalMessengerChannelId)).append("\n");
+		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
+		sb.append("    senderPerson: ").append(toIndentedString(senderPerson)).append("\n");
+		sb.append("    senderPersonPresenceId: ").append(toIndentedString(senderPersonPresenceId)).append("\n");
+		sb.append("    serverTimestamp: ").append(toIndentedString(serverTimestamp)).append("\n");
+		sb.append("    sendTimestamp: ").append(toIndentedString(sendTimestamp)).append("\n");
+		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
+		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
+		sb.append("    actionId: ").append(toIndentedString(actionId)).append("\n");
+		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
+		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
+		sb.append("    value: ").append(toIndentedString(value)).append("\n");
+		sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
+
+}

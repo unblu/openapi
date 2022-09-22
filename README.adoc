@@ -1,0 +1,34 @@
+//tag::vardef[]
+:gh-repo-owner: unblu
+:gh-repo-name: openapi
+
+:project-name: Unblu OpenAPI
+:git-branch: main/6.x.x
+:license: http://www.apache.org/licenses/LICENSE-2.0
+:license-name: Apache 2.0 License
+
+:git-repository: {gh-repo-owner}/{gh-repo-name}
+:homepage: https://{gh-repo-owner}.github.io/{gh-repo-name}/
+:issues: https://github.com/{git-repository}/issues
+//end::vardef[]
+
+//tag::header[]
+= {project-name}
+
+Java clients generated using the OpenAPI specification for the https://www.unblu.com/[Unblu] collaboration server.
+//end::header[]
+
+Read more on the link:{homepage}[project home page].
+
+//tag::contact-section[]
+== Get in touch
+
+Use the link:{issues}[{project-name} issue tracker] on GitHub.
+
+//end::contact-section[]
+
+//tag::license-section[]
+== License
+
+link:{license}[{license-name}]
+//end::license-section[]

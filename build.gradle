@@ -1,0 +1,102 @@
+plugins {
+    id 'de.marcphilipp.nexus-publish' version '0.4.0' apply false
+    id 'net.researchgate.release' version '2.6.0'
+    id 'io.codearte.nexus-staging' version '0.22.0'
+}
+
+wrapper {
+    gradleVersion = '7.3.3'
+}
+
+String groupId = 'com.unblu.openapi'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'signing'
+    apply plugin: 'de.marcphilipp.nexus-publish'
+    apply plugin: 'maven-publish'
+
+    group = groupId
+
+    signing {
+        useGpgCmd()
+        sign(publishing.publications)
+    }
+
+    tasks.withType(Sign) {
+        onlyIf {
+            project.hasProperty('signing.gnupg.keyName')
+        }
+    }
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+
+        compileJava.options.encoding = "UTF-8"
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(8)
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    nexusPublishing {
+        repositories {
+            sonatype {
+                username = project.findProperty('sonatypeUser') ?: ''
+                password = project.findProperty('sonatypePassword') ?: ''
+            }
+        }
+    }
+}
+
+nexusStaging {
+    packageGroup = 'com.unblu'
+    username = project.findProperty('sonatypeUser') ?: ''
+    password = project.findProperty('sonatypePassword') ?: ''
+}
+
+release {
+    buildTasks = ['releaseBuild']
+    git {
+        requireBranch = 'main/6.x.x'
+    }
+}
+
+task releaseBuild {
+    dependsOn(
+            'checkLastVersionValue',
+            'clean',
+            'build',
+            project.getTasksByName('publishToSonatype', true)
+    )
+}
+
+tasks.register('checkLastVersionValue') {
+    doLast {
+        if(version.endsWith('SNAPSHOT')) {
+            throw new GradleException("version '$version' ends with SNAPSHOT, this is not a release build!")
+        }
+        if(lastVersion != version) {
+            throw new GradleException("lastVersion '$lastVersion' does not match version '$version', fix it in the 'gradle.properties' file.")
+        }
+    }
+}
+
+def updateLastVersionValueTask = tasks.register('updateLastVersionValue') {
+    doLast {
+        def propertiesFile = file('gradle.properties')
+        def content = propertiesFile.text
+        content = content.replaceAll("lastVersion=[0-9\\.]+", "lastVersion=" + version.replace('-SNAPSHOT', ''))
+        propertiesFile.text = content
+    }
+}
+
+model {
+    tasks.unSnapshotVersion {
+        dependsOn updateLastVersionValueTask
+    }
+}
