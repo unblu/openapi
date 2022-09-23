@@ -169,4 +169,7 @@ model {
     tasks.unSnapshotVersion {
         dependsOn updateLastVersionValueTask
     }
+    tasks.gitPublishCopy {
+        dependsOn asciidoctor
+    }
 }
