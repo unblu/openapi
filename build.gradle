@@ -12,7 +12,7 @@ plugins {
     id 'org.ajoberstar.git-publish' version '3.0.1'
     id 'org.ajoberstar.grgit' version '4.1.1'
     id 'de.marcphilipp.nexus-publish' version '0.4.0' apply false
-    id 'net.researchgate.release' version '2.6.0'
+    id 'net.researchgate.release' version '3.0.2'
     id 'io.codearte.nexus-staging' version '0.22.0'
 }
 
@@ -58,6 +58,7 @@ subprojects {
     nexusPublishing {
         repositories {
             sonatype {
+                nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
                 username = project.findProperty('sonatypeUser') ?: ''
                 password = project.findProperty('sonatypePassword') ?: ''
             }
@@ -66,6 +67,7 @@ subprojects {
 }
 
 nexusStaging {
+    serverUrl = "https://s01.oss.sonatype.org/service/local/"
     packageGroup = 'com.unblu'
     username = project.findProperty('sonatypeUser') ?: ''
     password = project.findProperty('sonatypePassword') ?: ''
@@ -128,7 +130,7 @@ gitPublish {
 release {
     buildTasks = ['releaseBuild']
     git {
-        requireBranch = 'main/7.x.x'
+        requireBranch.set('main/7.x.x')
     }
 }
 
