@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.18.2
+  version: 7.18.3
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -2544,6 +2544,29 @@ paths:
                     needsCounterpartPresence: false
                     messageStateHandledExternally: false
                     onTimeoutBehavior: HAND_OFF
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /bots/restrictDialogCounterpart:
+    post:
+      tags:
+      - Bots
+      summary: restrictDialogCounterpart
+      description: Limits the length of a message the counterpart can send to the
+        bot in a dialog. <p> The value is reset automatically when the bot hands off
+        the dialog.<br>
+      operationId: botsRestrictDialogCounterpart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BotsRestrictDialogCounterpartBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -12417,6 +12440,17 @@ components:
         dialogBotId:
           type: string
           description: The ID of the dialog bot
+    BotsRestrictDialogCounterpartBody:
+      type: object
+      description: Request Body for the 'botsRestrictDialogCounterpart' operation
+      properties:
+        dialogToken:
+          type: string
+          description: The dialog token included in each bot dialog webhook
+        maxChatInputLength:
+          type: integer
+          format: int32
+          description: The maximum number of characters in a message
     CannedResponse:
       type: object
       description: Model of canned response. Canned responses are predefined messages

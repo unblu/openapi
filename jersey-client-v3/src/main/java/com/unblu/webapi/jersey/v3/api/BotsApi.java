@@ -22,6 +22,7 @@ import com.unblu.webapi.model.v3.BotsDialogMessageDeliveredBody;
 import com.unblu.webapi.model.v3.BotsDialogMessageReadBody;
 import com.unblu.webapi.model.v3.BotsFinishDialogBody;
 import com.unblu.webapi.model.v3.BotsPingWebhookBody;
+import com.unblu.webapi.model.v3.BotsRestrictDialogCounterpartBody;
 import com.unblu.webapi.model.v3.DialogBotData;
 import com.unblu.webapi.model.v3.DialogBotQuery;
 import com.unblu.webapi.model.v3.DialogBotResult;
@@ -1078,6 +1079,56 @@ public class BotsApi {
 		GenericType<DialogBotData> localVarReturnType = new GenericType<DialogBotData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * restrictDialogCounterpart Limits the length of a message the counterpart can send to the bot in a dialog. &lt;p&gt; The value is reset automatically when the
+	 * bot hands off the dialog.&lt;br&gt;
+	 * 
+	 * @param botsRestrictDialogCounterpartBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsRestrictDialogCounterpart(BotsRestrictDialogCounterpartBody botsRestrictDialogCounterpartBody) throws ApiException {
+
+		botsRestrictDialogCounterpartWithHttpInfo(botsRestrictDialogCounterpartBody);
+	}
+
+	/**
+	 * restrictDialogCounterpart Limits the length of a message the counterpart can send to the bot in a dialog. &lt;p&gt; The value is reset automatically when the
+	 * bot hands off the dialog.&lt;br&gt;
+	 * 
+	 * @param botsRestrictDialogCounterpartBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsRestrictDialogCounterpartWithHttpInfo(BotsRestrictDialogCounterpartBody botsRestrictDialogCounterpartBody) throws ApiException {
+		Object localVarPostBody = botsRestrictDialogCounterpartBody;
+
+		// verify the required parameter 'botsRestrictDialogCounterpartBody' is set
+		if (botsRestrictDialogCounterpartBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'botsRestrictDialogCounterpartBody' when calling botsRestrictDialogCounterpart");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/restrictDialogCounterpart";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**
