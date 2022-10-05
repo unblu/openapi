@@ -36,11 +36,11 @@ public class InvitationsRequeueConversationBody {
 	}
 
 	/**
-	 * Conversation id.
+	 * Conversation ID
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "Conversation id.")
+	@ApiModelProperty(value = "Conversation ID")
 	public String getConversationId() {
 		return conversationId;
 	}

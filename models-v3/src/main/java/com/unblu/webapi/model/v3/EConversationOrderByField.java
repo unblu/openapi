@@ -20,6 +20,11 @@ public enum EConversationOrderByField {
 	END_TIMESTAMP("END_TIMESTAMP"),
 
 	/**
+	 * SCHEDULED_TIMESTAMP: Sort by the &#39;scheduledTimestamp&#39; attribute
+	 */
+	SCHEDULED_TIMESTAMP("SCHEDULED_TIMESTAMP"),
+
+	/**
 	 * ID: Sort by the &#39;id&#39; attribute
 	 */
 	ID("ID"),

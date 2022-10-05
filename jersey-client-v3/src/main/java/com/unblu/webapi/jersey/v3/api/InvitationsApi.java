@@ -46,14 +46,14 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * addSecondaryInvitationTarget Add a secondary invitation target to the given invitation. This target agent will be informed additionally to the main target
-	 * agent and can accept the invitation as well.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; This is only possible for conversation requests for a specific agent.
-	 * Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; The secondary target person has to be a different one than the target of the
-	 * invitation. Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; There can only be one pending secondary invitation target per person.
-	 * If there is already one defined which is in pending state, an exception will be thrown.&lt;br&gt; To cancel this secondary invitation, see
-	 * &#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * addSecondaryInvitationTarget Add a secondary invitation target to the given invitation. This target agent is informed additionally to the main target agent
+	 * and can accept the invitation in their place. &lt;ul&gt; &lt;li&gt;The endpoint may only be called for conversation requests directed at a specific agent.
+	 * &lt;li&gt;The secondary target must be different from the main target of the invitation. &lt;li&gt;Each secondary invitation target may only added to an
+	 * invitation to a particular conversation once. The same secondary invitation target can, however, be added to invitations to multiple conversations.
+	 * &lt;/ul&gt; If any of these prerequisites are violated, the call to the endpoint returns an error response code. To cancel a secondary invitation,
+	 * see&#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
 	 * 
-	 * @param invitationId The invitation to which the secondary target should be added. (required)
+	 * @param invitationId The invitation that the secondary target should be added to (required)
 	 * @param invitationsAddSecondaryInvitationTargetBody (required)
 	 * @return ConversationInvitationData
 	 * @throws ApiException if fails to make API call
@@ -63,14 +63,14 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * addSecondaryInvitationTarget Add a secondary invitation target to the given invitation. This target agent will be informed additionally to the main target
-	 * agent and can accept the invitation as well.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; This is only possible for conversation requests for a specific agent.
-	 * Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; The secondary target person has to be a different one than the target of the
-	 * invitation. Otherwise an exception will be thrown.&lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; There can only be one pending secondary invitation target per person.
-	 * If there is already one defined which is in pending state, an exception will be thrown.&lt;br&gt; To cancel this secondary invitation, see
-	 * &#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * addSecondaryInvitationTarget Add a secondary invitation target to the given invitation. This target agent is informed additionally to the main target agent
+	 * and can accept the invitation in their place. &lt;ul&gt; &lt;li&gt;The endpoint may only be called for conversation requests directed at a specific agent.
+	 * &lt;li&gt;The secondary target must be different from the main target of the invitation. &lt;li&gt;Each secondary invitation target may only added to an
+	 * invitation to a particular conversation once. The same secondary invitation target can, however, be added to invitations to multiple conversations.
+	 * &lt;/ul&gt; If any of these prerequisites are violated, the call to the endpoint returns an error response code. To cancel a secondary invitation,
+	 * see&#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
 	 * 
-	 * @param invitationId The invitation to which the secondary target should be added. (required)
+	 * @param invitationId The invitation that the secondary target should be added to (required)
 	 * @param invitationsAddSecondaryInvitationTargetBody (required)
 	 * @return ApiResponse&lt;ConversationInvitationData&gt;
 	 * @throws ApiException if fails to make API call
@@ -115,10 +115,10 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * cancelSecondaryInvitationTarget Cancels the invitation send to a secondary target. The secondary target agent will no longer be able to accept the
+	 * cancelSecondaryInvitationTarget Cancels the invitation sent to a secondary target. The secondary target agent will no longer be able to accept the
 	 * invitation.&lt;br&gt; See also &#x60;addSecondaryInvitationTarget&#x60;&lt;br&gt;
 	 * 
-	 * @param invitationId The invitation to which the secondary target belongs to. (required)
+	 * @param invitationId The invitation the secondary target belongs to (required)
 	 * @param invitationsCancelSecondaryInvitationTargetBody (required)
 	 * @return ConversationInvitationData
 	 * @throws ApiException if fails to make API call
@@ -128,10 +128,10 @@ public class InvitationsApi {
 	}
 
 	/**
-	 * cancelSecondaryInvitationTarget Cancels the invitation send to a secondary target. The secondary target agent will no longer be able to accept the
+	 * cancelSecondaryInvitationTarget Cancels the invitation sent to a secondary target. The secondary target agent will no longer be able to accept the
 	 * invitation.&lt;br&gt; See also &#x60;addSecondaryInvitationTarget&#x60;&lt;br&gt;
 	 * 
-	 * @param invitationId The invitation to which the secondary target belongs to. (required)
+	 * @param invitationId The invitation the secondary target belongs to (required)
 	 * @param invitationsCancelSecondaryInvitationTargetBody (required)
 	 * @return ApiResponse&lt;ConversationInvitationData&gt;
 	 * @throws ApiException if fails to make API call

@@ -31,11 +31,11 @@ public class InvitationsCancelSecondaryInvitationTargetBody {
 	}
 
 	/**
-	 * The secondary invitation target person ID for which the invitation should be canceled.
+	 * The person ID of the secondary invitation target for whom to cancel the invitation
 	 * 
 	 * @return personId
 	 **/
-	@ApiModelProperty(value = "The secondary invitation target person ID for which the invitation should be canceled.")
+	@ApiModelProperty(value = "The person ID of the secondary invitation target for whom to cancel the invitation")
 	public String getPersonId() {
 		return personId;
 	}

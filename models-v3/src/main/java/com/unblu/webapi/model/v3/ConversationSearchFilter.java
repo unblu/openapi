@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = ParticipantPersonIdConversationSearchFilter.class, name = "PARTICIPANT_PERSON_ID"),
 	@JsonSubTypes.Type(value = RecipientIdConversationSearchFilter.class, name = "RECIPIENT_ID"),
 	@JsonSubTypes.Type(value = RecipientTypeConversationSearchFilter.class, name = "RECIPIENT_TYPE"),
+	@JsonSubTypes.Type(value = ScheduledTimestampConversationSearchFilter.class, name = "SCHEDULED_TIMESTAMP"),
 	@JsonSubTypes.Type(value = StateConversationSearchFilter.class, name = "STATE"),
 	@JsonSubTypes.Type(value = TokboxSessionIdConversationSearchFilter.class, name = "TOKBOX_SESSION_ID"),
 	@JsonSubTypes.Type(value = TopicConversationSearchFilter.class, name = "TOPIC"),

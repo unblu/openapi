@@ -20,6 +20,11 @@ public enum EConversationSearchFilterField {
 	END_TIMESTAMP("END_TIMESTAMP"),
 
 	/**
+	 * SCHEDULED_TIMESTAMP: Filter by the &#39;scheduledTimestamp&#39; attribute
+	 */
+	SCHEDULED_TIMESTAMP("SCHEDULED_TIMESTAMP"),
+
+	/**
 	 * INITIAL_ENGAGEMENT_TYPE: Filter by the &#39;initialEngagementType&#39; attribute
 	 */
 	INITIAL_ENGAGEMENT_TYPE("INITIAL_ENGAGEMENT_TYPE"),

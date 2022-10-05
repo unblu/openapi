@@ -41,11 +41,11 @@ public class InvitationsInviteAgentToConversationBody {
 	}
 
 	/**
-	 * Conversation id.
+	 * Conversation ID
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "Conversation id.")
+	@ApiModelProperty(value = "Conversation ID")
 	public String getConversationId() {
 		return conversationId;
 	}
@@ -60,11 +60,11 @@ public class InvitationsInviteAgentToConversationBody {
 	}
 
 	/**
-	 * Person ID of the invited agent.
+	 * Person ID of the invited agent
 	 * 
 	 * @return agentPersonId
 	 **/
-	@ApiModelProperty(value = "Person ID of the invited agent.")
+	@ApiModelProperty(value = "Person ID of the invited agent")
 	public String getAgentPersonId() {
 		return agentPersonId;
 	}

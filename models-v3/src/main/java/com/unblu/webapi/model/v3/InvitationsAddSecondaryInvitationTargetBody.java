@@ -31,11 +31,11 @@ public class InvitationsAddSecondaryInvitationTargetBody {
 	}
 
 	/**
-	 * The person who should be informed as well about the invitation.
+	 * The person who should be informed of the invitation additionally
 	 * 
 	 * @return personId
 	 **/
-	@ApiModelProperty(value = "The person who should be informed as well about the invitation.")
+	@ApiModelProperty(value = "The person who should be informed of the invitation additionally")
 	public String getPersonId() {
 		return personId;
 	}

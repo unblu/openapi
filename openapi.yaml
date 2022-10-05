@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.18.3
+  version: 7.19.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -6489,19 +6489,20 @@ paths:
       - Invitations
       summary: addSecondaryInvitationTarget
       description: Add a secondary invitation target to the given invitation. This
-        target agent will be informed additionally to the main target agent and can
-        accept the invitation as well.<br> <b>Note:</b> This is only possible for
-        conversation requests for a specific agent. Otherwise an exception will be
-        thrown.<br> <b>Note:</b> The secondary target person has to be a different
-        one than the target of the invitation. Otherwise an exception will be thrown.<br>
-        <b>Note:</b> There can only be one pending secondary invitation target per
-        person. If there is already one defined which is in pending state, an exception
-        will be thrown.<br> To cancel this secondary invitation, see `cancelSecondaryInvitationTarget`<br>
+        target agent is informed additionally to the main target agent and can accept
+        the invitation in their place. <ul> <li>The endpoint may only be called for
+        conversation requests directed at a specific agent. <li>The secondary target
+        must be different from the main target of the invitation. <li>Each secondary
+        invitation target may only added to an invitation to a particular conversation
+        once. The same secondary invitation target can, however, be added to invitations
+        to multiple conversations. </ul> If any of these prerequisites are violated,
+        the call to the endpoint returns an error response code. To cancel a secondary
+        invitation, see`cancelSecondaryInvitationTarget`<br>
       operationId: invitationsAddSecondaryInvitationTarget
       parameters:
       - name: invitationId
         in: path
-        description: The invitation to which the secondary target should be added.
+        description: The invitation that the secondary target should be added to
         required: true
         schema:
           type: string
@@ -6515,7 +6516,7 @@ paths:
         required: true
       responses:
         "200":
-          description: the information about the invitation
+          description: The information about the invitation
           content:
             application/json:
               schema:
@@ -6530,14 +6531,14 @@ paths:
       tags:
       - Invitations
       summary: cancelSecondaryInvitationTarget
-      description: Cancels the invitation send to a secondary target. The secondary
+      description: Cancels the invitation sent to a secondary target. The secondary
         target agent will no longer be able to accept the invitation.<br> See also
         `addSecondaryInvitationTarget`<br>
       operationId: invitationsCancelSecondaryInvitationTarget
       parameters:
       - name: invitationId
         in: path
-        description: The invitation to which the secondary target belongs to.
+        description: The invitation the secondary target belongs to
         required: true
         schema:
           type: string
@@ -6551,7 +6552,7 @@ paths:
         required: true
       responses:
         "200":
-          description: the information about the invitation
+          description: The information about the invitation
           content:
             application/json:
               schema:
@@ -6640,7 +6641,7 @@ paths:
         required: true
       responses:
         "200":
-          description: the information about the invitation created
+          description: The information about the invitation created
           content:
             application/json:
               schema:
@@ -6750,7 +6751,7 @@ paths:
         required: true
       responses:
         "200":
-          description: the information about the invitation created
+          description: The information about the invitation created
           content:
             application/json:
               schema:
@@ -6808,7 +6809,7 @@ paths:
         required: true
       responses:
         "200":
-          description: Information about the created invitation
+          description: Information about the invitation created
           content:
             application/json:
               schema:
@@ -14021,6 +14022,7 @@ components:
       - $ref: '#/components/schemas/InitialEngagementTypeConversationSearchFilter'
       - $ref: '#/components/schemas/CreationTimestampConversationSearchFilter'
       - $ref: '#/components/schemas/EndTimestampConversationSearchFilter'
+      - $ref: '#/components/schemas/ScheduledTimestampConversationSearchFilter'
       - $ref: '#/components/schemas/TopicConversationSearchFilter'
       - $ref: '#/components/schemas/TokboxSessionIdConversationSearchFilter'
       - $ref: '#/components/schemas/ContextPersonIdConversationSearchFilter'
@@ -14043,6 +14045,7 @@ components:
           PARTICIPANT_PERSON_ID: '#/components/schemas/ParticipantPersonIdConversationSearchFilter'
           RECIPIENT_ID: '#/components/schemas/RecipientIdConversationSearchFilter'
           RECIPIENT_TYPE: '#/components/schemas/RecipientTypeConversationSearchFilter'
+          SCHEDULED_TIMESTAMP: '#/components/schemas/ScheduledTimestampConversationSearchFilter'
           STATE: '#/components/schemas/StateConversationSearchFilter'
           TOKBOX_SESSION_ID: '#/components/schemas/TokboxSessionIdConversationSearchFilter'
           TOPIC: '#/components/schemas/TopicConversationSearchFilter'
@@ -16199,6 +16202,7 @@ components:
       enum:
       - CREATION_TIMESTAMP
       - END_TIMESTAMP
+      - SCHEDULED_TIMESTAMP
       - ID
       - TOPIC
       - ASSIGNEE_PERSON_ID
@@ -16216,6 +16220,7 @@ components:
       x-enum-descriptions:
       - 'CREATION_TIMESTAMP: Sort by the ''creationTimestamp'' attribute'
       - 'END_TIMESTAMP: Sort by the ''endTimestamp'' attribute'
+      - 'SCHEDULED_TIMESTAMP: Sort by the ''scheduledTimestamp'' attribute'
       - 'ID: Sort by the ''id'' attribute'
       - 'TOPIC: Sort by the ''topic'' attribute'
       - 'ASSIGNEE_PERSON_ID: Sort by the ''assigneePersonId'' attribute'
@@ -16281,6 +16286,7 @@ components:
       enum:
       - CREATION_TIMESTAMP
       - END_TIMESTAMP
+      - SCHEDULED_TIMESTAMP
       - INITIAL_ENGAGEMENT_TYPE
       - TOPIC
       - CONTEXT_PERSON_ID
@@ -16295,6 +16301,7 @@ components:
       x-enum-descriptions:
       - 'CREATION_TIMESTAMP: Filter by the ''creationTimestamp'' attribute'
       - 'END_TIMESTAMP: Filter by the ''endTimestamp'' attribute'
+      - 'SCHEDULED_TIMESTAMP: Filter by the ''scheduledTimestamp'' attribute'
       - 'INITIAL_ENGAGEMENT_TYPE: Filter by the ''initialEngagementType'' attribute'
       - 'TOPIC: Filter by the ''topic'' attribute'
       - 'CONTEXT_PERSON_ID: Filter by the ''contextPersonId'' attribute'
@@ -19299,7 +19306,7 @@ components:
       properties:
         personId:
           type: string
-          description: The person who should be informed as well about the invitation.
+          description: The person who should be informed of the invitation additionally
     InvitationsCancelSecondaryInvitationTargetBody:
       type: object
       description: Request Body for the 'invitationsCancelSecondaryInvitationTarget'
@@ -19307,8 +19314,8 @@ components:
       properties:
         personId:
           type: string
-          description: The secondary invitation target person ID for which the invitation
-            should be canceled.
+          description: The person ID of the secondary invitation target for whom to
+            cancel the invitation
     InvitationsForwardConversationToAgentBody:
       type: object
       description: Request Body for the 'invitationsForwardConversationToAgent' operation
@@ -19342,10 +19349,10 @@ components:
       properties:
         conversationId:
           type: string
-          description: Conversation id.
+          description: Conversation ID
         agentPersonId:
           type: string
-          description: Person ID of the invited agent.
+          description: Person ID of the invited agent
         comment:
           type: string
           description: Invitation comment. Optional.
@@ -19399,10 +19406,10 @@ components:
       properties:
         conversationId:
           type: string
-          description: Conversation id.
+          description: Conversation ID
         teamId:
           type: string
-          description: Team id.
+          description: Team ID
         comment:
           type: string
           description: Invitation comment. Optional.
@@ -19412,7 +19419,7 @@ components:
       properties:
         conversationId:
           type: string
-          description: Conversation id.
+          description: Conversation ID
         agentRemovalType:
           $ref: '#/components/schemas/EAgentRemovalType'
     IsNotNullBooleanOperator:
@@ -23414,6 +23421,18 @@ components:
         conversationStartUrl:
           type: string
           description: The URL where the conversation started
+    ScheduledTimestampConversationSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ScheduledTimestampConversationSearchFilter
+          enum:
+          - ScheduledTimestampConversationSearchFilter
+        field:
+          $ref: '#/components/schemas/EConversationSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     SecureTokenRequest:
       type: object
       description: Secure token request
@@ -24443,15 +24462,18 @@ components:
           x-type: ExpandableField
         username:
           type: string
-          description: The username for the login. Depending on the configuration,
-            this may also be the email address. Maximum length of 250 characters.
-            Cannot be omitted. When creating or updating a user, and 'storage.user.useEmailAsUsername'
-            is enabled, this value must be the same as the email address.
+          description: The username for the login. Maximum length of 250 characters.
+            Depending on the configuration, this may also be the email address.<br>
+            Cannot be omitted when creating or updating a user and 'com.unblu.storage.user.useEmailAsUsername'
+            is set to 'false'.<br> When creating or updating a user, and 'com.unblu.storage.user.useEmailAsUsername'
+            is set to 'true', this field can be omitted. If provided, its value must
+            be the same as that of the 'email' field.
         email:
           type: string
-          description: The email address of the user. Maximum length of 250 characters.
-            If 'storage.user.useEmailAsUsername' is set to 'false', the email may
-            be an empty string or set to null.
+          description: The user's email address. Maximum length of 250 characters.
+            If 'com.unblu.storage.user.useEmailAsUsername' is set to 'false', the
+            email may be an empty string or set to null. If 'com.unblu.storage.user.useEmailAsUsername'
+            is set to 'true', the field is mandatory.
         phone:
           type: string
           description: The phone number of the user. Maximum length of 100 characters.

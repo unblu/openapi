@@ -41,11 +41,11 @@ public class InvitationsInviteTeamToConversationBody {
 	}
 
 	/**
-	 * Conversation id.
+	 * Conversation ID
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "Conversation id.")
+	@ApiModelProperty(value = "Conversation ID")
 	public String getConversationId() {
 		return conversationId;
 	}
@@ -60,11 +60,11 @@ public class InvitationsInviteTeamToConversationBody {
 	}
 
 	/**
-	 * Team id.
+	 * Team ID
 	 * 
 	 * @return teamId
 	 **/
-	@ApiModelProperty(value = "Team id.")
+	@ApiModelProperty(value = "Team ID")
 	public String getTeamId() {
 		return teamId;
 	}

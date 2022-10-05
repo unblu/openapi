@@ -297,12 +297,14 @@ public class User {
 	}
 
 	/**
-	 * The username for the login. Depending on the configuration, this may also be the email address. Maximum length of 250 characters. Cannot be omitted. When
-	 * creating or updating a user, and &#39;storage.user.useEmailAsUsername&#39; is enabled, this value must be the same as the email address.
+	 * The username for the login. Maximum length of 250 characters. Depending on the configuration, this may also be the email address.&lt;br&gt; Cannot be omitted
+	 * when creating or updating a user and &#39;com.unblu.storage.user.useEmailAsUsername&#39; is set to &#39;false&#39;.&lt;br&gt; When creating or updating a
+	 * user, and &#39;com.unblu.storage.user.useEmailAsUsername&#39; is set to &#39;true&#39;, this field can be omitted. If provided, its value must be the same as
+	 * that of the &#39;email&#39; field.
 	 * 
 	 * @return username
 	 **/
-	@ApiModelProperty(value = "The username for the login. Depending on the configuration, this may also be the email address. Maximum length of 250 characters. Cannot be omitted. When creating or updating a user, and 'storage.user.useEmailAsUsername' is enabled, this value must be the same as the email address.")
+	@ApiModelProperty(value = "The username for the login. Maximum length of 250 characters. Depending on the configuration, this may also be the email address.<br> Cannot be omitted when creating or updating a user and 'com.unblu.storage.user.useEmailAsUsername' is set to 'false'.<br> When creating or updating a user, and 'com.unblu.storage.user.useEmailAsUsername' is set to 'true', this field can be omitted. If provided, its value must be the same as that of the 'email' field.")
 	public String getUsername() {
 		return username;
 	}
@@ -317,12 +319,12 @@ public class User {
 	}
 
 	/**
-	 * The email address of the user. Maximum length of 250 characters. If &#39;storage.user.useEmailAsUsername&#39; is set to &#39;false&#39;, the email may be an
-	 * empty string or set to null.
+	 * The user&#39;s email address. Maximum length of 250 characters. If &#39;com.unblu.storage.user.useEmailAsUsername&#39; is set to &#39;false&#39;, the email
+	 * may be an empty string or set to null. If &#39;com.unblu.storage.user.useEmailAsUsername&#39; is set to &#39;true&#39;, the field is mandatory.
 	 * 
 	 * @return email
 	 **/
-	@ApiModelProperty(value = "The email address of the user. Maximum length of 250 characters. If 'storage.user.useEmailAsUsername' is set to 'false', the email may be an empty string or set to null.")
+	@ApiModelProperty(value = "The user's email address. Maximum length of 250 characters. If 'com.unblu.storage.user.useEmailAsUsername' is set to 'false', the email may be an empty string or set to null. If 'com.unblu.storage.user.useEmailAsUsername' is set to 'true', the field is mandatory.")
 	public String getEmail() {
 		return email;
 	}
