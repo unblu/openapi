@@ -34,6 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationInvitationData.JSON_PROPERTY_LINKS,
 	ConversationInvitationData.JSON_PROPERTY_REDEEMING_PERSON_ID,
 	ConversationInvitationData.JSON_PROPERTY_COMMENT,
+	ConversationInvitationData.JSON_PROPERTY_JOIN_HIDDEN,
 	ConversationInvitationData.JSON_PROPERTY_EMAIL,
 	ConversationInvitationData.JSON_PROPERTY_NICKNAME,
 	ConversationInvitationData.JSON_PROPERTY_TARGET_RESPONSE_STATUS,
@@ -134,6 +135,10 @@ public class ConversationInvitationData {
 	public static final String JSON_PROPERTY_COMMENT = "comment";
 	@JsonProperty(JSON_PROPERTY_COMMENT)
 	private String comment;
+
+	public static final String JSON_PROPERTY_JOIN_HIDDEN = "joinHidden";
+	@JsonProperty(JSON_PROPERTY_JOIN_HIDDEN)
+	private Boolean joinHidden;
 
 	public static final String JSON_PROPERTY_EMAIL = "email";
 	@JsonProperty(JSON_PROPERTY_EMAIL)
@@ -448,6 +453,25 @@ public class ConversationInvitationData {
 		this.comment = comment;
 	}
 
+	public ConversationInvitationData joinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+		return this;
+	}
+
+	/**
+	 * Determines if the target of the invitation joins the conversation as a hidden participant
+	 * 
+	 * @return joinHidden
+	 **/
+	@ApiModelProperty(value = "Determines if the target of the invitation joins the conversation as a hidden participant")
+	public Boolean isJoinHidden() {
+		return joinHidden;
+	}
+
+	public void setJoinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+	}
+
 	public ConversationInvitationData email(String email) {
 		this.email = email;
 		return this;
@@ -577,6 +601,7 @@ public class ConversationInvitationData {
 				Objects.equals(this.links, conversationInvitationData.links) &&
 				Objects.equals(this.redeemingPersonId, conversationInvitationData.redeemingPersonId) &&
 				Objects.equals(this.comment, conversationInvitationData.comment) &&
+				Objects.equals(this.joinHidden, conversationInvitationData.joinHidden) &&
 				Objects.equals(this.email, conversationInvitationData.email) &&
 				Objects.equals(this.nickname, conversationInvitationData.nickname) &&
 				Objects.equals(this.targetResponseStatus, conversationInvitationData.targetResponseStatus) &&
@@ -586,7 +611,7 @@ public class ConversationInvitationData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, accountId, invitationType, invitationState, id, conversationId, token, createdTimestamp, creatorType, creatorPersonId, targetId, targetType, links, redeemingPersonId, comment, email, nickname, targetResponseStatus, secondaryInvitationTargets, expirationTimestamp);
+		return Objects.hash($type, accountId, invitationType, invitationState, id, conversationId, token, createdTimestamp, creatorType, creatorPersonId, targetId, targetType, links, redeemingPersonId, comment, joinHidden, email, nickname, targetResponseStatus, secondaryInvitationTargets, expirationTimestamp);
 	}
 
 	@Override
@@ -608,6 +633,7 @@ public class ConversationInvitationData {
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("    redeemingPersonId: ").append(toIndentedString(redeemingPersonId)).append("\n");
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
+		sb.append("    joinHidden: ").append(toIndentedString(joinHidden)).append("\n");
 		sb.append("    email: ").append(toIndentedString(email)).append("\n");
 		sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
 		sb.append("    targetResponseStatus: ").append(toIndentedString(targetResponseStatus)).append("\n");

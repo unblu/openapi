@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 	InvitationsInviteTeamToConversationBody.JSON_PROPERTY_CONVERSATION_ID,
 	InvitationsInviteTeamToConversationBody.JSON_PROPERTY_TEAM_ID,
 	InvitationsInviteTeamToConversationBody.JSON_PROPERTY_COMMENT,
+	InvitationsInviteTeamToConversationBody.JSON_PROPERTY_JOIN_HIDDEN,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class InvitationsInviteTeamToConversationBody {
@@ -34,6 +35,10 @@ public class InvitationsInviteTeamToConversationBody {
 	public static final String JSON_PROPERTY_COMMENT = "comment";
 	@JsonProperty(JSON_PROPERTY_COMMENT)
 	private String comment;
+
+	public static final String JSON_PROPERTY_JOIN_HIDDEN = "joinHidden";
+	@JsonProperty(JSON_PROPERTY_JOIN_HIDDEN)
+	private Boolean joinHidden;
 
 	public InvitationsInviteTeamToConversationBody conversationId(String conversationId) {
 		this.conversationId = conversationId;
@@ -92,6 +97,25 @@ public class InvitationsInviteTeamToConversationBody {
 		this.comment = comment;
 	}
 
+	public InvitationsInviteTeamToConversationBody joinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+		return this;
+	}
+
+	/**
+	 * Flag deciding whether accepting the invitation resolves into a hidden participation. Optional (false by default).
+	 * 
+	 * @return joinHidden
+	 **/
+	@ApiModelProperty(value = "Flag deciding whether accepting the invitation resolves into a hidden participation. Optional (false by default).")
+	public Boolean isJoinHidden() {
+		return joinHidden;
+	}
+
+	public void setJoinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -103,12 +127,13 @@ public class InvitationsInviteTeamToConversationBody {
 		InvitationsInviteTeamToConversationBody invitationsInviteTeamToConversationBody = (InvitationsInviteTeamToConversationBody) o;
 		return Objects.equals(this.conversationId, invitationsInviteTeamToConversationBody.conversationId) &&
 				Objects.equals(this.teamId, invitationsInviteTeamToConversationBody.teamId) &&
-				Objects.equals(this.comment, invitationsInviteTeamToConversationBody.comment);
+				Objects.equals(this.comment, invitationsInviteTeamToConversationBody.comment) &&
+				Objects.equals(this.joinHidden, invitationsInviteTeamToConversationBody.joinHidden);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(conversationId, teamId, comment);
+		return Objects.hash(conversationId, teamId, comment, joinHidden);
 	}
 
 	@Override
@@ -118,6 +143,7 @@ public class InvitationsInviteTeamToConversationBody {
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    teamId: ").append(toIndentedString(teamId)).append("\n");
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
+		sb.append("    joinHidden: ").append(toIndentedString(joinHidden)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

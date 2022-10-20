@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 	InvitationsInviteAgentToConversationBody.JSON_PROPERTY_CONVERSATION_ID,
 	InvitationsInviteAgentToConversationBody.JSON_PROPERTY_AGENT_PERSON_ID,
 	InvitationsInviteAgentToConversationBody.JSON_PROPERTY_COMMENT,
+	InvitationsInviteAgentToConversationBody.JSON_PROPERTY_JOIN_HIDDEN,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class InvitationsInviteAgentToConversationBody {
@@ -34,6 +35,10 @@ public class InvitationsInviteAgentToConversationBody {
 	public static final String JSON_PROPERTY_COMMENT = "comment";
 	@JsonProperty(JSON_PROPERTY_COMMENT)
 	private String comment;
+
+	public static final String JSON_PROPERTY_JOIN_HIDDEN = "joinHidden";
+	@JsonProperty(JSON_PROPERTY_JOIN_HIDDEN)
+	private Boolean joinHidden;
 
 	public InvitationsInviteAgentToConversationBody conversationId(String conversationId) {
 		this.conversationId = conversationId;
@@ -92,6 +97,25 @@ public class InvitationsInviteAgentToConversationBody {
 		this.comment = comment;
 	}
 
+	public InvitationsInviteAgentToConversationBody joinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+		return this;
+	}
+
+	/**
+	 * Flag deciding whether accepting the invitation resolves into a hidden participation. Optional (false by default).
+	 * 
+	 * @return joinHidden
+	 **/
+	@ApiModelProperty(value = "Flag deciding whether accepting the invitation resolves into a hidden participation. Optional (false by default).")
+	public Boolean isJoinHidden() {
+		return joinHidden;
+	}
+
+	public void setJoinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -103,12 +127,13 @@ public class InvitationsInviteAgentToConversationBody {
 		InvitationsInviteAgentToConversationBody invitationsInviteAgentToConversationBody = (InvitationsInviteAgentToConversationBody) o;
 		return Objects.equals(this.conversationId, invitationsInviteAgentToConversationBody.conversationId) &&
 				Objects.equals(this.agentPersonId, invitationsInviteAgentToConversationBody.agentPersonId) &&
-				Objects.equals(this.comment, invitationsInviteAgentToConversationBody.comment);
+				Objects.equals(this.comment, invitationsInviteAgentToConversationBody.comment) &&
+				Objects.equals(this.joinHidden, invitationsInviteAgentToConversationBody.joinHidden);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(conversationId, agentPersonId, comment);
+		return Objects.hash(conversationId, agentPersonId, comment, joinHidden);
 	}
 
 	@Override
@@ -118,6 +143,7 @@ public class InvitationsInviteAgentToConversationBody {
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    agentPersonId: ").append(toIndentedString(agentPersonId)).append("\n");
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
+		sb.append("    joinHidden: ").append(toIndentedString(joinHidden)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

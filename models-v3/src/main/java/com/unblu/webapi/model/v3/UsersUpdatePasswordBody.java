@@ -36,11 +36,11 @@ public class UsersUpdatePasswordBody {
 	}
 
 	/**
-	 * The id of the user which should be updated
+	 * The ID of the user whose password should be updated
 	 * 
 	 * @return userId
 	 **/
-	@ApiModelProperty(value = "The id of the user which should be updated")
+	@ApiModelProperty(value = "The ID of the user whose password should be updated")
 	public String getUserId() {
 		return userId;
 	}
@@ -55,11 +55,11 @@ public class UsersUpdatePasswordBody {
 	}
 
 	/**
-	 * The new password for the user
+	 * The user&#39;s new password
 	 * 
 	 * @return password
 	 **/
-	@ApiModelProperty(value = "The new password for the user")
+	@ApiModelProperty(value = "The user's new password")
 	public String getPassword() {
 		return password;
 	}

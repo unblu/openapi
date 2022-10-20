@@ -93,10 +93,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * createUserWithRandomPassword Creates a new user with a random password. The random password is returned and also send via email, if email is correctly
-	 * configured.&lt;br&gt;
+	 * createUserWithRandomPassword Creates a new user with a random password. The random password is returned and also sent via email, if email is configured
+	 * correctly.&lt;br&gt;
 	 * 
-	 * @param user The user data with which the new user is created (required)
+	 * @param user The data to create the new user with (required)
 	 * @param expand (optional)
 	 * @return UserPasswordContainer
 	 * @throws ApiException if fails to make API call
@@ -106,10 +106,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * createUserWithRandomPassword Creates a new user with a random password. The random password is returned and also send via email, if email is correctly
-	 * configured.&lt;br&gt;
+	 * createUserWithRandomPassword Creates a new user with a random password. The random password is returned and also sent via email, if email is configured
+	 * correctly.&lt;br&gt;
 	 * 
-	 * @param user The user data with which the new user is created (required)
+	 * @param user The data to create the new user with (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;UserPasswordContainer&gt;
 	 * @throws ApiException if fails to make API call
@@ -150,9 +150,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * createWithPassword Creates a new user with the provided password for login.&lt;br&gt;
+	 * createWithPassword Creates a new user with the provided password.&lt;br&gt;
 	 * 
-	 * @param userPasswordContainer The user and the password which should be created (required)
+	 * @param userPasswordContainer The user and the password to create (required)
 	 * @param expand (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
@@ -162,9 +162,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * createWithPassword Creates a new user with the provided password for login.&lt;br&gt;
+	 * createWithPassword Creates a new user with the provided password.&lt;br&gt;
 	 * 
-	 * @param userPasswordContainer The user and the password which should be created (required)
+	 * @param userPasswordContainer The user and the password to create (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
@@ -299,10 +299,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * doesUserLoginExist Checks if the given username exists in the system. Only checks the current account. This endpoint can be used for any type of users
-	 * including virtual visitors.&lt;br&gt;
+	 * doesUserLoginExist Checks if the given username exists in the current account. This endpoint can be used for all types of user, including virtual
+	 * visitors.&lt;br&gt;
 	 * 
-	 * @param username The username which will be looked up (optional)
+	 * @param username The username to look up (optional)
 	 * @return Boolean
 	 * @throws ApiException if fails to make API call
 	 */
@@ -311,10 +311,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * doesUserLoginExist Checks if the given username exists in the system. Only checks the current account. This endpoint can be used for any type of users
-	 * including virtual visitors.&lt;br&gt;
+	 * doesUserLoginExist Checks if the given username exists in the current account. This endpoint can be used for all types of user, including virtual
+	 * visitors.&lt;br&gt;
 	 * 
-	 * @param username The username which will be looked up (optional)
+	 * @param username The username to look up (optional)
 	 * @return ApiResponse&lt;Boolean&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -349,7 +349,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * getByUsername Returns the user for the given username.&lt;br&gt;
+	 * getByUsername Returns the user with the given username.&lt;br&gt;
 	 * 
 	 * @param username The username of the requested user (optional)
 	 * @param expand (optional)
@@ -361,7 +361,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * getByUsername Returns the user for the given username.&lt;br&gt;
+	 * getByUsername Returns the user with the given username.&lt;br&gt;
 	 * 
 	 * @param username The username of the requested user (optional)
 	 * @param expand (optional)
@@ -444,9 +444,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * isSuperUser Checks if the given user id belongs to a super admin user. This endpoint can be used for any type of users including virtual visitors.&lt;br&gt;
+	 * isSuperUser Checks if the given user ID belongs to a superadmin user.&lt;br&gt;
 	 * 
-	 * @param userId The id of a user which should be checked (optional)
+	 * @param userId The user ID to check (optional)
 	 * @return Boolean
 	 * @throws ApiException if fails to make API call
 	 */
@@ -455,9 +455,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * isSuperUser Checks if the given user id belongs to a super admin user. This endpoint can be used for any type of users including virtual visitors.&lt;br&gt;
+	 * isSuperUser Checks if the given user ID belongs to a superadmin user.&lt;br&gt;
 	 * 
-	 * @param userId The id of a user which should be checked (optional)
+	 * @param userId The user ID to check (optional)
 	 * @return ApiResponse&lt;Boolean&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -492,10 +492,11 @@ public class UsersApi {
 	}
 
 	/**
-	 * isUsernameAvailable Checks if the username is available in general or for the given userId. Checks all accounts and includes virtual visitors.&lt;br&gt;
+	 * isUsernameAvailable Checks if the username is available, in general or for the given user ID. Checks all accounts and includes virtual visitors.&lt;br&gt;
 	 * 
-	 * @param name The name which should be checked (optional)
-	 * @param userId The user id of the user for who the username should be set. When set, the name of the user (for himself) is considered as available. (optional)
+	 * @param name The username to check (optional)
+	 * @param userId The user ID of the user to check the username for. If their username matches the one provided, the username is considered to be available.
+	 * (optional)
 	 * @return Boolean
 	 * @throws ApiException if fails to make API call
 	 */
@@ -504,10 +505,11 @@ public class UsersApi {
 	}
 
 	/**
-	 * isUsernameAvailable Checks if the username is available in general or for the given userId. Checks all accounts and includes virtual visitors.&lt;br&gt;
+	 * isUsernameAvailable Checks if the username is available, in general or for the given user ID. Checks all accounts and includes virtual visitors.&lt;br&gt;
 	 * 
-	 * @param name The name which should be checked (optional)
-	 * @param userId The user id of the user for who the username should be set. When set, the name of the user (for himself) is considered as available. (optional)
+	 * @param name The username to check (optional)
+	 * @param userId The user ID of the user to check the username for. If their username matches the one provided, the username is considered to be available.
+	 * (optional)
 	 * @return ApiResponse&lt;Boolean&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -543,9 +545,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * read Returns the user for the given id.&lt;br&gt;
+	 * read Returns the user for the given ID.&lt;br&gt;
 	 * 
-	 * @param id Id of the user which should be returned (optional)
+	 * @param id The ID of the user to return (optional)
 	 * @param expand (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
@@ -555,9 +557,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * read Returns the user for the given id.&lt;br&gt;
+	 * read Returns the user for the given ID.&lt;br&gt;
 	 * 
-	 * @param id Id of the user which should be returned (optional)
+	 * @param id The ID of the user to return (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
@@ -594,9 +596,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of users for the given id&#39;s. The response will not include virtual visitors.&lt;br&gt;
+	 * readMultiple Gets a list of users for the given IDs. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the users should be fetched (required)
+	 * @param requestBody The IDs of the users to be fetched (required)
 	 * @param expand (optional)
 	 * @return List&lt;User&gt;
 	 * @throws ApiException if fails to make API call
@@ -606,9 +608,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of users for the given id&#39;s. The response will not include virtual visitors.&lt;br&gt;
+	 * readMultiple Gets a list of users for the given IDs. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the users should be fetched (required)
+	 * @param requestBody The IDs of the users to be fetched (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;List&lt;User&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -649,7 +651,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * search Search for users in the current account. The response will not include virtual visitors.&lt;br&gt;
+	 * search Search for users in the current account. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
 	 * @param userQuery (required)
 	 * @param expand (optional)
@@ -661,7 +663,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * search Search for users in the current account. The response will not include virtual visitors.&lt;br&gt;
+	 * search Search for users in the current account. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
 	 * @param userQuery (required)
 	 * @param expand (optional)
@@ -704,7 +706,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * update Updates the given user with the new data.&lt;br&gt;
+	 * update Updates the given user with the provided data.&lt;br&gt;
 	 * 
 	 * @param user The new user data (required)
 	 * @param expand (optional)
@@ -716,7 +718,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * update Updates the given user with the new data.&lt;br&gt;
+	 * update Updates the given user with the provided data.&lt;br&gt;
 	 * 
 	 * @param user The new user data (required)
 	 * @param expand (optional)
@@ -759,10 +761,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * updateAndRemovePassword Updates a user and remove the existing password of this user. Without password the user will not be able to log in directly into the
-	 * system. Users without a password are typically used in setups with ID propagation.&lt;br&gt;
+	 * updateAndRemovePassword Updates a user and removes their existing password. Without a password, the user can&#39;t log in to Unblu directly. Users without a
+	 * password are typically used in setups with ID propagation.&lt;br&gt;
 	 * 
-	 * @param user The user which should be updated (password will be removed) (required)
+	 * @param user The user to update; their password will be removed (required)
 	 * @param expand (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
@@ -772,10 +774,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * updateAndRemovePassword Updates a user and remove the existing password of this user. Without password the user will not be able to log in directly into the
-	 * system. Users without a password are typically used in setups with ID propagation.&lt;br&gt;
+	 * updateAndRemovePassword Updates a user and removes their existing password. Without a password, the user can&#39;t log in to Unblu directly. Users without a
+	 * password are typically used in setups with ID propagation.&lt;br&gt;
 	 * 
-	 * @param user The user which should be updated (password will be removed) (required)
+	 * @param user The user to update; their password will be removed (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
@@ -816,7 +818,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * updatePassword Updates the password of the given user.&lt;br&gt;
+	 * updatePassword Updates the given user&#39;s password.&lt;br&gt;
 	 * 
 	 * @param usersUpdatePasswordBody (required)
 	 * @param expand (optional)
@@ -828,7 +830,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * updatePassword Updates the password of the given user.&lt;br&gt;
+	 * updatePassword Updates the given user&#39;s password.&lt;br&gt;
 	 * 
 	 * @param usersUpdatePasswordBody (required)
 	 * @param expand (optional)
@@ -871,7 +873,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * updatePassword Updates the password of the given user.&lt;br&gt;
+	 * updatePassword Updates the given user&#39;s password.&lt;br&gt;
 	 * 
 	 * @param expand (optional)
 	 * @param userId (optional)
@@ -886,7 +888,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * updatePassword Updates the password of the given user.&lt;br&gt;
+	 * updatePassword Updates the given user&#39;s password.&lt;br&gt;
 	 * 
 	 * @param expand (optional)
 	 * @param userId (optional)
@@ -929,10 +931,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * updateUserWithRandomPassword Updates the password of a user with a new random password and also the user data. The random password is returned and also send
-	 * via email, if email is correctly configured.&lt;br&gt;
+	 * updateUserWithRandomPassword Updates a user&#39;s password with a new random password, and updates the user&#39;s data. The random password is returned and
+	 * also sent via email, if email is configured correctly.&lt;br&gt;
 	 * 
-	 * @param user The user which should be updated with a random password (required)
+	 * @param user The user to update and assign a random password to (required)
 	 * @param expand (optional)
 	 * @return UserPasswordContainer
 	 * @throws ApiException if fails to make API call
@@ -942,10 +944,10 @@ public class UsersApi {
 	}
 
 	/**
-	 * updateUserWithRandomPassword Updates the password of a user with a new random password and also the user data. The random password is returned and also send
-	 * via email, if email is correctly configured.&lt;br&gt;
+	 * updateUserWithRandomPassword Updates a user&#39;s password with a new random password, and updates the user&#39;s data. The random password is returned and
+	 * also sent via email, if email is configured correctly.&lt;br&gt;
 	 * 
-	 * @param user The user which should be updated with a random password (required)
+	 * @param user The user to update and assign a random password to (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;UserPasswordContainer&gt;
 	 * @throws ApiException if fails to make API call
@@ -986,9 +988,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * updateWithPassword Updates the password of the given user.&lt;br&gt;
+	 * updateWithPassword Updates the password and user data of the given user.&lt;br&gt;
 	 * 
-	 * @param userPasswordContainer The user and the password which should be updated (required)
+	 * @param userPasswordContainer A container for the user to update and their new password (required)
 	 * @param expand (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
@@ -998,9 +1000,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * updateWithPassword Updates the password of the given user.&lt;br&gt;
+	 * updateWithPassword Updates the password and user data of the given user.&lt;br&gt;
 	 * 
-	 * @param userPasswordContainer The user and the password which should be updated (required)
+	 * @param userPasswordContainer A container for the user to update and their new password (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
@@ -1041,9 +1043,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * userHasPassword Checks if a user has a password defined. This endpoint can be used for any type of users including virtual visitors.&lt;br&gt;
+	 * userHasPassword Checks if a user has a password. This endpoint can be used for any type of user, including virtual visitors.&lt;br&gt;
 	 * 
-	 * @param userId The id of the user to check (optional)
+	 * @param userId The ID of the user to check (optional)
 	 * @return Boolean
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1052,9 +1054,9 @@ public class UsersApi {
 	}
 
 	/**
-	 * userHasPassword Checks if a user has a password defined. This endpoint can be used for any type of users including virtual visitors.&lt;br&gt;
+	 * userHasPassword Checks if a user has a password. This endpoint can be used for any type of user, including virtual visitors.&lt;br&gt;
 	 * 
-	 * @param userId The id of the user to check (optional)
+	 * @param userId The ID of the user to check (optional)
 	 * @return ApiResponse&lt;Boolean&gt;
 	 * @throws ApiException if fails to make API call
 	 */

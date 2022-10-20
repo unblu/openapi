@@ -33,6 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AgentInvitationRevokedEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	AgentInvitationRevokedEvent.JSON_PROPERTY_TARGET,
 	AgentInvitationRevokedEvent.JSON_PROPERTY_COMMENT,
+	AgentInvitationRevokedEvent.JSON_PROPERTY_JOIN_HIDDEN,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AgentInvitationRevokedEvent {
@@ -124,6 +125,10 @@ public class AgentInvitationRevokedEvent {
 	public static final String JSON_PROPERTY_COMMENT = "comment";
 	@JsonProperty(JSON_PROPERTY_COMMENT)
 	private String comment;
+
+	public static final String JSON_PROPERTY_JOIN_HIDDEN = "joinHidden";
+	@JsonProperty(JSON_PROPERTY_JOIN_HIDDEN)
+	private Boolean joinHidden;
 
 	public AgentInvitationRevokedEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -391,6 +396,25 @@ public class AgentInvitationRevokedEvent {
 		this.comment = comment;
 	}
 
+	public AgentInvitationRevokedEvent joinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+		return this;
+	}
+
+	/**
+	 * Determines if the target is added as a hidden agent once the invitation is redeemed
+	 * 
+	 * @return joinHidden
+	 **/
+	@ApiModelProperty(value = "Determines if the target is added as a hidden agent once the invitation is redeemed")
+	public Boolean isJoinHidden() {
+		return joinHidden;
+	}
+
+	public void setJoinHidden(Boolean joinHidden) {
+		this.joinHidden = joinHidden;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -413,12 +437,13 @@ public class AgentInvitationRevokedEvent {
 				Objects.equals(this.creatorPerson, agentInvitationRevokedEvent.creatorPerson) &&
 				Objects.equals(this.contextPersonInfo, agentInvitationRevokedEvent.contextPersonInfo) &&
 				Objects.equals(this.target, agentInvitationRevokedEvent.target) &&
-				Objects.equals(this.comment, agentInvitationRevokedEvent.comment);
+				Objects.equals(this.comment, agentInvitationRevokedEvent.comment) &&
+				Objects.equals(this.joinHidden, agentInvitationRevokedEvent.joinHidden);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversationId, conversation, token, dateCreated, creatorType, creatorPerson, contextPersonInfo, target, comment);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversationId, conversation, token, dateCreated, creatorType, creatorPerson, contextPersonInfo, target, comment, joinHidden);
 	}
 
 	@Override
@@ -439,6 +464,7 @@ public class AgentInvitationRevokedEvent {
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
+		sb.append("    joinHidden: ").append(toIndentedString(joinHidden)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
