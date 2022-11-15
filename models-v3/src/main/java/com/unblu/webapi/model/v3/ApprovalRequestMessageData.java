@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ApprovalRequestMessageData.JSON_PROPERTY_ACTION_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_SOURCE_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_BOT_THREAD_ID,
+	ApprovalRequestMessageData.JSON_PROPERTY_INTERNAL,
 	ApprovalRequestMessageData.JSON_PROPERTY_TEXT,
 	ApprovalRequestMessageData.JSON_PROPERTY_TEXT_TYPE,
 	ApprovalRequestMessageData.JSON_PROPERTY_OPTIONS,
@@ -135,6 +136,10 @@ public class ApprovalRequestMessageData implements MessageData {
 	public static final String JSON_PROPERTY_BOT_THREAD_ID = "botThreadId";
 	@JsonProperty(JSON_PROPERTY_BOT_THREAD_ID)
 	private String botThreadId;
+
+	public static final String JSON_PROPERTY_INTERNAL = "internal";
+	@JsonProperty(JSON_PROPERTY_INTERNAL)
+	private Boolean internal;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -448,6 +453,25 @@ public class ApprovalRequestMessageData implements MessageData {
 		this.botThreadId = botThreadId;
 	}
 
+	public ApprovalRequestMessageData internal(Boolean internal) {
+		this.internal = internal;
+		return this;
+	}
+
+	/**
+	 * Flag indicating whether the message is internal and only visible to agents. If &#39;false&#39;, the message is public and visible for everyone.
+	 * 
+	 * @return internal
+	 **/
+	@ApiModelProperty(value = "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone.")
+	public Boolean isInternal() {
+		return internal;
+	}
+
+	public void setInternal(Boolean internal) {
+		this.internal = internal;
+	}
+
 	public ApprovalRequestMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -556,6 +580,7 @@ public class ApprovalRequestMessageData implements MessageData {
 				Objects.equals(this.actionId, approvalRequestMessageData.actionId) &&
 				Objects.equals(this.sourceId, approvalRequestMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, approvalRequestMessageData.botThreadId) &&
+				Objects.equals(this.internal, approvalRequestMessageData.internal) &&
 				Objects.equals(this.text, approvalRequestMessageData.text) &&
 				Objects.equals(this.textType, approvalRequestMessageData.textType) &&
 				Objects.equals(this.options, approvalRequestMessageData.options) &&
@@ -564,7 +589,7 @@ public class ApprovalRequestMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, text, textType, options, answerStatus);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, text, textType, options, answerStatus);
 	}
 
 	@Override
@@ -586,6 +611,7 @@ public class ApprovalRequestMessageData implements MessageData {
 		sb.append("    actionId: ").append(toIndentedString(actionId)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
+		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

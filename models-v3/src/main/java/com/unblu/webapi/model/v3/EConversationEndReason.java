@@ -50,6 +50,11 @@ public enum EConversationEndReason {
 	CALL_ENDED("CALL_ENDED"),
 
 	/**
+	 * NO_AGENT_AVAILABLE
+	 */
+	NO_AGENT_AVAILABLE("NO_AGENT_AVAILABLE"),
+
+	/**
 	 * OTHER
 	 */
 	OTHER("OTHER");

@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BotPostMessage.JSON_PROPERTY_CONVERSATION_ID,
 	BotPostMessage.JSON_PROPERTY_SENDER_PERSON_ID,
 	BotPostMessage.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
+	BotPostMessage.JSON_PROPERTY_INTERNAL,
 	BotPostMessage.JSON_PROPERTY_MESSAGE_DATA,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -77,6 +78,10 @@ public class BotPostMessage {
 	public static final String JSON_PROPERTY_RECIPIENT_PERSON_IDS = "recipientPersonIds";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_PERSON_IDS)
 	private List<String> recipientPersonIds = null;
+
+	public static final String JSON_PROPERTY_INTERNAL = "internal";
+	@JsonProperty(JSON_PROPERTY_INTERNAL)
+	private Boolean internal;
 
 	public static final String JSON_PROPERTY_MESSAGE_DATA = "messageData";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_DATA)
@@ -166,6 +171,26 @@ public class BotPostMessage {
 		this.recipientPersonIds = recipientPersonIds;
 	}
 
+	public BotPostMessage internal(Boolean internal) {
+		this.internal = internal;
+		return this;
+	}
+
+	/**
+	 * Flag indicating whether the message is internal and only visible to agents. If &#39;false&#39;, the message is public and visible for everyone. Cannot be set
+	 * for REPLY message type.
+	 * 
+	 * @return internal
+	 **/
+	@ApiModelProperty(value = "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone. Cannot be set for REPLY message type.")
+	public Boolean isInternal() {
+		return internal;
+	}
+
+	public void setInternal(Boolean internal) {
+		this.internal = internal;
+	}
+
 	public BotPostMessage messageData(PostMessageData messageData) {
 		this.messageData = messageData;
 		return this;
@@ -198,12 +223,13 @@ public class BotPostMessage {
 				Objects.equals(this.conversationId, botPostMessage.conversationId) &&
 				Objects.equals(this.senderPersonId, botPostMessage.senderPersonId) &&
 				Objects.equals(this.recipientPersonIds, botPostMessage.recipientPersonIds) &&
+				Objects.equals(this.internal, botPostMessage.internal) &&
 				Objects.equals(this.messageData, botPostMessage.messageData);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, senderPersonId, recipientPersonIds, messageData);
+		return Objects.hash($type, conversationId, senderPersonId, recipientPersonIds, internal, messageData);
 	}
 
 	@Override
@@ -214,6 +240,7 @@ public class BotPostMessage {
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    senderPersonId: ").append(toIndentedString(senderPersonId)).append("\n");
 		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
+		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    messageData: ").append(toIndentedString(messageData)).append("\n");
 		sb.append("}");
 		return sb.toString();

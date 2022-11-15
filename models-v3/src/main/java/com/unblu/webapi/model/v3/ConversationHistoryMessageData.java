@@ -28,6 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryMessageData.JSON_PROPERTY_SERVER_TIMESTAMP,
 	ConversationHistoryMessageData.JSON_PROPERTY_SENDER_PERSON_ID,
 	ConversationHistoryMessageData.JSON_PROPERTY_TYPE,
+	ConversationHistoryMessageData.JSON_PROPERTY_INTERNAL,
 	ConversationHistoryMessageData.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
 	ConversationHistoryMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	ConversationHistoryMessageData.JSON_PROPERTY_TEXT,
@@ -94,6 +95,10 @@ public class ConversationHistoryMessageData {
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private EMessageType type;
+
+	public static final String JSON_PROPERTY_INTERNAL = "internal";
+	@JsonProperty(JSON_PROPERTY_INTERNAL)
+	private Boolean internal;
 
 	public static final String JSON_PROPERTY_RECIPIENT_PERSON_IDS = "recipientPersonIds";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_PERSON_IDS)
@@ -240,6 +245,25 @@ public class ConversationHistoryMessageData {
 		this.type = type;
 	}
 
+	public ConversationHistoryMessageData internal(Boolean internal) {
+		this.internal = internal;
+		return this;
+	}
+
+	/**
+	 * Flag indicating whether the message is internal and only visible to agents. If &#39;false&#39;, the message is public and visible for everyone.
+	 * 
+	 * @return internal
+	 **/
+	@ApiModelProperty(value = "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone.")
+	public Boolean isInternal() {
+		return internal;
+	}
+
+	public void setInternal(Boolean internal) {
+		this.internal = internal;
+	}
+
 	public ConversationHistoryMessageData recipientPersonIds(List<String> recipientPersonIds) {
 		this.recipientPersonIds = recipientPersonIds;
 		return this;
@@ -321,6 +345,7 @@ public class ConversationHistoryMessageData {
 				Objects.equals(this.serverTimestamp, conversationHistoryMessageData.serverTimestamp) &&
 				Objects.equals(this.senderPersonId, conversationHistoryMessageData.senderPersonId) &&
 				Objects.equals(this.type, conversationHistoryMessageData.type) &&
+				Objects.equals(this.internal, conversationHistoryMessageData.internal) &&
 				Objects.equals(this.recipientPersonIds, conversationHistoryMessageData.recipientPersonIds) &&
 				Objects.equals(this.botThreadId, conversationHistoryMessageData.botThreadId) &&
 				Objects.equals(this.text, conversationHistoryMessageData.text);
@@ -328,7 +353,7 @@ public class ConversationHistoryMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, recipientPersonIds, botThreadId, text);
+		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, recipientPersonIds, botThreadId, text);
 	}
 
 	@Override
@@ -342,6 +367,7 @@ public class ConversationHistoryMessageData {
 		sb.append("    serverTimestamp: ").append(toIndentedString(serverTimestamp)).append("\n");
 		sb.append("    senderPersonId: ").append(toIndentedString(senderPersonId)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");

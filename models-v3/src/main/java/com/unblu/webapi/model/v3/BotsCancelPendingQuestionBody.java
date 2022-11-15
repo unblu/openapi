@@ -55,11 +55,11 @@ public class BotsCancelPendingQuestionBody {
 	}
 
 	/**
-	 * The ID of the question message that will be cancelled
+	 * The ID of the question message that will be canceled
 	 * 
 	 * @return questionMessageId
 	 **/
-	@ApiModelProperty(value = "The ID of the question message that will be cancelled")
+	@ApiModelProperty(value = "The ID of the question message that will be canceled")
 	public String getQuestionMessageId() {
 		return questionMessageId;
 	}

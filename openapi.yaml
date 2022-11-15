@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.20.0
+  version: 7.21.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -2451,6 +2451,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: CardPostMessageData
                     type: CARD
@@ -2491,6 +2492,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: CardPostMessageData
                     type: CARD
@@ -2519,6 +2521,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: FilePostMessageData
                     type: FILE
@@ -2541,6 +2544,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: ListPostMessageData
                     type: LIST
@@ -2613,6 +2617,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: MultichoiceQuestionPostMessageData
                     type: MULTICHOICE_QUESTION
@@ -2656,6 +2661,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: RatingQuestionPostMessageData
                     type: RATING_QUESTION
@@ -2681,6 +2687,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: TextPostMessageData
                     type: TEXT
@@ -2701,6 +2708,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: false
                   messageData:
                     $_type: TextQuestionPostMessageData
                     type: TEXT_QUESTION
@@ -7070,12 +7078,12 @@ paths:
       tags:
       - Persons
       summary: getBySource
-      description: Returns a person by source<br>
+      description: Returns the person that represents the user identified by the source ID<br>
       operationId: personsGetBySource
       parameters:
       - name: personSource
         in: query
-        description: Source of the of the person
+        description: The source of the person
         required: false
         schema:
           $ref: '#/components/schemas/EPersonSource'
@@ -7083,7 +7091,7 @@ paths:
         explode: true
       - name: sourceId
         in: query
-        description: Identifier of the person in its source
+        description: "The identifier of the source for the person's information<br> <ul> <li>For agents and visitors whose identity is propagated and whose person source is \"VIRTUAL\", the source ID is the value of the propagated \"userId\" field which is saved as ${link User.username} in the User entity. <li>For users whose identity is managed in Unblu (and whose person source is therefore \"USER_DB\"), the source ID is the ${link User.id} of the user represented by the person. <li>For anonymous visitors, the source ID is a random String. <li>For the concierge bot, the source ID is the String \"concierge-bot-person-id\". </ul>"
         required: false
         schema:
           type: string
@@ -8330,7 +8338,7 @@ paths:
         explode: true
       responses:
         "200":
-          description: True if the username exists in the current account
+          description: "True if the username exists in the current account, false if it doesn't"
           content:
             application/json:
               schema:
@@ -10723,6 +10731,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         text:
           type: string
           description: Text of the message
@@ -11690,6 +11701,9 @@ components:
           description: "Person IDs of the recipients of the message. If it is null, all active participations are recipients"
           items:
             type: string
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone. Cannot be set for REPLY message type."
         messageData:
           $ref: '#/components/schemas/PostMessageData'
     BotReboardingOfferEvent:
@@ -11741,7 +11755,7 @@ components:
           description: The ID of the conversation the question message was sent to
         questionMessageId:
           type: string
-          description: The ID of the question message that will be cancelled
+          description: The ID of the question message that will be canceled
     BotsDeclineDialogOfferBody:
       type: object
       description: Request Body for the 'botsDeclineDialogOffer' operation
@@ -11990,6 +12004,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         imageUrl:
           type: string
           description: URL of the image displayed at the top of the card.
@@ -12679,6 +12696,9 @@ components:
           description: ID of the person that send the message. May be null for system messages.
         type:
           $ref: '#/components/schemas/EMessageType'
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         recipientPersonIds:
           type: array
           description: "IDs of persons that the message was addressed to. <p> If it is null, all active participations are regarded as recipients."
@@ -14919,6 +14939,7 @@ components:
       - SOLVED_BY_BOT
       - CANCELED
       - CALL_ENDED
+      - NO_AGENT_AVAILABLE
       - OTHER
       x-enum-descriptions:
       - ENDED_BY_PARTICIPANT
@@ -14929,6 +14950,7 @@ components:
       - SOLVED_BY_BOT
       - CANCELED
       - CALL_ENDED
+      - NO_AGENT_AVAILABLE
       - OTHER
     EConversationEndReasonOperatorType:
       type: string
@@ -15883,6 +15905,7 @@ components:
       - CONVERSATION_ENDED
       - SOLVED_BY_BOT
       - CONVERSATION_REQUEUED
+      - NO_AGENT_AVAILABLE
       - OTHER
       x-enum-descriptions:
       - "FORWARDED: Conversation was forwarded to another agent and this agent therefore left the conversation"
@@ -15898,6 +15921,7 @@ components:
       - "CONVERSATION_ENDED: The conversation has ended"
       - "SOLVED_BY_BOT: The conversation was ended because an onboarding bot solved it."
       - "CONVERSATION_REQUEUED: The conversation has been re-queued."
+      - "NO_AGENT_AVAILABLE: There was no agent available for the conversation"
       - "OTHER: Some other unspecified reason"
     EOnlineState:
       type: string
@@ -16035,8 +16059,8 @@ components:
       - USER_DB
       - VIRTUAL
       x-enum-descriptions:
-      - "USER_DB: Person-Source is on the main_user table"
-      - "VIRTUAL: Person-Source is only virtual (no seperate storage)"
+      - "USER_DB: The source of the person is the ${link User} entity"
+      - "VIRTUAL: The source of the person is virtual, that is, the individual is either anonymous or their identity was propagated by a single sign-on (SSO) mechanism."
     EPersonSourceOperatorType:
       type: string
       enum:
@@ -17305,6 +17329,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         fileName:
           type: string
           description: The name of the file that is send
@@ -18522,6 +18549,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         header:
           $ref: '#/components/schemas/MessageHeader'
         items:
@@ -19032,6 +19062,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         text:
           type: string
           description: Text of the message
@@ -21282,6 +21315,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -21355,6 +21391,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         text:
           type: string
           description: Text of the message
@@ -21572,6 +21611,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         blobId:
           type: string
           description: The blob store ID of the recording
@@ -21667,6 +21709,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -22548,6 +22593,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         text:
           type: string
           description: Text of the message
@@ -22635,6 +22683,9 @@ components:
         botThreadId:
           type: string
           description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
         text:
           type: string
           description: Text of the message

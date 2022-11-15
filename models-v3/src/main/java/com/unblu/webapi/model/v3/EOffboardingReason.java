@@ -75,6 +75,11 @@ public enum EOffboardingReason {
 	CONVERSATION_REQUEUED("CONVERSATION_REQUEUED"),
 
 	/**
+	 * NO_AGENT_AVAILABLE: There was no agent available for the conversation
+	 */
+	NO_AGENT_AVAILABLE("NO_AGENT_AVAILABLE"),
+
+	/**
 	 * OTHER: Some other unspecified reason
 	 */
 	OTHER("OTHER");

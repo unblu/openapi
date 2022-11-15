@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ReplyMessageData.JSON_PROPERTY_ACTION_ID,
 	ReplyMessageData.JSON_PROPERTY_SOURCE_ID,
 	ReplyMessageData.JSON_PROPERTY_BOT_THREAD_ID,
+	ReplyMessageData.JSON_PROPERTY_INTERNAL,
 	ReplyMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	ReplyMessageData.JSON_PROPERTY_VALUE,
 })
@@ -133,6 +134,10 @@ public class ReplyMessageData implements MessageData {
 	public static final String JSON_PROPERTY_BOT_THREAD_ID = "botThreadId";
 	@JsonProperty(JSON_PROPERTY_BOT_THREAD_ID)
 	private String botThreadId;
+
+	public static final String JSON_PROPERTY_INTERNAL = "internal";
+	@JsonProperty(JSON_PROPERTY_INTERNAL)
+	private Boolean internal;
 
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
@@ -438,6 +443,25 @@ public class ReplyMessageData implements MessageData {
 		this.botThreadId = botThreadId;
 	}
 
+	public ReplyMessageData internal(Boolean internal) {
+		this.internal = internal;
+		return this;
+	}
+
+	/**
+	 * Flag indicating whether the message is internal and only visible to agents. If &#39;false&#39;, the message is public and visible for everyone.
+	 * 
+	 * @return internal
+	 **/
+	@ApiModelProperty(value = "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone.")
+	public Boolean isInternal() {
+		return internal;
+	}
+
+	public void setInternal(Boolean internal) {
+		this.internal = internal;
+	}
+
 	public ReplyMessageData questionMessageId(String questionMessageId) {
 		this.questionMessageId = questionMessageId;
 		return this;
@@ -500,13 +524,14 @@ public class ReplyMessageData implements MessageData {
 				Objects.equals(this.actionId, replyMessageData.actionId) &&
 				Objects.equals(this.sourceId, replyMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, replyMessageData.botThreadId) &&
+				Objects.equals(this.internal, replyMessageData.internal) &&
 				Objects.equals(this.questionMessageId, replyMessageData.questionMessageId) &&
 				Objects.equals(this.value, replyMessageData.value);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, questionMessageId, value);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, questionMessageId, value);
 	}
 
 	@Override
@@ -528,6 +553,7 @@ public class ReplyMessageData implements MessageData {
 		sb.append("    actionId: ").append(toIndentedString(actionId)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
+		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("}");

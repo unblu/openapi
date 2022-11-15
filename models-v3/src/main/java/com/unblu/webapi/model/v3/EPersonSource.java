@@ -10,12 +10,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EPersonSource {
 
 	/**
-	 * USER_DB: Person-Source is on the main_user table
+	 * USER_DB: The source of the person is the ${link User} entity
 	 */
 	USER_DB("USER_DB"),
 
 	/**
-	 * VIRTUAL: Person-Source is only virtual (no seperate storage)
+	 * VIRTUAL: The source of the person is virtual, that is, the individual is either anonymous or their identity was propagated by a single sign-on (SSO)
+	 * mechanism.
 	 */
 	VIRTUAL("VIRTUAL");
 

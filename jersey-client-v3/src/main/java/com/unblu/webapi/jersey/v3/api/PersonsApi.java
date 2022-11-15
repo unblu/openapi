@@ -277,10 +277,14 @@ public class PersonsApi {
 	}
 
 	/**
-	 * getBySource Returns a person by source&lt;br&gt;
+	 * getBySource Returns the person that represents the user identified by the source ID&lt;br&gt;
 	 * 
-	 * @param personSource Source of the of the person (optional)
-	 * @param sourceId Identifier of the person in its source (optional)
+	 * @param personSource The source of the person (optional)
+	 * @param sourceId The identifier of the source for the person&#39;s information&lt;br&gt; &lt;ul&gt; &lt;li&gt;For agents and visitors whose identity is
+	 * propagated and whose person source is \&quot;VIRTUAL\&quot;, the source ID is the value of the propagated \&quot;userId\&quot; field which is saved as ${link
+	 * User.username} in the User entity. &lt;li&gt;For users whose identity is managed in Unblu (and whose person source is therefore \&quot;USER_DB\&quot;), the
+	 * source ID is the ${link User.id} of the user represented by the person. &lt;li&gt;For anonymous visitors, the source ID is a random String. &lt;li&gt;For the
+	 * concierge bot, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
 	 * @param expand (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
@@ -290,10 +294,14 @@ public class PersonsApi {
 	}
 
 	/**
-	 * getBySource Returns a person by source&lt;br&gt;
+	 * getBySource Returns the person that represents the user identified by the source ID&lt;br&gt;
 	 * 
-	 * @param personSource Source of the of the person (optional)
-	 * @param sourceId Identifier of the person in its source (optional)
+	 * @param personSource The source of the person (optional)
+	 * @param sourceId The identifier of the source for the person&#39;s information&lt;br&gt; &lt;ul&gt; &lt;li&gt;For agents and visitors whose identity is
+	 * propagated and whose person source is \&quot;VIRTUAL\&quot;, the source ID is the value of the propagated \&quot;userId\&quot; field which is saved as ${link
+	 * User.username} in the User entity. &lt;li&gt;For users whose identity is managed in Unblu (and whose person source is therefore \&quot;USER_DB\&quot;), the
+	 * source ID is the ${link User.id} of the user represented by the person. &lt;li&gt;For anonymous visitors, the source ID is a random String. &lt;li&gt;For the
+	 * concierge bot, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call

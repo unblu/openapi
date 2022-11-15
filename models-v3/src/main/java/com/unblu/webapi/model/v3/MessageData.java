@@ -104,4 +104,10 @@ public interface MessageData {
 
 	MessageData botThreadId(String botThreadId);
 
+	void setInternal(Boolean internal);
+
+	Boolean isInternal();
+
+	MessageData internal(Boolean internal);
+
 }

@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordingAvailableMessageData.JSON_PROPERTY_ACTION_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_SOURCE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BOT_THREAD_ID,
+	RecordingAvailableMessageData.JSON_PROPERTY_INTERNAL,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_SIZE,
 	RecordingAvailableMessageData.JSON_PROPERTY_FILE_NAME,
@@ -136,6 +137,10 @@ public class RecordingAvailableMessageData implements MessageData {
 	public static final String JSON_PROPERTY_BOT_THREAD_ID = "botThreadId";
 	@JsonProperty(JSON_PROPERTY_BOT_THREAD_ID)
 	private String botThreadId;
+
+	public static final String JSON_PROPERTY_INTERNAL = "internal";
+	@JsonProperty(JSON_PROPERTY_INTERNAL)
+	private Boolean internal;
 
 	public static final String JSON_PROPERTY_BLOB_ID = "blobId";
 	@JsonProperty(JSON_PROPERTY_BLOB_ID)
@@ -453,6 +458,25 @@ public class RecordingAvailableMessageData implements MessageData {
 		this.botThreadId = botThreadId;
 	}
 
+	public RecordingAvailableMessageData internal(Boolean internal) {
+		this.internal = internal;
+		return this;
+	}
+
+	/**
+	 * Flag indicating whether the message is internal and only visible to agents. If &#39;false&#39;, the message is public and visible for everyone.
+	 * 
+	 * @return internal
+	 **/
+	@ApiModelProperty(value = "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone.")
+	public Boolean isInternal() {
+		return internal;
+	}
+
+	public void setInternal(Boolean internal) {
+		this.internal = internal;
+	}
+
 	public RecordingAvailableMessageData blobId(String blobId) {
 		this.blobId = blobId;
 		return this;
@@ -572,6 +596,7 @@ public class RecordingAvailableMessageData implements MessageData {
 				Objects.equals(this.actionId, recordingAvailableMessageData.actionId) &&
 				Objects.equals(this.sourceId, recordingAvailableMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, recordingAvailableMessageData.botThreadId) &&
+				Objects.equals(this.internal, recordingAvailableMessageData.internal) &&
 				Objects.equals(this.blobId, recordingAvailableMessageData.blobId) &&
 				Objects.equals(this.blobSize, recordingAvailableMessageData.blobSize) &&
 				Objects.equals(this.fileName, recordingAvailableMessageData.fileName) &&
@@ -581,7 +606,7 @@ public class RecordingAvailableMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, blobId, blobSize, fileName, startTimestamp, endTimestamp);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, blobId, blobSize, fileName, startTimestamp, endTimestamp);
 	}
 
 	@Override
@@ -603,6 +628,7 @@ public class RecordingAvailableMessageData implements MessageData {
 		sb.append("    actionId: ").append(toIndentedString(actionId)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
+		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    blobId: ").append(toIndentedString(blobId)).append("\n");
 		sb.append("    blobSize: ").append(toIndentedString(blobSize)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
