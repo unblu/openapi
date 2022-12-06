@@ -492,7 +492,8 @@ public class UsersApi {
 	}
 
 	/**
-	 * isUsernameAvailable Checks if the username is available, in general or for the given user ID. Checks all accounts and includes virtual visitors.&lt;br&gt;
+	 * isUsernameAvailable Checks if the username is available, in general or for the given user ID. If the context account isn&#39;t ingress-enabled, calling the
+	 * endpoint checks all accounts and includes virtual visitors. If ingress is enabled, only users in the context account are checked.&lt;br&gt;
 	 * 
 	 * @param name The username to check (optional)
 	 * @param userId The user ID of the user to check the username for. If their username matches the one provided, the username is considered to be available.
@@ -505,7 +506,8 @@ public class UsersApi {
 	}
 
 	/**
-	 * isUsernameAvailable Checks if the username is available, in general or for the given user ID. Checks all accounts and includes virtual visitors.&lt;br&gt;
+	 * isUsernameAvailable Checks if the username is available, in general or for the given user ID. If the context account isn&#39;t ingress-enabled, calling the
+	 * endpoint checks all accounts and includes virtual visitors. If ingress is enabled, only users in the context account are checked.&lt;br&gt;
 	 * 
 	 * @param name The username to check (optional)
 	 * @param userId The user ID of the user to check the username for. If their username matches the one provided, the username is considered to be available.

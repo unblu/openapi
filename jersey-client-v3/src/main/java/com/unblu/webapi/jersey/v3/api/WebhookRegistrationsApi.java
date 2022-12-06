@@ -184,7 +184,7 @@ public class WebhookRegistrationsApi {
 	/**
 	 * getByName Returns the webhook registration for the given name.&lt;br&gt;
 	 * 
-	 * @param name (optional)
+	 * @param name The name of the requested webhook registration (optional)
 	 * @return WebhookRegistration
 	 * @throws ApiException if fails to make API call
 	 */
@@ -195,7 +195,7 @@ public class WebhookRegistrationsApi {
 	/**
 	 * getByName Returns the webhook registration for the given name.&lt;br&gt;
 	 * 
-	 * @param name (optional)
+	 * @param name The name of the requested webhook registration (optional)
 	 * @return ApiResponse&lt;WebhookRegistration&gt;
 	 * @throws ApiException if fails to make API call
 	 */

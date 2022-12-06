@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.21.1
+  version: 7.22.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -28,6 +28,8 @@ tags:
   description: Service to manage all kind of bots. Additionally the bots use this service to interact with a conversation/dialog.
 - name: CannedResponses
   description: "Service to manage canned responses.<br> The canned responses a user can edit and the once he can use for chat can differ. The once he can edit are depending on his role. The ones he can use in a chat depends on the team setup and his role. See the following policies for the list of chat messages available for chat: <ul> <li>All canned responses of the own user.</li> <li>All canned responses of the team cascade (the users team and all of the parent teams)</li> <li>All canned responses of the sub-teams if role is: SUPERVISOR or higher.</li> <li>All canned responses of all teams if role is: ADMIN or higher.</li> <li>All canned responses of the users account.</li> </ul> In comparison to this the creation/editing/deleting of canned responses follow the following policies: <ul> <li>All canned responses of the own user.</li> <li>All canned responses of the sub-teams if role is: SUPERVISOR or higher.</li> <li>All canned responses of all teams if role is: ADMIN or higher.</li> <li>All canned responses of the users account if role is: ADMIN or higher.</li> <li></li> </ul>"
+- name: CannedResponsesUsage
+  description: Service for Canned Response Usage
 - name: Contacts
   description: Service to access the contact data for an account
 - name: ConversationHistory
@@ -274,6 +276,48 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
+  /accounts/disableAccountIngress:
+    post:
+      tags:
+      - Accounts
+      summary: disableAccountIngress
+      description: "Disables ingress for the given account. <p> Calling this method triggers the ingress deactivation process. This consists of a single step: <ol> <li>Migrate all users of the account to be managed through the built-in Unblu user management system. </ol> Successfully completing the deactivation process changes the `getMigrationStatus` to DONE_INGRESS_INACTIVE and the`getIngressStatus` to GLOBAL<br> If the deactivation process fails, `getMigrationStatus` changes to ERROR.<br> In such a case, use `readIngressStatus` to retrieve the current status and find the potential source of the problems. <p> Once you've resolved the issues that caused the deactivation process to fail, use `restartIngressMigration` to restart the process."
+      operationId: accountsDisableAccountIngress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountsDisableAccountIngressBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /accounts/enableAccountIngress:
+    post:
+      tags:
+      - Accounts
+      summary: enableAccountIngress
+      description: "Enables ingress for the given account. Before calling this method, you must have configured ingress correctly. <p> Calling this method triggers the ingress activation process. The process consists of the following steps: <ol> <li>Migrate all the users of the account to be managed through ingress single sign-on (SSO). <li>Check and apply all ingress-related configuration properties. </ol> Successfully completing the activation process changes the `getMigrationStatus` to DONE_INGRESS_ACTIVE and the`getIngressStatus` to ACCOUNT<br> If the activation process fails, the `getMigrationStatus` changes to ERROR.<br> In such a case, use `readIngressStatus` to retrieve the current status and find the potential source of the problems. </p> If the process failed because of an invalid configuration, ingress is automatically activated once the configuration has been rectified.<br> If there was an issue during migration, use `restartIngressMigration` to restart the process once you've resolved all migration issues."
+      operationId: accountsEnableAccountIngress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountsEnableAccountIngressBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
   /accounts/getByName:
     get:
       tags:
@@ -413,6 +457,33 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
+  /accounts/readIngressStatus:
+    get:
+      tags:
+      - Accounts
+      summary: readIngressStatus
+      description: readIngressStatus operation
+      operationId: accountsReadIngressStatus
+      parameters:
+      - name: accountId
+        in: query
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountIngressStatus'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
   /accounts/readMultiple:
     post:
       tags:
@@ -448,6 +519,27 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Account'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /accounts/restartIngressMigration:
+    post:
+      tags:
+      - Accounts
+      summary: restartIngressMigration
+      description: "Retries the ingress migration process for the given account. This is necessary when main_account#ingress_migration_status is ERROR. <p> When the service is executed, it updates the ingress_activation_status to MIGRATING. This causes the ingress migration leader selection task to resume the migration."
+      operationId: accountsRestartIngressMigration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountsRestartIngressMigrationBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -2960,7 +3052,7 @@ paths:
       tags:
       - CannedResponses
       summary: getWritableConfigurationScopes
-      description: "Returns a list of all configuration scopes for which the calling user may add, delete or edits canned responses. Depending on the permissions of the users, these configuration scopes can be more then the ones which are available for the user in a chat.<br>"
+      description: "Returns a list of all configuration scopes for which the calling user may add, delete or edit canned responses. Depending on the permissions of the users, these configuration scopes can be more than the ones which are available for the user in a chat.<br>"
       operationId: cannedResponsesGetWritableConfigurationScopes
       responses:
         "200":
@@ -3101,6 +3193,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CannedResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /cannedresponses/usage/count:
+    post:
+      tags:
+      - CannedResponsesUsage
+      summary: count
+      description: Retrieve the number of canned response usages according to the search filter provided<br>
+      operationId: cannedResponsesUsageCount
+      requestBody:
+        description: to use for the search
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CannedResponseUsageCountQuery'
+        required: true
+      responses:
+        "200":
+          description: count result container with number of canned response usages found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /cannedresponses/usage/search:
+    post:
+      tags:
+      - CannedResponsesUsage
+      summary: search
+      description: Search for usages of canned responses<br>
+      operationId: cannedResponsesUsageSearch
+      requestBody:
+        description: to use for the search
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CannedResponseUsageQuery'
+        required: true
+      responses:
+        "200":
+          description: A list of canned response usages found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CannedResponseUsageResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -8438,7 +8582,7 @@ paths:
       tags:
       - Users
       summary: isUsernameAvailable
-      description: "Checks if the username is available, in general or for the given user ID. Checks all accounts and includes virtual visitors.<br>"
+      description: "Checks if the username is available, in general or for the given user ID. If the context account isn't ingress-enabled, calling the endpoint checks all accounts and includes virtual visitors. If ingress is enabled, only users in the context account are checked.<br>"
       operationId: usersIsUsernameAvailable
       parameters:
       - name: name
@@ -9112,6 +9256,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.cannedresponse_used:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.cannedresponse_used
+              description: An event triggered every time at least one canned response is used in a conversation message
+              operationId: conversationCannedresponseUsedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CannedResponseUsedEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.created:
           '{$request.body#/endpoint}':
             post:
@@ -9598,6 +9756,7 @@ paths:
       parameters:
       - name: name
         in: query
+        description: The name of the requested webhook registration
         required: false
         schema:
           type: string
@@ -9869,6 +10028,26 @@ components:
           - $ref: '#/components/schemas/Avatar'
           x-expand-query-key: avatar
           x-type: ExpandableField
+    AccountIngressStatus:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AccountIngressStatus
+          enum:
+          - AccountIngressStatus
+        enabled:
+          type: boolean
+          description: Whether or not ingress should be enabled for the account.<br> This property can be changed by `IAccountStorageService.enableAccountIngress` and `IAccountStorageService.disableAccountIngress`
+        ingressStatus:
+          $ref: '#/components/schemas/EIngressStatus'
+        migrationStatus:
+          $ref: '#/components/schemas/EIngressMigrationStatus'
+        problemDetails:
+          type: array
+          description: Ingress configuration and migration issues that arose during the last ingress activation or deactivation process.
+          items:
+            type: string
     AccountModificationEvent:
       type: object
       description: "An event triggered every time an `Account` is created, deleted or changed."
@@ -10026,6 +10205,24 @@ components:
           $ref: '#/components/schemas/Account'
         adminUser:
           $ref: '#/components/schemas/User'
+    AccountsDisableAccountIngressBody:
+      type: object
+      description: Request Body for the 'accountsDisableAccountIngress' operation
+      properties:
+        accountId:
+          type: string
+    AccountsEnableAccountIngressBody:
+      type: object
+      description: Request Body for the 'accountsEnableAccountIngress' operation
+      properties:
+        accountId:
+          type: string
+    AccountsRestartIngressMigrationBody:
+      type: object
+      description: Request Body for the 'accountsRestartIngressMigration' operation
+      properties:
+        accountId:
+          type: string
     Address:
       type: object
       description: Model of an address
@@ -11874,6 +12071,18 @@ components:
           description: Id of the owner. It defines to whom the configuration is assigned
         ownerType:
           $ref: '#/components/schemas/EPropertyOwnerType'
+    CannedResponseIdCannedResponseUsageSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CannedResponseIdCannedResponseUsageSearchFilter
+          enum:
+          - CannedResponseIdCannedResponseUsageSearchFilter
+        field:
+          $ref: '#/components/schemas/ECannedResponseUsageSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     CannedResponseOrderBy:
       type: object
       description: CannedResponse orderBy item.
@@ -11951,6 +12160,158 @@ components:
           MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampCannedResponseSearchFilter'
           TEXT: '#/components/schemas/TextCannedResponseSearchFilter'
           TITLE: '#/components/schemas/TitleCannedResponseSearchFilter'
+    CannedResponseUsage:
+      type: object
+      description: Model of usage of a canned response by a person within a conversation message.
+      properties:
+        $_type:
+          type: string
+          default: CannedResponseUsage
+          enum:
+          - CannedResponseUsage
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        cannedResponseId:
+          type: string
+          description: The ID of the canned response used by a person within a message
+        personId:
+          type: string
+          description: The ID of the person who used the canned response within a message
+        messageId:
+          type: string
+          description: The ID of the message where a canned response was used
+        conversationId:
+          type: string
+          description: The ID of the conversation where a canned response was used
+    CannedResponseUsageCountQuery:
+      type: object
+      description: Container to count canned response usages
+      properties:
+        $_type:
+          type: string
+          default: CannedResponseUsageCountQuery
+          enum:
+          - CannedResponseUsageCountQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/CannedResponseUsageSearchFilter'
+    CannedResponseUsageOrderBy:
+      type: object
+      description: CannedResponseUsage orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: CannedResponseUsageOrderBy
+          enum:
+          - CannedResponseUsageOrderBy
+        field:
+          $ref: '#/components/schemas/ECannedResponseUsageOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    CannedResponseUsageQuery:
+      type: object
+      description: Container to search canned response usages
+      properties:
+        $_type:
+          type: string
+          default: CannedResponseUsageQuery
+          enum:
+          - CannedResponseUsageQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/CannedResponseUsageSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/CannedResponseUsageOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    CannedResponseUsageResult:
+      type: object
+      description: Container to return list of canned response usages
+      properties:
+        $_type:
+          type: string
+          default: CannedResponseUsageResult
+          enum:
+          - CannedResponseUsageResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If more items are present on the server, this value can be used as offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/CannedResponseUsage'
+    CannedResponseUsageSearchFilter:
+      description: CannedResponseUsage filter item.
+      oneOf:
+      - $ref: '#/components/schemas/CreationTimestampCannedResponseUsageSearchFilter'
+      - $ref: '#/components/schemas/PersonIdCannedResponseUsageSearchFilter'
+      - $ref: '#/components/schemas/CannedResponseIdCannedResponseUsageSearchFilter'
+      - $ref: '#/components/schemas/MessageIdCannedResponseUsageSearchFilter'
+      - $ref: '#/components/schemas/ConversationIdCannedResponseUsageSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          CANNED_RESPONSE_ID: '#/components/schemas/CannedResponseIdCannedResponseUsageSearchFilter'
+          CONVERSATION_ID: '#/components/schemas/ConversationIdCannedResponseUsageSearchFilter'
+          CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampCannedResponseUsageSearchFilter'
+          MESSAGE_ID: '#/components/schemas/MessageIdCannedResponseUsageSearchFilter'
+          PERSON_ID: '#/components/schemas/PersonIdCannedResponseUsageSearchFilter'
+    CannedResponseUsedEvent:
+      type: object
+      description: An event triggered every time at least one canned response is used in a conversation message
+      properties:
+        $_type:
+          type: string
+          default: CannedResponseUsedEvent
+          enum:
+          - CannedResponseUsedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationMessage:
+          $ref: '#/components/schemas/MessageData'
+        usedCannedResponses:
+          type: array
+          description: The list of the used canned responses
+          items:
+            $ref: '#/components/schemas/CannedResponse'
     CardMessageData:
       type: object
       description: "Card message which may contain an image, title, body and actions. <p> All of these parts are optional as long as it contains at least one of them."
@@ -12788,6 +13149,18 @@ components:
           STATE: '#/components/schemas/StateConversationHistorySearchFilter'
           TOKBOX_SESSION_ID: '#/components/schemas/TokboxSessionIdConversationHistorySearchFilter'
           TOPIC: '#/components/schemas/TopicConversationHistorySearchFilter'
+    ConversationIdCannedResponseUsageSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationIdCannedResponseUsageSearchFilter
+          enum:
+          - ConversationIdCannedResponseUsageSearchFilter
+        field:
+          $ref: '#/components/schemas/ECannedResponseUsageSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     ConversationIdConversationInvitationSearchFilter:
       type: object
       properties:
@@ -13558,6 +13931,19 @@ components:
         visitorData:
           type: string
           description: Custom visitor data in any format.
+    CountResult:
+      type: object
+      description: General container for result of count method
+      properties:
+        $_type:
+          type: string
+          default: CountResult
+          enum:
+          - CountResult
+        count:
+          type: integer
+          format: int64
+          description: Number of entities found
     CreationTimestampAccountSearchFilter:
       type: object
       properties:
@@ -13616,6 +14002,18 @@ components:
           - CreationTimestampCannedResponseSearchFilter
         field:
           $ref: '#/components/schemas/ECannedResponseSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    CreationTimestampCannedResponseUsageSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampCannedResponseUsageSearchFilter
+          enum:
+          - CreationTimestampCannedResponseUsageSearchFilter
+        field:
+          $ref: '#/components/schemas/ECannedResponseUsageSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
     CreationTimestampContactSearchFilter:
@@ -14892,6 +15290,36 @@ components:
       - "TEXT: Filter by the 'text' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+    ECannedResponseUsageOrderByField:
+      type: string
+      enum:
+      - ID
+      - PERSON_ID
+      - CANNED_RESPONSE_ID
+      - MESSAGE_ID
+      - CONVERSATION_ID
+      - CREATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "PERSON_ID: Sort by the 'personId' attribute"
+      - "CANNED_RESPONSE_ID: Sort by the 'cannedResponseId' attribute"
+      - "MESSAGE_ID: Sort by the 'messageId' attribute"
+      - "CONVERSATION_ID: Sort by the 'conversationId' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+    ECannedResponseUsageSearchFilterField:
+      type: string
+      enum:
+      - PERSON_ID
+      - CANNED_RESPONSE_ID
+      - MESSAGE_ID
+      - CONVERSATION_ID
+      - CREATION_TIMESTAMP
+      x-enum-descriptions:
+      - "PERSON_ID: Filter by the 'personId' attribute"
+      - "CANNED_RESPONSE_ID: Filter by the 'cannedResponseId' attribute"
+      - "MESSAGE_ID: Filter by the 'messageId' attribute"
+      - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
     EContactOrderByField:
       type: string
       enum:
@@ -15577,6 +16005,30 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EIngressMigrationStatus:
+      type: string
+      description: "Status of the ingress activation. This status represents the status of the users in the account regarding the scope of the username uniqueness. In order for an account ingress to be fully active, the following conditions must be met: ingress_enabled=true, ingress_activation_status=ACTIVE and ingress configuration is valid."
+      enum:
+      - MIGRATING
+      - DONE_INGRESS_ACTIVE
+      - DONE_INGRESS_INACTIVE
+      - ERROR
+      x-enum-descriptions:
+      - "MIGRATING: The system is migrating the user uniqueness scope to its desired state (according to the ingress_enabled flag). If ingress_enabled is true, the username_scope column of all existing users is updated to the accountId. If ingress_enabled is false, then the username_scope column of all existing users is updated to GLOBAL."
+      - "DONE_INGRESS_ACTIVE: All users are migrated and the account is active with ingress (if configuration is valid)"
+      - "DONE_INGRESS_INACTIVE: All users are migrated and the account is active without ingress"
+      - "ERROR: The migration has failed (for example because the account contains usernames that also exist in a different account that isn't using ingress). The migration can be retried using the 'try again' action. If doing so isn't too expensive, the UI shows a list of the users causing conflicts."
+    EIngressStatus:
+      type: string
+      description: How ingress is handled
+      enum:
+      - ACCOUNT
+      - GLOBAL
+      - BLOCKED
+      x-enum-descriptions:
+      - "ACCOUNT: Account-specific ingress enabled (using custom origin)"
+      - "GLOBAL: Account is accessible via global ingress"
+      - "BLOCKED: Account is blocked, i.e. because ingress is configured but not valid"
     EInitialEngagementType:
       type: string
       description: The initial type of a conversation. The type used at creation time of the conversation determines the conversation template that is used.
@@ -18724,6 +19176,18 @@ components:
           description: Body text which may optionally contain markdown. <p> Max length is 256 characters.
         bodyTextType:
           $ref: '#/components/schemas/EConversationMessageTextType'
+    MessageIdCannedResponseUsageSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: MessageIdCannedResponseUsageSearchFilter
+          enum:
+          - MessageIdCannedResponseUsageSearchFilter
+        field:
+          $ref: '#/components/schemas/ECannedResponseUsageSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     MessageOrderBy:
       type: object
       description: Message orderBy item.
@@ -20418,6 +20882,18 @@ components:
             type: string
           x-expand-query-key: metadata
           x-type: Map
+    PersonIdCannedResponseUsageSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: PersonIdCannedResponseUsageSearchFilter
+          enum:
+          - PersonIdCannedResponseUsageSearchFilter
+        field:
+          $ref: '#/components/schemas/ECannedResponseUsageSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     PersonIdPersonPresenceSearchFilter:
       type: object
       properties:

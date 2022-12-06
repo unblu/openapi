@@ -230,8 +230,8 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * getWritableConfigurationScopes Returns a list of all configuration scopes for which the calling user may add, delete or edits canned responses. Depending on
-	 * the permissions of the users, these configuration scopes can be more then the ones which are available for the user in a chat.&lt;br&gt;
+	 * getWritableConfigurationScopes Returns a list of all configuration scopes for which the calling user may add, delete or edit canned responses. Depending on
+	 * the permissions of the users, these configuration scopes can be more than the ones which are available for the user in a chat.&lt;br&gt;
 	 * 
 	 * @return List&lt;CannedResponseConfigurationScope&gt;
 	 * @throws ApiException if fails to make API call
@@ -241,8 +241,8 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * getWritableConfigurationScopes Returns a list of all configuration scopes for which the calling user may add, delete or edits canned responses. Depending on
-	 * the permissions of the users, these configuration scopes can be more then the ones which are available for the user in a chat.&lt;br&gt;
+	 * getWritableConfigurationScopes Returns a list of all configuration scopes for which the calling user may add, delete or edit canned responses. Depending on
+	 * the permissions of the users, these configuration scopes can be more than the ones which are available for the user in a chat.&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;List&lt;CannedResponseConfigurationScope&gt;&gt;
 	 * @throws ApiException if fails to make API call
