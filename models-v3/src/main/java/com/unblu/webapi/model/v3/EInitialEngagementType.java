@@ -45,6 +45,11 @@ public enum EInitialEngagementType {
 	MOBILE_COBROWSING_REQUEST("MOBILE_COBROWSING_REQUEST"),
 
 	/**
+	 * WHITEBOARD_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming whiteboard conversation.
+	 */
+	WHITEBOARD_REQUEST("WHITEBOARD_REQUEST"),
+
+	/**
 	 * SCREEN_SHARING_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming screen sharing conversation.
 	 */
 	SCREEN_SHARING_REQUEST("SCREEN_SHARING_REQUEST"),
@@ -74,6 +79,11 @@ public enum EInitialEngagementType {
 	MOBILE_PIN("MOBILE_PIN"),
 
 	/**
+	 * WHITEBOARD_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a whiteboard conversation.
+	 */
+	WHITEBOARD_PIN("WHITEBOARD_PIN"),
+
+	/**
 	 * SCREEN_SHARING_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a screen sharing
 	 * conversation.
 	 */
@@ -93,6 +103,11 @@ public enum EInitialEngagementType {
 	 * HEADLESS_INVITE: (Agent initiated, agent centered) An agent creates universal co-browsing conversation and invites customer later.
 	 */
 	HEADLESS_INVITE("HEADLESS_INVITE"),
+
+	/**
+	 * WHITEBOARD_INVITE: (Agent initiated, agent centered) An agent creates whiteboard conversation and invites customer later.
+	 */
+	WHITEBOARD_INVITE("WHITEBOARD_INVITE"),
 
 	/**
 	 * SCREEN_SHARING_INVITE: (Agent initiated, agent centered) An agent creates screen sharing conversation and invites customer later.

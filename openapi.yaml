@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.22.2
+  version: 7.23.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -4007,7 +4007,7 @@ paths:
       tags:
       - Conversations
       summary: create
-      description: Creates the conversation in the system. The id of the conversation must not be set for the 'create' operation as a new one will be generated.<br>
+      description: "Creates the conversation in the system. The conversation ID mustn't be set as a new one will be generated. <br> If called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, there are a number of restrictions regarding the conversation to be created: <ul> <li>The `initialEngagementType` must be a conversation type initiated by agents <li>The `assigneePersonId` must refer to the person entity of the agent making the call <li>The agent making the call must be the only participant in the conversation </ul><br>"
       operationId: conversationsCreate
       parameters:
       - name: expand
@@ -4093,12 +4093,12 @@ paths:
       tags:
       - Conversations
       summary: delete
-      description: Deletes the conversation for the given ID<br>
+      description: "Deletes the conversation with the given ID. <br> Calls with the authorization role `SUPERVISOR` or `REGISTERED_USER` are only permissible if: <ul> <li>The agent making the call is the only participant in the conversation <li>The conversation never had any participants other than the agent calling the endpoint <li>The conversation contains no messages except system messages and messages sent by bots </ul><br>"
       operationId: conversationsDelete
       parameters:
       - name: id
         in: query
-        description: The id of the conversation which should be deleted
+        description: The ID of the conversation to be deleted
         required: false
         schema:
           type: string
@@ -4118,7 +4118,7 @@ paths:
       tags:
       - Conversations
       summary: end
-      description: End a conversation.<br>
+      description: "End a conversation. If called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the agent making the call must have the necessary permissions to end a conversation.<br>"
       operationId: conversationsEnd
       parameters:
       - name: conversationId
@@ -4169,7 +4169,7 @@ paths:
       tags:
       - Conversations
       summary: getBySourceIdAndChannelId
-      description: Returns the conversation for the given source and channel id<br>
+      description: "Returns the conversation for the given source and channel id. If called with the authorization role `REGISTERED_USER`, the call will fail if the conversation matching the search criteria doesn't include the agent making the call as a participant. If the agent making the call has the user role `SUPERVISOR`, the call will fail if the conversation matching the search criteria doesn't include an agent in their team or teams as a participant.<br>"
       operationId: conversationsGetBySourceIdAndChannelId
       parameters:
       - name: sourceId
@@ -4182,7 +4182,7 @@ paths:
         explode: true
       - name: externalMessengerChannelId
         in: query
-        description: The messenger channel id to which the conversation is connected. Can be null for internal conversations.
+        description: The messenger channel ID the conversation is connected to. Can be null for internal conversations.
         required: false
         schema:
           type: string
@@ -4296,7 +4296,7 @@ paths:
       tags:
       - Conversations
       summary: read
-      description: Returns the conversation for the given ID<br>
+      description: "Returns the conversation for the given ID. If called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the agent making the call must be a participant in the conversation.<br>"
       operationId: conversationsRead
       parameters:
       - name: id
@@ -4333,7 +4333,7 @@ paths:
       tags:
       - Conversations
       summary: search
-      description: Search for conversations in the current account<br>
+      description: "Search for conversations in the current account. If called with the authorization role `REGISTERED_USER`, the call only returns conversations matching the search criteria where the agent making a call is the participant. If the agent making the call has the user role `SUPERVISOR`, the results only include conversations of the agents in their team or teams.<br>"
       operationId: conversationsSearch
       parameters:
       - name: expand
@@ -4561,7 +4561,7 @@ paths:
       tags:
       - Conversations
       summary: setScheduledTimestamp
-      description: "Set the scheduled time of the conversation. Unix timestamp (ms) when the conversation is scheduled for, which will be rounded to the nearest minute. Can only be set for conversations with initialEngagementType = \"SCHEDULED_CONVERSATION\".<br>"
+      description: "Set the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded to the nearest minute. Can only be set for conversations with initialEngagementType = \"SCHEDULED_CONVERSATION\". <br> When called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the behavior of the call depends on the configuration property `com.unblu.conversation.message.allowNonAdminUsersChangeConversationScheduledTimeViaWebApi`: <ul> <li>If the configuration property is `true`, the agent making the call can only change the conversation's `scheduledTimestamp` if they're a participant in the conversation. <li>If the configuration property is `false`, the agent making the call can change the `scheduledTimestamp` provided their participation type in the conversation is listed in the configuration property `com.unblu.conversation.message.allowChangeConversationScheduledTime`. </ul><br>"
       operationId: conversationsSetScheduledTimestamp
       parameters:
       - name: conversationId
@@ -4653,7 +4653,7 @@ paths:
       tags:
       - Conversations
       summary: setTopic
-      description: "Set the topic of the conversation. Setting it to null deletes the topic, if it is not mandatory to have a topic defined for the conversation type (e.g. SCHEDULED_CONVERSATION).<br>"
+      description: "Set the topic of the conversation. Setting it to `null` deletes the topic, provided it isn't mandatory to specify a topic for the conversation type (e.g. `SCHEDULED_CONVERSATION`). <br> When called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the behavior of the call depends on the configuration property `com.unblu.conversation.message.allowNonAdminUsersChangeConversationTopicViaWebApi`: <ul> <li>If the configuration property is `true`, the agent making the call can only change the conversation's topic if they're a participant in the conversation. <li>If the configuration property is `false`, the agent making the call can change the topic provided their participation type in the conversation is listed in the configuration property `com.unblu.conversation.message.allowChangeConversationTopic`. </ul><br>"
       operationId: conversationsSetTopic
       parameters:
       - name: conversationId
@@ -6581,6 +6581,34 @@ paths:
       responses:
         "200":
           description: The information about the invitation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationInvitationData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /invitations/read:
+    get:
+      tags:
+      - Invitations
+      summary: read
+      description: Returns the invitation with the given ID.<br>
+      operationId: invitationsRead
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the invitation to return
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: "The invitation with the given ID, or null if no such invitation could be found"
           content:
             application/json:
               schema:
@@ -16040,15 +16068,18 @@ components:
       - HEADLESS_BROWSER_REQUEST
       - DOMCAP_BROWSER_REQUEST
       - MOBILE_COBROWSING_REQUEST
+      - WHITEBOARD_REQUEST
       - SCREEN_SHARING_REQUEST
       - VISITOR_COBROWSING
       - HEADLESS_PIN
       - DOMCAP_PIN
       - MOBILE_PIN
+      - WHITEBOARD_PIN
       - SCREEN_SHARING_PIN
       - CHAT_PIN
       - CHAT_INVITE
       - HEADLESS_INVITE
+      - WHITEBOARD_INVITE
       - SCREEN_SHARING_INVITE
       - SCHEDULED_CONVERSATION
       x-enum-descriptions:
@@ -16059,15 +16090,18 @@ components:
       - "HEADLESS_BROWSER_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming universal co-browsing conversation."
       - "DOMCAP_BROWSER_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming embedded co-browsing conversation."
       - "MOBILE_COBROWSING_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming mobile co-browsing conversation."
+      - "WHITEBOARD_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming whiteboard conversation."
       - "SCREEN_SHARING_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming screen sharing conversation."
       - "VISITOR_COBROWSING: (Api initiated, visitor centered) A visitor creates a conversation via API which is not added to the queue and where he can invite other visitor to do embedded"
       - "HEADLESS_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join an universal co-browsing conversation."
       - "DOMCAP_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join an embedded co-browsing conversation."
       - "MOBILE_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a mobile co-browsing conversation."
+      - "WHITEBOARD_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a whiteboard conversation."
       - "SCREEN_SHARING_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a screen sharing conversation."
       - "CHAT_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a chat conversation."
       - "CHAT_INVITE: (Web-API initiated, agent centered) A chat conversation is created for a visitor to join a chat conversation."
       - "HEADLESS_INVITE: (Agent initiated, agent centered) An agent creates universal co-browsing conversation and invites customer later."
+      - "WHITEBOARD_INVITE: (Agent initiated, agent centered) An agent creates whiteboard conversation and invites customer later."
       - "SCREEN_SHARING_INVITE: (Agent initiated, agent centered) An agent creates screen sharing conversation and invites customer later."
       - "SCHEDULED_CONVERSATION: (Agent initiated, agent centered) Conversation created with a certain topic and scheduled for some point in time."
     EInitialEngagementTypeOperatorType:

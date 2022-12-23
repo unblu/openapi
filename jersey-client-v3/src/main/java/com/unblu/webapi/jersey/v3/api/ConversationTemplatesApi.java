@@ -109,7 +109,7 @@ public class ConversationTemplatesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> conversationTemplatesDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversationtemplates/delete";
@@ -158,7 +158,7 @@ public class ConversationTemplatesApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> conversationTemplatesDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversationtemplates/delete";
@@ -206,7 +206,7 @@ public class ConversationTemplatesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationTemplate> conversationTemplatesGetDefaultTemplateByEngagementTypeWithHttpInfo(EInitialEngagementType initialEngagementType, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversationtemplates/getDefaultTemplateByEngagementType";
@@ -257,7 +257,7 @@ public class ConversationTemplatesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationTemplate> conversationTemplatesReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversationtemplates/read";

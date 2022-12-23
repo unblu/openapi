@@ -105,7 +105,7 @@ public class CannedResponsesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> cannedResponsesDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/cannedresponses/delete";
@@ -154,7 +154,7 @@ public class CannedResponsesApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> cannedResponsesDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/cannedresponses/delete";
@@ -202,7 +202,7 @@ public class CannedResponsesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<CannedResponse>> cannedResponsesGetCannedResponsesAvailableForChatWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/cannedresponses/getCannedResponsesAvailableForChat";
@@ -248,7 +248,7 @@ public class CannedResponsesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<CannedResponseConfigurationScope>> cannedResponsesGetWritableConfigurationScopesWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/cannedresponses/getWritableConfigurationScopes";
@@ -296,7 +296,7 @@ public class CannedResponsesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<CannedResponseConfigurationScope>> cannedResponsesGetWritableConfigurationScopesAvailableForChatWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/cannedresponses/getWritableConfigurationScopesAvailableForChat";
@@ -342,7 +342,7 @@ public class CannedResponsesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<CannedResponse> cannedResponsesReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/cannedresponses/read";

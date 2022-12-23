@@ -557,6 +557,54 @@ public class InvitationsApi {
 	}
 
 	/**
+	 * read Returns the invitation with the given ID.&lt;br&gt;
+	 * 
+	 * @param id The ID of the invitation to return (optional)
+	 * @return ConversationInvitationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationInvitationData invitationsRead(String id) throws ApiException {
+		return invitationsReadWithHttpInfo(id).getData();
+	}
+
+	/**
+	 * read Returns the invitation with the given ID.&lt;br&gt;
+	 * 
+	 * @param id The ID of the invitation to return (optional)
+	 * @return ApiResponse&lt;ConversationInvitationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationInvitationData> invitationsReadWithHttpInfo(String id) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// create path and map variables
+		String localVarPath = "/invitations/read";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "id", id));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * renewPin Renews the PIN of an anonymous visitor PIN invitation. An error is returned if the method is called for any other type of invitation.&lt;br&gt;
 	 * 
 	 * @param invitationId Invitation id. (required)
@@ -575,7 +623,7 @@ public class InvitationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationInvitationData> invitationsRenewPinWithHttpInfo(String invitationId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'invitationId' is set
 		if (invitationId == null) {
@@ -682,7 +730,7 @@ public class InvitationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationInvitationData> invitationsRevokeWithHttpInfo(String invitationId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'invitationId' is set
 		if (invitationId == null) {

@@ -66,7 +66,7 @@ public class AvailabilityApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<EAvailabilityState> availabilityGetAgentAvailabilityWithHttpInfo(String userId, String locale, String namedAreaSiteId, String apiKey, Boolean ignoreAgentAvailabilityOverride) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/availability/getAgentAvailability";
@@ -132,7 +132,7 @@ public class AvailabilityApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> availabilityIsAgentAvailableWithHttpInfo(String userId, String locale, String namedAreaSiteId, String apiKey, Boolean ignoreAgentAvailabilityOverride) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/availability/isAgentAvailable";

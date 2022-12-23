@@ -107,7 +107,7 @@ public class DeputyRelationshipsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> deputyRelationshipsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/deputyrelationships/delete";
@@ -153,7 +153,7 @@ public class DeputyRelationshipsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<DeputyRelationship> deputyRelationshipsReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/deputyrelationships/read";

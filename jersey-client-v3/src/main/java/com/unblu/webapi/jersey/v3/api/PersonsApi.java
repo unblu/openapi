@@ -133,7 +133,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonStateData> personsAutoPauseNotificationsWithHttpInfo(String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'personId' is set
 		if (personId == null) {
@@ -307,7 +307,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonData> personsGetBySourceWithHttpInfo(EPersonSource personSource, String sourceId, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/persons/getBySource";
@@ -357,7 +357,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<NotificationCountData> personsGetNotificationCountWithHttpInfo(String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'personId' is set
 		if (personId == null) {
@@ -474,7 +474,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonData> personsReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/persons/read";
@@ -523,7 +523,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonStateData> personsReadStateWithHttpInfo(String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/persons/readState";
@@ -632,7 +632,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonStateData> personsResumeNotificationsWithHttpInfo(String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'personId' is set
 		if (personId == null) {

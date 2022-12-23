@@ -106,7 +106,7 @@ public class GlobalApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ProductVersion> globalProductVersionWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/global/productVersion";
@@ -152,7 +152,7 @@ public class GlobalApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<GlobalData> globalReadWithHttpInfo(String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/global/read";
@@ -200,7 +200,7 @@ public class GlobalApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<GlobalData> globalRemoveLicenseWithHttpInfo(String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/global/removeLicense";

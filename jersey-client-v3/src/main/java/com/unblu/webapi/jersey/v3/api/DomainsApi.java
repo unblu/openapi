@@ -104,7 +104,7 @@ public class DomainsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> domainsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/domains/delete";
@@ -153,7 +153,7 @@ public class DomainsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> domainsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/domains/delete";
@@ -197,7 +197,7 @@ public class DomainsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<String>> domainsGetAccountDomainsAsStringWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/domains/getAccountDomainsAsString";
@@ -241,7 +241,7 @@ public class DomainsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Integer> domainsGetQuotaUsageWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/domains/getQuotaUsage";
@@ -287,7 +287,7 @@ public class DomainsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Domain> domainsReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/domains/read";

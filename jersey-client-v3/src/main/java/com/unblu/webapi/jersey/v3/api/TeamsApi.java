@@ -108,7 +108,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> teamsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/delete";
@@ -157,7 +157,7 @@ public class TeamsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> teamsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/delete";
@@ -205,7 +205,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<Team>> teamsGetByParentIdWithHttpInfo(String parentId, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/getByParentId";
@@ -254,7 +254,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<String>> teamsGetChildTeamIdsWithHttpInfo(String teamId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/getChildTeamIds";
@@ -304,7 +304,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<Team>> teamsGetChildTeamsWithHttpInfo(String teamId, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/getChildTeams";
@@ -351,7 +351,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Integer> teamsGetQuotaUsageWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/getQuotaUsage";
@@ -397,7 +397,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Team> teamsGetTeamOfCurrentUserWithHttpInfo(String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/getTeamOfCurrentUser";
@@ -447,7 +447,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Team> teamsReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/read";
@@ -612,7 +612,7 @@ public class TeamsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> teamsTeamIsChildOfOtherTeamWithHttpInfo(String parentTeamId, String subTeamId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/teams/teamIsChildOfOtherTeam";

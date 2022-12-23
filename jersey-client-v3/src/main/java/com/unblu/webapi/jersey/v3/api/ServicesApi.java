@@ -59,7 +59,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<String>> servicesFindWebhookEventTypeNamesByWithHttpInfo(EWebApiVersion apiVersion, ERegistrationLocation registrationLocation) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/findWebhookEventTypeNamesBy";
@@ -106,7 +106,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<String>> servicesGetAllServiceNamesWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/getAllServiceNames";
@@ -150,7 +150,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<WebApiService>> servicesGetAllServicesWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/getAllServices";
@@ -194,7 +194,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ServicesContainer> servicesGetAllServicesMetadataWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/getAllServicesMetadata";
@@ -238,7 +238,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<String>> servicesGetAllTypeNamesWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/getAllTypeNames";
@@ -282,7 +282,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<ServiceType>> servicesGetAllTypesWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/getAllTypes";
@@ -326,7 +326,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<String>> servicesGetAllWebhookEventTypeNamesWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/getAllWebhookEventTypeNames";
@@ -370,7 +370,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<ServiceWebhookEventType>> servicesGetAllWebhookEventTypesWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/services/getAllWebhookEventTypes";
@@ -416,7 +416,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<WebApiService> servicesGetServiceByNameWithHttpInfo(String serviceName) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'serviceName' is set
 		if (serviceName == null) {
@@ -468,7 +468,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ServiceType> servicesGetTypeByNameWithHttpInfo(String name) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'name' is set
 		if (name == null) {
@@ -520,7 +520,7 @@ public class ServicesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ServiceWebhookEventType> servicesGetWebhookEventTypeByNameWithHttpInfo(String name) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'name' is set
 		if (name == null) {

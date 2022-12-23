@@ -146,7 +146,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsAddParticipantLegacyGetWithHttpInfo(String conversationId, String expand, String personId, Boolean connectedViaExternalMessenger, Boolean hidden, Boolean conversationStarred) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -277,7 +277,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsChangeParticipantVisibilityLegacyGetWithHttpInfo(String conversationId, String expand, String personId, Boolean hidden) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -315,8 +315,11 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * create Creates the conversation in the system. The id of the conversation must not be set for the &#39;create&#39; operation as a new one will be
-	 * generated.&lt;br&gt;
+	 * create Creates the conversation in the system. The conversation ID mustn&#39;t be set as a new one will be generated. &lt;br&gt; If called with the
+	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, there are a number of restrictions regarding the conversation to be created:
+	 * &lt;ul&gt; &lt;li&gt;The &#x60;initialEngagementType&#x60; must be a conversation type initiated by agents &lt;li&gt;The &#x60;assigneePersonId&#x60; must
+	 * refer to the person entity of the agent making the call &lt;li&gt;The agent making the call must be the only participant in the conversation
+	 * &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationData (required)
 	 * @param expand (optional)
@@ -328,8 +331,11 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * create Creates the conversation in the system. The id of the conversation must not be set for the &#39;create&#39; operation as a new one will be
-	 * generated.&lt;br&gt;
+	 * create Creates the conversation in the system. The conversation ID mustn&#39;t be set as a new one will be generated. &lt;br&gt; If called with the
+	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, there are a number of restrictions regarding the conversation to be created:
+	 * &lt;ul&gt; &lt;li&gt;The &#x60;initialEngagementType&#x60; must be a conversation type initiated by agents &lt;li&gt;The &#x60;assigneePersonId&#x60; must
+	 * refer to the person entity of the agent making the call &lt;li&gt;The agent making the call must be the only participant in the conversation
+	 * &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationData (required)
 	 * @param expand (optional)
@@ -372,9 +378,12 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given ID&lt;br&gt;
+	 * delete Deletes the conversation with the given ID. &lt;br&gt; Calls with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60; are
+	 * only permissible if: &lt;ul&gt; &lt;li&gt;The agent making the call is the only participant in the conversation &lt;li&gt;The conversation never had any
+	 * participants other than the agent calling the endpoint &lt;li&gt;The conversation contains no messages except system messages and messages sent by bots
+	 * &lt;/ul&gt;&lt;br&gt;
 	 * 
-	 * @param id The id of the conversation which should be deleted (optional)
+	 * @param id The ID of the conversation to be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void conversationsDelete(String id) throws ApiException {
@@ -383,13 +392,16 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given ID&lt;br&gt;
+	 * delete Deletes the conversation with the given ID. &lt;br&gt; Calls with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60; are
+	 * only permissible if: &lt;ul&gt; &lt;li&gt;The agent making the call is the only participant in the conversation &lt;li&gt;The conversation never had any
+	 * participants other than the agent calling the endpoint &lt;li&gt;The conversation contains no messages except system messages and messages sent by bots
+	 * &lt;/ul&gt;&lt;br&gt;
 	 * 
-	 * @param id The id of the conversation which should be deleted (optional)
+	 * @param id The ID of the conversation to be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> conversationsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/delete";
@@ -417,9 +429,12 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given ID&lt;br&gt;
+	 * delete Deletes the conversation with the given ID. &lt;br&gt; Calls with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60; are
+	 * only permissible if: &lt;ul&gt; &lt;li&gt;The agent making the call is the only participant in the conversation &lt;li&gt;The conversation never had any
+	 * participants other than the agent calling the endpoint &lt;li&gt;The conversation contains no messages except system messages and messages sent by bots
+	 * &lt;/ul&gt;&lt;br&gt;
 	 * 
-	 * @param id The id of the conversation which should be deleted (optional)
+	 * @param id The ID of the conversation to be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -430,15 +445,18 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * delete Deletes the conversation for the given ID&lt;br&gt;
+	 * delete Deletes the conversation with the given ID. &lt;br&gt; Calls with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60; are
+	 * only permissible if: &lt;ul&gt; &lt;li&gt;The agent making the call is the only participant in the conversation &lt;li&gt;The conversation never had any
+	 * participants other than the agent calling the endpoint &lt;li&gt;The conversation contains no messages except system messages and messages sent by bots
+	 * &lt;/ul&gt;&lt;br&gt;
 	 * 
-	 * @param id The id of the conversation which should be deleted (optional)
+	 * @param id The ID of the conversation to be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
 	@Deprecated
 	public ApiResponse<Void> conversationsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/delete";
@@ -466,7 +484,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation.&lt;br&gt;
+	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsEndBody (required)
@@ -479,7 +498,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation.&lt;br&gt;
+	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsEndBody (required)
@@ -529,7 +549,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation.&lt;br&gt;
+	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -545,7 +566,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation.&lt;br&gt;
+	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -557,7 +579,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsEndLegacyGetWithHttpInfo(String conversationId, String expand, EConversationEndReason reason, String comment) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -595,10 +617,13 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * getBySourceIdAndChannelId Returns the conversation for the given source and channel id&lt;br&gt;
+	 * getBySourceIdAndChannelId Returns the conversation for the given source and channel id. If called with the authorization role &#x60;REGISTERED_USER&#x60;,
+	 * the call will fail if the conversation matching the search criteria doesn&#39;t include the agent making the call as a participant. If the agent making the
+	 * call has the user role &#x60;SUPERVISOR&#x60;, the call will fail if the conversation matching the search criteria doesn&#39;t include an agent in their team
+	 * or teams as a participant.&lt;br&gt;
 	 * 
 	 * @param sourceId The sourceId with which the conversation was created (optional)
-	 * @param externalMessengerChannelId The messenger channel id to which the conversation is connected. Can be null for internal conversations. (optional)
+	 * @param externalMessengerChannelId The messenger channel ID the conversation is connected to. Can be null for internal conversations. (optional)
 	 * @param expand (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
@@ -608,16 +633,19 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * getBySourceIdAndChannelId Returns the conversation for the given source and channel id&lt;br&gt;
+	 * getBySourceIdAndChannelId Returns the conversation for the given source and channel id. If called with the authorization role &#x60;REGISTERED_USER&#x60;,
+	 * the call will fail if the conversation matching the search criteria doesn&#39;t include the agent making the call as a participant. If the agent making the
+	 * call has the user role &#x60;SUPERVISOR&#x60;, the call will fail if the conversation matching the search criteria doesn&#39;t include an agent in their team
+	 * or teams as a participant.&lt;br&gt;
 	 * 
 	 * @param sourceId The sourceId with which the conversation was created (optional)
-	 * @param externalMessengerChannelId The messenger channel id to which the conversation is connected. Can be null for internal conversations. (optional)
+	 * @param externalMessengerChannelId The messenger channel ID the conversation is connected to. Can be null for internal conversations. (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationData> conversationsGetBySourceIdAndChannelIdWithHttpInfo(String sourceId, String externalMessengerChannelId, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/getBySourceIdAndChannelId";
@@ -667,7 +695,7 @@ public class ConversationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<ConversationFileData>> conversationsGetConversationFilesWithHttpInfo(String conversationId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -794,7 +822,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsOffboardParticipantLegacyGetWithHttpInfo(String conversationId, String expand, String personId, EConversationLeftReason reason, String comment) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -833,7 +861,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * read Returns the conversation for the given ID&lt;br&gt;
+	 * read Returns the conversation for the given ID. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making
+	 * the call must be a participant in the conversation.&lt;br&gt;
 	 * 
 	 * @param id ID of the conversation which should be returned (optional)
 	 * @param expand (optional)
@@ -845,7 +874,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * read Returns the conversation for the given ID&lt;br&gt;
+	 * read Returns the conversation for the given ID. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making
+	 * the call must be a participant in the conversation.&lt;br&gt;
 	 * 
 	 * @param id ID of the conversation which should be returned (optional)
 	 * @param expand (optional)
@@ -853,7 +883,7 @@ public class ConversationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationData> conversationsReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/read";
@@ -884,7 +914,9 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * search Search for conversations in the current account&lt;br&gt;
+	 * search Search for conversations in the current account. If called with the authorization role &#x60;REGISTERED_USER&#x60;, the call only returns
+	 * conversations matching the search criteria where the agent making a call is the participant. If the agent making the call has the user role
+	 * &#x60;SUPERVISOR&#x60;, the results only include conversations of the agents in their team or teams.&lt;br&gt;
 	 * 
 	 * @param conversationQuery (required)
 	 * @param expand (optional)
@@ -896,7 +928,9 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * search Search for conversations in the current account&lt;br&gt;
+	 * search Search for conversations in the current account. If called with the authorization role &#x60;REGISTERED_USER&#x60;, the call only returns
+	 * conversations matching the search criteria where the agent making a call is the participant. If the agent making the call has the user role
+	 * &#x60;SUPERVISOR&#x60;, the results only include conversations of the agents in their team or teams.&lt;br&gt;
 	 * 
 	 * @param conversationQuery (required)
 	 * @param expand (optional)
@@ -1032,7 +1066,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsSetAssigneePersonLegacyGetWithHttpInfo(String conversationId, String expand, String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -1162,7 +1196,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsSetContextPersonLegacyGetWithHttpInfo(String conversationId, String expand, String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -1288,7 +1322,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsSetLocaleLegacyGetWithHttpInfo(String conversationId, String expand, String locale) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -1388,8 +1422,14 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setScheduledTimestamp Set the scheduled time of the conversation. Unix timestamp (ms) when the conversation is scheduled for, which will be rounded to the
-	 * nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;.&lt;br&gt;
+	 * setScheduledTimestamp Set the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded to
+	 * the nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;. &lt;br&gt; When called with the
+	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
+	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationScheduledTimeViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
+	 * &#x60;true&#x60;, the agent making the call can only change the conversation&#39;s &#x60;scheduledTimestamp&#x60; if they&#39;re a participant in the
+	 * conversation. &lt;li&gt;If the configuration property is &#x60;false&#x60;, the agent making the call can change the &#x60;scheduledTimestamp&#x60; provided
+	 * their participation type in the conversation is listed in the configuration property
+	 * &#x60;com.unblu.conversation.message.allowChangeConversationScheduledTime&#x60;. &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetScheduledTimestampBody (required)
@@ -1402,8 +1442,14 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setScheduledTimestamp Set the scheduled time of the conversation. Unix timestamp (ms) when the conversation is scheduled for, which will be rounded to the
-	 * nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;.&lt;br&gt;
+	 * setScheduledTimestamp Set the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded to
+	 * the nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;. &lt;br&gt; When called with the
+	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
+	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationScheduledTimeViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
+	 * &#x60;true&#x60;, the agent making the call can only change the conversation&#39;s &#x60;scheduledTimestamp&#x60; if they&#39;re a participant in the
+	 * conversation. &lt;li&gt;If the configuration property is &#x60;false&#x60;, the agent making the call can change the &#x60;scheduledTimestamp&#x60; provided
+	 * their participation type in the conversation is listed in the configuration property
+	 * &#x60;com.unblu.conversation.message.allowChangeConversationScheduledTime&#x60;. &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetScheduledTimestampBody (required)
@@ -1516,8 +1562,13 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setTopic Set the topic of the conversation. Setting it to null deletes the topic, if it is not mandatory to have a topic defined for the conversation type
-	 * (e.g. SCHEDULED_CONVERSATION).&lt;br&gt;
+	 * setTopic Set the topic of the conversation. Setting it to &#x60;null&#x60; deletes the topic, provided it isn&#39;t mandatory to specify a topic for the
+	 * conversation type (e.g. &#x60;SCHEDULED_CONVERSATION&#x60;). &lt;br&gt; When called with the authorization role &#x60;SUPERVISOR&#x60; or
+	 * &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
+	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationTopicViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
+	 * &#x60;true&#x60;, the agent making the call can only change the conversation&#39;s topic if they&#39;re a participant in the conversation. &lt;li&gt;If the
+	 * configuration property is &#x60;false&#x60;, the agent making the call can change the topic provided their participation type in the conversation is listed
+	 * in the configuration property &#x60;com.unblu.conversation.message.allowChangeConversationTopic&#x60;. &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetTopicBody (required)
@@ -1530,8 +1581,13 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setTopic Set the topic of the conversation. Setting it to null deletes the topic, if it is not mandatory to have a topic defined for the conversation type
-	 * (e.g. SCHEDULED_CONVERSATION).&lt;br&gt;
+	 * setTopic Set the topic of the conversation. Setting it to &#x60;null&#x60; deletes the topic, provided it isn&#39;t mandatory to specify a topic for the
+	 * conversation type (e.g. &#x60;SCHEDULED_CONVERSATION&#x60;). &lt;br&gt; When called with the authorization role &#x60;SUPERVISOR&#x60; or
+	 * &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
+	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationTopicViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
+	 * &#x60;true&#x60;, the agent making the call can only change the conversation&#39;s topic if they&#39;re a participant in the conversation. &lt;li&gt;If the
+	 * configuration property is &#x60;false&#x60;, the agent making the call can change the topic provided their participation type in the conversation is listed
+	 * in the configuration property &#x60;com.unblu.conversation.message.allowChangeConversationTopic&#x60;. &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetTopicBody (required)

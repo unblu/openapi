@@ -104,7 +104,7 @@ public class ContactsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> contactsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/contacts/delete";
@@ -153,7 +153,7 @@ public class ContactsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> contactsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/contacts/delete";
@@ -199,7 +199,7 @@ public class ContactsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Contact> contactsReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/contacts/read";

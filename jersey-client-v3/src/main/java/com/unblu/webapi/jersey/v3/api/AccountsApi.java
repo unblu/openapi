@@ -168,7 +168,7 @@ public class AccountsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> accountsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accounts/delete";
@@ -217,7 +217,7 @@ public class AccountsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> accountsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accounts/delete";
@@ -385,7 +385,7 @@ public class AccountsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Account> accountsGetByNameWithHttpInfo(String name, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accounts/getByName";
@@ -434,7 +434,7 @@ public class AccountsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Account> accountsGetCurrentAccountWithHttpInfo(String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accounts/getCurrentAccount";
@@ -486,7 +486,7 @@ public class AccountsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> accountsIsAccountNameAvailableWithHttpInfo(String name, String accountId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accounts/isAccountNameAvailable";
@@ -537,7 +537,7 @@ public class AccountsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Account> accountsReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accounts/read";
@@ -586,7 +586,7 @@ public class AccountsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<AccountIngressStatus> accountsReadIngressStatusWithHttpInfo(String accountId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accounts/readIngressStatus";

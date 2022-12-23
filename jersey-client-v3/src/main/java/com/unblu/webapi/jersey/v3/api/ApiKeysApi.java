@@ -108,7 +108,7 @@ public class ApiKeysApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> apiKeysDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/apikeys/delete";
@@ -157,7 +157,7 @@ public class ApiKeysApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> apiKeysDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/apikeys/delete";
@@ -205,7 +205,7 @@ public class ApiKeysApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ApiKey> apiKeysGetByKeyWithHttpInfo(String apiKey, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/apikeys/getByKey";
@@ -256,7 +256,7 @@ public class ApiKeysApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ApiKey> apiKeysGetDefaultForAccountIdWithHttpInfo(String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/apikeys/getDefaultForAccountId";
@@ -302,7 +302,7 @@ public class ApiKeysApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Integer> apiKeysGetQuotaUsageWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/apikeys/getQuotaUsage";
@@ -350,7 +350,7 @@ public class ApiKeysApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ApiKey> apiKeysReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/apikeys/read";

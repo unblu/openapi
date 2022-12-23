@@ -105,7 +105,7 @@ public class WebhookRegistrationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> webhookRegistrationsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/webhookregistrations/delete";
@@ -154,7 +154,7 @@ public class WebhookRegistrationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> webhookRegistrationsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/webhookregistrations/delete";
@@ -200,7 +200,7 @@ public class WebhookRegistrationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<WebhookRegistration> webhookRegistrationsGetByNameWithHttpInfo(String name) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/webhookregistrations/getByName";
@@ -299,7 +299,7 @@ public class WebhookRegistrationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> webhookRegistrationsPingLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/webhookregistrations/ping";
@@ -345,7 +345,7 @@ public class WebhookRegistrationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<WebhookRegistration> webhookRegistrationsReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/webhookregistrations/read";

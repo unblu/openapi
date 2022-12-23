@@ -50,7 +50,7 @@ public class AccountSecretsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<AccountSecret> accountSecretsGetCurrentAccountSecretWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/accountsecrets/getCurrentAccountSecret";
