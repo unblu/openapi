@@ -23,7 +23,8 @@ import io.swagger.annotations.ApiModelProperty;
 	AccountIngressStatus.JSON_PROPERTY_ENABLED,
 	AccountIngressStatus.JSON_PROPERTY_INGRESS_STATUS,
 	AccountIngressStatus.JSON_PROPERTY_MIGRATION_STATUS,
-	AccountIngressStatus.JSON_PROPERTY_PROBLEM_DETAILS,
+	AccountIngressStatus.JSON_PROPERTY_ERROR_DETAILS,
+	AccountIngressStatus.JSON_PROPERTY_WARNING_DETAILS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AccountIngressStatus {
@@ -76,9 +77,13 @@ public class AccountIngressStatus {
 	@JsonProperty(JSON_PROPERTY_MIGRATION_STATUS)
 	private EIngressMigrationStatus migrationStatus;
 
-	public static final String JSON_PROPERTY_PROBLEM_DETAILS = "problemDetails";
-	@JsonProperty(JSON_PROPERTY_PROBLEM_DETAILS)
-	private List<String> problemDetails = null;
+	public static final String JSON_PROPERTY_ERROR_DETAILS = "errorDetails";
+	@JsonProperty(JSON_PROPERTY_ERROR_DETAILS)
+	private List<String> errorDetails = null;
+
+	public static final String JSON_PROPERTY_WARNING_DETAILS = "warningDetails";
+	@JsonProperty(JSON_PROPERTY_WARNING_DETAILS)
+	private List<String> warningDetails = null;
 
 	public AccountIngressStatus $type(TypeEnum $type) {
 		this.$type = $type;
@@ -157,31 +162,60 @@ public class AccountIngressStatus {
 		this.migrationStatus = migrationStatus;
 	}
 
-	public AccountIngressStatus problemDetails(List<String> problemDetails) {
-		this.problemDetails = problemDetails;
+	public AccountIngressStatus errorDetails(List<String> errorDetails) {
+		this.errorDetails = errorDetails;
 		return this;
 	}
 
-	public AccountIngressStatus addProblemDetailsItem(String problemDetailsItem) {
-		if (this.problemDetails == null) {
-			this.problemDetails = new ArrayList<>();
+	public AccountIngressStatus addErrorDetailsItem(String errorDetailsItem) {
+		if (this.errorDetails == null) {
+			this.errorDetails = new ArrayList<>();
 		}
-		this.problemDetails.add(problemDetailsItem);
+		this.errorDetails.add(errorDetailsItem);
 		return this;
 	}
 
 	/**
-	 * Ingress configuration and migration issues that arose during the last ingress activation or deactivation process.
+	 * High severity ingress configuration and migration issues that arose during the last ingress activation or deactivation process. Any error will block ingress
+	 * from being activated or deactivated.
 	 * 
-	 * @return problemDetails
+	 * @return errorDetails
 	 **/
-	@ApiModelProperty(value = "Ingress configuration and migration issues that arose during the last ingress activation or deactivation process.")
-	public List<String> getProblemDetails() {
-		return problemDetails;
+	@ApiModelProperty(value = "High severity ingress configuration and migration issues that arose during the last ingress activation or deactivation process. Any error will block ingress from being activated or deactivated.")
+	public List<String> getErrorDetails() {
+		return errorDetails;
 	}
 
-	public void setProblemDetails(List<String> problemDetails) {
-		this.problemDetails = problemDetails;
+	public void setErrorDetails(List<String> errorDetails) {
+		this.errorDetails = errorDetails;
+	}
+
+	public AccountIngressStatus warningDetails(List<String> warningDetails) {
+		this.warningDetails = warningDetails;
+		return this;
+	}
+
+	public AccountIngressStatus addWarningDetailsItem(String warningDetailsItem) {
+		if (this.warningDetails == null) {
+			this.warningDetails = new ArrayList<>();
+		}
+		this.warningDetails.add(warningDetailsItem);
+		return this;
+	}
+
+	/**
+	 * Low severity ingress configuration and migration issues that arose during the last ingress activation or deactivation process. Ingress can still be
+	 * successfully activated or deactivated if warnings are present.
+	 * 
+	 * @return warningDetails
+	 **/
+	@ApiModelProperty(value = "Low severity ingress configuration and migration issues that arose during the last ingress activation or deactivation process. Ingress can still be successfully activated or deactivated if warnings are present.")
+	public List<String> getWarningDetails() {
+		return warningDetails;
+	}
+
+	public void setWarningDetails(List<String> warningDetails) {
+		this.warningDetails = warningDetails;
 	}
 
 	@Override
@@ -197,12 +231,13 @@ public class AccountIngressStatus {
 				Objects.equals(this.enabled, accountIngressStatus.enabled) &&
 				Objects.equals(this.ingressStatus, accountIngressStatus.ingressStatus) &&
 				Objects.equals(this.migrationStatus, accountIngressStatus.migrationStatus) &&
-				Objects.equals(this.problemDetails, accountIngressStatus.problemDetails);
+				Objects.equals(this.errorDetails, accountIngressStatus.errorDetails) &&
+				Objects.equals(this.warningDetails, accountIngressStatus.warningDetails);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, enabled, ingressStatus, migrationStatus, problemDetails);
+		return Objects.hash($type, enabled, ingressStatus, migrationStatus, errorDetails, warningDetails);
 	}
 
 	@Override
@@ -213,7 +248,8 @@ public class AccountIngressStatus {
 		sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
 		sb.append("    ingressStatus: ").append(toIndentedString(ingressStatus)).append("\n");
 		sb.append("    migrationStatus: ").append(toIndentedString(migrationStatus)).append("\n");
-		sb.append("    problemDetails: ").append(toIndentedString(problemDetails)).append("\n");
+		sb.append("    errorDetails: ").append(toIndentedString(errorDetails)).append("\n");
+		sb.append("    warningDetails: ").append(toIndentedString(warningDetails)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

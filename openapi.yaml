@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.23.2
+  version: 7.24.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -10071,9 +10071,14 @@ components:
           $ref: '#/components/schemas/EIngressStatus'
         migrationStatus:
           $ref: '#/components/schemas/EIngressMigrationStatus'
-        problemDetails:
+        errorDetails:
           type: array
-          description: Ingress configuration and migration issues that arose during the last ingress activation or deactivation process.
+          description: High severity ingress configuration and migration issues that arose during the last ingress activation or deactivation process. Any error will block ingress from being activated or deactivated.
+          items:
+            type: string
+        warningDetails:
+          type: array
+          description: Low severity ingress configuration and migration issues that arose during the last ingress activation or deactivation process. Ingress can still be successfully activated or deactivated if warnings are present.
           items:
             type: string
     AccountModificationEvent:
@@ -11727,6 +11732,12 @@ components:
         dialogToken:
           type: string
           description: Token for this dialog. It is present in every dialog webhook and must be passed to all Bot Web-API service calls to identify the dialog.
+        conversationId:
+          type: string
+          description: The ID of the conversation this dialog belongs to.
+        counterpartPersonId:
+          type: string
+          description: The ID of the person the bot is talking to.
     BotDialogCounterpartChanged:
       type: object
       description: "Event emitted when the counterpart person of dialog changes during a dialog.<br> This can only happen if a anonymous person that is in a dialog logs in / authenticates during the dialog and is changed to an authenticated person.<br> In this case the person ID and all details will switch to a authenticated person and all subsequent messages will be sent by that person, the dialog including the dialog token will stay the same and go on.<br> <p> This event will only be delivered to the dialog bots that accepted dialog offer for this dialog beforehand."

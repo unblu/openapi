@@ -27,6 +27,8 @@ import io.swagger.annotations.ApiModelProperty;
 	BotDialogClosedEvent.JSON_PROPERTY_EVENT_TYPE,
 	BotDialogClosedEvent.JSON_PROPERTY_ACCOUNT_ID,
 	BotDialogClosedEvent.JSON_PROPERTY_DIALOG_TOKEN,
+	BotDialogClosedEvent.JSON_PROPERTY_CONVERSATION_ID,
+	BotDialogClosedEvent.JSON_PROPERTY_COUNTERPART_PERSON_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BotDialogClosedEvent {
@@ -82,6 +84,14 @@ public class BotDialogClosedEvent {
 	public static final String JSON_PROPERTY_DIALOG_TOKEN = "dialogToken";
 	@JsonProperty(JSON_PROPERTY_DIALOG_TOKEN)
 	private String dialogToken;
+
+	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
+	private String conversationId;
+
+	public static final String JSON_PROPERTY_COUNTERPART_PERSON_ID = "counterpartPersonId";
+	@JsonProperty(JSON_PROPERTY_COUNTERPART_PERSON_ID)
+	private String counterpartPersonId;
 
 	public BotDialogClosedEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -178,6 +188,44 @@ public class BotDialogClosedEvent {
 		this.dialogToken = dialogToken;
 	}
 
+	public BotDialogClosedEvent conversationId(String conversationId) {
+		this.conversationId = conversationId;
+		return this;
+	}
+
+	/**
+	 * The ID of the conversation this dialog belongs to.
+	 * 
+	 * @return conversationId
+	 **/
+	@ApiModelProperty(value = "The ID of the conversation this dialog belongs to.")
+	public String getConversationId() {
+		return conversationId;
+	}
+
+	public void setConversationId(String conversationId) {
+		this.conversationId = conversationId;
+	}
+
+	public BotDialogClosedEvent counterpartPersonId(String counterpartPersonId) {
+		this.counterpartPersonId = counterpartPersonId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person the bot is talking to.
+	 * 
+	 * @return counterpartPersonId
+	 **/
+	@ApiModelProperty(value = "The ID of the person the bot is talking to.")
+	public String getCounterpartPersonId() {
+		return counterpartPersonId;
+	}
+
+	public void setCounterpartPersonId(String counterpartPersonId) {
+		this.counterpartPersonId = counterpartPersonId;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -191,12 +239,14 @@ public class BotDialogClosedEvent {
 				Objects.equals(this.timestamp, botDialogClosedEvent.timestamp) &&
 				Objects.equals(this.eventType, botDialogClosedEvent.eventType) &&
 				Objects.equals(this.accountId, botDialogClosedEvent.accountId) &&
-				Objects.equals(this.dialogToken, botDialogClosedEvent.dialogToken);
+				Objects.equals(this.dialogToken, botDialogClosedEvent.dialogToken) &&
+				Objects.equals(this.conversationId, botDialogClosedEvent.conversationId) &&
+				Objects.equals(this.counterpartPersonId, botDialogClosedEvent.counterpartPersonId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, dialogToken);
+		return Objects.hash($type, timestamp, eventType, accountId, dialogToken, conversationId, counterpartPersonId);
 	}
 
 	@Override
@@ -208,6 +258,8 @@ public class BotDialogClosedEvent {
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    dialogToken: ").append(toIndentedString(dialogToken)).append("\n");
+		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+		sb.append("    counterpartPersonId: ").append(toIndentedString(counterpartPersonId)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
