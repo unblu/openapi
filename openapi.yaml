@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.24.1
+  version: 7.25.0
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -15266,11 +15266,13 @@ components:
       enum:
       - MISSED_BECAUSE_TIMEOUT
       - MISSED_BECAUSE_TERMINATED
+      - MISSED_BECAUSE_UNAVAILABLE
       - TERMINATED_BY_PARTICIPANT
       - TERMINATED_BY_SYSTEM_ABORT
       x-enum-descriptions:
       - "MISSED_BECAUSE_TIMEOUT: The participation was ended because of a timeout on the participant's side."
       - "MISSED_BECAUSE_TERMINATED: The participation ended because the initiator terminated the call before the other participant answered it"
+      - "MISSED_BECAUSE_UNAVAILABLE: The participation ended because nobody was available to answer the call"
       - "TERMINATED_BY_PARTICIPANT: The participation ended normally"
       - "TERMINATED_BY_SYSTEM_ABORT: The participation ended because the system aborted the call"
     ECallState:
@@ -15280,11 +15282,13 @@ components:
       - IDLE
       - CALLING
       - FORWARDING
+      - UNAVAILABLE
       - ACTIVE
       x-enum-descriptions:
       - "IDLE: The call is not active (anymore)"
       - "CALLING: The call is ringing, nobody accepted it yet"
       - "FORWARDING: The call is ringing for the hidden agents of the conversation, after no visible agent has accepted the call"
+      - "UNAVAILABLE: As no call recipient is available to accept the call it just notifies the caller of this fact"
       - "ACTIVE: The call is active"
     ECallType:
       type: string
@@ -15752,7 +15756,7 @@ components:
       - "TOKBOX_SESSION_ID: Filter by the 'tokboxSessionId' attribute"
     EConversationState:
       type: string
-      description: "Life cycle state of the conversation. Following transitions are possible: <ul> <li>`CREATED` --> `ONBOARDING`, `OFFBOARDING`</li> <li>`ONBOARDING` --> `QUEUED`, `ACTIVE`, `OFFBOARDING`, `UNASSIGNED`</li> <li>`REBOARDING` --> `QUEUED`, `OFFBOARDING`</li> <li>`QUEUED` --> `ACTIVE`, `OFFBOARDING`</li> <li>`ACTIVE` --> `UNASSIGNED`, `OFFBOARDING`</li> <li>`UNASSIGNED` --> `REBOARDING`, `OFFBOARDING`</li> <li>`OFFBOARDING` --> `ENDED`</li> <li>`ENDED` --> none</li> </ul>"
+      description: "Life cycle state of the conversation. Following transitions are possible: <ul> <li>`CREATED` --> `ONBOARDING`, `OFFBOARDING`</li> <li>`ONBOARDING` --> `QUEUED`, `ACTIVE`, `OFFBOARDING`, `UNASSIGNED`</li> <li>`REBOARDING` --> `QUEUED`, `UNASSIGNED`, `OFFBOARDING`</li> <li>`QUEUED` --> `ACTIVE`, `OFFBOARDING`, `UNASSIGNED`</li> <li>`ACTIVE` --> `UNASSIGNED`, `OFFBOARDING`, `QUEUED`</li> <li>`UNASSIGNED` --> `REBOARDING`, `OFFBOARDING`, `QUEUED`, `ACTIVE`</li> <li>`OFFBOARDING` --> `ENDED`</li> <li>`ENDED` --> none</li> </ul>"
       enum:
       - CREATED
       - ONBOARDING
@@ -15768,7 +15772,7 @@ components:
       - "REBOARDING: When a message is send to an unassigned conversation, the conversation first is put into the reboarding state as long as the person in the center of the conversation is doing the reboarding."
       - "QUEUED: Depending of the engagement type of the conversation, the conversation is put in the queued state when it is inside the queue."
       - "ACTIVE: Conversation is active"
-      - "UNASSIGNED: After there is no assignee of a conversation anymore, the conversation goes to unassigned state until a message from a visitor is written to start reboarding again."
+      - "UNASSIGNED: After there is no assignee of a conversation anymore, the conversation goes to unassigned state until a message from a visitor is written to start reboarding again, or until the conversation is requeued."
       - "OFFBOARDING: Conversation is being ended"
       - "ENDED: Conversation is ended"
     EConversationStateOperatorType:

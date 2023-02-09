@@ -20,6 +20,11 @@ public enum ECallParticipationEndReason {
 	MISSED_BECAUSE_TERMINATED("MISSED_BECAUSE_TERMINATED"),
 
 	/**
+	 * MISSED_BECAUSE_UNAVAILABLE: The participation ended because nobody was available to answer the call
+	 */
+	MISSED_BECAUSE_UNAVAILABLE("MISSED_BECAUSE_UNAVAILABLE"),
+
+	/**
 	 * TERMINATED_BY_PARTICIPANT: The participation ended normally
 	 */
 	TERMINATED_BY_PARTICIPANT("TERMINATED_BY_PARTICIPANT"),

@@ -25,6 +25,11 @@ public enum ECallState {
 	FORWARDING("FORWARDING"),
 
 	/**
+	 * UNAVAILABLE: As no call recipient is available to accept the call it just notifies the caller of this fact
+	 */
+	UNAVAILABLE("UNAVAILABLE"),
+
+	/**
 	 * ACTIVE: The call is active
 	 */
 	ACTIVE("ACTIVE");

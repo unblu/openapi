@@ -7,10 +7,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Life cycle state of the conversation. Following transitions are possible: &lt;ul&gt; &lt;li&gt;&#x60;CREATED&#x60; --&gt; &#x60;ONBOARDING&#x60;,
  * &#x60;OFFBOARDING&#x60;&lt;/li&gt; &lt;li&gt;&#x60;ONBOARDING&#x60; --&gt; &#x60;QUEUED&#x60;, &#x60;ACTIVE&#x60;, &#x60;OFFBOARDING&#x60;,
- * &#x60;UNASSIGNED&#x60;&lt;/li&gt; &lt;li&gt;&#x60;REBOARDING&#x60; --&gt; &#x60;QUEUED&#x60;, &#x60;OFFBOARDING&#x60;&lt;/li&gt; &lt;li&gt;&#x60;QUEUED&#x60;
- * --&gt; &#x60;ACTIVE&#x60;, &#x60;OFFBOARDING&#x60;&lt;/li&gt; &lt;li&gt;&#x60;ACTIVE&#x60; --&gt; &#x60;UNASSIGNED&#x60;, &#x60;OFFBOARDING&#x60;&lt;/li&gt;
- * &lt;li&gt;&#x60;UNASSIGNED&#x60; --&gt; &#x60;REBOARDING&#x60;, &#x60;OFFBOARDING&#x60;&lt;/li&gt; &lt;li&gt;&#x60;OFFBOARDING&#x60; --&gt;
- * &#x60;ENDED&#x60;&lt;/li&gt; &lt;li&gt;&#x60;ENDED&#x60; --&gt; none&lt;/li&gt; &lt;/ul&gt;
+ * &#x60;UNASSIGNED&#x60;&lt;/li&gt; &lt;li&gt;&#x60;REBOARDING&#x60; --&gt; &#x60;QUEUED&#x60;, &#x60;UNASSIGNED&#x60;, &#x60;OFFBOARDING&#x60;&lt;/li&gt;
+ * &lt;li&gt;&#x60;QUEUED&#x60; --&gt; &#x60;ACTIVE&#x60;, &#x60;OFFBOARDING&#x60;, &#x60;UNASSIGNED&#x60;&lt;/li&gt; &lt;li&gt;&#x60;ACTIVE&#x60; --&gt;
+ * &#x60;UNASSIGNED&#x60;, &#x60;OFFBOARDING&#x60;, &#x60;QUEUED&#x60;&lt;/li&gt; &lt;li&gt;&#x60;UNASSIGNED&#x60; --&gt; &#x60;REBOARDING&#x60;,
+ * &#x60;OFFBOARDING&#x60;, &#x60;QUEUED&#x60;, &#x60;ACTIVE&#x60;&lt;/li&gt; &lt;li&gt;&#x60;OFFBOARDING&#x60; --&gt; &#x60;ENDED&#x60;&lt;/li&gt;
+ * &lt;li&gt;&#x60;ENDED&#x60; --&gt; none&lt;/li&gt; &lt;/ul&gt;
  */
 public enum EConversationState {
 
@@ -43,7 +44,7 @@ public enum EConversationState {
 
 	/**
 	 * UNASSIGNED: After there is no assignee of a conversation anymore, the conversation goes to unassigned state until a message from a visitor is written to
-	 * start reboarding again.
+	 * start reboarding again, or until the conversation is requeued.
 	 */
 	UNASSIGNED("UNASSIGNED"),
 
