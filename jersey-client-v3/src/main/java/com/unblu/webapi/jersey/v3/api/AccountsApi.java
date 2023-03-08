@@ -96,9 +96,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * createAccountWithNewAdmin createAccountWithNewAdmin operation
+	 * createAccountWithNewAdmin Create a new account with a new admin which will receive an email with the initial password.&lt;br&gt;
 	 * 
-	 * @param accountUserContainer (required)
+	 * @param accountUserContainer the new account and admin user information (required)
 	 * @param expand (optional)
 	 * @return AccountUserContainer
 	 * @throws ApiException if fails to make API call
@@ -108,9 +108,9 @@ public class AccountsApi {
 	}
 
 	/**
-	 * createAccountWithNewAdmin createAccountWithNewAdmin operation
+	 * createAccountWithNewAdmin Create a new account with a new admin which will receive an email with the initial password.&lt;br&gt;
 	 * 
-	 * @param accountUserContainer (required)
+	 * @param accountUserContainer the new account and admin user information (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;AccountUserContainer&gt;
 	 * @throws ApiException if fails to make API call

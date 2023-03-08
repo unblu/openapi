@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.25.0
+  version: 7.26.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -181,7 +181,7 @@ paths:
       tags:
       - Accounts
       summary: createAccountWithNewAdmin
-      description: createAccountWithNewAdmin operation
+      description: Create a new account with a new admin which will receive an email with the initial password.<br>
       operationId: accountsCreateAccountWithNewAdmin
       parameters:
       - name: expand
@@ -194,6 +194,7 @@ paths:
         style: form
         explode: false
       requestBody:
+        description: the new account and admin user information
         content:
           application/json:
             schema:
@@ -241,7 +242,7 @@ paths:
         required: true
       responses:
         "200":
-          description: Ok
+          description: the created Account and User in the container object
           content:
             application/json:
               schema:
@@ -3904,7 +3905,7 @@ paths:
       tags:
       - Conversations
       summary: addParticipant
-      description: Add a participant to a conversation.<br>
+      description: Adds a participant to a conversation.<br>
       operationId: conversationsAddParticipant
       parameters:
       - name: conversationId
@@ -3941,7 +3942,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -3991,7 +3992,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4027,7 +4028,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The created conversation as it exists now in the system
+          description: The created conversation
           content:
             application/json:
               schema:
@@ -4080,6 +4081,8 @@ paths:
                     sourceUrl: http://some.url/conv1
                     endReason: null
                     initialEngagementUrl: null
+                    awaitedPersonType: NONE
+                    awaitedPersonTypeChangeTimestamp: null
                     configuration: null
                     text: null
                     metadata: null
@@ -4118,7 +4121,7 @@ paths:
       tags:
       - Conversations
       summary: end
-      description: "End a conversation. If called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the agent making the call must have the necessary permissions to end a conversation.<br>"
+      description: "Ends a conversation. If called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the agent making the call must have the necessary permissions to end a conversation.<br>"
       operationId: conversationsEnd
       parameters:
       - name: conversationId
@@ -4153,7 +4156,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4199,7 +4202,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: The conversation for the given source and channel id
+          description: The conversation for the given source and channel ID
           content:
             application/json:
               schema:
@@ -4244,7 +4247,7 @@ paths:
       tags:
       - Conversations
       summary: offboardParticipant
-      description: Offboard a participant from a conversation.<br>
+      description: Offboards a participant from a conversation.<br>
       operationId: conversationsOffboardParticipant
       parameters:
       - name: conversationId
@@ -4280,7 +4283,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4368,7 +4371,7 @@ paths:
       tags:
       - Conversations
       summary: setAssigneePerson
-      description: Set an agent as assignee to a conversation. <p> <b>Note:</b> The person has to have an active participation in the conversation<br>
+      description: Sets an agent as assignee to a conversation. <p> <b>Note:</b> The person has to have an active participation in the conversation<br>
       operationId: conversationsSetAssigneePerson
       parameters:
       - name: conversationId
@@ -4402,7 +4405,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4413,12 +4416,61 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversations/{conversationId}/setAwaitedPersonType:
+    post:
+      tags:
+      - Conversations
+      summary: setAwaitedPersonType
+      description: Sets the awaited person type in a conversation<br>
+      operationId: conversationsSetAwaitedPersonType
+      parameters:
+      - name: conversationId
+        in: path
+        description: the conversation that is updated
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpandFields'
+        style: form
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationsSetAwaitedPersonTypeBody'
+            examples:
+              request-body:
+                summary: request body
+                description: Set the conversation awaited person
+                value:
+                  awaitedPersonType: VISITOR
+        required: true
+      responses:
+        "200":
+          description: The updated conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /conversations/{conversationId}/setContextPerson:
     post:
       tags:
       - Conversations
       summary: setContextPerson
-      description: Set a visitor as context person of a conversation. <p> <b>Note:</b> The person has to have an active participation in the conversation<br>
+      description: Sets a visitor as context person of a conversation. <p> <b>Note:</b> The person has to have an active participation in the conversation<br>
       operationId: conversationsSetContextPerson
       parameters:
       - name: conversationId
@@ -4452,7 +4504,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4468,7 +4520,7 @@ paths:
       tags:
       - Conversations
       summary: setLocale
-      description: Set the locale of the conversation language (as BCP 47 language tag form including region if available).<br>
+      description: Sets the locale of the conversation language (as BCP 47 language tag form including region if available).<br>
       operationId: conversationsSetLocale
       parameters:
       - name: conversationId
@@ -4502,7 +4554,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4518,7 +4570,7 @@ paths:
       tags:
       - Conversations
       summary: setRecipient
-      description: "Set a person, named area, team or account as the recipient of a conversation.<br>"
+      description: "Sets a person, named area, team or account as the recipient of a conversation.<br>"
       operationId: conversationsSetRecipient
       parameters:
       - name: conversationId
@@ -4546,7 +4598,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4561,7 +4613,7 @@ paths:
       tags:
       - Conversations
       summary: setScheduledTimestamp
-      description: "Set the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded to the nearest minute. Can only be set for conversations with initialEngagementType = \"SCHEDULED_CONVERSATION\". <br> When called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the behavior of the call depends on the configuration property `com.unblu.conversation.message.allowNonAdminUsersChangeConversationScheduledTimeViaWebApi`: <ul> <li>If the configuration property is `true`, the agent making the call can only change the conversation's `scheduledTimestamp` if they're a participant in the conversation. <li>If the configuration property is `false`, the agent making the call can change the `scheduledTimestamp` provided their participation type in the conversation is listed in the configuration property `com.unblu.conversation.message.allowChangeConversationScheduledTime`. </ul><br>"
+      description: "Sets the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded to the nearest minute. Can only be set for conversations with initialEngagementType = \"SCHEDULED_CONVERSATION\". <br> When called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the behavior of the call depends on the configuration property `com.unblu.conversation.message.allowNonAdminUsersChangeConversationScheduledTimeViaWebApi`: <ul> <li>If the configuration property is `true`, the agent making the call can only change the conversation's `scheduledTimestamp` if they're a participant in the conversation. <li>If the configuration property is `false`, the agent making the call can change the `scheduledTimestamp` provided their participation type in the conversation is listed in the configuration property `com.unblu.conversation.message.allowChangeConversationScheduledTime`. </ul><br>"
       operationId: conversationsSetScheduledTimestamp
       parameters:
       - name: conversationId
@@ -4595,7 +4647,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4610,7 +4662,7 @@ paths:
       tags:
       - Conversations
       summary: setStarred
-      description: Set the starred status of a conversation for a particular person<br>
+      description: Sets the starred status of a conversation for a particular person<br>
       operationId: conversationsSetStarred
       parameters:
       - name: conversationId
@@ -4638,7 +4690,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4653,7 +4705,7 @@ paths:
       tags:
       - Conversations
       summary: setTopic
-      description: "Set the topic of the conversation. Setting it to `null` deletes the topic, provided it isn't mandatory to specify a topic for the conversation type (e.g. `SCHEDULED_CONVERSATION`). <br> When called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the behavior of the call depends on the configuration property `com.unblu.conversation.message.allowNonAdminUsersChangeConversationTopicViaWebApi`: <ul> <li>If the configuration property is `true`, the agent making the call can only change the conversation's topic if they're a participant in the conversation. <li>If the configuration property is `false`, the agent making the call can change the topic provided their participation type in the conversation is listed in the configuration property `com.unblu.conversation.message.allowChangeConversationTopic`. </ul><br>"
+      description: "Sets the topic of the conversation. Setting it to `null` deletes the topic, provided it isn't mandatory to specify a topic for the conversation type (e.g. `SCHEDULED_CONVERSATION`). <br> When called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, the behavior of the call depends on the configuration property `com.unblu.conversation.message.allowNonAdminUsersChangeConversationTopicViaWebApi`: <ul> <li>If the configuration property is `true`, the agent making the call can only change the conversation's topic if they're a participant in the conversation. <li>If the configuration property is `false`, the agent making the call can change the topic provided their participation type in the conversation is listed in the configuration property `com.unblu.conversation.message.allowChangeConversationTopic`. </ul><br>"
       operationId: conversationsSetTopic
       parameters:
       - name: conversationId
@@ -4687,7 +4739,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4702,7 +4754,7 @@ paths:
       tags:
       - Conversations
       summary: setVisitorData
-      description: Set custom visitor data.<br>
+      description: Sets custom visitor data.<br>
       operationId: conversationsSetVisitorData
       parameters:
       - name: conversationId
@@ -4731,7 +4783,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4746,7 +4798,7 @@ paths:
       tags:
       - Conversations
       summary: updateConfiguration
-      description: Update the configuration map for a specific conversation<br>
+      description: Updates the configuration map for a specific conversation<br>
       operationId: conversationsUpdateConfiguration
       parameters:
       - name: conversationId
@@ -4786,7 +4838,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4839,6 +4891,8 @@ paths:
                     sourceUrl: null
                     endReason: null
                     initialEngagementUrl: null
+                    awaitedPersonType: NONE
+                    awaitedPersonTypeChangeTimestamp: null
                     configuration:
                       $_version: 071ca160e0b7bd9b311060b160edb783
                       com.unblu.conversation.feature.callEnabled: "true"
@@ -4856,7 +4910,7 @@ paths:
       tags:
       - Conversations
       summary: updateMetadata
-      description: Update the metadata map for a specific conversation<br>
+      description: Updates the metadata map for a specific conversation<br>
       operationId: conversationsUpdateMetadata
       parameters:
       - name: conversationId
@@ -4895,7 +4949,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -4948,6 +5002,8 @@ paths:
                     sourceUrl: null
                     endReason: null
                     initialEngagementUrl: null
+                    awaitedPersonType: NONE
+                    awaitedPersonTypeChangeTimestamp: null
                     configuration: null
                     text: null
                     metadata:
@@ -4964,7 +5020,7 @@ paths:
       tags:
       - Conversations
       summary: updateText
-      description: Update the text map for a specific conversation<br>
+      description: Updates the text map for a specific conversation<br>
       operationId: conversationsUpdateText
       parameters:
       - name: conversationId
@@ -5009,7 +5065,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated conversation as it exists now in the system
+          description: The updated conversation
           content:
             application/json:
               schema:
@@ -5062,6 +5118,8 @@ paths:
                     sourceUrl: null
                     endReason: null
                     initialEngagementUrl: null
+                    awaitedPersonType: NONE
+                    awaitedPersonTypeChangeTimestamp: null
                     configuration: null
                     text:
                       $_version:
@@ -9284,6 +9342,34 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.active:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.active
+              description: An event triggered every time a conversation's state is set to ACTIVE
+              operationId: conversationActiveCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationActiveEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.awaitedpersontype_changed:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.awaitedpersontype_changed
+              description: An event triggered every time the awaited person type of a conversation changes
+              operationId: conversationAwaitedpersontypeChangedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/AwaitedPersonTypeChangedEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.cannedresponse_used:
           '{$request.body#/endpoint}':
             post:
@@ -9302,7 +9388,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.created
-              description: An event triggered every time a `ConversationData` is created.
+              description: An event triggered every time a conversation is created
               operationId: conversationCreatedCallback
               requestBody:
                 content:
@@ -9316,7 +9402,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.ended
-              description: An event triggered every time a `ConversationData` is ended.
+              description: An event triggered every time a conversation is ended
               operationId: conversationEndedCallback
               requestBody:
                 content:
@@ -9354,6 +9440,188 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.offboarding:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.offboarding
+              description: An event triggered every time a conversation's state is set to OFFBOARDING
+              operationId: conversationOffboardingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationOffboardingEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.onboarding:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.onboarding
+              description: An event triggered every time a conversation's state is set to ONBOARDING
+              operationId: conversationOnboardingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationOnboardingEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.activated:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.activated
+              description: An event triggered every time a participation is activated
+              operationId: conversationParticipationActivatedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationActivatedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.conversation_rated:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.conversation_rated
+              description: An event triggered every time a participant rates a conversation
+              operationId: conversationParticipationConversationRatedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationConversationRatedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.created:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.created
+              description: An event triggered every time a participation is created
+              operationId: conversationParticipationCreatedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationCreatedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.hidden:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.hidden
+              description: An event triggered every time a participation is hidden
+              operationId: conversationParticipationHiddenCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationHiddenEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.left:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.left
+              description: An event triggered every time a participant leaves a conversation
+              operationId: conversationParticipationLeftCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationLeftEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.offboarding:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.offboarding
+              description: An event triggered every time a participant starts the offboarding process
+              operationId: conversationParticipationOffboardingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationOffboardingEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.onboarding:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.onboarding
+              description: An event triggered every time a participant starts the onboarding process
+              operationId: conversationParticipationOnboardingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationOnboardingEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.unhidden:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.unhidden
+              description: An event triggered every time a participation changes from \"hidden\" to \"visible\"
+              operationId: conversationParticipationUnhiddenCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationUnhiddenEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.participation.updated:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.updated
+              description: An event triggered every time a participation changes
+              operationId: conversationParticipationUpdatedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationUpdatedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.queued:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.queued
+              description: An event triggered every time a conversation's state changes from ONBOARDING to QUEUED
+              operationId: conversationQueuedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationQueuedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.reboarding:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.reboarding
+              description: An event triggered every time a conversation's state is set to REBOARDING
+              operationId: conversationReboardingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationReboardingEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.recording_available:
           '{$request.body#/endpoint}':
             post:
@@ -9368,11 +9636,39 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.requeued:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.requeued
+              description: An event triggered every time a conversation's state changes to QUEUED from any state other than ONBOARDING
+              operationId: conversationRequeuedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationRequeuedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.unassigned:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.unassigned
+              description: An event triggered every time a conversation's state is set to UNASSIGNED
+              operationId: conversationUnassignedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationUnassignedEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.updated:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.updated
-              description: An event triggered every time a `ConversationData` is updated.
+              description: An event triggered every time a conversation is updated
               operationId: conversationUpdatedCallback
               requestBody:
                 content:
@@ -11666,6 +11962,89 @@ components:
         imageData:
           type: string
           description: "Image content as data URL scheme (RFC2397 - <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code>)"
+    AwaitedPersonChangeTimestampConversationHistorySearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AwaitedPersonChangeTimestampConversationHistorySearchFilter
+          enum:
+          - AwaitedPersonChangeTimestampConversationHistorySearchFilter
+        field:
+          $ref: '#/components/schemas/EConversationHistorySearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    AwaitedPersonTypeChangeTimestampConversationSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AwaitedPersonTypeChangeTimestampConversationSearchFilter
+          enum:
+          - AwaitedPersonTypeChangeTimestampConversationSearchFilter
+        field:
+          $ref: '#/components/schemas/EConversationSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    AwaitedPersonTypeChangedEvent:
+      type: object
+      description: An event triggered every time the awaited person type of a conversation changes
+      properties:
+        $_type:
+          type: string
+          default: AwaitedPersonTypeChangedEvent
+          enum:
+          - AwaitedPersonTypeChangedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+    AwaitedPersonTypeConversationHistorySearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AwaitedPersonTypeConversationHistorySearchFilter
+          enum:
+          - AwaitedPersonTypeConversationHistorySearchFilter
+        field:
+          $ref: '#/components/schemas/EConversationHistorySearchFilterField'
+        operator:
+          $ref: '#/components/schemas/AwaitedPersonTypeOperator'
+    AwaitedPersonTypeConversationSearchFilter:
+      type: object
+      description: Filters conversations by their 'awaitedPerson' field
+      properties:
+        $_type:
+          type: string
+          default: AwaitedPersonTypeConversationSearchFilter
+          enum:
+          - AwaitedPersonTypeConversationSearchFilter
+        field:
+          $ref: '#/components/schemas/EConversationSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/AwaitedPersonTypeOperator'
+    AwaitedPersonTypeOperator:
+      oneOf:
+      - $ref: '#/components/schemas/EqualsAwaitedPersonTypeOperator'
+      - $ref: '#/components/schemas/NotEqualsAwaitedPersonTypeOperator'
+      - $ref: '#/components/schemas/InAwaitedPersonTypeOperator'
+      - $ref: '#/components/schemas/NotInAwaitedPersonTypeOperator'
+      discriminator:
+        propertyName: type
+        mapping:
+          EQUALS: '#/components/schemas/EqualsAwaitedPersonTypeOperator'
+          IN: '#/components/schemas/InAwaitedPersonTypeOperator'
+          NOT_EQUALS: '#/components/schemas/NotEqualsAwaitedPersonTypeOperator'
+          NOT_IN: '#/components/schemas/NotInAwaitedPersonTypeOperator'
     BodyElement:
       type: object
       description: "If body consist of only one complex type, it can be directly this implementation of `IBody`. Otherwise this elements are wrapped by a `ArrayBody`"
@@ -12433,7 +12812,7 @@ components:
             $ref: '#/components/schemas/QuickReply'
     CardPostMessageData:
       type: object
-      description: "Card message which may contain an image, title, body and actions. <p> All of these parts are optional as long as it contains at least one of them."
+      description: "Card message which may contain an image, title, body and actions. All of these parts are optional as long as it contains at least one of them. <p> This model is used when creating a card message to send to a conversation."
       properties:
         $_type:
           type: string
@@ -12447,26 +12826,26 @@ components:
           description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         imageUrl:
           type: string
-          description: URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ration of 16:9</li> <li>If the image doesn't fit the aspect ration it will be zoomed to cover the whole area</li> <li>Depending on the chat windows size it will be 200px - 400px wide.</li> </ul>
+          description: "URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ratio of 16:9</li> <li>If the image doesn't fit the aspect ratio it's magnified to cover the whole area</li> <li>Depending on the chat windows size, the image is displayed with a width of 200-400px.</li> </ul>"
         imageAltText:
           type: string
-          description: Alt text for the image. (required if imageUrl is set)
+          description: Alt text for the image. Required if imageUrl is set.
         title:
           type: string
           description: Title displayed below the image. (optional) <p> Max length is 64 characters.
         body:
           type: string
-          description: Body text which may optionally contain markdown. (optional) <p> Max length is 640 characters.
+          description: Body text. May optionally contain Markdown. (optional) <p> Max length is 640 characters.
         bodyTextType:
           $ref: '#/components/schemas/EConversationMessageTextType'
         actions:
           type: array
-          description: Actions which will be displayed at the bottom of the card. (optional) <p> Max number of actions is 5.
+          description: Actions to be displayed at the bottom of the card. (optional) <p> Max number of actions is 5.
           items:
             $ref: '#/components/schemas/MessageAction'
         quickReplies:
           type: array
-          description: Optional list of quick replies available to the message's recipients <p> Max number of quick replies is 13.
+          description: List of quick replies available to the message's recipients. (optional) <p> Max number of quick replies is 13.
           items:
             $ref: '#/components/schemas/QuickReply'
     ChangeTypeAuditChangeSearchFilter:
@@ -12776,9 +13155,30 @@ components:
         country:
           type: string
           description: The country in which the visitor is (probable)
+    ConversationActiveEvent:
+      type: object
+      description: An event triggered every time a conversation's state is set to ACTIVE
+      properties:
+        $_type:
+          type: string
+          default: ConversationActiveEvent
+          enum:
+          - ConversationActiveEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
     ConversationCreatedEvent:
       type: object
-      description: An event triggered every time a `ConversationData` is created.
+      description: An event triggered every time a conversation is created
       properties:
         $_type:
           type: string
@@ -12875,6 +13275,12 @@ components:
         initialEngagementUrl:
           type: string
           description: "The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer's website will have a value. Conversely, conversations initiated from the mobile SDK won't have an initial engagement URL.<br> Conversations created using the Web API can also contain an initial engagement URL if one was provided at creation time."
+        awaitedPersonType:
+          $ref: '#/components/schemas/EAwaitedPersonType'
+        awaitedPersonTypeChangeTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the awaited person type last changed
         configuration:
           type: object
           description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
@@ -12912,7 +13318,7 @@ components:
           NOT_EQUALS: '#/components/schemas/NotEqualsConversationEndReasonOperator'
     ConversationEndedEvent:
       type: object
-      description: An event triggered every time a `ConversationData` is ended.
+      description: An event triggered every time a conversation is ended
       properties:
         $_type:
           type: string
@@ -13068,6 +13474,12 @@ components:
         initialEngagementUrl:
           type: string
           description: "The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer's website will have a value. Conversely, conversations initiated from the mobile SDK won't have an initial engagement URL.<br> Conversations created using the Web API can also contain an initial engagement URL if one was provided at creation time."
+        awaitedPersonType:
+          $ref: '#/components/schemas/EAwaitedPersonType'
+        awaitedPersonTypeChangeTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the awaited person type last changed
     ConversationHistoryMessageData:
       type: object
       description: Chat message log entry
@@ -13157,6 +13569,7 @@ components:
       - $ref: '#/components/schemas/InitialEngagementTypeConversationHistorySearchFilter'
       - $ref: '#/components/schemas/CreationTimestampConversationHistorySearchFilter'
       - $ref: '#/components/schemas/ScheduledTimestampConversationHistorySearchFilter'
+      - $ref: '#/components/schemas/AwaitedPersonChangeTimestampConversationHistorySearchFilter'
       - $ref: '#/components/schemas/EndTimestampConversationHistorySearchFilter'
       - $ref: '#/components/schemas/TopicConversationHistorySearchFilter'
       - $ref: '#/components/schemas/TokboxSessionIdConversationHistorySearchFilter'
@@ -13166,6 +13579,7 @@ components:
       - $ref: '#/components/schemas/ConversationTemplateIdConversationHistorySearchFilter'
       - $ref: '#/components/schemas/RecipientIdConversationHistorySearchFilter'
       - $ref: '#/components/schemas/RecipientTypeConversationHistorySearchFilter'
+      - $ref: '#/components/schemas/AwaitedPersonTypeConversationHistorySearchFilter'
       - $ref: '#/components/schemas/StateConversationHistorySearchFilter'
       - $ref: '#/components/schemas/LastMessageTimestampConversationHistorySearchFilter'
       - $ref: '#/components/schemas/LastCompletedRecordingTimestampConversationHistorySearchFilter'
@@ -13173,6 +13587,7 @@ components:
         propertyName: field
         mapping:
           ASSIGNEE_PERSON_ID: '#/components/schemas/AssigneePersonIdConversationHistorySearchFilter'
+          AWAITED_PERSON_TYPE: '#/components/schemas/AwaitedPersonTypeConversationHistorySearchFilter'
           CONTEXT_PERSON_ID: '#/components/schemas/ContextPersonIdConversationHistorySearchFilter'
           CONVERSATION_TEMPLATE_ID: '#/components/schemas/ConversationTemplateIdConversationHistorySearchFilter'
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampConversationHistorySearchFilter'
@@ -13444,6 +13859,48 @@ components:
           description: The account ID the event originated from
         conversationMessage:
           $ref: '#/components/schemas/MessageData'
+    ConversationOffboardingEvent:
+      type: object
+      description: An event triggered every time a conversation's state is set to OFFBOARDING
+      properties:
+        $_type:
+          type: string
+          default: ConversationOffboardingEvent
+          enum:
+          - ConversationOffboardingEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+    ConversationOnboardingEvent:
+      type: object
+      description: An event triggered every time a conversation's state is set to ONBOARDING
+      properties:
+        $_type:
+          type: string
+          default: ConversationOnboardingEvent
+          enum:
+          - ConversationOnboardingEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
     ConversationOrderBy:
       type: object
       description: Conversation orderBy item.
@@ -13457,6 +13914,60 @@ components:
           $ref: '#/components/schemas/EConversationOrderByField'
         order:
           $ref: '#/components/schemas/Order'
+    ConversationParticipationData:
+      type: object
+      description: Data about a conversation participation<br>
+      properties:
+        $_type:
+          type: string
+          default: ConversationParticipationData
+          enum:
+          - ConversationParticipationData
+        id:
+          type: string
+          description: Unique ID of the participation
+        state:
+          $ref: '#/components/schemas/EConversationParticipationState'
+        createdTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the participation was created. It is set when the entity is stored for the first time.
+        onboardingTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the participation started the onboarding process. Null if the participant hasn't yet started the onboarding.
+        activationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the participation was activated. Null if the participation hasn't being activated yet.
+        offboardingTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the participation started the offboarding process. Null if the participant hasn't yet started the offboarding.
+        leftTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the participant left the conversation after finishing offboarding. Null if the participant is still part of the conversation.
+        leftReason:
+          $ref: '#/components/schemas/EConversationLeftReason'
+        leftComment:
+          type: string
+          description: "The comment on why the participant left the conversation. If provided, this attribute is set when offboarding starts and is null if the participant is still part of the conversation."
+        conversationRating:
+          type: number
+          format: float
+          description: The rating the participant gave the conversation. The rating is mapped to a number from 0-1. Null until the participant rates the conversation.
+        hidden:
+          type: boolean
+          description: Flag indicating whether the participant is hidden
+        conversationStarred:
+          type: boolean
+          description: Flag indictaing whether the participant has starred this conversation
+        conversationId:
+          type: string
+          description: The ID of the conversation the participation belongs to
+        person:
+          $ref: '#/components/schemas/PersonData'
     ConversationQuery:
       type: object
       description: Container to search conversations
@@ -13484,6 +13995,48 @@ components:
           type: integer
           format: int32
           description: Maximal amount of items returned
+    ConversationQueuedEvent:
+      type: object
+      description: An event triggered every time a conversation's state changes from ONBOARDING to QUEUED
+      properties:
+        $_type:
+          type: string
+          default: ConversationQueuedEvent
+          enum:
+          - ConversationQueuedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+    ConversationReboardingEvent:
+      type: object
+      description: An event triggered every time a conversation's state is set to REBOARDING
+      properties:
+        $_type:
+          type: string
+          default: ConversationReboardingEvent
+          enum:
+          - ConversationReboardingEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
     ConversationRecipientData:
       description: "Recipient of a conversation: Either a single `PersonData`, `TeamData`, `NamedAreaData` or `AccountData`. For compatibility reasons,`RecipientData` is also supported."
       oneOf:
@@ -13597,6 +14150,27 @@ components:
           $ref: '#/components/schemas/ERecordingEndReason'
         recordingType:
           $ref: '#/components/schemas/ERecordingType'
+    ConversationRequeuedEvent:
+      type: object
+      description: An event triggered every time a conversation's state changes to QUEUED from any state other than ONBOARDING
+      properties:
+        $_type:
+          type: string
+          default: ConversationRequeuedEvent
+          enum:
+          - ConversationRequeuedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
     ConversationResult:
       type: object
       description: Container to return list of conversations
@@ -13629,6 +14203,8 @@ components:
       - $ref: '#/components/schemas/TopicConversationSearchFilter'
       - $ref: '#/components/schemas/TokboxSessionIdConversationSearchFilter'
       - $ref: '#/components/schemas/ContextPersonIdConversationSearchFilter'
+      - $ref: '#/components/schemas/AwaitedPersonTypeConversationSearchFilter'
+      - $ref: '#/components/schemas/AwaitedPersonTypeChangeTimestampConversationSearchFilter'
       - $ref: '#/components/schemas/AssigneePersonIdConversationSearchFilter'
       - $ref: '#/components/schemas/EndReasonConversationSearchFilter'
       - $ref: '#/components/schemas/ConversationTemplateIdConversationSearchFilter'
@@ -13639,6 +14215,8 @@ components:
         propertyName: field
         mapping:
           ASSIGNEE_PERSON_ID: '#/components/schemas/AssigneePersonIdConversationSearchFilter'
+          AWAITED_PERSON_TYPE: '#/components/schemas/AwaitedPersonTypeConversationSearchFilter'
+          AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: '#/components/schemas/AwaitedPersonTypeChangeTimestampConversationSearchFilter'
           CONTEXT_PERSON_ID: '#/components/schemas/ContextPersonIdConversationSearchFilter'
           CONVERSATION_TEMPLATE_ID: '#/components/schemas/ConversationTemplateIdConversationSearchFilter'
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampConversationSearchFilter'
@@ -13851,9 +14429,30 @@ components:
         description:
           type: string
           description: Translated description of the corresponding description field of the main entity this translation belongs to
+    ConversationUnassignedEvent:
+      type: object
+      description: An event triggered every time a conversation's state is set to UNASSIGNED
+      properties:
+        $_type:
+          type: string
+          default: ConversationUnassignedEvent
+          enum:
+          - ConversationUnassignedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
     ConversationUpdatedEvent:
       type: object
-      description: An event triggered every time a `ConversationData` is updated.
+      description: An event triggered every time a conversation is updated
       properties:
         $_type:
           type: string
@@ -13920,6 +14519,12 @@ components:
       properties:
         personId:
           type: string
+    ConversationsSetAwaitedPersonTypeBody:
+      type: object
+      description: Request Body for the 'conversationsSetAwaitedPersonType' operation
+      properties:
+        awaitedPersonType:
+          $ref: '#/components/schemas/EAwaitedPersonType'
     ConversationsSetContextPersonBody:
       type: object
       description: Request Body for the 'conversationsSetContextPerson' operation
@@ -14686,7 +15291,7 @@ components:
           $ref: '#/components/schemas/EDeviceType'
         identifier:
           type: string
-          description: Device identifier (via fingerprinting in browser or device id for MobileSDK)
+          description: Device identifier (via fingerprinting in browser and MobileSDK)
         identifierSource:
           $ref: '#/components/schemas/EIdentifierSource'
         pushToken:
@@ -15205,6 +15810,29 @@ components:
       - "AVAILABLE: There is at least one agent available for the specified named area and locale."
       - "BUSY: There is at least one agent watching the inbound queue for the specified named area and locale but the max capacity of parallel conversations is reached. It is very likely, that an agent will be available in a short time."
       - "UNAVAILABLE: There is currently no agent handling any inbound queue items. It is very unlikely, that an agent will be available in a short time."
+    EAwaitedPersonType:
+      type: string
+      description: Indicates which type of person the conversation is waiting for
+      enum:
+      - NONE
+      - VISITOR
+      - AGENT
+      x-enum-descriptions:
+      - NONE
+      - VISITOR
+      - AGENT
+    EAwaitedPersonTypeOperatorType:
+      type: string
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      - IN
+      - NOT_IN
+      x-enum-descriptions:
+      - "EQUALS: Check if the value is equal to the one provided in the operator"
+      - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+      - "IN: Check if the value is one of those provided in the operator"
+      - "NOT_IN: Check if the value is not one of the one provided in the operator"
     EBooleanOperatorType:
       type: string
       enum:
@@ -15460,6 +16088,8 @@ components:
       - TOPIC
       - ASSIGNEE_PERSON_ID
       - CONTEXT_PERSON_ID
+      - AWAITED_PERSON
+      - AWAITED_PERSON_CHANGE_TIMESTAMP
       - STATE
       - INITIAL_ENGAGEMENT_TYPE
       - LOCALE
@@ -15479,6 +16109,8 @@ components:
       - "TOPIC: Sort by the 'topic' attribute"
       - "ASSIGNEE_PERSON_ID: Sort by the 'assigneePersonId' attribute"
       - "CONTEXT_PERSON_ID: Sort by the 'contextPersonId' attribute"
+      - "AWAITED_PERSON: Sort by the 'awaitedPerson' attribute"
+      - "AWAITED_PERSON_CHANGE_TIMESTAMP: Sort by the 'awaitedPersonChangeTimestamp' attribute"
       - "STATE: Sort by the 'state' attribute"
       - "INITIAL_ENGAGEMENT_TYPE: Sort by the 'initialEngagementType' attribute"
       - "LOCALE: Sort by the 'locale' attribute"
@@ -15499,6 +16131,8 @@ components:
       - INITIAL_ENGAGEMENT_TYPE
       - TOPIC
       - CONTEXT_PERSON_ID
+      - AWAITED_PERSON_TYPE
+      - AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP
       - ASSIGNEE_PERSON_ID
       - PARTICIPANT_PERSON_ID
       - STATE
@@ -15516,6 +16150,8 @@ components:
       - "INITIAL_ENGAGEMENT_TYPE: Filter by the 'initialEngagementType' attribute"
       - "TOPIC: Filter by the 'topic' attribute"
       - "CONTEXT_PERSON_ID: Filter by the 'contextPersonId' attribute"
+      - "AWAITED_PERSON_TYPE: Filter by the 'awaitedPersonType' attribute"
+      - "AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Filter by the 'awaitedPersonTypeChangeTimestamp' attribute"
       - "ASSIGNEE_PERSON_ID: Filter by the 'assigneePersonId' attribute"
       - "PARTICIPANT_PERSON_ID: Filter by the 'personId' of the participants"
       - "STATE: Filter by the 'state' attribute"
@@ -15654,6 +16290,8 @@ components:
       - TOPIC
       - ASSIGNEE_PERSON_ID
       - CONTEXT_PERSON_ID
+      - AWAITED_PERSON_TYPE
+      - AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP
       - STATE
       - INITIAL_ENGAGEMENT_TYPE
       - LOCALE
@@ -15672,6 +16310,8 @@ components:
       - "TOPIC: Sort by the 'topic' attribute"
       - "ASSIGNEE_PERSON_ID: Sort by the 'assigneePersonId' attribute"
       - "CONTEXT_PERSON_ID: Sort by the 'contextPersonId' attribute"
+      - "AWAITED_PERSON_TYPE: Sort by the 'awaitedPersonType' attribute"
+      - "AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Sort by the 'awaitedPersonTypeChangeTimestamp' attribute"
       - "STATE: Sort by the 'state' attribute"
       - "INITIAL_ENGAGEMENT_TYPE: Sort by the 'initialEngagementType' attribute"
       - "LOCALE: Sort by the 'locale' attribute"
@@ -15731,6 +16371,8 @@ components:
       - INITIAL_ENGAGEMENT_TYPE
       - TOPIC
       - CONTEXT_PERSON_ID
+      - AWAITED_PERSON_TYPE
+      - AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP
       - ASSIGNEE_PERSON_ID
       - PARTICIPANT_PERSON_ID
       - STATE
@@ -15746,6 +16388,8 @@ components:
       - "INITIAL_ENGAGEMENT_TYPE: Filter by the 'initialEngagementType' attribute"
       - "TOPIC: Filter by the 'topic' attribute"
       - "CONTEXT_PERSON_ID: Filter by the 'contextPersonId' attribute"
+      - "AWAITED_PERSON_TYPE: Filter by the 'awaitedPersonType' attribute"
+      - "AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Filter by the 'awaitedPersonTypeChangeTimestamp' attribute"
       - "ASSIGNEE_PERSON_ID: Filter by the 'assigneePersonId' attribute"
       - "PARTICIPANT_PERSON_ID: Filter by the 'personId' of the participants"
       - "STATE: Filter by the 'state' attribute"
@@ -17189,6 +17833,18 @@ components:
           $ref: '#/components/schemas/EAuthorizationRoleOperatorType'
         value:
           $ref: '#/components/schemas/EAuthorizationRole'
+    EqualsAwaitedPersonTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: EqualsAwaitedPersonTypeOperator
+          enum:
+          - EqualsAwaitedPersonTypeOperator
+        type:
+          $ref: '#/components/schemas/EAwaitedPersonTypeOperatorType'
+        value:
+          $ref: '#/components/schemas/EAwaitedPersonType'
     EqualsBooleanOperator:
       type: object
       properties:
@@ -18131,6 +18787,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EAuthorizationRole'
+    InAwaitedPersonTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: InAwaitedPersonTypeOperator
+          enum:
+          - InAwaitedPersonTypeOperator
+        type:
+          $ref: '#/components/schemas/EAwaitedPersonTypeOperatorType'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/EAwaitedPersonType'
     InConversationEndReasonOperator:
       type: object
       properties:
@@ -20072,6 +20742,18 @@ components:
           $ref: '#/components/schemas/EAuthorizationRoleOperatorType'
         value:
           $ref: '#/components/schemas/EAuthorizationRole'
+    NotEqualsAwaitedPersonTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotEqualsAwaitedPersonTypeOperator
+          enum:
+          - NotEqualsAwaitedPersonTypeOperator
+        type:
+          $ref: '#/components/schemas/EAwaitedPersonTypeOperatorType'
+        value:
+          $ref: '#/components/schemas/EAwaitedPersonType'
     NotEqualsBooleanOperator:
       type: object
       properties:
@@ -20369,6 +21051,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EAuthorizationRole'
+    NotInAwaitedPersonTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotInAwaitedPersonTypeOperator
+          enum:
+          - NotInAwaitedPersonTypeOperator
+        type:
+          $ref: '#/components/schemas/EAwaitedPersonTypeOperatorType'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/EAwaitedPersonType'
     NotInConversationRecipientTypeOperator:
       type: object
       properties:
@@ -20784,6 +21480,195 @@ components:
           $ref: '#/components/schemas/EConversationSearchFilterField'
         operator:
           $ref: '#/components/schemas/IdListOperator'
+    ParticipationActivatedEvent:
+      type: object
+      description: An event triggered every time a participation is activated
+      properties:
+        $_type:
+          type: string
+          default: ParticipationActivatedEvent
+          enum:
+          - ParticipationActivatedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationConversationRatedEvent:
+      type: object
+      description: An event triggered every time a participant rates a conversation
+      properties:
+        $_type:
+          type: string
+          default: ParticipationConversationRatedEvent
+          enum:
+          - ParticipationConversationRatedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationCreatedEvent:
+      type: object
+      description: An event triggered every time a participation is created
+      properties:
+        $_type:
+          type: string
+          default: ParticipationCreatedEvent
+          enum:
+          - ParticipationCreatedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationHiddenEvent:
+      type: object
+      description: An event triggered every time a participation is hidden
+      properties:
+        $_type:
+          type: string
+          default: ParticipationHiddenEvent
+          enum:
+          - ParticipationHiddenEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationLeftEvent:
+      type: object
+      description: An event triggered every time a participant leaves a conversation
+      properties:
+        $_type:
+          type: string
+          default: ParticipationLeftEvent
+          enum:
+          - ParticipationLeftEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationOffboardingEvent:
+      type: object
+      description: An event triggered every time a participant starts the offboarding process
+      properties:
+        $_type:
+          type: string
+          default: ParticipationOffboardingEvent
+          enum:
+          - ParticipationOffboardingEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationOnboardingEvent:
+      type: object
+      description: An event triggered every time a participant starts the onboarding process
+      properties:
+        $_type:
+          type: string
+          default: ParticipationOnboardingEvent
+          enum:
+          - ParticipationOnboardingEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationUnhiddenEvent:
+      type: object
+      description: An event triggered every time a participation changes from \"hidden\" to \"visible\"
+      properties:
+        $_type:
+          type: string
+          default: ParticipationUnhiddenEvent
+          enum:
+          - ParticipationUnhiddenEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationUpdatedEvent:
+      type: object
+      description: An event triggered every time a participation changes
+      properties:
+        $_type:
+          type: string
+          default: ParticipationUpdatedEvent
+          enum:
+          - ParticipationUpdatedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
     PauseNotificationsEndTimestampPersonSearchFilter:
       type: object
       properties:
@@ -21696,7 +22581,7 @@ components:
           type: string
     PostListMessageCardItemData:
       type: object
-      description: List message item.
+      description: List message item. <p> This model is used when creating a card item in a list message to send to a conversation.
       properties:
         $_type:
           type: string
@@ -21705,16 +22590,16 @@ components:
           - PostListMessageCardItemData
         imageUrl:
           type: string
-          description: URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ration of 16:9</li> <li>If the image doesn't fit the aspect ration it will be zoomed to cover the whole area</li> <li>Depending on the chat windows size it will be 200px - 400px wide.</li> </ul>
+          description: URL of the image displayed on the list item. (optional) <p> The alignment of the image on the item is determined by com.unblu.conversation.messaging.ui.listMessageImageAlignment.
         imageAltText:
           type: string
-          description: Alt text for the image. (required if imageUrl is set)
+          description: Alt text for the image. Required if imageUrl is set.
         title:
           type: string
           description: Title displayed below the image. (optional) <p> Max length is 64 characters.
         body:
           type: string
-          description: Body text which may optionally contain markdown. (optional) <p> Max length is 256 characters.
+          description: Body text. May optionally contain Markdown. (optional) <p> Max length is 256 characters.
         bodyTextType:
           $ref: '#/components/schemas/EConversationMessageTextType'
         action:

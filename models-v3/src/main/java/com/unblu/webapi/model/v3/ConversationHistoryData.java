@@ -50,6 +50,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryData.JSON_PROPERTY_SOURCE_URL,
 	ConversationHistoryData.JSON_PROPERTY_SCHEDULED_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_INITIAL_ENGAGEMENT_URL,
+	ConversationHistoryData.JSON_PROPERTY_AWAITED_PERSON_TYPE,
+	ConversationHistoryData.JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationHistoryData {
@@ -201,6 +203,14 @@ public class ConversationHistoryData {
 	public static final String JSON_PROPERTY_INITIAL_ENGAGEMENT_URL = "initialEngagementUrl";
 	@JsonProperty(JSON_PROPERTY_INITIAL_ENGAGEMENT_URL)
 	private String initialEngagementUrl;
+
+	public static final String JSON_PROPERTY_AWAITED_PERSON_TYPE = "awaitedPersonType";
+	@JsonProperty(JSON_PROPERTY_AWAITED_PERSON_TYPE)
+	private EAwaitedPersonType awaitedPersonType;
+
+	public static final String JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP = "awaitedPersonTypeChangeTimestamp";
+	@JsonProperty(JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP)
+	private Long awaitedPersonTypeChangeTimestamp;
 
 	public ConversationHistoryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -767,6 +777,44 @@ public class ConversationHistoryData {
 		this.initialEngagementUrl = initialEngagementUrl;
 	}
 
+	public ConversationHistoryData awaitedPersonType(EAwaitedPersonType awaitedPersonType) {
+		this.awaitedPersonType = awaitedPersonType;
+		return this;
+	}
+
+	/**
+	 * Get awaitedPersonType
+	 * 
+	 * @return awaitedPersonType
+	 **/
+	@ApiModelProperty(value = "")
+	public EAwaitedPersonType getAwaitedPersonType() {
+		return awaitedPersonType;
+	}
+
+	public void setAwaitedPersonType(EAwaitedPersonType awaitedPersonType) {
+		this.awaitedPersonType = awaitedPersonType;
+	}
+
+	public ConversationHistoryData awaitedPersonTypeChangeTimestamp(Long awaitedPersonTypeChangeTimestamp) {
+		this.awaitedPersonTypeChangeTimestamp = awaitedPersonTypeChangeTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the awaited person type last changed
+	 * 
+	 * @return awaitedPersonTypeChangeTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the awaited person type last changed")
+	public Long getAwaitedPersonTypeChangeTimestamp() {
+		return awaitedPersonTypeChangeTimestamp;
+	}
+
+	public void setAwaitedPersonTypeChangeTimestamp(Long awaitedPersonTypeChangeTimestamp) {
+		this.awaitedPersonTypeChangeTimestamp = awaitedPersonTypeChangeTimestamp;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -804,12 +852,14 @@ public class ConversationHistoryData {
 				Objects.equals(this.topic, conversationHistoryData.topic) &&
 				Objects.equals(this.sourceUrl, conversationHistoryData.sourceUrl) &&
 				Objects.equals(this.scheduledTimestamp, conversationHistoryData.scheduledTimestamp) &&
-				Objects.equals(this.initialEngagementUrl, conversationHistoryData.initialEngagementUrl);
+				Objects.equals(this.initialEngagementUrl, conversationHistoryData.initialEngagementUrl) &&
+				Objects.equals(this.awaitedPersonType, conversationHistoryData.awaitedPersonType) &&
+				Objects.equals(this.awaitedPersonTypeChangeTimestamp, conversationHistoryData.awaitedPersonTypeChangeTimestamp);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, recipient, assigneePerson, contextPerson, endPerson, participants, createdTimestamp, onboardingTimestamp, activationTimestamp, assigneeJoinTimestamp, reboardingTimestamp, offboardingTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, queuedTimestamp, state, initialEngagementType, locale, endReason, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, initialEngagementUrl);
+		return Objects.hash($type, id, recipient, assigneePerson, contextPerson, endPerson, participants, createdTimestamp, onboardingTimestamp, activationTimestamp, assigneeJoinTimestamp, reboardingTimestamp, offboardingTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, queuedTimestamp, state, initialEngagementType, locale, endReason, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp);
 	}
 
 	@Override
@@ -845,6 +895,8 @@ public class ConversationHistoryData {
 		sb.append("    sourceUrl: ").append(toIndentedString(sourceUrl)).append("\n");
 		sb.append("    scheduledTimestamp: ").append(toIndentedString(scheduledTimestamp)).append("\n");
 		sb.append("    initialEngagementUrl: ").append(toIndentedString(initialEngagementUrl)).append("\n");
+		sb.append("    awaitedPersonType: ").append(toIndentedString(awaitedPersonType)).append("\n");
+		sb.append("    awaitedPersonTypeChangeTimestamp: ").append(toIndentedString(awaitedPersonTypeChangeTimestamp)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

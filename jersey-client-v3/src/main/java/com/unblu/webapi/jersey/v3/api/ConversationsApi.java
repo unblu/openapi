@@ -22,6 +22,7 @@ import com.unblu.webapi.model.v3.ConversationsChangeParticipantVisibilityBody;
 import com.unblu.webapi.model.v3.ConversationsEndBody;
 import com.unblu.webapi.model.v3.ConversationsOffboardParticipantBody;
 import com.unblu.webapi.model.v3.ConversationsSetAssigneePersonBody;
+import com.unblu.webapi.model.v3.ConversationsSetAwaitedPersonTypeBody;
 import com.unblu.webapi.model.v3.ConversationsSetContextPersonBody;
 import com.unblu.webapi.model.v3.ConversationsSetLocaleBody;
 import com.unblu.webapi.model.v3.ConversationsSetScheduledTimestampBody;
@@ -51,7 +52,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * addParticipant Add a participant to a conversation.&lt;br&gt;
+	 * addParticipant Adds a participant to a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsAddParticipantBody (required)
@@ -64,7 +65,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * addParticipant Add a participant to a conversation.&lt;br&gt;
+	 * addParticipant Adds a participant to a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsAddParticipantBody (required)
@@ -114,7 +115,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * addParticipant Add a participant to a conversation.&lt;br&gt;
+	 * addParticipant Adds a participant to a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -132,7 +133,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * addParticipant Add a participant to a conversation.&lt;br&gt;
+	 * addParticipant Adds a participant to a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -484,7 +485,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * end Ends a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
 	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -498,7 +499,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * end Ends a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
 	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -549,7 +550,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * end Ends a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
 	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -566,7 +567,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * end End a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
+	 * end Ends a conversation. If called with the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the agent making the call must have the
 	 * necessary permissions to end a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -729,7 +730,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * offboardParticipant Offboard a participant from a conversation.&lt;br&gt;
+	 * offboardParticipant Offboards a participant from a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsOffboardParticipantBody (required)
@@ -742,7 +743,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * offboardParticipant Offboard a participant from a conversation.&lt;br&gt;
+	 * offboardParticipant Offboards a participant from a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsOffboardParticipantBody (required)
@@ -792,7 +793,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * offboardParticipant Offboard a participant from a conversation.&lt;br&gt;
+	 * offboardParticipant Offboards a participant from a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -809,7 +810,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * offboardParticipant Offboard a participant from a conversation.&lt;br&gt;
+	 * offboardParticipant Offboards a participant from a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -973,7 +974,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setAssigneePerson Set an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setAssigneePerson Sets an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -987,7 +988,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setAssigneePerson Set an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setAssigneePerson Sets an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -1038,7 +1039,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setAssigneePerson Set an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setAssigneePerson Sets an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -1054,7 +1055,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setAssigneePerson Set an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setAssigneePerson Sets an agent as assignee to a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -1103,7 +1104,70 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setContextPerson Set a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setAwaitedPersonType Sets the awaited person type in a conversation&lt;br&gt;
+	 * 
+	 * @param conversationId the conversation that is updated (required)
+	 * @param conversationsSetAwaitedPersonTypeBody (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsSetAwaitedPersonType(String conversationId, ConversationsSetAwaitedPersonTypeBody conversationsSetAwaitedPersonTypeBody, String expand) throws ApiException {
+		return conversationsSetAwaitedPersonTypeWithHttpInfo(conversationId, conversationsSetAwaitedPersonTypeBody, expand).getData();
+	}
+
+	/**
+	 * setAwaitedPersonType Sets the awaited person type in a conversation&lt;br&gt;
+	 * 
+	 * @param conversationId the conversation that is updated (required)
+	 * @param conversationsSetAwaitedPersonTypeBody (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsSetAwaitedPersonTypeWithHttpInfo(String conversationId, ConversationsSetAwaitedPersonTypeBody conversationsSetAwaitedPersonTypeBody, String expand) throws ApiException {
+		Object localVarPostBody = conversationsSetAwaitedPersonTypeBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsSetAwaitedPersonType");
+		}
+
+		// verify the required parameter 'conversationsSetAwaitedPersonTypeBody' is set
+		if (conversationsSetAwaitedPersonTypeBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationsSetAwaitedPersonTypeBody' when calling conversationsSetAwaitedPersonType");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/setAwaitedPersonType"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * setContextPerson Sets a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -1117,7 +1181,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setContextPerson Set a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setContextPerson Sets a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -1168,7 +1232,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setContextPerson Set a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setContextPerson Sets a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -1184,7 +1248,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setContextPerson Set a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
+	 * setContextPerson Sets a visitor as context person of a conversation. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; The person has to have an active participation in the
 	 * conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
@@ -1233,7 +1297,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Sets the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetLocaleBody (required)
@@ -1246,7 +1310,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Sets the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetLocaleBody (required)
@@ -1296,7 +1360,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Sets the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -1311,7 +1375,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setLocale Set the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
+	 * setLocale Sets the locale of the conversation language (as BCP 47 language tag form including region if available).&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param expand (optional)
@@ -1359,7 +1423,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setRecipient Set a person, named area, team or account as the recipient of a conversation.&lt;br&gt;
+	 * setRecipient Sets a person, named area, team or account as the recipient of a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationRecipientData (required)
@@ -1372,7 +1436,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setRecipient Set a person, named area, team or account as the recipient of a conversation.&lt;br&gt;
+	 * setRecipient Sets a person, named area, team or account as the recipient of a conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationRecipientData (required)
@@ -1422,9 +1486,9 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setScheduledTimestamp Set the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded to
-	 * the nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;. &lt;br&gt; When called with the
-	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
+	 * setScheduledTimestamp Sets the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded
+	 * to the nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;. &lt;br&gt; When called with
+	 * the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
 	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationScheduledTimeViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
 	 * &#x60;true&#x60;, the agent making the call can only change the conversation&#39;s &#x60;scheduledTimestamp&#x60; if they&#39;re a participant in the
 	 * conversation. &lt;li&gt;If the configuration property is &#x60;false&#x60;, the agent making the call can change the &#x60;scheduledTimestamp&#x60; provided
@@ -1442,9 +1506,9 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setScheduledTimestamp Set the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded to
-	 * the nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;. &lt;br&gt; When called with the
-	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
+	 * setScheduledTimestamp Sets the scheduled time of the conversation. The timestamp is the Unix timestamp (ms) when the conversation is scheduled for, rounded
+	 * to the nearest minute. Can only be set for conversations with initialEngagementType &#x3D; \&quot;SCHEDULED_CONVERSATION\&quot;. &lt;br&gt; When called with
+	 * the authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
 	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationScheduledTimeViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
 	 * &#x60;true&#x60;, the agent making the call can only change the conversation&#39;s &#x60;scheduledTimestamp&#x60; if they&#39;re a participant in the
 	 * conversation. &lt;li&gt;If the configuration property is &#x60;false&#x60;, the agent making the call can change the &#x60;scheduledTimestamp&#x60; provided
@@ -1499,7 +1563,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setStarred Set the starred status of a conversation for a particular person&lt;br&gt;
+	 * setStarred Sets the starred status of a conversation for a particular person&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation to be starred/unstarred (required)
 	 * @param conversationsSetStarredBody (required)
@@ -1512,7 +1576,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setStarred Set the starred status of a conversation for a particular person&lt;br&gt;
+	 * setStarred Sets the starred status of a conversation for a particular person&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation to be starred/unstarred (required)
 	 * @param conversationsSetStarredBody (required)
@@ -1562,7 +1626,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setTopic Set the topic of the conversation. Setting it to &#x60;null&#x60; deletes the topic, provided it isn&#39;t mandatory to specify a topic for the
+	 * setTopic Sets the topic of the conversation. Setting it to &#x60;null&#x60; deletes the topic, provided it isn&#39;t mandatory to specify a topic for the
 	 * conversation type (e.g. &#x60;SCHEDULED_CONVERSATION&#x60;). &lt;br&gt; When called with the authorization role &#x60;SUPERVISOR&#x60; or
 	 * &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
 	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationTopicViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
@@ -1581,7 +1645,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setTopic Set the topic of the conversation. Setting it to &#x60;null&#x60; deletes the topic, provided it isn&#39;t mandatory to specify a topic for the
+	 * setTopic Sets the topic of the conversation. Setting it to &#x60;null&#x60; deletes the topic, provided it isn&#39;t mandatory to specify a topic for the
 	 * conversation type (e.g. &#x60;SCHEDULED_CONVERSATION&#x60;). &lt;br&gt; When called with the authorization role &#x60;SUPERVISOR&#x60; or
 	 * &#x60;REGISTERED_USER&#x60;, the behavior of the call depends on the configuration property
 	 * &#x60;com.unblu.conversation.message.allowNonAdminUsersChangeConversationTopicViaWebApi&#x60;: &lt;ul&gt; &lt;li&gt;If the configuration property is
@@ -1637,7 +1701,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setVisitorData Set custom visitor data.&lt;br&gt;
+	 * setVisitorData Sets custom visitor data.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation where the custom data should be added (required)
 	 * @param conversationsSetVisitorDataBody the custom visitor data (required)
@@ -1650,7 +1714,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setVisitorData Set custom visitor data.&lt;br&gt;
+	 * setVisitorData Sets custom visitor data.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation where the custom data should be added (required)
 	 * @param conversationsSetVisitorDataBody the custom visitor data (required)
@@ -1700,7 +1764,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * updateConfiguration Update the configuration map for a specific conversation&lt;br&gt;
+	 * updateConfiguration Updates the configuration map for a specific conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of settings that will be updated. The source for this map has to be the &lt;code&gt;configuration&lt;/code&gt; attribute
@@ -1714,7 +1778,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * updateConfiguration Update the configuration map for a specific conversation&lt;br&gt;
+	 * updateConfiguration Updates the configuration map for a specific conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of settings that will be updated. The source for this map has to be the &lt;code&gt;configuration&lt;/code&gt; attribute
@@ -1765,7 +1829,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * updateMetadata Update the metadata map for a specific conversation&lt;br&gt;
+	 * updateMetadata Updates the metadata map for a specific conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of metadata that will be updated. The source for this map has to be the &lt;code&gt;metadata&lt;/code&gt; attribute when
@@ -1779,7 +1843,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * updateMetadata Update the metadata map for a specific conversation&lt;br&gt;
+	 * updateMetadata Updates the metadata map for a specific conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of metadata that will be updated. The source for this map has to be the &lt;code&gt;metadata&lt;/code&gt; attribute when
@@ -1830,7 +1894,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * updateText Update the text map for a specific conversation&lt;br&gt;
+	 * updateText Updates the text map for a specific conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of translations that will be updated. The source for this map has to be the &lt;code&gt;text&lt;/code&gt; attribute when
@@ -1844,7 +1908,7 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * updateText Update the text map for a specific conversation&lt;br&gt;
+	 * updateText Updates the text map for a specific conversation&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of translations that will be updated. The source for this map has to be the &lt;code&gt;text&lt;/code&gt; attribute when

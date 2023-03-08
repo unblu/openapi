@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a &#x60;ConversationData&#x60; is updated.
+ * An event triggered every time a conversation is updated
  */
-@ApiModel(description = "An event triggered every time a `ConversationData` is updated.")
+@ApiModel(description = "An event triggered every time a conversation is updated")
 
 @JsonPropertyOrder({
 	ConversationUpdatedEvent.JSON_PROPERTY_$_TYPE,

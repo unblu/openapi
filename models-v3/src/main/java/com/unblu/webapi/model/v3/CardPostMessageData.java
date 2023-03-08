@@ -16,9 +16,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Card message which may contain an image, title, body and actions. &lt;p&gt; All of these parts are optional as long as it contains at least one of them.
+ * Card message which may contain an image, title, body and actions. All of these parts are optional as long as it contains at least one of them. &lt;p&gt; This
+ * model is used when creating a card message to send to a conversation.
  */
-@ApiModel(description = "Card message which may contain an image, title, body and actions. <p> All of these parts are optional as long as it contains at least one of them.")
+@ApiModel(description = "Card message which may contain an image, title, body and actions. All of these parts are optional as long as it contains at least one of them. <p> This model is used when creating a card message to send to a conversation.")
 
 @JsonPropertyOrder({
 	CardPostMessageData.JSON_PROPERTY_$_TYPE,
@@ -173,13 +174,13 @@ public class CardPostMessageData implements PostMessageData {
 	}
 
 	/**
-	 * URL of the image displayed at the top of the card. (optional) &lt;p&gt; &lt;ul&gt; &lt;li&gt;The image is always displayed with an aspect ration of
-	 * 16:9&lt;/li&gt; &lt;li&gt;If the image doesn&#39;t fit the aspect ration it will be zoomed to cover the whole area&lt;/li&gt; &lt;li&gt;Depending on the chat
-	 * windows size it will be 200px - 400px wide.&lt;/li&gt; &lt;/ul&gt;
+	 * URL of the image displayed at the top of the card. (optional) &lt;p&gt; &lt;ul&gt; &lt;li&gt;The image is always displayed with an aspect ratio of
+	 * 16:9&lt;/li&gt; &lt;li&gt;If the image doesn&#39;t fit the aspect ratio it&#39;s magnified to cover the whole area&lt;/li&gt; &lt;li&gt;Depending on the chat
+	 * windows size, the image is displayed with a width of 200-400px.&lt;/li&gt; &lt;/ul&gt;
 	 * 
 	 * @return imageUrl
 	 **/
-	@ApiModelProperty(value = "URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ration of 16:9</li> <li>If the image doesn't fit the aspect ration it will be zoomed to cover the whole area</li> <li>Depending on the chat windows size it will be 200px - 400px wide.</li> </ul>")
+	@ApiModelProperty(value = "URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ratio of 16:9</li> <li>If the image doesn't fit the aspect ratio it's magnified to cover the whole area</li> <li>Depending on the chat windows size, the image is displayed with a width of 200-400px.</li> </ul>")
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -194,11 +195,11 @@ public class CardPostMessageData implements PostMessageData {
 	}
 
 	/**
-	 * Alt text for the image. (required if imageUrl is set)
+	 * Alt text for the image. Required if imageUrl is set.
 	 * 
 	 * @return imageAltText
 	 **/
-	@ApiModelProperty(value = "Alt text for the image. (required if imageUrl is set)")
+	@ApiModelProperty(value = "Alt text for the image. Required if imageUrl is set.")
 	public String getImageAltText() {
 		return imageAltText;
 	}
@@ -232,11 +233,11 @@ public class CardPostMessageData implements PostMessageData {
 	}
 
 	/**
-	 * Body text which may optionally contain markdown. (optional) &lt;p&gt; Max length is 640 characters.
+	 * Body text. May optionally contain Markdown. (optional) &lt;p&gt; Max length is 640 characters.
 	 * 
 	 * @return body
 	 **/
-	@ApiModelProperty(value = "Body text which may optionally contain markdown. (optional) <p> Max length is 640 characters.")
+	@ApiModelProperty(value = "Body text. May optionally contain Markdown. (optional) <p> Max length is 640 characters.")
 	public String getBody() {
 		return body;
 	}
@@ -278,11 +279,11 @@ public class CardPostMessageData implements PostMessageData {
 	}
 
 	/**
-	 * Actions which will be displayed at the bottom of the card. (optional) &lt;p&gt; Max number of actions is 5.
+	 * Actions to be displayed at the bottom of the card. (optional) &lt;p&gt; Max number of actions is 5.
 	 * 
 	 * @return actions
 	 **/
-	@ApiModelProperty(value = "Actions which will be displayed at the bottom of the card. (optional) <p> Max number of actions is 5.")
+	@ApiModelProperty(value = "Actions to be displayed at the bottom of the card. (optional) <p> Max number of actions is 5.")
 	public List<MessageAction> getActions() {
 		return actions;
 	}
@@ -305,11 +306,11 @@ public class CardPostMessageData implements PostMessageData {
 	}
 
 	/**
-	 * Optional list of quick replies available to the message&#39;s recipients &lt;p&gt; Max number of quick replies is 13.
+	 * List of quick replies available to the message&#39;s recipients. (optional) &lt;p&gt; Max number of quick replies is 13.
 	 * 
 	 * @return quickReplies
 	 **/
-	@ApiModelProperty(value = "Optional list of quick replies available to the message's recipients <p> Max number of quick replies is 13.")
+	@ApiModelProperty(value = "List of quick replies available to the message's recipients. (optional) <p> Max number of quick replies is 13.")
 	public List<QuickReply> getQuickReplies() {
 		return quickReplies;
 	}

@@ -45,6 +45,16 @@ public enum EConversationOrderByField {
 	CONTEXT_PERSON_ID("CONTEXT_PERSON_ID"),
 
 	/**
+	 * AWAITED_PERSON_TYPE: Sort by the &#39;awaitedPersonType&#39; attribute
+	 */
+	AWAITED_PERSON_TYPE("AWAITED_PERSON_TYPE"),
+
+	/**
+	 * AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Sort by the &#39;awaitedPersonTypeChangeTimestamp&#39; attribute
+	 */
+	AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP("AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP"),
+
+	/**
 	 * STATE: Sort by the &#39;state&#39; attribute
 	 */
 	STATE("STATE"),

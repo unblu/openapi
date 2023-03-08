@@ -46,6 +46,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationData.JSON_PROPERTY_SOURCE_URL,
 	ConversationData.JSON_PROPERTY_END_REASON,
 	ConversationData.JSON_PROPERTY_INITIAL_ENGAGEMENT_URL,
+	ConversationData.JSON_PROPERTY_AWAITED_PERSON_TYPE,
+	ConversationData.JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP,
 	ConversationData.JSON_PROPERTY_CONFIGURATION,
 	ConversationData.JSON_PROPERTY_TEXT,
 	ConversationData.JSON_PROPERTY_METADATA,
@@ -176,6 +178,14 @@ public class ConversationData {
 	public static final String JSON_PROPERTY_INITIAL_ENGAGEMENT_URL = "initialEngagementUrl";
 	@JsonProperty(JSON_PROPERTY_INITIAL_ENGAGEMENT_URL)
 	private String initialEngagementUrl;
+
+	public static final String JSON_PROPERTY_AWAITED_PERSON_TYPE = "awaitedPersonType";
+	@JsonProperty(JSON_PROPERTY_AWAITED_PERSON_TYPE)
+	private EAwaitedPersonType awaitedPersonType;
+
+	public static final String JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP = "awaitedPersonTypeChangeTimestamp";
+	@JsonProperty(JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP)
+	private Long awaitedPersonTypeChangeTimestamp;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -648,6 +658,44 @@ public class ConversationData {
 		this.initialEngagementUrl = initialEngagementUrl;
 	}
 
+	public ConversationData awaitedPersonType(EAwaitedPersonType awaitedPersonType) {
+		this.awaitedPersonType = awaitedPersonType;
+		return this;
+	}
+
+	/**
+	 * Get awaitedPersonType
+	 * 
+	 * @return awaitedPersonType
+	 **/
+	@ApiModelProperty(value = "")
+	public EAwaitedPersonType getAwaitedPersonType() {
+		return awaitedPersonType;
+	}
+
+	public void setAwaitedPersonType(EAwaitedPersonType awaitedPersonType) {
+		this.awaitedPersonType = awaitedPersonType;
+	}
+
+	public ConversationData awaitedPersonTypeChangeTimestamp(Long awaitedPersonTypeChangeTimestamp) {
+		this.awaitedPersonTypeChangeTimestamp = awaitedPersonTypeChangeTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the awaited person type last changed
+	 * 
+	 * @return awaitedPersonTypeChangeTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the awaited person type last changed")
+	public Long getAwaitedPersonTypeChangeTimestamp() {
+		return awaitedPersonTypeChangeTimestamp;
+	}
+
+	public void setAwaitedPersonTypeChangeTimestamp(Long awaitedPersonTypeChangeTimestamp) {
+		this.awaitedPersonTypeChangeTimestamp = awaitedPersonTypeChangeTimestamp;
+	}
+
 	public ConversationData _configuration(Map<String, String> _configuration) {
 		this._configuration = _configuration;
 		return this;
@@ -761,6 +809,8 @@ public class ConversationData {
 				Objects.equals(this.sourceUrl, conversationData.sourceUrl) &&
 				Objects.equals(this.endReason, conversationData.endReason) &&
 				Objects.equals(this.initialEngagementUrl, conversationData.initialEngagementUrl) &&
+				Objects.equals(this.awaitedPersonType, conversationData.awaitedPersonType) &&
+				Objects.equals(this.awaitedPersonTypeChangeTimestamp, conversationData.awaitedPersonTypeChangeTimestamp) &&
 				Objects.equals(this._configuration, conversationData._configuration) &&
 				Objects.equals(this.text, conversationData.text) &&
 				Objects.equals(this.metadata, conversationData.metadata);
@@ -768,7 +818,7 @@ public class ConversationData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, creationTimestamp, endTimestamp, id, accountId, topic, scheduledTimestamp, recipient, participants, assigneePersonId, contextPersonId, state, initialEngagementType, locale, tokboxSessionId, visitorData, conversationTemplateId, links, externalMessengerChannelId, sourceId, sourceUrl, endReason, initialEngagementUrl, _configuration, text, metadata);
+		return Objects.hash($type, creationTimestamp, endTimestamp, id, accountId, topic, scheduledTimestamp, recipient, participants, assigneePersonId, contextPersonId, state, initialEngagementType, locale, tokboxSessionId, visitorData, conversationTemplateId, links, externalMessengerChannelId, sourceId, sourceUrl, endReason, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, _configuration, text, metadata);
 	}
 
 	@Override
@@ -798,6 +848,8 @@ public class ConversationData {
 		sb.append("    sourceUrl: ").append(toIndentedString(sourceUrl)).append("\n");
 		sb.append("    endReason: ").append(toIndentedString(endReason)).append("\n");
 		sb.append("    initialEngagementUrl: ").append(toIndentedString(initialEngagementUrl)).append("\n");
+		sb.append("    awaitedPersonType: ").append(toIndentedString(awaitedPersonType)).append("\n");
+		sb.append("    awaitedPersonTypeChangeTimestamp: ").append(toIndentedString(awaitedPersonTypeChangeTimestamp)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");

@@ -14,24 +14,24 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a conversation is ended
+ * An event triggered every time a participation is hidden
  */
-@ApiModel(description = "An event triggered every time a conversation is ended")
+@ApiModel(description = "An event triggered every time a participation is hidden")
 
 @JsonPropertyOrder({
-	ConversationEndedEvent.JSON_PROPERTY_$_TYPE,
-	ConversationEndedEvent.JSON_PROPERTY_TIMESTAMP,
-	ConversationEndedEvent.JSON_PROPERTY_EVENT_TYPE,
-	ConversationEndedEvent.JSON_PROPERTY_ACCOUNT_ID,
-	ConversationEndedEvent.JSON_PROPERTY_CONVERSATION,
+	ParticipationHiddenEvent.JSON_PROPERTY_$_TYPE,
+	ParticipationHiddenEvent.JSON_PROPERTY_TIMESTAMP,
+	ParticipationHiddenEvent.JSON_PROPERTY_EVENT_TYPE,
+	ParticipationHiddenEvent.JSON_PROPERTY_ACCOUNT_ID,
+	ParticipationHiddenEvent.JSON_PROPERTY_PARTICIPATION,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class ConversationEndedEvent {
+public class ParticipationHiddenEvent {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		CONVERSATIONENDEDEVENT("ConversationEndedEvent");
+		PARTICIPATIONHIDDENEVENT("ParticipationHiddenEvent");
 
 		private String value;
 
@@ -56,13 +56,13 @@ public class ConversationEndedEvent {
 					return b;
 				}
 			}
-			return TypeEnum.CONVERSATIONENDEDEVENT;
+			return TypeEnum.PARTICIPATIONHIDDENEVENT;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.CONVERSATIONENDEDEVENT;
+	private TypeEnum $type = TypeEnum.PARTICIPATIONHIDDENEVENT;
 
 	public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
 	@JsonProperty(JSON_PROPERTY_TIMESTAMP)
@@ -76,11 +76,11 @@ public class ConversationEndedEvent {
 	@JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
 	private String accountId;
 
-	public static final String JSON_PROPERTY_CONVERSATION = "conversation";
-	@JsonProperty(JSON_PROPERTY_CONVERSATION)
-	private ConversationData conversation = null;
+	public static final String JSON_PROPERTY_PARTICIPATION = "participation";
+	@JsonProperty(JSON_PROPERTY_PARTICIPATION)
+	private ConversationParticipationData participation = null;
 
-	public ConversationEndedEvent $type(TypeEnum $type) {
+	public ParticipationHiddenEvent $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -99,7 +99,7 @@ public class ConversationEndedEvent {
 		this.$type = $type;
 	}
 
-	public ConversationEndedEvent timestamp(Long timestamp) {
+	public ParticipationHiddenEvent timestamp(Long timestamp) {
 		this.timestamp = timestamp;
 		return this;
 	}
@@ -118,7 +118,7 @@ public class ConversationEndedEvent {
 		this.timestamp = timestamp;
 	}
 
-	public ConversationEndedEvent eventType(String eventType) {
+	public ParticipationHiddenEvent eventType(String eventType) {
 		this.eventType = eventType;
 		return this;
 	}
@@ -137,7 +137,7 @@ public class ConversationEndedEvent {
 		this.eventType = eventType;
 	}
 
-	public ConversationEndedEvent accountId(String accountId) {
+	public ParticipationHiddenEvent accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -156,23 +156,23 @@ public class ConversationEndedEvent {
 		this.accountId = accountId;
 	}
 
-	public ConversationEndedEvent conversation(ConversationData conversation) {
-		this.conversation = conversation;
+	public ParticipationHiddenEvent participation(ConversationParticipationData participation) {
+		this.participation = participation;
 		return this;
 	}
 
 	/**
-	 * Get conversation
+	 * Get participation
 	 * 
-	 * @return conversation
+	 * @return participation
 	 **/
 	@ApiModelProperty(value = "")
-	public ConversationData getConversation() {
-		return conversation;
+	public ConversationParticipationData getParticipation() {
+		return participation;
 	}
 
-	public void setConversation(ConversationData conversation) {
-		this.conversation = conversation;
+	public void setParticipation(ConversationParticipationData participation) {
+		this.participation = participation;
 	}
 
 	@Override
@@ -183,28 +183,28 @@ public class ConversationEndedEvent {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ConversationEndedEvent conversationEndedEvent = (ConversationEndedEvent) o;
-		return Objects.equals(this.$type, conversationEndedEvent.$type) &&
-				Objects.equals(this.timestamp, conversationEndedEvent.timestamp) &&
-				Objects.equals(this.eventType, conversationEndedEvent.eventType) &&
-				Objects.equals(this.accountId, conversationEndedEvent.accountId) &&
-				Objects.equals(this.conversation, conversationEndedEvent.conversation);
+		ParticipationHiddenEvent participationHiddenEvent = (ParticipationHiddenEvent) o;
+		return Objects.equals(this.$type, participationHiddenEvent.$type) &&
+				Objects.equals(this.timestamp, participationHiddenEvent.timestamp) &&
+				Objects.equals(this.eventType, participationHiddenEvent.eventType) &&
+				Objects.equals(this.accountId, participationHiddenEvent.accountId) &&
+				Objects.equals(this.participation, participationHiddenEvent.participation);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversation);
+		return Objects.hash($type, timestamp, eventType, accountId, participation);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ConversationEndedEvent {\n");
+		sb.append("class ParticipationHiddenEvent {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
-		sb.append("    conversation: ").append(toIndentedString(conversation)).append("\n");
+		sb.append("    participation: ").append(toIndentedString(participation)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

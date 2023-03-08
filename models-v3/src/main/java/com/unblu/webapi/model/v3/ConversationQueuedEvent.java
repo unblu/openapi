@@ -14,24 +14,24 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a conversation is ended
+ * An event triggered every time a conversation&#39;s state changes from ONBOARDING to QUEUED
  */
-@ApiModel(description = "An event triggered every time a conversation is ended")
+@ApiModel(description = "An event triggered every time a conversation's state changes from ONBOARDING to QUEUED")
 
 @JsonPropertyOrder({
-	ConversationEndedEvent.JSON_PROPERTY_$_TYPE,
-	ConversationEndedEvent.JSON_PROPERTY_TIMESTAMP,
-	ConversationEndedEvent.JSON_PROPERTY_EVENT_TYPE,
-	ConversationEndedEvent.JSON_PROPERTY_ACCOUNT_ID,
-	ConversationEndedEvent.JSON_PROPERTY_CONVERSATION,
+	ConversationQueuedEvent.JSON_PROPERTY_$_TYPE,
+	ConversationQueuedEvent.JSON_PROPERTY_TIMESTAMP,
+	ConversationQueuedEvent.JSON_PROPERTY_EVENT_TYPE,
+	ConversationQueuedEvent.JSON_PROPERTY_ACCOUNT_ID,
+	ConversationQueuedEvent.JSON_PROPERTY_CONVERSATION,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class ConversationEndedEvent {
+public class ConversationQueuedEvent {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		CONVERSATIONENDEDEVENT("ConversationEndedEvent");
+		CONVERSATIONQUEUEDEVENT("ConversationQueuedEvent");
 
 		private String value;
 
@@ -56,13 +56,13 @@ public class ConversationEndedEvent {
 					return b;
 				}
 			}
-			return TypeEnum.CONVERSATIONENDEDEVENT;
+			return TypeEnum.CONVERSATIONQUEUEDEVENT;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.CONVERSATIONENDEDEVENT;
+	private TypeEnum $type = TypeEnum.CONVERSATIONQUEUEDEVENT;
 
 	public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
 	@JsonProperty(JSON_PROPERTY_TIMESTAMP)
@@ -80,7 +80,7 @@ public class ConversationEndedEvent {
 	@JsonProperty(JSON_PROPERTY_CONVERSATION)
 	private ConversationData conversation = null;
 
-	public ConversationEndedEvent $type(TypeEnum $type) {
+	public ConversationQueuedEvent $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -99,7 +99,7 @@ public class ConversationEndedEvent {
 		this.$type = $type;
 	}
 
-	public ConversationEndedEvent timestamp(Long timestamp) {
+	public ConversationQueuedEvent timestamp(Long timestamp) {
 		this.timestamp = timestamp;
 		return this;
 	}
@@ -118,7 +118,7 @@ public class ConversationEndedEvent {
 		this.timestamp = timestamp;
 	}
 
-	public ConversationEndedEvent eventType(String eventType) {
+	public ConversationQueuedEvent eventType(String eventType) {
 		this.eventType = eventType;
 		return this;
 	}
@@ -137,7 +137,7 @@ public class ConversationEndedEvent {
 		this.eventType = eventType;
 	}
 
-	public ConversationEndedEvent accountId(String accountId) {
+	public ConversationQueuedEvent accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -156,7 +156,7 @@ public class ConversationEndedEvent {
 		this.accountId = accountId;
 	}
 
-	public ConversationEndedEvent conversation(ConversationData conversation) {
+	public ConversationQueuedEvent conversation(ConversationData conversation) {
 		this.conversation = conversation;
 		return this;
 	}
@@ -183,12 +183,12 @@ public class ConversationEndedEvent {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ConversationEndedEvent conversationEndedEvent = (ConversationEndedEvent) o;
-		return Objects.equals(this.$type, conversationEndedEvent.$type) &&
-				Objects.equals(this.timestamp, conversationEndedEvent.timestamp) &&
-				Objects.equals(this.eventType, conversationEndedEvent.eventType) &&
-				Objects.equals(this.accountId, conversationEndedEvent.accountId) &&
-				Objects.equals(this.conversation, conversationEndedEvent.conversation);
+		ConversationQueuedEvent conversationQueuedEvent = (ConversationQueuedEvent) o;
+		return Objects.equals(this.$type, conversationQueuedEvent.$type) &&
+				Objects.equals(this.timestamp, conversationQueuedEvent.timestamp) &&
+				Objects.equals(this.eventType, conversationQueuedEvent.eventType) &&
+				Objects.equals(this.accountId, conversationQueuedEvent.accountId) &&
+				Objects.equals(this.conversation, conversationQueuedEvent.conversation);
 	}
 
 	@Override
@@ -199,7 +199,7 @@ public class ConversationEndedEvent {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ConversationEndedEvent {\n");
+		sb.append("class ConversationQueuedEvent {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");

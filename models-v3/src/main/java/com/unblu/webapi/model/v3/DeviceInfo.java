@@ -433,11 +433,11 @@ public class DeviceInfo {
 	}
 
 	/**
-	 * Device identifier (via fingerprinting in browser or device id for MobileSDK)
+	 * Device identifier (via fingerprinting in browser and MobileSDK)
 	 * 
 	 * @return identifier
 	 **/
-	@ApiModelProperty(value = "Device identifier (via fingerprinting in browser or device id for MobileSDK)")
+	@ApiModelProperty(value = "Device identifier (via fingerprinting in browser and MobileSDK)")
 	public String getIdentifier() {
 		return identifier;
 	}

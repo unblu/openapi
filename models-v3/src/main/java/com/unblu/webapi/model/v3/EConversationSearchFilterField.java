@@ -40,6 +40,16 @@ public enum EConversationSearchFilterField {
 	CONTEXT_PERSON_ID("CONTEXT_PERSON_ID"),
 
 	/**
+	 * AWAITED_PERSON_TYPE: Filter by the &#39;awaitedPersonType&#39; attribute
+	 */
+	AWAITED_PERSON_TYPE("AWAITED_PERSON_TYPE"),
+
+	/**
+	 * AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Filter by the &#39;awaitedPersonTypeChangeTimestamp&#39; attribute
+	 */
+	AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP("AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP"),
+
+	/**
 	 * ASSIGNEE_PERSON_ID: Filter by the &#39;assigneePersonId&#39; attribute
 	 */
 	ASSIGNEE_PERSON_ID("ASSIGNEE_PERSON_ID"),

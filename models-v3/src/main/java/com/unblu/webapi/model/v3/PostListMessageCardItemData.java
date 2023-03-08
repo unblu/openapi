@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * List message item.
+ * List message item. &lt;p&gt; This model is used when creating a card item in a list message to send to a conversation.
  */
-@ApiModel(description = "List message item.")
+@ApiModel(description = "List message item. <p> This model is used when creating a card item in a list message to send to a conversation.")
 
 @JsonPropertyOrder({
 	PostListMessageCardItemData.JSON_PROPERTY_$_TYPE,
@@ -115,13 +115,12 @@ public class PostListMessageCardItemData {
 	}
 
 	/**
-	 * URL of the image displayed at the top of the card. (optional) &lt;p&gt; &lt;ul&gt; &lt;li&gt;The image is always displayed with an aspect ration of
-	 * 16:9&lt;/li&gt; &lt;li&gt;If the image doesn&#39;t fit the aspect ration it will be zoomed to cover the whole area&lt;/li&gt; &lt;li&gt;Depending on the chat
-	 * windows size it will be 200px - 400px wide.&lt;/li&gt; &lt;/ul&gt;
+	 * URL of the image displayed on the list item. (optional) &lt;p&gt; The alignment of the image on the item is determined by
+	 * com.unblu.conversation.messaging.ui.listMessageImageAlignment.
 	 * 
 	 * @return imageUrl
 	 **/
-	@ApiModelProperty(value = "URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ration of 16:9</li> <li>If the image doesn't fit the aspect ration it will be zoomed to cover the whole area</li> <li>Depending on the chat windows size it will be 200px - 400px wide.</li> </ul>")
+	@ApiModelProperty(value = "URL of the image displayed on the list item. (optional) <p> The alignment of the image on the item is determined by com.unblu.conversation.messaging.ui.listMessageImageAlignment.")
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -136,11 +135,11 @@ public class PostListMessageCardItemData {
 	}
 
 	/**
-	 * Alt text for the image. (required if imageUrl is set)
+	 * Alt text for the image. Required if imageUrl is set.
 	 * 
 	 * @return imageAltText
 	 **/
-	@ApiModelProperty(value = "Alt text for the image. (required if imageUrl is set)")
+	@ApiModelProperty(value = "Alt text for the image. Required if imageUrl is set.")
 	public String getImageAltText() {
 		return imageAltText;
 	}
@@ -174,11 +173,11 @@ public class PostListMessageCardItemData {
 	}
 
 	/**
-	 * Body text which may optionally contain markdown. (optional) &lt;p&gt; Max length is 256 characters.
+	 * Body text. May optionally contain Markdown. (optional) &lt;p&gt; Max length is 256 characters.
 	 * 
 	 * @return body
 	 **/
-	@ApiModelProperty(value = "Body text which may optionally contain markdown. (optional) <p> Max length is 256 characters.")
+	@ApiModelProperty(value = "Body text. May optionally contain Markdown. (optional) <p> Max length is 256 characters.")
 	public String getBody() {
 		return body;
 	}
