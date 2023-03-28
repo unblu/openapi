@@ -26,6 +26,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ParticipantHistoryData.JSON_PROPERTY_ACTIVATION_TIMESTAMP,
 	ParticipantHistoryData.JSON_PROPERTY_OFFBOARDING_TIMESTAMP,
 	ParticipantHistoryData.JSON_PROPERTY_LEFT_TIMESTAMP,
+	ParticipantHistoryData.JSON_PROPERTY_LEFT_REASON,
+	ParticipantHistoryData.JSON_PROPERTY_LEFT_COMMENT,
 	ParticipantHistoryData.JSON_PROPERTY_CONVERSATION_RATING,
 	ParticipantHistoryData.JSON_PROPERTY_IS_HIDDEN,
 	ParticipantHistoryData.JSON_PROPERTY_CONVERSATION_STARRED,
@@ -93,6 +95,14 @@ public class ParticipantHistoryData {
 	public static final String JSON_PROPERTY_LEFT_TIMESTAMP = "leftTimestamp";
 	@JsonProperty(JSON_PROPERTY_LEFT_TIMESTAMP)
 	private Long leftTimestamp;
+
+	public static final String JSON_PROPERTY_LEFT_REASON = "leftReason";
+	@JsonProperty(JSON_PROPERTY_LEFT_REASON)
+	private EConversationLeftReason leftReason;
+
+	public static final String JSON_PROPERTY_LEFT_COMMENT = "leftComment";
+	@JsonProperty(JSON_PROPERTY_LEFT_COMMENT)
+	private String leftComment;
 
 	public static final String JSON_PROPERTY_CONVERSATION_RATING = "conversationRating";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_RATING)
@@ -245,6 +255,45 @@ public class ParticipantHistoryData {
 		this.leftTimestamp = leftTimestamp;
 	}
 
+	public ParticipantHistoryData leftReason(EConversationLeftReason leftReason) {
+		this.leftReason = leftReason;
+		return this;
+	}
+
+	/**
+	 * Get leftReason
+	 * 
+	 * @return leftReason
+	 **/
+	@ApiModelProperty(value = "")
+	public EConversationLeftReason getLeftReason() {
+		return leftReason;
+	}
+
+	public void setLeftReason(EConversationLeftReason leftReason) {
+		this.leftReason = leftReason;
+	}
+
+	public ParticipantHistoryData leftComment(String leftComment) {
+		this.leftComment = leftComment;
+		return this;
+	}
+
+	/**
+	 * The comment on why the participant left the conversation. If provided, this attribute is set when offboarding starts and is null if the participant is still
+	 * part of the conversation.
+	 * 
+	 * @return leftComment
+	 **/
+	@ApiModelProperty(value = "The comment on why the participant left the conversation. If provided, this attribute is set when offboarding starts and is null if the participant is still part of the conversation.")
+	public String getLeftComment() {
+		return leftComment;
+	}
+
+	public void setLeftComment(String leftComment) {
+		this.leftComment = leftComment;
+	}
+
 	public ParticipantHistoryData conversationRating(Float conversationRating) {
 		this.conversationRating = conversationRating;
 		return this;
@@ -337,6 +386,8 @@ public class ParticipantHistoryData {
 				Objects.equals(this.activationTimestamp, participantHistoryData.activationTimestamp) &&
 				Objects.equals(this.offboardingTimestamp, participantHistoryData.offboardingTimestamp) &&
 				Objects.equals(this.leftTimestamp, participantHistoryData.leftTimestamp) &&
+				Objects.equals(this.leftReason, participantHistoryData.leftReason) &&
+				Objects.equals(this.leftComment, participantHistoryData.leftComment) &&
 				Objects.equals(this.conversationRating, participantHistoryData.conversationRating) &&
 				Objects.equals(this.isHidden, participantHistoryData.isHidden) &&
 				Objects.equals(this.conversationStarred, participantHistoryData.conversationStarred) &&
@@ -345,7 +396,7 @@ public class ParticipantHistoryData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, state, createdTimestamp, joinedTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, conversationRating, isHidden, conversationStarred, person);
+		return Objects.hash($type, state, createdTimestamp, joinedTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, leftReason, leftComment, conversationRating, isHidden, conversationStarred, person);
 	}
 
 	@Override
@@ -359,6 +410,8 @@ public class ParticipantHistoryData {
 		sb.append("    activationTimestamp: ").append(toIndentedString(activationTimestamp)).append("\n");
 		sb.append("    offboardingTimestamp: ").append(toIndentedString(offboardingTimestamp)).append("\n");
 		sb.append("    leftTimestamp: ").append(toIndentedString(leftTimestamp)).append("\n");
+		sb.append("    leftReason: ").append(toIndentedString(leftReason)).append("\n");
+		sb.append("    leftComment: ").append(toIndentedString(leftComment)).append("\n");
 		sb.append("    conversationRating: ").append(toIndentedString(conversationRating)).append("\n");
 		sb.append("    isHidden: ").append(toIndentedString(isHidden)).append("\n");
 		sb.append("    conversationStarred: ").append(toIndentedString(conversationStarred)).append("\n");

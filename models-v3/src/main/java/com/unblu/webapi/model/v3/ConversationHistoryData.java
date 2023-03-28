@@ -49,6 +49,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryData.JSON_PROPERTY_TOPIC,
 	ConversationHistoryData.JSON_PROPERTY_SOURCE_URL,
 	ConversationHistoryData.JSON_PROPERTY_SCHEDULED_TIMESTAMP,
+	ConversationHistoryData.JSON_PROPERTY_DELETION_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_INITIAL_ENGAGEMENT_URL,
 	ConversationHistoryData.JSON_PROPERTY_AWAITED_PERSON_TYPE,
 	ConversationHistoryData.JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP,
@@ -199,6 +200,10 @@ public class ConversationHistoryData {
 	public static final String JSON_PROPERTY_SCHEDULED_TIMESTAMP = "scheduledTimestamp";
 	@JsonProperty(JSON_PROPERTY_SCHEDULED_TIMESTAMP)
 	private Long scheduledTimestamp;
+
+	public static final String JSON_PROPERTY_DELETION_TIMESTAMP = "deletionTimestamp";
+	@JsonProperty(JSON_PROPERTY_DELETION_TIMESTAMP)
+	private Long deletionTimestamp;
 
 	public static final String JSON_PROPERTY_INITIAL_ENGAGEMENT_URL = "initialEngagementUrl";
 	@JsonProperty(JSON_PROPERTY_INITIAL_ENGAGEMENT_URL)
@@ -756,6 +761,25 @@ public class ConversationHistoryData {
 		this.scheduledTimestamp = scheduledTimestamp;
 	}
 
+	public ConversationHistoryData deletionTimestamp(Long deletionTimestamp) {
+		this.deletionTimestamp = deletionTimestamp;
+		return this;
+	}
+
+	/**
+	 * * Unix timestamp (ms) when this conversation will be automatically deleted. See &#x60;getRetentionIntervalConversationSeconds&#x60; for details.
+	 * 
+	 * @return deletionTimestamp
+	 **/
+	@ApiModelProperty(value = "* Unix timestamp (ms) when this conversation will be automatically deleted. See `getRetentionIntervalConversationSeconds` for details.")
+	public Long getDeletionTimestamp() {
+		return deletionTimestamp;
+	}
+
+	public void setDeletionTimestamp(Long deletionTimestamp) {
+		this.deletionTimestamp = deletionTimestamp;
+	}
+
 	public ConversationHistoryData initialEngagementUrl(String initialEngagementUrl) {
 		this.initialEngagementUrl = initialEngagementUrl;
 		return this;
@@ -852,6 +876,7 @@ public class ConversationHistoryData {
 				Objects.equals(this.topic, conversationHistoryData.topic) &&
 				Objects.equals(this.sourceUrl, conversationHistoryData.sourceUrl) &&
 				Objects.equals(this.scheduledTimestamp, conversationHistoryData.scheduledTimestamp) &&
+				Objects.equals(this.deletionTimestamp, conversationHistoryData.deletionTimestamp) &&
 				Objects.equals(this.initialEngagementUrl, conversationHistoryData.initialEngagementUrl) &&
 				Objects.equals(this.awaitedPersonType, conversationHistoryData.awaitedPersonType) &&
 				Objects.equals(this.awaitedPersonTypeChangeTimestamp, conversationHistoryData.awaitedPersonTypeChangeTimestamp);
@@ -859,7 +884,7 @@ public class ConversationHistoryData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, recipient, assigneePerson, contextPerson, endPerson, participants, createdTimestamp, onboardingTimestamp, activationTimestamp, assigneeJoinTimestamp, reboardingTimestamp, offboardingTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, queuedTimestamp, state, initialEngagementType, locale, endReason, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp);
+		return Objects.hash($type, id, recipient, assigneePerson, contextPerson, endPerson, participants, createdTimestamp, onboardingTimestamp, activationTimestamp, assigneeJoinTimestamp, reboardingTimestamp, offboardingTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, queuedTimestamp, state, initialEngagementType, locale, endReason, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, deletionTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp);
 	}
 
 	@Override
@@ -894,6 +919,7 @@ public class ConversationHistoryData {
 		sb.append("    topic: ").append(toIndentedString(topic)).append("\n");
 		sb.append("    sourceUrl: ").append(toIndentedString(sourceUrl)).append("\n");
 		sb.append("    scheduledTimestamp: ").append(toIndentedString(scheduledTimestamp)).append("\n");
+		sb.append("    deletionTimestamp: ").append(toIndentedString(deletionTimestamp)).append("\n");
 		sb.append("    initialEngagementUrl: ").append(toIndentedString(initialEngagementUrl)).append("\n");
 		sb.append("    awaitedPersonType: ").append(toIndentedString(awaitedPersonType)).append("\n");
 		sb.append("    awaitedPersonTypeChangeTimestamp: ").append(toIndentedString(awaitedPersonTypeChangeTimestamp)).append("\n");

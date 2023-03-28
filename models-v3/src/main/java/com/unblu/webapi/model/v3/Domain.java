@@ -216,12 +216,12 @@ public class Domain {
 	}
 
 	/**
-	 * The name/adress of the domain. It should normally contain a protocol (e.g. http:// or https://) and the url of the domain (e.g. www.unblu.com). Maximum of
+	 * The name/address of the domain. It should normally contain a protocol (e.g. http:// or https://) and the url of the domain (e.g. www.unblu.com). Maximum of
 	 * 250 characters. Can not be omitted. 250 characters.
 	 * 
 	 * @return domainName
 	 **/
-	@ApiModelProperty(value = "The name/adress of the domain. It should normally contain a protocol (e.g. http:// or https://) and the url of the domain (e.g. www.unblu.com). Maximum of 250 characters. Can not be omitted. 250 characters.")
+	@ApiModelProperty(value = "The name/address of the domain. It should normally contain a protocol (e.g. http:// or https://) and the url of the domain (e.g. www.unblu.com). Maximum of 250 characters. Can not be omitted. 250 characters.")
 	public String getDomainName() {
 		return domainName;
 	}

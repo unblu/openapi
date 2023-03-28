@@ -37,7 +37,12 @@ public enum AuditInteractionType {
 	/**
 	 * SYNCJOB
 	 */
-	SYNCJOB("SYNCJOB");
+	SYNCJOB("SYNCJOB"),
+
+	/**
+	 * GC
+	 */
+	GC("GC");
 
 	private String value;
 

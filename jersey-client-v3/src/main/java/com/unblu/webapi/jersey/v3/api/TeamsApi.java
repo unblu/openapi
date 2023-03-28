@@ -187,7 +187,7 @@ public class TeamsApi {
 	/**
 	 * getByParentId Returns a list of teams, which directly belong to the given parent team.&lt;br&gt;
 	 * 
-	 * @param parentId The id of the parent for which the direct child teams should be returned (optional)
+	 * @param parentId The ID of the parent for which the direct child teams should be returned (optional)
 	 * @param expand (optional)
 	 * @return List&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
@@ -199,7 +199,7 @@ public class TeamsApi {
 	/**
 	 * getByParentId Returns a list of teams, which directly belong to the given parent team.&lt;br&gt;
 	 * 
-	 * @param parentId The id of the parent for which the direct child teams should be returned (optional)
+	 * @param parentId The ID of the parent for which the direct child teams should be returned (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;List&lt;Team&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -427,9 +427,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * read Returns the team for the given id&lt;br&gt;
+	 * read Returns the team for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the team which should be returned (optional)
+	 * @param id ID of the team which should be returned (optional)
 	 * @param expand (optional)
 	 * @return Team
 	 * @throws ApiException if fails to make API call
@@ -439,9 +439,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * read Returns the team for the given id&lt;br&gt;
+	 * read Returns the team for the given ID&lt;br&gt;
 	 * 
-	 * @param id Id of the team which should be returned (optional)
+	 * @param id ID of the team which should be returned (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
@@ -478,9 +478,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of teams for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of teams for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the teams should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the teams should be fetched (required)
 	 * @param expand (optional)
 	 * @return List&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
@@ -490,9 +490,9 @@ public class TeamsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of teams for the given id&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of teams for the given ID&#39;s&lt;br&gt;
 	 * 
-	 * @param requestBody The id&#39;s for which the teams should be fetched (required)
+	 * @param requestBody The ID&#39;s for which the teams should be fetched (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;List&lt;Team&gt;&gt;
 	 * @throws ApiException if fails to make API call

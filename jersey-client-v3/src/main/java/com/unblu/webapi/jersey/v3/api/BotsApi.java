@@ -407,9 +407,9 @@ public class BotsApi {
 	}
 
 	/**
-	 * delete Deletes an existing dialog bot.&lt;br&gt;
+	 * delete Deletes an existing dialog bot&lt;br&gt;
 	 * 
-	 * @param id ID of the dialog bot. (optional)
+	 * @param id The ID of the dialog bot which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void botsDelete(String id) throws ApiException {
@@ -418,9 +418,9 @@ public class BotsApi {
 	}
 
 	/**
-	 * delete Deletes an existing dialog bot.&lt;br&gt;
+	 * delete Deletes an existing dialog bot&lt;br&gt;
 	 * 
-	 * @param id ID of the dialog bot. (optional)
+	 * @param id The ID of the dialog bot which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> botsDeleteWithHttpInfo(String id) throws ApiException {
@@ -452,9 +452,9 @@ public class BotsApi {
 	}
 
 	/**
-	 * delete Deletes an existing dialog bot.&lt;br&gt;
+	 * delete Deletes an existing dialog bot&lt;br&gt;
 	 * 
-	 * @param id ID of the dialog bot. (optional)
+	 * @param id The ID of the dialog bot which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */
@@ -465,9 +465,9 @@ public class BotsApi {
 	}
 
 	/**
-	 * delete Deletes an existing dialog bot.&lt;br&gt;
+	 * delete Deletes an existing dialog bot&lt;br&gt;
 	 * 
-	 * @param id ID of the dialog bot. (optional)
+	 * @param id The ID of the dialog bot which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
 	 * @deprecated
 	 */

@@ -87,7 +87,17 @@ public enum EConversationSearchFilterField {
 	/**
 	 * TOKBOX_SESSION_ID: Filter by the &#39;tokboxSessionId&#39; attribute
 	 */
-	TOKBOX_SESSION_ID("TOKBOX_SESSION_ID");
+	TOKBOX_SESSION_ID("TOKBOX_SESSION_ID"),
+
+	/**
+	 * SOURCE_ID: Filter by the &#39;sourceId&#39; attribute
+	 */
+	SOURCE_ID("SOURCE_ID"),
+
+	/**
+	 * EXTERNAL_MESSENGER_CHANNEL_ID: Filter by the &#39;externalMessengerChannelId&#39; attribute
+	 */
+	EXTERNAL_MESSENGER_CHANNEL_ID("EXTERNAL_MESSENGER_CHANNEL_ID");
 
 	private String value;
 

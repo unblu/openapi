@@ -319,8 +319,9 @@ public class ConversationsApi {
 	 * create Creates the conversation in the system. The conversation ID mustn&#39;t be set as a new one will be generated. &lt;br&gt; If called with the
 	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, there are a number of restrictions regarding the conversation to be created:
 	 * &lt;ul&gt; &lt;li&gt;The &#x60;initialEngagementType&#x60; must be a conversation type initiated by agents &lt;li&gt;The &#x60;assigneePersonId&#x60; must
-	 * refer to the person entity of the agent making the call &lt;li&gt;The agent making the call must be the only participant in the conversation
-	 * &lt;/ul&gt;&lt;br&gt;
+	 * refer to the person entity of the agent making the call &lt;li&gt;The agent making the call must be the only participant in the conversation &lt;/ul&gt; If
+	 * &#x60;sourceId&#x60; and &#x60;externalMessengerChannelId&#x60; are set they have to be unique for any active conversations. Ended conversations are
+	 * ignored.&lt;br&gt;
 	 * 
 	 * @param conversationData (required)
 	 * @param expand (optional)
@@ -335,8 +336,9 @@ public class ConversationsApi {
 	 * create Creates the conversation in the system. The conversation ID mustn&#39;t be set as a new one will be generated. &lt;br&gt; If called with the
 	 * authorization role &#x60;SUPERVISOR&#x60; or &#x60;REGISTERED_USER&#x60;, there are a number of restrictions regarding the conversation to be created:
 	 * &lt;ul&gt; &lt;li&gt;The &#x60;initialEngagementType&#x60; must be a conversation type initiated by agents &lt;li&gt;The &#x60;assigneePersonId&#x60; must
-	 * refer to the person entity of the agent making the call &lt;li&gt;The agent making the call must be the only participant in the conversation
-	 * &lt;/ul&gt;&lt;br&gt;
+	 * refer to the person entity of the agent making the call &lt;li&gt;The agent making the call must be the only participant in the conversation &lt;/ul&gt; If
+	 * &#x60;sourceId&#x60; and &#x60;externalMessengerChannelId&#x60; are set they have to be unique for any active conversations. Ended conversations are
+	 * ignored.&lt;br&gt;
 	 * 
 	 * @param conversationData (required)
 	 * @param expand (optional)
@@ -618,12 +620,13 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * getBySourceIdAndChannelId Returns the conversation for the given source and channel id. If called with the authorization role &#x60;REGISTERED_USER&#x60;,
-	 * the call will fail if the conversation matching the search criteria doesn&#39;t include the agent making the call as a participant. If the agent making the
-	 * call has the user role &#x60;SUPERVISOR&#x60;, the call will fail if the conversation matching the search criteria doesn&#39;t include an agent in their team
-	 * or teams as a participant.&lt;br&gt;
+	 * getBySourceIdAndChannelId Returns the active conversation for the given source ID and channel ID. When called with the authorization role
+	 * &#x60;REGISTERED_USER&#x60;, the agent making the call must be a participant in the conversation matching the search criteria. If they aren&#39;t, the call
+	 * will fail. When called with the authorization role &#x60;SUPERVISOR&#x60;, the conversation matching the search criteria must include a participant who is an
+	 * agent in their team (or one of their teams). If it doesn&#39;t, the call will fail. &lt;p&gt; Ended conversations for the same sourceId and channel are
+	 * ignored. These can be retrieved using the &lt;code&gt;/search&lt;/code&gt; service.&lt;br&gt;
 	 * 
-	 * @param sourceId The sourceId with which the conversation was created (optional)
+	 * @param sourceId The source ID the conversation was created with (optional)
 	 * @param externalMessengerChannelId The messenger channel ID the conversation is connected to. Can be null for internal conversations. (optional)
 	 * @param expand (optional)
 	 * @return ConversationData
@@ -634,12 +637,13 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * getBySourceIdAndChannelId Returns the conversation for the given source and channel id. If called with the authorization role &#x60;REGISTERED_USER&#x60;,
-	 * the call will fail if the conversation matching the search criteria doesn&#39;t include the agent making the call as a participant. If the agent making the
-	 * call has the user role &#x60;SUPERVISOR&#x60;, the call will fail if the conversation matching the search criteria doesn&#39;t include an agent in their team
-	 * or teams as a participant.&lt;br&gt;
+	 * getBySourceIdAndChannelId Returns the active conversation for the given source ID and channel ID. When called with the authorization role
+	 * &#x60;REGISTERED_USER&#x60;, the agent making the call must be a participant in the conversation matching the search criteria. If they aren&#39;t, the call
+	 * will fail. When called with the authorization role &#x60;SUPERVISOR&#x60;, the conversation matching the search criteria must include a participant who is an
+	 * agent in their team (or one of their teams). If it doesn&#39;t, the call will fail. &lt;p&gt; Ended conversations for the same sourceId and channel are
+	 * ignored. These can be retrieved using the &lt;code&gt;/search&lt;/code&gt; service.&lt;br&gt;
 	 * 
-	 * @param sourceId The sourceId with which the conversation was created (optional)
+	 * @param sourceId The source ID the conversation was created with (optional)
 	 * @param externalMessengerChannelId The messenger channel ID the conversation is connected to. Can be null for internal conversations. (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;

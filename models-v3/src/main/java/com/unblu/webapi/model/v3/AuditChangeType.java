@@ -22,7 +22,17 @@ public enum AuditChangeType {
 	/**
 	 * DELETE
 	 */
-	DELETE("DELETE");
+	DELETE("DELETE"),
+
+	/**
+	 * MARK_DELETED
+	 */
+	MARK_DELETED("MARK_DELETED"),
+
+	/**
+	 * UNMARK_DELETED
+	 */
+	UNMARK_DELETED("UNMARK_DELETED");
 
 	private String value;
 

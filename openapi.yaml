@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.26.2
+  version: 7.27.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -54,6 +54,8 @@ tags:
   description: Service to access person presences
 - name: Persons
   description: Service to manage virtual or bot persons
+- name: RecordRetention
+  description: Service for loading and updating the record retention configuration. The configuration is account-specific.
 - name: Services
   description: Service which provides metadata information for all services and used types.
 - name: Teams
@@ -2206,12 +2208,12 @@ paths:
       tags:
       - Bots
       summary: delete
-      description: Deletes an existing dialog bot.<br>
+      description: Deletes an existing dialog bot<br>
       operationId: botsDelete
       parameters:
       - name: id
         in: query
-        description: ID of the dialog bot.
+        description: The ID of the dialog bot which should be deleted
         required: false
         schema:
           type: string
@@ -4008,7 +4010,7 @@ paths:
       tags:
       - Conversations
       summary: create
-      description: "Creates the conversation in the system. The conversation ID mustn't be set as a new one will be generated. <br> If called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, there are a number of restrictions regarding the conversation to be created: <ul> <li>The `initialEngagementType` must be a conversation type initiated by agents <li>The `assigneePersonId` must refer to the person entity of the agent making the call <li>The agent making the call must be the only participant in the conversation </ul><br>"
+      description: "Creates the conversation in the system. The conversation ID mustn't be set as a new one will be generated. <br> If called with the authorization role `SUPERVISOR` or `REGISTERED_USER`, there are a number of restrictions regarding the conversation to be created: <ul> <li>The `initialEngagementType` must be a conversation type initiated by agents <li>The `assigneePersonId` must refer to the person entity of the agent making the call <li>The agent making the call must be the only participant in the conversation </ul> If `sourceId` and `externalMessengerChannelId` are set they have to be unique for any active conversations. Ended conversations are ignored.<br>"
       operationId: conversationsCreate
       parameters:
       - name: expand
@@ -4172,12 +4174,12 @@ paths:
       tags:
       - Conversations
       summary: getBySourceIdAndChannelId
-      description: "Returns the conversation for the given source and channel id. If called with the authorization role `REGISTERED_USER`, the call will fail if the conversation matching the search criteria doesn't include the agent making the call as a participant. If the agent making the call has the user role `SUPERVISOR`, the call will fail if the conversation matching the search criteria doesn't include an agent in their team or teams as a participant.<br>"
+      description: "Returns the active conversation for the given source ID and channel ID. When called with the authorization role `REGISTERED_USER`, the agent making the call must be a participant in the conversation matching the search criteria. If they aren't, the call will fail. When called with the authorization role `SUPERVISOR`, the conversation matching the search criteria must include a participant who is an agent in their team (or one of their teams). If it doesn't, the call will fail. <p> Ended conversations for the same sourceId and channel are ignored. These can be retrieved using the <code>/search</code> service.<br>"
       operationId: conversationsGetBySourceIdAndChannelId
       parameters:
       - name: sourceId
         in: query
-        description: The sourceId with which the conversation was created
+        description: The source ID the conversation was created with
         required: false
         schema:
           type: string
@@ -4202,7 +4204,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: The conversation for the given source and channel ID
+          description: The active conversation for the given source ID and channel ID
           content:
             application/json:
               schema:
@@ -6240,7 +6242,7 @@ paths:
                     id: cne9hsne4rgxa2es6MenC8d
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
-                    version: 2
+                    version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
                     name: 'Updated Name '
                     description: custom description
@@ -7663,6 +7665,51 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /recordretention/read:
+    get:
+      tags:
+      - RecordRetention
+      summary: read
+      description: Returns the records retention configuration for the account of the calling user<br>
+      operationId: recordRetentionRead
+      responses:
+        "200":
+          description: The records retention configuration for an account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordRetentionData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /recordretention/update:
+    post:
+      tags:
+      - RecordRetention
+      summary: update
+      description: Updates and returns an account's records retention configuration with the settings in `RecordRetentionData`<br>
+      operationId: recordRetentionUpdate
+      requestBody:
+        description: The new records retention configuration
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordRetentionData'
+        required: true
+      responses:
+        "200":
+          description: The updated records retention configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordRetentionData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /services/findWebhookEventTypeNamesBy:
     get:
       tags:
@@ -8059,7 +8106,7 @@ paths:
       parameters:
       - name: parentId
         in: query
-        description: The id of the parent for which the direct child teams should be returned
+        description: The ID of the parent for which the direct child teams should be returned
         required: false
         schema:
           type: string
@@ -8211,12 +8258,12 @@ paths:
       tags:
       - Teams
       summary: read
-      description: Returns the team for the given id<br>
+      description: Returns the team for the given ID<br>
       operationId: teamsRead
       parameters:
       - name: id
         in: query
-        description: Id of the team which should be returned
+        description: ID of the team which should be returned
         required: false
         schema:
           type: string
@@ -8248,7 +8295,7 @@ paths:
       tags:
       - Teams
       summary: readMultiple
-      description: Gets a list of teams for the given id's<br>
+      description: Gets a list of teams for the given ID's<br>
       operationId: teamsReadMultiple
       parameters:
       - name: expand
@@ -8261,7 +8308,7 @@ paths:
         style: form
         explode: false
       requestBody:
-        description: The id's for which the teams should be fetched
+        description: The ID's for which the teams should be fetched
         content:
           application/json:
             schema:
@@ -8271,7 +8318,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of teams for the given id's
+          description: A list of teams for the given ID's
           content:
             application/json:
               schema:
@@ -11677,10 +11724,14 @@ components:
       - CREATE
       - UPDATE
       - DELETE
+      - MARK_DELETED
+      - UNMARK_DELETED
       x-enum-descriptions:
       - CREATE
       - UPDATE
       - DELETE
+      - MARK_DELETED
+      - UNMARK_DELETED
     AuditChangeTypeOperator:
       oneOf:
       - $ref: '#/components/schemas/EqualsAuditChangeTypeOperator'
@@ -11703,6 +11754,7 @@ components:
       - ACTION
       - INTERNAL
       - SYNCJOB
+      - GC
       x-enum-descriptions:
       - API
       - RPC
@@ -11710,6 +11762,7 @@ components:
       - ACTION
       - INTERNAL
       - SYNCJOB
+      - GC
     AuthenticatorChangePasswordBody:
       type: object
       description: Request Body for the 'authenticatorChangePassword' operation
@@ -13471,6 +13524,10 @@ components:
           type: integer
           format: int64
           description: Unix timestamp (ms) when the conversation is scheduled for. Can be set only for conversations with initialEngagementType :`EInitialEngagementType.SCHEDULED_CONVERSATION`
+        deletionTimestamp:
+          type: integer
+          format: int64
+          description: '* Unix timestamp (ms) when this conversation will be automatically deleted. See `getRetentionIntervalConversationSeconds` for details.'
         initialEngagementUrl:
           type: string
           description: "The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer's website will have a value. Conversely, conversations initiated from the mobile SDK won't have an initial engagement URL.<br> Conversations created using the Web API can also contain an initial engagement URL if one was provided at creation time."
@@ -14211,6 +14268,8 @@ components:
       - $ref: '#/components/schemas/RecipientIdConversationSearchFilter'
       - $ref: '#/components/schemas/RecipientTypeConversationSearchFilter'
       - $ref: '#/components/schemas/StateConversationSearchFilter'
+      - $ref: '#/components/schemas/SourceIdConversationSearchFilter'
+      - $ref: '#/components/schemas/ExternalMessengerChannelIdConversationSearchFilter'
       discriminator:
         propertyName: field
         mapping:
@@ -14222,11 +14281,13 @@ components:
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampConversationSearchFilter'
           END_REASON: '#/components/schemas/EndReasonConversationSearchFilter'
           END_TIMESTAMP: '#/components/schemas/EndTimestampConversationSearchFilter'
+          EXTERNAL_MESSENGER_CHANNEL_ID: '#/components/schemas/ExternalMessengerChannelIdConversationSearchFilter'
           INITIAL_ENGAGEMENT_TYPE: '#/components/schemas/InitialEngagementTypeConversationSearchFilter'
           PARTICIPANT_PERSON_ID: '#/components/schemas/ParticipantPersonIdConversationSearchFilter'
           RECIPIENT_ID: '#/components/schemas/RecipientIdConversationSearchFilter'
           RECIPIENT_TYPE: '#/components/schemas/RecipientTypeConversationSearchFilter'
           SCHEDULED_TIMESTAMP: '#/components/schemas/ScheduledTimestampConversationSearchFilter'
+          SOURCE_ID: '#/components/schemas/SourceIdConversationSearchFilter'
           STATE: '#/components/schemas/StateConversationSearchFilter'
           TOKBOX_SESSION_ID: '#/components/schemas/TokboxSessionIdConversationSearchFilter'
           TOPIC: '#/components/schemas/TopicConversationSearchFilter'
@@ -15480,7 +15541,7 @@ components:
           description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
         domainName:
           type: string
-          description: The name/adress of the domain. It should normally contain a protocol (e.g. http:// or https://) and the url of the domain (e.g. www.unblu.com). Maximum of 250 characters. Can not be omitted. 250 characters.
+          description: The name/address of the domain. It should normally contain a protocol (e.g. http:// or https://) and the url of the domain (e.g. www.unblu.com). Maximum of 250 characters. Can not be omitted. 250 characters.
     DomainModificationEvent:
       type: object
       description: "An event triggered every time a `Domain` is created, deleted or changed."
@@ -16381,6 +16442,8 @@ components:
       - RECIPIENT_ID
       - RECIPIENT_TYPE
       - TOKBOX_SESSION_ID
+      - SOURCE_ID
+      - EXTERNAL_MESSENGER_CHANNEL_ID
       x-enum-descriptions:
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
       - "END_TIMESTAMP: Filter by the 'endTimestamp' attribute"
@@ -16398,6 +16461,8 @@ components:
       - "RECIPIENT_ID: Filter by the 'id' of the 'recipient' attribute"
       - "RECIPIENT_TYPE: Filter by the 'type' of the 'recipient' attribute"
       - "TOKBOX_SESSION_ID: Filter by the 'tokboxSessionId' attribute"
+      - "SOURCE_ID: Filter by the 'sourceId' attribute"
+      - "EXTERNAL_MESSENGER_CHANNEL_ID: Filter by the 'externalMessengerChannelId' attribute"
     EConversationState:
       type: string
       description: "Life cycle state of the conversation. Following transitions are possible: <ul> <li>`CREATED` --> `ONBOARDING`, `OFFBOARDING`</li> <li>`ONBOARDING` --> `QUEUED`, `ACTIVE`, `OFFBOARDING`, `UNASSIGNED`</li> <li>`REBOARDING` --> `QUEUED`, `UNASSIGNED`, `OFFBOARDING`</li> <li>`QUEUED` --> `ACTIVE`, `OFFBOARDING`, `UNASSIGNED`</li> <li>`ACTIVE` --> `UNASSIGNED`, `OFFBOARDING`, `QUEUED`</li> <li>`UNASSIGNED` --> `REBOARDING`, `OFFBOARDING`, `QUEUED`, `ACTIVE`</li> <li>`OFFBOARDING` --> `ENDED`</li> <li>`ENDED` --> none</li> </ul>"
@@ -18196,6 +18261,18 @@ components:
         propertyName: $_type
         mapping:
           CustomExternalMessengerChannel: '#/components/schemas/CustomExternalMessengerChannel'
+    ExternalMessengerChannelIdConversationSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ExternalMessengerChannelIdConversationSearchFilter
+          enum:
+          - ExternalMessengerChannelIdConversationSearchFilter
+        field:
+          $ref: '#/components/schemas/EConversationSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/IdOperator'
     ExternalMessengerChannelOrderBy:
       type: object
       description: ExternalMessengerChannel orderBy item.
@@ -21442,6 +21519,11 @@ components:
           type: integer
           format: int64
           description: "Unix timestamp (ms) when the person has left, can be null (timestamp when the state was set to `EConversationParticipationState.ENDED`)"
+        leftReason:
+          $ref: '#/components/schemas/EConversationLeftReason'
+        leftComment:
+          type: string
+          description: "The comment on why the participant left the conversation. If provided, this attribute is set when offboarding starts and is null if the participant is still part of the conversation."
         conversationRating:
           type: number
           format: float
@@ -22968,6 +23050,34 @@ components:
           $ref: '#/components/schemas/EConversationSearchFilterField'
         operator:
           $ref: '#/components/schemas/ConversationRecipientTypeOperator'
+    RecordRetentionData:
+      type: object
+      description: Representation of account specific record retention data.
+      properties:
+        $_type:
+          type: string
+          default: RecordRetentionData
+          enum:
+          - RecordRetentionData
+        accountId:
+          type: string
+          description: ID of the account whose retention configuration properties the object represents
+        retentionIntervalConversationSeconds:
+          type: integer
+          format: int64
+          description: "Retention interval of conversations represented as number of seconds. Conversations are deleted after the interval, counting from when they ended."
+        retentionIntervalPresenceSeconds:
+          type: integer
+          format: int64
+          description: "Retention interval of person presences represented as number of seconds. If a person presence exists without a conversation, the log is deleted after the time set below. Otherwise, it is deleted when the conversation record is deleted."
+        retentionIntervalWebhookCallLogSeconds:
+          type: integer
+          format: int64
+          description: "Retention interval of webhook call logs represented as number of seconds. Webhook logs are deleted after the time set below, counting from when they were created."
+        retentionIntervalAuditLogSeconds:
+          type: integer
+          format: int64
+          description: "Retention interval of audit logs represented as number of seconds. Audit logs are deleted after the time set below, counting from when they were created."
     RecordingAvailableMessageData:
       type: object
       description: "Recording available message which contains the blob store ID, blob size, filename, start time and end time"
@@ -23594,6 +23704,18 @@ components:
           $ref: '#/components/schemas/EPersonSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    SourceIdConversationSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: SourceIdConversationSearchFilter
+          enum:
+          - SourceIdConversationSearchFilter
+        field:
+          $ref: '#/components/schemas/EConversationSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/IdOperator'
     SourceIdPersonSearchFilter:
       type: object
       properties:
