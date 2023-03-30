@@ -370,11 +370,16 @@ public class CannedResponse {
 	}
 
 	/**
-	 * Get language
+	 * The language of a canned response, specified using the language tag format as defined in IETF BCP 47. This field can be omitted, but doing so may lead to
+	 * behavior that doesn&#39;t matches users&#39; expectations. &lt;p&gt; Only canned responses matching a conversation&#39;s language are displayed in the
+	 * UI.&lt;br&gt; The following rules apply: &lt;ul&gt; &lt;li&gt;Canned response with no language defined are displayed for all conversations.&lt;/li&gt;
+	 * &lt;li&gt;If the conversation language (e.g. \&quot;en-us\&quot;) is more specific than the language of the canned response (e.g. \&quot;en\&quot;), the
+	 * canned response is also displayed.&lt;/li&gt; &lt;li&gt;If the language of the canned response (e.g. \&quot;en-us\&quot;) is &lt;i&gt;more&lt;/i&gt; specific
+	 * than the conversation language (e.g. \&quot;en\&quot;), the canned response &lt;b&gt;isn&#39;t&lt;/b&gt; displayed.&lt;/li&gt;
 	 * 
 	 * @return language
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The language of a canned response, specified using the language tag format as defined in IETF BCP 47. This field can be omitted, but doing so may lead to behavior that doesn't matches users' expectations. <p> Only canned responses matching a conversation's language are displayed in the UI.<br> The following rules apply: <ul> <li>Canned response with no language defined are displayed for all conversations.</li> <li>If the conversation language (e.g. \"en-us\") is more specific than the language of the canned response (e.g. \"en\"), the canned response is also displayed.</li> <li>If the language of the canned response (e.g. \"en-us\") is <i>more</i> specific than the conversation language (e.g. \"en\"), the canned response <b>isn't</b> displayed.</li>")
 	public String getLanguage() {
 		return language;
 	}

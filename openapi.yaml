@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.27.2
+  version: 7.27.3
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -2904,7 +2904,7 @@ paths:
                   key: Have a nice day
                   title: Have a nice day
                   text: "It was great chatting with you, have a nice day!"
-                  language: null
+                  language: en
               create-for-team:
                 summary: create for team
                 description: Create a new canned response for a team
@@ -2921,7 +2921,7 @@ paths:
                   key: Ask invite team member
                   title: Ask invite team member
                   text: I would like to have a second opinion on this. Is it OK for you if I invite one of my colleague to this conversation?
-                  language: null
+                  language: en
               create-for-user:
                 summary: create for user
                 description: Create a new canned response for a user
@@ -2938,7 +2938,7 @@ paths:
                   key: Hello & help
                   title: Hello & help
                   text: "Hello, how can I help you?"
-                  language: null
+                  language: en
         required: true
       responses:
         "200":
@@ -2964,7 +2964,7 @@ paths:
                     key: Have a nice day
                     title: Have a nice day
                     text: "It was great chatting with you, have a nice day!"
-                    language: null
+                    language: en
                 create-for-team:
                   summary: create for team
                   description: New canned response for a team
@@ -2981,7 +2981,7 @@ paths:
                     key: Ask invite team member
                     title: Ask invite team member
                     text: I would like to have a second opinion on this. Is it OK for you if I invite one of my colleague to this conversation?
-                    language: null
+                    language: en
                 create-for-user:
                   summary: create for user
                   description: New canned response for user created
@@ -2998,7 +2998,7 @@ paths:
                     key: Hello & help
                     title: Hello & help
                     text: "Hello, how can I help you?"
-                    language: null
+                    language: en
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -12525,6 +12525,7 @@ components:
           description: "The text of a canned response. Can be omitted, but should not."
         language:
           type: string
+          description: "The language of a canned response, specified using the language tag format as defined in IETF BCP 47. This field can be omitted, but doing so may lead to behavior that doesn't matches users' expectations. <p> Only canned responses matching a conversation's language are displayed in the UI.<br> The following rules apply: <ul> <li>Canned response with no language defined are displayed for all conversations.</li> <li>If the conversation language (e.g. \"en-us\") is more specific than the language of the canned response (e.g. \"en\"), the canned response is also displayed.</li> <li>If the language of the canned response (e.g. \"en-us\") is <i>more</i> specific than the conversation language (e.g. \"en\"), the canned response <b>isn't</b> displayed.</li>"
     CannedResponseConfigurationScope:
       type: object
       description: Scope definition for CannedResponses
