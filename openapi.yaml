@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.27.3
+  version: 7.28.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -6525,6 +6525,31 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /invitations/getAcceptLink:
+    post:
+      tags:
+      - Invitations
+      summary: getAcceptLink
+      description: "Returns link(s) to accept the invitation that the conversation invitation token provided is related to. The token is validated first and the endpoint only returns links if the validation is successful. If the token is not valid, no longer redeemable (for example, because it's expired or been redeemed by another person), or the rate limit has been reached, the endpoint returns an error.<br> <br> <b>Note:</b> In environments where account ingress isn't enabled, you must provide the API key using the <code>apiKey</code> query parameter if this service is called for anonymous users. The API key is needed to identify the correct Unblu account.<br>"
+      operationId: invitationsGetAcceptLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitationsGetAcceptLinkBody'
+        required: true
+      responses:
+        "200":
+          description: The link(s) to accept and redeem the conversation invitation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptLinkData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: PUBLIC
+      x-required-role:
+      - ANONYMOUS_USER
   /invitations/inviteAgentToConversation:
     post:
       tags:
@@ -8858,6 +8883,41 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /users/transformVirtualToPhysical:
+    post:
+      tags:
+      - Users
+      summary: transformVirtualToPhysical
+      description: "Converts the user with the given username from a virtual to a physical user. This also changes the related `Person` entity to a physical`Person`. If the user's already physical, the user is simply returned. If no user with the given username exists, the endpoint returns an error.<br>"
+      operationId: usersTransformVirtualToPhysical
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpandFields'
+        style: form
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsersTransformVirtualToPhysicalBody'
+        required: true
+      responses:
+        "200":
+          description: The updated instance of the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /users/update:
     post:
       tags:
@@ -10284,6 +10344,30 @@ paths:
       - ADMIN
 components:
   schemas:
+    AcceptLinkData:
+      type: object
+      description: Model with information about links to accept conversation invitations
+      properties:
+        $_type:
+          type: string
+          default: AcceptLinkData
+          enum:
+          - AcceptLinkData
+        accountId:
+          type: string
+          description: The account ID of the conversation
+        conversationId:
+          type: string
+          description: The conversation ID
+        links:
+          type: array
+          description: List of links to accept the invitation and open the corresponding conversation.<br> Only one link may be used.
+          items:
+            $ref: '#/components/schemas/ConversationLink'
+        expirationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp after which the invitation is no longer valid
     Account:
       type: object
       description: Model of an account. The contact and the billing address can be directly resolved when using the expand feature.
@@ -13753,7 +13837,7 @@ components:
         expirationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp after witch the invitation is no longer valid
+          description: Unix timestamp after which the invitation is no longer valid
     ConversationInvitationOrderBy:
       type: object
       description: Conversation orderBy item.
@@ -17270,7 +17354,7 @@ components:
       - USER_DB
       - VIRTUAL
       x-enum-descriptions:
-      - "USER_DB: The source of the person is the ${link User} entity"
+      - "USER_DB: The source of the person is the ${link User} entity, so the `Person` is considered to be physical"
       - "VIRTUAL: The source of the person is virtual, that is, the individual is either anonymous or their identity was propagated by a single sign-on (SSO) mechanism."
     EPersonSourceOperatorType:
       type: string
@@ -19410,6 +19494,13 @@ components:
         comment:
           type: string
           description: Invitation comment. Optional.
+    InvitationsGetAcceptLinkBody:
+      type: object
+      description: Request Body for the 'invitationsGetAcceptLink' operation
+      properties:
+        token:
+          type: string
+          description: to return the links for
     InvitationsInviteAgentToConversationBody:
       type: object
       description: Request Body for the 'invitationsInviteAgentToConversation' operation
@@ -24446,7 +24537,7 @@ components:
           description: "True if the user is externally managed and cannot be edited in the Unblu user interface. If omitted, the property is set to false."
         virtualUser:
           type: boolean
-          description: "True if the user is pure virtual (i.e. not created beforehand by LDAP sync for instance) and therefore can not be edited by the Unblu user interface. If omitted, the property is set to false."
+          description: "True if the user is purely virtual (they weren't created as the result of an LDAP sync, for instance) and thus can't be edited in the Unblu UI. If omitted, the property is set to false, and the user is considered to be a physical user."
         configuration:
           type: object
           description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
@@ -24659,6 +24750,13 @@ components:
           $ref: '#/components/schemas/EUserSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    UsersTransformVirtualToPhysicalBody:
+      type: object
+      description: Request Body for the 'usersTransformVirtualToPhysical' operation
+      properties:
+        username:
+          type: string
+          description: The username of the User entity that should be converted to a physical user
     UsersUpdatePasswordBody:
       type: object
       description: Request Body for the 'usersUpdatePassword' operation
@@ -24993,10 +25091,22 @@ components:
           description: The full send request
         requestSentTableColumn:
           type: string
-          description: "If the request data were larger then 2000 bytes, the first 2000 bytes are stored in this field. The other part is stored in the blob-store. See`requestFileStoreId`."
+          description: "First part of the request payload. If it is bigger than 2000 bytes, it will be splitted to the next request payload column(s)."
+        requestSentTableColumn2:
+          type: string
+          description: "Second part of the request payload. If it is bigger than 4000 bytes, it will be splitted to the next request payload column(s)."
+        requestSentTableColumn3:
+          type: string
+          description: "Third part of the request payload. If it is bigger than 6000 bytes, it will be splitted to the next request payload column(s)."
+        requestSentTableColumn4:
+          type: string
+          description: "Fourth part of the request payload. If it is bigger than 8000 bytes, it will be splitted to the next request payload column(s)."
+        requestSentTableColumn5:
+          type: string
+          description: "Fifth part of the request payload. If it is bigger than 10000 bytes, it will be stored in the blob store."
         requestFileStoreId:
           type: string
-          description: "If the request data were larger then 2000 bytes, the first 2000 btes are stored in `requestSentTableColumn`. The others are stored behind this blob store id."
+          description: "If request payload is larger than 10000 bytes: stores whole data in the blob-store (see file_store_id)"
         httpResponseCode:
           type: integer
           format: int32

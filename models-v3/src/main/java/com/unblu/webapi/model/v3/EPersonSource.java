@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EPersonSource {
 
 	/**
-	 * USER_DB: The source of the person is the ${link User} entity
+	 * USER_DB: The source of the person is the ${link User} entity, so the &#x60;Person&#x60; is considered to be physical
 	 */
 	USER_DB("USER_DB"),
 

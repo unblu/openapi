@@ -66,4 +66,9 @@ public class ExpandableField<T> {
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ExpandableField [id=" + id + ", expandedObject=" + expandedObject + "]";
+	}
 }

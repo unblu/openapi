@@ -16,6 +16,7 @@ import com.unblu.webapi.model.v3.User;
 import com.unblu.webapi.model.v3.UserPasswordContainer;
 import com.unblu.webapi.model.v3.UserQuery;
 import com.unblu.webapi.model.v3.UserResult;
+import com.unblu.webapi.model.v3.UsersTransformVirtualToPhysicalBody;
 import com.unblu.webapi.model.v3.UsersUpdatePasswordBody;
 
 public class UsersApi {
@@ -703,6 +704,65 @@ public class UsersApi {
 		String[] localVarAuthNames = new String[] { "basicAuth" };
 
 		GenericType<UserResult> localVarReturnType = new GenericType<UserResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * transformVirtualToPhysical Converts the user with the given username from a virtual to a physical user. This also changes the related &#x60;Person&#x60;
+	 * entity to a physical&#x60;Person&#x60;. If the user&#39;s already physical, the user is simply returned. If no user with the given username exists, the
+	 * endpoint returns an error.&lt;br&gt;
+	 * 
+	 * @param usersTransformVirtualToPhysicalBody (required)
+	 * @param expand (optional)
+	 * @return User
+	 * @throws ApiException if fails to make API call
+	 */
+	public User usersTransformVirtualToPhysical(UsersTransformVirtualToPhysicalBody usersTransformVirtualToPhysicalBody, String expand) throws ApiException {
+		return usersTransformVirtualToPhysicalWithHttpInfo(usersTransformVirtualToPhysicalBody, expand).getData();
+	}
+
+	/**
+	 * transformVirtualToPhysical Converts the user with the given username from a virtual to a physical user. This also changes the related &#x60;Person&#x60;
+	 * entity to a physical&#x60;Person&#x60;. If the user&#39;s already physical, the user is simply returned. If no user with the given username exists, the
+	 * endpoint returns an error.&lt;br&gt;
+	 * 
+	 * @param usersTransformVirtualToPhysicalBody (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;User&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<User> usersTransformVirtualToPhysicalWithHttpInfo(UsersTransformVirtualToPhysicalBody usersTransformVirtualToPhysicalBody, String expand) throws ApiException {
+		Object localVarPostBody = usersTransformVirtualToPhysicalBody;
+
+		// verify the required parameter 'usersTransformVirtualToPhysicalBody' is set
+		if (usersTransformVirtualToPhysicalBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'usersTransformVirtualToPhysicalBody' when calling usersTransformVirtualToPhysical");
+		}
+
+		// create path and map variables
+		String localVarPath = "/users/transformVirtualToPhysical";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

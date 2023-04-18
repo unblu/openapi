@@ -472,12 +472,12 @@ public class User {
 	}
 
 	/**
-	 * True if the user is pure virtual (i.e. not created beforehand by LDAP sync for instance) and therefore can not be edited by the Unblu user interface. If
-	 * omitted, the property is set to false.
+	 * True if the user is purely virtual (they weren&#39;t created as the result of an LDAP sync, for instance) and thus can&#39;t be edited in the Unblu UI. If
+	 * omitted, the property is set to false, and the user is considered to be a physical user.
 	 * 
 	 * @return virtualUser
 	 **/
-	@ApiModelProperty(value = "True if the user is pure virtual (i.e. not created beforehand by LDAP sync for instance) and therefore can not be edited by the Unblu user interface. If omitted, the property is set to false.")
+	@ApiModelProperty(value = "True if the user is purely virtual (they weren't created as the result of an LDAP sync, for instance) and thus can't be edited in the Unblu UI. If omitted, the property is set to false, and the user is considered to be a physical user.")
 	public Boolean isVirtualUser() {
 		return virtualUser;
 	}

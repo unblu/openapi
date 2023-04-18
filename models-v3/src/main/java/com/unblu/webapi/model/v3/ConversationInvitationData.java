@@ -564,11 +564,11 @@ public class ConversationInvitationData {
 	}
 
 	/**
-	 * Unix timestamp after witch the invitation is no longer valid
+	 * Unix timestamp after which the invitation is no longer valid
 	 * 
 	 * @return expirationTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp after witch the invitation is no longer valid")
+	@ApiModelProperty(value = "Unix timestamp after which the invitation is no longer valid")
 	public Long getExpirationTimestamp() {
 		return expirationTimestamp;
 	}

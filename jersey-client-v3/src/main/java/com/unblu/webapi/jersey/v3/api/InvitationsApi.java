@@ -12,6 +12,7 @@ import com.unblu.webapi.jersey.v3.invoker.ApiException;
 import com.unblu.webapi.jersey.v3.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v3.invoker.Configuration;
 import com.unblu.webapi.jersey.v3.invoker.Pair;
+import com.unblu.webapi.model.v3.AcceptLinkData;
 import com.unblu.webapi.model.v3.ConversationInvitationData;
 import com.unblu.webapi.model.v3.ConversationInvitationQuery;
 import com.unblu.webapi.model.v3.ConversationInvitationResult;
@@ -19,6 +20,7 @@ import com.unblu.webapi.model.v3.InvitationsAddSecondaryInvitationTargetBody;
 import com.unblu.webapi.model.v3.InvitationsCancelSecondaryInvitationTargetBody;
 import com.unblu.webapi.model.v3.InvitationsForwardConversationToAgentBody;
 import com.unblu.webapi.model.v3.InvitationsForwardConversationToTeamBody;
+import com.unblu.webapi.model.v3.InvitationsGetAcceptLinkBody;
 import com.unblu.webapi.model.v3.InvitationsInviteAgentToConversationBody;
 import com.unblu.webapi.model.v3.InvitationsInviteAnonymousVisitorToConversationWithEmailBody;
 import com.unblu.webapi.model.v3.InvitationsInviteAnonymousVisitorToConversationWithLinkBody;
@@ -285,6 +287,65 @@ public class InvitationsApi {
 		String[] localVarAuthNames = new String[] { "basicAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * getAcceptLink Returns link(s) to accept the invitation that the conversation invitation token provided is related to. The token is validated first and the
+	 * endpoint only returns links if the validation is successful. If the token is not valid, no longer redeemable (for example, because it&#39;s expired or been
+	 * redeemed by another person), or the rate limit has been reached, the endpoint returns an error.&lt;br&gt; &lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; In environments
+	 * where account ingress isn&#39;t enabled, you must provide the API key using the &lt;code&gt;apiKey&lt;/code&gt; query parameter if this service is called for
+	 * anonymous users. The API key is needed to identify the correct Unblu account.&lt;br&gt;
+	 * 
+	 * @param invitationsGetAcceptLinkBody (required)
+	 * @return AcceptLinkData
+	 * @throws ApiException if fails to make API call
+	 */
+	public AcceptLinkData invitationsGetAcceptLink(InvitationsGetAcceptLinkBody invitationsGetAcceptLinkBody) throws ApiException {
+		return invitationsGetAcceptLinkWithHttpInfo(invitationsGetAcceptLinkBody).getData();
+	}
+
+	/**
+	 * getAcceptLink Returns link(s) to accept the invitation that the conversation invitation token provided is related to. The token is validated first and the
+	 * endpoint only returns links if the validation is successful. If the token is not valid, no longer redeemable (for example, because it&#39;s expired or been
+	 * redeemed by another person), or the rate limit has been reached, the endpoint returns an error.&lt;br&gt; &lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; In environments
+	 * where account ingress isn&#39;t enabled, you must provide the API key using the &lt;code&gt;apiKey&lt;/code&gt; query parameter if this service is called for
+	 * anonymous users. The API key is needed to identify the correct Unblu account.&lt;br&gt;
+	 * 
+	 * @param invitationsGetAcceptLinkBody (required)
+	 * @return ApiResponse&lt;AcceptLinkData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<AcceptLinkData> invitationsGetAcceptLinkWithHttpInfo(InvitationsGetAcceptLinkBody invitationsGetAcceptLinkBody) throws ApiException {
+		Object localVarPostBody = invitationsGetAcceptLinkBody;
+
+		// verify the required parameter 'invitationsGetAcceptLinkBody' is set
+		if (invitationsGetAcceptLinkBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'invitationsGetAcceptLinkBody' when calling invitationsGetAcceptLink");
+		}
+
+		// create path and map variables
+		String localVarPath = "/invitations/getAcceptLink";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<AcceptLinkData> localVarReturnType = new GenericType<AcceptLinkData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

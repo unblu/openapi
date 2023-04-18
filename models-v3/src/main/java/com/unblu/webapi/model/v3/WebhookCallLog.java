@@ -35,6 +35,10 @@ import io.swagger.annotations.ApiModelProperty;
 	WebhookCallLog.JSON_PROPERTY_REQUEST_HEADERS,
 	WebhookCallLog.JSON_PROPERTY_REQUEST_SENT,
 	WebhookCallLog.JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN,
+	WebhookCallLog.JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN2,
+	WebhookCallLog.JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN3,
+	WebhookCallLog.JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN4,
+	WebhookCallLog.JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN5,
 	WebhookCallLog.JSON_PROPERTY_REQUEST_FILE_STORE_ID,
 	WebhookCallLog.JSON_PROPERTY_HTTP_RESPONSE_CODE,
 	WebhookCallLog.JSON_PROPERTY_HTTP_RESPONSE_REASON,
@@ -142,6 +146,22 @@ public class WebhookCallLog {
 	public static final String JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN = "requestSentTableColumn";
 	@JsonProperty(JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN)
 	private String requestSentTableColumn;
+
+	public static final String JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN2 = "requestSentTableColumn2";
+	@JsonProperty(JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN2)
+	private String requestSentTableColumn2;
+
+	public static final String JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN3 = "requestSentTableColumn3";
+	@JsonProperty(JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN3)
+	private String requestSentTableColumn3;
+
+	public static final String JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN4 = "requestSentTableColumn4";
+	@JsonProperty(JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN4)
+	private String requestSentTableColumn4;
+
+	public static final String JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN5 = "requestSentTableColumn5";
+	@JsonProperty(JSON_PROPERTY_REQUEST_SENT_TABLE_COLUMN5)
+	private String requestSentTableColumn5;
 
 	public static final String JSON_PROPERTY_REQUEST_FILE_STORE_ID = "requestFileStoreId";
 	@JsonProperty(JSON_PROPERTY_REQUEST_FILE_STORE_ID)
@@ -472,12 +492,11 @@ public class WebhookCallLog {
 	}
 
 	/**
-	 * If the request data were larger then 2000 bytes, the first 2000 bytes are stored in this field. The other part is stored in the blob-store.
-	 * See&#x60;requestFileStoreId&#x60;.
+	 * First part of the request payload. If it is bigger than 2000 bytes, it will be splitted to the next request payload column(s).
 	 * 
 	 * @return requestSentTableColumn
 	 **/
-	@ApiModelProperty(value = "If the request data were larger then 2000 bytes, the first 2000 bytes are stored in this field. The other part is stored in the blob-store. See`requestFileStoreId`.")
+	@ApiModelProperty(value = "First part of the request payload. If it is bigger than 2000 bytes, it will be splitted to the next request payload column(s).")
 	public String getRequestSentTableColumn() {
 		return requestSentTableColumn;
 	}
@@ -486,18 +505,93 @@ public class WebhookCallLog {
 		this.requestSentTableColumn = requestSentTableColumn;
 	}
 
+	public WebhookCallLog requestSentTableColumn2(String requestSentTableColumn2) {
+		this.requestSentTableColumn2 = requestSentTableColumn2;
+		return this;
+	}
+
+	/**
+	 * Second part of the request payload. If it is bigger than 4000 bytes, it will be splitted to the next request payload column(s).
+	 * 
+	 * @return requestSentTableColumn2
+	 **/
+	@ApiModelProperty(value = "Second part of the request payload. If it is bigger than 4000 bytes, it will be splitted to the next request payload column(s).")
+	public String getRequestSentTableColumn2() {
+		return requestSentTableColumn2;
+	}
+
+	public void setRequestSentTableColumn2(String requestSentTableColumn2) {
+		this.requestSentTableColumn2 = requestSentTableColumn2;
+	}
+
+	public WebhookCallLog requestSentTableColumn3(String requestSentTableColumn3) {
+		this.requestSentTableColumn3 = requestSentTableColumn3;
+		return this;
+	}
+
+	/**
+	 * Third part of the request payload. If it is bigger than 6000 bytes, it will be splitted to the next request payload column(s).
+	 * 
+	 * @return requestSentTableColumn3
+	 **/
+	@ApiModelProperty(value = "Third part of the request payload. If it is bigger than 6000 bytes, it will be splitted to the next request payload column(s).")
+	public String getRequestSentTableColumn3() {
+		return requestSentTableColumn3;
+	}
+
+	public void setRequestSentTableColumn3(String requestSentTableColumn3) {
+		this.requestSentTableColumn3 = requestSentTableColumn3;
+	}
+
+	public WebhookCallLog requestSentTableColumn4(String requestSentTableColumn4) {
+		this.requestSentTableColumn4 = requestSentTableColumn4;
+		return this;
+	}
+
+	/**
+	 * Fourth part of the request payload. If it is bigger than 8000 bytes, it will be splitted to the next request payload column(s).
+	 * 
+	 * @return requestSentTableColumn4
+	 **/
+	@ApiModelProperty(value = "Fourth part of the request payload. If it is bigger than 8000 bytes, it will be splitted to the next request payload column(s).")
+	public String getRequestSentTableColumn4() {
+		return requestSentTableColumn4;
+	}
+
+	public void setRequestSentTableColumn4(String requestSentTableColumn4) {
+		this.requestSentTableColumn4 = requestSentTableColumn4;
+	}
+
+	public WebhookCallLog requestSentTableColumn5(String requestSentTableColumn5) {
+		this.requestSentTableColumn5 = requestSentTableColumn5;
+		return this;
+	}
+
+	/**
+	 * Fifth part of the request payload. If it is bigger than 10000 bytes, it will be stored in the blob store.
+	 * 
+	 * @return requestSentTableColumn5
+	 **/
+	@ApiModelProperty(value = "Fifth part of the request payload. If it is bigger than 10000 bytes, it will be stored in the blob store.")
+	public String getRequestSentTableColumn5() {
+		return requestSentTableColumn5;
+	}
+
+	public void setRequestSentTableColumn5(String requestSentTableColumn5) {
+		this.requestSentTableColumn5 = requestSentTableColumn5;
+	}
+
 	public WebhookCallLog requestFileStoreId(String requestFileStoreId) {
 		this.requestFileStoreId = requestFileStoreId;
 		return this;
 	}
 
 	/**
-	 * If the request data were larger then 2000 bytes, the first 2000 btes are stored in &#x60;requestSentTableColumn&#x60;. The others are stored behind this blob
-	 * store id.
+	 * If request payload is larger than 10000 bytes: stores whole data in the blob-store (see file_store_id)
 	 * 
 	 * @return requestFileStoreId
 	 **/
-	@ApiModelProperty(value = "If the request data were larger then 2000 bytes, the first 2000 btes are stored in `requestSentTableColumn`. The others are stored behind this blob store id.")
+	@ApiModelProperty(value = "If request payload is larger than 10000 bytes: stores whole data in the blob-store (see file_store_id)")
 	public String getRequestFileStoreId() {
 		return requestFileStoreId;
 	}
@@ -666,6 +760,10 @@ public class WebhookCallLog {
 				Objects.equals(this.requestHeaders, webhookCallLog.requestHeaders) &&
 				Objects.equals(this.requestSent, webhookCallLog.requestSent) &&
 				Objects.equals(this.requestSentTableColumn, webhookCallLog.requestSentTableColumn) &&
+				Objects.equals(this.requestSentTableColumn2, webhookCallLog.requestSentTableColumn2) &&
+				Objects.equals(this.requestSentTableColumn3, webhookCallLog.requestSentTableColumn3) &&
+				Objects.equals(this.requestSentTableColumn4, webhookCallLog.requestSentTableColumn4) &&
+				Objects.equals(this.requestSentTableColumn5, webhookCallLog.requestSentTableColumn5) &&
 				Objects.equals(this.requestFileStoreId, webhookCallLog.requestFileStoreId) &&
 				Objects.equals(this.httpResponseCode, webhookCallLog.httpResponseCode) &&
 				Objects.equals(this.httpResponseReason, webhookCallLog.httpResponseReason) &&
@@ -678,7 +776,7 @@ public class WebhookCallLog {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, registrationId, requestId, executionTimestamp, endpoint, retryNr, callId, eventName, requestHeaders, requestSent, requestSentTableColumn, requestFileStoreId, httpResponseCode, httpResponseReason, httpResponseHeaders, responseFromServer, responseFromServerTableColumn, responseMimeType, responseFileStoreId);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, registrationId, requestId, executionTimestamp, endpoint, retryNr, callId, eventName, requestHeaders, requestSent, requestSentTableColumn, requestSentTableColumn2, requestSentTableColumn3, requestSentTableColumn4, requestSentTableColumn5, requestFileStoreId, httpResponseCode, httpResponseReason, httpResponseHeaders, responseFromServer, responseFromServerTableColumn, responseMimeType, responseFileStoreId);
 	}
 
 	@Override
@@ -701,6 +799,10 @@ public class WebhookCallLog {
 		sb.append("    requestHeaders: ").append(toIndentedString(requestHeaders)).append("\n");
 		sb.append("    requestSent: ").append(toIndentedString(requestSent)).append("\n");
 		sb.append("    requestSentTableColumn: ").append(toIndentedString(requestSentTableColumn)).append("\n");
+		sb.append("    requestSentTableColumn2: ").append(toIndentedString(requestSentTableColumn2)).append("\n");
+		sb.append("    requestSentTableColumn3: ").append(toIndentedString(requestSentTableColumn3)).append("\n");
+		sb.append("    requestSentTableColumn4: ").append(toIndentedString(requestSentTableColumn4)).append("\n");
+		sb.append("    requestSentTableColumn5: ").append(toIndentedString(requestSentTableColumn5)).append("\n");
 		sb.append("    requestFileStoreId: ").append(toIndentedString(requestFileStoreId)).append("\n");
 		sb.append("    httpResponseCode: ").append(toIndentedString(httpResponseCode)).append("\n");
 		sb.append("    httpResponseReason: ").append(toIndentedString(httpResponseReason)).append("\n");
