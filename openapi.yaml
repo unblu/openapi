@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.28.1
+  version: 7.28.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
