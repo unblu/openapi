@@ -169,7 +169,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonData> personsGetBySourceWithHttpInfo(EPersonSource personSource, String sourceId, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/persons/getBySource";
@@ -221,7 +221,7 @@ public class PersonsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonData> personsReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/persons/read";

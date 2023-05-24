@@ -71,7 +71,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> authenticatorAuthenticateWithTokenWithHttpInfo(String authenticationToken, String redirectOnSuccess, String redirectOnFailure) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/authenticateWithToken";
@@ -178,7 +178,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Boolean> authenticatorChangePasswordLegacyGetWithHttpInfo(String oldPassword, String newPassword) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/changePassword";
@@ -282,7 +282,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<List<String>> authenticatorCheckPasswordAgainstPolicyLegacyGetWithHttpInfo(String password) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/checkPasswordAgainstPolicy";
@@ -328,7 +328,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> authenticatorCheckSuperAdminPasswordFileWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/checkSuperAdminPasswordFile";
@@ -423,7 +423,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<String> authenticatorCreateAuthenticationTokenForCurrentUserWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/createAuthenticationTokenForCurrentUser";
@@ -471,7 +471,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<String> authenticatorCreateAuthenticationTokenForCurrentUserLegacyGetWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/createAuthenticationTokenForCurrentUser";
@@ -523,7 +523,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<String> authenticatorCreateAuthenticationTokenLegacyGetWithHttpInfo(String username, String password) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/createAuthenticationToken";
@@ -570,7 +570,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<String> authenticatorGetAuthenticatedUserDisplayNameWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/getAuthenticatedUserDisplayName";
@@ -614,7 +614,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<String> authenticatorGetAuthenticatedUserNameWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/getAuthenticatedUserName";
@@ -660,7 +660,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<CompactUser> authenticatorGetCompactUserWithHttpInfo(String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/getCompactUser";
@@ -706,7 +706,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<String> authenticatorGetUserIdWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/getUserId";
@@ -750,7 +750,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Permissions> authenticatorGetUserPermissionsWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/getUserPermissions";
@@ -794,7 +794,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<String> authenticatorGetUserRoleWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/getUserRole";
@@ -903,7 +903,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Boolean> authenticatorImpersonateLegacyGetWithHttpInfo(String username, String userId, Boolean superUser, String redirectOnSuccess, String redirectOnFailure) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/impersonate";
@@ -953,7 +953,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> authenticatorIsAuthenticatedWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/isAuthenticated";
@@ -997,7 +997,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> authenticatorIsRegisteredUserWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/isRegisteredUser";
@@ -1041,7 +1041,7 @@ public class AuthenticatorApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> authenticatorIsSuperAdminWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/isSuperAdmin";
@@ -1152,7 +1152,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Boolean> authenticatorLoginLegacyGetWithHttpInfo(String username, String password, String redirectOnSuccess, String redirectOnFailure) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/login";
@@ -1304,7 +1304,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> authenticatorLogoutLegacyGetWithHttpInfo(String redirectOnSuccess) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/logout";
@@ -1407,7 +1407,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Boolean> authenticatorResetImpersonationLegacyGetWithHttpInfo(String redirectOnSuccess, String redirectOnFailure) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/resetImpersonation";
@@ -1507,7 +1507,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> authenticatorSendPasswordResetMailLegacyGetWithHttpInfo(String username) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/sendPasswordResetMail";
@@ -1608,7 +1608,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> authenticatorSetDefaultLocaleLegacyGetWithHttpInfo(String locale) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/setDefaultLocale";
@@ -1711,7 +1711,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> authenticatorSetNewPasswordLegacyGetWithHttpInfo(String authenticationToken, String password) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/setNewPassword";
@@ -1821,7 +1821,7 @@ public class AuthenticatorApi {
 	 */
 	@Deprecated
 	public ApiResponse<Boolean> authenticatorSwitchToAccountLegacyGetWithHttpInfo(String accountId, String redirectOnSuccess, String redirectOnFailure) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/authenticator/switchToAccount";

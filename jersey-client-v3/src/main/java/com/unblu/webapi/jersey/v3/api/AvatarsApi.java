@@ -103,7 +103,7 @@ public class AvatarsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Avatar> avatarsReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/avatars/read";

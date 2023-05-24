@@ -128,7 +128,7 @@ public class BotsApi {
 	 */
 	@Deprecated
 	public ApiResponse<String> botsAcceptDialogOfferLegacyGetWithHttpInfo(String dialogOfferToken) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/acceptDialogOffer";
@@ -378,7 +378,7 @@ public class BotsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> botsDeclineDialogOfferLegacyGetWithHttpInfo(String dialogOfferToken) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/declineDialogOffer";
@@ -423,7 +423,7 @@ public class BotsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> botsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/delete";
@@ -472,7 +472,7 @@ public class BotsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> botsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/delete";
@@ -575,7 +575,7 @@ public class BotsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> botsDialogMessageDeliveredLegacyGetWithHttpInfo(String dialogToken, String messageId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/dialogMessageDelivered";
@@ -679,7 +679,7 @@ public class BotsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> botsDialogMessageReadLegacyGetWithHttpInfo(String dialogToken, String messageId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/dialogMessageRead";
@@ -859,7 +859,7 @@ public class BotsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> botsFinishDialogLegacyGetWithHttpInfo(String dialogToken, EBotDialogFinishReason reason) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/finishDialog";
@@ -906,7 +906,7 @@ public class BotsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<DialogBotData> botsGetByNameWithHttpInfo(String name) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/getByName";
@@ -1005,7 +1005,7 @@ public class BotsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> botsPingWebhookLegacyGetWithHttpInfo(String dialogBotId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/pingWebhook";
@@ -1051,7 +1051,7 @@ public class BotsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<DialogBotData> botsReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/bots/read";

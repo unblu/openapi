@@ -54,7 +54,7 @@ public class PersonPresencesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<PersonPresenceData> personPresencesReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/personpresences/read";

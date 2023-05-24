@@ -144,7 +144,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsAddParticipantLegacyGetWithHttpInfo(String conversationId, String expand, String personId, Boolean connectedViaExternalMessenger, Boolean hidden, Boolean conversationStarred) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -275,7 +275,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsChangeParticipantVisibilityLegacyGetWithHttpInfo(String conversationId, String expand, String personId, Boolean hidden) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -387,7 +387,7 @@ public class ConversationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> conversationsDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/delete";
@@ -436,7 +436,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> conversationsDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/delete";
@@ -555,7 +555,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsEndLegacyGetWithHttpInfo(String conversationId, String expand, EConversationEndReason reason, String comment) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -615,7 +615,7 @@ public class ConversationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationData> conversationsGetBySourceIdAndChannelIdWithHttpInfo(String sourceId, String externalMessengerChannelId, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/getBySourceIdAndChannelId";
@@ -665,7 +665,7 @@ public class ConversationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<List<ConversationFileData>> conversationsGetConversationFilesWithHttpInfo(String conversationId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -792,7 +792,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsOffboardParticipantLegacyGetWithHttpInfo(String conversationId, String expand, String personId, EConversationLeftReason reason, String comment) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -851,7 +851,7 @@ public class ConversationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationData> conversationsReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/conversations/read";
@@ -1030,7 +1030,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsSetAssigneePersonLegacyGetWithHttpInfo(String conversationId, String expand, String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -1160,7 +1160,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsSetContextPersonLegacyGetWithHttpInfo(String conversationId, String expand, String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {
@@ -1286,7 +1286,7 @@ public class ConversationsApi {
 	 */
 	@Deprecated
 	public ApiResponse<ConversationData> conversationsSetLocaleLegacyGetWithHttpInfo(String conversationId, String expand, String locale) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
 		if (conversationId == null) {

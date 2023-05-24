@@ -60,7 +60,7 @@ public class AvailabilityApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<EAvailabilityState> availabilityGetAgentAvailabilityWithHttpInfo(String locale, String namedAreaSiteId, String apiKey) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/availability/getAgentAvailability";

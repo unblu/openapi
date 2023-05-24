@@ -108,7 +108,7 @@ public class NamedAreasApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> namedAreasDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/namedareas/delete";
@@ -157,7 +157,7 @@ public class NamedAreasApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> namedAreasDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/namedareas/delete";
@@ -201,7 +201,7 @@ public class NamedAreasApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Integer> namedAreasGetQuotaUsageWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/namedareas/getQuotaUsage";
@@ -249,7 +249,7 @@ public class NamedAreasApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<NamedArea> namedAreasReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/namedareas/read";

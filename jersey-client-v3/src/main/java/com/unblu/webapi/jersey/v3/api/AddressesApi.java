@@ -104,7 +104,7 @@ public class AddressesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> addressesDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/addresses/delete";
@@ -153,7 +153,7 @@ public class AddressesApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> addressesDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/addresses/delete";
@@ -199,7 +199,7 @@ public class AddressesApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Address> addressesReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/addresses/read";

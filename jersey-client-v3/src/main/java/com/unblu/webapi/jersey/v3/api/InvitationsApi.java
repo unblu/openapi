@@ -443,7 +443,7 @@ public class InvitationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationInvitationData> invitationsRenewPinWithHttpInfo(String invitationId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'invitationId' is set
 		if (invitationId == null) {
@@ -550,7 +550,7 @@ public class InvitationsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ConversationInvitationData> invitationsRevokeWithHttpInfo(String invitationId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'invitationId' is set
 		if (invitationId == null) {

@@ -114,7 +114,7 @@ public class ExternalMessengersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> externalMessengersDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/externalmessengers/delete";
@@ -163,7 +163,7 @@ public class ExternalMessengersApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> externalMessengersDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/externalmessengers/delete";
@@ -211,7 +211,7 @@ public class ExternalMessengersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ExternalMessengerChannel> externalMessengersGetByNameWithHttpInfo(String name, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/externalmessengers/getByName";
@@ -325,7 +325,7 @@ public class ExternalMessengersApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> externalMessengersMessageDeliveredLegacyGetWithHttpInfo(String conversationId, String externalMessengerChannelId, String messageId, String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/externalmessengers/messageDelivered";
@@ -435,7 +435,7 @@ public class ExternalMessengersApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> externalMessengersMessageReadLegacyGetWithHttpInfo(String conversationId, String externalMessengerChannelId, String messageId, String personId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/externalmessengers/messageRead";
@@ -641,7 +641,7 @@ public class ExternalMessengersApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> externalMessengersPingCustomChannelLegacyGetWithHttpInfo(String externalMessengerChannelId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/externalmessengers/pingCustomChannel";
@@ -689,7 +689,7 @@ public class ExternalMessengersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<ExternalMessengerChannel> externalMessengersReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/externalmessengers/read";

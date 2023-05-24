@@ -222,7 +222,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> usersDeleteWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/delete";
@@ -271,7 +271,7 @@ public class UsersApi {
 	 */
 	@Deprecated
 	public ApiResponse<Void> usersDeleteLegacyGetWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/delete";
@@ -319,7 +319,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> usersDoesUserLoginExistWithHttpInfo(String username) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/doesUserLoginExist";
@@ -369,7 +369,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<User> usersGetByUsernameWithHttpInfo(String username, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/getByUsername";
@@ -416,7 +416,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Integer> usersGetQuotaUsageWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/getQuotaUsage";
@@ -462,7 +462,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> usersIsSuperUserWithHttpInfo(String userId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/isSuperUser";
@@ -512,7 +512,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> usersIsUsernameAvailableWithHttpInfo(String name, String userId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/isUsernameAvailable";
@@ -563,7 +563,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<User> usersReadWithHttpInfo(String id, String expand) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/read";
@@ -897,7 +897,7 @@ public class UsersApi {
 	 */
 	@Deprecated
 	public ApiResponse<User> usersUpdatePasswordLegacyGetWithHttpInfo(String expand, String userId, String password) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/updatePassword";
@@ -1059,7 +1059,7 @@ public class UsersApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Boolean> usersUserHasPasswordWithHttpInfo(String userId) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/users/userHasPassword";

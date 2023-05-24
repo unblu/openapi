@@ -54,7 +54,7 @@ public class WebhookCallLogsApi {
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<WebhookCallLog> webhookCallLogsReadWithHttpInfo(String id) throws ApiException {
-		Object localVarPostBody = new Object();
+		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
 		String localVarPath = "/webhookcalllogs/read";
