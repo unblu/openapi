@@ -31,6 +31,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryMessageData.JSON_PROPERTY_INTERNAL,
 	ConversationHistoryMessageData.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
 	ConversationHistoryMessageData.JSON_PROPERTY_BOT_THREAD_ID,
+	ConversationHistoryMessageData.JSON_PROPERTY_REJECTION_SEVERITY,
+	ConversationHistoryMessageData.JSON_PROPERTY_REJECTION_REASON,
 	ConversationHistoryMessageData.JSON_PROPERTY_TEXT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -107,6 +109,14 @@ public class ConversationHistoryMessageData {
 	public static final String JSON_PROPERTY_BOT_THREAD_ID = "botThreadId";
 	@JsonProperty(JSON_PROPERTY_BOT_THREAD_ID)
 	private String botThreadId;
+
+	public static final String JSON_PROPERTY_REJECTION_SEVERITY = "rejectionSeverity";
+	@JsonProperty(JSON_PROPERTY_REJECTION_SEVERITY)
+	private ESentRejectionSeverity rejectionSeverity;
+
+	public static final String JSON_PROPERTY_REJECTION_REASON = "rejectionReason";
+	@JsonProperty(JSON_PROPERTY_REJECTION_REASON)
+	private String rejectionReason;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -310,6 +320,44 @@ public class ConversationHistoryMessageData {
 		this.botThreadId = botThreadId;
 	}
 
+	public ConversationHistoryMessageData rejectionSeverity(ESentRejectionSeverity rejectionSeverity) {
+		this.rejectionSeverity = rejectionSeverity;
+		return this;
+	}
+
+	/**
+	 * Get rejectionSeverity
+	 * 
+	 * @return rejectionSeverity
+	 **/
+	@ApiModelProperty(value = "")
+	public ESentRejectionSeverity getRejectionSeverity() {
+		return rejectionSeverity;
+	}
+
+	public void setRejectionSeverity(ESentRejectionSeverity rejectionSeverity) {
+		this.rejectionSeverity = rejectionSeverity;
+	}
+
+	public ConversationHistoryMessageData rejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+		return this;
+	}
+
+	/**
+	 * The reason why a message was rejected. Null for messages that weren&#39;t rejected.
+	 * 
+	 * @return rejectionReason
+	 **/
+	@ApiModelProperty(value = "The reason why a message was rejected. Null for messages that weren't rejected.")
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
+
 	public ConversationHistoryMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -348,12 +396,14 @@ public class ConversationHistoryMessageData {
 				Objects.equals(this.internal, conversationHistoryMessageData.internal) &&
 				Objects.equals(this.recipientPersonIds, conversationHistoryMessageData.recipientPersonIds) &&
 				Objects.equals(this.botThreadId, conversationHistoryMessageData.botThreadId) &&
+				Objects.equals(this.rejectionSeverity, conversationHistoryMessageData.rejectionSeverity) &&
+				Objects.equals(this.rejectionReason, conversationHistoryMessageData.rejectionReason) &&
 				Objects.equals(this.text, conversationHistoryMessageData.text);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, recipientPersonIds, botThreadId, text);
+		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text);
 	}
 
 	@Override
@@ -370,6 +420,8 @@ public class ConversationHistoryMessageData {
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
+		sb.append("    rejectionSeverity: ").append(toIndentedString(rejectionSeverity)).append("\n");
+		sb.append("    rejectionReason: ").append(toIndentedString(rejectionReason)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("}");
 		return sb.toString();

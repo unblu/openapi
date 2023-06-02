@@ -643,13 +643,14 @@ public class ConversationData {
 	}
 
 	/**
-	 * The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer&#39;s website will have a value.
-	 * Conversely, conversations initiated from the mobile SDK won&#39;t have an initial engagement URL.&lt;br&gt; Conversations created using the Web API can also
-	 * contain an initial engagement URL if one was provided at creation time.
+	 * The URL where the conversation originated. The following conversations always have an initial engagement URL: &lt;ul&gt; &lt;li&gt;Conversations initiated by
+	 * a visitor on a customer&#39;s website where Unblu is integrated&lt;/li&gt; &lt;li&gt;PIN-based conversations, provided a visitor redeems the PIN on a
+	 * customer&#39;s website where Unblu is integrated&lt;/li&gt; &lt;li&gt;Conversations created using the Web API, provided an initial engagement URL was
+	 * included when the conversation was created&lt;/li&gt; &lt;/ul&gt; Conversations initiated from the mobile SDK don&#39;t have an initial engagement URL.
 	 * 
 	 * @return initialEngagementUrl
 	 **/
-	@ApiModelProperty(value = "The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer's website will have a value. Conversely, conversations initiated from the mobile SDK won't have an initial engagement URL.<br> Conversations created using the Web API can also contain an initial engagement URL if one was provided at creation time.")
+	@ApiModelProperty(value = "The URL where the conversation originated. The following conversations always have an initial engagement URL: <ul> <li>Conversations initiated by a visitor on a customer's website where Unblu is integrated</li> <li>PIN-based conversations, provided a visitor redeems the PIN on a customer's website where Unblu is integrated</li> <li>Conversations created using the Web API, provided an initial engagement URL was included when the conversation was created</li> </ul> Conversations initiated from the mobile SDK don't have an initial engagement URL.")
 	public String getInitialEngagementUrl() {
 		return initialEngagementUrl;
 	}

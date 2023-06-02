@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.29.0
+  version: 7.30.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -48,6 +48,8 @@ tags:
   description: With this service the global Unblu system can be managed.<br> <br> For super-admin the Global object can be expanded to set configuration or translations.
 - name: Invitations
   description: Service to manage conversation invitations
+- name: MessageInterceptors
+  description: "Service to manage message interceptors. Some operations are only valid for some types of message interceptor. Where that is the case, the operation's documentation states which types it applies to."
 - name: NamedAreas
   description: Service to manage named areas.
 - name: PersonPresences
@@ -6809,6 +6811,228 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /messageinterceptors/approveMessage:
+    post:
+      tags:
+      - MessageInterceptors
+      summary: approveMessage
+      description: Approves a message for which approval was requested through a <code>message_interceptor.new_message</code> webhook. <p> This operation is only available for ExternalMessageInterceptor entities. Messages sent to InternalMessageInterceptor entities are approved automatically.<br>
+      operationId: messageInterceptorsApproveMessage
+      requestBody:
+        description: The action to approve a message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApproveMessageAction'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/create:
+    post:
+      tags:
+      - MessageInterceptors
+      summary: create
+      description: Creates a new message interceptor<br>
+      operationId: messageInterceptorsCreate
+      requestBody:
+        description: The message interceptor to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInterceptorData'
+        required: true
+      responses:
+        "200":
+          description: The created message interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageInterceptorData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/delete:
+    delete:
+      tags:
+      - MessageInterceptors
+      summary: delete
+      description: Deletes an existing message interceptor<br>
+      operationId: messageInterceptorsDelete
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the message interceptor which should be deleted
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/getByName:
+    get:
+      tags:
+      - MessageInterceptors
+      summary: getByName
+      description: Searches for an existing message interceptor with the given name<br>
+      operationId: messageInterceptorsGetByName
+      parameters:
+      - name: name
+        in: query
+        description: The name of the message interceptor
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The message interceptor with the given name or <code>null</code> if none is found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageInterceptorData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/pingWebhook:
+    post:
+      tags:
+      - MessageInterceptors
+      summary: pingWebhook
+      description: Emits a `WebhookPingEvent` on the configured webhook for the specified external message interceptor. <p> This operation is only available for ExternalMessageInterceptor entities.<br>
+      operationId: messageInterceptorsPingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInterceptorsPingWebhookBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/read:
+    get:
+      tags:
+      - MessageInterceptors
+      summary: read
+      description: Reads an existing message interceptor<br>
+      operationId: messageInterceptorsRead
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the message interceptor
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The message interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageInterceptorData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/rejectMessage:
+    post:
+      tags:
+      - MessageInterceptors
+      summary: rejectMessage
+      description: Rejects a message for which approval was requested through a <code>message_interceptor.new_message</code> webhook. <p> This operation is only available for ExternalMessageInterceptor entities. Messages sent to InternalMessageInterceptor entities are rejected automatically.<br>
+      operationId: messageInterceptorsRejectMessage
+      requestBody:
+        description: The action to reject a message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectMessageAction'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/search:
+    post:
+      tags:
+      - MessageInterceptors
+      summary: search
+      description: Searches for message interceptors in the current account<br>
+      operationId: messageInterceptorsSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInterceptorQuery'
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageInterceptorResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /messageinterceptors/update:
+    post:
+      tags:
+      - MessageInterceptors
+      summary: update
+      description: Updates an existing message interceptor<br>
+      operationId: messageInterceptorsUpdate
+      requestBody:
+        description: The message interceptor to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInterceptorData'
+        required: true
+      responses:
+        "200":
+          description: The updated message interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageInterceptorData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /namedareas/create:
     post:
       tags:
@@ -9827,6 +10051,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        message_interceptor.message_rejected:
+          '{$request.body#/endpoint}':
+            post:
+              summary: message_interceptor.message_rejected
+              description: An event triggered every time a message is rejected by a message interceptor
+              operationId: messageInterceptorMessageRejectedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/MessageRejectedEvent'
+              responses:
+                "200":
+                  description: OK
         named_area:
           '{$request.body#/endpoint}':
             post:
@@ -11403,6 +11641,18 @@ components:
             $ref: '#/components/schemas/MultichoiceQuestionOption'
         answerStatus:
           $ref: '#/components/schemas/EAnswerStatus'
+    ApproveMessageAction:
+      type: object
+      description: Action used to approve a message for which approval was requested through a <code>message_interceptor.new_message</code> webhook.
+      properties:
+        $_type:
+          type: string
+          default: ApproveMessageAction
+          enum:
+          - ApproveMessageAction
+        token:
+          type: string
+          description: The token used to identify the message this action applies to. The token is received when approval is requested through a <code>message_interceptor.new_message</code> webhook. Each message approval request contains a unique token.
     ArrayBody:
       type: object
       description: "If body consist of multiple complex types, it must be an array, which is represented by this implementation of `IBody`"
@@ -13412,7 +13662,7 @@ components:
           $ref: '#/components/schemas/EConversationEndReason'
         initialEngagementUrl:
           type: string
-          description: "The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer's website will have a value. Conversely, conversations initiated from the mobile SDK won't have an initial engagement URL.<br> Conversations created using the Web API can also contain an initial engagement URL if one was provided at creation time."
+          description: "The URL where the conversation originated. The following conversations always have an initial engagement URL: <ul> <li>Conversations initiated by a visitor on a customer's website where Unblu is integrated</li> <li>PIN-based conversations, provided a visitor redeems the PIN on a customer's website where Unblu is integrated</li> <li>Conversations created using the Web API, provided an initial engagement URL was included when the conversation was created</li> </ul> Conversations initiated from the mobile SDK don't have an initial engagement URL."
         awaitedPersonType:
           $ref: '#/components/schemas/EAwaitedPersonType'
         awaitedPersonTypeChangeTimestamp:
@@ -13615,7 +13865,7 @@ components:
           description: '* Unix timestamp (ms) when this conversation will be automatically deleted. See `getRetentionIntervalConversationSeconds` for details.'
         initialEngagementUrl:
           type: string
-          description: "The URL where the conversation originated. Conversations initiated by a visitor where Unblu was integrated into a customer's website will have a value. Conversely, conversations initiated from the mobile SDK won't have an initial engagement URL.<br> Conversations created using the Web API can also contain an initial engagement URL if one was provided at creation time."
+          description: "The URL where the conversation originated. The following conversations always have an initial engagement URL: <ul> <li>Conversations initiated by a visitor on a customer's website where Unblu is integrated</li> <li>PIN-based conversations, provided a visitor redeems the PIN on a customer's website where Unblu is integrated</li> <li>Conversations created using the Web API, provided an initial engagement URL was included when the conversation was created</li> </ul> Conversations initiated from the mobile SDK don't have an initial engagement URL."
         awaitedPersonType:
           $ref: '#/components/schemas/EAwaitedPersonType'
         awaitedPersonTypeChangeTimestamp:
@@ -13661,6 +13911,11 @@ components:
         botThreadId:
           type: string
           description: ID of the bot thread the message is part of. Always null for messages outside bot threads.
+        rejectionSeverity:
+          $ref: '#/components/schemas/ESentRejectionSeverity'
+        rejectionReason:
+          type: string
+          description: The reason why a message was rejected. Null for messages that weren't rejected.
         text:
           type: string
           description: Text representation of the message.
@@ -14912,6 +15167,19 @@ components:
           - CreationTimestampExternalMessengerChannelSearchFilter
         field:
           $ref: '#/components/schemas/EExternalMessengerChannelSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    CreationTimestampMessageInterceptorSearchFilter:
+      type: object
+      description: CreationTimestampMessageInterceptorSearchFilter
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampMessageInterceptorSearchFilter
+          enum:
+          - CreationTimestampMessageInterceptorSearchFilter
+        field:
+          $ref: '#/components/schemas/EMessageInterceptorSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
     CreationTimestampNamedAreaSearchFilter:
@@ -16925,6 +17193,15 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EInternalMessageInterceptorStatus:
+      type: string
+      description: The status of an internal message interceptor.
+      enum:
+      - ACTIVE
+      - INACTIVE
+      x-enum-descriptions:
+      - "ACTIVE: The interceptor is active and participates in all conversations where it is configured"
+      - "INACTIVE: The interceptor isn't active and doesn't participate in any conversation"
     EInvitationCreatorType:
       type: string
       description: The type of the person/system who created an invitation
@@ -17071,6 +17348,64 @@ components:
       - "LOWER_THAN: Check if the value is lower than the one provided in the operator"
       - "IN_RANGE: Check if the value is in the range of the provided values. Results equal to the provided values are included."
       - "NOT_IN_RANGE: Check if the value is NOT in the range of the provided values. Results equal to the provided values are not included."
+    EMessageInterceptionPoint:
+      type: string
+      description: Identifies the point where an interceptor intercepts messages
+      enum:
+      - BEFORE_PERSISTING
+      - AFTER_PERSISTING
+      x-enum-descriptions:
+      - "BEFORE_PERSISTING: Messages are intercepted before the message is persisted. The first interception takes place on the client side before the message is sent to the server. A second validation occurs before the message is persisted and added to the conversation in case the client-side validation was skipped for some reason. <p> If this point of interception is selected, Unblu doesn't store any information about rejected chat messages. It isn't possible to see rejected chat messages, or to be notified of rejected chat messages through logs or webhooks."
+      - "AFTER_PERSISTING: Messages are intercepted after they've been persisted and added to the conversation. Until the interception phase is over, the messages are only visible to the sender. If the message is rejected, only participation types with the appropriate rights can see the message. <p> If this interception point is chosen, every message is stored in Unblu and can be accessed later. It is possible to receive a webhook and logs when a message is rejected."
+    EMessageInterceptorMessageFilter:
+      type: string
+      enum:
+      - AGENT
+      - VISITOR
+      - ALL
+      x-enum-descriptions:
+      - AGENT
+      - VISITOR
+      - ALL
+    EMessageInterceptorOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EMessageInterceptorSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+    EMessageInterceptorTimeoutBehavior:
+      type: string
+      description: "What should happen with a message when a timeout occurs during interception.<br> If omitted, the value REJECT is used."
+      enum:
+      - REJECT
+      - CONTINUE
+      x-enum-descriptions:
+      - "REJECT: Reject the message when a timeout occurs"
+      - "CONTINUE: Proceed with the message when a timeout occurs"
+    EMessageInterceptorType:
+      type: string
+      enum:
+      - EXTERNAL
+      - INTERNAL
+      x-enum-descriptions:
+      - EXTERNAL
+      - INTERNAL
     EMessageOrderByField:
       type: string
       enum:
@@ -17543,10 +17878,12 @@ components:
       - WEBHOOK_REGISTRATION
       - BOT
       - EXTERNAL_MESSENGER
+      - EXTERNAL_MESSAGE_INTERCEPTOR
       x-enum-descriptions:
       - WEBHOOK_REGISTRATION
       - BOT
       - EXTERNAL_MESSENGER
+      - EXTERNAL_MESSAGE_INTERCEPTOR
     ERegistrationStatus:
       type: string
       description: Possible Webhook Registration Status
@@ -17576,6 +17913,17 @@ components:
       x-enum-descriptions:
       - "RETRYABLE: Message could not be sent, but it is not terminal and can be tried again"
       - "TERMINAL: Message could not be sent and it will not be possible to send it again"
+    ESentRejectionSeverity:
+      type: string
+      description: The severity of the rejection for messages rejected by a message interceptor. This affects how the rejected message is displayed to different participants.
+      enum:
+      - HIGH
+      - MEDIUM
+      - LOW
+      x-enum-descriptions:
+      - "HIGH: The message was rejected with high severity"
+      - "MEDIUM: The message was rejected with medium severity"
+      - "LOW: The message was rejected with low severity"
     EStringOperatorType:
       type: string
       enum:
@@ -18338,6 +18686,53 @@ components:
           $ref: '#/components/schemas/EConversationInvitationSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
+    ExternalMessageInterceptorData:
+      type: object
+      description: Model representing an external message interceptor used to approve or reject messages in a conversation
+      properties:
+        $_type:
+          type: string
+          default: ExternalMessageInterceptorData
+          enum:
+          - ExternalMessageInterceptorData
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the message interceptor. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the message interceptor. Maximum length of 500 characters. Optional.
+        messageFilter:
+          $ref: '#/components/schemas/EMessageInterceptorMessageFilter'
+        timeoutBehavior:
+          $ref: '#/components/schemas/EMessageInterceptorTimeoutBehavior'
+        type:
+          $ref: '#/components/schemas/EMessageInterceptorType'
+        webhookStatus:
+          $ref: '#/components/schemas/ERegistrationStatus'
+        webhookEndpoint:
+          type: string
+          description: "The URL of the webhook registration endpoint. Requests for webhook events are sent to this URL. Maximum length of 4000 characters. <p> The following event is sent to the endpoint: <ul> <li>`TypedEvent.MESSAGE_INTERCEPTOR_NEW_MESSAGE`: On each message in the conversation.</li> </ul>"
+        webhookSecret:
+          type: string
+          description: Optional secret sent with each webhook event <p> Maximum length of 4000 characters.
     ExternalMessengerChannel:
       description: Representation of an external messenger which is linked to the collaboration server.
       oneOf:
@@ -19382,6 +19777,79 @@ components:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
         operator:
           $ref: '#/components/schemas/AuditChangeInteractionTypeOperator'
+    InternalMessageInterceptorData:
+      type: object
+      description: Model representing an internal message interceptor used to approve or reject messages in a conversation
+      properties:
+        $_type:
+          type: string
+          default: InternalMessageInterceptorData
+          enum:
+          - InternalMessageInterceptorData
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the message interceptor. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the message interceptor. Maximum length of 500 characters. Optional.
+        messageFilter:
+          $ref: '#/components/schemas/EMessageInterceptorMessageFilter'
+        timeoutBehavior:
+          $ref: '#/components/schemas/EMessageInterceptorTimeoutBehavior'
+        type:
+          $ref: '#/components/schemas/EMessageInterceptorType'
+        pointOfInterception:
+          $ref: '#/components/schemas/EMessageInterceptionPoint'
+        language:
+          type: string
+          description: "The IETF BCP 47 language tag of the interceptor. The interceptor only applies to conversations in the language specified. Can be omitted for interceptors that apply to all languages. The following rules apply: <ul> <li>Internal Message Interceptors with no language defined are used for all conversations where they have been configured no matter the language of the conversation.</li> <li>If the conversation language (e.g. \"en-us\") is more specific than the language of the internal message interceptor (e.g. \"en\"), the internal message interceptor is also used.</li> <li>If the language of the internal message interceptor (e.g. \"en-us\") is <i>more</i> specific than the conversation language (e.g. \"en\"), the internal message interceptor <b>isn't</b> used.</li>"
+        regex:
+          type: string
+          description: The regular expression used to identify the messages to reject
+        reason:
+          type: string
+          description: "The reason displayed when a message is rejected. If a localized version of the reason exists in the language of the conversation, the translation is used. Otherwise, this value is used."
+        severity:
+          $ref: '#/components/schemas/ESentRejectionSeverity'
+        status:
+          $ref: '#/components/schemas/EInternalMessageInterceptorStatus'
+        translations:
+          type: object
+          description: A map of localized versions of the reject reason of this entity. The key is the IETF BCP 47 representation of the locale.
+          additionalProperties:
+            $ref: '#/components/schemas/InternalMessageInterceptorTranslation'
+    InternalMessageInterceptorTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: InternalMessageInterceptorTranslation
+          enum:
+          - InternalMessageInterceptorTranslation
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted, the ID is generated by the server."
+        reason:
+          type: string
+          description: "The reason shown when a message is rejected. If a translation of the reason exists in the language of the conversation, it's used. Otherwise this value is used."
     InvitationCreatorTypeOperator:
       oneOf:
       - $ref: '#/components/schemas/EqualsInvitationCreatorTypeOperator'
@@ -20076,6 +20544,95 @@ components:
           $ref: '#/components/schemas/ECannedResponseUsageSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    MessageInterceptorData:
+      oneOf:
+      - $ref: '#/components/schemas/ExternalMessageInterceptorData'
+      - $ref: '#/components/schemas/InternalMessageInterceptorData'
+      discriminator:
+        propertyName: type
+        mapping:
+          EXTERNAL: '#/components/schemas/ExternalMessageInterceptorData'
+          INTERNAL: '#/components/schemas/InternalMessageInterceptorData'
+    MessageInterceptorOrderBy:
+      type: object
+      description: Abstract MessageInterceptor orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: MessageInterceptorOrderBy
+          enum:
+          - MessageInterceptorOrderBy
+        field:
+          $ref: '#/components/schemas/EMessageInterceptorOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    MessageInterceptorQuery:
+      type: object
+      description: Container to search Abstract MessageInterceptor
+      properties:
+        $_type:
+          type: string
+          default: MessageInterceptorQuery
+          enum:
+          - MessageInterceptorQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/MessageInterceptorSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/MessageInterceptorOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    MessageInterceptorResult:
+      type: object
+      description: Container to return list of message interceptors
+      properties:
+        $_type:
+          type: string
+          default: MessageInterceptorResult
+          enum:
+          - MessageInterceptorResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If more items are present on the server, this value can be used as offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/MessageInterceptorData'
+    MessageInterceptorSearchFilter:
+      description: AbstractMessageInterceptorFilter item.
+      oneOf:
+      - $ref: '#/components/schemas/CreationTimestampMessageInterceptorSearchFilter'
+      - $ref: '#/components/schemas/ModificationTimestampMessageInterceptorSearchFilter'
+      - $ref: '#/components/schemas/NameMessageInterceptorSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampMessageInterceptorSearchFilter'
+          MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampMessageInterceptorSearchFilter'
+          NAME: '#/components/schemas/NameMessageInterceptorSearchFilter'
+    MessageInterceptorsPingWebhookBody:
+      type: object
+      description: Request Body for the 'messageInterceptorsPingWebhook' operation
+      properties:
+        interceptorId:
+          type: string
+          description: The ID of an external message interceptor
     MessageOrderBy:
       type: object
       description: Message orderBy item.
@@ -20116,6 +20673,32 @@ components:
           type: integer
           format: int32
           description: Maximal amount of items returned
+    MessageRejectedEvent:
+      type: object
+      description: An event triggered every time a message is rejected by a message interceptor
+      properties:
+        $_type:
+          type: string
+          default: MessageRejectedEvent
+          enum:
+          - MessageRejectedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        message:
+          $ref: '#/components/schemas/MessageData'
+        severity:
+          $ref: '#/components/schemas/ESentRejectionSeverity'
+        reason:
+          type: string
+          description: The reason the message was rejected. <p> Should be localized in the the language of the conversation the message belongs to.
     MessageResult:
       type: object
       description: Container to return list of messages
@@ -20311,6 +20894,18 @@ components:
           - ModificationTimestampExternalMessengerChannelSearchFilter
         field:
           $ref: '#/components/schemas/EExternalMessengerChannelSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    ModificationTimestampMessageInterceptorSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampMessageInterceptorSearchFilter
+          enum:
+          - ModificationTimestampMessageInterceptorSearchFilter
+        field:
+          $ref: '#/components/schemas/EMessageInterceptorSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
     ModificationTimestampNamedAreaSearchFilter:
@@ -20529,6 +21124,18 @@ components:
           - NameExternalMessengerChannelSearchFilter
         field:
           $ref: '#/components/schemas/EExternalMessengerChannelSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    NameMessageInterceptorSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NameMessageInterceptorSearchFilter
+          enum:
+          - NameMessageInterceptorSearchFilter
+        field:
+          $ref: '#/components/schemas/EMessageInterceptorSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
     NameNamedAreaSearchFilter:
@@ -23268,6 +23875,23 @@ components:
           $ref: '#/components/schemas/EWebhookCallLogSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    RejectMessageAction:
+      type: object
+      description: Action used to reject a message for which approval was requested through a <code>message_interceptor.new_message</code> webhook.
+      properties:
+        $_type:
+          type: string
+          default: RejectMessageAction
+          enum:
+          - RejectMessageAction
+        token:
+          type: string
+          description: The token used to identify the message this action applies to. The token is received when approval is requested through a <code>message_interceptor.new_message</code> webhook. Each message approval request contains a unique token.
+        reason:
+          type: string
+          description: The reason explaining why the message was rejected. This reason is displayed as-is to end users.
+        severity:
+          $ref: '#/components/schemas/ESentRejectionSeverity'
     ReplyMessageData:
       type: object
       description: Message to reply to a specific question message.
