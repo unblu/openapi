@@ -39,6 +39,7 @@ import io.swagger.annotations.ApiModelProperty;
 	DialogBotData.JSON_PROPERTY_OFFBOARDING_FILTER,
 	DialogBotData.JSON_PROPERTY_NEEDS_COUNTERPART_PRESENCE,
 	DialogBotData.JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY,
+	DialogBotData.JSON_PROPERTY_AUTOMATIC_TYPING_STATE_HANDLING_ENABLED,
 	DialogBotData.JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -155,6 +156,10 @@ public class DialogBotData {
 	public static final String JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY = "messageStateHandledExternally";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY)
 	private Boolean messageStateHandledExternally;
+
+	public static final String JSON_PROPERTY_AUTOMATIC_TYPING_STATE_HANDLING_ENABLED = "automaticTypingStateHandlingEnabled";
+	@JsonProperty(JSON_PROPERTY_AUTOMATIC_TYPING_STATE_HANDLING_ENABLED)
+	private Boolean automaticTypingStateHandlingEnabled;
 
 	public static final String JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR = "onTimeoutBehavior";
 	@JsonProperty(JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR)
@@ -561,6 +566,26 @@ public class DialogBotData {
 		this.messageStateHandledExternally = messageStateHandledExternally;
 	}
 
+	public DialogBotData automaticTypingStateHandlingEnabled(Boolean automaticTypingStateHandlingEnabled) {
+		this.automaticTypingStateHandlingEnabled = automaticTypingStateHandlingEnabled;
+		return this;
+	}
+
+	/**
+	 * Defines if the bot should automatically display a typing indicator after receiving a message from the counterpart person. The indication starts 1s after the
+	 * message is received. The typing state can also be influenced through the web API, independently of this property.
+	 * 
+	 * @return automaticTypingStateHandlingEnabled
+	 **/
+	@ApiModelProperty(value = "Defines if the bot should automatically display a typing indicator after receiving a message from the counterpart person. The indication starts 1s after the message is received. The typing state can also be influenced through the web API, independently of this property.")
+	public Boolean isAutomaticTypingStateHandlingEnabled() {
+		return automaticTypingStateHandlingEnabled;
+	}
+
+	public void setAutomaticTypingStateHandlingEnabled(Boolean automaticTypingStateHandlingEnabled) {
+		this.automaticTypingStateHandlingEnabled = automaticTypingStateHandlingEnabled;
+	}
+
 	public DialogBotData onTimeoutBehavior(EBotDialogTimeoutBehavior onTimeoutBehavior) {
 		this.onTimeoutBehavior = onTimeoutBehavior;
 		return this;
@@ -609,12 +634,13 @@ public class DialogBotData {
 				Objects.equals(this.offboardingFilter, dialogBotData.offboardingFilter) &&
 				Objects.equals(this.needsCounterpartPresence, dialogBotData.needsCounterpartPresence) &&
 				Objects.equals(this.messageStateHandledExternally, dialogBotData.messageStateHandledExternally) &&
+				Objects.equals(this.automaticTypingStateHandlingEnabled, dialogBotData.automaticTypingStateHandlingEnabled) &&
 				Objects.equals(this.onTimeoutBehavior, dialogBotData.onTimeoutBehavior);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, webhookStatus, webhookEndpoint, webhookSecret, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, messageStateHandledExternally, onTimeoutBehavior);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, webhookStatus, webhookEndpoint, webhookSecret, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, messageStateHandledExternally, automaticTypingStateHandlingEnabled, onTimeoutBehavior);
 	}
 
 	@Override
@@ -641,6 +667,7 @@ public class DialogBotData {
 		sb.append("    offboardingFilter: ").append(toIndentedString(offboardingFilter)).append("\n");
 		sb.append("    needsCounterpartPresence: ").append(toIndentedString(needsCounterpartPresence)).append("\n");
 		sb.append("    messageStateHandledExternally: ").append(toIndentedString(messageStateHandledExternally)).append("\n");
+		sb.append("    automaticTypingStateHandlingEnabled: ").append(toIndentedString(automaticTypingStateHandlingEnabled)).append("\n");
 		sb.append("    onTimeoutBehavior: ").append(toIndentedString(onTimeoutBehavior)).append("\n");
 		sb.append("}");
 		return sb.toString();

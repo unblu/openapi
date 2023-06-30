@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = EqualsConversationEndReasonOperator.class, name = "EQUALS"),
 	@JsonSubTypes.Type(value = InConversationEndReasonOperator.class, name = "IN"),
 	@JsonSubTypes.Type(value = NotEqualsConversationEndReasonOperator.class, name = "NOT_EQUALS"),
+	@JsonSubTypes.Type(value = NotInConversationEndReasonOperator.class, name = "NOT_IN"),
 })
 public interface ConversationEndReasonOperator {
 	void setType(EConversationEndReasonOperatorType type);

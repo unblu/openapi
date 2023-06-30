@@ -13,21 +13,21 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * PauseNotificationsEndTimestampPersonSearchFilter
+ * RegistrationIdWebhookCallLogSearchFilter
  */
 
 @JsonPropertyOrder({
-	PauseNotificationsEndTimestampPersonSearchFilter.JSON_PROPERTY_$_TYPE,
-	PauseNotificationsEndTimestampPersonSearchFilter.JSON_PROPERTY_FIELD,
-	PauseNotificationsEndTimestampPersonSearchFilter.JSON_PROPERTY_OPERATOR,
+	RegistrationIdWebhookCallLogSearchFilter.JSON_PROPERTY_$_TYPE,
+	RegistrationIdWebhookCallLogSearchFilter.JSON_PROPERTY_FIELD,
+	RegistrationIdWebhookCallLogSearchFilter.JSON_PROPERTY_OPERATOR,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class PauseNotificationsEndTimestampPersonSearchFilter {
+public class RegistrationIdWebhookCallLogSearchFilter implements WebhookCallLogSearchFilter {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PAUSENOTIFICATIONSENDTIMESTAMPPERSONSEARCHFILTER("PauseNotificationsEndTimestampPersonSearchFilter");
+		REGISTRATIONIDWEBHOOKCALLLOGSEARCHFILTER("RegistrationIdWebhookCallLogSearchFilter");
 
 		private String value;
 
@@ -52,23 +52,23 @@ public class PauseNotificationsEndTimestampPersonSearchFilter {
 					return b;
 				}
 			}
-			return TypeEnum.PAUSENOTIFICATIONSENDTIMESTAMPPERSONSEARCHFILTER;
+			return TypeEnum.REGISTRATIONIDWEBHOOKCALLLOGSEARCHFILTER;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PAUSENOTIFICATIONSENDTIMESTAMPPERSONSEARCHFILTER;
+	private TypeEnum $type = TypeEnum.REGISTRATIONIDWEBHOOKCALLLOGSEARCHFILTER;
 
 	public static final String JSON_PROPERTY_FIELD = "field";
 	@JsonProperty(JSON_PROPERTY_FIELD)
-	private EPersonStateSearchFilterField field;
+	private EWebhookCallLogSearchFilterField field = EWebhookCallLogSearchFilterField.REGISTRATION_ID;
 
 	public static final String JSON_PROPERTY_OPERATOR = "operator";
 	@JsonProperty(JSON_PROPERTY_OPERATOR)
-	private TimestampOperator operator = null;
+	private StringOperator operator = null;
 
-	public PauseNotificationsEndTimestampPersonSearchFilter $type(TypeEnum $type) {
+	public RegistrationIdWebhookCallLogSearchFilter $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -87,7 +87,7 @@ public class PauseNotificationsEndTimestampPersonSearchFilter {
 		this.$type = $type;
 	}
 
-	public PauseNotificationsEndTimestampPersonSearchFilter field(EPersonStateSearchFilterField field) {
+	public RegistrationIdWebhookCallLogSearchFilter field(EWebhookCallLogSearchFilterField field) {
 		this.field = field;
 		return this;
 	}
@@ -98,15 +98,15 @@ public class PauseNotificationsEndTimestampPersonSearchFilter {
 	 * @return field
 	 **/
 	@ApiModelProperty(value = "")
-	public EPersonStateSearchFilterField getField() {
+	public EWebhookCallLogSearchFilterField getField() {
 		return field;
 	}
 
-	public void setField(EPersonStateSearchFilterField field) {
+	public void setField(EWebhookCallLogSearchFilterField field) {
 		this.field = field;
 	}
 
-	public PauseNotificationsEndTimestampPersonSearchFilter operator(TimestampOperator operator) {
+	public RegistrationIdWebhookCallLogSearchFilter operator(StringOperator operator) {
 		this.operator = operator;
 		return this;
 	}
@@ -117,11 +117,11 @@ public class PauseNotificationsEndTimestampPersonSearchFilter {
 	 * @return operator
 	 **/
 	@ApiModelProperty(value = "")
-	public TimestampOperator getOperator() {
+	public StringOperator getOperator() {
 		return operator;
 	}
 
-	public void setOperator(TimestampOperator operator) {
+	public void setOperator(StringOperator operator) {
 		this.operator = operator;
 	}
 
@@ -133,10 +133,10 @@ public class PauseNotificationsEndTimestampPersonSearchFilter {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PauseNotificationsEndTimestampPersonSearchFilter pauseNotificationsEndTimestampPersonSearchFilter = (PauseNotificationsEndTimestampPersonSearchFilter) o;
-		return Objects.equals(this.$type, pauseNotificationsEndTimestampPersonSearchFilter.$type) &&
-				Objects.equals(this.field, pauseNotificationsEndTimestampPersonSearchFilter.field) &&
-				Objects.equals(this.operator, pauseNotificationsEndTimestampPersonSearchFilter.operator);
+		RegistrationIdWebhookCallLogSearchFilter registrationIdWebhookCallLogSearchFilter = (RegistrationIdWebhookCallLogSearchFilter) o;
+		return Objects.equals(this.$type, registrationIdWebhookCallLogSearchFilter.$type) &&
+				Objects.equals(this.field, registrationIdWebhookCallLogSearchFilter.field) &&
+				Objects.equals(this.operator, registrationIdWebhookCallLogSearchFilter.operator);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class PauseNotificationsEndTimestampPersonSearchFilter {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class PauseNotificationsEndTimestampPersonSearchFilter {\n");
+		sb.append("class RegistrationIdWebhookCallLogSearchFilter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    field: ").append(toIndentedString(field)).append("\n");
 		sb.append("    operator: ").append(toIndentedString(operator)).append("\n");

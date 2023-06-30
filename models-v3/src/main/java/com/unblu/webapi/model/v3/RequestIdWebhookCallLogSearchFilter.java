@@ -13,21 +13,21 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * AwaitedPersonChangeTimestampConversationHistorySearchFilter
+ * RequestIdWebhookCallLogSearchFilter
  */
 
 @JsonPropertyOrder({
-	AwaitedPersonChangeTimestampConversationHistorySearchFilter.JSON_PROPERTY_$_TYPE,
-	AwaitedPersonChangeTimestampConversationHistorySearchFilter.JSON_PROPERTY_FIELD,
-	AwaitedPersonChangeTimestampConversationHistorySearchFilter.JSON_PROPERTY_OPERATOR,
+	RequestIdWebhookCallLogSearchFilter.JSON_PROPERTY_$_TYPE,
+	RequestIdWebhookCallLogSearchFilter.JSON_PROPERTY_FIELD,
+	RequestIdWebhookCallLogSearchFilter.JSON_PROPERTY_OPERATOR,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class AwaitedPersonChangeTimestampConversationHistorySearchFilter {
+public class RequestIdWebhookCallLogSearchFilter implements WebhookCallLogSearchFilter {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		AWAITEDPERSONCHANGETIMESTAMPCONVERSATIONHISTORYSEARCHFILTER("AwaitedPersonChangeTimestampConversationHistorySearchFilter");
+		REQUESTIDWEBHOOKCALLLOGSEARCHFILTER("RequestIdWebhookCallLogSearchFilter");
 
 		private String value;
 
@@ -52,23 +52,23 @@ public class AwaitedPersonChangeTimestampConversationHistorySearchFilter {
 					return b;
 				}
 			}
-			return TypeEnum.AWAITEDPERSONCHANGETIMESTAMPCONVERSATIONHISTORYSEARCHFILTER;
+			return TypeEnum.REQUESTIDWEBHOOKCALLLOGSEARCHFILTER;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.AWAITEDPERSONCHANGETIMESTAMPCONVERSATIONHISTORYSEARCHFILTER;
+	private TypeEnum $type = TypeEnum.REQUESTIDWEBHOOKCALLLOGSEARCHFILTER;
 
 	public static final String JSON_PROPERTY_FIELD = "field";
 	@JsonProperty(JSON_PROPERTY_FIELD)
-	private EConversationHistorySearchFilterField field;
+	private EWebhookCallLogSearchFilterField field = EWebhookCallLogSearchFilterField.REQUEST_ID;
 
 	public static final String JSON_PROPERTY_OPERATOR = "operator";
 	@JsonProperty(JSON_PROPERTY_OPERATOR)
-	private TimestampOperator operator = null;
+	private StringOperator operator = null;
 
-	public AwaitedPersonChangeTimestampConversationHistorySearchFilter $type(TypeEnum $type) {
+	public RequestIdWebhookCallLogSearchFilter $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -87,7 +87,7 @@ public class AwaitedPersonChangeTimestampConversationHistorySearchFilter {
 		this.$type = $type;
 	}
 
-	public AwaitedPersonChangeTimestampConversationHistorySearchFilter field(EConversationHistorySearchFilterField field) {
+	public RequestIdWebhookCallLogSearchFilter field(EWebhookCallLogSearchFilterField field) {
 		this.field = field;
 		return this;
 	}
@@ -98,15 +98,15 @@ public class AwaitedPersonChangeTimestampConversationHistorySearchFilter {
 	 * @return field
 	 **/
 	@ApiModelProperty(value = "")
-	public EConversationHistorySearchFilterField getField() {
+	public EWebhookCallLogSearchFilterField getField() {
 		return field;
 	}
 
-	public void setField(EConversationHistorySearchFilterField field) {
+	public void setField(EWebhookCallLogSearchFilterField field) {
 		this.field = field;
 	}
 
-	public AwaitedPersonChangeTimestampConversationHistorySearchFilter operator(TimestampOperator operator) {
+	public RequestIdWebhookCallLogSearchFilter operator(StringOperator operator) {
 		this.operator = operator;
 		return this;
 	}
@@ -117,11 +117,11 @@ public class AwaitedPersonChangeTimestampConversationHistorySearchFilter {
 	 * @return operator
 	 **/
 	@ApiModelProperty(value = "")
-	public TimestampOperator getOperator() {
+	public StringOperator getOperator() {
 		return operator;
 	}
 
-	public void setOperator(TimestampOperator operator) {
+	public void setOperator(StringOperator operator) {
 		this.operator = operator;
 	}
 
@@ -133,10 +133,10 @@ public class AwaitedPersonChangeTimestampConversationHistorySearchFilter {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		AwaitedPersonChangeTimestampConversationHistorySearchFilter awaitedPersonChangeTimestampConversationHistorySearchFilter = (AwaitedPersonChangeTimestampConversationHistorySearchFilter) o;
-		return Objects.equals(this.$type, awaitedPersonChangeTimestampConversationHistorySearchFilter.$type) &&
-				Objects.equals(this.field, awaitedPersonChangeTimestampConversationHistorySearchFilter.field) &&
-				Objects.equals(this.operator, awaitedPersonChangeTimestampConversationHistorySearchFilter.operator);
+		RequestIdWebhookCallLogSearchFilter requestIdWebhookCallLogSearchFilter = (RequestIdWebhookCallLogSearchFilter) o;
+		return Objects.equals(this.$type, requestIdWebhookCallLogSearchFilter.$type) &&
+				Objects.equals(this.field, requestIdWebhookCallLogSearchFilter.field) &&
+				Objects.equals(this.operator, requestIdWebhookCallLogSearchFilter.operator);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class AwaitedPersonChangeTimestampConversationHistorySearchFilter {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class AwaitedPersonChangeTimestampConversationHistorySearchFilter {\n");
+		sb.append("class RequestIdWebhookCallLogSearchFilter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    field: ").append(toIndentedString(field)).append("\n");
 		sb.append("    operator: ").append(toIndentedString(operator)).append("\n");

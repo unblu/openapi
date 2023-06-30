@@ -15,21 +15,21 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * NotConversationEndReasonOperator
+ * NotInConversationEndReasonOperator
  */
 
 @JsonPropertyOrder({
-	NotConversationEndReasonOperator.JSON_PROPERTY_$_TYPE,
-	NotConversationEndReasonOperator.JSON_PROPERTY_TYPE,
-	NotConversationEndReasonOperator.JSON_PROPERTY_VALUES,
+	NotInConversationEndReasonOperator.JSON_PROPERTY_$_TYPE,
+	NotInConversationEndReasonOperator.JSON_PROPERTY_TYPE,
+	NotInConversationEndReasonOperator.JSON_PROPERTY_VALUES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class NotConversationEndReasonOperator {
+public class NotInConversationEndReasonOperator implements ConversationEndReasonOperator {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		NOTCONVERSATIONENDREASONOPERATOR("NotConversationEndReasonOperator");
+		NOTINCONVERSATIONENDREASONOPERATOR("NotInConversationEndReasonOperator");
 
 		private String value;
 
@@ -54,23 +54,23 @@ public class NotConversationEndReasonOperator {
 					return b;
 				}
 			}
-			return TypeEnum.NOTCONVERSATIONENDREASONOPERATOR;
+			return TypeEnum.NOTINCONVERSATIONENDREASONOPERATOR;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.NOTCONVERSATIONENDREASONOPERATOR;
+	private TypeEnum $type = TypeEnum.NOTINCONVERSATIONENDREASONOPERATOR;
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
-	private EConversationEndReasonOperatorType type;
+	private EConversationEndReasonOperatorType type = EConversationEndReasonOperatorType.NOT_IN;
 
 	public static final String JSON_PROPERTY_VALUES = "values";
 	@JsonProperty(JSON_PROPERTY_VALUES)
 	private List<EConversationEndReason> values = null;
 
-	public NotConversationEndReasonOperator $type(TypeEnum $type) {
+	public NotInConversationEndReasonOperator $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -89,7 +89,7 @@ public class NotConversationEndReasonOperator {
 		this.$type = $type;
 	}
 
-	public NotConversationEndReasonOperator type(EConversationEndReasonOperatorType type) {
+	public NotInConversationEndReasonOperator type(EConversationEndReasonOperatorType type) {
 		this.type = type;
 		return this;
 	}
@@ -108,12 +108,12 @@ public class NotConversationEndReasonOperator {
 		this.type = type;
 	}
 
-	public NotConversationEndReasonOperator values(List<EConversationEndReason> values) {
+	public NotInConversationEndReasonOperator values(List<EConversationEndReason> values) {
 		this.values = values;
 		return this;
 	}
 
-	public NotConversationEndReasonOperator addValuesItem(EConversationEndReason valuesItem) {
+	public NotInConversationEndReasonOperator addValuesItem(EConversationEndReason valuesItem) {
 		if (this.values == null) {
 			this.values = new ArrayList<>();
 		}
@@ -143,10 +143,10 @@ public class NotConversationEndReasonOperator {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		NotConversationEndReasonOperator notConversationEndReasonOperator = (NotConversationEndReasonOperator) o;
-		return Objects.equals(this.$type, notConversationEndReasonOperator.$type) &&
-				Objects.equals(this.type, notConversationEndReasonOperator.type) &&
-				Objects.equals(this.values, notConversationEndReasonOperator.values);
+		NotInConversationEndReasonOperator notInConversationEndReasonOperator = (NotInConversationEndReasonOperator) o;
+		return Objects.equals(this.$type, notInConversationEndReasonOperator.$type) &&
+				Objects.equals(this.type, notInConversationEndReasonOperator.type) &&
+				Objects.equals(this.values, notInConversationEndReasonOperator.values);
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class NotConversationEndReasonOperator {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class NotConversationEndReasonOperator {\n");
+		sb.append("class NotInConversationEndReasonOperator {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    values: ").append(toIndentedString(values)).append("\n");

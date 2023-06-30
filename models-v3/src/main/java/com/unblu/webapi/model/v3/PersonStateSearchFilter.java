@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = AutoPauseNotificationsReasonExpirationTimestampPersonStateSearchFilter.class, name = "AUTO_PAUSE_NOTIFICATIONS_REASON_EXPIRATION_TIMESTAMP"),
 	@JsonSubTypes.Type(value = AutoPauseNotificationsReasonSourceIdPersonStateSearchFilter.class, name = "AUTO_PAUSE_NOTIFICATIONS_REASON_SOURCE_ID"),
 	@JsonSubTypes.Type(value = OnlineStatePersonStateSearchFilter.class, name = "ONLINE_STATE"),
+	@JsonSubTypes.Type(value = PauseNotificationsEndTimestampPersonStateSearchFilter.class, name = "PAUSE_NOTIFICATIONS_END_TIMESTAMP"),
 	@JsonSubTypes.Type(value = PauseNotificationsModePersonStateSearchFilter.class, name = "PAUSE_NOTIFICATIONS_MODE"),
 	@JsonSubTypes.Type(value = PauseNotificationsStatePersonStateSearchFilter.class, name = "PAUSE_NOTIFICATIONS_STATE"),
 	@JsonSubTypes.Type(value = PersonIdPersonStateSearchFilter.class, name = "PERSON_ID"),

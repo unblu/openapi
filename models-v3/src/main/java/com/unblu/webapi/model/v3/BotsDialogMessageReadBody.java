@@ -36,11 +36,11 @@ public class BotsDialogMessageReadBody {
 	}
 
 	/**
-	 * The token belonging to the dialog of the bot
+	 * The token that belongs to the bot&#39;s dialog
 	 * 
 	 * @return dialogToken
 	 **/
-	@ApiModelProperty(value = "The token belonging to the dialog of the bot")
+	@ApiModelProperty(value = "The token that belongs to the bot's dialog")
 	public String getDialogToken() {
 		return dialogToken;
 	}

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.30.3
+  version: 7.31.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -85,6 +85,7 @@ paths:
                 $ref: '#/components/schemas/AccountSecret'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -177,6 +178,7 @@ paths:
                     text: null
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -253,6 +255,7 @@ paths:
                 $ref: '#/components/schemas/AccountUserContainer'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -277,6 +280,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -299,6 +303,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -320,6 +325,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -357,6 +363,7 @@ paths:
                 $ref: '#/components/schemas/Account'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -386,6 +393,7 @@ paths:
                 $ref: '#/components/schemas/Account'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -422,6 +430,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -459,6 +468,7 @@ paths:
                 $ref: '#/components/schemas/Account'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -486,6 +496,7 @@ paths:
                 $ref: '#/components/schemas/AccountIngressStatus'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -526,6 +537,7 @@ paths:
                   $ref: '#/components/schemas/Account'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -547,6 +559,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -582,6 +595,7 @@ paths:
                 $ref: '#/components/schemas/AccountResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -618,6 +632,7 @@ paths:
                 $ref: '#/components/schemas/Account'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -644,6 +659,7 @@ paths:
                 $ref: '#/components/schemas/Address'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -668,6 +684,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -697,6 +714,7 @@ paths:
                 $ref: '#/components/schemas/Address'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -727,6 +745,7 @@ paths:
                   $ref: '#/components/schemas/Address'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -752,6 +771,7 @@ paths:
                 $ref: '#/components/schemas/AddressResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -778,6 +798,7 @@ paths:
                 $ref: '#/components/schemas/Address'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -814,6 +835,7 @@ paths:
                 $ref: '#/components/schemas/ApiKey'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -838,6 +860,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -876,6 +899,7 @@ paths:
                 $ref: '#/components/schemas/ApiKey'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -905,6 +929,7 @@ paths:
                 $ref: '#/components/schemas/ApiKey'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -925,6 +950,7 @@ paths:
                 format: int32
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPERVISOR
@@ -962,6 +988,7 @@ paths:
                 $ref: '#/components/schemas/ApiKey'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -1002,6 +1029,7 @@ paths:
                   $ref: '#/components/schemas/ApiKey'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -1037,6 +1065,7 @@ paths:
                 $ref: '#/components/schemas/ApiKeyResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -1073,6 +1102,7 @@ paths:
                 $ref: '#/components/schemas/ApiKey'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -1143,6 +1173,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1175,6 +1206,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1209,6 +1241,7 @@ paths:
                   type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1229,6 +1262,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ANONYMOUS_USER
@@ -1261,6 +1295,7 @@ paths:
                 type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1281,6 +1316,7 @@ paths:
                 type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1301,6 +1337,7 @@ paths:
                 type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1320,6 +1357,7 @@ paths:
                 type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1349,6 +1387,7 @@ paths:
                 $ref: '#/components/schemas/CompactUser'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ANONYMOUS_USER
@@ -1368,6 +1407,7 @@ paths:
                 type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1387,6 +1427,7 @@ paths:
                 $ref: '#/components/schemas/Permissions'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1406,6 +1447,7 @@ paths:
                 type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1441,6 +1483,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -1461,6 +1504,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1480,6 +1524,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ANONYMOUS_USER
@@ -1499,6 +1544,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ANONYMOUS_USER
@@ -1533,6 +1579,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1555,6 +1602,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -1582,6 +1630,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1615,6 +1664,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -1643,6 +1693,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1671,6 +1722,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1700,6 +1752,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
@@ -1734,6 +1787,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -1944,6 +1998,27 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /bots/cancelDialogBotTypingIndicator:
+    post:
+      tags:
+      - Bots
+      summary: cancelDialogBotTypingIndicator
+      description: "Hides the typing indicator for the dialog bot.<br> If the typing indicator wasn't displayed, calling the endpoint has no effect.<br>"
+      operationId: botsCancelDialogBotTypingIndicator
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BotsCancelDialogBotTypingIndicatorBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /bots/cancelPendingDialogQuestions:
     post:
       tags:
@@ -2024,6 +2099,7 @@ paths:
                   offboardingFilter: NONE
                   needsCounterpartPresence: false
                   messageStateHandledExternally: false
+                  automaticTypingStateHandlingEnabled: true
                   onTimeoutBehavior: HAND_OFF
         required: true
       responses:
@@ -2058,6 +2134,7 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     messageStateHandledExternally: false
+                    automaticTypingStateHandlingEnabled: true
                     onTimeoutBehavior: HAND_OFF
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -2365,6 +2442,7 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     messageStateHandledExternally: false
+                    automaticTypingStateHandlingEnabled: true
                     onTimeoutBehavior: HAND_OFF
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -2447,6 +2525,7 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     messageStateHandledExternally: false
+                    automaticTypingStateHandlingEnabled: true
                     onTimeoutBehavior: HAND_OFF
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -2851,6 +2930,27 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /bots/startDialogBotTypingIndicator:
+    post:
+      tags:
+      - Bots
+      summary: startDialogBotTypingIndicator
+      description: "Displays a typing indicator for the dialog bot, to show the counterpart person that something is happening.<br> The typing indicator is removed automatically after four seconds or when the bot sends a message, whichever occurs sooner. If the typing indicator is already displayed, calling this endpoint resets the four second timer.<br>"
+      operationId: botsStartDialogBotTypingIndicator
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BotsStartDialogBotTypingIndicatorBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /bots/update:
     post:
       tags:
@@ -3003,6 +3103,7 @@ paths:
                     language: en
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3027,6 +3128,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -3049,6 +3151,7 @@ paths:
                   $ref: '#/components/schemas/CannedResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3070,6 +3173,7 @@ paths:
                   $ref: '#/components/schemas/CannedResponseConfigurationScope'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3091,6 +3195,7 @@ paths:
                   $ref: '#/components/schemas/CannedResponseConfigurationScope'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3119,6 +3224,7 @@ paths:
                 $ref: '#/components/schemas/CannedResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3149,6 +3255,7 @@ paths:
                   $ref: '#/components/schemas/CannedResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3174,6 +3281,7 @@ paths:
                 $ref: '#/components/schemas/CannedResponseResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3200,6 +3308,7 @@ paths:
                 $ref: '#/components/schemas/CannedResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3278,6 +3387,7 @@ paths:
                 $ref: '#/components/schemas/Contact'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -3302,6 +3412,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -3331,6 +3442,7 @@ paths:
                 $ref: '#/components/schemas/Contact'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -3361,6 +3473,7 @@ paths:
                   $ref: '#/components/schemas/Contact'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -3386,6 +3499,7 @@ paths:
                 $ref: '#/components/schemas/ContactResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -3412,6 +3526,7 @@ paths:
                 $ref: '#/components/schemas/Contact'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -3692,6 +3807,7 @@ paths:
                     metadata: null
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -3716,6 +3832,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -3753,6 +3870,7 @@ paths:
                 $ref: '#/components/schemas/ConversationTemplate'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3790,6 +3908,7 @@ paths:
                 $ref: '#/components/schemas/ConversationTemplate'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3830,6 +3949,7 @@ paths:
                   $ref: '#/components/schemas/ConversationTemplate'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3865,6 +3985,7 @@ paths:
                 $ref: '#/components/schemas/ConversationTemplateResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -3901,6 +4022,7 @@ paths:
                 $ref: '#/components/schemas/ConversationTemplate'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -5343,6 +5465,7 @@ paths:
                 $ref: '#/components/schemas/Domain'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -5367,6 +5490,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -5389,6 +5513,7 @@ paths:
                   type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -5409,6 +5534,7 @@ paths:
                 format: int32
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPERVISOR
@@ -5437,6 +5563,7 @@ paths:
                 $ref: '#/components/schemas/Domain'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -5467,6 +5594,7 @@ paths:
                   $ref: '#/components/schemas/Domain'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -5492,6 +5620,7 @@ paths:
                 $ref: '#/components/schemas/DomainResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -5518,6 +5647,7 @@ paths:
                 $ref: '#/components/schemas/Domain'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -6294,6 +6424,7 @@ paths:
                 $ref: '#/components/schemas/GlobalData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -6313,6 +6444,7 @@ paths:
                 $ref: '#/components/schemas/ProductVersion'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -6342,6 +6474,7 @@ paths:
                 $ref: '#/components/schemas/GlobalData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -6371,6 +6504,7 @@ paths:
                 $ref: '#/components/schemas/GlobalData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -6406,6 +6540,7 @@ paths:
                 $ref: '#/components/schemas/GlobalData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
@@ -7126,6 +7261,7 @@ paths:
                     metadata: null
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -7150,6 +7286,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -7171,6 +7308,7 @@ paths:
                 format: int32
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPERVISOR
@@ -7208,6 +7346,7 @@ paths:
                 $ref: '#/components/schemas/NamedArea'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -7248,6 +7387,7 @@ paths:
                   $ref: '#/components/schemas/NamedArea'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -7283,6 +7423,7 @@ paths:
                 $ref: '#/components/schemas/NamedAreaResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -7319,6 +7460,7 @@ paths:
                 $ref: '#/components/schemas/NamedArea'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -7930,6 +8072,7 @@ paths:
                 $ref: '#/components/schemas/RecordRetentionData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -7956,6 +8099,7 @@ paths:
                 $ref: '#/components/schemas/RecordRetentionData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -8317,6 +8461,7 @@ paths:
                     metadata: null
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -8341,6 +8486,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -8381,6 +8527,7 @@ paths:
                   $ref: '#/components/schemas/Team'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8411,6 +8558,7 @@ paths:
                   type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8450,6 +8598,7 @@ paths:
                   $ref: '#/components/schemas/Team'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8470,6 +8619,7 @@ paths:
                 format: int32
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPERVISOR
@@ -8499,6 +8649,7 @@ paths:
                 $ref: '#/components/schemas/Team'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8536,6 +8687,7 @@ paths:
                 $ref: '#/components/schemas/Team'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8576,6 +8728,7 @@ paths:
                   $ref: '#/components/schemas/Team'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8611,6 +8764,7 @@ paths:
                 $ref: '#/components/schemas/TeamResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8647,6 +8801,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8683,6 +8838,7 @@ paths:
                 $ref: '#/components/schemas/Team'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPERVISOR
@@ -8719,6 +8875,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -8755,6 +8912,7 @@ paths:
                 $ref: '#/components/schemas/UserPasswordContainer'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -8818,6 +8976,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -8842,6 +9001,7 @@ paths:
           description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -8871,6 +9031,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8908,6 +9069,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -8928,6 +9090,7 @@ paths:
                 format: int32
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPERVISOR
@@ -8956,6 +9119,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -8992,6 +9156,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -9029,6 +9194,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -9069,6 +9235,7 @@ paths:
                   $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -9104,6 +9271,7 @@ paths:
                 $ref: '#/components/schemas/UserResult'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -9139,6 +9307,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -9175,6 +9344,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -9211,6 +9381,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -9253,6 +9424,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-legacy-get: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
@@ -9290,6 +9462,7 @@ paths:
                 $ref: '#/components/schemas/UserPasswordContainer'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -9353,6 +9526,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -9381,6 +9555,7 @@ paths:
                 type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -12349,14 +12524,14 @@ components:
         imageData:
           type: string
           description: "Image content as data URL scheme (RFC2397 - <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code>)"
-    AwaitedPersonChangeTimestampConversationHistorySearchFilter:
+    AwaitedPersonTypeChangeTimestampConversationHistorySearchFilter:
       type: object
       properties:
         $_type:
           type: string
-          default: AwaitedPersonChangeTimestampConversationHistorySearchFilter
+          default: AwaitedPersonTypeChangeTimestampConversationHistorySearchFilter
           enum:
-          - AwaitedPersonChangeTimestampConversationHistorySearchFilter
+          - AwaitedPersonTypeChangeTimestampConversationHistorySearchFilter
         field:
           $ref: '#/components/schemas/EConversationHistorySearchFilterField'
         operator:
@@ -12741,6 +12916,13 @@ components:
         dialogOfferToken:
           type: string
           description: "the onboarding-, reboarding- or offboarding-offer token contained in the webhook."
+    BotsCancelDialogBotTypingIndicatorBody:
+      type: object
+      description: Request Body for the 'botsCancelDialogBotTypingIndicator' operation
+      properties:
+        dialogToken:
+          type: string
+          description: The token that belongs to the bot's dialog
     BotsCancelPendingDialogQuestionsBody:
       type: object
       description: Request Body for the 'botsCancelPendingDialogQuestions' operation
@@ -12771,7 +12953,7 @@ components:
       properties:
         dialogToken:
           type: string
-          description: The token belonging to the dialog of the bot
+          description: The token that belongs to the bot's dialog
         messageId:
           type: string
           description: The ID of the delivered message
@@ -12781,7 +12963,7 @@ components:
       properties:
         dialogToken:
           type: string
-          description: The token belonging to the dialog of the bot
+          description: The token that belongs to the bot's dialog
         messageId:
           type: string
           description: The ID of the message that was read
@@ -12812,6 +12994,13 @@ components:
           type: integer
           format: int32
           description: The maximum number of characters in a message
+    BotsStartDialogBotTypingIndicatorBody:
+      type: object
+      description: Request Body for the 'botsStartDialogBotTypingIndicator' operation
+      properties:
+        dialogToken:
+          type: string
+          description: The token that belongs to the bot's dialog
     CannedResponse:
       type: object
       description: Model of canned response. Canned responses are predefined messages for chat responses.
@@ -13697,13 +13886,14 @@ components:
       - $ref: '#/components/schemas/EqualsConversationEndReasonOperator'
       - $ref: '#/components/schemas/NotEqualsConversationEndReasonOperator'
       - $ref: '#/components/schemas/InConversationEndReasonOperator'
-      - $ref: '#/components/schemas/NotConversationEndReasonOperator'
+      - $ref: '#/components/schemas/NotInConversationEndReasonOperator'
       discriminator:
         propertyName: type
         mapping:
           EQUALS: '#/components/schemas/EqualsConversationEndReasonOperator'
           IN: '#/components/schemas/InConversationEndReasonOperator'
           NOT_EQUALS: '#/components/schemas/NotEqualsConversationEndReasonOperator'
+          NOT_IN: '#/components/schemas/NotInConversationEndReasonOperator'
     ConversationEndedEvent:
       type: object
       description: An event triggered every time a conversation is ended
@@ -13966,7 +14156,7 @@ components:
       - $ref: '#/components/schemas/InitialEngagementTypeConversationHistorySearchFilter'
       - $ref: '#/components/schemas/CreationTimestampConversationHistorySearchFilter'
       - $ref: '#/components/schemas/ScheduledTimestampConversationHistorySearchFilter'
-      - $ref: '#/components/schemas/AwaitedPersonChangeTimestampConversationHistorySearchFilter'
+      - $ref: '#/components/schemas/AwaitedPersonTypeChangeTimestampConversationHistorySearchFilter'
       - $ref: '#/components/schemas/EndTimestampConversationHistorySearchFilter'
       - $ref: '#/components/schemas/TopicConversationHistorySearchFilter'
       - $ref: '#/components/schemas/TokboxSessionIdConversationHistorySearchFilter'
@@ -13985,6 +14175,7 @@ components:
         mapping:
           ASSIGNEE_PERSON_ID: '#/components/schemas/AssigneePersonIdConversationHistorySearchFilter'
           AWAITED_PERSON_TYPE: '#/components/schemas/AwaitedPersonTypeConversationHistorySearchFilter'
+          AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: '#/components/schemas/AwaitedPersonTypeChangeTimestampConversationHistorySearchFilter'
           CONTEXT_PERSON_ID: '#/components/schemas/ContextPersonIdConversationHistorySearchFilter'
           CONVERSATION_TEMPLATE_ID: '#/components/schemas/ConversationTemplateIdConversationHistorySearchFilter'
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampConversationHistorySearchFilter'
@@ -15790,6 +15981,9 @@ components:
         messageStateHandledExternally:
           type: boolean
           description: "Defines if the delivered/read state of messages is handled externally or by the collaboration server. <br> If the collaboration server handles the state, the messages are marked as delivered and read a soon as the webhook could be successfully dispatched to the configured webhookEndpoint.<br> If the it is handled externally, the external service has to call the api function to mark the message as delivered/read. Additionally webhook events for the message state of messages from the bot are dispatched."
+        automaticTypingStateHandlingEnabled:
+          type: boolean
+          description: "Defines if the bot should automatically display a typing indicator after receiving a message from the counterpart person. The indication starts 1s after the message is received. The typing state can also be influenced through the web API, independently of this property."
         onTimeoutBehavior:
           $ref: '#/components/schemas/EBotDialogTimeoutBehavior'
     DialogBotOrderBy:
@@ -21468,20 +21662,6 @@ components:
           $ref: '#/components/schemas/EPersonSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
-    NotConversationEndReasonOperator:
-      type: object
-      properties:
-        $_type:
-          type: string
-          default: NotConversationEndReasonOperator
-          enum:
-          - NotConversationEndReasonOperator
-        type:
-          $ref: '#/components/schemas/EConversationEndReasonOperatorType'
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/EConversationEndReason'
     NotEqualsAuditChangeInteractionTypeOperator:
       type: object
       properties:
@@ -21841,6 +22021,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EAwaitedPersonType'
+    NotInConversationEndReasonOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotInConversationEndReasonOperator
+          enum:
+          - NotInConversationEndReasonOperator
+        type:
+          $ref: '#/components/schemas/EConversationEndReasonOperatorType'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/EConversationEndReason'
     NotInConversationRecipientTypeOperator:
       type: object
       properties:
@@ -22450,14 +22644,14 @@ components:
           description: The account ID the event originated from
         participation:
           $ref: '#/components/schemas/ConversationParticipationData'
-    PauseNotificationsEndTimestampPersonSearchFilter:
+    PauseNotificationsEndTimestampPersonStateSearchFilter:
       type: object
       properties:
         $_type:
           type: string
-          default: PauseNotificationsEndTimestampPersonSearchFilter
+          default: PauseNotificationsEndTimestampPersonStateSearchFilter
           enum:
-          - PauseNotificationsEndTimestampPersonSearchFilter
+          - PauseNotificationsEndTimestampPersonStateSearchFilter
         field:
           $ref: '#/components/schemas/EPersonStateSearchFilterField'
         operator:
@@ -23019,7 +23213,7 @@ components:
       - $ref: '#/components/schemas/StatusMessagePersonStateSearchFilter'
       - $ref: '#/components/schemas/PauseNotificationsModePersonStateSearchFilter'
       - $ref: '#/components/schemas/PauseNotificationsStatePersonStateSearchFilter'
-      - $ref: '#/components/schemas/PauseNotificationsEndTimestampPersonSearchFilter'
+      - $ref: '#/components/schemas/PauseNotificationsEndTimestampPersonStateSearchFilter'
       - $ref: '#/components/schemas/AutoPauseNotificationsReasonSourceIdPersonStateSearchFilter'
       - $ref: '#/components/schemas/AutoPauseNotificationsReasonExpirationTimestampPersonStateSearchFilter'
       discriminator:
@@ -23028,6 +23222,7 @@ components:
           AUTO_PAUSE_NOTIFICATIONS_REASON_EXPIRATION_TIMESTAMP: '#/components/schemas/AutoPauseNotificationsReasonExpirationTimestampPersonStateSearchFilter'
           AUTO_PAUSE_NOTIFICATIONS_REASON_SOURCE_ID: '#/components/schemas/AutoPauseNotificationsReasonSourceIdPersonStateSearchFilter'
           ONLINE_STATE: '#/components/schemas/OnlineStatePersonStateSearchFilter'
+          PAUSE_NOTIFICATIONS_END_TIMESTAMP: '#/components/schemas/PauseNotificationsEndTimestampPersonStateSearchFilter'
           PAUSE_NOTIFICATIONS_MODE: '#/components/schemas/PauseNotificationsModePersonStateSearchFilter'
           PAUSE_NOTIFICATIONS_STATE: '#/components/schemas/PauseNotificationsStatePersonStateSearchFilter'
           PERSON_ID: '#/components/schemas/PersonIdPersonStateSearchFilter'
@@ -23863,14 +24058,14 @@ components:
           $ref: '#/components/schemas/EConversationInvitationSearchFilterField'
         operator:
           $ref: '#/components/schemas/IdOperator'
-    RegistrationIdNameWebhookCallLogSearchFilter:
+    RegistrationIdWebhookCallLogSearchFilter:
       type: object
       properties:
         $_type:
           type: string
-          default: RegistrationIdNameWebhookCallLogSearchFilter
+          default: RegistrationIdWebhookCallLogSearchFilter
           enum:
-          - RegistrationIdNameWebhookCallLogSearchFilter
+          - RegistrationIdWebhookCallLogSearchFilter
         field:
           $ref: '#/components/schemas/EWebhookCallLogSearchFilterField'
         operator:
@@ -23974,14 +24169,14 @@ components:
         value:
           type: string
           description: The reply value for the question message.
-    RequestIdNameWebhookCallLogSearchFilter:
+    RequestIdWebhookCallLogSearchFilter:
       type: object
       properties:
         $_type:
           type: string
-          default: RequestIdNameWebhookCallLogSearchFilter
+          default: RequestIdWebhookCallLogSearchFilter
           enum:
-          - RequestIdNameWebhookCallLogSearchFilter
+          - RequestIdWebhookCallLogSearchFilter
         field:
           $ref: '#/components/schemas/EWebhookCallLogSearchFilterField'
         operator:
@@ -25820,8 +26015,8 @@ components:
       - $ref: '#/components/schemas/EndpointWebhookCallLogSearchFilter'
       - $ref: '#/components/schemas/EventNameWebhookCallLogSearchFilter'
       - $ref: '#/components/schemas/ExecutionTimestampWebhookCallLogSearchFilter'
-      - $ref: '#/components/schemas/RegistrationIdNameWebhookCallLogSearchFilter'
-      - $ref: '#/components/schemas/RequestIdNameWebhookCallLogSearchFilter'
+      - $ref: '#/components/schemas/RegistrationIdWebhookCallLogSearchFilter'
+      - $ref: '#/components/schemas/RequestIdWebhookCallLogSearchFilter'
       - $ref: '#/components/schemas/RetryNrWebhookCallLogSearchFilter'
       - $ref: '#/components/schemas/HttpResponseCodeWebhookCallLogSearchFilter'
       discriminator:
@@ -25832,6 +26027,8 @@ components:
           EVENT_NAME: '#/components/schemas/EventNameWebhookCallLogSearchFilter'
           EXECUTION_TIMESTAMP: '#/components/schemas/ExecutionTimestampWebhookCallLogSearchFilter'
           HTTP_RESPONSE_CODE: '#/components/schemas/HttpResponseCodeWebhookCallLogSearchFilter'
+          REGISTRATION_ID: '#/components/schemas/RegistrationIdWebhookCallLogSearchFilter'
+          REQUEST_ID: '#/components/schemas/RequestIdWebhookCallLogSearchFilter'
           RETRY_NR: '#/components/schemas/RetryNrWebhookCallLogSearchFilter'
     WebhookPingEvent:
       type: object

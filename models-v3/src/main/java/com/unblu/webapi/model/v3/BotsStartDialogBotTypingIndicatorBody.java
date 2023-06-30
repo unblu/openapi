@@ -12,25 +12,20 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Request Body for the &#39;botsDialogMessageDelivered&#39; operation
+ * Request Body for the &#39;botsStartDialogBotTypingIndicator&#39; operation
  */
-@ApiModel(description = "Request Body for the 'botsDialogMessageDelivered' operation")
+@ApiModel(description = "Request Body for the 'botsStartDialogBotTypingIndicator' operation")
 
 @JsonPropertyOrder({
-	BotsDialogMessageDeliveredBody.JSON_PROPERTY_DIALOG_TOKEN,
-	BotsDialogMessageDeliveredBody.JSON_PROPERTY_MESSAGE_ID,
+	BotsStartDialogBotTypingIndicatorBody.JSON_PROPERTY_DIALOG_TOKEN,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class BotsDialogMessageDeliveredBody {
+public class BotsStartDialogBotTypingIndicatorBody {
 	public static final String JSON_PROPERTY_DIALOG_TOKEN = "dialogToken";
 	@JsonProperty(JSON_PROPERTY_DIALOG_TOKEN)
 	private String dialogToken;
 
-	public static final String JSON_PROPERTY_MESSAGE_ID = "messageId";
-	@JsonProperty(JSON_PROPERTY_MESSAGE_ID)
-	private String messageId;
-
-	public BotsDialogMessageDeliveredBody dialogToken(String dialogToken) {
+	public BotsStartDialogBotTypingIndicatorBody dialogToken(String dialogToken) {
 		this.dialogToken = dialogToken;
 		return this;
 	}
@@ -49,25 +44,6 @@ public class BotsDialogMessageDeliveredBody {
 		this.dialogToken = dialogToken;
 	}
 
-	public BotsDialogMessageDeliveredBody messageId(String messageId) {
-		this.messageId = messageId;
-		return this;
-	}
-
-	/**
-	 * The ID of the delivered message
-	 * 
-	 * @return messageId
-	 **/
-	@ApiModelProperty(value = "The ID of the delivered message")
-	public String getMessageId() {
-		return messageId;
-	}
-
-	public void setMessageId(String messageId) {
-		this.messageId = messageId;
-	}
-
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -76,22 +52,20 @@ public class BotsDialogMessageDeliveredBody {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		BotsDialogMessageDeliveredBody botsDialogMessageDeliveredBody = (BotsDialogMessageDeliveredBody) o;
-		return Objects.equals(this.dialogToken, botsDialogMessageDeliveredBody.dialogToken) &&
-				Objects.equals(this.messageId, botsDialogMessageDeliveredBody.messageId);
+		BotsStartDialogBotTypingIndicatorBody botsStartDialogBotTypingIndicatorBody = (BotsStartDialogBotTypingIndicatorBody) o;
+		return Objects.equals(this.dialogToken, botsStartDialogBotTypingIndicatorBody.dialogToken);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dialogToken, messageId);
+		return Objects.hash(dialogToken);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class BotsDialogMessageDeliveredBody {\n");
+		sb.append("class BotsStartDialogBotTypingIndicatorBody {\n");
 		sb.append("    dialogToken: ").append(toIndentedString(dialogToken)).append("\n");
-		sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

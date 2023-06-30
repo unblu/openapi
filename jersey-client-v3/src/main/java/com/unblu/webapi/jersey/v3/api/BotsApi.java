@@ -15,6 +15,7 @@ import com.unblu.webapi.jersey.v3.invoker.Pair;
 import com.unblu.webapi.model.v3.BotDialogPostMessage;
 import com.unblu.webapi.model.v3.BotPostMessage;
 import com.unblu.webapi.model.v3.BotsAcceptDialogOfferBody;
+import com.unblu.webapi.model.v3.BotsCancelDialogBotTypingIndicatorBody;
 import com.unblu.webapi.model.v3.BotsCancelPendingDialogQuestionsBody;
 import com.unblu.webapi.model.v3.BotsCancelPendingQuestionBody;
 import com.unblu.webapi.model.v3.BotsDeclineDialogOfferBody;
@@ -23,6 +24,7 @@ import com.unblu.webapi.model.v3.BotsDialogMessageReadBody;
 import com.unblu.webapi.model.v3.BotsFinishDialogBody;
 import com.unblu.webapi.model.v3.BotsPingWebhookBody;
 import com.unblu.webapi.model.v3.BotsRestrictDialogCounterpartBody;
+import com.unblu.webapi.model.v3.BotsStartDialogBotTypingIndicatorBody;
 import com.unblu.webapi.model.v3.DialogBotData;
 import com.unblu.webapi.model.v3.DialogBotQuery;
 import com.unblu.webapi.model.v3.DialogBotResult;
@@ -156,6 +158,56 @@ public class BotsApi {
 		GenericType<String> localVarReturnType = new GenericType<String>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * cancelDialogBotTypingIndicator Hides the typing indicator for the dialog bot.&lt;br&gt; If the typing indicator wasn&#39;t displayed, calling the endpoint
+	 * has no effect.&lt;br&gt;
+	 * 
+	 * @param botsCancelDialogBotTypingIndicatorBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsCancelDialogBotTypingIndicator(BotsCancelDialogBotTypingIndicatorBody botsCancelDialogBotTypingIndicatorBody) throws ApiException {
+
+		botsCancelDialogBotTypingIndicatorWithHttpInfo(botsCancelDialogBotTypingIndicatorBody);
+	}
+
+	/**
+	 * cancelDialogBotTypingIndicator Hides the typing indicator for the dialog bot.&lt;br&gt; If the typing indicator wasn&#39;t displayed, calling the endpoint
+	 * has no effect.&lt;br&gt;
+	 * 
+	 * @param botsCancelDialogBotTypingIndicatorBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsCancelDialogBotTypingIndicatorWithHttpInfo(BotsCancelDialogBotTypingIndicatorBody botsCancelDialogBotTypingIndicatorBody) throws ApiException {
+		Object localVarPostBody = botsCancelDialogBotTypingIndicatorBody;
+
+		// verify the required parameter 'botsCancelDialogBotTypingIndicatorBody' is set
+		if (botsCancelDialogBotTypingIndicatorBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'botsCancelDialogBotTypingIndicatorBody' when calling botsCancelDialogBotTypingIndicator");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/cancelDialogBotTypingIndicator";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**
@@ -1286,6 +1338,58 @@ public class BotsApi {
 		GenericType<String> localVarReturnType = new GenericType<String>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * startDialogBotTypingIndicator Displays a typing indicator for the dialog bot, to show the counterpart person that something is happening.&lt;br&gt; The
+	 * typing indicator is removed automatically after four seconds or when the bot sends a message, whichever occurs sooner. If the typing indicator is already
+	 * displayed, calling this endpoint resets the four second timer.&lt;br&gt;
+	 * 
+	 * @param botsStartDialogBotTypingIndicatorBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsStartDialogBotTypingIndicator(BotsStartDialogBotTypingIndicatorBody botsStartDialogBotTypingIndicatorBody) throws ApiException {
+
+		botsStartDialogBotTypingIndicatorWithHttpInfo(botsStartDialogBotTypingIndicatorBody);
+	}
+
+	/**
+	 * startDialogBotTypingIndicator Displays a typing indicator for the dialog bot, to show the counterpart person that something is happening.&lt;br&gt; The
+	 * typing indicator is removed automatically after four seconds or when the bot sends a message, whichever occurs sooner. If the typing indicator is already
+	 * displayed, calling this endpoint resets the four second timer.&lt;br&gt;
+	 * 
+	 * @param botsStartDialogBotTypingIndicatorBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsStartDialogBotTypingIndicatorWithHttpInfo(BotsStartDialogBotTypingIndicatorBody botsStartDialogBotTypingIndicatorBody) throws ApiException {
+		Object localVarPostBody = botsStartDialogBotTypingIndicatorBody;
+
+		// verify the required parameter 'botsStartDialogBotTypingIndicatorBody' is set
+		if (botsStartDialogBotTypingIndicatorBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'botsStartDialogBotTypingIndicatorBody' when calling botsStartDialogBotTypingIndicator");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/startDialogBotTypingIndicator";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**
