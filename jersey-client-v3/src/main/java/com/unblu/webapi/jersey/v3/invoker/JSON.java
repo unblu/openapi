@@ -3,7 +3,7 @@ package com.unblu.webapi.jersey.v3.invoker;
 import java.io.IOException;
 import java.text.DateFormat;
 
-import javax.ws.rs.ext.ContextResolver;
+import jakarta.ws.rs.ext.ContextResolver;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;

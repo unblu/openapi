@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.GenericType;
 
 import com.unblu.webapi.jersey.v3.invoker.ApiClient;
 import com.unblu.webapi.jersey.v3.invoker.ApiException;
