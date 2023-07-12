@@ -57,7 +57,12 @@ public enum EPropertyOwnerType {
 	/**
 	 * EXTERNAL_MESSENGER_CHANNEL: External messenger channel
 	 */
-	EXTERNAL_MESSENGER_CHANNEL("EXTERNAL_MESSENGER_CHANNEL");
+	EXTERNAL_MESSENGER_CHANNEL("EXTERNAL_MESSENGER_CHANNEL"),
+
+	/**
+	 * CUSTOM_ACTION: Custom action
+	 */
+	CUSTOM_ACTION("CUSTOM_ACTION");
 
 	private String value;
 

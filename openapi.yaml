@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.31.2
+  version: 7.32.0
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -38,6 +38,8 @@ tags:
   description: Service to manage all conversation templates.
 - name: Conversations
   description: Service to manage conversations
+- name: CustomActions
+  description: Service for Custom Actions
 - name: DeputyRelationships
   description: Service to manage deputy relationships. A deputy relationship is needed if deputy delegation should be executed for unhandled conversation requests.
 - name: Domains
@@ -4368,6 +4370,34 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversations/{conversationId}/getRecordingState:
+    post:
+      tags:
+      - Conversations
+      summary: getRecordingState
+      description: Retrieve the current recording state of the given conversation<br>
+      operationId: conversationsGetRecordingState
+      parameters:
+      - name: conversationId
+        in: path
+        description: The conversation to retrieve the recording state for
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationRecordingState'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /conversations/{conversationId}/offboardParticipant:
     post:
       tags:
@@ -4919,6 +4949,54 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversations/{conversationId}/startRecording:
+    post:
+      tags:
+      - Conversations
+      summary: startRecording
+      description: "Manually start a conversation recording. The recording is only started if a compatible blob store is configured, manually starting and stopping a recording is allowed, and a collaboration layer or call is active. The recording is started asynchronously, and there may be a brief delay before it starts. In case of an error a conversation.recording_failed webhook is triggered. The type of the recording (audio only or audio and video) is determined by the configuration.<br>@throws ConversationRecordingRunningException If a conversation recording is already running<br>@throws ConversationRecordingDeniedException If no compatible blob store is configured or manual start of a recording is not allowed<br>@throws ConversationRecordingFailedException If there is no active call or collaboration layer"
+      operationId: conversationsStartRecording
+      parameters:
+      - name: conversationId
+        in: path
+        description: The conversation for which a recording should be started
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /conversations/{conversationId}/stopRecording:
+    post:
+      tags:
+      - Conversations
+      summary: stopRecording
+      description: Manually stop a conversation recording. The recording is stopped if there is a running conversation recording and manually starting and stopping the recording is allowed.<br>@throws ConversationRecordingNotRunningException If no conversation recording is running<br>@throws ConversationRecordingDeniedException If manually starting and stopping a recording isn't permitted
+      operationId: conversationsStopRecording
+      parameters:
+      - name: conversationId
+        in: path
+        description: The conversation for which a recording should be stopped
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /conversations/{conversationId}/updateConfiguration:
     post:
       tags:
@@ -5256,6 +5334,492 @@ paths:
                         en: "Hello, I am the concierge."
                         fr: Bonjour je suis le concierge.
                     metadata: null
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /customactions/create:
+    post:
+      tags:
+      - CustomActions
+      summary: create
+      description: Creates a new custom action. You must specify the expanded parameter "actionIcon".<br>
+      operationId: customActionsCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpandFields'
+        style: form
+        explode: false
+      requestBody:
+        description: The custom action to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomActionData'
+            examples:
+              create-for-custom-action:
+                summary: create for custom action
+                description: Create a new custom action
+                value:
+                  $_type: CustomConversationActionData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  key: conv1-custom-action
+                  name: conv1-custom-action-name
+                  description: Custom action to be triggered on conversation level
+                  translations:
+                    de:
+                      $_type: CustomActionTranslation
+                      id: null
+                      name: Meine Konversation Aktion
+                      description: null
+                    en:
+                      $_type: CustomActionTranslation
+                      id: null
+                      name: My conversation action
+                      description: null
+                  actionIcon: null
+                  state: ACTIVE
+                  triggerWebhook:
+                    $_type: CustomActionWebhookRegistration
+                    endpoint: http://webhooks.end.com/89898-66363-11212
+                    secret: null
+                  invokableFromFrontends:
+                  - AGENT_DESK
+                  - AGENT_SINGLE_CONVERSATION_DESK
+                  invokableForConversationStates:
+                  - ACTIVE
+                  - ONBOARDING
+                  invokableForParticipationStates:
+                  - ACTIVE
+                  - ONBOARDING
+                  invokableBy:
+                  - ASSIGNED_AGENT
+                  - SECONDARY_AGENT
+                  triggerSystemMessage: true
+                  triggerVisitorMobileSdkEvent: true
+                  triggerVisitorEmbeddedApiEvent: true
+                  triggerVisitorFloatingApiEvent: true
+                  triggerAgentMobileSdkEvent: false
+                  sortingOrder: 3
+                  type: CONVERSATION
+                  actionBarPosition: ALWAYS_VISIBLE
+                  apiEventTriggerFilter: ALL
+        required: true
+      responses:
+        "200":
+          description: The created custom action object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomActionData'
+              examples:
+                create-for-custom-action:
+                  summary: create for custom action
+                  description: New custom action
+                  value:
+                    $_type: CustomConversationActionData
+                    id: qIzXjL9hRx-aIQVADZdq7Q
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    key: conv1-custom-action
+                    name: conv1-custom-action-name
+                    description: Custom action to be triggered on conversation level
+                    translations:
+                      de:
+                        $_type: CustomActionTranslation
+                        id: 3GxKB_qhRjSwFbhKXjrz5w
+                        name: Meine Konversation Aktion
+                        description: null
+                      en:
+                        $_type: CustomActionTranslation
+                        id: 3GxKB_qhRjSwFbhKXjrz5w
+                        name: My conversation action
+                        description: null
+                    actionIcon: null
+                    state: ACTIVE
+                    triggerWebhook:
+                      $_type: CustomActionWebhookRegistration
+                      endpoint: http://webhooks.end.com/89898-66363-11212
+                      secret: null
+                    invokableFromFrontends:
+                    - AGENT_DESK
+                    - AGENT_SINGLE_CONVERSATION_DESK
+                    invokableForConversationStates:
+                    - ACTIVE
+                    - ONBOARDING
+                    invokableForParticipationStates:
+                    - ACTIVE
+                    - ONBOARDING
+                    invokableBy:
+                    - ASSIGNED_AGENT
+                    - SECONDARY_AGENT
+                    triggerSystemMessage: true
+                    triggerVisitorMobileSdkEvent: true
+                    triggerVisitorEmbeddedApiEvent: true
+                    triggerVisitorFloatingApiEvent: true
+                    triggerAgentMobileSdkEvent: false
+                    sortingOrder: 3
+                    type: CONVERSATION
+                    actionBarPosition: ALWAYS_VISIBLE
+                    apiEventTriggerFilter: ALL
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      callbacks:
+        custom_conversation_action.invoked:
+          '{$request.body#/endpoint}':
+            post:
+              summary: custom_conversation_action.invoked
+              description: An event triggered every time a custom conversation action is invoked
+              operationId: customConversationActionInvokedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CustomConversationActionInvocationEvent'
+              responses:
+                "200":
+                  description: OK
+        custom_message_action.invoked:
+          '{$request.body#/endpoint}':
+            post:
+              summary: custom_message_action.invoked
+              description: An event triggered every time a custom message action is invoked
+              operationId: customMessageActionInvokedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CustomMessageActionInvocationEvent'
+              responses:
+                "200":
+                  description: OK
+        custom_person_action.invoked:
+          '{$request.body#/endpoint}':
+            post:
+              summary: custom_person_action.invoked
+              description: An event triggered every time a custom person action is invoked
+              operationId: customPersonActionInvokedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CustomPersonActionInvocationEvent'
+              responses:
+                "200":
+                  description: OK
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /customactions/delete:
+    delete:
+      tags:
+      - CustomActions
+      summary: delete
+      description: "Deletes a custom action. If there's a webhook registration connected to the action, the webhook is also deleted.<br>"
+      operationId: customActionsDelete
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the custom action to delete
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /customactions/pingWebhook:
+    post:
+      tags:
+      - CustomActions
+      summary: pingWebhook
+      description: Emits a `WebhookPingEvent` on the webhook for the custom action<br>
+      operationId: customActionsPingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomActionsPingWebhookBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /customactions/read:
+    get:
+      tags:
+      - CustomActions
+      summary: read
+      description: Returns a `CustomActionData` by ID<br>
+      operationId: customActionsRead
+      parameters:
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpandFields'
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: "The custom action with the ID provided, or null if no such custom action exists"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomActionData'
+              examples:
+                read-for-custom-action:
+                  summary: read for custom action
+                  description: Custom action
+                  value:
+                    $_type: CustomPersonActionData
+                    id: ARmohixpSDSj8ypTbyUm-g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    key: pr1-custom-action
+                    name: pr1-custom-action-name
+                    description: Custom action to be triggered on person target
+                    translations:
+                      en:
+                        $_type: CustomActionTranslation
+                        id: 3GxKB_qhRjSwFbhKXjrz5w
+                        name: My person action
+                        description: null
+                    actionIcon: null
+                    state: ACTIVE
+                    triggerWebhook:
+                      $_type: CustomActionWebhookRegistration
+                      endpoint: http://webhooks.end.com/89898-66363-11212
+                      secret: null
+                    invokableFromFrontends:
+                    - AGENT_DESK
+                    - AGENT_SINGLE_CONVERSATION_DESK
+                    invokableForConversationStates:
+                    - ACTIVE
+                    - ONBOARDING
+                    invokableForParticipationStates:
+                    - ACTIVE
+                    - ONBOARDING
+                    invokableBy:
+                    - ASSIGNED_AGENT
+                    - SECONDARY_AGENT
+                    triggerSystemMessage: true
+                    triggerVisitorMobileSdkEvent: false
+                    triggerVisitorEmbeddedApiEvent: true
+                    triggerVisitorFloatingApiEvent: true
+                    triggerAgentMobileSdkEvent: false
+                    sortingOrder: 5
+                    type: PERSON
+                    availableForTargetPersonTypes:
+                    - ANONYMOUS_VISITOR
+                    - AUTHENTICATED_VISITOR
+                    availableForTargetFrontends:
+                    - VISITOR_DESK
+                    - VISITOR_SITE_INTEGRATION
+                    apiEventTriggerFilter: TARGET_PERSON
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /customactions/search:
+    post:
+      tags:
+      - CustomActions
+      summary: search
+      description: Search for custom actions<br>
+      operationId: customActionsSearch
+      requestBody:
+        description: The query to use for the search
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomActionQuery'
+        required: true
+      responses:
+        "200":
+          description: A list of custom actions that match the query provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomActionResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /customactions/update:
+    post:
+      tags:
+      - CustomActions
+      summary: update
+      description: Updates a custom action. The parameter "actionIcon" may not be null.<br>
+      operationId: customActionsUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpandFields'
+        style: form
+        explode: false
+      requestBody:
+        description: The custom action to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomActionData'
+            examples:
+              update-for-custom-action:
+                summary: Update for custom action
+                description: Update custom action request
+                value:
+                  $_type: CustomMessageActionData
+                  id: j3uz3AiSRp6wIB2wGq6L0g
+                  creationTimestamp: 1546300800000
+                  modificationTimestamp: 1548979200000
+                  version: 1
+                  accountId: A7d9E_0-c3cC4aoFDb85t6n
+                  key: msg1-custom-action_v2
+                  name: msg1-custom-action-name
+                  description: Custom action to be triggered on message target
+                  translations:
+                    en:
+                      $_type: CustomActionTranslation
+                      id: 3GxKB_qhRjSwFbhKXjrz5w
+                      name: My message action
+                      description: null
+                  actionIcon: null
+                  state: ACTIVE
+                  triggerWebhook:
+                    $_type: CustomActionWebhookRegistration
+                    endpoint: http://webhooks.end.com/89898-66363-11212
+                    secret: null
+                  invokableFromFrontends:
+                  - AGENT_DESK
+                  - AGENT_SINGLE_CONVERSATION_DESK
+                  invokableForConversationStates:
+                  - ACTIVE
+                  - ONBOARDING
+                  invokableForParticipationStates:
+                  - ACTIVE
+                  - ONBOARDING
+                  invokableBy:
+                  - ASSIGNED_AGENT
+                  - SECONDARY_AGENT
+                  triggerSystemMessage: true
+                  triggerVisitorMobileSdkEvent: false
+                  triggerVisitorEmbeddedApiEvent: false
+                  triggerVisitorFloatingApiEvent: false
+                  triggerAgentMobileSdkEvent: false
+                  sortingOrder: 5
+                  type: MESSAGE
+                  messageTypes:
+                  - TEXT
+                  - CARD
+                  - LIST
+                  fileMessageMimeTypeRegex: .pdf
+                  invokableForMessagesSentBy:
+                  - SELF
+                  - OTHER_AGENT
+                  apiEventTriggerFilter: SENDER
+        required: true
+      responses:
+        "200":
+          description: The updated custom action object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomActionData'
+              examples:
+                update-for-custom-action:
+                  summary: Update for custom action
+                  description: Updated custom action response
+                  value:
+                    $_type: CustomMessageActionData
+                    id: j3uz3AiSRp6wIB2wGq6L0g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 2
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    key: msg1-custom-action_v2
+                    name: msg1-custom-action-name
+                    description: Custom action to be triggered on message target
+                    translations:
+                      en:
+                        $_type: CustomActionTranslation
+                        id: 3GxKB_qhRjSwFbhKXjrz5w
+                        name: My message action
+                        description: null
+                    actionIcon: null
+                    state: ACTIVE
+                    triggerWebhook:
+                      $_type: CustomActionWebhookRegistration
+                      endpoint: http://webhooks.end.com/89898-66363-11212
+                      secret: null
+                    invokableFromFrontends:
+                    - AGENT_DESK
+                    - AGENT_SINGLE_CONVERSATION_DESK
+                    invokableForConversationStates:
+                    - ACTIVE
+                    - ONBOARDING
+                    invokableForParticipationStates:
+                    - ACTIVE
+                    - ONBOARDING
+                    invokableBy:
+                    - ASSIGNED_AGENT
+                    - SECONDARY_AGENT
+                    triggerSystemMessage: true
+                    triggerVisitorMobileSdkEvent: false
+                    triggerVisitorEmbeddedApiEvent: false
+                    triggerVisitorFloatingApiEvent: false
+                    triggerAgentMobileSdkEvent: false
+                    sortingOrder: 5
+                    type: MESSAGE
+                    messageTypes:
+                    - TEXT
+                    - CARD
+                    - LIST
+                    fileMessageMimeTypeRegex: .pdf
+                    invokableForMessagesSentBy:
+                    - SELF
+                    - OTHER_AGENT
+                    apiEventTriggerFilter: SENDER
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -6991,6 +7555,21 @@ paths:
                 $ref: '#/components/schemas/MessageInterceptorData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      callbacks:
+        message_interceptor.new_message:
+          '{$request.body#/endpoint}':
+            post:
+              summary: message_interceptor.new_message
+              description: Event sent to external message interceptors when a new message is added to the conversation
+              operationId: messageInterceptorNewMessageCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/InterceptorNewMessageEvent'
+              responses:
+                "200":
+                  description: OK
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -10139,6 +10718,34 @@ paths:
                   application/json:
                     schema:
                       $ref: '#/components/schemas/ConversationRecordingAvailableEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.recording_failed:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.recording_failed
+              description: Event emitted when a conversation recording failed
+              operationId: conversationRecordingFailedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationRecordingFailedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.recording_started:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.recording_started
+              description: Event emitted when a conversation recording is started
+              operationId: conversationRecordingStartedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationRecordingStartedEvent'
               responses:
                 "200":
                   description: OK
@@ -14697,6 +15304,36 @@ components:
           description: utc timestamp when the conversation recording has ended
         endReason:
           $ref: '#/components/schemas/ERecordingEndReason'
+    ConversationRecordingFailedEvent:
+      type: object
+      description: Event emitted when a conversation recording failed
+      properties:
+        $_type:
+          type: string
+          default: ConversationRecordingFailedEvent
+          enum:
+          - ConversationRecordingFailedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation this recording belongs to
+        recordingType:
+          $ref: '#/components/schemas/ERecordingType'
+        recordingStartTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the conversation recording has started. Null if the recording failed to start.
+        failureReason:
+          $ref: '#/components/schemas/ERecordingFailedReason'
     ConversationRecordingHistoryData:
       type: object
       properties:
@@ -14738,6 +15375,53 @@ components:
           $ref: '#/components/schemas/ERecordingEndReason'
         recordingType:
           $ref: '#/components/schemas/ERecordingType'
+    ConversationRecordingStartedEvent:
+      type: object
+      description: Event emitted when a conversation recording is started
+      properties:
+        $_type:
+          type: string
+          default: ConversationRecordingStartedEvent
+          enum:
+          - ConversationRecordingStartedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation this recording belongs to
+        recordingType:
+          $ref: '#/components/schemas/ERecordingType'
+        recordingStartTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the conversation recording started
+    ConversationRecordingState:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationRecordingState
+          enum:
+          - ConversationRecordingState
+        conversationId:
+          type: string
+          description: Id of the conversation this recording belongs to
+        recordingState:
+          $ref: '#/components/schemas/EConversationRecordingState'
+        recordingType:
+          $ref: '#/components/schemas/ERecordingType'
+        recordingStartTimestamp:
+          type: integer
+          format: int64
+          description: utc timestamp when the conversation recording has started
     ConversationRequeuedEvent:
       type: object
       description: An event triggered every time a conversation's state changes to QUEUED from any state other than ONBOARDING
@@ -15458,6 +16142,256 @@ components:
           $ref: '#/components/schemas/EConversationInvitationSearchFilterField'
         operator:
           $ref: '#/components/schemas/InvitationCreatorTypeOperator'
+    CustomActionData:
+      oneOf:
+      - $ref: '#/components/schemas/CustomConversationActionData'
+      - $ref: '#/components/schemas/CustomPersonActionData'
+      - $ref: '#/components/schemas/CustomMessageActionData'
+      discriminator:
+        propertyName: type
+        mapping:
+          CONVERSATION: '#/components/schemas/CustomConversationActionData'
+          MESSAGE: '#/components/schemas/CustomMessageActionData'
+          PERSON: '#/components/schemas/CustomPersonActionData'
+    CustomActionOrderBy:
+      type: object
+      description: CustomAction orderBy item
+      properties:
+        $_type:
+          type: string
+          default: CustomActionOrderBy
+          enum:
+          - CustomActionOrderBy
+        field:
+          $ref: '#/components/schemas/ECustomActionOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    CustomActionQuery:
+      type: object
+      description: Container to search custom actions
+      properties:
+        $_type:
+          type: string
+          default: CustomActionQuery
+          enum:
+          - CustomActionQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/CustomActionSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/CustomActionOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    CustomActionResult:
+      type: object
+      description: Container to return a list of custom actions
+      properties:
+        $_type:
+          type: string
+          default: CustomActionResult
+          enum:
+          - CustomActionResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If more items are present on the server, this value can be used as offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/CustomActionData'
+    CustomActionSearchFilter:
+      description: CustomAction filter item
+      oneOf:
+      - $ref: '#/components/schemas/KeyCustomActionSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          KEY: '#/components/schemas/KeyCustomActionSearchFilter'
+    CustomActionTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CustomActionTranslation
+          enum:
+          - CustomActionTranslation
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        name:
+          type: string
+          description: Translated name of the corresponding name field of the main entity this translation belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    CustomActionWebhookRegistration:
+      type: object
+      description: A web API model entity to hold information about the optional webhook registration triggered by the invocation of a custom action
+      properties:
+        $_type:
+          type: string
+          default: CustomActionWebhookRegistration
+          enum:
+          - CustomActionWebhookRegistration
+        endpoint:
+          type: string
+          description: The endpoint URL of the webhook registration. Requests for the webhook events triggered by the related custom action invocation are made to this URL. Maximum length of 4000 characters. Cannot be omitted.
+        secret:
+          type: string
+          description: A secret which is sent with each webhook event. Maximum length of 4000 characters. Can be omitted.
+    CustomActionsPingWebhookBody:
+      type: object
+      description: Request Body for the 'customActionsPingWebhook' operation
+      properties:
+        customActionId:
+          type: string
+          description: The ID of the custom action
+    CustomConversationActionData:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CustomConversationActionData
+          enum:
+          - CustomConversationActionData
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        key:
+          type: string
+          description: The unique key of the action
+        name:
+          type: string
+          description: The name of the custom action. Maximum of 250 characters. Can not be omitted.
+        description:
+          type: string
+          description: The description of the custom action. Maximum of 500 characters. Can be omitted.
+        translations:
+          type: object
+          description: A map of localized versions of the name and description of this custom action
+          additionalProperties:
+            $ref: '#/components/schemas/CustomActionTranslation'
+        actionIcon:
+          description: The avatar ID of the avatar used as the action's icon. The ID can be expanded.
+          oneOf:
+          - type: string
+          - $ref: '#/components/schemas/Avatar'
+          x-expand-query-key: actionIcon
+          x-type: ExpandableField
+        state:
+          $ref: '#/components/schemas/ECustomActionState'
+        triggerWebhook:
+          $ref: '#/components/schemas/CustomActionWebhookRegistration'
+        invokableFromFrontends:
+          type: array
+          description: The frontends that the action may be invoked from
+          items:
+            $ref: '#/components/schemas/EFrontend'
+        invokableForConversationStates:
+          type: array
+          description: The conversation states the action may be invoked in
+          items:
+            $ref: '#/components/schemas/EConversationState'
+        invokableForParticipationStates:
+          type: array
+          description: The participation states a person may invoke the action in
+          items:
+            $ref: '#/components/schemas/EConversationParticipationState'
+        invokableBy:
+          type: array
+          description: The types of participant who may invoke the action
+          items:
+            $ref: '#/components/schemas/EConversationImpactingParticipationType'
+        triggerSystemMessage:
+          type: boolean
+          description: A flag indicating whether the action should trigger a system message. The default value is true.
+        triggerVisitorMobileSdkEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a visitor mobile SDK event. The default value is false.
+        triggerVisitorEmbeddedApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an Embedded JS API event. The default value is false.
+        triggerVisitorFloatingApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a Visitor JS API event. The default value is false.
+        triggerAgentMobileSdkEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
+        sortingOrder:
+          type: integer
+          format: int32
+          description: The sorting order within the custom actions when displayed in the action bar. The default value is 5.
+        type:
+          $ref: '#/components/schemas/ECustomActionType'
+        actionBarPosition:
+          $ref: '#/components/schemas/EActionBarItemPosition'
+        apiEventTriggerFilter:
+          $ref: '#/components/schemas/ECustomConversationActionEventTriggerFilter'
+    CustomConversationActionInvocationEvent:
+      type: object
+      description: An event triggered every time a custom conversation action is invoked
+      properties:
+        $_type:
+          type: string
+          default: CustomConversationActionInvocationEvent
+          enum:
+          - CustomConversationActionInvocationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        actionType:
+          $ref: '#/components/schemas/ECustomActionType'
+        actionKey:
+          type: string
+          description: The unique key of the invoked `CustomActionData`
+        actionInvocationId:
+          type: string
+          description: The unique invocation ID of the action
+        actionInvocationTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp of the action invocation
+        executedBy:
+          $ref: '#/components/schemas/PersonData'
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
     CustomExternalMessengerChannel:
       type: object
       description: "Channel between the collaboration server and an external messenger server. This could be emails, sms or other channels.<br> It defines basically a webhook endpoint where the collaboration server sends new messages to. Messages from the external messenger can be send via the ExternalMessengers web api."
@@ -15521,6 +16455,291 @@ components:
             type: string
           x-expand-query-key: metadata
           x-type: Map
+    CustomMessageActionData:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CustomMessageActionData
+          enum:
+          - CustomMessageActionData
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        key:
+          type: string
+          description: The unique key of the action
+        name:
+          type: string
+          description: The name of the custom action. Maximum of 250 characters. Can not be omitted.
+        description:
+          type: string
+          description: The description of the custom action. Maximum of 500 characters. Can be omitted.
+        translations:
+          type: object
+          description: A map of localized versions of the name and description of this custom action
+          additionalProperties:
+            $ref: '#/components/schemas/CustomActionTranslation'
+        actionIcon:
+          description: The avatar ID of the avatar used as the action's icon. The ID can be expanded.
+          oneOf:
+          - type: string
+          - $ref: '#/components/schemas/Avatar'
+          x-expand-query-key: actionIcon
+          x-type: ExpandableField
+        state:
+          $ref: '#/components/schemas/ECustomActionState'
+        triggerWebhook:
+          $ref: '#/components/schemas/CustomActionWebhookRegistration'
+        invokableFromFrontends:
+          type: array
+          description: The frontends that the action may be invoked from
+          items:
+            $ref: '#/components/schemas/EFrontend'
+        invokableForConversationStates:
+          type: array
+          description: The conversation states the action may be invoked in
+          items:
+            $ref: '#/components/schemas/EConversationState'
+        invokableForParticipationStates:
+          type: array
+          description: The participation states a person may invoke the action in
+          items:
+            $ref: '#/components/schemas/EConversationParticipationState'
+        invokableBy:
+          type: array
+          description: The types of participant who may invoke the action
+          items:
+            $ref: '#/components/schemas/EConversationImpactingParticipationType'
+        triggerSystemMessage:
+          type: boolean
+          description: A flag indicating whether the action should trigger a system message. The default value is true.
+        triggerVisitorMobileSdkEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a visitor mobile SDK event. The default value is false.
+        triggerVisitorEmbeddedApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an Embedded JS API event. The default value is false.
+        triggerVisitorFloatingApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a Visitor JS API event. The default value is false.
+        triggerAgentMobileSdkEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
+        sortingOrder:
+          type: integer
+          format: int32
+          description: The sorting order within the custom actions when displayed in the action bar. The default value is 5.
+        type:
+          $ref: '#/components/schemas/ECustomActionType'
+        messageTypes:
+          type: array
+          description: The message types the action will be available for
+          items:
+            $ref: '#/components/schemas/EMessageType'
+        fileMessageMimeTypeRegex:
+          type: string
+          description: "A regular expression for the allowed MIME types of file messages the action will be available for. The default is null, which means the action will be available for file messages of all types."
+        invokableForMessagesSentBy:
+          type: array
+          description: A list of types of sender of the messages the action will be available for
+          items:
+            $ref: '#/components/schemas/EMessageSenderType'
+        apiEventTriggerFilter:
+          $ref: '#/components/schemas/ECustomMessageActionEventTriggerFilter'
+    CustomMessageActionInvocationEvent:
+      type: object
+      description: An event triggered every time a custom message action is invoked
+      properties:
+        $_type:
+          type: string
+          default: CustomMessageActionInvocationEvent
+          enum:
+          - CustomMessageActionInvocationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        actionType:
+          $ref: '#/components/schemas/ECustomActionType'
+        actionKey:
+          type: string
+          description: The unique key of the invoked `CustomActionData`
+        actionInvocationId:
+          type: string
+          description: The unique invocation ID of the action
+        actionInvocationTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp of the action invocation
+        executedBy:
+          $ref: '#/components/schemas/PersonData'
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        message:
+          $ref: '#/components/schemas/MessageData'
+    CustomPersonActionData:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CustomPersonActionData
+          enum:
+          - CustomPersonActionData
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        key:
+          type: string
+          description: The unique key of the action
+        name:
+          type: string
+          description: The name of the custom action. Maximum of 250 characters. Can not be omitted.
+        description:
+          type: string
+          description: The description of the custom action. Maximum of 500 characters. Can be omitted.
+        translations:
+          type: object
+          description: A map of localized versions of the name and description of this custom action
+          additionalProperties:
+            $ref: '#/components/schemas/CustomActionTranslation'
+        actionIcon:
+          description: The avatar ID of the avatar used as the action's icon. The ID can be expanded.
+          oneOf:
+          - type: string
+          - $ref: '#/components/schemas/Avatar'
+          x-expand-query-key: actionIcon
+          x-type: ExpandableField
+        state:
+          $ref: '#/components/schemas/ECustomActionState'
+        triggerWebhook:
+          $ref: '#/components/schemas/CustomActionWebhookRegistration'
+        invokableFromFrontends:
+          type: array
+          description: The frontends that the action may be invoked from
+          items:
+            $ref: '#/components/schemas/EFrontend'
+        invokableForConversationStates:
+          type: array
+          description: The conversation states the action may be invoked in
+          items:
+            $ref: '#/components/schemas/EConversationState'
+        invokableForParticipationStates:
+          type: array
+          description: The participation states a person may invoke the action in
+          items:
+            $ref: '#/components/schemas/EConversationParticipationState'
+        invokableBy:
+          type: array
+          description: The types of participant who may invoke the action
+          items:
+            $ref: '#/components/schemas/EConversationImpactingParticipationType'
+        triggerSystemMessage:
+          type: boolean
+          description: A flag indicating whether the action should trigger a system message. The default value is true.
+        triggerVisitorMobileSdkEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a visitor mobile SDK event. The default value is false.
+        triggerVisitorEmbeddedApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an Embedded JS API event. The default value is false.
+        triggerVisitorFloatingApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a Visitor JS API event. The default value is false.
+        triggerAgentMobileSdkEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
+        sortingOrder:
+          type: integer
+          format: int32
+          description: The sorting order within the custom actions when displayed in the action bar. The default value is 5.
+        type:
+          $ref: '#/components/schemas/ECustomActionType'
+        availableForTargetPersonTypes:
+          type: array
+          description: The person types the action can be invoked on
+          items:
+            $ref: '#/components/schemas/ECustomPersonActionTargetPersonType'
+        availableForTargetFrontends:
+          type: array
+          description: "The frontends of the person the action can be invoked on. If omitted, the action can be invoked on any of the target person's frontends, even if they aren't present in the conversation at that time."
+          items:
+            $ref: '#/components/schemas/EFrontend'
+        apiEventTriggerFilter:
+          $ref: '#/components/schemas/ECustomPersonActionEventTriggerFilter'
+    CustomPersonActionInvocationEvent:
+      type: object
+      description: An event triggered every time a custom person action is invoked
+      properties:
+        $_type:
+          type: string
+          default: CustomPersonActionInvocationEvent
+          enum:
+          - CustomPersonActionInvocationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        actionType:
+          $ref: '#/components/schemas/ECustomActionType'
+        actionKey:
+          type: string
+          description: The unique key of the invoked `CustomActionData`
+        actionInvocationId:
+          type: string
+          description: The unique invocation ID of the action
+        actionInvocationTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp of the action invocation
+        executedBy:
+          $ref: '#/components/schemas/PersonData'
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        person:
+          $ref: '#/components/schemas/PersonData'
     DefaultTemplateConversationTemplateSearchFilter:
       type: object
       properties:
@@ -16221,6 +17440,17 @@ components:
       - "NAME: Filter by the 'name' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+    EActionBarItemPosition:
+      type: string
+      description: The position of an item within an action bar
+      enum:
+      - ALWAYS_VISIBLE
+      - ALWAYS_IN_OVERFLOW
+      - SHOW_IF_POSSIBLE
+      x-enum-descriptions:
+      - "ALWAYS_VISIBLE: Action is always displayed in the action bar"
+      - "ALWAYS_IN_OVERFLOW: Action is always displayed in the overflow section of the action bar"
+      - "SHOW_IF_POSSIBLE: Action is displayed in the action bar if there is enough space"
     EAddressOrderByField:
       type: string
       enum:
@@ -16770,6 +18000,21 @@ components:
       - "TOKBOX_SESSION_ID: Filter by the 'tokboxSessionId' attribute"
       - "LAST_MESSAGE_TIMESTAMP: Filter by the 'lastMessageTimestamp' attribute"
       - "LAST_COMPLETED_RECORDING_TIMESTAMP: Filter by the 'lastCompletedRecordingTimestamp' attribute"
+    EConversationImpactingParticipationType:
+      type: string
+      description: "This enum contains all human participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`ENonVisitorParticipationType`</b> All types excluding visitors <li><b> EConversationImpactingParticipationType</b> All human participation types (No recorder) <li><b>`EConversationRealParticipationType`</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
+      enum:
+      - ASSIGNED_AGENT
+      - CONTEXT_PERSON
+      - SECONDARY_AGENT
+      - SECONDARY_VISITOR
+      - GHOST
+      x-enum-descriptions:
+      - ASSIGNED_AGENT
+      - CONTEXT_PERSON
+      - SECONDARY_AGENT
+      - SECONDARY_VISITOR
+      - GHOST
     EConversationInvitationOrderByField:
       type: string
       enum:
@@ -16970,6 +18215,24 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EConversationRecordingState:
+      type: string
+      enum:
+      - IDLE
+      - INITIALIZING
+      - WAITING_READY
+      - READY
+      - STARTED
+      - STOPPED
+      - FAILED
+      x-enum-descriptions:
+      - "IDLE: Conversation recording is ready to be initialized"
+      - "INITIALIZING: Conversation recording is initializing"
+      - "WAITING_READY: Conversation recording is waiting for the recording entry point to become available"
+      - "READY: Conversation recording is ready to start recording"
+      - "STARTED: Conversation recording has started to record"
+      - "STOPPED: Conversation recording has stopped recording"
+      - "FAILED: Conversation recording has failed"
     EConversationSearchFilterField:
       type: string
       enum:
@@ -17077,6 +18340,92 @@ components:
       - "INITIAL_ENGAGEMENT_TYPE: Filter by the 'initialEngagementType' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+    ECustomActionOrderByField:
+      type: string
+      enum:
+      - ID
+      - KEY
+      x-enum-descriptions:
+      - "ID: Sort by the \\\"ID\\\" attribute"
+      - "KEY: Sort by the \\\"key\\\" attribute"
+    ECustomActionSearchFilterField:
+      type: string
+      enum:
+      - KEY
+      x-enum-descriptions:
+      - "KEY: Filter by the \\\"key\\\" attribute"
+    ECustomActionState:
+      type: string
+      description: Possible Custom Action State
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - INACTIVE_UNAVAILABLE
+      x-enum-descriptions:
+      - "ACTIVE: State when a custom action is manually enabled"
+      - "INACTIVE: State when a custom action is manually disabled"
+      - "INACTIVE_UNAVAILABLE: State when a custom action is automatically disabled because it's webhook registration got automatically disabled"
+    ECustomActionType:
+      type: string
+      description: The type of the custom action
+      enum:
+      - CONVERSATION
+      - PERSON
+      - MESSAGE
+      x-enum-descriptions:
+      - "CONVERSATION: Conversation custom action type"
+      - "PERSON: Person custom action type"
+      - "MESSAGE: Message custom action type"
+    ECustomConversationActionEventTriggerFilter:
+      type: string
+      description: Who a custom conversation action API event should be triggered for
+      enum:
+      - SELF
+      - OTHERS
+      - ALL
+      x-enum-descriptions:
+      - "SELF: Trigger the custom action API event only for the person who invoked it"
+      - "OTHERS: Trigger the custom action API event for everyone except the person who invoked it"
+      - "ALL: Trigger the custom action API event for everyone"
+    ECustomMessageActionEventTriggerFilter:
+      type: string
+      description: Who a custom message action API event should be triggered for
+      enum:
+      - SENDER
+      - SELF
+      - OTHERS
+      - ALL
+      x-enum-descriptions:
+      - "SENDER: Trigger the custom action API event only for the sender of the target message"
+      - "SELF: Trigger the custom action API event only for the person who invoked it"
+      - "OTHERS: Trigger the custom action API event for everyone except the person who invoked it"
+      - "ALL: Trigger the custom action API event for everyone"
+    ECustomPersonActionEventTriggerFilter:
+      type: string
+      description: Who a custom person action API event should be triggered for
+      enum:
+      - TARGET_PERSON
+      - SELF
+      - OTHERS
+      - ALL
+      x-enum-descriptions:
+      - "TARGET_PERSON: Trigger the custom action API event only for the target person"
+      - "SELF: Trigger the custom action API event only for the person who invoked it"
+      - "OTHERS: Trigger the custom action API event for everyone except the person who invoked it"
+      - "ALL: Trigger the custom action API event for everyone"
+    ECustomPersonActionTargetPersonType:
+      type: string
+      description: The type of the target person of a custom person action
+      enum:
+      - AGENT
+      - ANONYMOUS_VISITOR
+      - AUTHENTICATED_VISITOR
+      - BOT
+      x-enum-descriptions:
+      - "AGENT: Agent participant"
+      - "ANONYMOUS_VISITOR: Anonymous visitor participant"
+      - "AUTHENTICATED_VISITOR: Authenticated visitor participant"
+      - "BOT: Bot participant"
     EDeputyDelegationEscalationLevel:
       type: string
       description: The escalation levels for a deputy delegation
@@ -17240,6 +18589,27 @@ components:
       - "CUSTOM: Custom channel which is connected via rest and webhooks"
       - "WHATS_APP: WhatsApp channel which is managed by the collaboration server"
       - "FACEBOOK: Facebook channel which is managed by the collaboration server"
+    EFrontend:
+      type: string
+      description: All the different Unblu conversation frontends users can interact with
+      enum:
+      - VISITOR_SITE_INTEGRATION
+      - VISITOR_SITE_EMBEDDED
+      - VISITOR_DESK
+      - VISITOR_MOBILE
+      - VISITOR_POPOUT
+      - AGENT_DESK
+      - AGENT_SINGLE_CONVERSATION_DESK
+      - AGENT_MOBILE
+      x-enum-descriptions:
+      - "VISITOR_SITE_INTEGRATION: Sites that integrate Unblu using the Floating Visitor UI"
+      - "VISITOR_SITE_EMBEDDED: Sites that integrate Unblu using the Embedded Visitor UI"
+      - "VISITOR_DESK: Sites for visitors to join a session, but the page isn't integrated into any other page"
+      - "VISITOR_MOBILE: Sites for mobile visitor frontend and pop-out that display the Individual UI of the visitor site integration"
+      - "VISITOR_POPOUT: Sites for site integration pop-outs"
+      - "AGENT_DESK: The Agent Desk"
+      - "AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent"
+      - "AGENT_MOBILE: Sites for the mobile agent frontend that display the agent inbox and the conversation UI"
     EIdListOperatorType:
       type: string
       description: Operator types corresponding to operators defined by `IdListOperator`
@@ -17624,6 +18994,19 @@ components:
       - SEND_TIMESTAMP
       x-enum-descriptions:
       - "SEND_TIMESTAMP: Filter by the 'sendTimestamp' attribute"
+    EMessageSenderType:
+      type: string
+      description: The type of participant who sent a message
+      enum:
+      - SELF
+      - OTHER_VISITOR
+      - OTHER_AGENT
+      - BOT
+      x-enum-descriptions:
+      - "SELF: The person sent the message themselves"
+      - "OTHER_VISITOR: Another visitor sent the message"
+      - "OTHER_AGENT: Another agent sent the message"
+      - "BOT: Bot sent the message"
     EMessageState:
       type: string
       description: The state of a message if it was delivered or read
@@ -18003,6 +19386,7 @@ components:
       - CONVERSATION
       - CONVERSATION_TEMPLATE
       - EXTERNAL_MESSENGER_CHANNEL
+      - CUSTOM_ACTION
       x-enum-descriptions:
       - "GLOBAL: Global system is owner"
       - "ACCOUNT: Account is owner"
@@ -18014,6 +19398,7 @@ components:
       - "CONVERSATION: Conversation"
       - "CONVERSATION_TEMPLATE: Conversation template"
       - "EXTERNAL_MESSENGER_CHANNEL: External messenger channel"
+      - "CUSTOM_ACTION: Custom action"
     EPropertyOwnerTypeOperatorType:
       type: string
       enum:
@@ -18047,7 +19432,19 @@ components:
       - "NORMAL: Recording ended normally"
       - "ABORT_SYSTEM: Recording aborted by the system"
       - "ABORT_TIMEOUT: Recording aborted due to timeout"
-      - "ABORT_BLOBSTORE_FAILURE: Recording aborted due to an error with the blob"
+      - "ABORT_BLOBSTORE_FAILURE: Recording aborted due to an error regarding the blob"
+      - "ABORT_UNEXPECT: Recording aborted unexpectedly"
+    ERecordingFailedReason:
+      type: string
+      enum:
+      - ABORT_SYSTEM
+      - ABORT_TIMEOUT
+      - ABORT_BLOBSTORE_FAILURE
+      - ABORT_UNEXPECT
+      x-enum-descriptions:
+      - "ABORT_SYSTEM: Recording aborted by the system"
+      - "ABORT_TIMEOUT: Recording aborted due to timeout"
+      - "ABORT_BLOBSTORE_FAILURE: Recording aborted due to an error regarding the blob"
       - "ABORT_UNEXPECT: Recording aborted unexpectedly"
     ERecordingStatus:
       type: string
@@ -18073,11 +19470,13 @@ components:
       - BOT
       - EXTERNAL_MESSENGER
       - EXTERNAL_MESSAGE_INTERCEPTOR
+      - CUSTOM_ACTION
       x-enum-descriptions:
       - WEBHOOK_REGISTRATION
       - BOT
       - EXTERNAL_MESSENGER
       - EXTERNAL_MESSAGE_INTERCEPTOR
+      - CUSTOM_ACTION
     ERegistrationStatus:
       type: string
       description: Possible Webhook Registration Status
@@ -18861,6 +20260,7 @@ components:
     ExpandFields:
       type: string
       enum:
+      - actionIcon
       - avatar
       - billingAddress
       - channelIcon
@@ -19971,6 +21371,33 @@ components:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
         operator:
           $ref: '#/components/schemas/AuditChangeInteractionTypeOperator'
+    InterceptorNewMessageEvent:
+      type: object
+      description: Event sent to external message interceptors when a new message is added to the conversation
+      properties:
+        $_type:
+          type: string
+          default: InterceptorNewMessageEvent
+          enum:
+          - InterceptorNewMessageEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        messageApiToken:
+          type: string
+          description: "The token to approve, modify, or reject the message"
+        conversationMessage:
+          $ref: '#/components/schemas/MessageData'
+        conversationLanguage:
+          type: string
+          description: The language of the conversation
     InternalMessageInterceptorData:
       type: object
       description: Model representing an internal message interceptor used to approve or reject messages in a conversation
@@ -20341,6 +21768,18 @@ components:
           - KeyCannedResponseSearchFilter
         field:
           $ref: '#/components/schemas/ECannedResponseSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    KeyCustomActionSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: KeyCustomActionSearchFilter
+          enum:
+          - KeyCustomActionSearchFilter
+        field:
+          $ref: '#/components/schemas/ECustomActionSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
     LastCompletedRecordingTimestampConversationHistorySearchFilter:

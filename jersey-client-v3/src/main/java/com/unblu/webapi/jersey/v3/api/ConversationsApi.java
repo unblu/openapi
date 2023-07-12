@@ -16,6 +16,7 @@ import com.unblu.webapi.model.v3.ConversationData;
 import com.unblu.webapi.model.v3.ConversationFileData;
 import com.unblu.webapi.model.v3.ConversationQuery;
 import com.unblu.webapi.model.v3.ConversationRecipientData;
+import com.unblu.webapi.model.v3.ConversationRecordingState;
 import com.unblu.webapi.model.v3.ConversationResult;
 import com.unblu.webapi.model.v3.ConversationsAddParticipantBody;
 import com.unblu.webapi.model.v3.ConversationsChangeParticipantVisibilityBody;
@@ -731,6 +732,58 @@ public class ConversationsApi {
 		GenericType<List<ConversationFileData>> localVarReturnType = new GenericType<List<ConversationFileData>>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * getRecordingState Retrieve the current recording state of the given conversation&lt;br&gt;
+	 * 
+	 * @param conversationId The conversation to retrieve the recording state for (required)
+	 * @return ConversationRecordingState
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationRecordingState conversationsGetRecordingState(String conversationId) throws ApiException {
+		return conversationsGetRecordingStateWithHttpInfo(conversationId).getData();
+	}
+
+	/**
+	 * getRecordingState Retrieve the current recording state of the given conversation&lt;br&gt;
+	 * 
+	 * @param conversationId The conversation to retrieve the recording state for (required)
+	 * @return ApiResponse&lt;ConversationRecordingState&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationRecordingState> conversationsGetRecordingStateWithHttpInfo(String conversationId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsGetRecordingState");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/getRecordingState"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationRecordingState> localVarReturnType = new GenericType<ConversationRecordingState>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**
@@ -1765,6 +1818,118 @@ public class ConversationsApi {
 		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * startRecording Manually start a conversation recording. The recording is only started if a compatible blob store is configured, manually starting and
+	 * stopping a recording is allowed, and a collaboration layer or call is active. The recording is started asynchronously, and there may be a brief delay before
+	 * it starts. In case of an error a conversation.recording_failed webhook is triggered. The type of the recording (audio only or audio and video) is determined
+	 * by the configuration.&lt;br&gt;@throws ConversationRecordingRunningException If a conversation recording is already running&lt;br&gt;@throws
+	 * ConversationRecordingDeniedException If no compatible blob store is configured or manual start of a recording is not allowed&lt;br&gt;@throws
+	 * ConversationRecordingFailedException If there is no active call or collaboration layer
+	 * 
+	 * @param conversationId The conversation for which a recording should be started (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void conversationsStartRecording(String conversationId) throws ApiException {
+
+		conversationsStartRecordingWithHttpInfo(conversationId);
+	}
+
+	/**
+	 * startRecording Manually start a conversation recording. The recording is only started if a compatible blob store is configured, manually starting and
+	 * stopping a recording is allowed, and a collaboration layer or call is active. The recording is started asynchronously, and there may be a brief delay before
+	 * it starts. In case of an error a conversation.recording_failed webhook is triggered. The type of the recording (audio only or audio and video) is determined
+	 * by the configuration.&lt;br&gt;@throws ConversationRecordingRunningException If a conversation recording is already running&lt;br&gt;@throws
+	 * ConversationRecordingDeniedException If no compatible blob store is configured or manual start of a recording is not allowed&lt;br&gt;@throws
+	 * ConversationRecordingFailedException If there is no active call or collaboration layer
+	 * 
+	 * @param conversationId The conversation for which a recording should be started (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> conversationsStartRecordingWithHttpInfo(String conversationId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsStartRecording");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/startRecording"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
+	 * stopRecording Manually stop a conversation recording. The recording is stopped if there is a running conversation recording and manually starting and
+	 * stopping the recording is allowed.&lt;br&gt;@throws ConversationRecordingNotRunningException If no conversation recording is running&lt;br&gt;@throws
+	 * ConversationRecordingDeniedException If manually starting and stopping a recording isn&#39;t permitted
+	 * 
+	 * @param conversationId The conversation for which a recording should be stopped (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void conversationsStopRecording(String conversationId) throws ApiException {
+
+		conversationsStopRecordingWithHttpInfo(conversationId);
+	}
+
+	/**
+	 * stopRecording Manually stop a conversation recording. The recording is stopped if there is a running conversation recording and manually starting and
+	 * stopping the recording is allowed.&lt;br&gt;@throws ConversationRecordingNotRunningException If no conversation recording is running&lt;br&gt;@throws
+	 * ConversationRecordingDeniedException If manually starting and stopping a recording isn&#39;t permitted
+	 * 
+	 * @param conversationId The conversation for which a recording should be stopped (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> conversationsStopRecordingWithHttpInfo(String conversationId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsStopRecording");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/stopRecording"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**

@@ -5,29 +5,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ExpandFields
+ * Gets or Sets ECustomActionOrderByField
  */
-public enum ExpandFields {
+public enum ECustomActionOrderByField {
 
-	ACTIONICON("actionIcon"),
+	/**
+	 * ID: Sort by the \&quot;ID\&quot; attribute
+	 */
+	ID("ID"),
 
-	AVATAR("avatar"),
-
-	BILLINGADDRESS("billingAddress"),
-
-	CHANNELICON("channelIcon"),
-
-	CONFIGURATION("configuration"),
-
-	CONTACTADDRESS("contactAddress"),
-
-	METADATA("metadata"),
-
-	TEXT("text");
+	/**
+	 * KEY: Sort by the \&quot;key\&quot; attribute
+	 */
+	KEY("KEY");
 
 	private String value;
 
-	ExpandFields(String value) {
+	ECustomActionOrderByField(String value) {
 		this.value = value;
 	}
 
@@ -42,8 +36,8 @@ public enum ExpandFields {
 	}
 
 	@JsonCreator
-	public static ExpandFields fromValue(String value) {
-		for (ExpandFields b : ExpandFields.values()) {
+	public static ECustomActionOrderByField fromValue(String value) {
+		for (ECustomActionOrderByField b : ECustomActionOrderByField.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

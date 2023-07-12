@@ -5,29 +5,28 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ExpandFields
+ * The type of the custom action
  */
-public enum ExpandFields {
+public enum ECustomActionType {
 
-	ACTIONICON("actionIcon"),
+	/**
+	 * CONVERSATION: Conversation custom action type
+	 */
+	CONVERSATION("CONVERSATION"),
 
-	AVATAR("avatar"),
+	/**
+	 * PERSON: Person custom action type
+	 */
+	PERSON("PERSON"),
 
-	BILLINGADDRESS("billingAddress"),
-
-	CHANNELICON("channelIcon"),
-
-	CONFIGURATION("configuration"),
-
-	CONTACTADDRESS("contactAddress"),
-
-	METADATA("metadata"),
-
-	TEXT("text");
+	/**
+	 * MESSAGE: Message custom action type
+	 */
+	MESSAGE("MESSAGE");
 
 	private String value;
 
-	ExpandFields(String value) {
+	ECustomActionType(String value) {
 		this.value = value;
 	}
 
@@ -42,8 +41,8 @@ public enum ExpandFields {
 	}
 
 	@JsonCreator
-	public static ExpandFields fromValue(String value) {
-		for (ExpandFields b : ExpandFields.values()) {
+	public static ECustomActionType fromValue(String value) {
+		for (ECustomActionType b : ECustomActionType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

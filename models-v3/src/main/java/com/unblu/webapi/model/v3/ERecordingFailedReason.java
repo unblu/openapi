@@ -5,14 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ERecordingEndReason
+ * Gets or Sets ERecordingFailedReason
  */
-public enum ERecordingEndReason {
-
-	/**
-	 * NORMAL: Recording ended normally
-	 */
-	NORMAL("NORMAL"),
+public enum ERecordingFailedReason {
 
 	/**
 	 * ABORT_SYSTEM: Recording aborted by the system
@@ -36,7 +31,7 @@ public enum ERecordingEndReason {
 
 	private String value;
 
-	ERecordingEndReason(String value) {
+	ERecordingFailedReason(String value) {
 		this.value = value;
 	}
 
@@ -51,8 +46,8 @@ public enum ERecordingEndReason {
 	}
 
 	@JsonCreator
-	public static ERecordingEndReason fromValue(String value) {
-		for (ERecordingEndReason b : ERecordingEndReason.values()) {
+	public static ERecordingFailedReason fromValue(String value) {
+		for (ERecordingFailedReason b : ERecordingFailedReason.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}
