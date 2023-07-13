@@ -1,0 +1,47 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api project(':models-v3')
+
+    implementation libs.swagger.annotations
+    api libs.jersey3.client
+    api libs.jersey3.media.multipart
+    api libs.jersey3.media.json.jackson
+    api libs.jersey3.hk2
+    api libs.jackson.core
+    api libs.jackson.annotations
+    api libs.jackson.databind
+    api libs.jackson.jsr310
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                name = 'Jersey Client v3'
+                description = 'Client implemented using Jersey'
+                packaging = 'jar'
+                url = 'https://' + "$githubRepositoryOwner" + '.github.io/' + "$githubRepositoryName" + '/'
+                licenses {
+                    license {
+                        name = 'Apache 2.0 License'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0'
+                    }
+                }
+                developers {
+                    developer {
+                        url = 'https://github.com/orgs/' + "$githubRepositoryOwner" + '/people'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/' + "$githubRepositoryOwner" + '/' + "$githubRepositoryName" + '.git'
+                    developerConnection = 'scm:git:https://github.com/' + "$githubRepositoryOwner" + '/' + "$githubRepositoryName" + '.git'
+                    url = 'https://github.com/' + "$githubRepositoryOwner" + '/' + "$githubRepositoryName" + '/'
+                }
+            }
+            from components.java
+        }
+    }
+}

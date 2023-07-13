@@ -15,7 +15,7 @@ endif::[]
 
 This project contains java classes corresponding to the JSON Schemas used as request body or response body in the Web-API's endpoints and as body of the Webhook events.
 
-The model library can be used with different clients such as the git-link:jersey-client-v3/[Jersey client v3]
+The model library can be used with different clients such as the git-link:jersey-client-v3/[Jersey 2.x client v3] or the git-link:jersey3-client-v3/[Jersey 3.x.x client v3]
 
 [source, xml, subs="verbatim,attributes"]
 .Maven coordinates of the '{module-name}' project  (xml notation)

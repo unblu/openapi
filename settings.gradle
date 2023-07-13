@@ -3,3 +3,4 @@ enableFeaturePreview("VERSION_CATALOGS")
 
 include(':models-v3')
 include(':jersey-client-v3')
+include(':jersey3-client-v3')

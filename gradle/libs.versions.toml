@@ -1,6 +1,7 @@
 [versions]
-jackson = "2.10.1"
-jersey = "2.26"
+jackson = "2.14.1"
+jersey = "2.40"
+jersey3 = "3.1.2"
 junit = "5.7.1"
 
 [libraries]
@@ -12,9 +13,14 @@ jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations
 jackson-jdk8 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8", version.ref = "jackson" }
 jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
 
-
 jersey-client = { module = "org.glassfish.jersey.core:jersey-client", version.ref = "jersey" }
 jersey-media-multipart = { module = "org.glassfish.jersey.media:jersey-media-multipart", version.ref = "jersey" }
 jersey-media-json-jackson = { module = "org.glassfish.jersey.media:jersey-media-json-jackson", version.ref = "jersey" }
 jersey-hk2 = { module = "org.glassfish.jersey.inject:jersey-hk2", version.ref = "jersey" }
+
+jersey3-client = { module = "org.glassfish.jersey.core:jersey-client", version.ref = "jersey3" }
+jersey3-media-multipart = { module = "org.glassfish.jersey.media:jersey-media-multipart", version.ref = "jersey3" }
+jersey3-media-json-jackson = { module = "org.glassfish.jersey.media:jersey-media-json-jackson", version.ref = "jersey3" }
+jersey3-hk2 = { module = "org.glassfish.jersey.inject:jersey-hk2", version.ref = "jersey3" }
+
 swagger-annotations = { module = "io.swagger:swagger-annotations", version = "1.5.15" }
