@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.32.0
+  version: 7.33.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -5387,7 +5387,17 @@ paths:
                       id: null
                       name: My conversation action
                       description: null
-                  actionIcon: null
+                  actionIcon:
+                    $_type: Avatar
+                    id: null
+                    creationTimestamp: null
+                    modificationTimestamp: null
+                    accountId: null
+                    imageZoomFactor: null
+                    imageXPositionRatio: null
+                    imageYPositionRatio: null
+                    imageRotationAngle: null
+                    imageData: "data:image/png;base64,iVBORw0KG...QmCC"
                   state: ACTIVE
                   triggerWebhook:
                     $_type: CustomActionWebhookRegistration
@@ -5447,7 +5457,17 @@ paths:
                         id: 3GxKB_qhRjSwFbhKXjrz5w
                         name: My conversation action
                         description: null
-                    actionIcon: null
+                    actionIcon:
+                      $_type: Avatar
+                      id: _1dA8a75B-9v3r6Ct4EbADa
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      imageZoomFactor: null
+                      imageXPositionRatio: 0.5
+                      imageYPositionRatio: 0.5
+                      imageRotationAngle: 0
+                      imageData: "data:image/png;base64,iVBORw0KG...QmCC"
                     state: ACTIVE
                     triggerWebhook:
                       $_type: CustomActionWebhookRegistration
@@ -5618,7 +5638,7 @@ paths:
                         id: 3GxKB_qhRjSwFbhKXjrz5w
                         name: My person action
                         description: null
-                    actionIcon: null
+                    actionIcon: _1dA8a75B-9v3r6Ct4EbADa
                     state: ACTIVE
                     triggerWebhook:
                       $_type: CustomActionWebhookRegistration
@@ -5724,7 +5744,17 @@ paths:
                       id: 3GxKB_qhRjSwFbhKXjrz5w
                       name: My message action
                       description: null
-                  actionIcon: null
+                  actionIcon:
+                    $_type: Avatar
+                    id: _1dA8a75B-9v3r6Ct4EbADa
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    imageZoomFactor: null
+                    imageXPositionRatio: 0.5
+                    imageYPositionRatio: 0.5
+                    imageRotationAngle: 0
+                    imageData: "data:image/png;base64,iVBORw0KG...QmCC"
                   state: ACTIVE
                   triggerWebhook:
                     $_type: CustomActionWebhookRegistration
@@ -5786,7 +5816,7 @@ paths:
                         id: 3GxKB_qhRjSwFbhKXjrz5w
                         name: My message action
                         description: null
-                    actionIcon: null
+                    actionIcon: _1dA8a75B-9v3r6Ct4EbADa
                     state: ACTIVE
                     triggerWebhook:
                       $_type: CustomActionWebhookRegistration
@@ -7545,6 +7575,47 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MessageInterceptorData'
+            examples:
+              create-external:
+                summary: create external
+                description: create a new external message interceptor
+                value:
+                  $_type: ExternalMessageInterceptorData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: Test external message interceptor
+                  description: Test description
+                  messageFilter: VISITOR
+                  timeoutBehavior: REJECT
+                  type: EXTERNAL
+                  webhookStatus: INACTIVE
+                  webhookEndpoint: http://external.interceptor.endpoint
+                  webhookSecret: hash-secret
+              create-internal:
+                summary: create internal
+                description: create a new internal message interceptor
+                value:
+                  $_type: InternalMessageInterceptorData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: Test internal message interceptor
+                  description: Test description
+                  messageFilter: VISITOR
+                  timeoutBehavior: REJECT
+                  type: INTERNAL
+                  pointOfInterception: AFTER_PERSISTING
+                  language: null
+                  regex: .*
+                  reason: message reason
+                  severity: HIGH
+                  status: INACTIVE
+                  translations: null
         required: true
       responses:
         "200":
@@ -7553,6 +7624,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageInterceptorData'
+              examples:
+                read-external:
+                  summary: read external
+                  description: create a new external message interceptor
+                  value:
+                    $_type: ExternalMessageInterceptorData
+                    id: _LFMquN7Qy-5K9rSWtpL_g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: Test external message interceptor
+                    description: Test description
+                    messageFilter: VISITOR
+                    timeoutBehavior: REJECT
+                    type: EXTERNAL
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: http://external.interceptor.endpoint
+                    webhookSecret: hash-secret
+                read-internal:
+                  summary: read internal
+                  description: create a new internal message interceptor
+                  value:
+                    $_type: InternalMessageInterceptorData
+                    id: 4F6NRewHSWap5P8I8PHrnQ
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: Test internal message interceptor
+                    description: Test description
+                    messageFilter: VISITOR
+                    timeoutBehavior: REJECT
+                    type: INTERNAL
+                    pointOfInterception: AFTER_PERSISTING
+                    language: null
+                    regex: .*
+                    reason: message reason
+                    severity: HIGH
+                    status: INACTIVE
+                    translations: {}
         default:
           $ref: '#/components/responses/ErrorResponse'
       callbacks:
@@ -7734,6 +7846,47 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MessageInterceptorData'
+            examples:
+              create-external:
+                summary: create external
+                description: update an existing external message interceptor
+                value:
+                  $_type: ExternalMessageInterceptorData
+                  id: _LFMquN7Qy-5K9rSWtpL_g
+                  creationTimestamp: 1546300800000
+                  modificationTimestamp: 1548979200000
+                  version: 1
+                  accountId: A7d9E_0-c3cC4aoFDb85t6n
+                  name: Test external message interceptor
+                  description: New description
+                  messageFilter: VISITOR
+                  timeoutBehavior: REJECT
+                  type: EXTERNAL
+                  webhookStatus: INACTIVE
+                  webhookEndpoint: http://external.interceptor.endpoint
+                  webhookSecret: hash-secret
+              create-internal:
+                summary: create internal
+                description: update an existing internal message interceptor
+                value:
+                  $_type: InternalMessageInterceptorData
+                  id: 4F6NRewHSWap5P8I8PHrnQ
+                  creationTimestamp: 1546300800000
+                  modificationTimestamp: 1548979200000
+                  version: 1
+                  accountId: A7d9E_0-c3cC4aoFDb85t6n
+                  name: Test internal message interceptor
+                  description: New description
+                  messageFilter: VISITOR
+                  timeoutBehavior: REJECT
+                  type: INTERNAL
+                  pointOfInterception: AFTER_PERSISTING
+                  language: null
+                  regex: .*
+                  reason: message reason
+                  severity: HIGH
+                  status: INACTIVE
+                  translations: {}
         required: true
       responses:
         "200":
@@ -7742,6 +7895,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageInterceptorData'
+              examples:
+                update-external:
+                  summary: update external
+                  description: update an existing external message interceptor
+                  value:
+                    $_type: ExternalMessageInterceptorData
+                    id: _LFMquN7Qy-5K9rSWtpL_g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 2
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: Test external message interceptor
+                    description: New description
+                    messageFilter: VISITOR
+                    timeoutBehavior: REJECT
+                    type: EXTERNAL
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: http://external.interceptor.endpoint
+                    webhookSecret: hash-secret
+                update-internal:
+                  summary: update internal
+                  description: update an existing internal message interceptor
+                  value:
+                    $_type: InternalMessageInterceptorData
+                    id: 4F6NRewHSWap5P8I8PHrnQ
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 2
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: Test internal message interceptor
+                    description: New description
+                    messageFilter: VISITOR
+                    timeoutBehavior: REJECT
+                    type: INTERNAL
+                    pointOfInterception: AFTER_PERSISTING
+                    language: null
+                    regex: .*
+                    reason: message reason
+                    severity: HIGH
+                    status: INACTIVE
+                    translations: {}
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
