@@ -531,8 +531,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1>Unblu OpenAPI</h1>
 <div class="details">
-<span id="revnumber">version 7.32.0,</span>
-<span id="revdate">2023-07-12</span>
+<span id="revnumber">version 7.33.1,</span>
+<span id="revdate">2023-07-27</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -542,6 +542,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#models-v3">Models v3</a></li>
 <li><a href="#jersey-client-v3">Jersey Client v3</a></li>
+<li><a href="#jersey-client-v3-2">Jersey Client v3</a></li>
 </ul>
 </li>
 <li><a href="#download">Download</a></li>
@@ -606,7 +607,7 @@ Do you want to improve this page? Please <a href="https://github.com/unblu/opena
 <p>This project contains java classes corresponding to the JSON Schemas used as request body or response body in the Web-API&#8217;s endpoints and as body of the Webhook events.</p>
 </div>
 <div class="paragraph">
-<p>The model library can be used with different clients such as the <a href="https://github.com/unblu/openapi/tree/main/7.x.x/jersey-client-v3">Jersey client v3</a></p>
+<p>The model library can be used with different clients such as the <a href="https://github.com/unblu/openapi/tree/main/7.x.x/jersey-client-v3">Jersey 2.x client v3</a> or the <a href="https://github.com/unblu/openapi/tree/main/7.x.x/jersey3-client-v3">Jersey 3.x.x client v3</a></p>
 </div>
 <div class="listingblock">
 <div class="title">Listing 1. Maven coordinates of the 'Models v3' project  (xml notation)</div>
@@ -614,14 +615,14 @@ Do you want to improve this page? Please <a href="https://github.com/unblu/opena
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
   <span class="tag">&lt;groupId&gt;</span>com.unblu.openapi<span class="tag">&lt;/groupId&gt;</span>
   <span class="tag">&lt;artifactId&gt;</span>model-v3<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;version&gt;</span>7.32.0<span class="tag">&lt;/version&gt;</span>
+  <span class="tag">&lt;version&gt;</span>7.33.1<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Listing 2. Maven coordinates of the 'Models v3' project  (single line notation)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:model-v3:7.32.0</code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:model-v3:7.33.1</code></pre>
 </div>
 </div>
 </div>
@@ -631,7 +632,7 @@ Do you want to improve this page? Please <a href="https://github.com/unblu/opena
 <p>This project contains a client to perform HTTP request against the Web-API of the collaboration server.</p>
 </div>
 <div class="paragraph">
-<p>This is based on the <a href="https://eclipse-ee4j.github.io/jersey/">jersey project</a>.
+<p>This is based on the <a href="https://eclipse-ee4j.github.io/jersey/">jersey project</a>, version <code>2.x</code>.
 It requires the <a href="https://github.com/unblu/openapi/tree/main/7.x.x/model-v3">model v3</a> library</p>
 </div>
 <div class="listingblock">
@@ -640,14 +641,46 @@ It requires the <a href="https://github.com/unblu/openapi/tree/main/7.x.x/model-
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
   <span class="tag">&lt;groupId&gt;</span>com.unblu.openapi<span class="tag">&lt;/groupId&gt;</span>
   <span class="tag">&lt;artifactId&gt;</span>jersey-client-v3<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;version&gt;</span>7.32.0<span class="tag">&lt;/version&gt;</span>
+  <span class="tag">&lt;version&gt;</span>7.33.1<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Listing 4. Maven coordinates of the 'Jersey Client v3' project  (single line notation)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:jersey-client-v3:7.32.0</code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:jersey-client-v3:7.33.1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="jersey-client-v3-2"><a class="anchor" href="#jersey-client-v3-2"></a>Jersey Client v3</h4>
+<div class="paragraph">
+<p>This project contains a client to perform HTTP request against the Web-API of the collaboration server.</p>
+</div>
+<div class="paragraph">
+<p>This is based on the <a href="https://eclipse-ee4j.github.io/jersey/">jersey project</a>, version <code>3.x.x</code>.
+It requires the <a href="https://github.com/unblu/openapi/tree/main/7.x.x/model-v3">model v3</a> library</p>
+</div>
+<div class="paragraph">
+<p>It requires Java 11 to run.</p>
+</div>
+<div class="paragraph">
+<p>It is compatible with Spring 6 / Spring Boot 3 / Quarkus 3.</p>
+</div>
+<div class="listingblock">
+<div class="title">Listing 5. Maven coordinates of the 'Jersey Client v3' project  (xml notation)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>com.unblu.openapi<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>jersey3-client-v3<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;version&gt;</span>7.33.1<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Listing 6. Maven coordinates of the 'Jersey Client v3' project  (single line notation)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:jersey3-client-v3:7.33.1</code></pre>
 </div>
 </div>
 </div>
@@ -770,8 +803,8 @@ ssh-add ~/.ssh/id_rsa</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 7.32.0<br>
-Last updated 2023-06-05 09:47:17 +0200
+Version 7.33.1<br>
+Last updated 2023-07-27 14:30:26 +0200
 </div>
 </div>
 </body>
