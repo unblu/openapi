@@ -1185,9 +1185,10 @@ public class AuthenticatorApi {
 	}
 
 	/**
-	 * loginWithSecureToken Start a session using a signed JWT as the login credentials. A new user with the role WEBUSER is created automatically. If
-	 * authentication is successful, the response includes an authentication cookie; the response body is empty. &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a
-	 * mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
+	 * loginWithSecureToken Start a session using a signed JWT as the login credentials. A logout token can be provided in the claim set of the signed JWT. This
+	 * logout token is stored in the authentication session to be used later for the &#x60;logoutWithSecureToken&#x60; call. A new user with the role WEBUSER is
+	 * created automatically. If authentication is successful, the response includes an authentication cookie; the response body is empty.
+	 * &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
 	 * 
 	 * @param secureTokenRequest (required)
 	 * @throws ApiException if fails to make API call
@@ -1198,9 +1199,10 @@ public class AuthenticatorApi {
 	}
 
 	/**
-	 * loginWithSecureToken Start a session using a signed JWT as the login credentials. A new user with the role WEBUSER is created automatically. If
-	 * authentication is successful, the response includes an authentication cookie; the response body is empty. &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a
-	 * mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
+	 * loginWithSecureToken Start a session using a signed JWT as the login credentials. A logout token can be provided in the claim set of the signed JWT. This
+	 * logout token is stored in the authentication session to be used later for the &#x60;logoutWithSecureToken&#x60; call. A new user with the role WEBUSER is
+	 * created automatically. If authentication is successful, the response includes an authentication cookie; the response body is empty.
+	 * &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification.
 	 * 
 	 * @param secureTokenRequest (required)
 	 * @throws ApiException if fails to make API call
@@ -1331,6 +1333,58 @@ public class AuthenticatorApi {
 		String[] localVarAuthNames = new String[] { "basicAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
+	 * logoutWithSecureToken Call this to log out using a signed JWT containing the logout token in the claim set. Use this to allow backend server(s) to log out
+	 * from visitor SSO. &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI
+	 * specification.
+	 * 
+	 * @param secureTokenRequest (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void authenticatorLogoutWithSecureToken(SecureTokenRequest secureTokenRequest) throws ApiException {
+
+		authenticatorLogoutWithSecureTokenWithHttpInfo(secureTokenRequest);
+	}
+
+	/**
+	 * logoutWithSecureToken Call this to log out using a signed JWT containing the logout token in the claim set. Use this to allow backend server(s) to log out
+	 * from visitor SSO. &lt;code&gt;x-unblu-apikey&lt;/code&gt; is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI
+	 * specification.
+	 * 
+	 * @param secureTokenRequest (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> authenticatorLogoutWithSecureTokenWithHttpInfo(SecureTokenRequest secureTokenRequest) throws ApiException {
+		Object localVarPostBody = secureTokenRequest;
+
+		// verify the required parameter 'secureTokenRequest' is set
+		if (secureTokenRequest == null) {
+			throw new ApiException(400, "Missing the required parameter 'secureTokenRequest' when calling authenticatorLogoutWithSecureToken");
+		}
+
+		// create path and map variables
+		String localVarPath = "/authenticator/logoutWithSecureToken";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**

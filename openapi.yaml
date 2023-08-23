@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.33.1
+  version: 7.34.3
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -1591,7 +1591,7 @@ paths:
       tags:
       - Authenticator
       summary: loginWithSecureToken
-      description: "Start a session using a signed JWT as the login credentials. A new user with the role WEBUSER is created automatically. If authentication is successful, the response includes an authentication cookie; the response body is empty. <code>x-unblu-apikey</code> is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification."
+      description: "Start a session using a signed JWT as the login credentials. A logout token can be provided in the claim set of the signed JWT. This logout token is stored in the authentication session to be used later for the `logoutWithSecureToken` call. A new user with the role WEBUSER is created automatically. If authentication is successful, the response includes an authentication cookie; the response body is empty. <code>x-unblu-apikey</code> is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification."
       operationId: authenticatorLoginWithSecureToken
       requestBody:
         content:
@@ -1634,6 +1634,28 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       x-allow-impersonated-access: "true"
       x-legacy-get: "true"
+      x-required-entry-path: PUBLIC
+      x-required-role:
+      - ANONYMOUS_USER
+  /authenticator/logoutWithSecureToken:
+    post:
+      tags:
+      - Authenticator
+      summary: logoutWithSecureToken
+      description: "Call this to log out using a signed JWT containing the logout token in the claim set. Use this to allow backend server(s) to log out from visitor SSO. <code>x-unblu-apikey</code> is a mandatory GET parameter for this operation, even though it is not part of the OpenAPI specification."
+      operationId: authenticatorLogoutWithSecureToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecureTokenRequest'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
@@ -19905,6 +19927,15 @@ components:
       - "RETRY_NR: Filter by the 'retryNr' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
       - "HTTP_RESPONSE_CODE: Filter by the 'httpResponseCode' attribute"
+    EWebhookEventKind:
+      type: string
+      description: Kind of webhook event (regular webhook event or outbound request/response)
+      enum:
+      - WEBHOOK
+      - OUTBOUND
+      x-enum-descriptions:
+      - "WEBHOOK: Regular webhook, where no specific response is expected, receiver can process the POST call in an asynchronous way"
+      - "OUTBOUND: Outbound request which expects a response, receiver must process the POST call in a synchronous way"
     EWebhookRegistrationOrderByField:
       type: string
       enum:
@@ -26177,6 +26208,8 @@ components:
         documentation:
           type: string
           description: Documentation of the webhook event
+        kind:
+          $ref: '#/components/schemas/EWebhookEventKind'
         name:
           type: string
           description: Name of the event
@@ -26197,6 +26230,9 @@ components:
           description: Static properties of the event. They are not send
           items:
             $ref: '#/components/schemas/ServiceTypeProperty'
+        responseClassName:
+          type: string
+          description: "Expected response name, only set when the kind is `EWebhookEventKind.OUTBOUND`"
     ServicesContainer:
       type: object
       description: "Container for Web API services, webhook events and the types used in them"

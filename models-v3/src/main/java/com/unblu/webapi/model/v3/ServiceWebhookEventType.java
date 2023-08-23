@@ -23,12 +23,14 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	ServiceWebhookEventType.JSON_PROPERTY_$_TYPE,
 	ServiceWebhookEventType.JSON_PROPERTY_DOCUMENTATION,
+	ServiceWebhookEventType.JSON_PROPERTY_KIND,
 	ServiceWebhookEventType.JSON_PROPERTY_NAME,
 	ServiceWebhookEventType.JSON_PROPERTY_IMPLEMENTATION_NAME,
 	ServiceWebhookEventType.JSON_PROPERTY_REGISTRATION_LOCATION,
 	ServiceWebhookEventType.JSON_PROPERTY_SINCE,
 	ServiceWebhookEventType.JSON_PROPERTY_PROPERTIES,
 	ServiceWebhookEventType.JSON_PROPERTY_STATIC_PROPERTIES,
+	ServiceWebhookEventType.JSON_PROPERTY_RESPONSE_CLASS_NAME,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ServiceWebhookEventType {
@@ -73,6 +75,10 @@ public class ServiceWebhookEventType {
 	@JsonProperty(JSON_PROPERTY_DOCUMENTATION)
 	private String documentation;
 
+	public static final String JSON_PROPERTY_KIND = "kind";
+	@JsonProperty(JSON_PROPERTY_KIND)
+	private EWebhookEventKind kind;
+
 	public static final String JSON_PROPERTY_NAME = "name";
 	@JsonProperty(JSON_PROPERTY_NAME)
 	private String name;
@@ -96,6 +102,10 @@ public class ServiceWebhookEventType {
 	public static final String JSON_PROPERTY_STATIC_PROPERTIES = "staticProperties";
 	@JsonProperty(JSON_PROPERTY_STATIC_PROPERTIES)
 	private List<ServiceTypeProperty> staticProperties = null;
+
+	public static final String JSON_PROPERTY_RESPONSE_CLASS_NAME = "responseClassName";
+	@JsonProperty(JSON_PROPERTY_RESPONSE_CLASS_NAME)
+	private String responseClassName;
 
 	public ServiceWebhookEventType $type(TypeEnum $type) {
 		this.$type = $type;
@@ -133,6 +143,25 @@ public class ServiceWebhookEventType {
 
 	public void setDocumentation(String documentation) {
 		this.documentation = documentation;
+	}
+
+	public ServiceWebhookEventType kind(EWebhookEventKind kind) {
+		this.kind = kind;
+		return this;
+	}
+
+	/**
+	 * Get kind
+	 * 
+	 * @return kind
+	 **/
+	@ApiModelProperty(value = "")
+	public EWebhookEventKind getKind() {
+		return kind;
+	}
+
+	public void setKind(EWebhookEventKind kind) {
+		this.kind = kind;
 	}
 
 	public ServiceWebhookEventType name(String name) {
@@ -265,6 +294,25 @@ public class ServiceWebhookEventType {
 		this.staticProperties = staticProperties;
 	}
 
+	public ServiceWebhookEventType responseClassName(String responseClassName) {
+		this.responseClassName = responseClassName;
+		return this;
+	}
+
+	/**
+	 * Expected response name, only set when the kind is &#x60;EWebhookEventKind.OUTBOUND&#x60;
+	 * 
+	 * @return responseClassName
+	 **/
+	@ApiModelProperty(value = "Expected response name, only set when the kind is `EWebhookEventKind.OUTBOUND`")
+	public String getResponseClassName() {
+		return responseClassName;
+	}
+
+	public void setResponseClassName(String responseClassName) {
+		this.responseClassName = responseClassName;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -276,17 +324,19 @@ public class ServiceWebhookEventType {
 		ServiceWebhookEventType serviceWebhookEventType = (ServiceWebhookEventType) o;
 		return Objects.equals(this.$type, serviceWebhookEventType.$type) &&
 				Objects.equals(this.documentation, serviceWebhookEventType.documentation) &&
+				Objects.equals(this.kind, serviceWebhookEventType.kind) &&
 				Objects.equals(this.name, serviceWebhookEventType.name) &&
 				Objects.equals(this.implementationName, serviceWebhookEventType.implementationName) &&
 				Objects.equals(this.registrationLocation, serviceWebhookEventType.registrationLocation) &&
 				Objects.equals(this.since, serviceWebhookEventType.since) &&
 				Objects.equals(this.properties, serviceWebhookEventType.properties) &&
-				Objects.equals(this.staticProperties, serviceWebhookEventType.staticProperties);
+				Objects.equals(this.staticProperties, serviceWebhookEventType.staticProperties) &&
+				Objects.equals(this.responseClassName, serviceWebhookEventType.responseClassName);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, documentation, name, implementationName, registrationLocation, since, properties, staticProperties);
+		return Objects.hash($type, documentation, kind, name, implementationName, registrationLocation, since, properties, staticProperties, responseClassName);
 	}
 
 	@Override
@@ -295,12 +345,14 @@ public class ServiceWebhookEventType {
 		sb.append("class ServiceWebhookEventType {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    documentation: ").append(toIndentedString(documentation)).append("\n");
+		sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    implementationName: ").append(toIndentedString(implementationName)).append("\n");
 		sb.append("    registrationLocation: ").append(toIndentedString(registrationLocation)).append("\n");
 		sb.append("    since: ").append(toIndentedString(since)).append("\n");
 		sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
 		sb.append("    staticProperties: ").append(toIndentedString(staticProperties)).append("\n");
+		sb.append("    responseClassName: ").append(toIndentedString(responseClassName)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
