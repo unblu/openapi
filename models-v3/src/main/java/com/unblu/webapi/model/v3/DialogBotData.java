@@ -30,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 	DialogBotData.JSON_PROPERTY_BOT_PERSON_ID,
 	DialogBotData.JSON_PROPERTY_WEBHOOK_STATUS,
 	DialogBotData.JSON_PROPERTY_WEBHOOK_ENDPOINT,
+	DialogBotData.JSON_PROPERTY_WEBHOOK_API_VERSION,
 	DialogBotData.JSON_PROPERTY_WEBHOOK_SECRET,
 	DialogBotData.JSON_PROPERTY_ONBOARDING_ORDER,
 	DialogBotData.JSON_PROPERTY_REBOARDING_ORDER,
@@ -120,6 +121,10 @@ public class DialogBotData {
 	public static final String JSON_PROPERTY_WEBHOOK_ENDPOINT = "webhookEndpoint";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_ENDPOINT)
 	private String webhookEndpoint;
+
+	public static final String JSON_PROPERTY_WEBHOOK_API_VERSION = "webhookApiVersion";
+	@JsonProperty(JSON_PROPERTY_WEBHOOK_API_VERSION)
+	private EWebApiVersion webhookApiVersion;
 
 	public static final String JSON_PROPERTY_WEBHOOK_SECRET = "webhookSecret";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_SECRET)
@@ -388,6 +393,25 @@ public class DialogBotData {
 		this.webhookEndpoint = webhookEndpoint;
 	}
 
+	public DialogBotData webhookApiVersion(EWebApiVersion webhookApiVersion) {
+		this.webhookApiVersion = webhookApiVersion;
+		return this;
+	}
+
+	/**
+	 * Get webhookApiVersion
+	 * 
+	 * @return webhookApiVersion
+	 **/
+	@ApiModelProperty(value = "")
+	public EWebApiVersion getWebhookApiVersion() {
+		return webhookApiVersion;
+	}
+
+	public void setWebhookApiVersion(EWebApiVersion webhookApiVersion) {
+		this.webhookApiVersion = webhookApiVersion;
+	}
+
 	public DialogBotData webhookSecret(String webhookSecret) {
 		this.webhookSecret = webhookSecret;
 		return this;
@@ -625,6 +649,7 @@ public class DialogBotData {
 				Objects.equals(this.botPersonId, dialogBotData.botPersonId) &&
 				Objects.equals(this.webhookStatus, dialogBotData.webhookStatus) &&
 				Objects.equals(this.webhookEndpoint, dialogBotData.webhookEndpoint) &&
+				Objects.equals(this.webhookApiVersion, dialogBotData.webhookApiVersion) &&
 				Objects.equals(this.webhookSecret, dialogBotData.webhookSecret) &&
 				Objects.equals(this.onboardingOrder, dialogBotData.onboardingOrder) &&
 				Objects.equals(this.reboardingOrder, dialogBotData.reboardingOrder) &&
@@ -640,7 +665,7 @@ public class DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, webhookStatus, webhookEndpoint, webhookSecret, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, messageStateHandledExternally, automaticTypingStateHandlingEnabled, onTimeoutBehavior);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, webhookStatus, webhookEndpoint, webhookApiVersion, webhookSecret, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, messageStateHandledExternally, automaticTypingStateHandlingEnabled, onTimeoutBehavior);
 	}
 
 	@Override
@@ -658,6 +683,7 @@ public class DialogBotData {
 		sb.append("    botPersonId: ").append(toIndentedString(botPersonId)).append("\n");
 		sb.append("    webhookStatus: ").append(toIndentedString(webhookStatus)).append("\n");
 		sb.append("    webhookEndpoint: ").append(toIndentedString(webhookEndpoint)).append("\n");
+		sb.append("    webhookApiVersion: ").append(toIndentedString(webhookApiVersion)).append("\n");
 		sb.append("    webhookSecret: ").append(toIndentedString(webhookSecret)).append("\n");
 		sb.append("    onboardingOrder: ").append(toIndentedString(onboardingOrder)).append("\n");
 		sb.append("    reboardingOrder: ").append(toIndentedString(reboardingOrder)).append("\n");

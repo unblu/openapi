@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EPersonPresenceSearchFilterField {
 
 	/**
-	 * JOINED_TIMESTAMP: Filter by the &#39;joindTimestamp&#39; attribute
+	 * JOINED_TIMESTAMP: Filter by the &#39;joinedTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	JOINED_TIMESTAMP("JOINED_TIMESTAMP"),
 
 	/**
-	 * LEFT_TIMESTAMP: Filter by the &#39;leftTimestamp&#39; attribute
+	 * LEFT_TIMESTAMP: Filter by the &#39;leftTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	LEFT_TIMESTAMP("LEFT_TIMESTAMP"),
 

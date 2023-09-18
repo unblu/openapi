@@ -5,18 +5,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EMessageSearchFilterField
+ * The status of an Outbound Web-API endpoint.
  */
-public enum EMessageSearchFilterField {
+public enum EOutboundEndpointStatus {
 
 	/**
-	 * SEND_TIMESTAMP: Filter by the &#39;sendTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
+	 * ENABLED: The endpoint is enabled and calls are allowed.
 	 */
-	SEND_TIMESTAMP("SEND_TIMESTAMP");
+	ENABLED("ENABLED"),
+
+	/**
+	 * DISABLED: The endpoint is disabled and calls should be avoided, since they won&#39;t work.
+	 */
+	DISABLED("DISABLED");
 
 	private String value;
 
-	EMessageSearchFilterField(String value) {
+	EOutboundEndpointStatus(String value) {
 		this.value = value;
 	}
 
@@ -31,8 +36,8 @@ public enum EMessageSearchFilterField {
 	}
 
 	@JsonCreator
-	public static EMessageSearchFilterField fromValue(String value) {
-		for (EMessageSearchFilterField b : EMessageSearchFilterField.values()) {
+	public static EOutboundEndpointStatus fromValue(String value) {
+		for (EOutboundEndpointStatus b : EOutboundEndpointStatus.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ExternalMessageInterceptorData.JSON_PROPERTY_TYPE,
 	ExternalMessageInterceptorData.JSON_PROPERTY_WEBHOOK_STATUS,
 	ExternalMessageInterceptorData.JSON_PROPERTY_WEBHOOK_ENDPOINT,
+	ExternalMessageInterceptorData.JSON_PROPERTY_WEBHOOK_API_VERSION,
 	ExternalMessageInterceptorData.JSON_PROPERTY_WEBHOOK_SECRET,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -120,6 +121,10 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 	public static final String JSON_PROPERTY_WEBHOOK_ENDPOINT = "webhookEndpoint";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_ENDPOINT)
 	private String webhookEndpoint;
+
+	public static final String JSON_PROPERTY_WEBHOOK_API_VERSION = "webhookApiVersion";
+	@JsonProperty(JSON_PROPERTY_WEBHOOK_API_VERSION)
+	private EWebApiVersion webhookApiVersion;
 
 	public static final String JSON_PROPERTY_WEBHOOK_SECRET = "webhookSecret";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_SECRET)
@@ -380,6 +385,25 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 		this.webhookEndpoint = webhookEndpoint;
 	}
 
+	public ExternalMessageInterceptorData webhookApiVersion(EWebApiVersion webhookApiVersion) {
+		this.webhookApiVersion = webhookApiVersion;
+		return this;
+	}
+
+	/**
+	 * Get webhookApiVersion
+	 * 
+	 * @return webhookApiVersion
+	 **/
+	@ApiModelProperty(value = "")
+	public EWebApiVersion getWebhookApiVersion() {
+		return webhookApiVersion;
+	}
+
+	public void setWebhookApiVersion(EWebApiVersion webhookApiVersion) {
+		this.webhookApiVersion = webhookApiVersion;
+	}
+
 	public ExternalMessageInterceptorData webhookSecret(String webhookSecret) {
 		this.webhookSecret = webhookSecret;
 		return this;
@@ -421,12 +445,13 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 				Objects.equals(this.type, externalMessageInterceptorData.type) &&
 				Objects.equals(this.webhookStatus, externalMessageInterceptorData.webhookStatus) &&
 				Objects.equals(this.webhookEndpoint, externalMessageInterceptorData.webhookEndpoint) &&
+				Objects.equals(this.webhookApiVersion, externalMessageInterceptorData.webhookApiVersion) &&
 				Objects.equals(this.webhookSecret, externalMessageInterceptorData.webhookSecret);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, messageFilter, timeoutBehavior, type, webhookStatus, webhookEndpoint, webhookSecret);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, messageFilter, timeoutBehavior, type, webhookStatus, webhookEndpoint, webhookApiVersion, webhookSecret);
 	}
 
 	@Override
@@ -446,6 +471,7 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    webhookStatus: ").append(toIndentedString(webhookStatus)).append("\n");
 		sb.append("    webhookEndpoint: ").append(toIndentedString(webhookEndpoint)).append("\n");
+		sb.append("    webhookApiVersion: ").append(toIndentedString(webhookApiVersion)).append("\n");
 		sb.append("    webhookSecret: ").append(toIndentedString(webhookSecret)).append("\n");
 		sb.append("}");
 		return sb.toString();

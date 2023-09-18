@@ -25,7 +25,7 @@ public enum EWebhookCallLogSearchFilterField {
 	REQUEST_ID("REQUEST_ID"),
 
 	/**
-	 * EXECUTION_TIMESTAMP: Filter by the &#39;executionTimestamp&#39; attribute
+	 * EXECUTION_TIMESTAMP: Filter by the &#39;executionTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	EXECUTION_TIMESTAMP("EXECUTION_TIMESTAMP"),
 
@@ -40,7 +40,7 @@ public enum EWebhookCallLogSearchFilterField {
 	RETRY_NR("RETRY_NR"),
 
 	/**
-	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute
+	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 

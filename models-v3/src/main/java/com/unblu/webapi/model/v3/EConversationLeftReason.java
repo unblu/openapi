@@ -60,6 +60,11 @@ public enum EConversationLeftReason {
 	CONVERSATION_REQUEUED("CONVERSATION_REQUEUED"),
 
 	/**
+	 * PUBLIC_DIALIN_ENDED
+	 */
+	PUBLIC_DIALIN_ENDED("PUBLIC_DIALIN_ENDED"),
+
+	/**
 	 * OTHER
 	 */
 	OTHER("OTHER");

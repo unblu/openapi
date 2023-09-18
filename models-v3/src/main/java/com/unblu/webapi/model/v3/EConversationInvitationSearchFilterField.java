@@ -30,12 +30,12 @@ public enum EConversationInvitationSearchFilterField {
 	TARGET_ID("TARGET_ID"),
 
 	/**
-	 * EXPIRATION_TIMESTAMP: Filter by the &#39;expirationTimestamp&#39; attribute
+	 * EXPIRATION_TIMESTAMP: Filter by the &#39;expirationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	EXPIRATION_TIMESTAMP("EXPIRATION_TIMESTAMP"),
 
 	/**
-	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute
+	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 

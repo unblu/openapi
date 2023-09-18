@@ -34,6 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomExternalMessengerChannel.JSON_PROPERTY_SOURCE_ID,
 	CustomExternalMessengerChannel.JSON_PROPERTY_TYPE,
 	CustomExternalMessengerChannel.JSON_PROPERTY_WEBHOOK_ENDPOINT,
+	CustomExternalMessengerChannel.JSON_PROPERTY_WEBHOOK_API_VERSION,
 	CustomExternalMessengerChannel.JSON_PROPERTY_WEBHOOK_SECRET,
 	CustomExternalMessengerChannel.JSON_PROPERTY_WEBHOOK_STATUS,
 	CustomExternalMessengerChannel.JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY,
@@ -121,6 +122,10 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 	public static final String JSON_PROPERTY_WEBHOOK_ENDPOINT = "webhookEndpoint";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_ENDPOINT)
 	private String webhookEndpoint;
+
+	public static final String JSON_PROPERTY_WEBHOOK_API_VERSION = "webhookApiVersion";
+	@JsonProperty(JSON_PROPERTY_WEBHOOK_API_VERSION)
+	private EWebApiVersion webhookApiVersion;
 
 	public static final String JSON_PROPERTY_WEBHOOK_SECRET = "webhookSecret";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_SECRET)
@@ -373,6 +378,25 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 		this.webhookEndpoint = webhookEndpoint;
 	}
 
+	public CustomExternalMessengerChannel webhookApiVersion(EWebApiVersion webhookApiVersion) {
+		this.webhookApiVersion = webhookApiVersion;
+		return this;
+	}
+
+	/**
+	 * Get webhookApiVersion
+	 * 
+	 * @return webhookApiVersion
+	 **/
+	@ApiModelProperty(value = "")
+	public EWebApiVersion getWebhookApiVersion() {
+		return webhookApiVersion;
+	}
+
+	public void setWebhookApiVersion(EWebApiVersion webhookApiVersion) {
+		this.webhookApiVersion = webhookApiVersion;
+	}
+
 	public CustomExternalMessengerChannel webhookSecret(String webhookSecret) {
 		this.webhookSecret = webhookSecret;
 		return this;
@@ -481,6 +505,7 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 				Objects.equals(this.sourceId, customExternalMessengerChannel.sourceId) &&
 				Objects.equals(this.type, customExternalMessengerChannel.type) &&
 				Objects.equals(this.webhookEndpoint, customExternalMessengerChannel.webhookEndpoint) &&
+				Objects.equals(this.webhookApiVersion, customExternalMessengerChannel.webhookApiVersion) &&
 				Objects.equals(this.webhookSecret, customExternalMessengerChannel.webhookSecret) &&
 				Objects.equals(this.webhookStatus, customExternalMessengerChannel.webhookStatus) &&
 				Objects.equals(this.messageStateHandledExternally, customExternalMessengerChannel.messageStateHandledExternally) &&
@@ -489,7 +514,7 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, channelIcon, sourceId, type, webhookEndpoint, webhookSecret, webhookStatus, messageStateHandledExternally, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, channelIcon, sourceId, type, webhookEndpoint, webhookApiVersion, webhookSecret, webhookStatus, messageStateHandledExternally, metadata);
 	}
 
 	@Override
@@ -508,6 +533,7 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    webhookEndpoint: ").append(toIndentedString(webhookEndpoint)).append("\n");
+		sb.append("    webhookApiVersion: ").append(toIndentedString(webhookApiVersion)).append("\n");
 		sb.append("    webhookSecret: ").append(toIndentedString(webhookSecret)).append("\n");
 		sb.append("    webhookStatus: ").append(toIndentedString(webhookStatus)).append("\n");
 		sb.append("    messageStateHandledExternally: ").append(toIndentedString(messageStateHandledExternally)).append("\n");

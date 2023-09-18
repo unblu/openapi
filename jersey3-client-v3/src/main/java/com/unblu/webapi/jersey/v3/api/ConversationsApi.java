@@ -1821,12 +1821,11 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * startRecording Manually start a conversation recording. The recording is only started if a compatible blob store is configured, manually starting and
-	 * stopping a recording is allowed, and a collaboration layer or call is active. The recording is started asynchronously, and there may be a brief delay before
-	 * it starts. In case of an error a conversation.recording_failed webhook is triggered. The type of the recording (audio only or audio and video) is determined
-	 * by the configuration.&lt;br&gt;@throws ConversationRecordingRunningException If a conversation recording is already running&lt;br&gt;@throws
-	 * ConversationRecordingDeniedException If no compatible blob store is configured or manual start of a recording is not allowed&lt;br&gt;@throws
-	 * ConversationRecordingFailedException If there is no active call or collaboration layer
+	 * startRecording Manually start a conversation recording. The recording is only started if: &lt;ul&gt; &lt;li&gt;A compatible blob store is configured
+	 * &lt;li&gt;Manually starting and stopping a recording is allowed &lt;li&gt;There is an active call or collaboration layer &lt;li&gt;There isn&#39;t already a
+	 * conversation recording running &lt;/ul&gt; The recording is started asynchronously, and there may be a brief delay before it starts. The type of the
+	 * recording (audio only or audio and video) is determined by the configuration. If an error occurs, a &lt;code&gt;conversation.recording_failed&lt;/code&gt;
+	 * webhook is triggered.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be started (required)
 	 * @throws ApiException if fails to make API call
@@ -1837,12 +1836,11 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * startRecording Manually start a conversation recording. The recording is only started if a compatible blob store is configured, manually starting and
-	 * stopping a recording is allowed, and a collaboration layer or call is active. The recording is started asynchronously, and there may be a brief delay before
-	 * it starts. In case of an error a conversation.recording_failed webhook is triggered. The type of the recording (audio only or audio and video) is determined
-	 * by the configuration.&lt;br&gt;@throws ConversationRecordingRunningException If a conversation recording is already running&lt;br&gt;@throws
-	 * ConversationRecordingDeniedException If no compatible blob store is configured or manual start of a recording is not allowed&lt;br&gt;@throws
-	 * ConversationRecordingFailedException If there is no active call or collaboration layer
+	 * startRecording Manually start a conversation recording. The recording is only started if: &lt;ul&gt; &lt;li&gt;A compatible blob store is configured
+	 * &lt;li&gt;Manually starting and stopping a recording is allowed &lt;li&gt;There is an active call or collaboration layer &lt;li&gt;There isn&#39;t already a
+	 * conversation recording running &lt;/ul&gt; The recording is started asynchronously, and there may be a brief delay before it starts. The type of the
+	 * recording (audio only or audio and video) is determined by the configuration. If an error occurs, a &lt;code&gt;conversation.recording_failed&lt;/code&gt;
+	 * webhook is triggered.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be started (required)
 	 * @throws ApiException if fails to make API call
@@ -1880,9 +1878,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * stopRecording Manually stop a conversation recording. The recording is stopped if there is a running conversation recording and manually starting and
-	 * stopping the recording is allowed.&lt;br&gt;@throws ConversationRecordingNotRunningException If no conversation recording is running&lt;br&gt;@throws
-	 * ConversationRecordingDeniedException If manually starting and stopping a recording isn&#39;t permitted
+	 * stopRecording Manually stop a conversation recording. The recording is stopped if: &lt;ul&gt; &lt;li&gt;There is a running conversation recording
+	 * &lt;li&gt;Manually starting and stopping the recording is allowed &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be stopped (required)
 	 * @throws ApiException if fails to make API call
@@ -1893,9 +1890,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * stopRecording Manually stop a conversation recording. The recording is stopped if there is a running conversation recording and manually starting and
-	 * stopping the recording is allowed.&lt;br&gt;@throws ConversationRecordingNotRunningException If no conversation recording is running&lt;br&gt;@throws
-	 * ConversationRecordingDeniedException If manually starting and stopping a recording isn&#39;t permitted
+	 * stopRecording Manually stop a conversation recording. The recording is stopped if: &lt;ul&gt; &lt;li&gt;There is a running conversation recording
+	 * &lt;li&gt;Manually starting and stopping the recording is allowed &lt;/ul&gt;&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be stopped (required)
 	 * @throws ApiException if fails to make API call

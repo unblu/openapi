@@ -5,23 +5,33 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EAddressSearchFilterField
+ * Gets or Sets ESuggestionSourceOrderByField
  */
-public enum EAddressSearchFilterField {
+public enum ESuggestionSourceOrderByField {
 
 	/**
-	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
+	 * ID: Sort by the &#39;id&#39; attribute
+	 */
+	ID("ID"),
+
+	/**
+	 * NAME: Sort by the &#39;name&#39; attribute
+	 */
+	NAME("NAME"),
+
+	/**
+	 * CREATION_TIMESTAMP: Sort by the &#39;creationTimestamp&#39; attribute
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 
 	/**
-	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
+	 * MODIFICATION_TIMESTAMP: Sort by the &#39;modificationTimestamp&#39; attribute
 	 */
 	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP");
 
 	private String value;
 
-	EAddressSearchFilterField(String value) {
+	ESuggestionSourceOrderByField(String value) {
 		this.value = value;
 	}
 
@@ -36,8 +46,8 @@ public enum EAddressSearchFilterField {
 	}
 
 	@JsonCreator
-	public static EAddressSearchFilterField fromValue(String value) {
-		for (EAddressSearchFilterField b : EAddressSearchFilterField.values()) {
+	public static ESuggestionSourceOrderByField fromValue(String value) {
+		for (ESuggestionSourceOrderByField b : ESuggestionSourceOrderByField.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

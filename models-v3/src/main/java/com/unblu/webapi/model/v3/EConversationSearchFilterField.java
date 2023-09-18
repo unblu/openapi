@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationSearchFilterField {
 
 	/**
-	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute
+	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 
 	/**
-	 * END_TIMESTAMP: Filter by the &#39;endTimestamp&#39; attribute
+	 * END_TIMESTAMP: Filter by the &#39;endTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	END_TIMESTAMP("END_TIMESTAMP"),
 
 	/**
-	 * SCHEDULED_TIMESTAMP: Filter by the &#39;scheduledTimestamp&#39; attribute
+	 * SCHEDULED_TIMESTAMP: Filter by the &#39;scheduledTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	SCHEDULED_TIMESTAMP("SCHEDULED_TIMESTAMP"),
 
@@ -45,7 +45,8 @@ public enum EConversationSearchFilterField {
 	AWAITED_PERSON_TYPE("AWAITED_PERSON_TYPE"),
 
 	/**
-	 * AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Filter by the &#39;awaitedPersonTypeChangeTimestamp&#39; attribute
+	 * AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Filter by the &#39;awaitedPersonTypeChangeTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with
+	 * milliseconds.
 	 */
 	AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP("AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP"),
 

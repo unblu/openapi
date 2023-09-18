@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.34.3
+  version: 7.35.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -62,6 +62,8 @@ tags:
   description: Service for loading and updating the record retention configuration. The configuration is account-specific.
 - name: Services
   description: Service which provides metadata information for all services and used types.
+- name: SuggestionSources
+  description: Service to manage all kind of suggestion sources.
 - name: Teams
   description: "Service to manage all teams in the system. For each account there is always a default team, which users are assigned to, when no explicit team is set."
 - name: Users
@@ -2114,6 +2116,7 @@ paths:
                   botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                   webhookStatus: INACTIVE
                   webhookEndpoint: https://test.unblu.com
+                  webhookApiVersion: V3
                   webhookSecret: null
                   onboardingOrder: 10
                   reboardingOrder: 10
@@ -2149,6 +2152,7 @@ paths:
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     webhookStatus: INACTIVE
                     webhookEndpoint: https://test.unblu.com
+                    webhookApiVersion: V3
                     webhookSecret: null
                     onboardingOrder: 10
                     reboardingOrder: 10
@@ -2457,6 +2461,7 @@ paths:
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
+                    webhookApiVersion: V3
                     webhookSecret: null
                     onboardingOrder: 10
                     reboardingOrder: 10
@@ -2540,6 +2545,7 @@ paths:
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
+                    webhookApiVersion: V3
                     webhookSecret: null
                     onboardingOrder: 10
                     reboardingOrder: 10
@@ -4976,7 +4982,7 @@ paths:
       tags:
       - Conversations
       summary: startRecording
-      description: "Manually start a conversation recording. The recording is only started if a compatible blob store is configured, manually starting and stopping a recording is allowed, and a collaboration layer or call is active. The recording is started asynchronously, and there may be a brief delay before it starts. In case of an error a conversation.recording_failed webhook is triggered. The type of the recording (audio only or audio and video) is determined by the configuration.<br>@throws ConversationRecordingRunningException If a conversation recording is already running<br>@throws ConversationRecordingDeniedException If no compatible blob store is configured or manual start of a recording is not allowed<br>@throws ConversationRecordingFailedException If there is no active call or collaboration layer"
+      description: "Manually start a conversation recording. The recording is only started if: <ul> <li>A compatible blob store is configured <li>Manually starting and stopping a recording is allowed <li>There is an active call or collaboration layer <li>There isn't already a conversation recording running </ul> The recording is started asynchronously, and there may be a brief delay before it starts. The type of the recording (audio only or audio and video) is determined by the configuration. If an error occurs, a <code>conversation.recording_failed</code> webhook is triggered.<br>"
       operationId: conversationsStartRecording
       parameters:
       - name: conversationId
@@ -5000,7 +5006,7 @@ paths:
       tags:
       - Conversations
       summary: stopRecording
-      description: Manually stop a conversation recording. The recording is stopped if there is a running conversation recording and manually starting and stopping the recording is allowed.<br>@throws ConversationRecordingNotRunningException If no conversation recording is running<br>@throws ConversationRecordingDeniedException If manually starting and stopping a recording isn't permitted
+      description: "Manually stop a conversation recording. The recording is stopped if: <ul> <li>There is a running conversation recording <li>Manually starting and stopping the recording is allowed </ul><br>"
       operationId: conversationsStopRecording
       parameters:
       - name: conversationId
@@ -5349,7 +5355,7 @@ paths:
                     configuration: null
                     text:
                       $_version:
-                        $_version: a653794e0715951202c8c52ab647e7f0
+                        $_version: f3cad33a9248c20423fd8328da6a4eff
                       com.unblu.conversation.concierge.visitorOnboardingDoneMessage:
                         en: "Thank you, see you soon."
                       com.unblu.conversation.concierge.visitorOnboardingWelcomeMessage:
@@ -5424,6 +5430,7 @@ paths:
                   triggerWebhook:
                     $_type: CustomActionWebhookRegistration
                     endpoint: http://webhooks.end.com/89898-66363-11212
+                    apiVersion: V3
                     secret: null
                   invokableFromFrontends:
                   - AGENT_DESK
@@ -5494,6 +5501,7 @@ paths:
                     triggerWebhook:
                       $_type: CustomActionWebhookRegistration
                       endpoint: http://webhooks.end.com/89898-66363-11212
+                      apiVersion: V3
                       secret: null
                     invokableFromFrontends:
                     - AGENT_DESK
@@ -5665,6 +5673,7 @@ paths:
                     triggerWebhook:
                       $_type: CustomActionWebhookRegistration
                       endpoint: http://webhooks.end.com/89898-66363-11212
+                      apiVersion: V3
                       secret: null
                     invokableFromFrontends:
                     - AGENT_DESK
@@ -5781,6 +5790,7 @@ paths:
                   triggerWebhook:
                     $_type: CustomActionWebhookRegistration
                     endpoint: http://webhooks.end.com/89898-66363-11212
+                    apiVersion: V3
                     secret: null
                   invokableFromFrontends:
                   - AGENT_DESK
@@ -5843,6 +5853,7 @@ paths:
                     triggerWebhook:
                       $_type: CustomActionWebhookRegistration
                       endpoint: http://webhooks.end.com/89898-66363-11212
+                      apiVersion: V3
                       secret: null
                     invokableFromFrontends:
                     - AGENT_DESK
@@ -6307,6 +6318,7 @@ paths:
                   sourceId: custom-sourceId
                   type: CUSTOM
                   webhookEndpoint: http://custom/endpoint
+                  webhookApiVersion: V3
                   webhookSecret: custom-secret
                   webhookStatus: ACTIVE
                   messageStateHandledExternally: null
@@ -6336,6 +6348,7 @@ paths:
                     sourceId: custom-sourceId
                     type: CUSTOM
                     webhookEndpoint: http://custom/endpoint
+                    webhookApiVersion: V3
                     webhookSecret: custom-secret
                     webhookStatus: ACTIVE
                     messageStateHandledExternally: false
@@ -6448,6 +6461,7 @@ paths:
                     sourceId: 123-sourceId
                     type: CUSTOM
                     webhookEndpoint: http://123/endpoint
+                    webhookApiVersion: V3
                     webhookSecret: 123-secret
                     webhookStatus: ACTIVE
                     messageStateHandledExternally: false
@@ -6638,6 +6652,7 @@ paths:
                     sourceId: custom-sourceId
                     type: CUSTOM
                     webhookEndpoint: http://custom/endpoint
+                    webhookApiVersion: V3
                     webhookSecret: custom-secret
                     webhookStatus: ACTIVE
                     messageStateHandledExternally: false
@@ -6969,6 +6984,7 @@ paths:
                   sourceId: custom-sourceId
                   type: CUSTOM
                   webhookEndpoint: http://custom/endpoint
+                  webhookApiVersion: V3
                   webhookSecret: custom-secret
                   webhookStatus: ACTIVE
                   messageStateHandledExternally: false
@@ -6998,6 +7014,7 @@ paths:
                     sourceId: custom-sourceId
                     type: CUSTOM
                     webhookEndpoint: http://custom/endpoint
+                    webhookApiVersion: V3
                     webhookSecret: custom-secret
                     webhookStatus: ACTIVE
                     messageStateHandledExternally: false
@@ -7615,6 +7632,7 @@ paths:
                   type: EXTERNAL
                   webhookStatus: INACTIVE
                   webhookEndpoint: http://external.interceptor.endpoint
+                  webhookApiVersion: null
                   webhookSecret: hash-secret
               create-internal:
                 summary: create internal
@@ -7664,6 +7682,7 @@ paths:
                     type: EXTERNAL
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://external.interceptor.endpoint
+                    webhookApiVersion: V3
                     webhookSecret: hash-secret
                 read-internal:
                   summary: read internal
@@ -7886,6 +7905,7 @@ paths:
                   type: EXTERNAL
                   webhookStatus: INACTIVE
                   webhookEndpoint: http://external.interceptor.endpoint
+                  webhookApiVersion: V3
                   webhookSecret: hash-secret
               create-internal:
                 summary: create internal
@@ -7935,6 +7955,7 @@ paths:
                     type: EXTERNAL
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://external.interceptor.endpoint
+                    webhookApiVersion: V3
                     webhookSecret: hash-secret
                 update-internal:
                   summary: update internal
@@ -9165,6 +9186,306 @@ paths:
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
+  /suggestionsources/create:
+    post:
+      tags:
+      - SuggestionSources
+      summary: create
+      description: Creates a new suggestion source<br>
+      operationId: suggestionSourcesCreate
+      requestBody:
+        description: The suggestion source to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestionSourceData'
+            examples:
+              create:
+                summary: create
+                description: Create a new suggestion source
+                value:
+                  $_type: SuggestionSourceData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  status: DISABLED
+                  endpoint: https://test.unblu.com
+                  apiVersion: V3
+                  secret: null
+                  timeoutMillis: 5000
+                  name: test-suggestionSource-1
+                  description: null
+              create-suggestionsource:
+                summary: create suggestionSource
+                description: Create a new suggestion source
+                value:
+                  $_type: SuggestionSourceData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: test-suggestionSource-1
+                  description: null
+                  outboundApiVersion: V3
+                  outboundStatus: DISABLED
+                  outboundEndpoint: https://test.unblu.com
+                  outboundSecret: null
+                  outboundTimeoutMillis: 5000
+        required: true
+      responses:
+        "200":
+          description: The created suggestion source.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestionSourceData'
+              examples:
+                create:
+                  summary: create
+                  description: New suggestion source
+                  value:
+                    $_type: SuggestionSourceData
+                    id: eaaz3AiSRp6wIB2wGq6L0g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    status: DISABLED
+                    endpoint: https://test.unblu.com
+                    apiVersion: V3
+                    secret: null
+                    timeoutMillis: 5000
+                    name: test-suggestionSource-1
+                    description: null
+                create-suggestionsource:
+                  summary: create suggestionSource
+                  description: New suggestion source
+                  value:
+                    $_type: SuggestionSourceData
+                    id: eaaz3AiSRp6wIB2wGq6L0g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-suggestionSource-1
+                    description: null
+                    outboundApiVersion: V3
+                    outboundStatus: DISABLED
+                    outboundEndpoint: https://test.unblu.com
+                    outboundSecret: null
+                    outboundTimeoutMillis: 5000
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /suggestionsources/delete:
+    delete:
+      tags:
+      - SuggestionSources
+      summary: delete
+      description: Deletes an existing suggestion source<br>
+      operationId: suggestionSourcesDelete
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the suggestion source which should be deleted
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /suggestionsources/getByName:
+    get:
+      tags:
+      - SuggestionSources
+      summary: getByName
+      description: Searches for an existing suggestion source with the given name.<br>
+      operationId: suggestionSourcesGetByName
+      parameters:
+      - name: name
+        in: query
+        description: Name of the suggestion source.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The suggestion source with the given name or <code>null</code> if none is found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestionSourceData'
+              examples:
+                get-by-name-suggestionsource:
+                  summary: get by name suggestionSource
+                  description: Suggestion Source
+                  value:
+                    $_type: SuggestionSourceData
+                    id: eaaz3AiSRp6wIB2wGq6L0g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-suggestionSource-1
+                    description: null
+                    outboundApiVersion: V3
+                    outboundStatus: DISABLED
+                    outboundEndpoint: http://test.webhook.com
+                    outboundSecret: null
+                    outboundTimeoutMillis: 2000
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /suggestionsources/pingOutboundEndpoint:
+    post:
+      tags:
+      - SuggestionSources
+      summary: pingOutboundEndpoint
+      description: Emits a `OutboundPingRequest` on the endpoint of the suggestion source. <p> The endpoint is expected to return a OutboundPingResponse<br>
+      operationId: suggestionSourcesPingOutboundEndpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestionSourcesPingOutboundEndpointBody'
+            examples:
+              request-body:
+                summary: request body
+                description: Send a ping request for the given suggestion source
+                value:
+                  suggestionSourceId: r1acbAidia_35-tB4o7FbWR
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutboundPingResponse'
+              examples:
+                response-body:
+                  summary: response body
+                  description: Ping response from the suggestion source
+                  value:
+                    $_type: OutboundPingResponse
+                    pingId: CD-Wj4RyTVOhx0oC_PCX_g
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /suggestionsources/read:
+    get:
+      tags:
+      - SuggestionSources
+      summary: read
+      description: Reads an existing suggestion source.<br>
+      operationId: suggestionSourcesRead
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the suggestion source.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The suggestion source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestionSourceData'
+              examples:
+                read-suggestionsource:
+                  summary: read suggestionSource
+                  description: Suggestion Source
+                  value:
+                    $_type: SuggestionSourceData
+                    id: eaaz3AiSRp6wIB2wGq6L0g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-suggestionSource-1
+                    description: null
+                    outboundApiVersion: V3
+                    outboundStatus: DISABLED
+                    outboundEndpoint: http://test.webhook.com
+                    outboundSecret: null
+                    outboundTimeoutMillis: 2000
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /suggestionsources/search:
+    post:
+      tags:
+      - SuggestionSources
+      summary: search
+      description: Search for suggestion sources in the current account<br>
+      operationId: suggestionSourcesSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestionSourceQuery'
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestionSourceResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /suggestionsources/update:
+    post:
+      tags:
+      - SuggestionSources
+      summary: update
+      description: Updates an existing suggestion source.<br>
+      operationId: suggestionSourcesUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestionSourceData'
+        required: true
+      responses:
+        "200":
+          description: The updated suggestion source.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestionSourceData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /teams/create:
     post:
       tags:
@@ -11074,6 +11395,34 @@ paths:
                   application/json:
                     schema:
                       $ref: '#/components/schemas/NamedAreaModificationEvent'
+              responses:
+                "200":
+                  description: OK
+        outbound.conversation.chat_suggestion:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.conversation.chat_suggestion
+              description: Model used to request a chat suggestion in a conversation
+              operationId: outboundConversationChatSuggestionCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionRequest'
+              responses:
+                "200":
+                  description: OK
+        outbound.ping:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.ping
+              description: Event sent when using the `ping` to test an outbound endpoint
+              operationId: outboundPingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/OutboundPingRequest'
               responses:
                 "200":
                   description: OK
@@ -14260,6 +14609,48 @@ components:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
         operator:
           $ref: '#/components/schemas/AuditChangeTypeOperator'
+    ChatSuggestionRequest:
+      type: object
+      description: Model used to request a chat suggestion in a conversation
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionRequest
+          enum:
+          - ChatSuggestionRequest
+        accountId:
+          type: string
+        serviceName:
+          type: string
+        suggestionId:
+          type: string
+          description: Unique ID of the request
+        requestingPerson:
+          $ref: '#/components/schemas/PersonData'
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        relatedMessages:
+          type: array
+          description: The messages for which the person is requesting a suggestion
+          items:
+            $ref: '#/components/schemas/MessageData'
+        capabilities:
+          $ref: '#/components/schemas/ChatSuggestionRequestCapabilities'
+    ChatSuggestionRequestCapabilities:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionRequestCapabilities
+          enum:
+          - ChatSuggestionRequestCapabilities
+        markdownSupported:
+          type: boolean
+          description: Indicates whether the caller of the request supports markdown syntax in the response or not
+        maxCharsSupported:
+          type: integer
+          format: int32
+          description: The maximum number of characters in the response that are supported by the caller
     CompactUser:
       type: object
       description: "A user class, which holds the most important information, which are needed on the client side. It sums up the information from the user instance with some other data like team information for easier access of a user"
@@ -16285,6 +16676,18 @@ components:
           $ref: '#/components/schemas/ENamedAreaSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
+    CreationTimestampSuggestionSourceSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampSuggestionSourceSearchFilter
+          enum:
+          - CreationTimestampSuggestionSourceSearchFilter
+        field:
+          $ref: '#/components/schemas/ESuggestionSourceSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     CreationTimestampTeamSearchFilter:
       type: object
       properties:
@@ -16467,6 +16870,8 @@ components:
         endpoint:
           type: string
           description: The endpoint URL of the webhook registration. Requests for the webhook events triggered by the related custom action invocation are made to this URL. Maximum length of 4000 characters. Cannot be omitted.
+        apiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
         secret:
           type: string
           description: A secret which is sent with each webhook event. Maximum length of 4000 characters. Can be omitted.
@@ -16656,6 +17061,8 @@ components:
         webhookEndpoint:
           type: string
           description: The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. Can not be omitted.
+        webhookApiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
         webhookSecret:
           type: string
           description: A secret which is send with each webhook event. Maximum length of 4000 characters. Can be omitted.
@@ -17388,6 +17795,8 @@ components:
         webhookEndpoint:
           type: string
           description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> Based on the configured filters/flags the following events will be sent to the endpoint: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a preaviously accepted bot dialog starts</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul>"
+        webhookApiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
         webhookSecret:
           type: string
           description: Optional secret which is send with each webhook event. <p> Maximum length of 4000 characters.
@@ -17654,8 +18063,8 @@ components:
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
       - "NAME: Filter by the 'name' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EActionBarItemPosition:
       type: string
       description: The position of an item within an action bar
@@ -17683,8 +18092,8 @@ components:
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EAgentRemovalType:
       type: string
       enum:
@@ -17736,8 +18145,8 @@ components:
       - "NAME: Filter by the 'name' attribute"
       - "DESCRIPTION: Filter by the 'description' attribute"
       - "API_KEY: Filter by the 'apiKey' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EAuditChangeInteractionTypeOperatorType:
       type: string
       enum:
@@ -18013,8 +18422,8 @@ components:
       - "KEY: Filter by the 'key' attribute"
       - "TITLE: Filter by the 'title' attribute"
       - "TEXT: Filter by the 'text' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     ECannedResponseUsageOrderByField:
       type: string
       enum:
@@ -18044,7 +18453,7 @@ components:
       - "CANNED_RESPONSE_ID: Filter by the 'cannedResponseId' attribute"
       - "MESSAGE_ID: Filter by the 'messageId' attribute"
       - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EContactOrderByField:
       type: string
       enum:
@@ -18063,8 +18472,8 @@ components:
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EContactType:
       type: string
       description: Type of a contact information
@@ -18198,9 +18607,9 @@ components:
       - LAST_MESSAGE_TIMESTAMP
       - LAST_COMPLETED_RECORDING_TIMESTAMP
       x-enum-descriptions:
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "END_TIMESTAMP: Filter by the 'endTimestamp' attribute"
-      - "SCHEDULED_TIMESTAMP: Filter by the 'scheduledTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "END_TIMESTAMP: Filter by the 'endTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "SCHEDULED_TIMESTAMP: Filter by the 'scheduledTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "INITIAL_ENGAGEMENT_TYPE: Filter by the 'initialEngagementType' attribute"
       - "TOPIC: Filter by the 'topic' attribute"
       - "CONTEXT_PERSON_ID: Filter by the 'contextPersonId' attribute"
@@ -18214,8 +18623,8 @@ components:
       - "RECIPIENT_ID: Filter by the 'id' of the 'recipient' attribute"
       - "RECIPIENT_TYPE: Filter by the 'type' of the 'recipient' attribute"
       - "TOKBOX_SESSION_ID: Filter by the 'tokboxSessionId' attribute"
-      - "LAST_MESSAGE_TIMESTAMP: Filter by the 'lastMessageTimestamp' attribute"
-      - "LAST_COMPLETED_RECORDING_TIMESTAMP: Filter by the 'lastCompletedRecordingTimestamp' attribute"
+      - "LAST_MESSAGE_TIMESTAMP: Filter by the 'lastMessageTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "LAST_COMPLETED_RECORDING_TIMESTAMP: Filter by the 'lastCompletedRecordingTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EConversationImpactingParticipationType:
       type: string
       description: "This enum contains all human participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`ENonVisitorParticipationType`</b> All types excluding visitors <li><b> EConversationImpactingParticipationType</b> All human participation types (No recorder) <li><b>`EConversationRealParticipationType`</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
@@ -18273,8 +18682,8 @@ components:
       - "TARGET_TYPE: Filter by the 'targetType' attribute"
       - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
       - "TARGET_ID: Filter by the 'targetId' attribute"
-      - "EXPIRATION_TIMESTAMP: Filter by the 'expirationTimestamp' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "EXPIRATION_TIMESTAMP: Filter by the 'expirationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "CREATOR_TYPE: Filter by the 'creatorType' attribute"
       - "CREATOR_PERSON_ID: Filter by the 'creatorId' attribute"
       - "REDEEMING_PERSON_ID: Filter by the 'redeemerPersonId' attribute"
@@ -18293,6 +18702,7 @@ components:
       - KICKED
       - CONVERSATION_UNASSIGNED
       - CONVERSATION_REQUEUED
+      - PUBLIC_DIALIN_ENDED
       - OTHER
       x-enum-descriptions:
       - FORWARDED
@@ -18305,6 +18715,7 @@ components:
       - KICKED
       - CONVERSATION_UNASSIGNED
       - CONVERSATION_REQUEUED
+      - PUBLIC_DIALIN_ENDED
       - OTHER
     EConversationLinkType:
       type: string
@@ -18471,14 +18882,14 @@ components:
       - SOURCE_ID
       - EXTERNAL_MESSENGER_CHANNEL_ID
       x-enum-descriptions:
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "END_TIMESTAMP: Filter by the 'endTimestamp' attribute"
-      - "SCHEDULED_TIMESTAMP: Filter by the 'scheduledTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "END_TIMESTAMP: Filter by the 'endTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "SCHEDULED_TIMESTAMP: Filter by the 'scheduledTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "INITIAL_ENGAGEMENT_TYPE: Filter by the 'initialEngagementType' attribute"
       - "TOPIC: Filter by the 'topic' attribute"
       - "CONTEXT_PERSON_ID: Filter by the 'contextPersonId' attribute"
       - "AWAITED_PERSON_TYPE: Filter by the 'awaitedPersonType' attribute"
-      - "AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Filter by the 'awaitedPersonTypeChangeTimestamp' attribute"
+      - "AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP: Filter by the 'awaitedPersonTypeChangeTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "ASSIGNEE_PERSON_ID: Filter by the 'assigneePersonId' attribute"
       - "PARTICIPANT_PERSON_ID: Filter by the 'personId' of the participants"
       - "STATE: Filter by the 'state' attribute"
@@ -18554,8 +18965,8 @@ components:
       - "DESCRIPTION: Filter by the 'description' attribute"
       - "DEFAULT_TEMPLATE: Filter by the 'defaultTemplate' attribute"
       - "INITIAL_ENGAGEMENT_TYPE: Filter by the 'initialEngagementType' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     ECustomActionOrderByField:
       type: string
       enum:
@@ -18697,8 +19108,8 @@ components:
       - "DEPUTY_TYPE: Filter by the 'deputyType' attribute"
       - "DEPUTY_ID: Filter by the 'deputyId' attribute"
       - ESCALATION_LEVEL
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EDeputyType:
       type: string
       enum:
@@ -18748,8 +19159,8 @@ components:
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
       - "NAME: Filter by the 'name' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EDomainOrderByField:
       type: string
       enum:
@@ -18770,8 +19181,8 @@ components:
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
       - "DOMAIN_NAME: Filter by the 'domainName' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EExternalMessengerChannelOrderByField:
       type: string
       enum:
@@ -18792,8 +19203,8 @@ components:
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
       - "NAME: Filter by the 'name' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EExternalMessengerChannelType:
       type: string
       description: The type of the external messenger channel
@@ -19167,8 +19578,8 @@ components:
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
       - "NAME: Filter by the 'name' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EMessageInterceptorTimeoutBehavior:
       type: string
       description: "What should happen with a message when a timeout occurs during interception.<br> If omitted, the value REJECT is used."
@@ -19209,7 +19620,7 @@ components:
       enum:
       - SEND_TIMESTAMP
       x-enum-descriptions:
-      - "SEND_TIMESTAMP: Filter by the 'sendTimestamp' attribute"
+      - "SEND_TIMESTAMP: Filter by the 'sendTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EMessageSenderType:
       type: string
       description: The type of participant who sent a message
@@ -19300,8 +19711,8 @@ components:
       - "NAME: Filter by the 'name' attribute"
       - "DESCRIPTION: Filter by the 'description' attribute"
       - "SITE_ID: Filter by the 'siteId' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     ENamedAreaType:
       type: string
       description: Type of a named area
@@ -19329,6 +19740,7 @@ components:
       - SOLVED_BY_BOT
       - CONVERSATION_REQUEUED
       - NO_AGENT_AVAILABLE
+      - PUBLIC_DIALIN_ENDED
       - OTHER
       x-enum-descriptions:
       - "FORWARDED: Conversation was forwarded to another agent and this agent therefore left the conversation"
@@ -19345,6 +19757,7 @@ components:
       - "SOLVED_BY_BOT: The conversation was ended because an onboarding bot solved it."
       - "CONVERSATION_REQUEUED: The conversation has been re-queued."
       - "NO_AGENT_AVAILABLE: There was no agent available for the conversation"
+      - "PUBLIC_DIALIN_ENDED: The public call dial-in ended, which automatically removes the person from the conversation"
       - "OTHER: Some other unspecified reason"
     EOnlineState:
       type: string
@@ -19363,6 +19776,15 @@ components:
       - EQUALS
       x-enum-descriptions:
       - "EQUALS: Check if the value is equal to the one provided in the operator"
+    EOutboundEndpointStatus:
+      type: string
+      description: The status of an Outbound Web-API endpoint.
+      enum:
+      - ENABLED
+      - DISABLED
+      x-enum-descriptions:
+      - "ENABLED: The endpoint is enabled and calls are allowed."
+      - "DISABLED: The endpoint is disabled and calls should be avoided, since they won't work."
     EPauseNotificationsMode:
       type: string
       description: Defines the mode whether and how the notifications should be paused or not.
@@ -19444,8 +19866,8 @@ components:
       - LEFT_TIMESTAMP
       - PERSON_ID
       x-enum-descriptions:
-      - "JOINED_TIMESTAMP: Filter by the 'joindTimestamp' attribute"
-      - "LEFT_TIMESTAMP: Filter by the 'leftTimestamp' attribute"
+      - "JOINED_TIMESTAMP: Filter by the 'joinedTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "LEFT_TIMESTAMP: Filter by the 'leftTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "PERSON_ID: Filter by the 'personId' attribute"
     EPersonSearchFilterField:
       type: string
@@ -19751,6 +20173,28 @@ components:
       - "IS_NULL: Check if the value is null"
       - "IS_NOT_NULL: Check if the value is not null"
       - "CONTAINS: Check if the value contains the string provided in the operator"
+    ESuggestionSourceOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    ESuggestionSourceSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
     ETeamOrderByField:
       type: string
       enum:
@@ -19779,8 +20223,8 @@ components:
       - "NAME: Filter by the 'name' attribute"
       - "DESCRIPTION: Filter by the 'description' attribute"
       - "PARENT_ID: Filter by the 'parentId' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     ETextQuestionType:
       type: string
       description: Type of a question message. Defines the reply value of a text message.
@@ -19868,8 +20312,8 @@ components:
       - "TEAM_ID: Filter by the 'teamId' attribute"
       - "EMAIL: Filter by the 'email' attribute"
       - "AUTHORIZATION_ROLE: Filter by the 'authorizationRole' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "VIRTUAL_USER: Filter by the 'virtualUser' attribute"
       - "EXTERNALLY_MANAGED: Filter by the 'externallyManaged' attribute"
     EWebApiVersion:
@@ -19922,10 +20366,10 @@ components:
       - "EVENT_NAME: Filter by the 'eventName' attribute"
       - "REGISTRATION_ID: Filter by the 'registrationId' attribute"
       - "REQUEST_ID: Filter by the 'requestId' attribute"
-      - "EXECUTION_TIMESTAMP: Filter by the 'executionTimestamp' attribute"
+      - "EXECUTION_TIMESTAMP: Filter by the 'executionTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "ENDPOINT: Filter by the 'endpoint' attribute"
       - "RETRY_NR: Filter by the 'retryNr' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "HTTP_RESPONSE_CODE: Filter by the 'httpResponseCode' attribute"
     EWebhookEventKind:
       type: string
@@ -19968,8 +20412,8 @@ components:
       - "NAME: Sort by the 'name' attribute"
       - "DESCRIPTION: Sort by the 'description' attribute"
       - "ENDPOINT: Sort by the 'endpoint' attribute"
-      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
-      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EmailPersonSearchFilter:
       type: object
       properties:
@@ -20549,6 +20993,8 @@ components:
         webhookEndpoint:
           type: string
           description: "The URL of the webhook registration endpoint. Requests for webhook events are sent to this URL. Maximum length of 4000 characters. <p> The following event is sent to the endpoint: <ul> <li>`TypedEvent.MESSAGE_INTERCEPTOR_NEW_MESSAGE`: On each message in the conversation.</li> </ul>"
+        webhookApiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
         webhookSecret:
           type: string
           description: Optional secret sent with each webhook event <p> Maximum length of 4000 characters.
@@ -22778,6 +23224,18 @@ components:
           $ref: '#/components/schemas/ENamedAreaSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
+    ModificationTimestampSuggestionSourceSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampSuggestionSourceSearchFilter
+          enum:
+          - ModificationTimestampSuggestionSourceSearchFilter
+        field:
+          $ref: '#/components/schemas/ESuggestionSourceSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     ModificationTimestampTeamSearchFilter:
       type: object
       properties:
@@ -23006,6 +23464,18 @@ components:
           - NameNamedAreaSearchFilter
         field:
           $ref: '#/components/schemas/ENamedAreaSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    NameSuggestionSourceSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NameSuggestionSourceSearchFilter
+          enum:
+          - NameSuggestionSourceSearchFilter
+        field:
+          $ref: '#/components/schemas/ESuggestionSourceSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
     NameTeamSearchFilter:
@@ -23986,6 +24456,33 @@ components:
       x-enum-descriptions:
       - "ASCENDING: Sort in the ascending order (smallest to largest, 0 to 9, and/or A to Z)"
       - "DESCENDING: Sort in the descending order (largest to smallest, 9 to 0, and/or Z to A)"
+    OutboundPingRequest:
+      type: object
+      description: Event sent when using the `ping` to test an outbound endpoint
+      properties:
+        $_type:
+          type: string
+          default: OutboundPingRequest
+          enum:
+          - OutboundPingRequest
+        accountId:
+          type: string
+        serviceName:
+          type: string
+        pingId:
+          type: string
+          description: A random ID that identifies this ping request. The response to the request must have the same ID.
+    OutboundPingResponse:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: OutboundPingResponse
+          enum:
+          - OutboundPingResponse
+        pingId:
+          type: string
+          description: The pingId of the request this event is responding to
     OwnerIdAuditChangeSearchFilter:
       type: object
       properties:
@@ -26375,6 +26872,133 @@ components:
           IS_NULL: '#/components/schemas/IsNullStringOperator'
           NOT_EQUALS: '#/components/schemas/NotEqualsStringOperator'
           NOT_IN: '#/components/schemas/NotInStringOperator'
+    SuggestionSourceData:
+      type: object
+      description: API Model representing a suggestion source
+      properties:
+        $_type:
+          type: string
+          default: SuggestionSourceData
+          enum:
+          - SuggestionSourceData
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the message interceptor. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the message interceptor. Maximum length of 500 characters. Optional.
+        outboundApiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
+        outboundStatus:
+          $ref: '#/components/schemas/EOutboundEndpointStatus'
+        outboundEndpoint:
+          type: string
+          description: "The endpoint url of the outbound registration. To this url the requests for the outbound requests are done. Maximum length of 4000 characters. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>"
+        outboundSecret:
+          type: string
+          description: Optional secret which is send with each outbound request. <p> Maximum length of 4000 characters.
+        outboundTimeoutMillis:
+          type: integer
+          format: int64
+          description: The timeout for the requests sent to the outbound endpoint. Mandatory.
+    SuggestionSourceOrderBy:
+      type: object
+      description: SuggestionSource orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: SuggestionSourceOrderBy
+          enum:
+          - SuggestionSourceOrderBy
+        field:
+          $ref: '#/components/schemas/ESuggestionSourceOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    SuggestionSourceQuery:
+      type: object
+      description: Container to search Suggestion Sources
+      properties:
+        $_type:
+          type: string
+          default: SuggestionSourceQuery
+          enum:
+          - SuggestionSourceQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/SuggestionSourceSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/SuggestionSourceOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    SuggestionSourceResult:
+      type: object
+      description: Container to return list of suggestion sources
+      properties:
+        $_type:
+          type: string
+          default: SuggestionSourceResult
+          enum:
+          - SuggestionSourceResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If more items are present on the server, this value can be used as offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/SuggestionSourceData'
+    SuggestionSourceSearchFilter:
+      description: DialogBot filter item.
+      oneOf:
+      - $ref: '#/components/schemas/CreationTimestampSuggestionSourceSearchFilter'
+      - $ref: '#/components/schemas/ModificationTimestampSuggestionSourceSearchFilter'
+      - $ref: '#/components/schemas/NameSuggestionSourceSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampSuggestionSourceSearchFilter'
+          MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampSuggestionSourceSearchFilter'
+          NAME: '#/components/schemas/NameSuggestionSourceSearchFilter'
+    SuggestionSourcesPingOutboundEndpointBody:
+      type: object
+      description: Request Body for the 'suggestionSourcesPingOutboundEndpoint' operation
+      properties:
+        suggestionSourceId:
+          type: string
+          description: The ID of the suggestion source
     TargetIdConversationInvitationSearchFilter:
       type: object
       properties:

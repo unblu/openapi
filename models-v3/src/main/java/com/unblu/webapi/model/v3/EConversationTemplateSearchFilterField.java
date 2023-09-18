@@ -30,12 +30,12 @@ public enum EConversationTemplateSearchFilterField {
 	INITIAL_ENGAGEMENT_TYPE("INITIAL_ENGAGEMENT_TYPE"),
 
 	/**
-	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute
+	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 
 	/**
-	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute
+	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP");
 

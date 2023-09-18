@@ -80,6 +80,11 @@ public enum EOffboardingReason {
 	NO_AGENT_AVAILABLE("NO_AGENT_AVAILABLE"),
 
 	/**
+	 * PUBLIC_DIALIN_ENDED: The public call dial-in ended, which automatically removes the person from the conversation
+	 */
+	PUBLIC_DIALIN_ENDED("PUBLIC_DIALIN_ENDED"),
+
+	/**
 	 * OTHER: Some other unspecified reason
 	 */
 	OTHER("OTHER");

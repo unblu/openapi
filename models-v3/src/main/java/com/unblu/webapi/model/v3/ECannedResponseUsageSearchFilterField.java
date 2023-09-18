@@ -30,7 +30,7 @@ public enum ECannedResponseUsageSearchFilterField {
 	CONVERSATION_ID("CONVERSATION_ID"),
 
 	/**
-	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute
+	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP");
 

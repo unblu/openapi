@@ -76,6 +76,12 @@ public interface ExternalMessengerChannel {
 
 	ExternalMessengerChannel webhookEndpoint(String webhookEndpoint);
 
+	void setWebhookApiVersion(EWebApiVersion webhookApiVersion);
+
+	EWebApiVersion getWebhookApiVersion();
+
+	ExternalMessengerChannel webhookApiVersion(EWebApiVersion webhookApiVersion);
+
 	void setWebhookSecret(String webhookSecret);
 
 	String getWebhookSecret();

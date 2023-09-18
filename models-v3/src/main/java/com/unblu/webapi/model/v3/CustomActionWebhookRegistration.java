@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	CustomActionWebhookRegistration.JSON_PROPERTY_$_TYPE,
 	CustomActionWebhookRegistration.JSON_PROPERTY_ENDPOINT,
+	CustomActionWebhookRegistration.JSON_PROPERTY_API_VERSION,
 	CustomActionWebhookRegistration.JSON_PROPERTY_SECRET,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -66,6 +67,10 @@ public class CustomActionWebhookRegistration {
 	@JsonProperty(JSON_PROPERTY_ENDPOINT)
 	private String endpoint;
 
+	public static final String JSON_PROPERTY_API_VERSION = "apiVersion";
+	@JsonProperty(JSON_PROPERTY_API_VERSION)
+	private EWebApiVersion apiVersion;
+
 	public static final String JSON_PROPERTY_SECRET = "secret";
 	@JsonProperty(JSON_PROPERTY_SECRET)
 	private String secret;
@@ -109,6 +114,25 @@ public class CustomActionWebhookRegistration {
 		this.endpoint = endpoint;
 	}
 
+	public CustomActionWebhookRegistration apiVersion(EWebApiVersion apiVersion) {
+		this.apiVersion = apiVersion;
+		return this;
+	}
+
+	/**
+	 * Get apiVersion
+	 * 
+	 * @return apiVersion
+	 **/
+	@ApiModelProperty(value = "")
+	public EWebApiVersion getApiVersion() {
+		return apiVersion;
+	}
+
+	public void setApiVersion(EWebApiVersion apiVersion) {
+		this.apiVersion = apiVersion;
+	}
+
 	public CustomActionWebhookRegistration secret(String secret) {
 		this.secret = secret;
 		return this;
@@ -139,12 +163,13 @@ public class CustomActionWebhookRegistration {
 		CustomActionWebhookRegistration customActionWebhookRegistration = (CustomActionWebhookRegistration) o;
 		return Objects.equals(this.$type, customActionWebhookRegistration.$type) &&
 				Objects.equals(this.endpoint, customActionWebhookRegistration.endpoint) &&
+				Objects.equals(this.apiVersion, customActionWebhookRegistration.apiVersion) &&
 				Objects.equals(this.secret, customActionWebhookRegistration.secret);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, endpoint, secret);
+		return Objects.hash($type, endpoint, apiVersion, secret);
 	}
 
 	@Override
@@ -153,6 +178,7 @@ public class CustomActionWebhookRegistration {
 		sb.append("class CustomActionWebhookRegistration {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    endpoint: ").append(toIndentedString(endpoint)).append("\n");
+		sb.append("    apiVersion: ").append(toIndentedString(apiVersion)).append("\n");
 		sb.append("    secret: ").append(toIndentedString(secret)).append("\n");
 		sb.append("}");
 		return sb.toString();
