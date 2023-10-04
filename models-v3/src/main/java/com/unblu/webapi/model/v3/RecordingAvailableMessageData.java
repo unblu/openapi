@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordingAvailableMessageData.JSON_PROPERTY_SOURCE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_INTERNAL,
+	RecordingAvailableMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_SIZE,
 	RecordingAvailableMessageData.JSON_PROPERTY_FILE_NAME,
@@ -141,6 +142,10 @@ public class RecordingAvailableMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
+	private String replyToMessageId;
 
 	public static final String JSON_PROPERTY_BLOB_ID = "blobId";
 	@JsonProperty(JSON_PROPERTY_BLOB_ID)
@@ -477,6 +482,25 @@ public class RecordingAvailableMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public RecordingAvailableMessageData replyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional ID that identifies the message that this message is replying to
+	 * 
+	 * @return replyToMessageId
+	 **/
+	@ApiModelProperty(value = "Optional ID that identifies the message that this message is replying to")
+	public String getReplyToMessageId() {
+		return replyToMessageId;
+	}
+
+	public void setReplyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+	}
+
 	public RecordingAvailableMessageData blobId(String blobId) {
 		this.blobId = blobId;
 		return this;
@@ -597,6 +621,7 @@ public class RecordingAvailableMessageData implements MessageData {
 				Objects.equals(this.sourceId, recordingAvailableMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, recordingAvailableMessageData.botThreadId) &&
 				Objects.equals(this.internal, recordingAvailableMessageData.internal) &&
+				Objects.equals(this.replyToMessageId, recordingAvailableMessageData.replyToMessageId) &&
 				Objects.equals(this.blobId, recordingAvailableMessageData.blobId) &&
 				Objects.equals(this.blobSize, recordingAvailableMessageData.blobSize) &&
 				Objects.equals(this.fileName, recordingAvailableMessageData.fileName) &&
@@ -606,7 +631,7 @@ public class RecordingAvailableMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, blobId, blobSize, fileName, startTimestamp, endTimestamp);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, blobId, blobSize, fileName, startTimestamp, endTimestamp);
 	}
 
 	@Override
@@ -629,6 +654,7 @@ public class RecordingAvailableMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    blobId: ").append(toIndentedString(blobId)).append("\n");
 		sb.append("    blobSize: ").append(toIndentedString(blobSize)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");

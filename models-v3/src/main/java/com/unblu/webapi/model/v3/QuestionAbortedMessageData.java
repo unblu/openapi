@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	QuestionAbortedMessageData.JSON_PROPERTY_SOURCE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_INTERNAL,
+	QuestionAbortedMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_VALUE,
 	QuestionAbortedMessageData.JSON_PROPERTY_REASON,
@@ -139,6 +140,10 @@ public class QuestionAbortedMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
+	private String replyToMessageId;
 
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
@@ -467,6 +472,25 @@ public class QuestionAbortedMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public QuestionAbortedMessageData replyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional ID that identifies the message that this message is replying to
+	 * 
+	 * @return replyToMessageId
+	 **/
+	@ApiModelProperty(value = "Optional ID that identifies the message that this message is replying to")
+	public String getReplyToMessageId() {
+		return replyToMessageId;
+	}
+
+	public void setReplyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+	}
+
 	public QuestionAbortedMessageData questionMessageId(String questionMessageId) {
 		this.questionMessageId = questionMessageId;
 		return this;
@@ -549,6 +573,7 @@ public class QuestionAbortedMessageData implements MessageData {
 				Objects.equals(this.sourceId, questionAbortedMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, questionAbortedMessageData.botThreadId) &&
 				Objects.equals(this.internal, questionAbortedMessageData.internal) &&
+				Objects.equals(this.replyToMessageId, questionAbortedMessageData.replyToMessageId) &&
 				Objects.equals(this.questionMessageId, questionAbortedMessageData.questionMessageId) &&
 				Objects.equals(this.value, questionAbortedMessageData.value) &&
 				Objects.equals(this.reason, questionAbortedMessageData.reason);
@@ -556,7 +581,7 @@ public class QuestionAbortedMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, questionMessageId, value, reason);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, questionMessageId, value, reason);
 	}
 
 	@Override
@@ -579,6 +604,7 @@ public class QuestionAbortedMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("    reason: ").append(toIndentedString(reason)).append("\n");

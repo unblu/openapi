@@ -343,11 +343,12 @@ public class Account {
 	}
 
 	/**
-	 * The entity&#39;s configuration properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;configuration&#39;.
+	 * The entity&#39;s configuration properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;configuration&#39;. Not
+	 * filled in webhook events.
 	 * 
 	 * @return _configuration
 	 **/
-	@ApiModelProperty(value = "The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.")
+	@ApiModelProperty(value = "The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.")
 	public Map<String, String> getConfiguration() {
 		return _configuration;
 	}
@@ -370,11 +371,12 @@ public class Account {
 	}
 
 	/**
-	 * The entity&#39;s metadata properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;metadata&#39;.
+	 * The entity&#39;s metadata properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;metadata&#39;. Not filled in
+	 * webhook events.
 	 * 
 	 * @return metadata
 	 **/
-	@ApiModelProperty(value = "The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.")
+	@ApiModelProperty(value = "The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.")
 	public Map<String, String> getMetadata() {
 		return metadata;
 	}
@@ -397,11 +399,12 @@ public class Account {
 	}
 
 	/**
-	 * The entity&#39;s text properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;text&#39;.
+	 * The entity&#39;s text properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;text&#39;. Not filled in webhook
+	 * events.
 	 * 
 	 * @return text
 	 **/
-	@ApiModelProperty(value = "The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'.")
+	@ApiModelProperty(value = "The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'. Not filled in webhook events.")
 	public Map<String, Map<String, String>> getText() {
 		return text;
 	}

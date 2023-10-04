@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.35.2
+  version: 7.36.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -46,6 +46,8 @@ tags:
   description: Service to manage the domains of the account. A domain needs to be defined to use unblu on it.
 - name: ExternalMessengers
   description: Manages all types of `ExternalMessengerChannel` and can be used to send messages from external messengers into a collaboration server conversation.
+- name: FileUploadInterceptors
+  description: Service to manage file upload interceptors. File upload interceptors also use this service to interact with Unblu.
 - name: Global
   description: With this service the global Unblu system can be managed.<br> <br> For super-admin the Global object can be expanded to set configuration or translations.
 - name: Invitations
@@ -1989,6 +1991,7 @@ paths:
                 $ref: '#/components/schemas/Avatar'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -2658,6 +2661,7 @@ paths:
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
                   internal: false
+                  replyToMessageId: null
                   messageData:
                     $_type: CardPostMessageData
                     type: CARD
@@ -2698,7 +2702,8 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
-                  internal: false
+                  internal: null
+                  replyToMessageId: null
                   messageData:
                     $_type: CardPostMessageData
                     type: CARD
@@ -2727,7 +2732,8 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
-                  internal: false
+                  internal: null
+                  replyToMessageId: null
                   messageData:
                     $_type: FilePostMessageData
                     type: FILE
@@ -2750,7 +2756,8 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
-                  internal: false
+                  internal: null
+                  replyToMessageId: null
                   messageData:
                     $_type: ListPostMessageData
                     type: LIST
@@ -2823,7 +2830,8 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
-                  internal: false
+                  internal: null
+                  replyToMessageId: null
                   messageData:
                     $_type: MultichoiceQuestionPostMessageData
                     type: MULTICHOICE_QUESTION
@@ -2867,7 +2875,8 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
-                  internal: false
+                  internal: null
+                  replyToMessageId: null
                   messageData:
                     $_type: RatingQuestionPostMessageData
                     type: RATING_QUESTION
@@ -2893,7 +2902,8 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
-                  internal: false
+                  internal: null
+                  replyToMessageId: null
                   messageData:
                     $_type: TextPostMessageData
                     type: TEXT
@@ -2914,7 +2924,8 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
-                  internal: false
+                  internal: null
+                  replyToMessageId: null
                   messageData:
                     $_type: TextQuestionPostMessageData
                     type: TEXT_QUESTION
@@ -6721,6 +6732,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds: null
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: TextPostMessageData
                     type: TEXT
@@ -6742,6 +6754,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds: null
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: CardPostMessageData
                     type: CARD
@@ -6779,6 +6792,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds: null
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: FilePostMessageData
                     type: FILE
@@ -6802,6 +6816,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds: null
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: ListPostMessageData
                     type: LIST
@@ -6843,6 +6858,7 @@ paths:
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: MultichoiceQuestionPostMessageData
                     type: MULTICHOICE_QUESTION
@@ -6873,6 +6889,7 @@ paths:
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: RatingQuestionPostMessageData
                     type: RATING_QUESTION
@@ -6899,6 +6916,7 @@ paths:
                   senderPersonId: nta30CBa-6d1a89cE57Db_F
                   recipientPersonIds: null
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: TextPostMessageData
                     type: TEXT
@@ -6917,6 +6935,7 @@ paths:
                   recipientPersonIds:
                   - PtwoVi1O-2G9FFCR_rZLKQ
                   sourceId: message-source
+                  replyToMessageId: null
                   messageData:
                     $_type: TextQuestionPostMessageData
                     type: TEXT_QUESTION
@@ -7019,6 +7038,343 @@ paths:
                     webhookStatus: ACTIVE
                     messageStateHandledExternally: false
                     metadata: null
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/approveFileUpload:
+    post:
+      tags:
+      - FileUploadInterceptors
+      summary: approveFileUpload
+      description: Approves a file upload for which approval was requested through a <code>file_upload_interceptor.new_file</code> webhook.<br>
+      operationId: fileUploadInterceptorsApproveFileUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorsApproveFileUploadBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/create:
+    post:
+      tags:
+      - FileUploadInterceptors
+      summary: create
+      description: Creates a new file upload interceptor<br>
+      operationId: fileUploadInterceptorsCreate
+      requestBody:
+        description: The file upload interceptor to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorData'
+            examples:
+              create:
+                summary: create
+                description: Create a new file upload interceptor
+                value:
+                  $_type: FileUploadInterceptorData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: test-file-upload-interceptor-1
+                  description: null
+                  order: 3
+                  mimeTypeRegex: null
+                  webhookStatus: INACTIVE
+                  webhookEndpoint: https://test.unblu.com
+                  webhookApiVersion: V3
+                  webhookSecret: null
+        required: true
+      responses:
+        "200":
+          description: The created file upload interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+              examples:
+                create:
+                  summary: create
+                  description: New file upload interceptor
+                  value:
+                    $_type: FileUploadInterceptorData
+                    id: VhSaA_3wThCuS_AOKxC0VA
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-file-upload-interceptor-1
+                    description: null
+                    order: 3
+                    mimeTypeRegex: null
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: https://test.unblu.com
+                    webhookApiVersion: V3
+                    webhookSecret: null
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      callbacks:
+        file_upload_interceptor.new_file:
+          '{$request.body#/endpoint}':
+            post:
+              summary: file_upload_interceptor.new_file
+              description: Event sent to file upload interceptors when a new file is uploaded
+              operationId: fileUploadInterceptorNewFileCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/InterceptorNewFileEvent'
+              responses:
+                "200":
+                  description: OK
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/delete:
+    delete:
+      tags:
+      - FileUploadInterceptors
+      summary: delete
+      description: Deletes an existing file upload interceptor<br>
+      operationId: fileUploadInterceptorsDelete
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the file upload interceptor which should be deleted
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/getByName:
+    get:
+      tags:
+      - FileUploadInterceptors
+      summary: getByName
+      description: Searches for a file upload interceptor with the given name<br>
+      operationId: fileUploadInterceptorsGetByName
+      parameters:
+      - name: name
+        in: query
+        description: The name of the file upload interceptor
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The file upload interceptor with the given name or <code>null</code> if no file interceptor of that name is found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+              examples:
+                get-by-name-interceptor:
+                  summary: get by name interceptor
+                  description: File upload interceptor
+                  value:
+                    $_type: FileUploadInterceptorData
+                    id: VhSaA_3wThCuS_AOKxC0VA
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-file-upload-interceptor-1
+                    description: null
+                    order: 1
+                    mimeTypeRegex: null
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: http://test.webhook.com
+                    webhookApiVersion: V3
+                    webhookSecret: null
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/pingWebhook:
+    post:
+      tags:
+      - FileUploadInterceptors
+      summary: pingWebhook
+      description: Emits a `WebhookPingEvent` on the configured webhook for the given file upload interceptor<br>
+      operationId: fileUploadInterceptorsPingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorsPingWebhookBody'
+            examples:
+              request-body:
+                summary: request body
+                description: Send a ping event for the given file upload interceptor
+                value:
+                  interceptorId: VhSaA_3wThCuS_AOKxC0VA
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/read:
+    get:
+      tags:
+      - FileUploadInterceptors
+      summary: read
+      description: Reads an existing file upload interceptor.<br>
+      operationId: fileUploadInterceptorsRead
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the file upload interceptor to read
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The file upload interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+              examples:
+                read-file-upload-interceptor:
+                  summary: read file upload interceptor
+                  description: File upload interceptor
+                  value:
+                    $_type: FileUploadInterceptorData
+                    id: VhSaA_3wThCuS_AOKxC0VA
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-file-upload-interceptor-1
+                    description: null
+                    order: 1
+                    mimeTypeRegex: null
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: http://test.webhook.com
+                    webhookApiVersion: V3
+                    webhookSecret: null
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/rejectFileUpload:
+    post:
+      tags:
+      - FileUploadInterceptors
+      summary: rejectFileUpload
+      description: Rejects a file upload for which approval was requested through a <code>file_upload_interceptor.new_file</code> webhook.<br>
+      operationId: fileUploadInterceptorsRejectFileUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorsRejectFileUploadBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/search:
+    post:
+      tags:
+      - FileUploadInterceptors
+      summary: search
+      description: Searches for file upload interceptors in the current account<br>
+      operationId: fileUploadInterceptorsSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorQuery'
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/update:
+    post:
+      tags:
+      - FileUploadInterceptors
+      summary: update
+      description: Updates an existing file upload interceptor<br>
+      operationId: fileUploadInterceptorsUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorData'
+        required: true
+      responses:
+        "200":
+          description: The updated file upload interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadinterceptors/validateMimeTypeRegex:
+    post:
+      tags:
+      - FileUploadInterceptors
+      summary: validateMimeTypeRegex
+      description: validateMimeTypeRegex operation
+      operationId: fileUploadInterceptorsValidateMimeTypeRegex
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorsValidateMimeTypeRegexBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -9200,23 +9556,6 @@ paths:
             schema:
               $ref: '#/components/schemas/SuggestionSourceData'
             examples:
-              create:
-                summary: create
-                description: Create a new suggestion source
-                value:
-                  $_type: SuggestionSourceData
-                  id: null
-                  creationTimestamp: null
-                  modificationTimestamp: null
-                  version: null
-                  accountId: null
-                  status: DISABLED
-                  endpoint: https://test.unblu.com
-                  apiVersion: V3
-                  secret: null
-                  timeoutMillis: 5000
-                  name: test-suggestionSource-1
-                  description: null
               create-suggestionsource:
                 summary: create suggestionSource
                 description: Create a new suggestion source
@@ -9243,23 +9582,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/SuggestionSourceData'
               examples:
-                create:
-                  summary: create
-                  description: New suggestion source
-                  value:
-                    $_type: SuggestionSourceData
-                    id: eaaz3AiSRp6wIB2wGq6L0g
-                    creationTimestamp: 1546300800000
-                    modificationTimestamp: 1548979200000
-                    version: 1
-                    accountId: A7d9E_0-c3cC4aoFDb85t6n
-                    status: DISABLED
-                    endpoint: https://test.unblu.com
-                    apiVersion: V3
-                    secret: null
-                    timeoutMillis: 5000
-                    name: test-suggestionSource-1
-                    description: null
                 create-suggestionsource:
                   summary: create suggestionSource
                   description: New suggestion source
@@ -9279,6 +9601,25 @@ paths:
                     outboundTimeoutMillis: 5000
         default:
           $ref: '#/components/responses/ErrorResponse'
+      callbacks:
+        outbound.conversation.chat_suggestion:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.conversation.chat_suggestion
+              description: Model used to request a chat suggestion in a conversation
+              operationId: outboundConversationChatSuggestionCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionRequest'
+              responses:
+                "200":
+                  description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/ChatSuggestionResponse'
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -11356,6 +11697,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        file_upload_interceptor.file_rejected:
+          '{$request.body#/endpoint}':
+            post:
+              summary: file_upload_interceptor.file_rejected
+              description: Event triggered when a file upload interceptor rejects a file upload
+              operationId: fileUploadInterceptorFileRejectedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/InterceptorFileRejectedEvent'
+              responses:
+                "200":
+                  description: OK
         ldap_sync_job:
           '{$request.body#/endpoint}':
             post:
@@ -11398,20 +11753,6 @@ paths:
               responses:
                 "200":
                   description: OK
-        outbound.conversation.chat_suggestion:
-          '{$request.body#/endpoint}':
-            post:
-              summary: outbound.conversation.chat_suggestion
-              description: Model used to request a chat suggestion in a conversation
-              operationId: outboundConversationChatSuggestionCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/ChatSuggestionRequest'
-              responses:
-                "200":
-                  description: OK
         outbound.ping:
           '{$request.body#/endpoint}':
             post:
@@ -11426,6 +11767,10 @@ paths:
               responses:
                 "200":
                   description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/OutboundPingResponse'
         person:
           '{$request.body#/endpoint}':
             post:
@@ -12008,21 +12353,21 @@ components:
             $ref: '#/components/schemas/AccountTranslation'
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
           x-type: Map
         text:
           type: object
-          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'.
+          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'. Not filled in webhook events.
           additionalProperties:
             type: object
             additionalProperties:
@@ -12785,14 +13130,14 @@ components:
           description: Description of the api key. E.g. where or for what it is used. Maximum of 500 characters. Can be omitted.
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         text:
           type: object
-          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'.
+          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'. Not filled in webhook events.
           additionalProperties:
             type: object
             additionalProperties:
@@ -12801,7 +13146,7 @@ components:
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -12976,6 +13321,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         text:
           type: string
           description: Text of the message
@@ -14030,6 +14378,18 @@ components:
           $ref: '#/components/schemas/PersonData'
         conversation:
           $ref: '#/components/schemas/ConversationData'
+    BotPersonIdDialogBotSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BotPersonIdDialogBotSearchFilter
+          enum:
+          - BotPersonIdDialogBotSearchFilter
+        field:
+          $ref: '#/components/schemas/EDialogBotSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     BotPostMessage:
       type: object
       description: A message send from a bot to the collaboration server
@@ -14053,6 +14413,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone. Cannot be set for REPLY message type."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         messageData:
           $ref: '#/components/schemas/PostMessageData'
     BotReboardingOfferEvent:
@@ -14535,6 +14898,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         imageUrl:
           type: string
           description: URL of the image displayed at the top of the card.
@@ -14572,7 +14938,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         imageUrl:
           type: string
           description: "URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ratio of 16:9</li> <li>If the image doesn't fit the aspect ratio it's magnified to cover the whole area</li> <li>Depending on the chat windows size, the image is displayed with a width of 200-400px.</li> </ul>"
@@ -14651,6 +15017,16 @@ components:
           type: integer
           format: int32
           description: The maximum number of characters in the response that are supported by the caller
+    ChatSuggestionResponse:
+      description: Base model for a chat suggestion response
+      oneOf:
+      - $ref: '#/components/schemas/TextChatSuggestionResponse'
+      - $ref: '#/components/schemas/EmptyChatSuggestionResponse'
+      discriminator:
+        propertyName: type
+        mapping:
+          EMPTY: '#/components/schemas/EmptyChatSuggestionResponse'
+          TEXT: '#/components/schemas/TextChatSuggestionResponse'
     CompactUser:
       type: object
       description: "A user class, which holds the most important information, which are needed on the client side. It sums up the information from the user instance with some other data like team information for easier access of a user"
@@ -15074,14 +15450,14 @@ components:
           description: Unix timestamp (ms) when the awaited person type last changed
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         text:
           type: object
-          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'.
+          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'. Not filled in webhook events.
           additionalProperties:
             type: object
             additionalProperties:
@@ -15090,7 +15466,7 @@ components:
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -15307,6 +15683,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         recipientPersonIds:
           type: array
           description: "IDs of persons that the message was addressed to. <p> If it is null, all active participations are regarded as recipients."
@@ -16171,14 +16550,14 @@ components:
             $ref: '#/components/schemas/ConversationTemplateTranslation'
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         text:
           type: object
-          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'.
+          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'. Not filled in webhook events.
           additionalProperties:
             type: object
             additionalProperties:
@@ -16187,7 +16566,7 @@ components:
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -16651,6 +17030,18 @@ components:
           $ref: '#/components/schemas/EExternalMessengerChannelSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
+    CreationTimestampFileUploadInterceptorSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampFileUploadInterceptorSearchFilter
+          enum:
+          - CreationTimestampFileUploadInterceptorSearchFilter
+        field:
+          $ref: '#/components/schemas/EFileUploadInterceptorSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     CreationTimestampMessageInterceptorSearchFilter:
       type: object
       description: CreationTimestampMessageInterceptorSearchFilter
@@ -17073,7 +17464,7 @@ components:
           description: "Defines if the delivered/read state of messages is handled externally or by the collaboration server. <br> If the collaboration server handles the state, the messages are marked as delivered and read a soon as the webhook could be successfully dispatched to the configured webhookEndpoint.<br> If the it is handled externally, the external service has to call the api function to mark the message as delivered/read. Additionally webhook events for the message state of messages from the external messenger are dispatched."
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -17894,12 +18285,14 @@ components:
     DialogBotSearchFilter:
       description: DialogBot filter item.
       oneOf:
+      - $ref: '#/components/schemas/BotPersonIdDialogBotSearchFilter'
       - $ref: '#/components/schemas/CreationTimestampDialogBotSearchFilter'
       - $ref: '#/components/schemas/ModificationTimestampDialogBotSearchFilter'
       - $ref: '#/components/schemas/NameDialogBotSearchFilter'
       discriminator:
         propertyName: field
         mapping:
+          BOT_PERSON_ID: '#/components/schemas/BotPersonIdDialogBotSearchFilter'
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampDialogBotSearchFilter'
           MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampDialogBotSearchFilter'
           NAME: '#/components/schemas/NameDialogBotSearchFilter'
@@ -18454,6 +18847,14 @@ components:
       - "MESSAGE_ID: Filter by the 'messageId' attribute"
       - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EChatSuggestionResponseType:
+      type: string
+      enum:
+      - EMPTY
+      - TEXT
+      x-enum-descriptions:
+      - EMPTY
+      - TEXT
     EContactOrderByField:
       type: string
       enum:
@@ -18535,12 +18936,16 @@ components:
       - CANCELED
       - FAILED
       - DELETED
+      - SCANNING
+      - REJECTED
       x-enum-descriptions:
       - IN_PROGRESS
       - COMPLETED
       - CANCELED
       - FAILED
       - DELETED
+      - SCANNING
+      - REJECTED
     EConversationHistoryOrderByField:
       type: string
       enum:
@@ -19155,10 +19560,12 @@ components:
       type: string
       enum:
       - NAME
+      - BOT_PERSON_ID
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
       - "NAME: Filter by the 'name' attribute"
+      - "BOT_PERSON_ID: Filter by the 'botPersonId' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EDomainOrderByField:
@@ -19183,6 +19590,16 @@ components:
       - "DOMAIN_NAME: Filter by the 'domainName' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EEmptyChatSuggestionReason:
+      type: string
+      enum:
+      - NO_SUGGESTION
+      - NOT_AVAILABLE
+      - OTHER
+      x-enum-descriptions:
+      - NO_SUGGESTION
+      - NOT_AVAILABLE
+      - OTHER
     EExternalMessengerChannelOrderByField:
       type: string
       enum:
@@ -19216,6 +19633,45 @@ components:
       - "CUSTOM: Custom channel which is connected via rest and webhooks"
       - "WHATS_APP: WhatsApp channel which is managed by the collaboration server"
       - "FACEBOOK: Facebook channel which is managed by the collaboration server"
+    EFileUploadInterceptorOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EFileUploadInterceptorSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+    EFileUploadInterceptorSource:
+      type: string
+      description: The source of a file upload
+      enum:
+      - BOT
+      - EXTERNAL_MESSENGER
+      - CONVERSATION
+      - CALL_SNAPSHOT
+      - CONVERSATION_RECORDING
+      - CO_BROWSING_DOWNLOAD
+      x-enum-descriptions:
+      - BOT
+      - "EXTERNAL_MESSENGER: The file is being upload as a file message via an external channel"
+      - "CONVERSATION: The file is being uploaded as a file message through an external messenger"
+      - "CALL_SNAPSHOT: The file is a snapshot from a call"
+      - "CONVERSATION_RECORDING: The file is the recording of a conversation"
+      - "CO_BROWSING_DOWNLOAD: The file is being uploaded to the conversation from a website participants are co-browsing"
     EFrontend:
       type: string
       description: All the different Unblu conversation frontends users can interact with
@@ -19226,6 +19682,7 @@ components:
       - VISITOR_MOBILE
       - VISITOR_POPOUT
       - AGENT_DESK
+      - TEAMS_AGENT_DESK
       - AGENT_SINGLE_CONVERSATION_DESK
       - AGENT_MOBILE
       x-enum-descriptions:
@@ -19235,6 +19692,7 @@ components:
       - "VISITOR_MOBILE: Sites for mobile visitor frontend and pop-out that display the Individual UI of the visitor site integration"
       - "VISITOR_POPOUT: Sites for site integration pop-outs"
       - "AGENT_DESK: The Agent Desk"
+      - "TEAMS_AGENT_DESK: The MS Teams Agent Desk"
       - "AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent"
       - "AGENT_MOBILE: Sites for the mobile agent frontend that display the agent inbox and the conversation UI"
     EIdListOperatorType:
@@ -20109,12 +20567,16 @@ components:
       - EXTERNAL_MESSENGER
       - EXTERNAL_MESSAGE_INTERCEPTOR
       - CUSTOM_ACTION
+      - SUGGESTION_SOURCE
+      - FILE_UPLOAD_INTERCEPTOR
       x-enum-descriptions:
       - WEBHOOK_REGISTRATION
       - BOT
       - EXTERNAL_MESSENGER
       - EXTERNAL_MESSAGE_INTERCEPTOR
       - CUSTOM_ACTION
+      - SUGGESTION_SOURCE
+      - FILE_UPLOAD_INTERCEPTOR
     ERegistrationStatus:
       type: string
       description: Possible Webhook Registration Status
@@ -20438,6 +20900,21 @@ components:
           $ref: '#/components/schemas/EUserSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    EmptyChatSuggestionResponse:
+      type: object
+      description: Model representing the response to a chat suggestion request when no suggestion could be generated
+      properties:
+        $_type:
+          type: string
+          default: EmptyChatSuggestionResponse
+          enum:
+          - EmptyChatSuggestionResponse
+        type:
+          $ref: '#/components/schemas/EChatSuggestionResponseType'
+        reason:
+          $ref: '#/components/schemas/EEmptyChatSuggestionReason'
+        hint:
+          type: string
     EndReasonConversationHistorySearchFilter:
       type: object
       properties:
@@ -21171,6 +21648,9 @@ components:
         sourceId:
           type: string
           description: An id identifying the source of the external message. Typically the id of the message in the other messaging system
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         messageData:
           $ref: '#/components/schemas/PostMessageData'
     ExternalMessengersMessageDeliveredBody:
@@ -21311,6 +21791,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         fileName:
           type: string
           description: The name of the file that is send
@@ -21359,7 +21842,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         fileName:
           type: string
           description: The name of the file that is send
@@ -21376,6 +21859,159 @@ components:
           description: Optional list of quick replies available to the message's recipients <p> Max number of quick replies is 13.
           items:
             $ref: '#/components/schemas/QuickReply'
+    FileUploadInterceptorData:
+      type: object
+      description: Model representing a file upload interceptor.
+      properties:
+        $_type:
+          type: string
+          default: FileUploadInterceptorData
+          enum:
+          - FileUploadInterceptorData
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the file upload interceptor. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the file upload interceptor. Maximum length of 500 characters. Optional.
+        order:
+          type: integer
+          format: int64
+          description: Order of execution of the file upload interceptor among all the file upload interceptors configured in the account. Mandatory.
+        mimeTypeRegex:
+          type: string
+          description: Regular expression used to determine if the interceptor must be used for a particular MIME type. Leave it empty to match all MIME types.
+        webhookStatus:
+          $ref: '#/components/schemas/ERegistrationStatus'
+        webhookEndpoint:
+          type: string
+          description: "The URL of the webhook registration endpoint. Requests for webhook events are sent to this URL. Maximum length of 4000 characters. <p> The following event is sent to the endpoint: <ul> <li>`TypedEvent.FILE_UPLOAD_INTERCEPTOR_NEW_FILE`: On each file uploaded to a conversation.</li> </ul>"
+        webhookApiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
+        webhookSecret:
+          type: string
+          description: Optional secret sent with each webhook event. Maximum length of 4000 characters.
+    FileUploadInterceptorOrderBy:
+      type: object
+      description: FileUploadInterceptor orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: FileUploadInterceptorOrderBy
+          enum:
+          - FileUploadInterceptorOrderBy
+        field:
+          $ref: '#/components/schemas/EFileUploadInterceptorOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    FileUploadInterceptorQuery:
+      type: object
+      description: Container to search file upload interceptors
+      properties:
+        $_type:
+          type: string
+          default: FileUploadInterceptorQuery
+          enum:
+          - FileUploadInterceptorQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/FileUploadInterceptorSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/FileUploadInterceptorOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    FileUploadInterceptorResult:
+      type: object
+      description: Container to return list of file upload interceptors
+      properties:
+        $_type:
+          type: string
+          default: FileUploadInterceptorResult
+          enum:
+          - FileUploadInterceptorResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If more items are present on the server, this value can be used as offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/FileUploadInterceptorData'
+    FileUploadInterceptorSearchFilter:
+      description: FileUploadInterceptor filter item.
+      oneOf:
+      - $ref: '#/components/schemas/CreationTimestampFileUploadInterceptorSearchFilter'
+      - $ref: '#/components/schemas/ModificationTimestampFileUploadInterceptorSearchFilter'
+      - $ref: '#/components/schemas/NameFileUploadInterceptorSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampFileUploadInterceptorSearchFilter'
+          MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampFileUploadInterceptorSearchFilter'
+          NAME: '#/components/schemas/NameFileUploadInterceptorSearchFilter'
+    FileUploadInterceptorsApproveFileUploadBody:
+      type: object
+      description: Request Body for the 'fileUploadInterceptorsApproveFileUpload' operation
+      properties:
+        token:
+          type: string
+          description: The token used to identify the file this action applies to. The token is received when approval is requested through a <code>file_upload_interceptor.new_file</code> webhook. Each file upload approval request contains a unique token.
+    FileUploadInterceptorsPingWebhookBody:
+      type: object
+      description: Request Body for the 'fileUploadInterceptorsPingWebhook' operation
+      properties:
+        interceptorId:
+          type: string
+          description: The ID of the file upload interceptor
+    FileUploadInterceptorsRejectFileUploadBody:
+      type: object
+      description: Request Body for the 'fileUploadInterceptorsRejectFileUpload' operation
+      properties:
+        token:
+          type: string
+          description: The token used to identify the file this action applies to. The token is received when approval is requested through a <code>file_upload_interceptor.new_file</code> webhook. Each file upload approval request contains a unique token.
+        reason:
+          type: string
+          description: A text explaining why the file upload was rejected. The text is displayed to end users as it was transmitted.
+    FileUploadInterceptorsValidateMimeTypeRegexBody:
+      type: object
+      description: Request Body for the 'fileUploadInterceptorsValidateMimeTypeRegex' operation
+      properties:
+        regex:
+          type: string
     FirstNamePersonSearchFilter:
       type: object
       properties:
@@ -21428,14 +22064,14 @@ components:
           $ref: '#/components/schemas/LicenseData'
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         text:
           type: object
-          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'.
+          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'. Not filled in webhook events.
           additionalProperties:
             type: object
             additionalProperties:
@@ -21444,7 +22080,7 @@ components:
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -22042,6 +22678,80 @@ components:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
         operator:
           $ref: '#/components/schemas/AuditChangeInteractionTypeOperator'
+    InterceptorFileRejectedEvent:
+      type: object
+      description: Event triggered when a file upload interceptor rejects a file upload
+      properties:
+        $_type:
+          type: string
+          default: InterceptorFileRejectedEvent
+          enum:
+          - InterceptorFileRejectedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        name:
+          type: string
+          description: The name of the file
+        mimeType:
+          type: string
+          description: The file's MIME type
+        length:
+          type: integer
+          format: int64
+          description: "The length, or size, of the file in bytes"
+        interceptorId:
+          type: string
+          description: The ID of the file upload interceptor that rejected the file upload
+        reason:
+          type: string
+          description: The reason the file upload was rejected
+    InterceptorNewFileEvent:
+      type: object
+      description: Event sent to file upload interceptors when a new file is uploaded
+      properties:
+        $_type:
+          type: string
+          default: InterceptorNewFileEvent
+          enum:
+          - InterceptorNewFileEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        apiToken:
+          type: string
+          description: The token to get the message's content and approve or reject the message
+        name:
+          type: string
+          description: The name of the file
+        mimeType:
+          type: string
+          description: The file's MIME type
+        length:
+          type: integer
+          format: int64
+          description: "The length, or size, of the file in bytes"
+        downloadLink:
+          type: string
+          description: The link to retrieve the file's contents
+        source:
+          $ref: '#/components/schemas/EFileUploadInterceptorSource'
+        person:
+          $ref: '#/components/schemas/PersonData'
     InterceptorNewMessageEvent:
       type: object
       description: Event sent to external message interceptors when a new message is added to the conversation
@@ -22664,6 +23374,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         header:
           $ref: '#/components/schemas/MessageHeader'
         items:
@@ -22694,7 +23407,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         header:
           $ref: '#/components/schemas/MessageHeader'
         items:
@@ -22786,7 +23499,7 @@ components:
           type: string
           description: The URL to open if the action type is a link or the reply message if the type is `EConversationMessageActionType.REPLY_MESSAGE` or a technical value that will be part of the reply message if the action is chosen if the type is `EConversationMessageActionType.REPLY_MESSAGE_WITH_TECHNICAL_VALUE`.
     MessageData:
-      description: "Base class for all conversation messages. Can be one of `ApprovalRequestMessageData`, `FileMessageData`, `CardMessageData`,`MultichoiceQuestionMessageData`, `RatingQuestionMessageData`, `ReplyMessageData`, `TextMessageData` or`TextQuestionMessageData`"
+      description: Base class for all conversation messages
       oneOf:
       - $ref: '#/components/schemas/ApprovalRequestMessageData'
       - $ref: '#/components/schemas/CardMessageData'
@@ -23200,6 +23913,18 @@ components:
           $ref: '#/components/schemas/EExternalMessengerChannelSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
+    ModificationTimestampFileUploadInterceptorSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampFileUploadInterceptorSearchFilter
+          enum:
+          - ModificationTimestampFileUploadInterceptorSearchFilter
+        field:
+          $ref: '#/components/schemas/EFileUploadInterceptorSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     ModificationTimestampMessageInterceptorSearchFilter:
       type: object
       properties:
@@ -23328,6 +24053,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         text:
           type: string
           description: Text of the message
@@ -23371,7 +24099,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         text:
           type: string
           description: Question message text
@@ -23440,6 +24168,18 @@ components:
           - NameExternalMessengerChannelSearchFilter
         field:
           $ref: '#/components/schemas/EExternalMessengerChannelSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    NameFileUploadInterceptorSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NameFileUploadInterceptorSearchFilter
+          enum:
+          - NameFileUploadInterceptorSearchFilter
+        field:
+          $ref: '#/components/schemas/EFileUploadInterceptorSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
     NameMessageInterceptorSearchFilter:
@@ -23554,14 +24294,14 @@ components:
             $ref: '#/components/schemas/NamedAreaTranslation'
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         text:
           type: object
-          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'.
+          description: The entity's text properties. Only contains values when the 'expand' query parameter is used with the value 'text'. Not filled in webhook events.
           additionalProperties:
             type: object
             additionalProperties:
@@ -23570,7 +24310,7 @@ components:
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -24947,7 +25687,7 @@ components:
           x-type: ExpandableField
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -25742,7 +26482,7 @@ components:
         action:
           $ref: '#/components/schemas/MessageAction'
     PostMessageData:
-      description: "Base class for all conversation messages send to the collaboration server.<br> Can be one of `FilePostMessageData`, `MultichoiceQuestionPostMessageData`, `RatingQuestionPostMessageData`, `ReplyPostMessageData`,`TextPostMessageData` or `TextQuestionPostMessageData`"
+      description: "Base class for all conversation messages sent to the collaboration server. <p> Can be one of `CardPostMessageData`, `FilePostMessageData`, `ListPostMessageData`, `MultichoiceQuestionPostMessageData`,`RatingQuestionPostMessageData`, `ReplyPostMessageData`, `TextPostMessageData` or `TextQuestionPostMessageData`"
       oneOf:
       - $ref: '#/components/schemas/ListPostMessageData'
       - $ref: '#/components/schemas/CardPostMessageData'
@@ -25865,6 +26605,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -25941,6 +26684,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         text:
           type: string
           description: Text of the message
@@ -25990,7 +26736,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         text:
           type: string
           description: Question message text
@@ -26189,6 +26935,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         blobId:
           type: string
           description: The blob store ID of the recording
@@ -26304,6 +27053,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -26323,7 +27075,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -27076,14 +27828,14 @@ components:
             $ref: '#/components/schemas/TeamTranslation'
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -27276,6 +28028,20 @@ components:
           $ref: '#/components/schemas/ECannedResponseSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    TextChatSuggestionResponse:
+      type: object
+      description: Model representing the response to a chat suggestion request
+      properties:
+        $_type:
+          type: string
+          default: TextChatSuggestionResponse
+          enum:
+          - TextChatSuggestionResponse
+        type:
+          $ref: '#/components/schemas/EChatSuggestionResponseType'
+        suggestionText:
+          type: string
+          description: The suggested text
     TextMessageData:
       type: object
       description: Text message
@@ -27332,6 +28098,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         text:
           type: string
           description: Text of the message
@@ -27355,7 +28124,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         text:
           type: string
           description: Message text
@@ -27422,6 +28191,9 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
         text:
           type: string
           description: Text of the message
@@ -27467,7 +28239,7 @@ components:
           $ref: '#/components/schemas/EPostMessageType'
         fallbackText:
           type: string
-          description: "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
         text:
           type: string
           description: Message text
@@ -27652,14 +28424,14 @@ components:
           description: "True if the user is purely virtual (they weren't created as the result of an LDAP sync, for instance) and thus can't be edited in the Unblu UI. If omitted, the property is set to false, and the user is considered to be a physical user."
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'.
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
           additionalProperties:
             type: string
           x-expand-query-key: metadata

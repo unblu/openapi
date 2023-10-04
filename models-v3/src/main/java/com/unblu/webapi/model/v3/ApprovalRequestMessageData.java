@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ApprovalRequestMessageData.JSON_PROPERTY_SOURCE_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_INTERNAL,
+	ApprovalRequestMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_TEXT,
 	ApprovalRequestMessageData.JSON_PROPERTY_TEXT_TYPE,
 	ApprovalRequestMessageData.JSON_PROPERTY_OPTIONS,
@@ -140,6 +141,10 @@ public class ApprovalRequestMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
+	private String replyToMessageId;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -472,6 +477,25 @@ public class ApprovalRequestMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public ApprovalRequestMessageData replyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional ID that identifies the message that this message is replying to
+	 * 
+	 * @return replyToMessageId
+	 **/
+	@ApiModelProperty(value = "Optional ID that identifies the message that this message is replying to")
+	public String getReplyToMessageId() {
+		return replyToMessageId;
+	}
+
+	public void setReplyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+	}
+
 	public ApprovalRequestMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -581,6 +605,7 @@ public class ApprovalRequestMessageData implements MessageData {
 				Objects.equals(this.sourceId, approvalRequestMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, approvalRequestMessageData.botThreadId) &&
 				Objects.equals(this.internal, approvalRequestMessageData.internal) &&
+				Objects.equals(this.replyToMessageId, approvalRequestMessageData.replyToMessageId) &&
 				Objects.equals(this.text, approvalRequestMessageData.text) &&
 				Objects.equals(this.textType, approvalRequestMessageData.textType) &&
 				Objects.equals(this.options, approvalRequestMessageData.options) &&
@@ -589,7 +614,7 @@ public class ApprovalRequestMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, text, textType, options, answerStatus);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, text, textType, options, answerStatus);
 	}
 
 	@Override
@@ -612,6 +637,7 @@ public class ApprovalRequestMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

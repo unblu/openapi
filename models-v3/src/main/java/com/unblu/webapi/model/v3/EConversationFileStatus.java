@@ -32,7 +32,17 @@ public enum EConversationFileStatus {
 	/**
 	 * DELETED
 	 */
-	DELETED("DELETED");
+	DELETED("DELETED"),
+
+	/**
+	 * SCANNING
+	 */
+	SCANNING("SCANNING"),
+
+	/**
+	 * REJECTED
+	 */
+	REJECTED("REJECTED");
 
 	private String value;
 

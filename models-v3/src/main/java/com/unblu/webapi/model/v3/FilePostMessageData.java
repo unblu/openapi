@@ -141,14 +141,14 @@ public class FilePostMessageData implements PostMessageData {
 	}
 
 	/**
-	 * Optional fallback text which is used when: &lt;ul&gt; &lt;li&gt;unblu cannot restore the complex content of the message anymore&lt;/li&gt; &lt;li&gt;in push
-	 * notifications&lt;/li&gt; &lt;li&gt;or for the last message in the conversation overview&lt;/li&gt; &lt;/ul&gt; The usage of this field is recommended
-	 * especially for complex message types.&lt;br&gt; The value must not contain markdown.&lt;br&gt; If no fallback is given, a fallback text based on the content
-	 * of the message is generated. This may however not always be a perfect textual representation of the message.&lt;br&gt;
+	 * Optional fallback text which is used when: &lt;ul&gt; &lt;li&gt;Unblu can&#39;t restore the complex content of a message&lt;/li&gt; &lt;li&gt;A push
+	 * notification couldn&#39;t be decrypted&lt;/li&gt; &lt;li&gt;Last message in the conversation overview&lt;/li&gt; &lt;/ul&gt; The usage of this field is
+	 * recommended especially for complex message types.&lt;br&gt; The value must not contain markdown.&lt;br&gt; If no fallback is given, a fallback text based on
+	 * the content of the message is generated. This may however not always be a perfect textual representation of the message.&lt;br&gt;
 	 * 
 	 * @return fallbackText
 	 **/
-	@ApiModelProperty(value = "Optional fallback text which is used when: <ul> <li>unblu cannot restore the complex content of the message anymore</li> <li>in push notifications</li> <li>or for the last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>")
+	@ApiModelProperty(value = "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>")
 	public String getFallbackText() {
 		return fallbackText;
 	}

@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BotPostMessage.JSON_PROPERTY_SENDER_PERSON_ID,
 	BotPostMessage.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
 	BotPostMessage.JSON_PROPERTY_INTERNAL,
+	BotPostMessage.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	BotPostMessage.JSON_PROPERTY_MESSAGE_DATA,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -82,6 +83,10 @@ public class BotPostMessage {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
+	private String replyToMessageId;
 
 	public static final String JSON_PROPERTY_MESSAGE_DATA = "messageData";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_DATA)
@@ -191,6 +196,25 @@ public class BotPostMessage {
 		this.internal = internal;
 	}
 
+	public BotPostMessage replyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional ID that identifies the message that this message is replying to
+	 * 
+	 * @return replyToMessageId
+	 **/
+	@ApiModelProperty(value = "Optional ID that identifies the message that this message is replying to")
+	public String getReplyToMessageId() {
+		return replyToMessageId;
+	}
+
+	public void setReplyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+	}
+
 	public BotPostMessage messageData(PostMessageData messageData) {
 		this.messageData = messageData;
 		return this;
@@ -224,12 +248,13 @@ public class BotPostMessage {
 				Objects.equals(this.senderPersonId, botPostMessage.senderPersonId) &&
 				Objects.equals(this.recipientPersonIds, botPostMessage.recipientPersonIds) &&
 				Objects.equals(this.internal, botPostMessage.internal) &&
+				Objects.equals(this.replyToMessageId, botPostMessage.replyToMessageId) &&
 				Objects.equals(this.messageData, botPostMessage.messageData);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, senderPersonId, recipientPersonIds, internal, messageData);
+		return Objects.hash($type, conversationId, senderPersonId, recipientPersonIds, internal, replyToMessageId, messageData);
 	}
 
 	@Override
@@ -241,6 +266,7 @@ public class BotPostMessage {
 		sb.append("    senderPersonId: ").append(toIndentedString(senderPersonId)).append("\n");
 		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    messageData: ").append(toIndentedString(messageData)).append("\n");
 		sb.append("}");
 		return sb.toString();

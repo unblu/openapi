@@ -40,6 +40,11 @@ public enum EFrontend {
 	AGENT_DESK("AGENT_DESK"),
 
 	/**
+	 * TEAMS_AGENT_DESK: The MS Teams Agent Desk
+	 */
+	TEAMS_AGENT_DESK("TEAMS_AGENT_DESK"),
+
+	/**
 	 * AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent
 	 */
 	AGENT_SINGLE_CONVERSATION_DESK("AGENT_SINGLE_CONVERSATION_DESK"),

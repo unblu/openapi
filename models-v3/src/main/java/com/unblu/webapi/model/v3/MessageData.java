@@ -110,4 +110,10 @@ public interface MessageData {
 
 	MessageData internal(Boolean internal);
 
+	void setReplyToMessageId(String replyToMessageId);
+
+	String getReplyToMessageId();
+
+	MessageData replyToMessageId(String replyToMessageId);
+
 }

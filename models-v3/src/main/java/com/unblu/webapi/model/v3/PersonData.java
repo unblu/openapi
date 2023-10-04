@@ -538,11 +538,12 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	}
 
 	/**
-	 * The entity&#39;s metadata properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;metadata&#39;.
+	 * The entity&#39;s metadata properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;metadata&#39;. Not filled in
+	 * webhook events.
 	 * 
 	 * @return metadata
 	 **/
-	@ApiModelProperty(value = "The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'.")
+	@ApiModelProperty(value = "The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.")
 	public Map<String, String> getMetadata() {
 		return metadata;
 	}

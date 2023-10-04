@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	FileMessageData.JSON_PROPERTY_SOURCE_ID,
 	FileMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	FileMessageData.JSON_PROPERTY_INTERNAL,
+	FileMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	FileMessageData.JSON_PROPERTY_FILE_NAME,
 	FileMessageData.JSON_PROPERTY_CAPTION,
 	FileMessageData.JSON_PROPERTY_CAPTION_TYPE,
@@ -147,6 +148,10 @@ public class FileMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
+	private String replyToMessageId;
 
 	public static final String JSON_PROPERTY_FILE_NAME = "fileName";
 	@JsonProperty(JSON_PROPERTY_FILE_NAME)
@@ -507,6 +512,25 @@ public class FileMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public FileMessageData replyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional ID that identifies the message that this message is replying to
+	 * 
+	 * @return replyToMessageId
+	 **/
+	@ApiModelProperty(value = "Optional ID that identifies the message that this message is replying to")
+	public String getReplyToMessageId() {
+		return replyToMessageId;
+	}
+
+	public void setReplyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+	}
+
 	public FileMessageData fileName(String fileName) {
 		this.fileName = fileName;
 		return this;
@@ -750,6 +774,7 @@ public class FileMessageData implements MessageData {
 				Objects.equals(this.sourceId, fileMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, fileMessageData.botThreadId) &&
 				Objects.equals(this.internal, fileMessageData.internal) &&
+				Objects.equals(this.replyToMessageId, fileMessageData.replyToMessageId) &&
 				Objects.equals(this.fileName, fileMessageData.fileName) &&
 				Objects.equals(this.caption, fileMessageData.caption) &&
 				Objects.equals(this.captionType, fileMessageData.captionType) &&
@@ -765,7 +790,7 @@ public class FileMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLink, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLink, quickReplies);
 	}
 
 	@Override
@@ -788,6 +813,7 @@ public class FileMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
 		sb.append("    caption: ").append(toIndentedString(caption)).append("\n");
 		sb.append("    captionType: ").append(toIndentedString(captionType)).append("\n");

@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CardMessageData.JSON_PROPERTY_SOURCE_ID,
 	CardMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	CardMessageData.JSON_PROPERTY_INTERNAL,
+	CardMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	CardMessageData.JSON_PROPERTY_IMAGE_URL,
 	CardMessageData.JSON_PROPERTY_IMAGE_ALT_TEXT,
 	CardMessageData.JSON_PROPERTY_TITLE,
@@ -143,6 +144,10 @@ public class CardMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
+	private String replyToMessageId;
 
 	public static final String JSON_PROPERTY_IMAGE_URL = "imageUrl";
 	@JsonProperty(JSON_PROPERTY_IMAGE_URL)
@@ -487,6 +492,25 @@ public class CardMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public CardMessageData replyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional ID that identifies the message that this message is replying to
+	 * 
+	 * @return replyToMessageId
+	 **/
+	@ApiModelProperty(value = "Optional ID that identifies the message that this message is replying to")
+	public String getReplyToMessageId() {
+		return replyToMessageId;
+	}
+
+	public void setReplyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+	}
+
 	public CardMessageData imageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 		return this;
@@ -661,6 +685,7 @@ public class CardMessageData implements MessageData {
 				Objects.equals(this.sourceId, cardMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, cardMessageData.botThreadId) &&
 				Objects.equals(this.internal, cardMessageData.internal) &&
+				Objects.equals(this.replyToMessageId, cardMessageData.replyToMessageId) &&
 				Objects.equals(this.imageUrl, cardMessageData.imageUrl) &&
 				Objects.equals(this.imageAltText, cardMessageData.imageAltText) &&
 				Objects.equals(this.title, cardMessageData.title) &&
@@ -672,7 +697,7 @@ public class CardMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies);
 	}
 
 	@Override
@@ -695,6 +720,7 @@ public class CardMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
 		sb.append("    imageAltText: ").append(toIndentedString(imageAltText)).append("\n");
 		sb.append("    title: ").append(toIndentedString(title)).append("\n");

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EDialogBotSearchFilterField
+ * Gets or Sets EFileUploadInterceptorSearchFilterField
  */
-public enum EDialogBotSearchFilterField {
+public enum EFileUploadInterceptorSearchFilterField {
 
 	/**
 	 * NAME: Filter by the &#39;name&#39; attribute
@@ -15,23 +15,18 @@ public enum EDialogBotSearchFilterField {
 	NAME("NAME"),
 
 	/**
-	 * BOT_PERSON_ID: Filter by the &#39;botPersonId&#39; attribute
-	 */
-	BOT_PERSON_ID("BOT_PERSON_ID"),
-
-	/**
-	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
+	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 
 	/**
-	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
+	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute
 	 */
 	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP");
 
 	private String value;
 
-	EDialogBotSearchFilterField(String value) {
+	EFileUploadInterceptorSearchFilterField(String value) {
 		this.value = value;
 	}
 
@@ -46,8 +41,8 @@ public enum EDialogBotSearchFilterField {
 	}
 
 	@JsonCreator
-	public static EDialogBotSearchFilterField fromValue(String value) {
-		for (EDialogBotSearchFilterField b : EDialogBotSearchFilterField.values()) {
+	public static EFileUploadInterceptorSearchFilterField fromValue(String value) {
+		for (EFileUploadInterceptorSearchFilterField b : EFileUploadInterceptorSearchFilterField.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}
