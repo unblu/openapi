@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.36.1
+  version: 7.37.0
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -3305,7 +3305,7 @@ paths:
       tags:
       - CannedResponses
       summary: search
-      description: Search for domains in the current account<br>
+      description: Search for canned responses according to the policy that applies to the user making the API call<br>
       operationId: cannedResponsesSearch
       requestBody:
         content:
@@ -9687,7 +9687,7 @@ paths:
                     outboundStatus: DISABLED
                     outboundEndpoint: http://test.webhook.com
                     outboundSecret: null
-                    outboundTimeoutMillis: 2000
+                    outboundTimeoutMillis: 5000
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -9771,7 +9771,7 @@ paths:
                     outboundStatus: DISABLED
                     outboundEndpoint: http://test.webhook.com
                     outboundSecret: null
-                    outboundTimeoutMillis: 2000
+                    outboundTimeoutMillis: 5000
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -11365,7 +11365,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.ended
-              description: An event triggered every time a conversation is ended
+              description: An event triggered every time a conversation is ended (all participants have finished their offboarding).
               operationId: conversationEndedCallback
               requestBody:
                 content:
@@ -15486,7 +15486,7 @@ components:
           NOT_IN: '#/components/schemas/NotInConversationEndReasonOperator'
     ConversationEndedEvent:
       type: object
-      description: An event triggered every time a conversation is ended
+      description: An event triggered every time a conversation is ended (all participants have finished their offboarding).
       properties:
         $_type:
           type: string
@@ -15505,6 +15505,13 @@ components:
           description: The account ID the event originated from
         conversation:
           $ref: '#/components/schemas/ConversationData'
+        endReason:
+          $ref: '#/components/schemas/EConversationEndReason'
+        endPerson:
+          $ref: '#/components/schemas/PersonData'
+        endComment:
+          type: string
+          description: The comment provided when ending the conversation. May be null.
     ConversationFileData:
       type: object
       description: "Data model object for a File (ConversationFile), which was shared/sent in a conversation"
@@ -16061,6 +16068,13 @@ components:
           description: The account ID the event originated from
         conversation:
           $ref: '#/components/schemas/ConversationData'
+        endReason:
+          $ref: '#/components/schemas/EConversationEndReason'
+        endPerson:
+          $ref: '#/components/schemas/PersonData'
+        endComment:
+          type: string
+          description: The comment provided when ending the conversation. May be null.
     ConversationOnboardingEvent:
       type: object
       description: An event triggered every time a conversation's state is set to ONBOARDING
@@ -17568,7 +17582,7 @@ components:
             $ref: '#/components/schemas/EMessageType'
         fileMessageMimeTypeRegex:
           type: string
-          description: "A regular expression for the allowed MIME types of file messages the action will be available for. The default is null, which means the action will be available for file messages of all types."
+          description: A regular expression that matches all MIME types of file messages the action can be carried out on. The regular expression must conform to both Java and JavaScript syntax as it is validated on both the server and the client.
         invokableForMessagesSentBy:
           type: array
           description: A list of types of sender of the messages the action will be available for
@@ -22710,6 +22724,14 @@ components:
         interceptorId:
           type: string
           description: The ID of the file upload interceptor that rejected the file upload
+        source:
+          $ref: '#/components/schemas/EFileUploadInterceptorSource'
+        personId:
+          type: string
+          description: "The ID of the person uploading the file. Depending on the source, this may be null."
+        conversationId:
+          type: string
+          description: "The ID of the conversation where the file is being uploaded. Depending on the source, this may be null."
         reason:
           type: string
           description: The reason the file upload was rejected
@@ -22752,6 +22774,9 @@ components:
           $ref: '#/components/schemas/EFileUploadInterceptorSource'
         person:
           $ref: '#/components/schemas/PersonData'
+        conversationId:
+          type: string
+          description: "The ID of the conversation where the file is being uploaded. Depending on the source, this may be null."
     InterceptorNewMessageEvent:
       type: object
       description: Event sent to external message interceptors when a new message is added to the conversation

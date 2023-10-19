@@ -423,7 +423,7 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * search Search for domains in the current account&lt;br&gt;
+	 * search Search for canned responses according to the policy that applies to the user making the API call&lt;br&gt;
 	 * 
 	 * @param cannedResponseQuery (required)
 	 * @return CannedResponseResult
@@ -434,7 +434,7 @@ public class CannedResponsesApi {
 	}
 
 	/**
-	 * search Search for domains in the current account&lt;br&gt;
+	 * search Search for canned responses according to the policy that applies to the user making the API call&lt;br&gt;
 	 * 
 	 * @param cannedResponseQuery (required)
 	 * @return ApiResponse&lt;CannedResponseResult&gt;

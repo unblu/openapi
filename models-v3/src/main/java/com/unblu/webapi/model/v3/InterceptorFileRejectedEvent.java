@@ -27,6 +27,9 @@ import io.swagger.annotations.ApiModelProperty;
 	InterceptorFileRejectedEvent.JSON_PROPERTY_MIME_TYPE,
 	InterceptorFileRejectedEvent.JSON_PROPERTY_LENGTH,
 	InterceptorFileRejectedEvent.JSON_PROPERTY_INTERCEPTOR_ID,
+	InterceptorFileRejectedEvent.JSON_PROPERTY_SOURCE,
+	InterceptorFileRejectedEvent.JSON_PROPERTY_PERSON_ID,
+	InterceptorFileRejectedEvent.JSON_PROPERTY_CONVERSATION_ID,
 	InterceptorFileRejectedEvent.JSON_PROPERTY_REASON,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -95,6 +98,18 @@ public class InterceptorFileRejectedEvent {
 	public static final String JSON_PROPERTY_INTERCEPTOR_ID = "interceptorId";
 	@JsonProperty(JSON_PROPERTY_INTERCEPTOR_ID)
 	private String interceptorId;
+
+	public static final String JSON_PROPERTY_SOURCE = "source";
+	@JsonProperty(JSON_PROPERTY_SOURCE)
+	private EFileUploadInterceptorSource source;
+
+	public static final String JSON_PROPERTY_PERSON_ID = "personId";
+	@JsonProperty(JSON_PROPERTY_PERSON_ID)
+	private String personId;
+
+	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
+	private String conversationId;
 
 	public static final String JSON_PROPERTY_REASON = "reason";
 	@JsonProperty(JSON_PROPERTY_REASON)
@@ -252,6 +267,63 @@ public class InterceptorFileRejectedEvent {
 		this.interceptorId = interceptorId;
 	}
 
+	public InterceptorFileRejectedEvent source(EFileUploadInterceptorSource source) {
+		this.source = source;
+		return this;
+	}
+
+	/**
+	 * Get source
+	 * 
+	 * @return source
+	 **/
+	@ApiModelProperty(value = "")
+	public EFileUploadInterceptorSource getSource() {
+		return source;
+	}
+
+	public void setSource(EFileUploadInterceptorSource source) {
+		this.source = source;
+	}
+
+	public InterceptorFileRejectedEvent personId(String personId) {
+		this.personId = personId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person uploading the file. Depending on the source, this may be null.
+	 * 
+	 * @return personId
+	 **/
+	@ApiModelProperty(value = "The ID of the person uploading the file. Depending on the source, this may be null.")
+	public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+
+	public InterceptorFileRejectedEvent conversationId(String conversationId) {
+		this.conversationId = conversationId;
+		return this;
+	}
+
+	/**
+	 * The ID of the conversation where the file is being uploaded. Depending on the source, this may be null.
+	 * 
+	 * @return conversationId
+	 **/
+	@ApiModelProperty(value = "The ID of the conversation where the file is being uploaded. Depending on the source, this may be null.")
+	public String getConversationId() {
+		return conversationId;
+	}
+
+	public void setConversationId(String conversationId) {
+		this.conversationId = conversationId;
+	}
+
 	public InterceptorFileRejectedEvent reason(String reason) {
 		this.reason = reason;
 		return this;
@@ -288,12 +360,15 @@ public class InterceptorFileRejectedEvent {
 				Objects.equals(this.mimeType, interceptorFileRejectedEvent.mimeType) &&
 				Objects.equals(this.length, interceptorFileRejectedEvent.length) &&
 				Objects.equals(this.interceptorId, interceptorFileRejectedEvent.interceptorId) &&
+				Objects.equals(this.source, interceptorFileRejectedEvent.source) &&
+				Objects.equals(this.personId, interceptorFileRejectedEvent.personId) &&
+				Objects.equals(this.conversationId, interceptorFileRejectedEvent.conversationId) &&
 				Objects.equals(this.reason, interceptorFileRejectedEvent.reason);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, name, mimeType, length, interceptorId, reason);
+		return Objects.hash($type, timestamp, eventType, accountId, name, mimeType, length, interceptorId, source, personId, conversationId, reason);
 	}
 
 	@Override
@@ -308,6 +383,9 @@ public class InterceptorFileRejectedEvent {
 		sb.append("    mimeType: ").append(toIndentedString(mimeType)).append("\n");
 		sb.append("    length: ").append(toIndentedString(length)).append("\n");
 		sb.append("    interceptorId: ").append(toIndentedString(interceptorId)).append("\n");
+		sb.append("    source: ").append(toIndentedString(source)).append("\n");
+		sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
+		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
 		sb.append("}");
 		return sb.toString();

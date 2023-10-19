@@ -24,6 +24,9 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationOffboardingEvent.JSON_PROPERTY_EVENT_TYPE,
 	ConversationOffboardingEvent.JSON_PROPERTY_ACCOUNT_ID,
 	ConversationOffboardingEvent.JSON_PROPERTY_CONVERSATION,
+	ConversationOffboardingEvent.JSON_PROPERTY_END_REASON,
+	ConversationOffboardingEvent.JSON_PROPERTY_END_PERSON,
+	ConversationOffboardingEvent.JSON_PROPERTY_END_COMMENT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationOffboardingEvent {
@@ -79,6 +82,18 @@ public class ConversationOffboardingEvent {
 	public static final String JSON_PROPERTY_CONVERSATION = "conversation";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION)
 	private ConversationData conversation = null;
+
+	public static final String JSON_PROPERTY_END_REASON = "endReason";
+	@JsonProperty(JSON_PROPERTY_END_REASON)
+	private EConversationEndReason endReason;
+
+	public static final String JSON_PROPERTY_END_PERSON = "endPerson";
+	@JsonProperty(JSON_PROPERTY_END_PERSON)
+	private PersonData endPerson = null;
+
+	public static final String JSON_PROPERTY_END_COMMENT = "endComment";
+	@JsonProperty(JSON_PROPERTY_END_COMMENT)
+	private String endComment;
 
 	public ConversationOffboardingEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -175,6 +190,63 @@ public class ConversationOffboardingEvent {
 		this.conversation = conversation;
 	}
 
+	public ConversationOffboardingEvent endReason(EConversationEndReason endReason) {
+		this.endReason = endReason;
+		return this;
+	}
+
+	/**
+	 * Get endReason
+	 * 
+	 * @return endReason
+	 **/
+	@ApiModelProperty(value = "")
+	public EConversationEndReason getEndReason() {
+		return endReason;
+	}
+
+	public void setEndReason(EConversationEndReason endReason) {
+		this.endReason = endReason;
+	}
+
+	public ConversationOffboardingEvent endPerson(PersonData endPerson) {
+		this.endPerson = endPerson;
+		return this;
+	}
+
+	/**
+	 * Get endPerson
+	 * 
+	 * @return endPerson
+	 **/
+	@ApiModelProperty(value = "")
+	public PersonData getEndPerson() {
+		return endPerson;
+	}
+
+	public void setEndPerson(PersonData endPerson) {
+		this.endPerson = endPerson;
+	}
+
+	public ConversationOffboardingEvent endComment(String endComment) {
+		this.endComment = endComment;
+		return this;
+	}
+
+	/**
+	 * The comment provided when ending the conversation. May be null.
+	 * 
+	 * @return endComment
+	 **/
+	@ApiModelProperty(value = "The comment provided when ending the conversation. May be null.")
+	public String getEndComment() {
+		return endComment;
+	}
+
+	public void setEndComment(String endComment) {
+		this.endComment = endComment;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -188,12 +260,15 @@ public class ConversationOffboardingEvent {
 				Objects.equals(this.timestamp, conversationOffboardingEvent.timestamp) &&
 				Objects.equals(this.eventType, conversationOffboardingEvent.eventType) &&
 				Objects.equals(this.accountId, conversationOffboardingEvent.accountId) &&
-				Objects.equals(this.conversation, conversationOffboardingEvent.conversation);
+				Objects.equals(this.conversation, conversationOffboardingEvent.conversation) &&
+				Objects.equals(this.endReason, conversationOffboardingEvent.endReason) &&
+				Objects.equals(this.endPerson, conversationOffboardingEvent.endPerson) &&
+				Objects.equals(this.endComment, conversationOffboardingEvent.endComment);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversation);
+		return Objects.hash($type, timestamp, eventType, accountId, conversation, endReason, endPerson, endComment);
 	}
 
 	@Override
@@ -205,6 +280,9 @@ public class ConversationOffboardingEvent {
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    conversation: ").append(toIndentedString(conversation)).append("\n");
+		sb.append("    endReason: ").append(toIndentedString(endReason)).append("\n");
+		sb.append("    endPerson: ").append(toIndentedString(endPerson)).append("\n");
+		sb.append("    endComment: ").append(toIndentedString(endComment)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

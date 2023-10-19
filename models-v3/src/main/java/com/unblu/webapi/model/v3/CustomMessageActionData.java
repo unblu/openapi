@@ -732,12 +732,12 @@ public class CustomMessageActionData implements CustomActionData {
 	}
 
 	/**
-	 * A regular expression for the allowed MIME types of file messages the action will be available for. The default is null, which means the action will be
-	 * available for file messages of all types.
+	 * A regular expression that matches all MIME types of file messages the action can be carried out on. The regular expression must conform to both Java and
+	 * JavaScript syntax as it is validated on both the server and the client.
 	 * 
 	 * @return fileMessageMimeTypeRegex
 	 **/
-	@ApiModelProperty(value = "A regular expression for the allowed MIME types of file messages the action will be available for. The default is null, which means the action will be available for file messages of all types.")
+	@ApiModelProperty(value = "A regular expression that matches all MIME types of file messages the action can be carried out on. The regular expression must conform to both Java and JavaScript syntax as it is validated on both the server and the client.")
 	public String getFileMessageMimeTypeRegex() {
 		return fileMessageMimeTypeRegex;
 	}

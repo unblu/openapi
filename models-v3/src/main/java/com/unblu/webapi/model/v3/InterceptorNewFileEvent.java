@@ -30,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 	InterceptorNewFileEvent.JSON_PROPERTY_DOWNLOAD_LINK,
 	InterceptorNewFileEvent.JSON_PROPERTY_SOURCE,
 	InterceptorNewFileEvent.JSON_PROPERTY_PERSON,
+	InterceptorNewFileEvent.JSON_PROPERTY_CONVERSATION_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class InterceptorNewFileEvent {
@@ -109,6 +110,10 @@ public class InterceptorNewFileEvent {
 	public static final String JSON_PROPERTY_PERSON = "person";
 	@JsonProperty(JSON_PROPERTY_PERSON)
 	private PersonData person = null;
+
+	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
+	private String conversationId;
 
 	public InterceptorNewFileEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -319,6 +324,25 @@ public class InterceptorNewFileEvent {
 		this.person = person;
 	}
 
+	public InterceptorNewFileEvent conversationId(String conversationId) {
+		this.conversationId = conversationId;
+		return this;
+	}
+
+	/**
+	 * The ID of the conversation where the file is being uploaded. Depending on the source, this may be null.
+	 * 
+	 * @return conversationId
+	 **/
+	@ApiModelProperty(value = "The ID of the conversation where the file is being uploaded. Depending on the source, this may be null.")
+	public String getConversationId() {
+		return conversationId;
+	}
+
+	public void setConversationId(String conversationId) {
+		this.conversationId = conversationId;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -338,12 +362,13 @@ public class InterceptorNewFileEvent {
 				Objects.equals(this.length, interceptorNewFileEvent.length) &&
 				Objects.equals(this.downloadLink, interceptorNewFileEvent.downloadLink) &&
 				Objects.equals(this.source, interceptorNewFileEvent.source) &&
-				Objects.equals(this.person, interceptorNewFileEvent.person);
+				Objects.equals(this.person, interceptorNewFileEvent.person) &&
+				Objects.equals(this.conversationId, interceptorNewFileEvent.conversationId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, apiToken, name, mimeType, length, downloadLink, source, person);
+		return Objects.hash($type, timestamp, eventType, accountId, apiToken, name, mimeType, length, downloadLink, source, person, conversationId);
 	}
 
 	@Override
@@ -361,6 +386,7 @@ public class InterceptorNewFileEvent {
 		sb.append("    downloadLink: ").append(toIndentedString(downloadLink)).append("\n");
 		sb.append("    source: ").append(toIndentedString(source)).append("\n");
 		sb.append("    person: ").append(toIndentedString(person)).append("\n");
+		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a conversation is ended
+ * An event triggered every time a conversation is ended (all participants have finished their offboarding).
  */
-@ApiModel(description = "An event triggered every time a conversation is ended")
+@ApiModel(description = "An event triggered every time a conversation is ended (all participants have finished their offboarding).")
 
 @JsonPropertyOrder({
 	ConversationEndedEvent.JSON_PROPERTY_$_TYPE,
@@ -24,6 +24,9 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationEndedEvent.JSON_PROPERTY_EVENT_TYPE,
 	ConversationEndedEvent.JSON_PROPERTY_ACCOUNT_ID,
 	ConversationEndedEvent.JSON_PROPERTY_CONVERSATION,
+	ConversationEndedEvent.JSON_PROPERTY_END_REASON,
+	ConversationEndedEvent.JSON_PROPERTY_END_PERSON,
+	ConversationEndedEvent.JSON_PROPERTY_END_COMMENT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationEndedEvent {
@@ -79,6 +82,18 @@ public class ConversationEndedEvent {
 	public static final String JSON_PROPERTY_CONVERSATION = "conversation";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION)
 	private ConversationData conversation = null;
+
+	public static final String JSON_PROPERTY_END_REASON = "endReason";
+	@JsonProperty(JSON_PROPERTY_END_REASON)
+	private EConversationEndReason endReason;
+
+	public static final String JSON_PROPERTY_END_PERSON = "endPerson";
+	@JsonProperty(JSON_PROPERTY_END_PERSON)
+	private PersonData endPerson = null;
+
+	public static final String JSON_PROPERTY_END_COMMENT = "endComment";
+	@JsonProperty(JSON_PROPERTY_END_COMMENT)
+	private String endComment;
 
 	public ConversationEndedEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -175,6 +190,63 @@ public class ConversationEndedEvent {
 		this.conversation = conversation;
 	}
 
+	public ConversationEndedEvent endReason(EConversationEndReason endReason) {
+		this.endReason = endReason;
+		return this;
+	}
+
+	/**
+	 * Get endReason
+	 * 
+	 * @return endReason
+	 **/
+	@ApiModelProperty(value = "")
+	public EConversationEndReason getEndReason() {
+		return endReason;
+	}
+
+	public void setEndReason(EConversationEndReason endReason) {
+		this.endReason = endReason;
+	}
+
+	public ConversationEndedEvent endPerson(PersonData endPerson) {
+		this.endPerson = endPerson;
+		return this;
+	}
+
+	/**
+	 * Get endPerson
+	 * 
+	 * @return endPerson
+	 **/
+	@ApiModelProperty(value = "")
+	public PersonData getEndPerson() {
+		return endPerson;
+	}
+
+	public void setEndPerson(PersonData endPerson) {
+		this.endPerson = endPerson;
+	}
+
+	public ConversationEndedEvent endComment(String endComment) {
+		this.endComment = endComment;
+		return this;
+	}
+
+	/**
+	 * The comment provided when ending the conversation. May be null.
+	 * 
+	 * @return endComment
+	 **/
+	@ApiModelProperty(value = "The comment provided when ending the conversation. May be null.")
+	public String getEndComment() {
+		return endComment;
+	}
+
+	public void setEndComment(String endComment) {
+		this.endComment = endComment;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -188,12 +260,15 @@ public class ConversationEndedEvent {
 				Objects.equals(this.timestamp, conversationEndedEvent.timestamp) &&
 				Objects.equals(this.eventType, conversationEndedEvent.eventType) &&
 				Objects.equals(this.accountId, conversationEndedEvent.accountId) &&
-				Objects.equals(this.conversation, conversationEndedEvent.conversation);
+				Objects.equals(this.conversation, conversationEndedEvent.conversation) &&
+				Objects.equals(this.endReason, conversationEndedEvent.endReason) &&
+				Objects.equals(this.endPerson, conversationEndedEvent.endPerson) &&
+				Objects.equals(this.endComment, conversationEndedEvent.endComment);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversation);
+		return Objects.hash($type, timestamp, eventType, accountId, conversation, endReason, endPerson, endComment);
 	}
 
 	@Override
@@ -205,6 +280,9 @@ public class ConversationEndedEvent {
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    conversation: ").append(toIndentedString(conversation)).append("\n");
+		sb.append("    endReason: ").append(toIndentedString(endReason)).append("\n");
+		sb.append("    endPerson: ").append(toIndentedString(endPerson)).append("\n");
+		sb.append("    endComment: ").append(toIndentedString(endComment)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
