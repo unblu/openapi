@@ -1,5 +1,5 @@
 :module-name: Models v3
-:maven-artifact-id: model-v3
+:maven-artifact-id: models-v3
 
 ifndef::maven-group-id[]
 :maven-group-id: com.unblu.openapi
