@@ -1,0 +1,39 @@
+:module-name: Jersey Client v4
+:maven-artifact-id: jersey3-client-v4
+
+ifndef::maven-group-id[]
+:maven-group-id: com.unblu.openapi
+endif::[]
+ifndef::artifacts-version[]
+:artifacts-version-mvn: ${last-stable-version}
+endif::[]
+ifdef::artifacts-version[]
+:artifacts-version-mvn: {artifacts-version}
+endif::[]
+
+= {module-name}
+
+This project contains a client to perform HTTP request against the Web-API of the collaboration server.
+
+This is based on the https://eclipse-ee4j.github.io/jersey/[jersey project], version `3.x.x`.
+It requires the git-link:model-v4/[model v4] library
+
+It requires Java 11 to run.
+
+It is compatible with Spring 6 / Spring Boot 3 / Quarkus 3.
+
+[source, xml, subs="verbatim,attributes"]
+.Maven coordinates of the '{module-name}' project  (xml notation)
+----
+<dependency>
+  <groupId>{maven-group-id}</groupId>
+  <artifactId>{maven-artifact-id}</artifactId>
+  <version>{artifacts-version-mvn}</version>
+</dependency>
+----
+
+[source, xml, subs="verbatim,attributes"]
+.Maven coordinates of the '{module-name}' project  (single line notation)
+----
+{maven-group-id}:{maven-artifact-id}:{artifacts-version-mvn}
+----

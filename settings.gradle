@@ -1,6 +1,5 @@
 rootProject.name = 'unblu-openapi'
 enableFeaturePreview("VERSION_CATALOGS")
 
-include(':models-v3')
-include(':jersey-client-v3')
-include(':jersey3-client-v3')
+include(':models-v4')
+include(':jersey3-client-v4')

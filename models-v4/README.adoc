@@ -1,0 +1,34 @@
+:module-name: Models v4
+:maven-artifact-id: models-v4
+
+ifndef::maven-group-id[]
+:maven-group-id: com.unblu.openapi
+endif::[]
+ifndef::artifacts-version[]
+:artifacts-version-mvn: ${last-stable-version}
+endif::[]
+ifdef::artifacts-version[]
+:artifacts-version-mvn: {artifacts-version}
+endif::[]
+
+= {module-name}
+
+This project contains java classes corresponding to the JSON Schemas used as request body or response body in the Web-API's endpoints and as body of the Webhook events.
+
+The model library can be used with different clients such as the git-link:jersey3-client-v4/[Jersey 3.x.x client v4]
+
+[source, xml, subs="verbatim,attributes"]
+.Maven coordinates of the '{module-name}' project  (xml notation)
+----
+<dependency>
+  <groupId>{maven-group-id}</groupId>
+  <artifactId>{maven-artifact-id}</artifactId>
+  <version>{artifacts-version-mvn}</version>
+</dependency>
+----
+
+[source, xml, subs="verbatim,attributes"]
+.Maven coordinates of the '{module-name}' project  (single line notation)
+----
+{maven-group-id}:{maven-artifact-id}:{artifacts-version-mvn}
+----

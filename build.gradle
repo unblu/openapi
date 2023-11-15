@@ -47,11 +47,7 @@ subprojects {
 
         compileJava.options.encoding = "UTF-8"
         toolchain {
-            if(project.name == 'jersey3-client-v3') {
-                languageVersion = JavaLanguageVersion.of(11)
-            } else {
-                languageVersion = JavaLanguageVersion.of(8)
-            }
+            languageVersion = JavaLanguageVersion.of(11)
         }
     }
 

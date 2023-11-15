@@ -21,11 +21,9 @@ TIP: Do you want to improve this page? Please git-link:self[edit it on GitHub, e
 
 The OpenAPI specification which leads the generation of the source file can be found at the root of the repository: git-link:openapi.yaml[openapi.yaml]
 
-include::../models-v3/README.adoc[leveloffset=3]
+include::../models-v4/README.adoc[leveloffset=3]
 
-include::../jersey-client-v3/README.adoc[leveloffset=3]
-
-include::../jersey3-client-v3/README.adoc[leveloffset=3]
+include::../jersey3-client-v4/README.adoc[leveloffset=3]
 
 
 == Download
