@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.37.0
+  version: 7.38.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -26,6 +26,7 @@ tags:
   description: "With this service, the avatar pictures can be managed."
 - name: Bots
   description: Service to manage all kind of bots. Additionally the bots use this service to interact with a conversation/dialog.
+- name: Call
 - name: CannedResponses
   description: "Service to manage canned responses.<br> The canned responses a user can edit and the once he can use for chat can differ. The once he can edit are depending on his role. The ones he can use in a chat depends on the team setup and his role. See the following policies for the list of chat messages available for chat: <ul> <li>All canned responses of the own user.</li> <li>All canned responses of the team cascade (the users team and all of the parent teams)</li> <li>All canned responses of the sub-teams if role is: SUPERVISOR or higher.</li> <li>All canned responses of all teams if role is: ADMIN or higher.</li> <li>All canned responses of the users account.</li> </ul> In comparison to this the creation/editing/deleting of canned responses follow the following policies: <ul> <li>All canned responses of the own user.</li> <li>All canned responses of the sub-teams if role is: SUPERVISOR or higher.</li> <li>All canned responses of all teams if role is: ADMIN or higher.</li> <li>All canned responses of the users account if role is: ADMIN or higher.</li> <li></li> </ul>"
 - name: CannedResponsesUsage
@@ -3017,6 +3018,60 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /call/read:
+    get:
+      tags:
+      - Call
+      summary: read
+      description: read operation
+      operationId: callRead
+      parameters:
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /call/search:
+    post:
+      tags:
+      - Call
+      summary: search
+      description: Search for call logs in the current account
+      operationId: callSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallQuery'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /cannedresponses/create:
     post:
       tags:
@@ -11333,6 +11388,132 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.call.accepted:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.accepted
+              description: An event triggered every time a call is accepted and the connection phase of the participant accepting the call starts. A call is accepted when the first participant answers the call.
+              operationId: conversationCallAcceptedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallAcceptedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.dial_in_publication.ended:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.dial_in_publication.ended
+              description: An event triggered when a dial-in publication for a call ends
+              operationId: conversationCallDialInPublicationEndedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallDialInPublicationEndedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.dial_in_publication.started:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.dial_in_publication.started
+              description: An event triggered when a dial-in publication for a call starts
+              operationId: conversationCallDialInPublicationStartedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallDialInPublicationStartedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.ended:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.ended
+              description: An event triggered every time a call ends
+              operationId: conversationCallEndedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallEndedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.established:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.established
+              description: An event triggered every time a call is established between at least two participants
+              operationId: conversationCallEstablishedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallEstablishedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.initiated:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.initiated
+              description: An event triggered every time a new call is initiated
+              operationId: conversationCallInitiatedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallInitiatedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.participant.connected:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.participant.connected
+              description: An event triggered every time a participant is connected to a call
+              operationId: conversationCallParticipantConnectedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallParticipantConnectedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.participant.joined:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.participant.joined
+              description: An event triggered every time a participant joins a call. The event is also triggered when a participant initiates a call.
+              operationId: conversationCallParticipantJoinedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallParticipantJoinedEvent'
+              responses:
+                "200":
+                  description: OK
+        conversation.call.participant.left:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.call.participant.left
+              description: "An event triggered every time a participant leaves a call. This can be because they hung up, they were removed from the call, or the conversation ended during the call."
+              operationId: conversationCallParticipantLeftCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CallParticipantLeftEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.cannedresponse_used:
           '{$request.body#/endpoint}':
             post:
@@ -12298,6 +12479,18 @@ components:
           type: integer
           format: int64
           description: Unix timestamp after which the invitation is no longer valid
+    AcceptTimestampCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AcceptTimestampCallSearchFilter
+          enum:
+          - AcceptTimestampCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     Account:
       type: object
       description: Model of an account. The contact and the billing address can be directly resolved when using the expand feature.
@@ -14536,6 +14729,683 @@ components:
         dialogToken:
           type: string
           description: The token that belongs to the bot's dialog
+    Call:
+      type: object
+      description: Call metadata class
+      properties:
+        $_type:
+          type: string
+          default: Call
+          enum:
+          - Call
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        conversationId:
+          type: string
+          description: Conversation ID the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: The call initiator's person ID
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        initiationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was initiated
+        acceptTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was first accepted by a participant and that participant's connection phase started
+        establishedTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when at least two participants successfully connected to the call service provider
+        endTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call ended
+        endReason:
+          $ref: '#/components/schemas/ECallEndReason'
+        participations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallParticipation'
+    CallAcceptedEvent:
+      type: object
+      description: An event triggered every time a call is accepted and the connection phase of the participant accepting the call starts. A call is accepted when the first participant answers the call.
+      properties:
+        $_type:
+          type: string
+          default: CallAcceptedEvent
+          enum:
+          - CallAcceptedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        initiationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was initiated
+        acceptTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was first accepted by a participant and that particpant's connection phase started
+    CallDialInPublication:
+      type: object
+      description: Call dial-in publication metadata class
+      properties:
+        $_type:
+          type: string
+          default: CallDialInPublication
+          enum:
+          - CallDialInPublication
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        type:
+          $ref: '#/components/schemas/ECallPublicationType'
+        dialInServiceProviderType:
+          $ref: '#/components/schemas/EDialInServiceProvider'
+        dialInId:
+          type: string
+          description: Dial-in ID of the dial-in service provider
+        dialInNumber:
+          type: string
+          description: Dial-in phone number used for this publication
+        startTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the dial-in publication started
+        endTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the dial-in publication ended
+    CallDialInPublicationEndedEvent:
+      type: object
+      description: An event triggered when a dial-in publication for a call ends
+      properties:
+        $_type:
+          type: string
+          default: CallDialInPublicationEndedEvent
+          enum:
+          - CallDialInPublicationEndedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        personId:
+          type: string
+          description: Person ID representing the participant
+        dialInServiceProviderType:
+          $ref: '#/components/schemas/EDialInServiceProvider'
+        dialInId:
+          type: string
+          description: Dial-in ID of dial-in service provider
+        dialInNumber:
+          type: string
+          description: Dial-in phone number used for the publication
+        startTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the dial-in publication started
+        endTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the dial-in publication ended
+    CallDialInPublicationStartedEvent:
+      type: object
+      description: An event triggered when a dial-in publication for a call starts
+      properties:
+        $_type:
+          type: string
+          default: CallDialInPublicationStartedEvent
+          enum:
+          - CallDialInPublicationStartedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        personId:
+          type: string
+          description: Person ID representing the participant
+        dialInServiceProviderType:
+          $ref: '#/components/schemas/EDialInServiceProvider'
+        dialInId:
+          type: string
+          description: Dial-in ID of dial-in service provider
+        dialInNumber:
+          type: string
+          description: Dial-in phone number used for the publication
+        startTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the dial-in publication started
+    CallEndedEvent:
+      type: object
+      description: An event triggered every time a call ends
+      properties:
+        $_type:
+          type: string
+          default: CallEndedEvent
+          enum:
+          - CallEndedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        initiationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was initiated
+        acceptTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was first accepted by a participant and that particpant's connection phase started
+        establishedTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when at least two participants successfully connected to the call service provider
+        endTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call ended
+        endReason:
+          $ref: '#/components/schemas/ECallEndReason'
+    CallEstablishedEvent:
+      type: object
+      description: An event triggered every time a call is established between at least two participants
+      properties:
+        $_type:
+          type: string
+          default: CallEstablishedEvent
+          enum:
+          - CallEstablishedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        initiationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was initiated
+        acceptTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was first accepted by a participant and that particpant's connection phase started
+        establishedTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when at least two participants successfully connected to the call service provider
+    CallInitiatedEvent:
+      type: object
+      description: An event triggered every time a new call is initiated
+      properties:
+        $_type:
+          type: string
+          default: CallInitiatedEvent
+          enum:
+          - CallInitiatedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        initiationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was initiated
+    CallMediaPublication:
+      type: object
+      description: Call media publication metadata class
+      properties:
+        $_type:
+          type: string
+          default: CallMediaPublication
+          enum:
+          - CallMediaPublication
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        type:
+          $ref: '#/components/schemas/ECallPublicationType'
+        publicationType:
+          $ref: '#/components/schemas/EMediaPublicationType'
+        publicationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the media publication started
+    CallOrderBy:
+      type: object
+      description: Call orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: CallOrderBy
+          enum:
+          - CallOrderBy
+        field:
+          $ref: '#/components/schemas/ECallOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    CallParticipantConnectedEvent:
+      type: object
+      description: An event triggered every time a participant is connected to a call
+      properties:
+        $_type:
+          type: string
+          default: CallParticipantConnectedEvent
+          enum:
+          - CallParticipantConnectedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        personId:
+          type: string
+          description: Person ID representing the participant
+        joinedTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) when the participant joined the call and that particpant's connection phase started. Null if the participant never answered the call. For the participant initiating the call, this will be the same as the initiationTimestamp."
+        connectedTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the participant connected to the call. Null if the participant never answered the call.
+    CallParticipantJoinedEvent:
+      type: object
+      description: An event triggered every time a participant joins a call. The event is also triggered when a participant initiates a call.
+      properties:
+        $_type:
+          type: string
+          default: CallParticipantJoinedEvent
+          enum:
+          - CallParticipantJoinedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        personId:
+          type: string
+          description: Person ID representing the participant
+        joinedTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) when the participant joined the call and that particpant's connection phase started. Null if the participant never answered the call. For the participant initiating the call, this will be the same as the initiationTimestamp."
+    CallParticipantLeftEvent:
+      type: object
+      description: "An event triggered every time a participant leaves a call. This can be because they hung up, they were removed from the call, or the conversation ended during the call."
+      properties:
+        $_type:
+          type: string
+          default: CallParticipantLeftEvent
+          enum:
+          - CallParticipantLeftEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the call belongs to
+        serviceProviderCallId:
+          type: string
+          description: The service provider call ID for the call
+        serviceProviderType:
+          $ref: '#/components/schemas/ECallServiceProvider'
+        initiatorPersonId:
+          type: string
+          description: Person ID initiating the call
+        callType:
+          $ref: '#/components/schemas/ECallType'
+        personId:
+          type: string
+          description: Person ID representing the participant
+        joinedTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) when the participant joined the call and that particpant's connection phase started. Null if the participant never answered the call. For the participant initiating the call, this will be the same as the initiationTimestamp."
+        connectedTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the participant connected to the call. Null if the participant never answered the call.
+        leftTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the participant left the call
+        leftReason:
+          $ref: '#/components/schemas/ECallParticipationLeftReason'
+    CallParticipation:
+      type: object
+      description: Call participation metadata class
+      properties:
+        $_type:
+          type: string
+          default: CallParticipation
+          enum:
+          - CallParticipation
+        id:
+          type: string
+          description: Unique id of the entity. When creating an entity this property can be omitted as it will be generated by the server anyway.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is stored the first time in the system. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        joinedTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the person has joined
+        leftTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the person has left (may not be present or -1 if still online)
+        personId:
+          type: string
+          description: Person id representing the participant
+        ringingTimestamp:
+          type: integer
+          format: int64
+          description: utc timestamp when this call participation actually starts ringing
+        connectedTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the participant connected to the call
+        leftReason:
+          $ref: '#/components/schemas/ECallParticipationLeftReason'
+        publications:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallPublication'
+    CallPublication:
+      oneOf:
+      - $ref: '#/components/schemas/CallDialInPublication'
+      - $ref: '#/components/schemas/CallMediaPublication'
+      discriminator:
+        propertyName: type
+        mapping:
+          DIAL_IN: '#/components/schemas/CallDialInPublication'
+          MEDIA: '#/components/schemas/CallMediaPublication'
+    CallQuery:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CallQuery
+          enum:
+          - CallQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/CallSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/CallOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    CallResult:
+      type: object
+      description: Container to return list of call log(s)
+      properties:
+        $_type:
+          type: string
+          default: CallResult
+          enum:
+          - CallResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If more items are present on the server, this value can be used as offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/Call'
+    CallSearchFilter:
+      description: AbstractCallFilter item.
+      oneOf:
+      - $ref: '#/components/schemas/ConversationIdCallSearchFilter'
+      - $ref: '#/components/schemas/InitiatorPersonIdCallSearchFilter'
+      - $ref: '#/components/schemas/ServiceProviderTypeCallSearchFilter'
+      - $ref: '#/components/schemas/ServiceProviderCallIdCallSearchFilter'
+      - $ref: '#/components/schemas/InitiationTimestampCallSearchFilter'
+      - $ref: '#/components/schemas/AcceptTimestampCallSearchFilter'
+      - $ref: '#/components/schemas/EstablishedTimestampCallSearchFilter'
+      - $ref: '#/components/schemas/EndTimestampCallSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          ACCEPT_TIMESTAMP: '#/components/schemas/AcceptTimestampCallSearchFilter'
+          CONVERSATION_ID: '#/components/schemas/ConversationIdCallSearchFilter'
+          END_TIMESTAMP: '#/components/schemas/EndTimestampCallSearchFilter'
+          ESTABLISHED_TIMESTAMP: '#/components/schemas/EstablishedTimestampCallSearchFilter'
+          INITIATION_TIMESTAMP: '#/components/schemas/InitiationTimestampCallSearchFilter'
+          INITIATOR_PERSON_ID: '#/components/schemas/InitiatorPersonIdCallSearchFilter'
+          SERVICE_PROVIDER_CALL_ID: '#/components/schemas/ServiceProviderCallIdCallSearchFilter'
+          SERVICE_PROVIDER_TYPE: '#/components/schemas/ServiceProviderTypeCallSearchFilter'
+    CallServiceProviderOperator:
+      oneOf:
+      - $ref: '#/components/schemas/EqualsCallServiceProviderOperator'
+      - $ref: '#/components/schemas/NotEqualsCallServiceProviderOperator'
+      discriminator:
+        propertyName: type
+        mapping:
+          EQUALS: '#/components/schemas/EqualsCallServiceProviderOperator'
+          NOT_EQUALS: '#/components/schemas/NotEqualsCallServiceProviderOperator'
     CannedResponse:
       type: object
       description: Model of canned response. Canned responses are predefined messages for chat responses.
@@ -14682,12 +15552,16 @@ components:
       - $ref: '#/components/schemas/ModificationTimestampCannedResponseSearchFilter'
       - $ref: '#/components/schemas/TextCannedResponseSearchFilter'
       - $ref: '#/components/schemas/TitleCannedResponseSearchFilter'
+      - $ref: '#/components/schemas/OwnerIdCannedResponseSearchFilter'
+      - $ref: '#/components/schemas/OwnerTypeCannedResponseSearchFilter'
       discriminator:
         propertyName: field
         mapping:
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampCannedResponseSearchFilter'
           KEY: '#/components/schemas/KeyCannedResponseSearchFilter'
           MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampCannedResponseSearchFilter'
+          OWNER_ID: '#/components/schemas/OwnerIdCannedResponseSearchFilter'
+          OWNER_TYPE: '#/components/schemas/OwnerTypeCannedResponseSearchFilter'
           TEXT: '#/components/schemas/TextCannedResponseSearchFilter'
           TITLE: '#/components/schemas/TitleCannedResponseSearchFilter'
     CannedResponseUsage:
@@ -15545,7 +16419,7 @@ components:
           description: "The total size in bytes of the file, which was shared/sent in the conversation. Note that it is not always set."
         downloadLink:
           type: string
-          description: The url link to download the file. Note that the access must be done from an authenticated user with admin rights. This may either be done using basic authentication or a valid session cookie.
+          description: "The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
         creationTimestamp:
           type: integer
           format: int64
@@ -15791,6 +16665,18 @@ components:
           STATE: '#/components/schemas/StateConversationHistorySearchFilter'
           TOKBOX_SESSION_ID: '#/components/schemas/TokboxSessionIdConversationHistorySearchFilter'
           TOPIC: '#/components/schemas/TopicConversationHistorySearchFilter'
+    ConversationIdCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationIdCallSearchFilter
+          enum:
+          - ConversationIdCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     ConversationIdCannedResponseUsageSearchFilter:
       type: object
       properties:
@@ -16375,6 +17261,11 @@ components:
           $ref: '#/components/schemas/ERecordingEndReason'
         recordingType:
           $ref: '#/components/schemas/ERecordingType'
+        callIds:
+          type: array
+          description: A list of call IDs held during this recording
+          items:
+            type: string
     ConversationRecordingStartedEvent:
       type: object
       description: Event emitted when a conversation recording is started
@@ -18758,6 +19649,45 @@ components:
       - ONBOARDING
       - REBOARDING
       - OFFBOARDING
+    ECallEndReason:
+      type: string
+      description: The reason a call has ended
+      enum:
+      - NOT_ANSWERED
+      - ABORTED_BY_INITIATOR
+      - DECLINED
+      - DECLINED_BECAUSE_UNAVAILABLE
+      - LAST_MANDATORY_PARTICIPANT_LEFT
+      - CONVERSATION_ENDED
+      - RECORDING_DENIED
+      - SYSTEM_SHUTDOWN
+      - UNKNOWN
+      x-enum-descriptions:
+      - "NOT_ANSWERED: The call was not answered"
+      - "ABORTED_BY_INITIATOR: The initiator aborted the call while it was still ringing"
+      - "DECLINED: The call was declined"
+      - "DECLINED_BECAUSE_UNAVAILABLE: The call was declined because all conversation participants called were unavailable"
+      - "LAST_MANDATORY_PARTICIPANT_LEFT: The call ended because the last mandatory participant left"
+      - "CONVERSATION_ENDED: The call ended because the conversation ended"
+      - "RECORDING_DENIED: The call ended because conversation recording was denied"
+      - "SYSTEM_SHUTDOWN: The call ended because the collaboration server pod was shut down"
+      - "UNKNOWN: The call ended for another reason"
+    ECallOrderByField:
+      type: string
+      enum:
+      - ID
+      - CONVERSATION_ID
+      - INITIATION_TIMESTAMP
+      - ACCEPT_TIMESTAMP
+      - ESTABLISHED_TIMESTAMP
+      - END_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "CONVERSATION_ID: Sort by the 'conversationId' attribute"
+      - "INITIATION_TIMESTAMP: Sort by the 'initiationTimestamp' attribute"
+      - "ACCEPT_TIMESTAMP: Sort by the 'acceptTimestamp' attribute"
+      - "ESTABLISHED_TIMESTAMP: Sort by the 'establishedTimestamp' attribute"
+      - "END_TIMESTAMP: Sort by the 'endTimestamp' attribute"
     ECallParticipationEndReason:
       type: string
       description: Determines the reason why the participation on a call ended.
@@ -18773,6 +19703,76 @@ components:
       - "MISSED_BECAUSE_UNAVAILABLE: The participation ended because nobody was available to answer the call"
       - "TERMINATED_BY_PARTICIPANT: The participation ended normally"
       - "TERMINATED_BY_SYSTEM_ABORT: The participation ended because the system aborted the call"
+    ECallParticipationLeftReason:
+      type: string
+      description: The reason a participant left a call they had joined earlier
+      enum:
+      - HANG_UP
+      - MISSED_BECAUSE_TIMEOUT
+      - MISSED_BECAUSE_TERMINATED
+      - CALL_ENDED
+      - CALL_ABORTED
+      - DIAL_IN_ENDED
+      - REMOVED
+      - SYSTEM_ABORT
+      - UNKNOWN
+      x-enum-descriptions:
+      - "HANG_UP: The participant hung up"
+      - "MISSED_BECAUSE_TIMEOUT: The participant missed the call because they didn't answer it"
+      - "MISSED_BECAUSE_TERMINATED: The participant missed the call because the caller ended it before they could answer it"
+      - "CALL_ENDED: The participation ended because the call ended"
+      - "CALL_ABORTED: The participation ended because the call was aborted before they could answer it"
+      - "DIAL_IN_ENDED: The participant hung up the dialed-in phone"
+      - "REMOVED: The participant was removed from the conversation"
+      - "SYSTEM_ABORT: The participation ended because the system aborted the call"
+      - "UNKNOWN: The participant left for unknown reason"
+    ECallPublicationType:
+      type: string
+      description: The type of publication the call participant is using
+      enum:
+      - DIAL_IN
+      - MEDIA
+      x-enum-descriptions:
+      - "DIAL_IN: The participant is publishing their audio content through a call dial in"
+      - "MEDIA: The participant is publishing their media content (audio or audio and video) through the computer"
+    ECallSearchFilterField:
+      type: string
+      enum:
+      - CONVERSATION_ID
+      - SERVICE_PROVIDER_TYPE
+      - SERVICE_PROVIDER_CALL_ID
+      - INITIATION_TIMESTAMP
+      - ACCEPT_TIMESTAMP
+      - ESTABLISHED_TIMESTAMP
+      - END_TIMESTAMP
+      - INITIATOR_PERSON_ID
+      x-enum-descriptions:
+      - "CONVERSATION_ID: Filter by the 'creationTimestamp' attribute"
+      - "SERVICE_PROVIDER_TYPE: Filter by the 'serviceProviderType' attribute"
+      - "SERVICE_PROVIDER_CALL_ID: Filter by the 'serviceProviderCallId' attribute"
+      - "INITIATION_TIMESTAMP: Filter by the 'initiationTimestamp' attribute"
+      - "ACCEPT_TIMESTAMP: Filter by the 'acceptTimestamp' attribute"
+      - "ESTABLISHED_TIMESTAMP: Filter by the 'establishedTimestamp' attribute"
+      - "END_TIMESTAMP: Filter by the 'endTimestamp' attribute"
+      - "INITIATOR_PERSON_ID: Filter by the 'initiatorPersonId' attribute"
+    ECallServiceProvider:
+      type: string
+      enum:
+      - ACS
+      - LIVEKIT
+      - OPENTOK
+      x-enum-descriptions:
+      - "ACS: The call service was provided by ACS"
+      - "LIVEKIT: The call service was provided by LiveKit"
+      - "OPENTOK: The call service was provided by Vonage"
+    ECallServiceProviderOperatorType:
+      type: string
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      x-enum-descriptions:
+      - "EQUALS: Check if the value is equal to the one provided in the operator"
+      - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
     ECallState:
       type: string
       description: State of the call
@@ -18823,12 +19823,16 @@ components:
       - KEY
       - TITLE
       - TEXT
+      - OWNER_ID
+      - OWNER_TYPE
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
       - "KEY: Filter by the 'key' attribute"
       - "TITLE: Filter by the 'title' attribute"
       - "TEXT: Filter by the 'text' attribute"
+      - "OWNER_ID: Filter by the 'ownerId' attribute"
+      - "OWNER_TYPE: Filter by the 'ownerType' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     ECannedResponseUsageOrderByField:
@@ -19558,6 +20562,12 @@ components:
       x-enum-descriptions:
       - "MOBILE: Mobile phone / tablet / etc"
       - "DESKTOP: Desktop computer"
+    EDialInServiceProvider:
+      type: string
+      enum:
+      - VONAGE
+      x-enum-descriptions:
+      - "VONAGE: The dial-in service was provided via VONAGE"
     EDialogBotOrderByField:
       type: string
       enum:
@@ -20011,6 +21021,19 @@ components:
       - "LOWER_THAN: Check if the value is lower than the one provided in the operator"
       - "IN_RANGE: Check if the value is in the range of the provided values. Results equal to the provided values are included."
       - "NOT_IN_RANGE: Check if the value is NOT in the range of the provided values. Results equal to the provided values are not included."
+    EMediaPublicationType:
+      type: string
+      description: The media being published during the participation of a call
+      enum:
+      - AUDIO
+      - VIDEO
+      - AUDIO_VIDEO
+      - NONE
+      x-enum-descriptions:
+      - "AUDIO: Only audio is being shared (typically through a microphone)"
+      - "VIDEO: Only video is being shared (typically through a camera)"
+      - "AUDIO_VIDEO: Both audio and video are being shared (typically microphone & camera)"
+      - "NONE: No media is being published, the participant is only watching / listening to the call"
     EMessageInterceptionPoint:
       type: string
       description: Identifies the point where an interceptor intercepts messages
@@ -20559,9 +21582,11 @@ components:
     ERecordingStatus:
       type: string
       enum:
+      - INITIALIZING
       - PENDING
       - COMPLETE
       x-enum-descriptions:
+      - "INITIALIZING: Recording initializing"
       - "PENDING: Recording pending"
       - "COMPLETE: Recording completed"
     ERecordingType:
@@ -20953,6 +21978,18 @@ components:
           $ref: '#/components/schemas/EConversationSearchFilterField'
         operator:
           $ref: '#/components/schemas/ConversationEndReasonOperator'
+    EndTimestampCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: EndTimestampCallSearchFilter
+          enum:
+          - EndTimestampCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     EndTimestampConversationHistorySearchFilter:
       type: object
       properties:
@@ -21108,6 +22145,18 @@ components:
           $ref: '#/components/schemas/EBooleanOperatorType'
         value:
           type: boolean
+    EqualsCallServiceProviderOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: EqualsCallServiceProviderOperator
+          enum:
+          - EqualsCallServiceProviderOperator
+        type:
+          $ref: '#/components/schemas/ECallServiceProviderOperatorType'
+        value:
+          $ref: '#/components/schemas/ECallServiceProvider'
     EqualsConversationEndReasonOperator:
       type: object
       properties:
@@ -21393,6 +22442,18 @@ components:
           $ref: '#/components/schemas/EDeputyRelationshipSearchFilterField'
         operator:
           $ref: '#/components/schemas/DeputyDelegationEscalationLevelOperator'
+    EstablishedTimestampCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: EstablishedTimestampCallSearchFilter
+          enum:
+          - EstablishedTimestampCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     EventNameWebhookCallLogSearchFilter:
       type: object
       properties:
@@ -21837,7 +22898,7 @@ components:
           description: "The amount of data that was already uploaded to the server. Does not need to be set, when the file is send to the collaboration server"
         downloadLink:
           type: string
-          description: The url link to download the file. Note that the access must be done from an authenticated user with admin rights. This may either be done using basic authentication or a valid session cookie.
+          description: "The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
         quickReplies:
           type: array
           description: Optional quick replies which will be displayed above the chat input as a possible response options
@@ -22668,6 +23729,30 @@ components:
           IN: '#/components/schemas/InInitialEngagementTypeOperator'
           NOT_EQUALS: '#/components/schemas/NotEqualsInitialEngagementTypeOperator'
           NOT_IN: '#/components/schemas/NotInInitialEngagementTypeOperator'
+    InitiationTimestampCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: InitiationTimestampCallSearchFilter
+          enum:
+          - InitiationTimestampCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    InitiatorPersonIdCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: InitiatorPersonIdCallSearchFilter
+          enum:
+          - InitiatorPersonIdCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     InteractionNameAuditChangeSearchFilter:
       type: object
       properties:
@@ -24621,6 +25706,18 @@ components:
           $ref: '#/components/schemas/EBooleanOperatorType'
         value:
           type: boolean
+    NotEqualsCallServiceProviderOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotEqualsCallServiceProviderOperator
+          enum:
+          - NotEqualsCallServiceProviderOperator
+        type:
+          $ref: '#/components/schemas/ECallServiceProviderOperatorType'
+        value:
+          $ref: '#/components/schemas/ECallServiceProvider'
     NotEqualsConversationEndReasonOperator:
       type: object
       properties:
@@ -25260,6 +26357,18 @@ components:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    OwnerIdCannedResponseSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: OwnerIdCannedResponseSearchFilter
+          enum:
+          - OwnerIdCannedResponseSearchFilter
+        field:
+          $ref: '#/components/schemas/ECannedResponseSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/IdOperator'
     OwnerTypeAuditChangeSearchFilter:
       type: object
       properties:
@@ -25270,6 +26379,18 @@ components:
           - OwnerTypeAuditChangeSearchFilter
         field:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/PropertyOwnerTypeOperator'
+    OwnerTypeCannedResponseSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: OwnerTypeCannedResponseSearchFilter
+          enum:
+          - OwnerTypeCannedResponseSearchFilter
+        field:
+          $ref: '#/components/schemas/ECannedResponseSearchFilterField'
         operator:
           $ref: '#/components/schemas/PropertyOwnerTypeOperator'
     ParentIdTeamSearchFilter:
@@ -27363,6 +28484,30 @@ components:
           $ref: '#/components/schemas/EMessageSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
+    ServiceProviderCallIdCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ServiceProviderCallIdCallSearchFilter
+          enum:
+          - ServiceProviderCallIdCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    ServiceProviderTypeCallSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ServiceProviderTypeCallSearchFilter
+          enum:
+          - ServiceProviderTypeCallSearchFilter
+        field:
+          $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/CallServiceProviderOperator'
     ServiceType:
       type: object
       description: Representation of a complex type which can be transferred between client and server

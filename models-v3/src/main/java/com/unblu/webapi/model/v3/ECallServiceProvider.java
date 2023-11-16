@@ -5,28 +5,28 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ERecordingStatus
+ * Gets or Sets ECallServiceProvider
  */
-public enum ERecordingStatus {
+public enum ECallServiceProvider {
 
 	/**
-	 * INITIALIZING: Recording initializing
+	 * ACS: The call service was provided by ACS
 	 */
-	INITIALIZING("INITIALIZING"),
+	ACS("ACS"),
 
 	/**
-	 * PENDING: Recording pending
+	 * LIVEKIT: The call service was provided by LiveKit
 	 */
-	PENDING("PENDING"),
+	LIVEKIT("LIVEKIT"),
 
 	/**
-	 * COMPLETE: Recording completed
+	 * OPENTOK: The call service was provided by Vonage
 	 */
-	COMPLETE("COMPLETE");
+	OPENTOK("OPENTOK");
 
 	private String value;
 
-	ERecordingStatus(String value) {
+	ECallServiceProvider(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +41,8 @@ public enum ERecordingStatus {
 	}
 
 	@JsonCreator
-	public static ERecordingStatus fromValue(String value) {
-		for (ERecordingStatus b : ERecordingStatus.values()) {
+	public static ECallServiceProvider fromValue(String value) {
+		for (ECallServiceProvider b : ECallServiceProvider.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

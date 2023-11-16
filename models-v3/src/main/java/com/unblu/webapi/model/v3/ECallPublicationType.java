@@ -5,28 +5,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ERecordingStatus
+ * The type of publication the call participant is using
  */
-public enum ERecordingStatus {
+public enum ECallPublicationType {
 
 	/**
-	 * INITIALIZING: Recording initializing
+	 * DIAL_IN: The participant is publishing their audio content through a call dial in
 	 */
-	INITIALIZING("INITIALIZING"),
+	DIAL_IN("DIAL_IN"),
 
 	/**
-	 * PENDING: Recording pending
+	 * MEDIA: The participant is publishing their media content (audio or audio and video) through the computer
 	 */
-	PENDING("PENDING"),
-
-	/**
-	 * COMPLETE: Recording completed
-	 */
-	COMPLETE("COMPLETE");
+	MEDIA("MEDIA");
 
 	private String value;
 
-	ERecordingStatus(String value) {
+	ECallPublicationType(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +36,8 @@ public enum ERecordingStatus {
 	}
 
 	@JsonCreator
-	public static ERecordingStatus fromValue(String value) {
-		for (ERecordingStatus b : ERecordingStatus.values()) {
+	public static ECallPublicationType fromValue(String value) {
+		for (ECallPublicationType b : ECallPublicationType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

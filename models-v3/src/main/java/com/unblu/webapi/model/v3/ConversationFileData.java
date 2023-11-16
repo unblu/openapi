@@ -263,12 +263,13 @@ public class ConversationFileData {
 	}
 
 	/**
-	 * The url link to download the file. Note that the access must be done from an authenticated user with admin rights. This may either be done using basic
-	 * authentication or a valid session cookie.
+	 * The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a
+	 * valid session cookie.&lt;br&gt; If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file
+	 * upload has been approved.
 	 * 
 	 * @return downloadLink
 	 **/
-	@ApiModelProperty(value = "The url link to download the file. Note that the access must be done from an authenticated user with admin rights. This may either be done using basic authentication or a valid session cookie.")
+	@ApiModelProperty(value = "The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved.")
 	public String getDownloadLink() {
 		return downloadLink;
 	}

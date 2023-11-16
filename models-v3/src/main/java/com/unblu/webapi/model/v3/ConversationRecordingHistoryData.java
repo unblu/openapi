@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v3;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -29,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationRecordingHistoryData.JSON_PROPERTY_STATUS,
 	ConversationRecordingHistoryData.JSON_PROPERTY_END_REASON,
 	ConversationRecordingHistoryData.JSON_PROPERTY_RECORDING_TYPE,
+	ConversationRecordingHistoryData.JSON_PROPERTY_CALL_IDS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationRecordingHistoryData {
@@ -112,6 +115,10 @@ public class ConversationRecordingHistoryData {
 	public static final String JSON_PROPERTY_RECORDING_TYPE = "recordingType";
 	@JsonProperty(JSON_PROPERTY_RECORDING_TYPE)
 	private ERecordingType recordingType;
+
+	public static final String JSON_PROPERTY_CALL_IDS = "callIds";
+	@JsonProperty(JSON_PROPERTY_CALL_IDS)
+	private List<String> callIds = null;
 
 	public ConversationRecordingHistoryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -342,6 +349,33 @@ public class ConversationRecordingHistoryData {
 		this.recordingType = recordingType;
 	}
 
+	public ConversationRecordingHistoryData callIds(List<String> callIds) {
+		this.callIds = callIds;
+		return this;
+	}
+
+	public ConversationRecordingHistoryData addCallIdsItem(String callIdsItem) {
+		if (this.callIds == null) {
+			this.callIds = new ArrayList<>();
+		}
+		this.callIds.add(callIdsItem);
+		return this;
+	}
+
+	/**
+	 * A list of call IDs held during this recording
+	 * 
+	 * @return callIds
+	 **/
+	@ApiModelProperty(value = "A list of call IDs held during this recording")
+	public List<String> getCallIds() {
+		return callIds;
+	}
+
+	public void setCallIds(List<String> callIds) {
+		this.callIds = callIds;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -362,12 +396,13 @@ public class ConversationRecordingHistoryData {
 				Objects.equals(this.recordingEndTimestamp, conversationRecordingHistoryData.recordingEndTimestamp) &&
 				Objects.equals(this.status, conversationRecordingHistoryData.status) &&
 				Objects.equals(this.endReason, conversationRecordingHistoryData.endReason) &&
-				Objects.equals(this.recordingType, conversationRecordingHistoryData.recordingType);
+				Objects.equals(this.recordingType, conversationRecordingHistoryData.recordingType) &&
+				Objects.equals(this.callIds, conversationRecordingHistoryData.callIds);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, blobStoreId, fileName, mimeType, totalSize, downloadLink, recordingStartTimestamp, recordingEndTimestamp, status, endReason, recordingType);
+		return Objects.hash($type, conversationId, blobStoreId, fileName, mimeType, totalSize, downloadLink, recordingStartTimestamp, recordingEndTimestamp, status, endReason, recordingType, callIds);
 	}
 
 	@Override
@@ -386,6 +421,7 @@ public class ConversationRecordingHistoryData {
 		sb.append("    status: ").append(toIndentedString(status)).append("\n");
 		sb.append("    endReason: ").append(toIndentedString(endReason)).append("\n");
 		sb.append("    recordingType: ").append(toIndentedString(recordingType)).append("\n");
+		sb.append("    callIds: ").append(toIndentedString(callIds)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -25,6 +25,16 @@ public enum ECannedResponseSearchFilterField {
 	TEXT("TEXT"),
 
 	/**
+	 * OWNER_ID: Filter by the &#39;ownerId&#39; attribute
+	 */
+	OWNER_ID("OWNER_ID"),
+
+	/**
+	 * OWNER_TYPE: Filter by the &#39;ownerType&#39; attribute
+	 */
+	OWNER_TYPE("OWNER_TYPE"),
+
+	/**
 	 * CREATION_TIMESTAMP: Filter by the &#39;creationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
