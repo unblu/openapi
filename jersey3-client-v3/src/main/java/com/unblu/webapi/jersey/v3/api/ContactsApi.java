@@ -36,7 +36,8 @@ public class ContactsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated. This feature will be removed
+	 * with Unblu 8&lt;br&gt;
 	 * 
 	 * @param contact The entity to create (required)
 	 * @return Contact
@@ -47,7 +48,8 @@ public class ContactsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated. This feature will be removed
+	 * with Unblu 8&lt;br&gt;
 	 * 
 	 * @param contact The entity to create (required)
 	 * @return ApiResponse&lt;Contact&gt;
@@ -87,7 +89,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given ID&lt;br&gt;
+	 * delete Deletes the entity for the given ID. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -98,7 +100,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given ID&lt;br&gt;
+	 * delete Deletes the entity for the given ID. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -132,7 +134,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given ID&lt;br&gt;
+	 * delete Deletes the entity for the given ID. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -145,7 +147,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * delete Deletes the entity for the given ID&lt;br&gt;
+	 * delete Deletes the entity for the given ID. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param id The ID of the entity which should be deleted (optional)
 	 * @throws ApiException if fails to make API call
@@ -181,7 +183,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given ID&lt;br&gt;
+	 * read Returns the entity for the given ID. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param id ID of the entity which should be returned (optional)
 	 * @return Contact
@@ -192,7 +194,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * read Returns the entity for the given ID&lt;br&gt;
+	 * read Returns the entity for the given ID. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param id ID of the entity which should be returned (optional)
 	 * @return ApiResponse&lt;Contact&gt;
@@ -229,9 +231,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of the entities with the given IDs. IDs that can&#39;t be found are ignored. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
-	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The IDs for which to fetch the entities (required)
 	 * @return List&lt;Contact&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -240,9 +242,9 @@ public class ContactsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of the entities with the given IDs. IDs that can&#39;t be found are ignored. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
-	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The IDs for which to fetch the entities (required)
 	 * @return ApiResponse&lt;List&lt;Contact&gt;&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -280,7 +282,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * search Search for contacts in the current account&lt;br&gt;
+	 * search Search for contacts in the current account. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param contactQuery (required)
 	 * @return ContactResult
@@ -291,7 +293,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * search Search for contacts in the current account&lt;br&gt;
+	 * search Search for contacts in the current account. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param contactQuery (required)
 	 * @return ApiResponse&lt;ContactResult&gt;
@@ -331,7 +333,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * update Updates the entity in the system with the given entity.&lt;br&gt;
+	 * update Updates the entity in the system with the given entity. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param contact The entity to update (required)
 	 * @return Contact
@@ -342,7 +344,7 @@ public class ContactsApi {
 	}
 
 	/**
-	 * update Updates the entity in the system with the given entity.&lt;br&gt;
+	 * update Updates the entity in the system with the given entity. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param contact The entity to update (required)
 	 * @return ApiResponse&lt;Contact&gt;

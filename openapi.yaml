@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.39.0
+  version: 7.40.0
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -101,7 +101,7 @@ paths:
       tags:
       - Accounts
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: accountsCreate
       parameters:
       - name: expand
@@ -512,7 +512,7 @@ paths:
       tags:
       - Accounts
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored<br>
       operationId: accountsReadMultiple
       parameters:
       - name: expand
@@ -525,7 +525,7 @@ paths:
         style: form
         explode: false
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -535,7 +535,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -648,7 +648,7 @@ paths:
       tags:
       - Addresses
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated. This feature will be removed with Unblu 8<br>"
       operationId: addressesCreate
       requestBody:
         description: The entity to create
@@ -675,7 +675,7 @@ paths:
       tags:
       - Addresses
       summary: delete
-      description: Deletes the entity for the given ID<br>
+      description: Deletes the entity for the given ID. This feature will be removed with Unblu 8<br>
       operationId: addressesDelete
       parameters:
       - name: id
@@ -701,7 +701,7 @@ paths:
       tags:
       - Addresses
       summary: read
-      description: Returns the entity for the given ID<br>
+      description: Returns the entity for the given ID. This feature will be removed with Unblu 8<br>
       operationId: addressesRead
       parameters:
       - name: id
@@ -730,10 +730,10 @@ paths:
       tags:
       - Addresses
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored. This feature will be removed with Unblu 8<br>
       operationId: addressesReadMultiple
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -743,7 +743,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -761,7 +761,7 @@ paths:
       tags:
       - Addresses
       summary: search
-      description: Search for addresses in the current account<br>
+      description: Search for addresses in the current account. This feature will be removed with Unblu 8<br>
       operationId: addressesSearch
       requestBody:
         content:
@@ -787,7 +787,7 @@ paths:
       tags:
       - Addresses
       summary: update
-      description: Updates the entity in the system with the given entity.<br>
+      description: Updates the entity in the system with the given entity. This feature will be removed with Unblu 8<br>
       operationId: addressesUpdate
       requestBody:
         description: The entity to update
@@ -814,7 +814,7 @@ paths:
       tags:
       - ApiKeys
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: apiKeysCreate
       parameters:
       - name: expand
@@ -1004,7 +1004,7 @@ paths:
       tags:
       - ApiKeys
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored<br>
       operationId: apiKeysReadMultiple
       parameters:
       - name: expand
@@ -1017,7 +1017,7 @@ paths:
         style: form
         explode: false
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -1027,7 +1027,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -3077,7 +3077,7 @@ paths:
       tags:
       - CannedResponses
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: cannedResponsesCreate
       requestBody:
         description: The entity to create
@@ -3465,7 +3465,7 @@ paths:
       tags:
       - Contacts
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated. This feature will be removed with Unblu 8<br>"
       operationId: contactsCreate
       requestBody:
         description: The entity to create
@@ -3492,7 +3492,7 @@ paths:
       tags:
       - Contacts
       summary: delete
-      description: Deletes the entity for the given ID<br>
+      description: Deletes the entity for the given ID. This feature will be removed with Unblu 8<br>
       operationId: contactsDelete
       parameters:
       - name: id
@@ -3518,7 +3518,7 @@ paths:
       tags:
       - Contacts
       summary: read
-      description: Returns the entity for the given ID<br>
+      description: Returns the entity for the given ID. This feature will be removed with Unblu 8<br>
       operationId: contactsRead
       parameters:
       - name: id
@@ -3547,10 +3547,10 @@ paths:
       tags:
       - Contacts
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored. This feature will be removed with Unblu 8<br>
       operationId: contactsReadMultiple
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -3560,7 +3560,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -3578,7 +3578,7 @@ paths:
       tags:
       - Contacts
       summary: search
-      description: Search for contacts in the current account<br>
+      description: Search for contacts in the current account. This feature will be removed with Unblu 8<br>
       operationId: contactsSearch
       requestBody:
         content:
@@ -3604,7 +3604,7 @@ paths:
       tags:
       - Contacts
       summary: update
-      description: Updates the entity in the system with the given entity.<br>
+      description: Updates the entity in the system with the given entity. This feature will be removed with Unblu 8<br>
       operationId: contactsUpdate
       requestBody:
         description: The entity to update
@@ -3817,7 +3817,7 @@ paths:
       tags:
       - ConversationTemplates
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: conversationTemplatesCreate
       parameters:
       - name: expand
@@ -4013,7 +4013,7 @@ paths:
       tags:
       - ConversationTemplates
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored<br>
       operationId: conversationTemplatesReadMultiple
       parameters:
       - name: expand
@@ -4026,7 +4026,7 @@ paths:
         style: form
         explode: false
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -4036,7 +4036,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -6140,7 +6140,7 @@ paths:
       tags:
       - Domains
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: domainsCreate
       requestBody:
         description: The entity to create
@@ -6265,10 +6265,10 @@ paths:
       tags:
       - Domains
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored<br>
       operationId: domainsReadMultiple
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -6278,7 +6278,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -8400,7 +8400,7 @@ paths:
       tags:
       - NamedAreas
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: namedAreasCreate
       parameters:
       - name: expand
@@ -9335,7 +9335,7 @@ paths:
       tags:
       - Services
       summary: findWebhookEventTypeNamesBy
-      description: Returns the webhook event type names matching certain condition<br>
+      description: Returns the webhook event type names matching certain condition. This feature will be removed with Unblu 8<br>
       operationId: servicesFindWebhookEventTypeNamesBy
       parameters:
       - name: apiVersion
@@ -9373,7 +9373,7 @@ paths:
       tags:
       - Services
       summary: getAllServiceNames
-      description: Returns the name of all available services<br>
+      description: Returns the name of all available services. This feature will be removed with Unblu 8<br>
       operationId: servicesGetAllServiceNames
       responses:
         "200":
@@ -9394,7 +9394,7 @@ paths:
       tags:
       - Services
       summary: getAllServices
-      description: Returns a list of all available services<br>
+      description: Returns a list of all available services. This feature will be removed with Unblu 8<br>
       operationId: servicesGetAllServices
       responses:
         "200":
@@ -9415,7 +9415,7 @@ paths:
       tags:
       - Services
       summary: getAllServicesMetadata
-      description: Returns all metadata information available in one batch<br>
+      description: Returns all metadata information available in one batch. This feature will be removed with Unblu 8<br>
       operationId: servicesGetAllServicesMetadata
       responses:
         "200":
@@ -9434,7 +9434,7 @@ paths:
       tags:
       - Services
       summary: getAllTypeNames
-      description: Returns A list of all type names used by the services and the webhook events<br>
+      description: Returns A list of all type names used by the services and the webhook events. This feature will be removed with Unblu 8<br>
       operationId: servicesGetAllTypeNames
       responses:
         "200":
@@ -9455,7 +9455,7 @@ paths:
       tags:
       - Services
       summary: getAllTypes
-      description: Returns All available types used by the services and the webhook events<br>
+      description: Returns All available types used by the services and the webhook events. This feature will be removed with Unblu 8<br>
       operationId: servicesGetAllTypes
       responses:
         "200":
@@ -9476,7 +9476,7 @@ paths:
       tags:
       - Services
       summary: getAllWebhookEventTypeNames
-      description: Returns all webhook event type names<br>
+      description: Returns all webhook event type names. This feature will be removed with Unblu 8<br>
       operationId: servicesGetAllWebhookEventTypeNames
       responses:
         "200":
@@ -9497,7 +9497,7 @@ paths:
       tags:
       - Services
       summary: getAllWebhookEventTypes
-      description: Returns all webhook event types<br>
+      description: Returns all webhook event types. This feature will be removed with Unblu 8<br>
       operationId: servicesGetAllWebhookEventTypes
       responses:
         "200":
@@ -9518,7 +9518,7 @@ paths:
       tags:
       - Services
       summary: getServiceByName
-      description: Returns the metadata for the requested service<br>
+      description: Returns the metadata for the requested service. This feature will be removed with Unblu 8<br>
       operationId: servicesGetServiceByName
       parameters:
       - name: serviceName
@@ -9546,7 +9546,7 @@ paths:
       tags:
       - Services
       summary: getTypeByName
-      description: Returns a type definition by the given name<br>
+      description: Returns a type definition by the given name. This feature will be removed with Unblu 8<br>
       operationId: servicesGetTypeByName
       parameters:
       - name: name
@@ -9574,7 +9574,7 @@ paths:
       tags:
       - Services
       summary: getWebhookEventTypeByName
-      description: Returns the webhook event type definition for the requested webhook event<br>
+      description: Returns the webhook event type definition for the requested webhook event. This feature will be removed with Unblu 8<br>
       operationId: servicesGetWebhookEventTypeByName
       parameters:
       - name: name
@@ -9887,7 +9887,7 @@ paths:
       tags:
       - Teams
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: teamsCreate
       parameters:
       - name: expand
@@ -10359,7 +10359,7 @@ paths:
       tags:
       - Users
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: usersCreate
       parameters:
       - name: expand
@@ -11104,10 +11104,10 @@ paths:
       tags:
       - WebhookCallLogs
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored<br>
       operationId: webhookCallLogsReadMultiple
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -11117,7 +11117,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -11159,7 +11159,7 @@ paths:
       tags:
       - WebhookRegistrations
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.<br>"
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
       operationId: webhookRegistrationsCreate
       requestBody:
         description: The entity to create
@@ -12377,10 +12377,10 @@ paths:
       tags:
       - WebhookRegistrations
       summary: readMultiple
-      description: Gets a list of entities for the given ID's<br>
+      description: Gets a list of the entities with the given IDs. IDs that can't be found are ignored<br>
       operationId: webhookRegistrationsReadMultiple
       requestBody:
-        description: The ID's for which the entities should be fetched
+        description: The IDs for which to fetch the entities
         content:
           application/json:
             schema:
@@ -12390,7 +12390,7 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of entities for the given id's
+          description: A list of entities matching the IDs provided
           content:
             application/json:
               schema:
@@ -30084,7 +30084,7 @@ components:
         entityId:
           type: string
         changeType:
-          type: string
+          $ref: '#/components/schemas/AuditChangeType'
         auditEntity:
           type: string
     WebhookCallLog:

@@ -89,7 +89,7 @@ public class WebhookAuditEvent {
 
 	public static final String JSON_PROPERTY_CHANGE_TYPE = "changeType";
 	@JsonProperty(JSON_PROPERTY_CHANGE_TYPE)
-	private String changeType;
+	private AuditChangeType changeType;
 
 	public static final String JSON_PROPERTY_AUDIT_ENTITY = "auditEntity";
 	@JsonProperty(JSON_PROPERTY_AUDIT_ENTITY)
@@ -209,7 +209,7 @@ public class WebhookAuditEvent {
 		this.entityId = entityId;
 	}
 
-	public WebhookAuditEvent changeType(String changeType) {
+	public WebhookAuditEvent changeType(AuditChangeType changeType) {
 		this.changeType = changeType;
 		return this;
 	}
@@ -220,11 +220,11 @@ public class WebhookAuditEvent {
 	 * @return changeType
 	 **/
 	@ApiModelProperty(value = "")
-	public String getChangeType() {
+	public AuditChangeType getChangeType() {
 		return changeType;
 	}
 
-	public void setChangeType(String changeType) {
+	public void setChangeType(AuditChangeType changeType) {
 		this.changeType = changeType;
 	}
 

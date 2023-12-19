@@ -39,7 +39,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * findWebhookEventTypeNamesBy Returns the webhook event type names matching certain condition&lt;br&gt;
+	 * findWebhookEventTypeNamesBy Returns the webhook event type names matching certain condition. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param apiVersion only the events compatible with this version will be returned. If null the newest Web-API version will be used. (optional)
 	 * @param registrationLocation only the events having this registration location will be returned. If null all location will be considered (optional)
@@ -51,7 +51,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * findWebhookEventTypeNamesBy Returns the webhook event type names matching certain condition&lt;br&gt;
+	 * findWebhookEventTypeNamesBy Returns the webhook event type names matching certain condition. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param apiVersion only the events compatible with this version will be returned. If null the newest Web-API version will be used. (optional)
 	 * @param registrationLocation only the events having this registration location will be returned. If null all location will be considered (optional)
@@ -90,7 +90,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllServiceNames Returns the name of all available services&lt;br&gt;
+	 * getAllServiceNames Returns the name of all available services. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return List&lt;String&gt;
 	 * @throws ApiException if fails to make API call
@@ -100,7 +100,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllServiceNames Returns the name of all available services&lt;br&gt;
+	 * getAllServiceNames Returns the name of all available services. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;List&lt;String&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -134,7 +134,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllServices Returns a list of all available services&lt;br&gt;
+	 * getAllServices Returns a list of all available services. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return List&lt;WebApiService&gt;
 	 * @throws ApiException if fails to make API call
@@ -144,7 +144,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllServices Returns a list of all available services&lt;br&gt;
+	 * getAllServices Returns a list of all available services. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;List&lt;WebApiService&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -178,7 +178,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllServicesMetadata Returns all metadata information available in one batch&lt;br&gt;
+	 * getAllServicesMetadata Returns all metadata information available in one batch. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ServicesContainer
 	 * @throws ApiException if fails to make API call
@@ -188,7 +188,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllServicesMetadata Returns all metadata information available in one batch&lt;br&gt;
+	 * getAllServicesMetadata Returns all metadata information available in one batch. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;ServicesContainer&gt;
 	 * @throws ApiException if fails to make API call
@@ -222,7 +222,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllTypeNames Returns A list of all type names used by the services and the webhook events&lt;br&gt;
+	 * getAllTypeNames Returns A list of all type names used by the services and the webhook events. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return List&lt;String&gt;
 	 * @throws ApiException if fails to make API call
@@ -232,7 +232,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllTypeNames Returns A list of all type names used by the services and the webhook events&lt;br&gt;
+	 * getAllTypeNames Returns A list of all type names used by the services and the webhook events. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;List&lt;String&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -266,7 +266,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllTypes Returns All available types used by the services and the webhook events&lt;br&gt;
+	 * getAllTypes Returns All available types used by the services and the webhook events. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return List&lt;ServiceType&gt;
 	 * @throws ApiException if fails to make API call
@@ -276,7 +276,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllTypes Returns All available types used by the services and the webhook events&lt;br&gt;
+	 * getAllTypes Returns All available types used by the services and the webhook events. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;List&lt;ServiceType&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -310,7 +310,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllWebhookEventTypeNames Returns all webhook event type names&lt;br&gt;
+	 * getAllWebhookEventTypeNames Returns all webhook event type names. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return List&lt;String&gt;
 	 * @throws ApiException if fails to make API call
@@ -320,7 +320,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllWebhookEventTypeNames Returns all webhook event type names&lt;br&gt;
+	 * getAllWebhookEventTypeNames Returns all webhook event type names. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;List&lt;String&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -354,7 +354,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllWebhookEventTypes Returns all webhook event types&lt;br&gt;
+	 * getAllWebhookEventTypes Returns all webhook event types. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return List&lt;ServiceWebhookEventType&gt;
 	 * @throws ApiException if fails to make API call
@@ -364,7 +364,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getAllWebhookEventTypes Returns all webhook event types&lt;br&gt;
+	 * getAllWebhookEventTypes Returns all webhook event types. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @return ApiResponse&lt;List&lt;ServiceWebhookEventType&gt;&gt;
 	 * @throws ApiException if fails to make API call
@@ -398,7 +398,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getServiceByName Returns the metadata for the requested service&lt;br&gt;
+	 * getServiceByName Returns the metadata for the requested service. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param serviceName The name of the service of which the metadata should be returned (required)
 	 * @return WebApiService
@@ -409,7 +409,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getServiceByName Returns the metadata for the requested service&lt;br&gt;
+	 * getServiceByName Returns the metadata for the requested service. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param serviceName The name of the service of which the metadata should be returned (required)
 	 * @return ApiResponse&lt;WebApiService&gt;
@@ -450,7 +450,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getTypeByName Returns a type definition by the given name&lt;br&gt;
+	 * getTypeByName Returns a type definition by the given name. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param name The name of the type of which the metadata should be returned (required)
 	 * @return ServiceType
@@ -461,7 +461,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getTypeByName Returns a type definition by the given name&lt;br&gt;
+	 * getTypeByName Returns a type definition by the given name. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param name The name of the type of which the metadata should be returned (required)
 	 * @return ApiResponse&lt;ServiceType&gt;
@@ -502,7 +502,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getWebhookEventTypeByName Returns the webhook event type definition for the requested webhook event&lt;br&gt;
+	 * getWebhookEventTypeByName Returns the webhook event type definition for the requested webhook event. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param name The name of the webhook event type of which the metadata should be returned (required)
 	 * @return ServiceWebhookEventType
@@ -513,7 +513,7 @@ public class ServicesApi {
 	}
 
 	/**
-	 * getWebhookEventTypeByName Returns the webhook event type definition for the requested webhook event&lt;br&gt;
+	 * getWebhookEventTypeByName Returns the webhook event type definition for the requested webhook event. This feature will be removed with Unblu 8&lt;br&gt;
 	 * 
 	 * @param name The name of the webhook event type of which the metadata should be returned (required)
 	 * @return ApiResponse&lt;ServiceWebhookEventType&gt;

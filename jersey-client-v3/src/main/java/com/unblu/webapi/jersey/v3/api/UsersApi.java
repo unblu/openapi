@@ -39,7 +39,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param user The entity to create (required)
 	 * @param expand (optional)
@@ -51,7 +51,7 @@ public class UsersApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param user The entity to create (required)
 	 * @param expand (optional)

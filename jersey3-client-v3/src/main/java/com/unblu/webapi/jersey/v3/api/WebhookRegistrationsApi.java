@@ -37,7 +37,7 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param webhookRegistration The entity to create (required)
 	 * @return WebhookRegistration
@@ -48,7 +48,7 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity can not be set for create operation, a new one is generated.&lt;br&gt;
+	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param webhookRegistration The entity to create (required)
 	 * @return ApiResponse&lt;WebhookRegistration&gt;
@@ -375,9 +375,9 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of the entities with the given IDs. IDs that can&#39;t be found are ignored&lt;br&gt;
 	 * 
-	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The IDs for which to fetch the entities (required)
 	 * @return List&lt;WebhookRegistration&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -386,9 +386,9 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * readMultiple Gets a list of entities for the given ID&#39;s&lt;br&gt;
+	 * readMultiple Gets a list of the entities with the given IDs. IDs that can&#39;t be found are ignored&lt;br&gt;
 	 * 
-	 * @param requestBody The ID&#39;s for which the entities should be fetched (required)
+	 * @param requestBody The IDs for which to fetch the entities (required)
 	 * @return ApiResponse&lt;List&lt;WebhookRegistration&gt;&gt;
 	 * @throws ApiException if fails to make API call
 	 */
