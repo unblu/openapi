@@ -28,6 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationFileData.JSON_PROPERTY_FILE_STORE_ID,
 	ConversationFileData.JSON_PROPERTY_TOTAL_SIZE,
 	ConversationFileData.JSON_PROPERTY_DOWNLOAD_LINK,
+	ConversationFileData.JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK,
 	ConversationFileData.JSON_PROPERTY_CREATION_TIMESTAMP,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -100,6 +101,10 @@ public class ConversationFileData {
 	public static final String JSON_PROPERTY_DOWNLOAD_LINK = "downloadLink";
 	@JsonProperty(JSON_PROPERTY_DOWNLOAD_LINK)
 	private String downloadLink;
+
+	public static final String JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK = "agentDeskDownloadLink";
+	@JsonProperty(JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK)
+	private String agentDeskDownloadLink;
 
 	public static final String JSON_PROPERTY_CREATION_TIMESTAMP = "creationTimestamp";
 	@JsonProperty(JSON_PROPERTY_CREATION_TIMESTAMP)
@@ -263,19 +268,40 @@ public class ConversationFileData {
 	}
 
 	/**
-	 * The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a
-	 * valid session cookie.&lt;br&gt; If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file
-	 * upload has been approved.
+	 * The URL to download the file via the web API. The URL is only accessible to authenticated users that have access to the referenced conversation.
+	 * Authentication is possible with basic authentication or a valid session cookie.&lt;br&gt; If the file is currently being reviewed by one or more file
+	 * interceptors, calling the URL returns a 403 code until the file upload has been approved.
 	 * 
 	 * @return downloadLink
 	 **/
-	@ApiModelProperty(value = "The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved.")
+	@ApiModelProperty(value = "The URL to download the file via the web API. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved.")
 	public String getDownloadLink() {
 		return downloadLink;
 	}
 
 	public void setDownloadLink(String downloadLink) {
 		this.downloadLink = downloadLink;
+	}
+
+	public ConversationFileData agentDeskDownloadLink(String agentDeskDownloadLink) {
+		this.agentDeskDownloadLink = agentDeskDownloadLink;
+		return this;
+	}
+
+	/**
+	 * The URL to download the file from the Agent Desk. The URL is only accessible to authenticated users that have access to the referenced conversation.
+	 * Authentication is possible with basic authentication or a valid session cookie.&lt;br&gt; If the file is currently being reviewed by one or more file
+	 * interceptors, calling the URL returns a 403 code until the file upload has been approved.
+	 * 
+	 * @return agentDeskDownloadLink
+	 **/
+	@ApiModelProperty(value = "The URL to download the file from the Agent Desk. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved.")
+	public String getAgentDeskDownloadLink() {
+		return agentDeskDownloadLink;
+	}
+
+	public void setAgentDeskDownloadLink(String agentDeskDownloadLink) {
+		this.agentDeskDownloadLink = agentDeskDownloadLink;
 	}
 
 	public ConversationFileData creationTimestamp(Long creationTimestamp) {
@@ -315,12 +341,13 @@ public class ConversationFileData {
 				Objects.equals(this.fileStoreId, conversationFileData.fileStoreId) &&
 				Objects.equals(this.totalSize, conversationFileData.totalSize) &&
 				Objects.equals(this.downloadLink, conversationFileData.downloadLink) &&
+				Objects.equals(this.agentDeskDownloadLink, conversationFileData.agentDeskDownloadLink) &&
 				Objects.equals(this.creationTimestamp, conversationFileData.creationTimestamp);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, ownerPersonId, name, mimeType, source, fileStoreId, totalSize, downloadLink, creationTimestamp);
+		return Objects.hash($type, conversationId, ownerPersonId, name, mimeType, source, fileStoreId, totalSize, downloadLink, agentDeskDownloadLink, creationTimestamp);
 	}
 
 	@Override
@@ -336,6 +363,7 @@ public class ConversationFileData {
 		sb.append("    fileStoreId: ").append(toIndentedString(fileStoreId)).append("\n");
 		sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
 		sb.append("    downloadLink: ").append(toIndentedString(downloadLink)).append("\n");
+		sb.append("    agentDeskDownloadLink: ").append(toIndentedString(agentDeskDownloadLink)).append("\n");
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("}");
 		return sb.toString();

@@ -90,6 +90,47 @@ public class GlobalApi {
 	}
 
 	/**
+	 * ping Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+	 * 
+	 * @throws ApiException if fails to make API call
+	 */
+	public void globalPing() throws ApiException {
+
+		globalPingWithHttpInfo();
+	}
+
+	/**
+	 * ping Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+	 * 
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> globalPingWithHttpInfo() throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// create path and map variables
+		String localVarPath = "/global/ping";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
 	 * productVersion productVersion operation
 	 * 
 	 * @return ProductVersion

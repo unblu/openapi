@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.42.1
+  version: 7.43.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -5128,9 +5128,10 @@ paths:
                 summary: updateConfiguration
                 description: Map to update the translations
                 value:
-                  $_version: d41d8cd98f00b204e9800998ecf8427e
+                  $_version: 4c0a388a98203ce7ffbba74b92d64495
                   com.unblu.conversation.feature.callEnabled: "true"
                   com.unblu.conversation.feature.textChatEnabled: "false"
+                  com.unblu.conversation.invitation.allowPublicLinkAccess: "false"
                   com.unblu.conversation.lifecycle.autoEndOnLeave: SECONDARY_AGENT
         required: true
       responses:
@@ -5191,9 +5192,10 @@ paths:
                     awaitedPersonType: NONE
                     awaitedPersonTypeChangeTimestamp: null
                     configuration:
-                      $_version: 071ca160e0b7bd9b311060b160edb783
+                      $_version: 4cfc95dba376d286859d80694c9ef813
                       com.unblu.conversation.feature.callEnabled: "true"
                       com.unblu.conversation.feature.textChatEnabled: "false"
+                      com.unblu.conversation.invitation.allowPublicLinkAccess: "false"
                       com.unblu.conversation.lifecycle.autoEndOnLeave: SECONDARY_AGENT
                     text: null
                     metadata: null
@@ -7471,6 +7473,21 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
+  /global/ping:
+    get:
+      tags:
+      - Global
+      summary: ping
+      description: Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+      operationId: globalPing
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: PUBLIC
+      x-required-role:
+      - ANONYMOUS_USER
   /global/productVersion:
     get:
       tags:
@@ -16418,7 +16435,10 @@ components:
           description: "The total size in bytes of the file, which was shared/sent in the conversation. Note that it is not always set."
         downloadLink:
           type: string
-          description: "The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
+          description: "The URL to download the file via the web API. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
+        agentDeskDownloadLink:
+          type: string
+          description: "The URL to download the file from the Agent Desk. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
         creationTimestamp:
           type: integer
           format: int64
@@ -17178,7 +17198,10 @@ components:
           description: The total size in bytes of this recording
         downloadLink:
           type: string
-          description: The url link to download the recording. Note that the access must be done from an authenticated user with admin rights. This may either be done using basic authentication or a valid session cookie.
+          description: The URL to download the recording via the web API. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.
+        agentDeskDownloadLink:
+          type: string
+          description: The URL to download the recording from the Agent Desk. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.
         recordingStartTimestamp:
           type: integer
           format: int64
@@ -17245,7 +17268,10 @@ components:
           description: The total size of this recording in bytes
         downloadLink:
           type: string
-          description: The URL link to download the recording. Note that only authenticated users with admin rights may access the URL. This may be done using either basic authentication or a valid session cookie.
+          description: The URL to download the recording via the web API. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with either basic authentication or a valid session cookie.
+        agentDeskDownloadLink:
+          type: string
+          description: The URL to download the recording from the Agent Desk. the URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with either basic authentication or a valid session cookie.
         recordingStartTimestamp:
           type: integer
           format: int64
@@ -22897,7 +22923,10 @@ components:
           description: "The amount of data that was already uploaded to the server. Does not need to be set, when the file is send to the collaboration server"
         downloadLink:
           type: string
-          description: "The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
+          description: "The URL to download the file via the web API. Access is only permitted for authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
+        agentDeskDownloadLink:
+          type: string
+          description: "The URL to download the file from the Agent Desk. Access is only permitted for authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved."
         quickReplies:
           type: array
           description: Optional quick replies which will be displayed above the chat input as a possible response options

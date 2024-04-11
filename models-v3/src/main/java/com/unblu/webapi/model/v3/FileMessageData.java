@@ -48,6 +48,7 @@ import io.swagger.annotations.ApiModelProperty;
 	FileMessageData.JSON_PROPERTY_TOTAL_SIZE,
 	FileMessageData.JSON_PROPERTY_UPLOADED_SIZE,
 	FileMessageData.JSON_PROPERTY_DOWNLOAD_LINK,
+	FileMessageData.JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK,
 	FileMessageData.JSON_PROPERTY_QUICK_REPLIES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -192,6 +193,10 @@ public class FileMessageData implements MessageData {
 	public static final String JSON_PROPERTY_DOWNLOAD_LINK = "downloadLink";
 	@JsonProperty(JSON_PROPERTY_DOWNLOAD_LINK)
 	private String downloadLink;
+
+	public static final String JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK = "agentDeskDownloadLink";
+	@JsonProperty(JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK)
+	private String agentDeskDownloadLink;
 
 	public static final String JSON_PROPERTY_QUICK_REPLIES = "quickReplies";
 	@JsonProperty(JSON_PROPERTY_QUICK_REPLIES)
@@ -708,19 +713,40 @@ public class FileMessageData implements MessageData {
 	}
 
 	/**
-	 * The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a
-	 * valid session cookie.&lt;br&gt; If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file
-	 * upload has been approved.
+	 * The URL to download the file via the web API. Access is only permitted for authenticated users that have access to the referenced conversation.
+	 * Authentication is possible with basic authentication or a valid session cookie.&lt;br&gt; If the file is currently being reviewed by one or more file
+	 * interceptors, calling the URL returns a 403 code until the file upload has been approved.
 	 * 
 	 * @return downloadLink
 	 **/
-	@ApiModelProperty(value = "The URL to download the file. Access is only permitted for authenticated users with admin rights. Authentication is possible using basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved.")
+	@ApiModelProperty(value = "The URL to download the file via the web API. Access is only permitted for authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved.")
 	public String getDownloadLink() {
 		return downloadLink;
 	}
 
 	public void setDownloadLink(String downloadLink) {
 		this.downloadLink = downloadLink;
+	}
+
+	public FileMessageData agentDeskDownloadLink(String agentDeskDownloadLink) {
+		this.agentDeskDownloadLink = agentDeskDownloadLink;
+		return this;
+	}
+
+	/**
+	 * The URL to download the file from the Agent Desk. Access is only permitted for authenticated users that have access to the referenced conversation.
+	 * Authentication is possible with basic authentication or a valid session cookie.&lt;br&gt; If the file is currently being reviewed by one or more file
+	 * interceptors, calling the URL returns a 403 code until the file upload has been approved.
+	 * 
+	 * @return agentDeskDownloadLink
+	 **/
+	@ApiModelProperty(value = "The URL to download the file from the Agent Desk. Access is only permitted for authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling the URL returns a 403 code until the file upload has been approved.")
+	public String getAgentDeskDownloadLink() {
+		return agentDeskDownloadLink;
+	}
+
+	public void setAgentDeskDownloadLink(String agentDeskDownloadLink) {
+		this.agentDeskDownloadLink = agentDeskDownloadLink;
 	}
 
 	public FileMessageData quickReplies(List<QuickReply> quickReplies) {
@@ -786,12 +812,13 @@ public class FileMessageData implements MessageData {
 				Objects.equals(this.totalSize, fileMessageData.totalSize) &&
 				Objects.equals(this.uploadedSize, fileMessageData.uploadedSize) &&
 				Objects.equals(this.downloadLink, fileMessageData.downloadLink) &&
+				Objects.equals(this.agentDeskDownloadLink, fileMessageData.agentDeskDownloadLink) &&
 				Objects.equals(this.quickReplies, fileMessageData.quickReplies);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLink, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLink, agentDeskDownloadLink, quickReplies);
 	}
 
 	@Override
@@ -825,6 +852,7 @@ public class FileMessageData implements MessageData {
 		sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
 		sb.append("    uploadedSize: ").append(toIndentedString(uploadedSize)).append("\n");
 		sb.append("    downloadLink: ").append(toIndentedString(downloadLink)).append("\n");
+		sb.append("    agentDeskDownloadLink: ").append(toIndentedString(agentDeskDownloadLink)).append("\n");
 		sb.append("    quickReplies: ").append(toIndentedString(quickReplies)).append("\n");
 		sb.append("}");
 		return sb.toString();

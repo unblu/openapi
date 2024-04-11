@@ -28,6 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_MIME_TYPE,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_TOTAL_SIZE,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_DOWNLOAD_LINK,
+	ConversationRecordingAvailableEvent.JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_RECORDING_START_TIMESTAMP,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_RECORDING_END_TIMESTAMP,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_END_REASON,
@@ -102,6 +103,10 @@ public class ConversationRecordingAvailableEvent {
 	public static final String JSON_PROPERTY_DOWNLOAD_LINK = "downloadLink";
 	@JsonProperty(JSON_PROPERTY_DOWNLOAD_LINK)
 	private String downloadLink;
+
+	public static final String JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK = "agentDeskDownloadLink";
+	@JsonProperty(JSON_PROPERTY_AGENT_DESK_DOWNLOAD_LINK)
+	private String agentDeskDownloadLink;
 
 	public static final String JSON_PROPERTY_RECORDING_START_TIMESTAMP = "recordingStartTimestamp";
 	@JsonProperty(JSON_PROPERTY_RECORDING_START_TIMESTAMP)
@@ -273,18 +278,38 @@ public class ConversationRecordingAvailableEvent {
 	}
 
 	/**
-	 * The url link to download the recording. Note that the access must be done from an authenticated user with admin rights. This may either be done using basic
-	 * authentication or a valid session cookie.
+	 * The URL to download the recording via the web API. The URL is only accessible to authenticated users that have access to the referenced conversation.
+	 * Authentication is possible with basic authentication or a valid session cookie.
 	 * 
 	 * @return downloadLink
 	 **/
-	@ApiModelProperty(value = "The url link to download the recording. Note that the access must be done from an authenticated user with admin rights. This may either be done using basic authentication or a valid session cookie.")
+	@ApiModelProperty(value = "The URL to download the recording via the web API. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.")
 	public String getDownloadLink() {
 		return downloadLink;
 	}
 
 	public void setDownloadLink(String downloadLink) {
 		this.downloadLink = downloadLink;
+	}
+
+	public ConversationRecordingAvailableEvent agentDeskDownloadLink(String agentDeskDownloadLink) {
+		this.agentDeskDownloadLink = agentDeskDownloadLink;
+		return this;
+	}
+
+	/**
+	 * The URL to download the recording from the Agent Desk. The URL is only accessible to authenticated users that have access to the referenced conversation.
+	 * Authentication is possible with basic authentication or a valid session cookie.
+	 * 
+	 * @return agentDeskDownloadLink
+	 **/
+	@ApiModelProperty(value = "The URL to download the recording from the Agent Desk. The URL is only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.")
+	public String getAgentDeskDownloadLink() {
+		return agentDeskDownloadLink;
+	}
+
+	public void setAgentDeskDownloadLink(String agentDeskDownloadLink) {
+		this.agentDeskDownloadLink = agentDeskDownloadLink;
 	}
 
 	public ConversationRecordingAvailableEvent recordingStartTimestamp(Long recordingStartTimestamp) {
@@ -362,6 +387,7 @@ public class ConversationRecordingAvailableEvent {
 				Objects.equals(this.mimeType, conversationRecordingAvailableEvent.mimeType) &&
 				Objects.equals(this.totalSize, conversationRecordingAvailableEvent.totalSize) &&
 				Objects.equals(this.downloadLink, conversationRecordingAvailableEvent.downloadLink) &&
+				Objects.equals(this.agentDeskDownloadLink, conversationRecordingAvailableEvent.agentDeskDownloadLink) &&
 				Objects.equals(this.recordingStartTimestamp, conversationRecordingAvailableEvent.recordingStartTimestamp) &&
 				Objects.equals(this.recordingEndTimestamp, conversationRecordingAvailableEvent.recordingEndTimestamp) &&
 				Objects.equals(this.endReason, conversationRecordingAvailableEvent.endReason);
@@ -369,7 +395,7 @@ public class ConversationRecordingAvailableEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversationId, blobStoreId, mimeType, totalSize, downloadLink, recordingStartTimestamp, recordingEndTimestamp, endReason);
+		return Objects.hash($type, timestamp, eventType, accountId, conversationId, blobStoreId, mimeType, totalSize, downloadLink, agentDeskDownloadLink, recordingStartTimestamp, recordingEndTimestamp, endReason);
 	}
 
 	@Override
@@ -385,6 +411,7 @@ public class ConversationRecordingAvailableEvent {
 		sb.append("    mimeType: ").append(toIndentedString(mimeType)).append("\n");
 		sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
 		sb.append("    downloadLink: ").append(toIndentedString(downloadLink)).append("\n");
+		sb.append("    agentDeskDownloadLink: ").append(toIndentedString(agentDeskDownloadLink)).append("\n");
 		sb.append("    recordingStartTimestamp: ").append(toIndentedString(recordingStartTimestamp)).append("\n");
 		sb.append("    recordingEndTimestamp: ").append(toIndentedString(recordingEndTimestamp)).append("\n");
 		sb.append("    endReason: ").append(toIndentedString(endReason)).append("\n");
