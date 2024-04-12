@@ -130,7 +130,7 @@ gitPublish {
 release {
     buildTasks = ['releaseBuild']
     git {
-        requireBranch.set('main/7.x.x')
+        requireBranch.set('main/8.x.x')
     }
 }
 
