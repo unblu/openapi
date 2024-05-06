@@ -13,6 +13,7 @@ import com.unblu.webapi.jersey.v3.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v3.invoker.Configuration;
 import com.unblu.webapi.jersey.v3.invoker.Pair;
 import com.unblu.webapi.model.v3.GlobalData;
+import com.unblu.webapi.model.v3.GlobalPingResponse;
 import com.unblu.webapi.model.v3.ProductVersion;
 
 public class GlobalApi {
@@ -90,21 +91,24 @@ public class GlobalApi {
 	}
 
 	/**
-	 * ping Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+	 * ping Checks whether the system is ready to receive requests. If the system is ready, it returns a 200 HTTP status, otherwise it returns a 503 HTTP
+	 * status.&lt;br&gt;
 	 * 
+	 * @return GlobalPingResponse
 	 * @throws ApiException if fails to make API call
 	 */
-	public void globalPing() throws ApiException {
-
-		globalPingWithHttpInfo();
+	public GlobalPingResponse globalPing() throws ApiException {
+		return globalPingWithHttpInfo().getData();
 	}
 
 	/**
-	 * ping Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+	 * ping Checks whether the system is ready to receive requests. If the system is ready, it returns a 200 HTTP status, otherwise it returns a 503 HTTP
+	 * status.&lt;br&gt;
 	 * 
+	 * @return ApiResponse&lt;GlobalPingResponse&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Void> globalPingWithHttpInfo() throws ApiException {
+	public ApiResponse<GlobalPingResponse> globalPingWithHttpInfo() throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -116,7 +120,7 @@ public class GlobalApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		final String[] localVarAccepts = {
-
+			"application/json"
 		};
 		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
 
@@ -127,7 +131,9 @@ public class GlobalApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth" };
 
-		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+		GenericType<GlobalPingResponse> localVarReturnType = new GenericType<GlobalPingResponse>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**

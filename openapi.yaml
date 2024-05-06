@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.43.1
+  version: 7.44.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -7478,11 +7478,15 @@ paths:
       tags:
       - Global
       summary: ping
-      description: Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+      description: "Checks whether the system is ready to receive requests. If the system is ready, it returns a 200 HTTP status, otherwise it returns a 503 HTTP status.<br>"
       operationId: globalPing
       responses:
-        "204":
-          description: Ok
+        "200":
+          description: the status of the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalPingResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: PUBLIC
@@ -23188,6 +23192,18 @@ components:
             type: string
           x-expand-query-key: metadata
           x-type: Map
+    GlobalPingResponse:
+      type: object
+      description: The body of the response to a ping on the /global path
+      properties:
+        $_type:
+          type: string
+          default: GlobalPingResponse
+          enum:
+          - GlobalPingResponse
+        status:
+          type: string
+          description: The status of the system
     GreaterThanLongOperator:
       type: object
       properties:
