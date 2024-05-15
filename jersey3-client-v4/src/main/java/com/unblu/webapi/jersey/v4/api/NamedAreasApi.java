@@ -10,6 +10,7 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.NamedArea;
 import com.unblu.webapi.model.v4.NamedAreaList;
 import com.unblu.webapi.model.v4.NamedAreaQuery;
@@ -44,7 +45,7 @@ public class NamedAreasApi {
 	 * @return NamedArea
 	 * @throws ApiException if fails to make API call
 	 */
-	public NamedArea namedAreasCreate(NamedArea namedArea, String expand) throws ApiException {
+	public NamedArea namedAreasCreate(NamedArea namedArea, List<ExpandFields> expand) throws ApiException {
 		return namedAreasCreateWithHttpInfo(namedArea, expand).getData();
 	}
 
@@ -56,7 +57,7 @@ public class NamedAreasApi {
 	 * @return ApiResponse&lt;NamedArea&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<NamedArea> namedAreasCreateWithHttpInfo(NamedArea namedArea, String expand) throws ApiException {
+	public ApiResponse<NamedArea> namedAreasCreateWithHttpInfo(NamedArea namedArea, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = namedArea;
 
 		// verify the required parameter 'namedArea' is set
@@ -72,7 +73,7 @@ public class NamedAreasApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -148,7 +149,7 @@ public class NamedAreasApi {
 	 * @return NamedArea
 	 * @throws ApiException if fails to make API call
 	 */
-	public NamedArea namedAreasRead(String namedAreaId, String expand) throws ApiException {
+	public NamedArea namedAreasRead(String namedAreaId, List<ExpandFields> expand) throws ApiException {
 		return namedAreasReadWithHttpInfo(namedAreaId, expand).getData();
 	}
 
@@ -160,7 +161,7 @@ public class NamedAreasApi {
 	 * @return ApiResponse&lt;NamedArea&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<NamedArea> namedAreasReadWithHttpInfo(String namedAreaId, String expand) throws ApiException {
+	public ApiResponse<NamedArea> namedAreasReadWithHttpInfo(String namedAreaId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'namedAreaId' is set
@@ -177,7 +178,7 @@ public class NamedAreasApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -204,7 +205,7 @@ public class NamedAreasApi {
 	 * @return NamedAreaList
 	 * @throws ApiException if fails to make API call
 	 */
-	public NamedAreaList namedAreasReadMultiple(List<String> requestBody, String expand) throws ApiException {
+	public NamedAreaList namedAreasReadMultiple(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return namedAreasReadMultipleWithHttpInfo(requestBody, expand).getData();
 	}
 
@@ -216,7 +217,7 @@ public class NamedAreasApi {
 	 * @return ApiResponse&lt;NamedAreaList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<NamedAreaList> namedAreasReadMultipleWithHttpInfo(List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<NamedAreaList> namedAreasReadMultipleWithHttpInfo(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'requestBody' is set
@@ -232,7 +233,7 @@ public class NamedAreasApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -259,7 +260,7 @@ public class NamedAreasApi {
 	 * @return NamedAreaResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public NamedAreaResult namedAreasSearch(NamedAreaQuery namedAreaQuery, String expand) throws ApiException {
+	public NamedAreaResult namedAreasSearch(NamedAreaQuery namedAreaQuery, List<ExpandFields> expand) throws ApiException {
 		return namedAreasSearchWithHttpInfo(namedAreaQuery, expand).getData();
 	}
 
@@ -271,7 +272,7 @@ public class NamedAreasApi {
 	 * @return ApiResponse&lt;NamedAreaResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<NamedAreaResult> namedAreasSearchWithHttpInfo(NamedAreaQuery namedAreaQuery, String expand) throws ApiException {
+	public ApiResponse<NamedAreaResult> namedAreasSearchWithHttpInfo(NamedAreaQuery namedAreaQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = namedAreaQuery;
 
 		// verify the required parameter 'namedAreaQuery' is set
@@ -287,7 +288,7 @@ public class NamedAreasApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -314,7 +315,7 @@ public class NamedAreasApi {
 	 * @return NamedArea
 	 * @throws ApiException if fails to make API call
 	 */
-	public NamedArea namedAreasUpdate(NamedArea namedArea, String expand) throws ApiException {
+	public NamedArea namedAreasUpdate(NamedArea namedArea, List<ExpandFields> expand) throws ApiException {
 		return namedAreasUpdateWithHttpInfo(namedArea, expand).getData();
 	}
 
@@ -326,7 +327,7 @@ public class NamedAreasApi {
 	 * @return ApiResponse&lt;NamedArea&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<NamedArea> namedAreasUpdateWithHttpInfo(NamedArea namedArea, String expand) throws ApiException {
+	public ApiResponse<NamedArea> namedAreasUpdateWithHttpInfo(NamedArea namedArea, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = namedArea;
 
 		// verify the required parameter 'namedArea' is set
@@ -342,7 +343,7 @@ public class NamedAreasApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

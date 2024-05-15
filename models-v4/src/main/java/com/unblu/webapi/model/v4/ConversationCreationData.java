@@ -35,6 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationCreationData.JSON_PROPERTY_LOCALE,
 	ConversationCreationData.JSON_PROPERTY_VISITOR_DATA,
 	ConversationCreationData.JSON_PROPERTY_CONVERSATION_TEMPLATE_ID,
+	ConversationCreationData.JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS,
 	ConversationCreationData.JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ID,
 	ConversationCreationData.JSON_PROPERTY_SOURCE_ID,
 	ConversationCreationData.JSON_PROPERTY_SOURCE_URL,
@@ -125,6 +126,10 @@ public class ConversationCreationData {
 	public static final String JSON_PROPERTY_CONVERSATION_TEMPLATE_ID = "conversationTemplateId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_TEMPLATE_ID)
 	private String conversationTemplateId;
+
+	public static final String JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS = "inheritConfigurationAndTexts";
+	@JsonProperty(JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS)
+	private Boolean inheritConfigurationAndTexts;
 
 	public static final String JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ID = "externalMessengerChannelId";
 	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ID)
@@ -412,6 +417,26 @@ public class ConversationCreationData {
 		this.conversationTemplateId = conversationTemplateId;
 	}
 
+	public ConversationCreationData inheritConfigurationAndTexts(Boolean inheritConfigurationAndTexts) {
+		this.inheritConfigurationAndTexts = inheritConfigurationAndTexts;
+		return this;
+	}
+
+	/**
+	 * True if the conversation inherits all configuration and text properties from its conversation template. If omitted, the
+	 * value&#x60;ConversationTemplate.inheritConfigurationAndTexts&#x60; from its conversation template is used.
+	 * 
+	 * @return inheritConfigurationAndTexts
+	 **/
+	@ApiModelProperty(value = "True if the conversation inherits all configuration and text properties from its conversation template. If omitted, the value`ConversationTemplate.inheritConfigurationAndTexts` from its conversation template is used.")
+	public Boolean isInheritConfigurationAndTexts() {
+		return inheritConfigurationAndTexts;
+	}
+
+	public void setInheritConfigurationAndTexts(Boolean inheritConfigurationAndTexts) {
+		this.inheritConfigurationAndTexts = inheritConfigurationAndTexts;
+	}
+
 	public ConversationCreationData externalMessengerChannelId(String externalMessengerChannelId) {
 		this.externalMessengerChannelId = externalMessengerChannelId;
 		return this;
@@ -596,6 +621,7 @@ public class ConversationCreationData {
 				Objects.equals(this.locale, conversationCreationData.locale) &&
 				Objects.equals(this.visitorData, conversationCreationData.visitorData) &&
 				Objects.equals(this.conversationTemplateId, conversationCreationData.conversationTemplateId) &&
+				Objects.equals(this.inheritConfigurationAndTexts, conversationCreationData.inheritConfigurationAndTexts) &&
 				Objects.equals(this.externalMessengerChannelId, conversationCreationData.externalMessengerChannelId) &&
 				Objects.equals(this.sourceId, conversationCreationData.sourceId) &&
 				Objects.equals(this.sourceUrl, conversationCreationData.sourceUrl) &&
@@ -607,7 +633,7 @@ public class ConversationCreationData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, initialEngagementType, conversationVisibility, locale, visitorData, conversationTemplateId, externalMessengerChannelId, sourceId, sourceUrl, initialEngagementUrl, metadata, _configuration, text);
+		return Objects.hash($type, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, initialEngagementType, conversationVisibility, locale, visitorData, conversationTemplateId, inheritConfigurationAndTexts, externalMessengerChannelId, sourceId, sourceUrl, initialEngagementUrl, metadata, _configuration, text);
 	}
 
 	@Override
@@ -626,6 +652,7 @@ public class ConversationCreationData {
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    visitorData: ").append(toIndentedString(visitorData)).append("\n");
 		sb.append("    conversationTemplateId: ").append(toIndentedString(conversationTemplateId)).append("\n");
+		sb.append("    inheritConfigurationAndTexts: ").append(toIndentedString(inheritConfigurationAndTexts)).append("\n");
 		sb.append("    externalMessengerChannelId: ").append(toIndentedString(externalMessengerChannelId)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    sourceUrl: ").append(toIndentedString(sourceUrl)).append("\n");

@@ -10,6 +10,7 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.Team;
 import com.unblu.webapi.model.v4.TeamList;
 import com.unblu.webapi.model.v4.TeamQuery;
@@ -44,7 +45,7 @@ public class TeamsApi {
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
-	public Team teamsCreate(Team team, String expand) throws ApiException {
+	public Team teamsCreate(Team team, List<ExpandFields> expand) throws ApiException {
 		return teamsCreateWithHttpInfo(team, expand).getData();
 	}
 
@@ -56,7 +57,7 @@ public class TeamsApi {
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Team> teamsCreateWithHttpInfo(Team team, String expand) throws ApiException {
+	public ApiResponse<Team> teamsCreateWithHttpInfo(Team team, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = team;
 
 		// verify the required parameter 'team' is set
@@ -72,7 +73,7 @@ public class TeamsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -149,7 +150,7 @@ public class TeamsApi {
 	 * @return TeamList
 	 * @throws ApiException if fails to make API call
 	 */
-	public TeamList teamsGetChildTeams(String teamId, String expand) throws ApiException {
+	public TeamList teamsGetChildTeams(String teamId, List<ExpandFields> expand) throws ApiException {
 		return teamsGetChildTeamsWithHttpInfo(teamId, expand).getData();
 	}
 
@@ -162,7 +163,7 @@ public class TeamsApi {
 	 * @return ApiResponse&lt;TeamList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<TeamList> teamsGetChildTeamsWithHttpInfo(String teamId, String expand) throws ApiException {
+	public ApiResponse<TeamList> teamsGetChildTeamsWithHttpInfo(String teamId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'teamId' is set
@@ -179,7 +180,7 @@ public class TeamsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -205,7 +206,7 @@ public class TeamsApi {
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
-	public Team teamsGetTeamOfCurrentUser(String expand) throws ApiException {
+	public Team teamsGetTeamOfCurrentUser(List<ExpandFields> expand) throws ApiException {
 		return teamsGetTeamOfCurrentUserWithHttpInfo(expand).getData();
 	}
 
@@ -216,7 +217,7 @@ public class TeamsApi {
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Team> teamsGetTeamOfCurrentUserWithHttpInfo(String expand) throws ApiException {
+	public ApiResponse<Team> teamsGetTeamOfCurrentUserWithHttpInfo(List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -227,7 +228,7 @@ public class TeamsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -254,7 +255,7 @@ public class TeamsApi {
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
-	public Team teamsRead(String teamId, String expand) throws ApiException {
+	public Team teamsRead(String teamId, List<ExpandFields> expand) throws ApiException {
 		return teamsReadWithHttpInfo(teamId, expand).getData();
 	}
 
@@ -266,7 +267,7 @@ public class TeamsApi {
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Team> teamsReadWithHttpInfo(String teamId, String expand) throws ApiException {
+	public ApiResponse<Team> teamsReadWithHttpInfo(String teamId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'teamId' is set
@@ -283,7 +284,7 @@ public class TeamsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -310,7 +311,7 @@ public class TeamsApi {
 	 * @return TeamList
 	 * @throws ApiException if fails to make API call
 	 */
-	public TeamList teamsReadMultiple(List<String> requestBody, String expand) throws ApiException {
+	public TeamList teamsReadMultiple(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return teamsReadMultipleWithHttpInfo(requestBody, expand).getData();
 	}
 
@@ -322,7 +323,7 @@ public class TeamsApi {
 	 * @return ApiResponse&lt;TeamList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<TeamList> teamsReadMultipleWithHttpInfo(List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<TeamList> teamsReadMultipleWithHttpInfo(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'requestBody' is set
@@ -338,7 +339,7 @@ public class TeamsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -365,7 +366,7 @@ public class TeamsApi {
 	 * @return TeamResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public TeamResult teamsSearch(TeamQuery teamQuery, String expand) throws ApiException {
+	public TeamResult teamsSearch(TeamQuery teamQuery, List<ExpandFields> expand) throws ApiException {
 		return teamsSearchWithHttpInfo(teamQuery, expand).getData();
 	}
 
@@ -377,7 +378,7 @@ public class TeamsApi {
 	 * @return ApiResponse&lt;TeamResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<TeamResult> teamsSearchWithHttpInfo(TeamQuery teamQuery, String expand) throws ApiException {
+	public ApiResponse<TeamResult> teamsSearchWithHttpInfo(TeamQuery teamQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = teamQuery;
 
 		// verify the required parameter 'teamQuery' is set
@@ -393,7 +394,7 @@ public class TeamsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -420,7 +421,7 @@ public class TeamsApi {
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
-	public Team teamsUpdate(Team team, String expand) throws ApiException {
+	public Team teamsUpdate(Team team, List<ExpandFields> expand) throws ApiException {
 		return teamsUpdateWithHttpInfo(team, expand).getData();
 	}
 
@@ -432,7 +433,7 @@ public class TeamsApi {
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Team> teamsUpdateWithHttpInfo(Team team, String expand) throws ApiException {
+	public ApiResponse<Team> teamsUpdateWithHttpInfo(Team team, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = team;
 
 		// verify the required parameter 'team' is set
@@ -448,7 +449,7 @@ public class TeamsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

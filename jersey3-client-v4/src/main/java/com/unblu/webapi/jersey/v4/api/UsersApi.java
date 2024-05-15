@@ -10,6 +10,7 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.HasPasswordData;
 import com.unblu.webapi.model.v4.User;
 import com.unblu.webapi.model.v4.UserList;
@@ -48,7 +49,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersCreate(User user, String expand) throws ApiException {
+	public User usersCreate(User user, List<ExpandFields> expand) throws ApiException {
 		return usersCreateWithHttpInfo(user, expand).getData();
 	}
 
@@ -60,7 +61,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersCreateWithHttpInfo(User user, String expand) throws ApiException {
+	public ApiResponse<User> usersCreateWithHttpInfo(User user, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = user;
 
 		// verify the required parameter 'user' is set
@@ -76,7 +77,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -103,7 +104,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersCreateWithPassword(UserPasswordContainer userPasswordContainer, String expand) throws ApiException {
+	public User usersCreateWithPassword(UserPasswordContainer userPasswordContainer, List<ExpandFields> expand) throws ApiException {
 		return usersCreateWithPasswordWithHttpInfo(userPasswordContainer, expand).getData();
 	}
 
@@ -115,7 +116,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersCreateWithPasswordWithHttpInfo(UserPasswordContainer userPasswordContainer, String expand) throws ApiException {
+	public ApiResponse<User> usersCreateWithPasswordWithHttpInfo(UserPasswordContainer userPasswordContainer, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = userPasswordContainer;
 
 		// verify the required parameter 'userPasswordContainer' is set
@@ -131,7 +132,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -158,7 +159,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersCreateWithRandomPassword(User user, String expand) throws ApiException {
+	public User usersCreateWithRandomPassword(User user, List<ExpandFields> expand) throws ApiException {
 		return usersCreateWithRandomPasswordWithHttpInfo(user, expand).getData();
 	}
 
@@ -170,7 +171,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersCreateWithRandomPasswordWithHttpInfo(User user, String expand) throws ApiException {
+	public ApiResponse<User> usersCreateWithRandomPasswordWithHttpInfo(User user, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = user;
 
 		// verify the required parameter 'user' is set
@@ -186,7 +187,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -262,7 +263,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersGetByUsername(String username, String expand) throws ApiException {
+	public User usersGetByUsername(String username, List<ExpandFields> expand) throws ApiException {
 		return usersGetByUsernameWithHttpInfo(username, expand).getData();
 	}
 
@@ -274,7 +275,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersGetByUsernameWithHttpInfo(String username, String expand) throws ApiException {
+	public ApiResponse<User> usersGetByUsernameWithHttpInfo(String username, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -286,7 +287,7 @@ public class UsersApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "username", username));
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -365,7 +366,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersRead(String userId, String expand) throws ApiException {
+	public User usersRead(String userId, List<ExpandFields> expand) throws ApiException {
 		return usersReadWithHttpInfo(userId, expand).getData();
 	}
 
@@ -377,7 +378,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersReadWithHttpInfo(String userId, String expand) throws ApiException {
+	public ApiResponse<User> usersReadWithHttpInfo(String userId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'userId' is set
@@ -394,7 +395,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -421,7 +422,7 @@ public class UsersApi {
 	 * @return UserList
 	 * @throws ApiException if fails to make API call
 	 */
-	public UserList usersReadMultiple(List<String> requestBody, String expand) throws ApiException {
+	public UserList usersReadMultiple(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return usersReadMultipleWithHttpInfo(requestBody, expand).getData();
 	}
 
@@ -433,7 +434,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;UserList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<UserList> usersReadMultipleWithHttpInfo(List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<UserList> usersReadMultipleWithHttpInfo(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'requestBody' is set
@@ -449,7 +450,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -477,7 +478,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersRemovePassword(String userId, String expand) throws ApiException {
+	public User usersRemovePassword(String userId, List<ExpandFields> expand) throws ApiException {
 		return usersRemovePasswordWithHttpInfo(userId, expand).getData();
 	}
 
@@ -490,7 +491,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersRemovePasswordWithHttpInfo(String userId, String expand) throws ApiException {
+	public ApiResponse<User> usersRemovePasswordWithHttpInfo(String userId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'userId' is set
@@ -507,7 +508,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -534,7 +535,7 @@ public class UsersApi {
 	 * @return UserResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public UserResult usersSearch(UserQuery userQuery, String expand) throws ApiException {
+	public UserResult usersSearch(UserQuery userQuery, List<ExpandFields> expand) throws ApiException {
 		return usersSearchWithHttpInfo(userQuery, expand).getData();
 	}
 
@@ -546,7 +547,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;UserResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<UserResult> usersSearchWithHttpInfo(UserQuery userQuery, String expand) throws ApiException {
+	public ApiResponse<UserResult> usersSearchWithHttpInfo(UserQuery userQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = userQuery;
 
 		// verify the required parameter 'userQuery' is set
@@ -562,7 +563,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -590,7 +591,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersSetPassword(String userId, UsersSetPasswordBody usersSetPasswordBody, String expand) throws ApiException {
+	public User usersSetPassword(String userId, UsersSetPasswordBody usersSetPasswordBody, List<ExpandFields> expand) throws ApiException {
 		return usersSetPasswordWithHttpInfo(userId, usersSetPasswordBody, expand).getData();
 	}
 
@@ -603,7 +604,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersSetPasswordWithHttpInfo(String userId, UsersSetPasswordBody usersSetPasswordBody, String expand) throws ApiException {
+	public ApiResponse<User> usersSetPasswordWithHttpInfo(String userId, UsersSetPasswordBody usersSetPasswordBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = usersSetPasswordBody;
 
 		// verify the required parameter 'userId' is set
@@ -625,7 +626,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -652,7 +653,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersSetRandomPassword(String userId, String expand) throws ApiException {
+	public User usersSetRandomPassword(String userId, List<ExpandFields> expand) throws ApiException {
 		return usersSetRandomPasswordWithHttpInfo(userId, expand).getData();
 	}
 
@@ -664,7 +665,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersSetRandomPasswordWithHttpInfo(String userId, String expand) throws ApiException {
+	public ApiResponse<User> usersSetRandomPasswordWithHttpInfo(String userId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'userId' is set
@@ -681,7 +682,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -710,7 +711,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersTransformVirtualToPhysical(UsersTransformVirtualToPhysicalBody usersTransformVirtualToPhysicalBody, String expand) throws ApiException {
+	public User usersTransformVirtualToPhysical(UsersTransformVirtualToPhysicalBody usersTransformVirtualToPhysicalBody, List<ExpandFields> expand) throws ApiException {
 		return usersTransformVirtualToPhysicalWithHttpInfo(usersTransformVirtualToPhysicalBody, expand).getData();
 	}
 
@@ -724,7 +725,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersTransformVirtualToPhysicalWithHttpInfo(UsersTransformVirtualToPhysicalBody usersTransformVirtualToPhysicalBody, String expand) throws ApiException {
+	public ApiResponse<User> usersTransformVirtualToPhysicalWithHttpInfo(UsersTransformVirtualToPhysicalBody usersTransformVirtualToPhysicalBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = usersTransformVirtualToPhysicalBody;
 
 		// verify the required parameter 'usersTransformVirtualToPhysicalBody' is set
@@ -740,7 +741,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -767,7 +768,7 @@ public class UsersApi {
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
-	public User usersUpdate(User user, String expand) throws ApiException {
+	public User usersUpdate(User user, List<ExpandFields> expand) throws ApiException {
 		return usersUpdateWithHttpInfo(user, expand).getData();
 	}
 
@@ -779,7 +780,7 @@ public class UsersApi {
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<User> usersUpdateWithHttpInfo(User user, String expand) throws ApiException {
+	public ApiResponse<User> usersUpdateWithHttpInfo(User user, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = user;
 
 		// verify the required parameter 'user' is set
@@ -795,7 +796,7 @@ public class UsersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

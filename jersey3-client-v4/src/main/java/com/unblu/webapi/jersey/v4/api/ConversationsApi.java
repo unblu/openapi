@@ -31,6 +31,7 @@ import com.unblu.webapi.model.v4.ConversationsSetStarredBody;
 import com.unblu.webapi.model.v4.ConversationsSetTopicBody;
 import com.unblu.webapi.model.v4.ConversationsSetVisibilityBody;
 import com.unblu.webapi.model.v4.ConversationsSetVisitorDataBody;
+import com.unblu.webapi.model.v4.ExpandFields;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -63,7 +64,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsAddExternalParticipant(String conversationId, ConversationsAddExternalParticipantBody conversationsAddExternalParticipantBody, String expand) throws ApiException {
+	public ConversationData conversationsAddExternalParticipant(String conversationId, ConversationsAddExternalParticipantBody conversationsAddExternalParticipantBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsAddExternalParticipantWithHttpInfo(conversationId, conversationsAddExternalParticipantBody, expand).getData();
 	}
 
@@ -77,7 +78,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsAddExternalParticipantWithHttpInfo(String conversationId, ConversationsAddExternalParticipantBody conversationsAddExternalParticipantBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsAddExternalParticipantWithHttpInfo(String conversationId, ConversationsAddExternalParticipantBody conversationsAddExternalParticipantBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsAddExternalParticipantBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -99,7 +100,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -128,7 +129,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsAddParticipant(String conversationId, ConversationsAddParticipantBody conversationsAddParticipantBody, String expand) throws ApiException {
+	public ConversationData conversationsAddParticipant(String conversationId, ConversationsAddParticipantBody conversationsAddParticipantBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsAddParticipantWithHttpInfo(conversationId, conversationsAddParticipantBody, expand).getData();
 	}
 
@@ -142,7 +143,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsAddParticipantWithHttpInfo(String conversationId, ConversationsAddParticipantBody conversationsAddParticipantBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsAddParticipantWithHttpInfo(String conversationId, ConversationsAddParticipantBody conversationsAddParticipantBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsAddParticipantBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -164,7 +165,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -192,7 +193,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsChangeParticipantVisibility(String conversationId, ConversationsChangeParticipantVisibilityBody conversationsChangeParticipantVisibilityBody, String expand) throws ApiException {
+	public ConversationData conversationsChangeParticipantVisibility(String conversationId, ConversationsChangeParticipantVisibilityBody conversationsChangeParticipantVisibilityBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsChangeParticipantVisibilityWithHttpInfo(conversationId, conversationsChangeParticipantVisibilityBody, expand).getData();
 	}
 
@@ -205,7 +206,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsChangeParticipantVisibilityWithHttpInfo(String conversationId, ConversationsChangeParticipantVisibilityBody conversationsChangeParticipantVisibilityBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsChangeParticipantVisibilityWithHttpInfo(String conversationId, ConversationsChangeParticipantVisibilityBody conversationsChangeParticipantVisibilityBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsChangeParticipantVisibilityBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -227,7 +228,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -259,7 +260,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsCreate(ConversationCreationData conversationCreationData, String expand) throws ApiException {
+	public ConversationData conversationsCreate(ConversationCreationData conversationCreationData, List<ExpandFields> expand) throws ApiException {
 		return conversationsCreateWithHttpInfo(conversationCreationData, expand).getData();
 	}
 
@@ -276,7 +277,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsCreateWithHttpInfo(ConversationCreationData conversationCreationData, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsCreateWithHttpInfo(ConversationCreationData conversationCreationData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationCreationData;
 
 		// verify the required parameter 'conversationCreationData' is set
@@ -292,7 +293,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -376,7 +377,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsEnd(String conversationId, ConversationsEndBody conversationsEndBody, String expand) throws ApiException {
+	public ConversationData conversationsEnd(String conversationId, ConversationsEndBody conversationsEndBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsEndWithHttpInfo(conversationId, conversationsEndBody, expand).getData();
 	}
 
@@ -390,7 +391,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsEndWithHttpInfo(String conversationId, ConversationsEndBody conversationsEndBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsEndWithHttpInfo(String conversationId, ConversationsEndBody conversationsEndBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsEndBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -412,7 +413,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -444,7 +445,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsGetBySourceIdAndChannelId(String sourceId, String externalMessengerChannelId, String expand) throws ApiException {
+	public ConversationData conversationsGetBySourceIdAndChannelId(String sourceId, String externalMessengerChannelId, List<ExpandFields> expand) throws ApiException {
 		return conversationsGetBySourceIdAndChannelIdWithHttpInfo(sourceId, externalMessengerChannelId, expand).getData();
 	}
 
@@ -461,7 +462,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsGetBySourceIdAndChannelIdWithHttpInfo(String sourceId, String externalMessengerChannelId, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsGetBySourceIdAndChannelIdWithHttpInfo(String sourceId, String externalMessengerChannelId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -474,7 +475,7 @@ public class ConversationsApi {
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "sourceId", sourceId));
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "externalMessengerChannelId", externalMessengerChannelId));
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -606,7 +607,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsOffboardParticipant(String conversationId, ConversationsOffboardParticipantBody conversationsOffboardParticipantBody, String expand) throws ApiException {
+	public ConversationData conversationsOffboardParticipant(String conversationId, ConversationsOffboardParticipantBody conversationsOffboardParticipantBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsOffboardParticipantWithHttpInfo(conversationId, conversationsOffboardParticipantBody, expand).getData();
 	}
 
@@ -619,7 +620,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsOffboardParticipantWithHttpInfo(String conversationId, ConversationsOffboardParticipantBody conversationsOffboardParticipantBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsOffboardParticipantWithHttpInfo(String conversationId, ConversationsOffboardParticipantBody conversationsOffboardParticipantBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsOffboardParticipantBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -641,7 +642,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -669,7 +670,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsRead(String conversationId, String expand) throws ApiException {
+	public ConversationData conversationsRead(String conversationId, List<ExpandFields> expand) throws ApiException {
 		return conversationsReadWithHttpInfo(conversationId, expand).getData();
 	}
 
@@ -682,7 +683,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsReadWithHttpInfo(String conversationId, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsReadWithHttpInfo(String conversationId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
@@ -699,7 +700,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -728,7 +729,7 @@ public class ConversationsApi {
 	 * @return ConversationResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationResult conversationsSearch(ConversationQuery conversationQuery, String expand) throws ApiException {
+	public ConversationResult conversationsSearch(ConversationQuery conversationQuery, List<ExpandFields> expand) throws ApiException {
 		return conversationsSearchWithHttpInfo(conversationQuery, expand).getData();
 	}
 
@@ -742,7 +743,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationResult> conversationsSearchWithHttpInfo(ConversationQuery conversationQuery, String expand) throws ApiException {
+	public ApiResponse<ConversationResult> conversationsSearchWithHttpInfo(ConversationQuery conversationQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationQuery;
 
 		// verify the required parameter 'conversationQuery' is set
@@ -758,7 +759,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -787,7 +788,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetAssigneePerson(String conversationId, ConversationsSetAssigneePersonBody conversationsSetAssigneePersonBody, String expand) throws ApiException {
+	public ConversationData conversationsSetAssigneePerson(String conversationId, ConversationsSetAssigneePersonBody conversationsSetAssigneePersonBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetAssigneePersonWithHttpInfo(conversationId, conversationsSetAssigneePersonBody, expand).getData();
 	}
 
@@ -801,7 +802,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetAssigneePersonWithHttpInfo(String conversationId, ConversationsSetAssigneePersonBody conversationsSetAssigneePersonBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetAssigneePersonWithHttpInfo(String conversationId, ConversationsSetAssigneePersonBody conversationsSetAssigneePersonBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetAssigneePersonBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -823,7 +824,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -851,7 +852,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetAwaitedPersonType(String conversationId, ConversationsSetAwaitedPersonTypeBody conversationsSetAwaitedPersonTypeBody, String expand) throws ApiException {
+	public ConversationData conversationsSetAwaitedPersonType(String conversationId, ConversationsSetAwaitedPersonTypeBody conversationsSetAwaitedPersonTypeBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetAwaitedPersonTypeWithHttpInfo(conversationId, conversationsSetAwaitedPersonTypeBody, expand).getData();
 	}
 
@@ -864,7 +865,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetAwaitedPersonTypeWithHttpInfo(String conversationId, ConversationsSetAwaitedPersonTypeBody conversationsSetAwaitedPersonTypeBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetAwaitedPersonTypeWithHttpInfo(String conversationId, ConversationsSetAwaitedPersonTypeBody conversationsSetAwaitedPersonTypeBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetAwaitedPersonTypeBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -886,7 +887,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -915,7 +916,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetContextPerson(String conversationId, ConversationsSetContextPersonBody conversationsSetContextPersonBody, String expand) throws ApiException {
+	public ConversationData conversationsSetContextPerson(String conversationId, ConversationsSetContextPersonBody conversationsSetContextPersonBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetContextPersonWithHttpInfo(conversationId, conversationsSetContextPersonBody, expand).getData();
 	}
 
@@ -929,7 +930,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetContextPersonWithHttpInfo(String conversationId, ConversationsSetContextPersonBody conversationsSetContextPersonBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetContextPersonWithHttpInfo(String conversationId, ConversationsSetContextPersonBody conversationsSetContextPersonBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetContextPersonBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -951,7 +952,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -979,7 +980,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetLocale(String conversationId, ConversationsSetLocaleBody conversationsSetLocaleBody, String expand) throws ApiException {
+	public ConversationData conversationsSetLocale(String conversationId, ConversationsSetLocaleBody conversationsSetLocaleBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetLocaleWithHttpInfo(conversationId, conversationsSetLocaleBody, expand).getData();
 	}
 
@@ -992,7 +993,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetLocaleWithHttpInfo(String conversationId, ConversationsSetLocaleBody conversationsSetLocaleBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetLocaleWithHttpInfo(String conversationId, ConversationsSetLocaleBody conversationsSetLocaleBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetLocaleBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1014,7 +1015,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1042,7 +1043,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetRecipient(String conversationId, ConversationRecipientData conversationRecipientData, String expand) throws ApiException {
+	public ConversationData conversationsSetRecipient(String conversationId, ConversationRecipientData conversationRecipientData, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetRecipientWithHttpInfo(conversationId, conversationRecipientData, expand).getData();
 	}
 
@@ -1055,7 +1056,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetRecipientWithHttpInfo(String conversationId, ConversationRecipientData conversationRecipientData, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetRecipientWithHttpInfo(String conversationId, ConversationRecipientData conversationRecipientData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationRecipientData;
 
 		// verify the required parameter 'conversationId' is set
@@ -1077,7 +1078,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1112,7 +1113,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetScheduledTimestamp(String conversationId, ConversationsSetScheduledTimestampBody conversationsSetScheduledTimestampBody, String expand) throws ApiException {
+	public ConversationData conversationsSetScheduledTimestamp(String conversationId, ConversationsSetScheduledTimestampBody conversationsSetScheduledTimestampBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetScheduledTimestampWithHttpInfo(conversationId, conversationsSetScheduledTimestampBody, expand).getData();
 	}
 
@@ -1132,7 +1133,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetScheduledTimestampWithHttpInfo(String conversationId, ConversationsSetScheduledTimestampBody conversationsSetScheduledTimestampBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetScheduledTimestampWithHttpInfo(String conversationId, ConversationsSetScheduledTimestampBody conversationsSetScheduledTimestampBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetScheduledTimestampBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1154,7 +1155,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1182,7 +1183,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetStarred(String conversationId, ConversationsSetStarredBody conversationsSetStarredBody, String expand) throws ApiException {
+	public ConversationData conversationsSetStarred(String conversationId, ConversationsSetStarredBody conversationsSetStarredBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetStarredWithHttpInfo(conversationId, conversationsSetStarredBody, expand).getData();
 	}
 
@@ -1195,7 +1196,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetStarredWithHttpInfo(String conversationId, ConversationsSetStarredBody conversationsSetStarredBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetStarredWithHttpInfo(String conversationId, ConversationsSetStarredBody conversationsSetStarredBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetStarredBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1217,7 +1218,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1251,7 +1252,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetTopic(String conversationId, ConversationsSetTopicBody conversationsSetTopicBody, String expand) throws ApiException {
+	public ConversationData conversationsSetTopic(String conversationId, ConversationsSetTopicBody conversationsSetTopicBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetTopicWithHttpInfo(conversationId, conversationsSetTopicBody, expand).getData();
 	}
 
@@ -1270,7 +1271,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetTopicWithHttpInfo(String conversationId, ConversationsSetTopicBody conversationsSetTopicBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetTopicWithHttpInfo(String conversationId, ConversationsSetTopicBody conversationsSetTopicBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetTopicBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1292,7 +1293,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1320,7 +1321,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetVisibility(String conversationId, ConversationsSetVisibilityBody conversationsSetVisibilityBody, String expand) throws ApiException {
+	public ConversationData conversationsSetVisibility(String conversationId, ConversationsSetVisibilityBody conversationsSetVisibilityBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetVisibilityWithHttpInfo(conversationId, conversationsSetVisibilityBody, expand).getData();
 	}
 
@@ -1333,7 +1334,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetVisibilityWithHttpInfo(String conversationId, ConversationsSetVisibilityBody conversationsSetVisibilityBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetVisibilityWithHttpInfo(String conversationId, ConversationsSetVisibilityBody conversationsSetVisibilityBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetVisibilityBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1355,7 +1356,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1383,7 +1384,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsSetVisitorData(String conversationId, ConversationsSetVisitorDataBody conversationsSetVisitorDataBody, String expand) throws ApiException {
+	public ConversationData conversationsSetVisitorData(String conversationId, ConversationsSetVisitorDataBody conversationsSetVisitorDataBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsSetVisitorDataWithHttpInfo(conversationId, conversationsSetVisitorDataBody, expand).getData();
 	}
 
@@ -1396,7 +1397,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsSetVisitorDataWithHttpInfo(String conversationId, ConversationsSetVisitorDataBody conversationsSetVisitorDataBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsSetVisitorDataWithHttpInfo(String conversationId, ConversationsSetVisitorDataBody conversationsSetVisitorDataBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationsSetVisitorDataBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1418,7 +1419,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1555,7 +1556,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsUpdateConfiguration(String conversationId, Map<String, String> requestBody, String expand) throws ApiException {
+	public ConversationData conversationsUpdateConfiguration(String conversationId, Map<String, String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsUpdateConfigurationWithHttpInfo(conversationId, requestBody, expand).getData();
 	}
 
@@ -1569,7 +1570,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsUpdateConfigurationWithHttpInfo(String conversationId, Map<String, String> requestBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsUpdateConfigurationWithHttpInfo(String conversationId, Map<String, String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1591,7 +1592,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1620,7 +1621,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsUpdateMetadata(String conversationId, Map<String, String> requestBody, String expand) throws ApiException {
+	public ConversationData conversationsUpdateMetadata(String conversationId, Map<String, String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsUpdateMetadataWithHttpInfo(conversationId, requestBody, expand).getData();
 	}
 
@@ -1634,7 +1635,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsUpdateMetadataWithHttpInfo(String conversationId, Map<String, String> requestBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsUpdateMetadataWithHttpInfo(String conversationId, Map<String, String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1656,7 +1657,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1685,7 +1686,7 @@ public class ConversationsApi {
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationData conversationsUpdateText(String conversationId, Map<String, Map<String, String>> requestBody, String expand) throws ApiException {
+	public ConversationData conversationsUpdateText(String conversationId, Map<String, Map<String, String>> requestBody, List<ExpandFields> expand) throws ApiException {
 		return conversationsUpdateTextWithHttpInfo(conversationId, requestBody, expand).getData();
 	}
 
@@ -1699,7 +1700,7 @@ public class ConversationsApi {
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationData> conversationsUpdateTextWithHttpInfo(String conversationId, Map<String, Map<String, String>> requestBody, String expand) throws ApiException {
+	public ApiResponse<ConversationData> conversationsUpdateTextWithHttpInfo(String conversationId, Map<String, Map<String, String>> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'conversationId' is set
@@ -1721,7 +1722,7 @@ public class ConversationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

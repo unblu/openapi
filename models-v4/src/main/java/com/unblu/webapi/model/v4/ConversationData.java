@@ -581,12 +581,11 @@ public class ConversationData {
 	}
 
 	/**
-	 * True if the conversation inherits all configuration and texts from its conversation template. If omitted, the value based
-	 * on&#x60;ConversationTemplate.inheritConfigurationAndTexts&#x60; will be used.
+	 * True if the conversation inherits all configuration and text properties from its conversation template
 	 * 
 	 * @return inheritConfigurationAndTexts
 	 **/
-	@ApiModelProperty(value = "True if the conversation inherits all configuration and texts from its conversation template. If omitted, the value based on`ConversationTemplate.inheritConfigurationAndTexts` will be used.")
+	@ApiModelProperty(value = "True if the conversation inherits all configuration and text properties from its conversation template")
 	public Boolean isInheritConfigurationAndTexts() {
 		return inheritConfigurationAndTexts;
 	}

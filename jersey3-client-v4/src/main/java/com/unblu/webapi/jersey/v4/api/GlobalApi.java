@@ -10,7 +10,9 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.GlobalData;
+import com.unblu.webapi.model.v4.GlobalPingResponse;
 import com.unblu.webapi.model.v4.ProductVersion;
 import com.unblu.webapi.model.v4.RecordedMinutesData;
 
@@ -96,7 +98,7 @@ public class GlobalApi {
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
-	public GlobalData globalInstallLicense(String body, String expand) throws ApiException {
+	public GlobalData globalInstallLicense(String body, List<ExpandFields> expand) throws ApiException {
 		return globalInstallLicenseWithHttpInfo(body, expand).getData();
 	}
 
@@ -108,7 +110,7 @@ public class GlobalApi {
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<GlobalData> globalInstallLicenseWithHttpInfo(String body, String expand) throws ApiException {
+	public ApiResponse<GlobalData> globalInstallLicenseWithHttpInfo(String body, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = body;
 
 		// verify the required parameter 'body' is set
@@ -124,7 +126,7 @@ public class GlobalApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -144,21 +146,24 @@ public class GlobalApi {
 	}
 
 	/**
-	 * ping Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+	 * ping Checks whether the system is ready to receive requests. If the system is ready, it returns a 200 HTTP status, otherwise it returns a 503 HTTP
+	 * status.&lt;br&gt;
 	 * 
+	 * @return GlobalPingResponse
 	 * @throws ApiException if fails to make API call
 	 */
-	public void globalPing() throws ApiException {
-
-		globalPingWithHttpInfo();
+	public GlobalPingResponse globalPing() throws ApiException {
+		return globalPingWithHttpInfo().getData();
 	}
 
 	/**
-	 * ping Checks whether the system is ready to receive requests. It returns a 2xx HTTP status if the system is ready or a 503 status otherwise.
+	 * ping Checks whether the system is ready to receive requests. If the system is ready, it returns a 200 HTTP status, otherwise it returns a 503 HTTP
+	 * status.&lt;br&gt;
 	 * 
+	 * @return ApiResponse&lt;GlobalPingResponse&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Void> globalPingWithHttpInfo() throws ApiException {
+	public ApiResponse<GlobalPingResponse> globalPingWithHttpInfo() throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -170,7 +175,7 @@ public class GlobalApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		final String[] localVarAccepts = {
-
+			"application/json"
 		};
 		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
 
@@ -181,7 +186,9 @@ public class GlobalApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth" };
 
-		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+		GenericType<GlobalPingResponse> localVarReturnType = new GenericType<GlobalPingResponse>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**
@@ -235,7 +242,7 @@ public class GlobalApi {
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
-	public GlobalData globalRead(String expand) throws ApiException {
+	public GlobalData globalRead(List<ExpandFields> expand) throws ApiException {
 		return globalReadWithHttpInfo(expand).getData();
 	}
 
@@ -246,7 +253,7 @@ public class GlobalApi {
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<GlobalData> globalReadWithHttpInfo(String expand) throws ApiException {
+	public ApiResponse<GlobalData> globalReadWithHttpInfo(List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -257,7 +264,7 @@ public class GlobalApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -283,7 +290,7 @@ public class GlobalApi {
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
-	public GlobalData globalRemoveLicense(String expand) throws ApiException {
+	public GlobalData globalRemoveLicense(List<ExpandFields> expand) throws ApiException {
 		return globalRemoveLicenseWithHttpInfo(expand).getData();
 	}
 
@@ -294,7 +301,7 @@ public class GlobalApi {
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<GlobalData> globalRemoveLicenseWithHttpInfo(String expand) throws ApiException {
+	public ApiResponse<GlobalData> globalRemoveLicenseWithHttpInfo(List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -305,7 +312,7 @@ public class GlobalApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -333,7 +340,7 @@ public class GlobalApi {
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
-	public GlobalData globalUpdate(GlobalData globalData, String expand) throws ApiException {
+	public GlobalData globalUpdate(GlobalData globalData, List<ExpandFields> expand) throws ApiException {
 		return globalUpdateWithHttpInfo(globalData, expand).getData();
 	}
 
@@ -346,7 +353,7 @@ public class GlobalApi {
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<GlobalData> globalUpdateWithHttpInfo(GlobalData globalData, String expand) throws ApiException {
+	public ApiResponse<GlobalData> globalUpdateWithHttpInfo(GlobalData globalData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = globalData;
 
 		// verify the required parameter 'globalData' is set
@@ -362,7 +369,7 @@ public class GlobalApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

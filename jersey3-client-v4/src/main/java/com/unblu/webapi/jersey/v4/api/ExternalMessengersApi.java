@@ -12,6 +12,7 @@ import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
 import com.unblu.webapi.model.v4.CustomExternalMessengerChannelQuery;
 import com.unblu.webapi.model.v4.CustomExternalMessengerChannelResult;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.ExternalMessengerChannel;
 import com.unblu.webapi.model.v4.ExternalMessengerChannelQuery;
 import com.unblu.webapi.model.v4.ExternalMessengerChannelResult;
@@ -54,7 +55,7 @@ public class ExternalMessengersApi {
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
-	public ExternalMessengerChannel externalMessengersCreate(ExternalMessengerChannel externalMessengerChannel, String expand) throws ApiException {
+	public ExternalMessengerChannel externalMessengersCreate(ExternalMessengerChannel externalMessengerChannel, List<ExpandFields> expand) throws ApiException {
 		return externalMessengersCreateWithHttpInfo(externalMessengerChannel, expand).getData();
 	}
 
@@ -66,7 +67,7 @@ public class ExternalMessengersApi {
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ExternalMessengerChannel> externalMessengersCreateWithHttpInfo(ExternalMessengerChannel externalMessengerChannel, String expand) throws ApiException {
+	public ApiResponse<ExternalMessengerChannel> externalMessengersCreateWithHttpInfo(ExternalMessengerChannel externalMessengerChannel, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = externalMessengerChannel;
 
 		// verify the required parameter 'externalMessengerChannel' is set
@@ -82,7 +83,7 @@ public class ExternalMessengersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -158,7 +159,7 @@ public class ExternalMessengersApi {
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
-	public ExternalMessengerChannel externalMessengersGetByName(String name, String expand) throws ApiException {
+	public ExternalMessengerChannel externalMessengersGetByName(String name, List<ExpandFields> expand) throws ApiException {
 		return externalMessengersGetByNameWithHttpInfo(name, expand).getData();
 	}
 
@@ -170,7 +171,7 @@ public class ExternalMessengersApi {
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ExternalMessengerChannel> externalMessengersGetByNameWithHttpInfo(String name, String expand) throws ApiException {
+	public ApiResponse<ExternalMessengerChannel> externalMessengersGetByNameWithHttpInfo(String name, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -182,7 +183,7 @@ public class ExternalMessengersApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "name", name));
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -451,7 +452,7 @@ public class ExternalMessengersApi {
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
-	public ExternalMessengerChannel externalMessengersRead(String channelId, String expand) throws ApiException {
+	public ExternalMessengerChannel externalMessengersRead(String channelId, List<ExpandFields> expand) throws ApiException {
 		return externalMessengersReadWithHttpInfo(channelId, expand).getData();
 	}
 
@@ -463,7 +464,7 @@ public class ExternalMessengersApi {
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ExternalMessengerChannel> externalMessengersReadWithHttpInfo(String channelId, String expand) throws ApiException {
+	public ApiResponse<ExternalMessengerChannel> externalMessengersReadWithHttpInfo(String channelId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'channelId' is set
@@ -480,7 +481,7 @@ public class ExternalMessengersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -507,7 +508,7 @@ public class ExternalMessengersApi {
 	 * @return ExternalMessengerChannelResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public ExternalMessengerChannelResult externalMessengersSearch(ExternalMessengerChannelQuery externalMessengerChannelQuery, String expand) throws ApiException {
+	public ExternalMessengerChannelResult externalMessengersSearch(ExternalMessengerChannelQuery externalMessengerChannelQuery, List<ExpandFields> expand) throws ApiException {
 		return externalMessengersSearchWithHttpInfo(externalMessengerChannelQuery, expand).getData();
 	}
 
@@ -519,7 +520,7 @@ public class ExternalMessengersApi {
 	 * @return ApiResponse&lt;ExternalMessengerChannelResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ExternalMessengerChannelResult> externalMessengersSearchWithHttpInfo(ExternalMessengerChannelQuery externalMessengerChannelQuery, String expand) throws ApiException {
+	public ApiResponse<ExternalMessengerChannelResult> externalMessengersSearchWithHttpInfo(ExternalMessengerChannelQuery externalMessengerChannelQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = externalMessengerChannelQuery;
 
 		// verify the required parameter 'externalMessengerChannelQuery' is set
@@ -535,7 +536,7 @@ public class ExternalMessengersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -562,7 +563,7 @@ public class ExternalMessengersApi {
 	 * @return CustomExternalMessengerChannelResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public CustomExternalMessengerChannelResult externalMessengersSearchCustom(CustomExternalMessengerChannelQuery customExternalMessengerChannelQuery, String expand) throws ApiException {
+	public CustomExternalMessengerChannelResult externalMessengersSearchCustom(CustomExternalMessengerChannelQuery customExternalMessengerChannelQuery, List<ExpandFields> expand) throws ApiException {
 		return externalMessengersSearchCustomWithHttpInfo(customExternalMessengerChannelQuery, expand).getData();
 	}
 
@@ -574,7 +575,7 @@ public class ExternalMessengersApi {
 	 * @return ApiResponse&lt;CustomExternalMessengerChannelResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<CustomExternalMessengerChannelResult> externalMessengersSearchCustomWithHttpInfo(CustomExternalMessengerChannelQuery customExternalMessengerChannelQuery, String expand) throws ApiException {
+	public ApiResponse<CustomExternalMessengerChannelResult> externalMessengersSearchCustomWithHttpInfo(CustomExternalMessengerChannelQuery customExternalMessengerChannelQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = customExternalMessengerChannelQuery;
 
 		// verify the required parameter 'customExternalMessengerChannelQuery' is set
@@ -590,7 +591,7 @@ public class ExternalMessengersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -617,7 +618,7 @@ public class ExternalMessengersApi {
 	 * @return SmsExternalMessengerChannelResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public SmsExternalMessengerChannelResult externalMessengersSearchSms(SmsExternalMessengerChannelQuery smsExternalMessengerChannelQuery, String expand) throws ApiException {
+	public SmsExternalMessengerChannelResult externalMessengersSearchSms(SmsExternalMessengerChannelQuery smsExternalMessengerChannelQuery, List<ExpandFields> expand) throws ApiException {
 		return externalMessengersSearchSmsWithHttpInfo(smsExternalMessengerChannelQuery, expand).getData();
 	}
 
@@ -629,7 +630,7 @@ public class ExternalMessengersApi {
 	 * @return ApiResponse&lt;SmsExternalMessengerChannelResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<SmsExternalMessengerChannelResult> externalMessengersSearchSmsWithHttpInfo(SmsExternalMessengerChannelQuery smsExternalMessengerChannelQuery, String expand) throws ApiException {
+	public ApiResponse<SmsExternalMessengerChannelResult> externalMessengersSearchSmsWithHttpInfo(SmsExternalMessengerChannelQuery smsExternalMessengerChannelQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = smsExternalMessengerChannelQuery;
 
 		// verify the required parameter 'smsExternalMessengerChannelQuery' is set
@@ -645,7 +646,7 @@ public class ExternalMessengersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -785,7 +786,7 @@ public class ExternalMessengersApi {
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
-	public ExternalMessengerChannel externalMessengersUpdate(ExternalMessengerChannel externalMessengerChannel, String expand) throws ApiException {
+	public ExternalMessengerChannel externalMessengersUpdate(ExternalMessengerChannel externalMessengerChannel, List<ExpandFields> expand) throws ApiException {
 		return externalMessengersUpdateWithHttpInfo(externalMessengerChannel, expand).getData();
 	}
 
@@ -797,7 +798,7 @@ public class ExternalMessengersApi {
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ExternalMessengerChannel> externalMessengersUpdateWithHttpInfo(ExternalMessengerChannel externalMessengerChannel, String expand) throws ApiException {
+	public ApiResponse<ExternalMessengerChannel> externalMessengersUpdateWithHttpInfo(ExternalMessengerChannel externalMessengerChannel, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = externalMessengerChannel;
 
 		// verify the required parameter 'externalMessengerChannel' is set
@@ -813,7 +814,7 @@ public class ExternalMessengersApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

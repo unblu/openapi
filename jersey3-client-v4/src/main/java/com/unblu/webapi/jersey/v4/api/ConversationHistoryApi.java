@@ -14,6 +14,7 @@ import com.unblu.webapi.model.v4.ConversationHistoryData;
 import com.unblu.webapi.model.v4.ConversationHistoryDataResult;
 import com.unblu.webapi.model.v4.ConversationHistoryQuery;
 import com.unblu.webapi.model.v4.ConversationRecordingHistoryDataList;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.MessageExportQuery;
 import com.unblu.webapi.model.v4.MessageExportResult;
 
@@ -157,7 +158,7 @@ public class ConversationHistoryApi {
 	 * @return ConversationHistoryData
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationHistoryData conversationHistoryRead(String conversationId, String expand) throws ApiException {
+	public ConversationHistoryData conversationHistoryRead(String conversationId, List<ExpandFields> expand) throws ApiException {
 		return conversationHistoryReadWithHttpInfo(conversationId, expand).getData();
 	}
 
@@ -169,7 +170,7 @@ public class ConversationHistoryApi {
 	 * @return ApiResponse&lt;ConversationHistoryData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationHistoryData> conversationHistoryReadWithHttpInfo(String conversationId, String expand) throws ApiException {
+	public ApiResponse<ConversationHistoryData> conversationHistoryReadWithHttpInfo(String conversationId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'conversationId' is set
@@ -186,7 +187,7 @@ public class ConversationHistoryApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -213,7 +214,7 @@ public class ConversationHistoryApi {
 	 * @return ConversationHistoryDataResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public ConversationHistoryDataResult conversationHistorySearch(ConversationHistoryQuery conversationHistoryQuery, String expand) throws ApiException {
+	public ConversationHistoryDataResult conversationHistorySearch(ConversationHistoryQuery conversationHistoryQuery, List<ExpandFields> expand) throws ApiException {
 		return conversationHistorySearchWithHttpInfo(conversationHistoryQuery, expand).getData();
 	}
 
@@ -225,7 +226,7 @@ public class ConversationHistoryApi {
 	 * @return ApiResponse&lt;ConversationHistoryDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ConversationHistoryDataResult> conversationHistorySearchWithHttpInfo(ConversationHistoryQuery conversationHistoryQuery, String expand) throws ApiException {
+	public ApiResponse<ConversationHistoryDataResult> conversationHistorySearchWithHttpInfo(ConversationHistoryQuery conversationHistoryQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = conversationHistoryQuery;
 
 		// verify the required parameter 'conversationHistoryQuery' is set
@@ -241,7 +242,7 @@ public class ConversationHistoryApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

@@ -13,6 +13,7 @@ import com.unblu.webapi.jersey.v4.invoker.Pair;
 import com.unblu.webapi.model.v4.CustomActionData;
 import com.unblu.webapi.model.v4.CustomActionQuery;
 import com.unblu.webapi.model.v4.CustomActionResult;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.PingResponse;
 
 import jakarta.ws.rs.core.GenericType;
@@ -44,7 +45,7 @@ public class CustomActionsApi {
 	 * @return CustomActionData
 	 * @throws ApiException if fails to make API call
 	 */
-	public CustomActionData customActionsCreate(CustomActionData customActionData, String expand) throws ApiException {
+	public CustomActionData customActionsCreate(CustomActionData customActionData, List<ExpandFields> expand) throws ApiException {
 		return customActionsCreateWithHttpInfo(customActionData, expand).getData();
 	}
 
@@ -56,7 +57,7 @@ public class CustomActionsApi {
 	 * @return ApiResponse&lt;CustomActionData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<CustomActionData> customActionsCreateWithHttpInfo(CustomActionData customActionData, String expand) throws ApiException {
+	public ApiResponse<CustomActionData> customActionsCreateWithHttpInfo(CustomActionData customActionData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = customActionData;
 
 		// verify the required parameter 'customActionData' is set
@@ -72,7 +73,7 @@ public class CustomActionsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -148,7 +149,7 @@ public class CustomActionsApi {
 	 * @return CustomActionData
 	 * @throws ApiException if fails to make API call
 	 */
-	public CustomActionData customActionsRead(String customActionId, String expand) throws ApiException {
+	public CustomActionData customActionsRead(String customActionId, List<ExpandFields> expand) throws ApiException {
 		return customActionsReadWithHttpInfo(customActionId, expand).getData();
 	}
 
@@ -160,7 +161,7 @@ public class CustomActionsApi {
 	 * @return ApiResponse&lt;CustomActionData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<CustomActionData> customActionsReadWithHttpInfo(String customActionId, String expand) throws ApiException {
+	public ApiResponse<CustomActionData> customActionsReadWithHttpInfo(String customActionId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'customActionId' is set
@@ -177,7 +178,7 @@ public class CustomActionsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -307,7 +308,7 @@ public class CustomActionsApi {
 	 * @return CustomActionData
 	 * @throws ApiException if fails to make API call
 	 */
-	public CustomActionData customActionsUpdate(CustomActionData customActionData, String expand) throws ApiException {
+	public CustomActionData customActionsUpdate(CustomActionData customActionData, List<ExpandFields> expand) throws ApiException {
 		return customActionsUpdateWithHttpInfo(customActionData, expand).getData();
 	}
 
@@ -319,7 +320,7 @@ public class CustomActionsApi {
 	 * @return ApiResponse&lt;CustomActionData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<CustomActionData> customActionsUpdateWithHttpInfo(CustomActionData customActionData, String expand) throws ApiException {
+	public ApiResponse<CustomActionData> customActionsUpdateWithHttpInfo(CustomActionData customActionData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = customActionData;
 
 		// verify the required parameter 'customActionData' is set
@@ -335,7 +336,7 @@ public class CustomActionsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

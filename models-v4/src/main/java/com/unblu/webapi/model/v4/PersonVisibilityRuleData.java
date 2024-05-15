@@ -31,6 +31,8 @@ import io.swagger.annotations.ApiModelProperty;
 	PersonVisibilityRuleData.JSON_PROPERTY_AGENT_LABEL_NAMES,
 	PersonVisibilityRuleData.JSON_PROPERTY_VISITOR_LABEL_SELECTION,
 	PersonVisibilityRuleData.JSON_PROPERTY_VISITOR_LABEL_NAMES,
+	PersonVisibilityRuleData.JSON_PROPERTY_CREATION_TIMESTAMP,
+	PersonVisibilityRuleData.JSON_PROPERTY_MODIFICATION_TIMESTAMP,
 	PersonVisibilityRuleData.JSON_PROPERTY_VERSION,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -107,6 +109,14 @@ public class PersonVisibilityRuleData {
 	public static final String JSON_PROPERTY_VISITOR_LABEL_NAMES = "visitorLabelNames";
 	@JsonProperty(JSON_PROPERTY_VISITOR_LABEL_NAMES)
 	private List<String> visitorLabelNames = null;
+
+	public static final String JSON_PROPERTY_CREATION_TIMESTAMP = "creationTimestamp";
+	@JsonProperty(JSON_PROPERTY_CREATION_TIMESTAMP)
+	private Long creationTimestamp;
+
+	public static final String JSON_PROPERTY_MODIFICATION_TIMESTAMP = "modificationTimestamp";
+	@JsonProperty(JSON_PROPERTY_MODIFICATION_TIMESTAMP)
+	private Long modificationTimestamp;
 
 	public static final String JSON_PROPERTY_VERSION = "version";
 	@JsonProperty(JSON_PROPERTY_VERSION)
@@ -321,6 +331,47 @@ public class PersonVisibilityRuleData {
 		this.visitorLabelNames = visitorLabelNames;
 	}
 
+	public PersonVisibilityRuleData creationTimestamp(Long creationTimestamp) {
+		this.creationTimestamp = creationTimestamp;
+		return this;
+	}
+
+	/**
+	 * Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be
+	 * omitted. Note: If you set this property, Unblu returns the same value, but it isn&#39;t written to storage and doesn&#39;t affect data consistency.
+	 * 
+	 * @return creationTimestamp
+	 **/
+	@ApiModelProperty(value = "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency.")
+	public Long getCreationTimestamp() {
+		return creationTimestamp;
+	}
+
+	public void setCreationTimestamp(Long creationTimestamp) {
+		this.creationTimestamp = creationTimestamp;
+	}
+
+	public PersonVisibilityRuleData modificationTimestamp(Long modificationTimestamp) {
+		this.modificationTimestamp = modificationTimestamp;
+		return this;
+	}
+
+	/**
+	 * Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is
+	 * ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn&#39;t written to storage and doesn&#39;t
+	 * affect the data consistency.
+	 * 
+	 * @return modificationTimestamp
+	 **/
+	@ApiModelProperty(value = "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency.")
+	public Long getModificationTimestamp() {
+		return modificationTimestamp;
+	}
+
+	public void setModificationTimestamp(Long modificationTimestamp) {
+		this.modificationTimestamp = modificationTimestamp;
+	}
+
 	public PersonVisibilityRuleData version(Long version) {
 		this.version = version;
 		return this;
@@ -360,12 +411,14 @@ public class PersonVisibilityRuleData {
 				Objects.equals(this.agentLabelNames, personVisibilityRuleData.agentLabelNames) &&
 				Objects.equals(this.visitorLabelSelection, personVisibilityRuleData.visitorLabelSelection) &&
 				Objects.equals(this.visitorLabelNames, personVisibilityRuleData.visitorLabelNames) &&
+				Objects.equals(this.creationTimestamp, personVisibilityRuleData.creationTimestamp) &&
+				Objects.equals(this.modificationTimestamp, personVisibilityRuleData.modificationTimestamp) &&
 				Objects.equals(this.version, personVisibilityRuleData.version);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, name, enabled, description, agentLabelSelection, agentLabelNames, visitorLabelSelection, visitorLabelNames, version);
+		return Objects.hash($type, id, accountId, name, enabled, description, agentLabelSelection, agentLabelNames, visitorLabelSelection, visitorLabelNames, creationTimestamp, modificationTimestamp, version);
 	}
 
 	@Override
@@ -382,6 +435,8 @@ public class PersonVisibilityRuleData {
 		sb.append("    agentLabelNames: ").append(toIndentedString(agentLabelNames)).append("\n");
 		sb.append("    visitorLabelSelection: ").append(toIndentedString(visitorLabelSelection)).append("\n");
 		sb.append("    visitorLabelNames: ").append(toIndentedString(visitorLabelNames)).append("\n");
+		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
+		sb.append("    modificationTimestamp: ").append(toIndentedString(modificationTimestamp)).append("\n");
 		sb.append("    version: ").append(toIndentedString(version)).append("\n");
 		sb.append("}");
 		return sb.toString();

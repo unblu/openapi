@@ -202,11 +202,11 @@ public class SmsExternalMessengerChannel implements ExternalMessengerChannel {
 
 	/**
 	 * Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be
-	 * omitted. Note: If you set this property, Unblu returns the same value, but it isn&#39;t written to storage and doesn&#39;t affect data consistency..
+	 * omitted. Note: If you set this property, Unblu returns the same value, but it isn&#39;t written to storage and doesn&#39;t affect data consistency.
 	 * 
 	 * @return creationTimestamp
 	 **/
-	@ApiModelProperty(value = "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency..")
+	@ApiModelProperty(value = "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency.")
 	public Long getCreationTimestamp() {
 		return creationTimestamp;
 	}
@@ -221,13 +221,13 @@ public class SmsExternalMessengerChannel implements ExternalMessengerChannel {
 	}
 
 	/**
-	 * Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational
-	 * character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it
-	 * will not be written to the storage and will not effect the data consistency.
+	 * Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is
+	 * ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn&#39;t written to storage and doesn&#39;t
+	 * affect the data consistency.
 	 * 
 	 * @return modificationTimestamp
 	 **/
-	@ApiModelProperty(value = "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency.")
+	@ApiModelProperty(value = "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency.")
 	public Long getModificationTimestamp() {
 		return modificationTimestamp;
 	}

@@ -18,6 +18,7 @@ import com.unblu.webapi.model.v4.AccountQuotaUsageData;
 import com.unblu.webapi.model.v4.AccountResult;
 import com.unblu.webapi.model.v4.AccountSecret;
 import com.unblu.webapi.model.v4.AccountUserContainer;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.RecordedMinutesData;
 
 import jakarta.ws.rs.core.GenericType;
@@ -49,7 +50,7 @@ public class AccountsApi {
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
-	public Account accountsCreate(Account account, String expand) throws ApiException {
+	public Account accountsCreate(Account account, List<ExpandFields> expand) throws ApiException {
 		return accountsCreateWithHttpInfo(account, expand).getData();
 	}
 
@@ -61,7 +62,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Account> accountsCreateWithHttpInfo(Account account, String expand) throws ApiException {
+	public ApiResponse<Account> accountsCreateWithHttpInfo(Account account, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = account;
 
 		// verify the required parameter 'account' is set
@@ -77,7 +78,7 @@ public class AccountsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -104,7 +105,7 @@ public class AccountsApi {
 	 * @return AccountUserContainer
 	 * @throws ApiException if fails to make API call
 	 */
-	public AccountUserContainer accountsCreateAccountWithNewAdmin(AccountUserContainer accountUserContainer, String expand) throws ApiException {
+	public AccountUserContainer accountsCreateAccountWithNewAdmin(AccountUserContainer accountUserContainer, List<ExpandFields> expand) throws ApiException {
 		return accountsCreateAccountWithNewAdminWithHttpInfo(accountUserContainer, expand).getData();
 	}
 
@@ -116,7 +117,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;AccountUserContainer&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<AccountUserContainer> accountsCreateAccountWithNewAdminWithHttpInfo(AccountUserContainer accountUserContainer, String expand) throws ApiException {
+	public ApiResponse<AccountUserContainer> accountsCreateAccountWithNewAdminWithHttpInfo(AccountUserContainer accountUserContainer, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = accountUserContainer;
 
 		// verify the required parameter 'accountUserContainer' is set
@@ -132,7 +133,7 @@ public class AccountsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -384,7 +385,7 @@ public class AccountsApi {
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
-	public Account accountsGetByName(String name, String expand) throws ApiException {
+	public Account accountsGetByName(String name, List<ExpandFields> expand) throws ApiException {
 		return accountsGetByNameWithHttpInfo(name, expand).getData();
 	}
 
@@ -396,7 +397,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Account> accountsGetByNameWithHttpInfo(String name, String expand) throws ApiException {
+	public ApiResponse<Account> accountsGetByNameWithHttpInfo(String name, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -408,7 +409,7 @@ public class AccountsApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "name", name));
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -434,7 +435,7 @@ public class AccountsApi {
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
-	public Account accountsGetCurrentAccount(String expand) throws ApiException {
+	public Account accountsGetCurrentAccount(List<ExpandFields> expand) throws ApiException {
 		return accountsGetCurrentAccountWithHttpInfo(expand).getData();
 	}
 
@@ -445,7 +446,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Account> accountsGetCurrentAccountWithHttpInfo(String expand) throws ApiException {
+	public ApiResponse<Account> accountsGetCurrentAccountWithHttpInfo(List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -456,7 +457,7 @@ public class AccountsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -642,7 +643,7 @@ public class AccountsApi {
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
-	public Account accountsRead(String accountId, String expand) throws ApiException {
+	public Account accountsRead(String accountId, List<ExpandFields> expand) throws ApiException {
 		return accountsReadWithHttpInfo(accountId, expand).getData();
 	}
 
@@ -654,7 +655,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Account> accountsReadWithHttpInfo(String accountId, String expand) throws ApiException {
+	public ApiResponse<Account> accountsReadWithHttpInfo(String accountId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'accountId' is set
@@ -671,7 +672,7 @@ public class AccountsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -698,7 +699,7 @@ public class AccountsApi {
 	 * @return AccountList
 	 * @throws ApiException if fails to make API call
 	 */
-	public AccountList accountsReadMultiple(List<String> requestBody, String expand) throws ApiException {
+	public AccountList accountsReadMultiple(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return accountsReadMultipleWithHttpInfo(requestBody, expand).getData();
 	}
 
@@ -710,7 +711,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;AccountList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<AccountList> accountsReadMultipleWithHttpInfo(List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<AccountList> accountsReadMultipleWithHttpInfo(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'requestBody' is set
@@ -726,7 +727,7 @@ public class AccountsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -806,7 +807,7 @@ public class AccountsApi {
 	 * @return AccountResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public AccountResult accountsSearch(AccountQuery accountQuery, String expand) throws ApiException {
+	public AccountResult accountsSearch(AccountQuery accountQuery, List<ExpandFields> expand) throws ApiException {
 		return accountsSearchWithHttpInfo(accountQuery, expand).getData();
 	}
 
@@ -818,7 +819,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;AccountResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<AccountResult> accountsSearchWithHttpInfo(AccountQuery accountQuery, String expand) throws ApiException {
+	public ApiResponse<AccountResult> accountsSearchWithHttpInfo(AccountQuery accountQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = accountQuery;
 
 		// verify the required parameter 'accountQuery' is set
@@ -834,7 +835,7 @@ public class AccountsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -861,7 +862,7 @@ public class AccountsApi {
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
-	public Account accountsUpdate(Account account, String expand) throws ApiException {
+	public Account accountsUpdate(Account account, List<ExpandFields> expand) throws ApiException {
 		return accountsUpdateWithHttpInfo(account, expand).getData();
 	}
 
@@ -873,7 +874,7 @@ public class AccountsApi {
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Account> accountsUpdateWithHttpInfo(Account account, String expand) throws ApiException {
+	public ApiResponse<Account> accountsUpdateWithHttpInfo(Account account, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = account;
 
 		// verify the required parameter 'account' is set
@@ -889,7 +890,7 @@ public class AccountsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

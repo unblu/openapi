@@ -18,6 +18,7 @@ import com.unblu.webapi.model.v4.AuthenticatorLogoutBody;
 import com.unblu.webapi.model.v4.AuthenticatorResetImpersonationBody;
 import com.unblu.webapi.model.v4.AuthenticatorSetDefaultLocaleBody;
 import com.unblu.webapi.model.v4.AuthenticatorSwitchToAccountBody;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.LoginResult;
 import com.unblu.webapi.model.v4.PersonData;
 import com.unblu.webapi.model.v4.SecureTokenRequest;
@@ -201,7 +202,7 @@ public class AuthenticatorApi {
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData authenticatorGetCurrentPerson(String expand) throws ApiException {
+	public PersonData authenticatorGetCurrentPerson(List<ExpandFields> expand) throws ApiException {
 		return authenticatorGetCurrentPersonWithHttpInfo(expand).getData();
 	}
 
@@ -212,7 +213,7 @@ public class AuthenticatorApi {
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> authenticatorGetCurrentPersonWithHttpInfo(String expand) throws ApiException {
+	public ApiResponse<PersonData> authenticatorGetCurrentPersonWithHttpInfo(List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -223,7 +224,7 @@ public class AuthenticatorApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

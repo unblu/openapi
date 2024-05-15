@@ -14,6 +14,7 @@ import com.unblu.webapi.model.v4.ApiKey;
 import com.unblu.webapi.model.v4.ApiKeyList;
 import com.unblu.webapi.model.v4.ApiKeyQuery;
 import com.unblu.webapi.model.v4.ApiKeyResult;
+import com.unblu.webapi.model.v4.ExpandFields;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -44,7 +45,7 @@ public class ApiKeysApi {
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiKey apiKeysCreate(ApiKey apiKey, String expand) throws ApiException {
+	public ApiKey apiKeysCreate(ApiKey apiKey, List<ExpandFields> expand) throws ApiException {
 		return apiKeysCreateWithHttpInfo(apiKey, expand).getData();
 	}
 
@@ -56,7 +57,7 @@ public class ApiKeysApi {
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ApiKey> apiKeysCreateWithHttpInfo(ApiKey apiKey, String expand) throws ApiException {
+	public ApiResponse<ApiKey> apiKeysCreateWithHttpInfo(ApiKey apiKey, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = apiKey;
 
 		// verify the required parameter 'apiKey' is set
@@ -72,7 +73,7 @@ public class ApiKeysApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -148,7 +149,7 @@ public class ApiKeysApi {
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiKey apiKeysGetByKey(String apiKey, String expand) throws ApiException {
+	public ApiKey apiKeysGetByKey(String apiKey, List<ExpandFields> expand) throws ApiException {
 		return apiKeysGetByKeyWithHttpInfo(apiKey, expand).getData();
 	}
 
@@ -160,7 +161,7 @@ public class ApiKeysApi {
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ApiKey> apiKeysGetByKeyWithHttpInfo(String apiKey, String expand) throws ApiException {
+	public ApiResponse<ApiKey> apiKeysGetByKeyWithHttpInfo(String apiKey, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -172,7 +173,7 @@ public class ApiKeysApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "apiKey", apiKey));
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -198,7 +199,7 @@ public class ApiKeysApi {
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiKey apiKeysGetDefault(String expand) throws ApiException {
+	public ApiKey apiKeysGetDefault(List<ExpandFields> expand) throws ApiException {
 		return apiKeysGetDefaultWithHttpInfo(expand).getData();
 	}
 
@@ -209,7 +210,7 @@ public class ApiKeysApi {
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ApiKey> apiKeysGetDefaultWithHttpInfo(String expand) throws ApiException {
+	public ApiResponse<ApiKey> apiKeysGetDefaultWithHttpInfo(List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -220,7 +221,7 @@ public class ApiKeysApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -247,7 +248,7 @@ public class ApiKeysApi {
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiKey apiKeysRead(String apiKeyId, String expand) throws ApiException {
+	public ApiKey apiKeysRead(String apiKeyId, List<ExpandFields> expand) throws ApiException {
 		return apiKeysReadWithHttpInfo(apiKeyId, expand).getData();
 	}
 
@@ -259,7 +260,7 @@ public class ApiKeysApi {
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ApiKey> apiKeysReadWithHttpInfo(String apiKeyId, String expand) throws ApiException {
+	public ApiResponse<ApiKey> apiKeysReadWithHttpInfo(String apiKeyId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'apiKeyId' is set
@@ -276,7 +277,7 @@ public class ApiKeysApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -303,7 +304,7 @@ public class ApiKeysApi {
 	 * @return ApiKeyList
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiKeyList apiKeysReadMultiple(List<String> requestBody, String expand) throws ApiException {
+	public ApiKeyList apiKeysReadMultiple(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return apiKeysReadMultipleWithHttpInfo(requestBody, expand).getData();
 	}
 
@@ -315,7 +316,7 @@ public class ApiKeysApi {
 	 * @return ApiResponse&lt;ApiKeyList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ApiKeyList> apiKeysReadMultipleWithHttpInfo(List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<ApiKeyList> apiKeysReadMultipleWithHttpInfo(List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'requestBody' is set
@@ -331,7 +332,7 @@ public class ApiKeysApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -358,7 +359,7 @@ public class ApiKeysApi {
 	 * @return ApiKeyResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiKeyResult apiKeysSearch(ApiKeyQuery apiKeyQuery, String expand) throws ApiException {
+	public ApiKeyResult apiKeysSearch(ApiKeyQuery apiKeyQuery, List<ExpandFields> expand) throws ApiException {
 		return apiKeysSearchWithHttpInfo(apiKeyQuery, expand).getData();
 	}
 
@@ -370,7 +371,7 @@ public class ApiKeysApi {
 	 * @return ApiResponse&lt;ApiKeyResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ApiKeyResult> apiKeysSearchWithHttpInfo(ApiKeyQuery apiKeyQuery, String expand) throws ApiException {
+	public ApiResponse<ApiKeyResult> apiKeysSearchWithHttpInfo(ApiKeyQuery apiKeyQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = apiKeyQuery;
 
 		// verify the required parameter 'apiKeyQuery' is set
@@ -386,7 +387,7 @@ public class ApiKeysApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -413,7 +414,7 @@ public class ApiKeysApi {
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiKey apiKeysUpdate(ApiKey apiKey, String expand) throws ApiException {
+	public ApiKey apiKeysUpdate(ApiKey apiKey, List<ExpandFields> expand) throws ApiException {
 		return apiKeysUpdateWithHttpInfo(apiKey, expand).getData();
 	}
 
@@ -425,7 +426,7 @@ public class ApiKeysApi {
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<ApiKey> apiKeysUpdateWithHttpInfo(ApiKey apiKey, String expand) throws ApiException {
+	public ApiResponse<ApiKey> apiKeysUpdateWithHttpInfo(ApiKey apiKey, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = apiKey;
 
 		// verify the required parameter 'apiKey' is set
@@ -441,7 +442,7 @@ public class ApiKeysApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

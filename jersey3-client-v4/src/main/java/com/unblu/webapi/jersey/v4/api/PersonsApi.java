@@ -14,6 +14,7 @@ import com.unblu.webapi.model.v4.AgentPersonStateData;
 import com.unblu.webapi.model.v4.AgentPersonStateResult;
 import com.unblu.webapi.model.v4.AgentStateQuery;
 import com.unblu.webapi.model.v4.EPersonSource;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.NotificationCountData;
 import com.unblu.webapi.model.v4.PersonData;
 import com.unblu.webapi.model.v4.PersonQuery;
@@ -116,7 +117,7 @@ public class PersonsApi {
 
 	/**
 	 * addLabels Adds the labels provided to those already set on the person specified. A label within the same scope as an existing person label replaces the
-	 * current scoped label.&lt;br&gt;
+	 * current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
 	 * @param requestBody List of the labels to be added to the person (required)
@@ -124,13 +125,13 @@ public class PersonsApi {
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData personsAddLabels(String personId, List<String> requestBody, String expand) throws ApiException {
+	public PersonData personsAddLabels(String personId, List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return personsAddLabelsWithHttpInfo(personId, requestBody, expand).getData();
 	}
 
 	/**
 	 * addLabels Adds the labels provided to those already set on the person specified. A label within the same scope as an existing person label replaces the
-	 * current scoped label.&lt;br&gt;
+	 * current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
 	 * @param requestBody List of the labels to be added to the person (required)
@@ -138,7 +139,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> personsAddLabelsWithHttpInfo(String personId, List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<PersonData> personsAddLabelsWithHttpInfo(String personId, List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'personId' is set
@@ -160,7 +161,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -243,7 +244,7 @@ public class PersonsApi {
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData personsCreateOrUpdateBot(PersonData personData, String expand) throws ApiException {
+	public PersonData personsCreateOrUpdateBot(PersonData personData, List<ExpandFields> expand) throws ApiException {
 		return personsCreateOrUpdateBotWithHttpInfo(personData, expand).getData();
 	}
 
@@ -255,7 +256,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> personsCreateOrUpdateBotWithHttpInfo(PersonData personData, String expand) throws ApiException {
+	public ApiResponse<PersonData> personsCreateOrUpdateBotWithHttpInfo(PersonData personData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = personData;
 
 		// verify the required parameter 'personData' is set
@@ -271,7 +272,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -298,7 +299,7 @@ public class PersonsApi {
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData personsCreateOrUpdateVirtual(PersonData personData, String expand) throws ApiException {
+	public PersonData personsCreateOrUpdateVirtual(PersonData personData, List<ExpandFields> expand) throws ApiException {
 		return personsCreateOrUpdateVirtualWithHttpInfo(personData, expand).getData();
 	}
 
@@ -310,7 +311,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> personsCreateOrUpdateVirtualWithHttpInfo(PersonData personData, String expand) throws ApiException {
+	public ApiResponse<PersonData> personsCreateOrUpdateVirtualWithHttpInfo(PersonData personData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = personData;
 
 		// verify the required parameter 'personData' is set
@@ -326,7 +327,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -358,7 +359,7 @@ public class PersonsApi {
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData personsGetBySource(EPersonSource personSource, String sourceId, String expand) throws ApiException {
+	public PersonData personsGetBySource(EPersonSource personSource, String sourceId, List<ExpandFields> expand) throws ApiException {
 		return personsGetBySourceWithHttpInfo(personSource, sourceId, expand).getData();
 	}
 
@@ -375,7 +376,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> personsGetBySourceWithHttpInfo(EPersonSource personSource, String sourceId, String expand) throws ApiException {
+	public ApiResponse<PersonData> personsGetBySourceWithHttpInfo(EPersonSource personSource, String sourceId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -388,7 +389,7 @@ public class PersonsApi {
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "personSource", personSource));
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "sourceId", sourceId));
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -523,26 +524,28 @@ public class PersonsApi {
 	}
 
 	/**
-	 * read Returns a &#x60;PersonData&#x60; by ID&lt;br&gt;
+	 * read Returns a &#x60;PersonData&#x60; by ID. Persons who are not admins are only allowed to read visitors that are visible through visibility rules to
+	 * them.&lt;br&gt;
 	 * 
 	 * @param personId (required)
 	 * @param expand (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData personsRead(String personId, String expand) throws ApiException {
+	public PersonData personsRead(String personId, List<ExpandFields> expand) throws ApiException {
 		return personsReadWithHttpInfo(personId, expand).getData();
 	}
 
 	/**
-	 * read Returns a &#x60;PersonData&#x60; by ID&lt;br&gt;
+	 * read Returns a &#x60;PersonData&#x60; by ID. Persons who are not admins are only allowed to read visitors that are visible through visibility rules to
+	 * them.&lt;br&gt;
 	 * 
 	 * @param personId (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> personsReadWithHttpInfo(String personId, String expand) throws ApiException {
+	public ApiResponse<PersonData> personsReadWithHttpInfo(String personId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'personId' is set
@@ -559,7 +562,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -690,7 +693,8 @@ public class PersonsApi {
 	}
 
 	/**
-	 * removeLabels Removes the labels with the given names from the person specified&lt;br&gt;
+	 * removeLabels Removes the labels with the given names from the person specified. This operation can result in the caller being denied access to the person in
+	 * question due to the visibility rules in place. You should therefore always add new labels first, then remove the labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
 	 * @param requestBody List of the labels to remove from the person (required)
@@ -698,12 +702,13 @@ public class PersonsApi {
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData personsRemoveLabels(String personId, List<String> requestBody, String expand) throws ApiException {
+	public PersonData personsRemoveLabels(String personId, List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return personsRemoveLabelsWithHttpInfo(personId, requestBody, expand).getData();
 	}
 
 	/**
-	 * removeLabels Removes the labels with the given names from the person specified&lt;br&gt;
+	 * removeLabels Removes the labels with the given names from the person specified. This operation can result in the caller being denied access to the person in
+	 * question due to the visibility rules in place. You should therefore always add new labels first, then remove the labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
 	 * @param requestBody List of the labels to remove from the person (required)
@@ -711,7 +716,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> personsRemoveLabelsWithHttpInfo(String personId, List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<PersonData> personsRemoveLabelsWithHttpInfo(String personId, List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'personId' is set
@@ -733,7 +738,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -814,7 +819,7 @@ public class PersonsApi {
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonResult personsSearch(PersonQuery personQuery, String expand) throws ApiException {
+	public PersonResult personsSearch(PersonQuery personQuery, List<ExpandFields> expand) throws ApiException {
 		return personsSearchWithHttpInfo(personQuery, expand).getData();
 	}
 
@@ -826,7 +831,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonResult> personsSearchWithHttpInfo(PersonQuery personQuery, String expand) throws ApiException {
+	public ApiResponse<PersonResult> personsSearchWithHttpInfo(PersonQuery personQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = personQuery;
 
 		// verify the required parameter 'personQuery' is set
@@ -842,7 +847,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -869,7 +874,7 @@ public class PersonsApi {
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonResult personsSearchAgents(PersonTypedQuery personTypedQuery, String expand) throws ApiException {
+	public PersonResult personsSearchAgents(PersonTypedQuery personTypedQuery, List<ExpandFields> expand) throws ApiException {
 		return personsSearchAgentsWithHttpInfo(personTypedQuery, expand).getData();
 	}
 
@@ -881,7 +886,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonResult> personsSearchAgentsWithHttpInfo(PersonTypedQuery personTypedQuery, String expand) throws ApiException {
+	public ApiResponse<PersonResult> personsSearchAgentsWithHttpInfo(PersonTypedQuery personTypedQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = personTypedQuery;
 
 		// verify the required parameter 'personTypedQuery' is set
@@ -897,7 +902,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -975,7 +980,7 @@ public class PersonsApi {
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonResult personsSearchBots(PersonTypedQuery personTypedQuery, String expand) throws ApiException {
+	public PersonResult personsSearchBots(PersonTypedQuery personTypedQuery, List<ExpandFields> expand) throws ApiException {
 		return personsSearchBotsWithHttpInfo(personTypedQuery, expand).getData();
 	}
 
@@ -987,7 +992,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonResult> personsSearchBotsWithHttpInfo(PersonTypedQuery personTypedQuery, String expand) throws ApiException {
+	public ApiResponse<PersonResult> personsSearchBotsWithHttpInfo(PersonTypedQuery personTypedQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = personTypedQuery;
 
 		// verify the required parameter 'personTypedQuery' is set
@@ -1003,7 +1008,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1030,7 +1035,7 @@ public class PersonsApi {
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonResult personsSearchVisitors(PersonTypedQuery personTypedQuery, String expand) throws ApiException {
+	public PersonResult personsSearchVisitors(PersonTypedQuery personTypedQuery, List<ExpandFields> expand) throws ApiException {
 		return personsSearchVisitorsWithHttpInfo(personTypedQuery, expand).getData();
 	}
 
@@ -1042,7 +1047,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonResult> personsSearchVisitorsWithHttpInfo(PersonTypedQuery personTypedQuery, String expand) throws ApiException {
+	public ApiResponse<PersonResult> personsSearchVisitorsWithHttpInfo(PersonTypedQuery personTypedQuery, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = personTypedQuery;
 
 		// verify the required parameter 'personTypedQuery' is set
@@ -1058,7 +1063,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -1204,7 +1209,7 @@ public class PersonsApi {
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
-	public PersonData personsSetLabels(String personId, List<String> requestBody, String expand) throws ApiException {
+	public PersonData personsSetLabels(String personId, List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		return personsSetLabelsWithHttpInfo(personId, requestBody, expand).getData();
 	}
 
@@ -1219,7 +1224,7 @@ public class PersonsApi {
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<PersonData> personsSetLabelsWithHttpInfo(String personId, List<String> requestBody, String expand) throws ApiException {
+	public ApiResponse<PersonData> personsSetLabelsWithHttpInfo(String personId, List<String> requestBody, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'personId' is set
@@ -1241,7 +1246,7 @@ public class PersonsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-		localVarQueryParams.addAll(apiClient.parameterToPairs("", "expand", expand));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
