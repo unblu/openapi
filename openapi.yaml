@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.44.1
+  version: 7.45.0
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -9322,7 +9322,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - REGISTERED_USER
   /recordretention/update:
     post:
       tags:
