@@ -16,9 +16,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Channel allowing to connect Unblu with SMS using Twilio as the backend SMS system.&lt;br&gt; It defines the data needed in order to use the Twilio API.
+ * &lt;p&gt;This type is in preview mode.&lt;/p&gt;Channel allowing to connect Unblu with SMS using Twilio as the backend SMS system.&lt;br&gt; It defines the
+ * data needed in order to use the Twilio API.
  */
-@ApiModel(description = "Channel allowing to connect Unblu with SMS using Twilio as the backend SMS system.<br> It defines the data needed in order to use the Twilio API.")
+@ApiModel(description = "<p>This type is in preview mode.</p>Channel allowing to connect Unblu with SMS using Twilio as the backend SMS system.<br> It defines the data needed in order to use the Twilio API.")
 
 @JsonPropertyOrder({
 	SmsExternalMessengerChannel.JSON_PROPERTY_$_TYPE,

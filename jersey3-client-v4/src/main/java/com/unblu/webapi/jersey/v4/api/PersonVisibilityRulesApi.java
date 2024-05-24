@@ -38,8 +38,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * create Creates the given person visibility rule. The ID of the person visibility rule is generated automatically. Any ID provided in the person visibility
-	 * rule entity is ignored.&lt;br&gt;
+	 * create &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Creates the given person visibility rule. The ID of the person visibility rule is generated
+	 * automatically. Any ID provided in the person visibility rule entity is ignored.&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleData The person visibility rule to create (required)
 	 * @return PersonVisibilityRuleData
@@ -50,8 +50,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * create Creates the given person visibility rule. The ID of the person visibility rule is generated automatically. Any ID provided in the person visibility
-	 * rule entity is ignored.&lt;br&gt;
+	 * create &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Creates the given person visibility rule. The ID of the person visibility rule is generated
+	 * automatically. Any ID provided in the person visibility rule entity is ignored.&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleData The person visibility rule to create (required)
 	 * @return ApiResponse&lt;PersonVisibilityRuleData&gt;
@@ -91,7 +91,7 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * delete Deletes the person visibility rule with the given ID&lt;br&gt;
+	 * delete &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Deletes the person visibility rule with the given ID&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleId The ID of the person visibility rule to delete (required)
 	 * @throws ApiException if fails to make API call
@@ -102,7 +102,7 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * delete Deletes the person visibility rule with the given ID&lt;br&gt;
+	 * delete &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Deletes the person visibility rule with the given ID&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleId The ID of the person visibility rule to delete (required)
 	 * @throws ApiException if fails to make API call
@@ -140,8 +140,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * getByNames Retrieves a list of the person visibility rules with the names provided. Names that don&#39;t match any person visibility rules are
-	 * ignored.&lt;br&gt;
+	 * getByNames &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of the person visibility rules with the names provided. Names that don&#39;t
+	 * match any person visibility rules are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The names of the person visibility rules to fetch (required)
 	 * @return PersonVisibilityRuleDataList
@@ -152,8 +152,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * getByNames Retrieves a list of the person visibility rules with the names provided. Names that don&#39;t match any person visibility rules are
-	 * ignored.&lt;br&gt;
+	 * getByNames &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of the person visibility rules with the names provided. Names that don&#39;t
+	 * match any person visibility rules are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The names of the person visibility rules to fetch (required)
 	 * @return ApiResponse&lt;PersonVisibilityRuleDataList&gt;
@@ -193,7 +193,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * getByUsedLabelName Returns the person visibility rules which use the provided label name in their selection, or an empty list if none are found&lt;br&gt;
+	 * getByUsedLabelName &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the person visibility rules which use the provided label name in their
+	 * selection, or an empty list if none are found&lt;br&gt;
 	 * 
 	 * @param personVisibilityRulesGetByUsedLabelNameBody (required)
 	 * @return PersonVisibilityRuleDataList
@@ -204,7 +205,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * getByUsedLabelName Returns the person visibility rules which use the provided label name in their selection, or an empty list if none are found&lt;br&gt;
+	 * getByUsedLabelName &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the person visibility rules which use the provided label name in their
+	 * selection, or an empty list if none are found&lt;br&gt;
 	 * 
 	 * @param personVisibilityRulesGetByUsedLabelNameBody (required)
 	 * @return ApiResponse&lt;PersonVisibilityRuleDataList&gt;
@@ -244,7 +246,7 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * read Returns the person visibility rule with the given ID&lt;br&gt;
+	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the person visibility rule with the given ID&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleId The ID of the person visibility rule to return (required)
 	 * @return PersonVisibilityRuleData
@@ -255,7 +257,7 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * read Returns the person visibility rule with the given ID&lt;br&gt;
+	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the person visibility rule with the given ID&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleId The ID of the person visibility rule to return (required)
 	 * @return ApiResponse&lt;PersonVisibilityRuleData&gt;
@@ -296,7 +298,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * readMultiple Retrieves a list of person visibility rules for the given IDs. IDs that don&#39;t match any person visibility rules are ignored.&lt;br&gt;
+	 * readMultiple &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of person visibility rules for the given IDs. IDs that don&#39;t match any
+	 * person visibility rules are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs for which to fetch the person visibility rules (required)
 	 * @return PersonVisibilityRuleDataList
@@ -307,7 +310,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * readMultiple Retrieves a list of person visibility rules for the given IDs. IDs that don&#39;t match any person visibility rules are ignored.&lt;br&gt;
+	 * readMultiple &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of person visibility rules for the given IDs. IDs that don&#39;t match any
+	 * person visibility rules are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs for which to fetch the person visibility rules (required)
 	 * @return ApiResponse&lt;PersonVisibilityRuleDataList&gt;
@@ -347,7 +351,7 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * search Searches for person visibility rules&lt;br&gt;
+	 * search &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for person visibility rules&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleQuery The query to use for the search (required)
 	 * @return PersonVisibilityRuleResult
@@ -358,7 +362,7 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * search Searches for person visibility rules&lt;br&gt;
+	 * search &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for person visibility rules&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleQuery The query to use for the search (required)
 	 * @return ApiResponse&lt;PersonVisibilityRuleResult&gt;
@@ -398,7 +402,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * update Updates the person visibility rule. The update fails if no person visibility rule exists with the ID provided.&lt;br&gt;
+	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates the person visibility rule. The update fails if no person visibility rule exists with the
+	 * ID provided.&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleData The details to update the person visibility rule with (required)
 	 * @return PersonVisibilityRuleData
@@ -409,7 +414,8 @@ public class PersonVisibilityRulesApi {
 	}
 
 	/**
-	 * update Updates the person visibility rule. The update fails if no person visibility rule exists with the ID provided.&lt;br&gt;
+	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates the person visibility rule. The update fails if no person visibility rule exists with the
+	 * ID provided.&lt;br&gt;
 	 * 
 	 * @param personVisibilityRuleData The details to update the person visibility rule with (required)
 	 * @return ApiResponse&lt;PersonVisibilityRuleData&gt;

@@ -116,8 +116,9 @@ public class PersonsApi {
 	}
 
 	/**
-	 * addLabels Adds the labels provided to those already set on the person specified. A label within the same scope as an existing person label replaces the
-	 * current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a subsequent step.&lt;br&gt;
+	 * addLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Adds the labels provided to those already set on the person specified. A label within the same
+	 * scope as an existing person label replaces the current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a
+	 * subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
 	 * @param requestBody List of the labels to be added to the person (required)
@@ -130,8 +131,9 @@ public class PersonsApi {
 	}
 
 	/**
-	 * addLabels Adds the labels provided to those already set on the person specified. A label within the same scope as an existing person label replaces the
-	 * current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a subsequent step.&lt;br&gt;
+	 * addLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Adds the labels provided to those already set on the person specified. A label within the same
+	 * scope as an existing person label replaces the current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a
+	 * subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
 	 * @param requestBody List of the labels to be added to the person (required)
@@ -693,8 +695,9 @@ public class PersonsApi {
 	}
 
 	/**
-	 * removeLabels Removes the labels with the given names from the person specified. This operation can result in the caller being denied access to the person in
-	 * question due to the visibility rules in place. You should therefore always add new labels first, then remove the labels in a subsequent step.&lt;br&gt;
+	 * removeLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Removes the labels with the given names from the person specified. This operation can result
+	 * in the caller being denied access to the person in question due to the visibility rules in place. You should therefore always add new labels first, then
+	 * remove the labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
 	 * @param requestBody List of the labels to remove from the person (required)
@@ -707,8 +710,9 @@ public class PersonsApi {
 	}
 
 	/**
-	 * removeLabels Removes the labels with the given names from the person specified. This operation can result in the caller being denied access to the person in
-	 * question due to the visibility rules in place. You should therefore always add new labels first, then remove the labels in a subsequent step.&lt;br&gt;
+	 * removeLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Removes the labels with the given names from the person specified. This operation can result
+	 * in the caller being denied access to the person in question due to the visibility rules in place. You should therefore always add new labels first, then
+	 * remove the labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
 	 * @param requestBody List of the labels to remove from the person (required)
@@ -1199,9 +1203,9 @@ public class PersonsApi {
 	}
 
 	/**
-	 * setLabels Sets labels with the given names on the person specified. Labels already set on the person but missing from the list provided are deleted. Labels
-	 * already set and present in the list provided remain unchanged. Labels not set on the person but present in the list provided are added to the person. The
-	 * changes to the person only take affect for labels the executing user has permissions for.&lt;br&gt;
+	 * setLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Sets labels with the given names on the person specified. Labels already set on the person but
+	 * missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in
+	 * the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
 	 * @param requestBody List of the labels to set on the person (required)
@@ -1214,9 +1218,9 @@ public class PersonsApi {
 	}
 
 	/**
-	 * setLabels Sets labels with the given names on the person specified. Labels already set on the person but missing from the list provided are deleted. Labels
-	 * already set and present in the list provided remain unchanged. Labels not set on the person but present in the list provided are added to the person. The
-	 * changes to the person only take affect for labels the executing user has permissions for.&lt;br&gt;
+	 * setLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Sets labels with the given names on the person specified. Labels already set on the person but
+	 * missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in
+	 * the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
 	 * @param requestBody List of the labels to set on the person (required)

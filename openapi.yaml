@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.1.2
+  version: 8.2.0
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -531,7 +531,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The account with the given ID, or null if no such account exists."
+          description: The account with the given ID.
           content:
             application/json:
               schema:
@@ -836,7 +836,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The API key with the given ID, or null if no such API key exists"
+          description: The API key with the given ID
           content:
             application/json:
               schema:
@@ -1428,7 +1428,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The avatar with the given ID, or null if no such avatar exists"
+          description: The avatar with the given ID
           content:
             application/json:
               schema:
@@ -2489,7 +2489,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: the response to the outbound request or null in case if a webhook endpoint is configured
+          description: the response to the outbound request or a response with a null pingId if a webhook endpoint is configured
           content:
             application/json:
               schema:
@@ -2562,7 +2562,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The call with the given ID, or null if no such entity exists"
+          description: The call with the given ID
           content:
             application/json:
               schema:
@@ -2767,7 +2767,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The canned response with the given ID, or null if no such canned response exists"
+          description: The canned response with the given ID
           content:
             application/json:
               schema:
@@ -3235,7 +3235,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The template with the given ID, or null if no such template exists"
+          description: The template with the given ID
           content:
             application/json:
               schema:
@@ -3844,7 +3844,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The conversation of the ID which should be returned. If it could not be found, null is returned."
+          description: The conversation of the ID which should be returned.
           content:
             application/json:
               schema:
@@ -5072,7 +5072,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The custom action with the ID provided, or null if no such custom action exists"
+          description: The custom action with the ID provided
           content:
             application/json:
               schema:
@@ -5180,7 +5180,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: the response to the outbound request or null in case if a webhook endpoint is configured
+          description: the response to the outbound request or a response with a null pingId if a webhook endpoint is configured
           content:
             application/json:
               schema:
@@ -5416,7 +5416,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The deputy relationship with the given ID, or null if no such deputy relationship exists"
+          description: The deputy relationship with the given ID
           content:
             application/json:
               schema:
@@ -5597,7 +5597,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The domain with the given ID, or null if no such domain exists"
+          description: The domain with the given ID
           content:
             application/json:
               schema:
@@ -5695,7 +5695,7 @@ paths:
       tags:
       - ExternalMessengerContacts
       summary: create
-      description: Creates an external messenger contact. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to.<br>
+      description: <p>This endpoint is in preview mode.</p>Creates an external messenger contact. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to.<br>
       operationId: externalMessengerContactsCreate
       requestBody:
         description: to create
@@ -5716,12 +5716,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /externalmessengercontacts/{externalMessengerContactId}/delete:
     delete:
       tags:
       - ExternalMessengerContacts
       summary: delete
-      description: Deletes an external messenger contact. This ends all the contact's participations in conversations. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles this endpoint is available to.<br>
+      description: <p>This endpoint is in preview mode.</p>Deletes an external messenger contact. This ends all the contact's participations in conversations. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles this endpoint is available to.<br>
       operationId: externalMessengerContactsDelete
       parameters:
       - name: externalMessengerContactId
@@ -5740,12 +5741,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /externalmessengercontacts/{externalMessengerContactId}/migrateContactPersonWithAllConnectedConversations:
     post:
       tags:
       - ExternalMessengerContacts
       summary: migrateContactPersonWithAllConnectedConversations
-      description: "Changes the linked person of the external messenger contact. All conversations the external messenger contact participated in are migrated to the new person, provided the conversation allows a user change. Allowing it means the configuration property `com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration` isn't set to `EConversationReplaceUserOnLoginMode.NEVER` on the conversation. Other conversations not linked to the external messenger contact and just having the same person used, e.g. direct conversations without an external messenger, will not be migrated. <p> If the new person ID matches the current person ID, calling this endpoint doesn't do anything. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Changes the linked person of the external messenger contact. All conversations the external messenger contact participated in are migrated to the new person, provided the conversation allows a user change. Allowing it means the configuration property `com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration` isn't set to `EConversationReplaceUserOnLoginMode.NEVER` on the conversation. Other conversations not linked to the external messenger contact and just having the same person used, e.g. direct conversations without an external messenger, will not be migrated. <p> If the new person ID matches the current person ID, calling this endpoint doesn't do anything. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to.<br>"
       operationId: externalMessengerContactsMigrateContactPersonWithAllConnectedConversations
       parameters:
       - name: externalMessengerContactId
@@ -5774,12 +5776,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /externalmessengercontacts/{externalMessengerContactId}/migrateContactPersonWithGivenConversations:
     post:
       tags:
       - ExternalMessengerContacts
       summary: migrateContactPersonWithGivenConversations
-      description: "Changes the linked person of the external messenger contact and migrates the list of conversations passed in to the new person, provided the conversation allows a user change. Allowing it means the configuration property `com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration` isn't set to `EConversationReplaceUserOnLoginMode.NEVER`. <p> For all other conversations the contact is part of, their participation is removed. <p> If the new person ID matches the current person ID, calling this endpoint doesn't do anything. <p> The given conversation Ids have to be in the list of none ended conversation where the external messenger contact is a participant. If not, an error will be returned before doing any migration. <p> The configuration property `com.unblu.permission.roleAllowed.migrateExternalMessengerContacts` defines which user roles the endpoint is available to.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Changes the linked person of the external messenger contact and migrates the list of conversations passed in to the new person, provided the conversation allows a user change. Allowing it means the configuration property `com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration` isn't set to `EConversationReplaceUserOnLoginMode.NEVER`. <p> For all other conversations the contact is part of, their participation is removed. <p> If the new person ID matches the current person ID, calling this endpoint doesn't do anything. <p> The given conversation Ids have to be in the list of none ended conversation where the external messenger contact is a participant. If not, an error will be returned before doing any migration. <p> The configuration property `com.unblu.permission.roleAllowed.migrateExternalMessengerContacts` defines which user roles the endpoint is available to.<br>"
       operationId: externalMessengerContactsMigrateContactPersonWithGivenConversations
       parameters:
       - name: externalMessengerContactId
@@ -5819,12 +5822,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /externalmessengercontacts/{externalMessengerContactId}/read:
     get:
       tags:
       - ExternalMessengerContacts
       summary: read
-      description: Returns the external messenger contact with the given ID. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to.<br>
+      description: <p>This endpoint is in preview mode.</p>Returns the external messenger contact with the given ID. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to.<br>
       operationId: externalMessengerContactsRead
       parameters:
       - name: externalMessengerContactId
@@ -5837,7 +5841,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The external messenger contact with the given ID, or null if no such contact exists"
+          description: The external messenger contact with the given ID
           content:
             application/json:
               schema:
@@ -5847,12 +5851,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /externalmessengercontacts/readMultiple:
     post:
       tags:
       - ExternalMessengerContacts
       summary: readMultiple
-      description: readMultiple operation
+      description: <p>This endpoint is in preview mode.</p>readMultiple operation
       operationId: externalMessengerContactsReadMultiple
       requestBody:
         content:
@@ -5874,12 +5879,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /externalmessengercontacts/search:
     post:
       tags:
       - ExternalMessengerContacts
       summary: search
-      description: Search for `ExternalMessengerContact`s in the current account<br>
+      description: <p>This endpoint is in preview mode.</p>Search for `ExternalMessengerContact`s in the current account<br>
       operationId: externalMessengerContactsSearch
       requestBody:
         content:
@@ -5899,12 +5905,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /externalmessengercontacts/update:
     post:
       tags:
       - ExternalMessengerContacts
       summary: update
-      description: "Updates an external messenger contact. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to. <p> <b>Note:</b> This can't be used to update the personId. To update the link to a person, use the endpoint`migrateContactPersonWithAllConnectedConversations` or `migrateContactPersonWithGivenConversations`.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Updates an external messenger contact. <p> The configuration property `com.unblu.permission.roleAllowed.manageExternalMessengerContacts` defines which user roles the endpoint is available to. <p> <b>Note:</b> This can't be used to update the personId. To update the link to a person, use the endpoint`migrateContactPersonWithAllConnectedConversations` or `migrateContactPersonWithGivenConversations`.<br>"
       operationId: externalMessengerContactsUpdate
       requestBody:
         description: to update
@@ -5925,6 +5932,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /externalmessengers/create:
     post:
       tags:
@@ -7703,7 +7711,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The invitation with the given ID, or null if no such invitation could be found"
+          description: The invitation with the given ID
           content:
             application/json:
               schema:
@@ -8085,7 +8093,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: the response to the outbound request or null in case if a webhook endpoint is configured
+          description: the response to the outbound request or a response with a null pingId if a webhook endpoint is configured
           content:
             application/json:
               schema:
@@ -8354,7 +8362,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The named area with the given ID, or null if no such named area exists"
+          description: The named area with the given ID
           content:
             application/json:
               schema:
@@ -8482,7 +8490,7 @@ paths:
       tags:
       - PersonLabels
       summary: create
-      description: Creates the given person label. The ID of the person label is generated automatically. Any ID provided in the person label entity is ignored.<br>
+      description: <p>This endpoint is in preview mode.</p>Creates the given person label. The ID of the person label is generated automatically. Any ID provided in the person label entity is ignored.<br>
       operationId: personLabelsCreate
       requestBody:
         description: The person label to create
@@ -8558,12 +8566,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personlabels/{personLabelId}/delete:
     delete:
       tags:
       - PersonLabels
       summary: delete
-      description: Deletes the person label with the given ID<br>
+      description: <p>This endpoint is in preview mode.</p>Deletes the person label with the given ID<br>
       operationId: personLabelsDelete
       parameters:
       - name: personLabelId
@@ -8583,12 +8592,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personlabels/getByNames:
     post:
       tags:
       - PersonLabels
       summary: getByNames
-      description: Retrieves a list of the person labels with the names provided. Names that don't match any person labels are ignored.<br>
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of the person labels with the names provided. Names that don't match any person labels are ignored.<br>
       operationId: personLabelsGetByNames
       requestBody:
         description: The names of the person labels to fetch
@@ -8612,12 +8622,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personlabels/getByScope:
     post:
       tags:
       - PersonLabels
       summary: getByScope
-      description: "Retrieves the person labels found for the given scope, or an empty list if none are found<br>"
+      description: "<p>This endpoint is in preview mode.</p>Retrieves the person labels found for the given scope, or an empty list if none are found<br>"
       operationId: personLabelsGetByScope
       requestBody:
         content:
@@ -8638,12 +8649,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personlabels/{personLabelId}/read:
     get:
       tags:
       - PersonLabels
       summary: read
-      description: Returns the person label with the given ID<br>
+      description: <p>This endpoint is in preview mode.</p>Returns the person label with the given ID<br>
       operationId: personLabelsRead
       parameters:
       - name: personLabelId
@@ -8656,7 +8668,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The person label entity with the ID provided. If no person label has the ID provided, null is returned."
+          description: The person label entity with the ID provided
           content:
             application/json:
               schema:
@@ -8667,12 +8679,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personlabels/readMultiple:
     post:
       tags:
       - PersonLabels
       summary: readMultiple
-      description: Retrieves a list of person labels for the given IDs. IDs that don't match any person labels are ignored.<br>
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of person labels for the given IDs. IDs that don't match any person labels are ignored.<br>
       operationId: personLabelsReadMultiple
       requestBody:
         description: The IDs for which to fetch the person labels
@@ -8696,12 +8709,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personlabels/search:
     post:
       tags:
       - PersonLabels
       summary: search
-      description: Searches for person labels<br>
+      description: <p>This endpoint is in preview mode.</p>Searches for person labels<br>
       operationId: personLabelsSearch
       requestBody:
         description: The query to use for the search
@@ -8723,12 +8737,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personlabels/update:
     post:
       tags:
       - PersonLabels
       summary: update
-      description: Updates the person label in the system with the given entity. The update fails if no person label exists with the ID provided.<br>
+      description: <p>This endpoint is in preview mode.</p>Updates the person label in the system with the given entity. The update fails if no person label exists with the ID provided.<br>
       operationId: personLabelsUpdate
       requestBody:
         description: The details to update the person label with
@@ -8804,6 +8819,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /personpresences/{presenceId}/read:
     get:
       tags:
@@ -8861,7 +8877,7 @@ paths:
       tags:
       - PersonVisibilityRules
       summary: create
-      description: Creates the given person visibility rule. The ID of the person visibility rule is generated automatically. Any ID provided in the person visibility rule entity is ignored.<br>
+      description: <p>This endpoint is in preview mode.</p>Creates the given person visibility rule. The ID of the person visibility rule is generated automatically. Any ID provided in the person visibility rule entity is ignored.<br>
       operationId: personVisibilityRulesCreate
       requestBody:
         description: The person visibility rule to create
@@ -8922,12 +8938,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /personvisibilityrules/{personVisibilityRuleId}/delete:
     delete:
       tags:
       - PersonVisibilityRules
       summary: delete
-      description: Deletes the person visibility rule with the given ID<br>
+      description: <p>This endpoint is in preview mode.</p>Deletes the person visibility rule with the given ID<br>
       operationId: personVisibilityRulesDelete
       parameters:
       - name: personVisibilityRuleId
@@ -8946,12 +8963,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /personvisibilityrules/getByNames:
     post:
       tags:
       - PersonVisibilityRules
       summary: getByNames
-      description: Retrieves a list of the person visibility rules with the names provided. Names that don't match any person visibility rules are ignored.<br>
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of the person visibility rules with the names provided. Names that don't match any person visibility rules are ignored.<br>
       operationId: personVisibilityRulesGetByNames
       requestBody:
         description: The names of the person visibility rules to fetch
@@ -8974,12 +8992,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /personvisibilityrules/getByUsedLabelName:
     post:
       tags:
       - PersonVisibilityRules
       summary: getByUsedLabelName
-      description: "Returns the person visibility rules which use the provided label name in their selection, or an empty list if none are found<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns the person visibility rules which use the provided label name in their selection, or an empty list if none are found<br>"
       operationId: personVisibilityRulesGetByUsedLabelName
       requestBody:
         content:
@@ -8999,12 +9018,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /personvisibilityrules/{personVisibilityRuleId}/read:
     get:
       tags:
       - PersonVisibilityRules
       summary: read
-      description: Returns the person visibility rule with the given ID<br>
+      description: <p>This endpoint is in preview mode.</p>Returns the person visibility rule with the given ID<br>
       operationId: personVisibilityRulesRead
       parameters:
       - name: personVisibilityRuleId
@@ -9017,7 +9037,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The person visibility rule with the ID provided, or null if no person visibility rule has the ID provided"
+          description: The person visibility rule with the ID provided
           content:
             application/json:
               schema:
@@ -9027,12 +9047,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /personvisibilityrules/readMultiple:
     post:
       tags:
       - PersonVisibilityRules
       summary: readMultiple
-      description: Retrieves a list of person visibility rules for the given IDs. IDs that don't match any person visibility rules are ignored.<br>
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of person visibility rules for the given IDs. IDs that don't match any person visibility rules are ignored.<br>
       operationId: personVisibilityRulesReadMultiple
       requestBody:
         description: The IDs for which to fetch the person visibility rules
@@ -9055,12 +9076,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /personvisibilityrules/search:
     post:
       tags:
       - PersonVisibilityRules
       summary: search
-      description: Searches for person visibility rules<br>
+      description: <p>This endpoint is in preview mode.</p>Searches for person visibility rules<br>
       operationId: personVisibilityRulesSearch
       requestBody:
         description: The query to use for the search
@@ -9081,12 +9103,13 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /personvisibilityrules/update:
     post:
       tags:
       - PersonVisibilityRules
       summary: update
-      description: Updates the person visibility rule. The update fails if no person visibility rule exists with the ID provided.<br>
+      description: <p>This endpoint is in preview mode.</p>Updates the person visibility rule. The update fails if no person visibility rule exists with the ID provided.<br>
       operationId: personVisibilityRulesUpdate
       requestBody:
         description: The details to update the person visibility rule with
@@ -9147,6 +9170,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+      x-status: PREVIEW
   /persons/{personId}/addAutoPauseNotificationsReason:
     post:
       tags:
@@ -9186,7 +9210,7 @@ paths:
       tags:
       - Persons
       summary: addLabels
-      description: "Adds the labels provided to those already set on the person specified. A label within the same scope as an existing person label replaces the current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a subsequent step.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Adds the labels provided to those already set on the person specified. A label within the same scope as an existing person label replaces the current scoped label. To avoid losing access due to the visibility rules, you should remove labels in a subsequent step.<br>"
       operationId: personsAddLabels
       parameters:
       - name: personId
@@ -9227,6 +9251,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /persons/{personId}/autoPauseNotifications:
     post:
       tags:
@@ -9581,7 +9606,7 @@ paths:
       tags:
       - Persons
       summary: removeLabels
-      description: "Removes the labels with the given names from the person specified. This operation can result in the caller being denied access to the person in question due to the visibility rules in place. You should therefore always add new labels first, then remove the labels in a subsequent step.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Removes the labels with the given names from the person specified. This operation can result in the caller being denied access to the person in question due to the visibility rules in place. You should therefore always add new labels first, then remove the labels in a subsequent step.<br>"
       operationId: personsRemoveLabels
       parameters:
       - name: personId
@@ -9622,6 +9647,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /persons/{personId}/resumeNotifications:
     post:
       tags:
@@ -9879,7 +9905,7 @@ paths:
       tags:
       - Persons
       summary: setLabels
-      description: Sets labels with the given names on the person specified. Labels already set on the person but missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for.<br>
+      description: <p>This endpoint is in preview mode.</p>Sets labels with the given names on the person specified. Labels already set on the person but missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for.<br>
       operationId: personsSetLabels
       parameters:
       - name: personId
@@ -9920,6 +9946,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+      x-status: PREVIEW
   /persons/{personId}/setStatusMessage:
     post:
       tags:
@@ -9973,7 +10000,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - REGISTERED_USER
   /recordretention/update:
     post:
       tags:
@@ -10498,7 +10525,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The team with the given ID, or null if no such team exists"
+          description: The team with the given ID
           content:
             application/json:
               schema:
@@ -10811,7 +10838,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: The user with the given username. Null if none exists or the username corresponds to a virtual visitor.
+          description: The user with the given username.
           content:
             application/json:
               schema:
@@ -10878,7 +10905,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: The user with the given ID. Null if no such user could be found or the ID corresponds to a virtual visitor.
+          description: The user with the given ID.
           content:
             application/json:
               schema:
@@ -12380,7 +12407,7 @@ paths:
         explode: true
       responses:
         "200":
-          description: The webhook registration for the given name or null if none exists
+          description: The webhook registration for the given name
           content:
             application/json:
               schema:
@@ -12408,7 +12435,7 @@ paths:
         explode: false
       responses:
         "200":
-          description: "The webhook registration with the given ID, or null if no such registration exists"
+          description: The webhook registration with the given ID
           content:
             application/json:
               schema:
@@ -23652,7 +23679,7 @@ components:
           NOT_IN: '#/components/schemas/NotInExternalMessengerChannelTypeOperator'
     ExternalMessengerContact:
       type: object
-      description: Contact belonging to an external messenger.<br> The entity acts as a storage for external channels to create a link between Collaboration Server persons and the users of an external messenger.
+      description: <p>This type is in preview mode.</p>Contact belonging to an external messenger.<br> The entity acts as a storage for external channels to create a link between Collaboration Server persons and the users of an external messenger.
       properties:
         $_type:
           type: string
@@ -23688,6 +23715,7 @@ components:
         personId:
           type: string
           description: The person ID in Unblu that the contact is linked with
+      x-status: PREVIEW
     ExternalMessengerContactList:
       type: object
       properties:
@@ -28579,7 +28607,7 @@ components:
           $ref: '#/components/schemas/IdOperator'
     PersonLabel:
       type: object
-      description: Model of a person label.
+      description: <p>This type is in preview mode.</p>Model of a person label.
       properties:
         $_type:
           type: string
@@ -28633,6 +28661,7 @@ components:
           description: The roles for which the label is displayed to in the UIs. If this is not set only admins are able to see this label in the UI.
           items:
             $ref: '#/components/schemas/EPersonLabelManagementRole'
+      x-status: PREVIEW
     PersonLabelList:
       type: object
       properties:
@@ -29159,7 +29188,7 @@ components:
           USERNAME: '#/components/schemas/UsernamePersonTypedSearchFilter'
     PersonVisibilityRuleData:
       type: object
-      description: Model of a person visibility rule.
+      description: <p>This type is in preview mode.</p>Model of a person visibility rule.
       properties:
         $_type:
           type: string
@@ -29207,6 +29236,7 @@ components:
           type: integer
           format: int64
           description: "Version of the entity. The version is incremented on each change. Entity updates that aren't based on the latest version are rejected. When creating an object, the version can be omitted."
+      x-status: PREVIEW
     PersonVisibilityRuleDataList:
       type: object
       properties:
@@ -30492,7 +30522,7 @@ components:
           $ref: '#/components/schemas/IdOperator'
     SmsExternalMessengerChannel:
       type: object
-      description: Channel allowing to connect Unblu with SMS using Twilio as the backend SMS system.<br> It defines the data needed in order to use the Twilio API.
+      description: <p>This type is in preview mode.</p>Channel allowing to connect Unblu with SMS using Twilio as the backend SMS system.<br> It defines the data needed in order to use the Twilio API.
       properties:
         $_type:
           type: string
@@ -30565,6 +30595,7 @@ components:
             type: string
           x-expand-query-key: metadata
           x-type: Map
+      x-status: PREVIEW
     SmsExternalMessengerChannelOrderBy:
       type: object
       description: '`SmsExternalMessengerChannel` orderBy item.'

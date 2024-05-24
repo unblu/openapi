@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Contact belonging to an external messenger.&lt;br&gt; The entity acts as a storage for external channels to create a link between Collaboration Server
- * persons and the users of an external messenger.
+ * &lt;p&gt;This type is in preview mode.&lt;/p&gt;Contact belonging to an external messenger.&lt;br&gt; The entity acts as a storage for external channels to
+ * create a link between Collaboration Server persons and the users of an external messenger.
  */
-@ApiModel(description = "Contact belonging to an external messenger.<br> The entity acts as a storage for external channels to create a link between Collaboration Server persons and the users of an external messenger.")
+@ApiModel(description = "<p>This type is in preview mode.</p>Contact belonging to an external messenger.<br> The entity acts as a storage for external channels to create a link between Collaboration Server persons and the users of an external messenger.")
 
 @JsonPropertyOrder({
 	ExternalMessengerContact.JSON_PROPERTY_$_TYPE,

@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Model of a person visibility rule.
+ * &lt;p&gt;This type is in preview mode.&lt;/p&gt;Model of a person visibility rule.
  */
-@ApiModel(description = "Model of a person visibility rule.")
+@ApiModel(description = "<p>This type is in preview mode.</p>Model of a person visibility rule.")
 
 @JsonPropertyOrder({
 	PersonVisibilityRuleData.JSON_PROPERTY_$_TYPE,

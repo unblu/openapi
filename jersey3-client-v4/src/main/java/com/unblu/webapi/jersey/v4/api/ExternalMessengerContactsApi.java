@@ -38,7 +38,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * create Creates an external messenger contact. &lt;p&gt; The configuration property
+	 * create &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Creates an external messenger contact. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContact to create (required)
@@ -50,7 +50,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * create Creates an external messenger contact. &lt;p&gt; The configuration property
+	 * create &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Creates an external messenger contact. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContact to create (required)
@@ -91,8 +91,9 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * delete Deletes an external messenger contact. This ends all the contact&#39;s participations in conversations. &lt;p&gt; The configuration property
-	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles this endpoint is available to.&lt;br&gt;
+	 * delete &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Deletes an external messenger contact. This ends all the contact&#39;s participations in
+	 * conversations. &lt;p&gt; The configuration property &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles
+	 * this endpoint is available to.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContactId The ID of the external messenger contact to delete (required)
 	 * @throws ApiException if fails to make API call
@@ -103,8 +104,9 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * delete Deletes an external messenger contact. This ends all the contact&#39;s participations in conversations. &lt;p&gt; The configuration property
-	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles this endpoint is available to.&lt;br&gt;
+	 * delete &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Deletes an external messenger contact. This ends all the contact&#39;s participations in
+	 * conversations. &lt;p&gt; The configuration property &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles
+	 * this endpoint is available to.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContactId The ID of the external messenger contact to delete (required)
 	 * @throws ApiException if fails to make API call
@@ -142,9 +144,9 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * migrateContactPersonWithAllConnectedConversations Changes the linked person of the external messenger contact. All conversations the external messenger
-	 * contact participated in are migrated to the new person, provided the conversation allows a user change. Allowing it means the configuration property
-	 * &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
+	 * migrateContactPersonWithAllConnectedConversations &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Changes the linked person of the external messenger
+	 * contact. All conversations the external messenger contact participated in are migrated to the new person, provided the conversation allows a user change.
+	 * Allowing it means the configuration property &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
 	 * &#x60;EConversationReplaceUserOnLoginMode.NEVER&#x60; on the conversation. Other conversations not linked to the external messenger contact and just having
 	 * the same person used, e.g. direct conversations without an external messenger, will not be migrated. &lt;p&gt; If the new person ID matches the current
 	 * person ID, calling this endpoint doesn&#39;t do anything. &lt;p&gt; The configuration property
@@ -160,9 +162,9 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * migrateContactPersonWithAllConnectedConversations Changes the linked person of the external messenger contact. All conversations the external messenger
-	 * contact participated in are migrated to the new person, provided the conversation allows a user change. Allowing it means the configuration property
-	 * &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
+	 * migrateContactPersonWithAllConnectedConversations &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Changes the linked person of the external messenger
+	 * contact. All conversations the external messenger contact participated in are migrated to the new person, provided the conversation allows a user change.
+	 * Allowing it means the configuration property &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
 	 * &#x60;EConversationReplaceUserOnLoginMode.NEVER&#x60; on the conversation. Other conversations not linked to the external messenger contact and just having
 	 * the same person used, e.g. direct conversations without an external messenger, will not be migrated. &lt;p&gt; If the new person ID matches the current
 	 * person ID, calling this endpoint doesn&#39;t do anything. &lt;p&gt; The configuration property
@@ -213,9 +215,9 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * migrateContactPersonWithGivenConversations Changes the linked person of the external messenger contact and migrates the list of conversations passed in to
-	 * the new person, provided the conversation allows a user change. Allowing it means the configuration property
-	 * &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
+	 * migrateContactPersonWithGivenConversations &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Changes the linked person of the external messenger contact
+	 * and migrates the list of conversations passed in to the new person, provided the conversation allows a user change. Allowing it means the configuration
+	 * property &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
 	 * &#x60;EConversationReplaceUserOnLoginMode.NEVER&#x60;. &lt;p&gt; For all other conversations the contact is part of, their participation is removed.
 	 * &lt;p&gt; If the new person ID matches the current person ID, calling this endpoint doesn&#39;t do anything. &lt;p&gt; The given conversation Ids have to be
 	 * in the list of none ended conversation where the external messenger contact is a participant. If not, an error will be returned before doing any migration.
@@ -234,9 +236,9 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * migrateContactPersonWithGivenConversations Changes the linked person of the external messenger contact and migrates the list of conversations passed in to
-	 * the new person, provided the conversation allows a user change. Allowing it means the configuration property
-	 * &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
+	 * migrateContactPersonWithGivenConversations &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Changes the linked person of the external messenger contact
+	 * and migrates the list of conversations passed in to the new person, provided the conversation allows a user change. Allowing it means the configuration
+	 * property &#x60;com.unblu.conversation.lifecycle.allowMigrationOnExternalMessengerContactMigration&#x60; isn&#39;t set to
 	 * &#x60;EConversationReplaceUserOnLoginMode.NEVER&#x60;. &lt;p&gt; For all other conversations the contact is part of, their participation is removed.
 	 * &lt;p&gt; If the new person ID matches the current person ID, calling this endpoint doesn&#39;t do anything. &lt;p&gt; The given conversation Ids have to be
 	 * in the list of none ended conversation where the external messenger contact is a participant. If not, an error will be returned before doing any migration.
@@ -292,7 +294,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * read Returns the external messenger contact with the given ID. &lt;p&gt; The configuration property
+	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the external messenger contact with the given ID. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContactId The ID of the external messenger contact to retrieve (required)
@@ -304,7 +306,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * read Returns the external messenger contact with the given ID. &lt;p&gt; The configuration property
+	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the external messenger contact with the given ID. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContactId The ID of the external messenger contact to retrieve (required)
@@ -346,7 +348,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * readMultiple readMultiple operation
+	 * readMultiple &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;readMultiple operation
 	 * 
 	 * @param requestBody (required)
 	 * @return ExternalMessengerContactList
@@ -357,7 +359,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * readMultiple readMultiple operation
+	 * readMultiple &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;readMultiple operation
 	 * 
 	 * @param requestBody (required)
 	 * @return ApiResponse&lt;ExternalMessengerContactList&gt;
@@ -397,7 +399,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * search Search for &#x60;ExternalMessengerContact&#x60;s in the current account&lt;br&gt;
+	 * search &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Search for &#x60;ExternalMessengerContact&#x60;s in the current account&lt;br&gt;
 	 * 
 	 * @param externalMessengerContactQuery (required)
 	 * @return ExternalMessengerContactResult
@@ -408,7 +410,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * search Search for &#x60;ExternalMessengerContact&#x60;s in the current account&lt;br&gt;
+	 * search &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Search for &#x60;ExternalMessengerContact&#x60;s in the current account&lt;br&gt;
 	 * 
 	 * @param externalMessengerContactQuery (required)
 	 * @return ApiResponse&lt;ExternalMessengerContactResult&gt;
@@ -448,7 +450,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * update Updates an external messenger contact. &lt;p&gt; The configuration property
+	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates an external messenger contact. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to. &lt;p&gt;
 	 * &lt;b&gt;Note:&lt;/b&gt; This can&#39;t be used to update the personId. To update the link to a person, use the
 	 * endpoint&#x60;migrateContactPersonWithAllConnectedConversations&#x60; or &#x60;migrateContactPersonWithGivenConversations&#x60;.&lt;br&gt;
@@ -462,7 +464,7 @@ public class ExternalMessengerContactsApi {
 	}
 
 	/**
-	 * update Updates an external messenger contact. &lt;p&gt; The configuration property
+	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates an external messenger contact. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to. &lt;p&gt;
 	 * &lt;b&gt;Note:&lt;/b&gt; This can&#39;t be used to update the personId. To update the link to a person, use the
 	 * endpoint&#x60;migrateContactPersonWithAllConnectedConversations&#x60; or &#x60;migrateContactPersonWithGivenConversations&#x60;.&lt;br&gt;

@@ -38,8 +38,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * create Creates the given person label. The ID of the person label is generated automatically. Any ID provided in the person label entity is
-	 * ignored.&lt;br&gt;
+	 * create &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Creates the given person label. The ID of the person label is generated automatically. Any ID
+	 * provided in the person label entity is ignored.&lt;br&gt;
 	 * 
 	 * @param personLabel The person label to create (required)
 	 * @return PersonLabel
@@ -50,8 +50,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * create Creates the given person label. The ID of the person label is generated automatically. Any ID provided in the person label entity is
-	 * ignored.&lt;br&gt;
+	 * create &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Creates the given person label. The ID of the person label is generated automatically. Any ID
+	 * provided in the person label entity is ignored.&lt;br&gt;
 	 * 
 	 * @param personLabel The person label to create (required)
 	 * @return ApiResponse&lt;PersonLabel&gt;
@@ -91,7 +91,7 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * delete Deletes the person label with the given ID&lt;br&gt;
+	 * delete &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Deletes the person label with the given ID&lt;br&gt;
 	 * 
 	 * @param personLabelId The ID of the person label to delete (required)
 	 * @throws ApiException if fails to make API call
@@ -102,7 +102,7 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * delete Deletes the person label with the given ID&lt;br&gt;
+	 * delete &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Deletes the person label with the given ID&lt;br&gt;
 	 * 
 	 * @param personLabelId The ID of the person label to delete (required)
 	 * @throws ApiException if fails to make API call
@@ -140,7 +140,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * getByNames Retrieves a list of the person labels with the names provided. Names that don&#39;t match any person labels are ignored.&lt;br&gt;
+	 * getByNames &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of the person labels with the names provided. Names that don&#39;t match any
+	 * person labels are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The names of the person labels to fetch (required)
 	 * @return PersonLabelList
@@ -151,7 +152,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * getByNames Retrieves a list of the person labels with the names provided. Names that don&#39;t match any person labels are ignored.&lt;br&gt;
+	 * getByNames &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of the person labels with the names provided. Names that don&#39;t match any
+	 * person labels are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The names of the person labels to fetch (required)
 	 * @return ApiResponse&lt;PersonLabelList&gt;
@@ -191,7 +193,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * getByScope Retrieves the person labels found for the given scope, or an empty list if none are found&lt;br&gt;
+	 * getByScope &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves the person labels found for the given scope, or an empty list if none are
+	 * found&lt;br&gt;
 	 * 
 	 * @param personLabelsGetByScopeBody (required)
 	 * @return PersonLabelList
@@ -202,7 +205,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * getByScope Retrieves the person labels found for the given scope, or an empty list if none are found&lt;br&gt;
+	 * getByScope &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves the person labels found for the given scope, or an empty list if none are
+	 * found&lt;br&gt;
 	 * 
 	 * @param personLabelsGetByScopeBody (required)
 	 * @return ApiResponse&lt;PersonLabelList&gt;
@@ -242,7 +246,7 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * read Returns the person label with the given ID&lt;br&gt;
+	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the person label with the given ID&lt;br&gt;
 	 * 
 	 * @param personLabelId The ID of the person label to return (required)
 	 * @return PersonLabel
@@ -253,7 +257,7 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * read Returns the person label with the given ID&lt;br&gt;
+	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the person label with the given ID&lt;br&gt;
 	 * 
 	 * @param personLabelId The ID of the person label to return (required)
 	 * @return ApiResponse&lt;PersonLabel&gt;
@@ -294,7 +298,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * readMultiple Retrieves a list of person labels for the given IDs. IDs that don&#39;t match any person labels are ignored.&lt;br&gt;
+	 * readMultiple &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of person labels for the given IDs. IDs that don&#39;t match any person
+	 * labels are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs for which to fetch the person labels (required)
 	 * @return PersonLabelList
@@ -305,7 +310,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * readMultiple Retrieves a list of person labels for the given IDs. IDs that don&#39;t match any person labels are ignored.&lt;br&gt;
+	 * readMultiple &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Retrieves a list of person labels for the given IDs. IDs that don&#39;t match any person
+	 * labels are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs for which to fetch the person labels (required)
 	 * @return ApiResponse&lt;PersonLabelList&gt;
@@ -345,7 +351,7 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * search Searches for person labels&lt;br&gt;
+	 * search &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for person labels&lt;br&gt;
 	 * 
 	 * @param personLabelQuery The query to use for the search (required)
 	 * @return PersonLabelResult
@@ -356,7 +362,7 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * search Searches for person labels&lt;br&gt;
+	 * search &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for person labels&lt;br&gt;
 	 * 
 	 * @param personLabelQuery The query to use for the search (required)
 	 * @return ApiResponse&lt;PersonLabelResult&gt;
@@ -396,7 +402,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * update Updates the person label in the system with the given entity. The update fails if no person label exists with the ID provided.&lt;br&gt;
+	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates the person label in the system with the given entity. The update fails if no person label
+	 * exists with the ID provided.&lt;br&gt;
 	 * 
 	 * @param personLabel The details to update the person label with (required)
 	 * @return PersonLabel
@@ -407,7 +414,8 @@ public class PersonLabelsApi {
 	}
 
 	/**
-	 * update Updates the person label in the system with the given entity. The update fails if no person label exists with the ID provided.&lt;br&gt;
+	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates the person label in the system with the given entity. The update fails if no person label
+	 * exists with the ID provided.&lt;br&gt;
 	 * 
 	 * @param personLabel The details to update the person label with (required)
 	 * @return ApiResponse&lt;PersonLabel&gt;
