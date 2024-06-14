@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.45.0
+  version: 7.46.2
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -11380,6 +11380,48 @@ paths:
               responses:
                 "200":
                   description: OK
+        chat_suggestion.accepted:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.accepted
+              description: An event triggered every time a chat suggestion in a conversation is accepted with or without modifications
+              operationId: chatSuggestionAcceptedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionAcceptedEvent'
+              responses:
+                "200":
+                  description: OK
+        chat_suggestion.discarded:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.discarded
+              description: An event triggered every time a chat suggestion in a conversation is discarded
+              operationId: chatSuggestionDiscardedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionDiscardedEvent'
+              responses:
+                "200":
+                  description: OK
+        chat_suggestion.requested:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.requested
+              description: An event triggered every time a chat suggestion is requested in a conversation
+              operationId: chatSuggestionRequestedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionRequestedEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.active:
           '{$request.body#/endpoint}':
             post:
@@ -15869,6 +15911,94 @@ components:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
         operator:
           $ref: '#/components/schemas/AuditChangeTypeOperator'
+    ChatSuggestionAcceptedEvent:
+      type: object
+      description: An event triggered every time a chat suggestion in a conversation is accepted with or without modifications
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionAcceptedEvent
+          enum:
+          - ChatSuggestionAcceptedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        suggestedTextMessage:
+          type: string
+        sentTextMessage:
+          type: string
+          description: The suggested text as it was sent to the conversation
+        acceptedTimestamp:
+          type: integer
+          format: int64
+          description: The server-side time when the suggestion was accepted
+        modified:
+          type: boolean
+          description: Flag indicating whether the suggestion text was modified by the person before being sent into the conversation
+    ChatSuggestionDiscardedEvent:
+      type: object
+      description: An event triggered every time a chat suggestion in a conversation is discarded
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionDiscardedEvent
+          enum:
+          - ChatSuggestionDiscardedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        suggestedTextMessage:
+          type: string
+        discardedTimestamp:
+          type: integer
+          format: int64
+          description: The server-side time when the suggestion was discarded
     ChatSuggestionRequest:
       type: object
       description: Model used to request a chat suggestion in a conversation
@@ -15911,6 +16041,46 @@ components:
           type: integer
           format: int32
           description: The maximum number of characters in the response that are supported by the caller
+    ChatSuggestionRequestedEvent:
+      type: object
+      description: An event triggered every time a chat suggestion is requested in a conversation
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionRequestedEvent
+          enum:
+          - ChatSuggestionRequestedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        sourceMessages:
+          type: array
+          description: The messages used as the source of the suggestion
+          items:
+            $ref: '#/components/schemas/MessageData'
     ChatSuggestionResponse:
       description: Base model for a chat suggestion response
       oneOf:
