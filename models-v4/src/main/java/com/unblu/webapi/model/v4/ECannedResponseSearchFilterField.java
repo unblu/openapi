@@ -10,11 +10,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ECannedResponseSearchFilterField {
 
 	/**
-	 * KEY: Filter by the &#39;key&#39; attribute
-	 */
-	KEY("KEY"),
-
-	/**
 	 * TITLE: Filter by the &#39;title&#39; attribute
 	 */
 	TITLE("TITLE"),

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.2.0
+  version: 8.3.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -44,6 +44,8 @@ tags:
   description: Storage service to manage `ExternalMessengerContact`s
 - name: ExternalMessengers
   description: Manages all types of `ExternalMessengerChannel` and can be used to send messages from external messengers to a Collaboration Server conversation
+- name: FileUploadGlobalInterceptors
+  description: Service to manage global file upload interceptors. Global file upload interceptors also use this service to interact with Unblu.
 - name: FileUploadInterceptors
   description: Service to manage file upload interceptors. File upload interceptors also use this service to interact with Unblu.
 - name: Global
@@ -6903,6 +6905,285 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /fileuploadglobalinterceptors/approveFileUpload:
+    post:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: approveFileUpload
+      description: Approves a file upload for which approval was requested through a <code>file_upload_interceptor.new_file</code> webhook.<br>
+      operationId: fileUploadGlobalInterceptorsApproveFileUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadGlobalInterceptorsApproveFileUploadBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadglobalinterceptors/create:
+    post:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: create
+      description: Creates a new file upload interceptor<br>
+      operationId: fileUploadGlobalInterceptorsCreate
+      requestBody:
+        description: The file upload interceptor to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorData'
+            examples:
+              create:
+                summary: create
+                description: Create a new file upload global interceptor
+                value:
+                  $_type: FileUploadInterceptorData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: test-file-upload-interceptor-1
+                  description: null
+                  order: 3
+                  mimeTypeRegex: null
+                  webhookStatus: INACTIVE
+                  webhookEndpoint: https://test.unblu.com
+                  webhookApiVersion: V4
+                  webhookSecret: null
+        required: true
+      responses:
+        "200":
+          description: The created file upload interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+              examples:
+                create:
+                  summary: create
+                  description: New file upload global interceptor
+                  value:
+                    $_type: FileUploadInterceptorData
+                    id: VhSaA_3wThCuS_AOKxC0VA
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-file-upload-interceptor-1
+                    description: null
+                    order: 3
+                    mimeTypeRegex: null
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: https://test.unblu.com
+                    webhookApiVersion: V4
+                    webhookSecret: null
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /fileuploadglobalinterceptors/{interceptorId}/delete:
+    delete:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: delete
+      description: Deletes an existing file upload interceptor<br>
+      operationId: fileUploadGlobalInterceptorsDelete
+      parameters:
+      - name: interceptorId
+        in: path
+        description: The ID of the file upload interceptor which should be deleted
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /fileuploadglobalinterceptors/getByName:
+    get:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: getByName
+      description: Searches for a file upload interceptor with the given name<br>
+      operationId: fileUploadGlobalInterceptorsGetByName
+      parameters:
+      - name: name
+        in: query
+        description: The name of the file upload interceptor
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The file upload interceptor with the given name or an error if no file interceptor of that name is found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /fileuploadglobalinterceptors/{interceptorId}/read:
+    get:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: read
+      description: Reads an existing file upload interceptor.<br>
+      operationId: fileUploadGlobalInterceptorsRead
+      parameters:
+      - name: interceptorId
+        in: path
+        description: The ID of the file upload interceptor to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The file upload interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+              examples:
+                read-file-global-interceptor:
+                  summary: read file global interceptor
+                  description: File upload global interceptor
+                  value:
+                    $_type: FileUploadInterceptorData
+                    id: VhSaA_3wThCuS_AOKxC0VA
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-file-upload-interceptor-1
+                    description: null
+                    order: 1
+                    mimeTypeRegex: null
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: http://test.webhook.com
+                    webhookApiVersion: V4
+                    webhookSecret: null
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /fileuploadglobalinterceptors/rejectFileUpload:
+    post:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: rejectFileUpload
+      description: Rejects a file upload for which approval was requested through a <code>file_upload_interceptor.new_file</code> webhook.<br>
+      operationId: fileUploadGlobalInterceptorsRejectFileUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadGlobalInterceptorsRejectFileUploadBody'
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /fileuploadglobalinterceptors/search:
+    post:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: search
+      description: Searches for file upload interceptors in the current account<br>
+      operationId: fileUploadGlobalInterceptorsSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorQuery'
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /fileuploadglobalinterceptors/{interceptorId}/sendPing:
+    post:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: sendPing
+      description: Emits a `WebhookPingEvent` on the configured webhook for the given file upload interceptor<br>
+      operationId: fileUploadGlobalInterceptorsSendPing
+      parameters:
+      - name: interceptorId
+        in: path
+        description: The ID of the file upload interceptor
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /fileuploadglobalinterceptors/update:
+    post:
+      tags:
+      - FileUploadGlobalInterceptors
+      summary: update
+      description: Updates an existing file upload interceptor<br>
+      operationId: fileUploadGlobalInterceptorsUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadInterceptorData'
+        required: true
+      responses:
+        "200":
+          description: The updated file upload interceptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadInterceptorData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
   /fileuploadinterceptors/approveFileUpload:
     post:
       tags:
@@ -8565,7 +8846,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - REGISTERED_USER
+      - ADMIN
       x-status: PREVIEW
   /personlabels/{personLabelId}/delete:
     delete:
@@ -8591,7 +8872,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - REGISTERED_USER
+      - ADMIN
       x-status: PREVIEW
   /personlabels/getByNames:
     post:
@@ -8818,7 +9099,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - REGISTERED_USER
+      - ADMIN
       x-status: PREVIEW
   /personpresences/{presenceId}/read:
     get:
@@ -11431,6 +11712,48 @@ paths:
                   application/json:
                     schema:
                       $ref: '#/components/schemas/WebhookAuditEvent'
+              responses:
+                "200":
+                  description: OK
+        chat_suggestion.accepted:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.accepted
+              description: An event triggered every time a chat suggestion in a conversation is accepted with or without modifications
+              operationId: chatSuggestionAcceptedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionAcceptedEvent'
+              responses:
+                "200":
+                  description: OK
+        chat_suggestion.discarded:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.discarded
+              description: An event triggered every time a chat suggestion in a conversation is discarded
+              operationId: chatSuggestionDiscardedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionDiscardedEvent'
+              responses:
+                "200":
+                  description: OK
+        chat_suggestion.requested:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.requested
+              description: An event triggered every time a chat suggestion is requested in a conversation
+              operationId: chatSuggestionRequestedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionRequestedEvent'
               responses:
                 "200":
                   description: OK
@@ -15862,7 +16185,6 @@ components:
       description: CannedResponse filter item.
       oneOf:
       - $ref: '#/components/schemas/CreationTimestampCannedResponseSearchFilter'
-      - $ref: '#/components/schemas/KeyCannedResponseSearchFilter'
       - $ref: '#/components/schemas/ModificationTimestampCannedResponseSearchFilter'
       - $ref: '#/components/schemas/TextCannedResponseSearchFilter'
       - $ref: '#/components/schemas/TitleCannedResponseSearchFilter'
@@ -15872,7 +16194,6 @@ components:
         propertyName: field
         mapping:
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampCannedResponseSearchFilter'
-          KEY: '#/components/schemas/KeyCannedResponseSearchFilter'
           MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampCannedResponseSearchFilter'
           OWNER_ID: '#/components/schemas/OwnerIdCannedResponseSearchFilter'
           OWNER_TYPE: '#/components/schemas/OwnerTypeCannedResponseSearchFilter'
@@ -16163,6 +16484,94 @@ components:
           $ref: '#/components/schemas/EAuditChangeSearchFilterField'
         operator:
           $ref: '#/components/schemas/AuditChangeTypeOperator'
+    ChatSuggestionAcceptedEvent:
+      type: object
+      description: An event triggered every time a chat suggestion in a conversation is accepted with or without modifications
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionAcceptedEvent
+          enum:
+          - ChatSuggestionAcceptedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        suggestedTextMessage:
+          type: string
+        sentTextMessage:
+          type: string
+          description: The suggested text as it was sent to the conversation
+        acceptedTimestamp:
+          type: integer
+          format: int64
+          description: The server-side time when the suggestion was accepted
+        modified:
+          type: boolean
+          description: Flag indicating whether the suggestion text was modified by the person before being sent into the conversation
+    ChatSuggestionDiscardedEvent:
+      type: object
+      description: An event triggered every time a chat suggestion in a conversation is discarded
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionDiscardedEvent
+          enum:
+          - ChatSuggestionDiscardedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        suggestedTextMessage:
+          type: string
+        discardedTimestamp:
+          type: integer
+          format: int64
+          description: The server-side time when the suggestion was discarded
     ChatSuggestionRequest:
       type: object
       description: Model used to request a chat suggestion in a conversation
@@ -16205,6 +16614,46 @@ components:
           type: integer
           format: int32
           description: The maximum number of characters in the response that are supported by the caller
+    ChatSuggestionRequestedEvent:
+      type: object
+      description: An event triggered every time a chat suggestion is requested in a conversation
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionRequestedEvent
+          enum:
+          - ChatSuggestionRequestedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        sourceMessages:
+          type: array
+          description: The messages used as the source of the suggestion
+          items:
+            $ref: '#/components/schemas/MessageData'
     ChatSuggestionResponse:
       description: Base model for a chat suggestion response
       oneOf:
@@ -20587,7 +21036,6 @@ components:
     ECannedResponseSearchFilterField:
       type: string
       enum:
-      - KEY
       - TITLE
       - TEXT
       - OWNER_ID
@@ -20595,7 +21043,6 @@ components:
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
-      - "KEY: Filter by the 'key' attribute"
       - "TITLE: Filter by the 'title' attribute"
       - "TEXT: Filter by the 'text' attribute"
       - "OWNER_ID: Filter by the 'ownerId' attribute"
@@ -24412,6 +24859,23 @@ components:
           description: Optional list of quick replies available to the message's recipients <p> Max number of quick replies is 13.
           items:
             $ref: '#/components/schemas/QuickReply'
+    FileUploadGlobalInterceptorsApproveFileUploadBody:
+      type: object
+      description: Request body for the 'fileUploadGlobalInterceptorsApproveFileUpload' operation
+      properties:
+        token:
+          type: string
+          description: The token used to identify the file this action applies to. The token is received when approval is requested through a <code>file_upload_interceptor.new_file</code> webhook. Each file upload approval request contains a unique token.
+    FileUploadGlobalInterceptorsRejectFileUploadBody:
+      type: object
+      description: Request body for the 'fileUploadGlobalInterceptorsRejectFileUpload' operation
+      properties:
+        token:
+          type: string
+          description: The token used to identify the file this action applies to. The token is received when approval is requested through a <code>file_upload_interceptor.new_file</code> webhook. Each file upload approval request contains a unique token.
+        reason:
+          type: string
+          description: A text explaining why the file upload was rejected. The text is displayed to end users as it was transmitted.
     FileUploadInterceptorData:
       type: object
       description: Model representing a file upload interceptor.
@@ -25768,18 +26232,6 @@ components:
           $ref: '#/components/schemas/EPersonPresenceSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
-    KeyCannedResponseSearchFilter:
-      type: object
-      properties:
-        $_type:
-          type: string
-          default: KeyCannedResponseSearchFilter
-          enum:
-          - KeyCannedResponseSearchFilter
-        field:
-          $ref: '#/components/schemas/ECannedResponseSearchFilterField'
-        operator:
-          $ref: '#/components/schemas/StringOperator'
     KeyCustomActionSearchFilter:
       type: object
       properties:
