@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.3.1
+  version: 8.4.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -6417,7 +6417,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - REGISTERED_USER
   /externalmessengers/search:
     post:
       tags:
@@ -10228,6 +10228,49 @@ paths:
       x-required-role:
       - REGISTERED_USER
       x-status: PREVIEW
+  /persons/{personId}/setNote:
+    post:
+      tags:
+      - Persons
+      summary: setNote
+      description: Sets the note on the person to the given value<br>
+      operationId: personsSetNote
+      parameters:
+      - name: personId
+        in: path
+        description: The ID of the person to set the note on
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpandFields'
+        style: form
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonsSetNoteBody'
+        required: true
+      responses:
+        "200":
+          description: The updated person entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /persons/{personId}/setStatusMessage:
     post:
       tags:
@@ -16811,8 +16854,18 @@ components:
           description: List of labels set for this person
           items:
             $ref: '#/components/schemas/PersonLabel'
+        note:
+          type: string
+          description: Note maintained on this person
+        noteLastEditedTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the note was last edited
+        noteLastEditedPersonId:
+          type: string
+          description: ID of the person who last edited the note
         avatar:
-          description: "Avatar of the entity: id that can be expanded."
+          description: Avatar of the entity (expandable ID)
           oneOf:
           - type: string
           - $ref: '#/components/schemas/Avatar'
@@ -21344,6 +21397,7 @@ components:
       - CONVERSATION_UNASSIGNED
       - CONVERSATION_REQUEUED
       - PUBLIC_DIALIN_ENDED
+      - EXTERNAL_CONTACT_UNLINKED
       - OTHER
       x-enum-descriptions:
       - FORWARDED
@@ -21357,6 +21411,7 @@ components:
       - CONVERSATION_UNASSIGNED
       - CONVERSATION_REQUEUED
       - PUBLIC_DIALIN_ENDED
+      - EXTERNAL_CONTACT_UNLINKED
       - OTHER
     EConversationLinkType:
       type: string
@@ -22598,7 +22653,6 @@ components:
       - ONBOARDING_IDLE_TIMEOUT
       - KICKED
       - CONVERSATION_UNASSIGNED
-      - EXTERNAL_CHANNEL_CLOSED
       - CONVERSATION_CANCELED
       - CONVERSATION_ENDED
       - SOLVED_BY_BOT
@@ -22615,7 +22669,6 @@ components:
       - "ONBOARDING_IDLE_TIMEOUT: The onboarding timed out and therefore the participant will not join the conversation"
       - "KICKED: The participant was kicked out of the conversation"
       - "CONVERSATION_UNASSIGNED: The conversation is no longer assigned to an agent and therefore all other agents were removed"
-      - "EXTERNAL_CHANNEL_CLOSED: The external channel connected to this conversation has closed, no further messages are possible."
       - "CONVERSATION_CANCELED: The conversation was canceled before it was started"
       - "CONVERSATION_ENDED: The conversation has ended"
       - "SOLVED_BY_BOT: The conversation was ended because an onboarding bot solved it."
@@ -28983,8 +29036,18 @@ components:
           description: List of labels set for this person
           items:
             $ref: '#/components/schemas/PersonLabel'
+        note:
+          type: string
+          description: Note maintained on this person
+        noteLastEditedTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the note was last edited
+        noteLastEditedPersonId:
+          type: string
+          description: ID of the person who last edited the note
         avatar:
-          description: "Avatar of the entity: id that can be expanded."
+          description: Avatar of the entity (expandable ID)
           oneOf:
           - type: string
           - $ref: '#/components/schemas/Avatar'
@@ -29843,6 +29906,13 @@ components:
         away:
           type: boolean
           description: Boolean Whether to set the person's online state to AWAY (true) of ONLINE (false)
+    PersonsSetNoteBody:
+      type: object
+      description: Request body for the 'personsSetNote' operation
+      properties:
+        note:
+          type: string
+          description: The value of the note set on the person
     PersonsSetStatusMessageBody:
       type: object
       description: Request body for the 'personsSetStatusMessage' operation
@@ -30211,6 +30281,10 @@ components:
         productGuid:
           type: string
           description: The unique identifier of the product build
+        buildTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) of the product build
     PropertyOwnerTypeOperator:
       oneOf:
       - $ref: '#/components/schemas/EqualsPropertyOwnerTypeOperator'

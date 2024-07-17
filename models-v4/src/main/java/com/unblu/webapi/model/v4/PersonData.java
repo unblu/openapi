@@ -41,6 +41,9 @@ import io.swagger.annotations.ApiModelProperty;
 	PersonData.JSON_PROPERTY_PHONE,
 	PersonData.JSON_PROPERTY_TEAM_ID,
 	PersonData.JSON_PROPERTY_LABELS,
+	PersonData.JSON_PROPERTY_NOTE,
+	PersonData.JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP,
+	PersonData.JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID,
 	PersonData.JSON_PROPERTY_AVATAR,
 	PersonData.JSON_PROPERTY_METADATA,
 })
@@ -150,6 +153,18 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_LABELS = "labels";
 	@JsonProperty(JSON_PROPERTY_LABELS)
 	private List<PersonLabel> labels = null;
+
+	public static final String JSON_PROPERTY_NOTE = "note";
+	@JsonProperty(JSON_PROPERTY_NOTE)
+	private String note;
+
+	public static final String JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP = "noteLastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP)
+	private Long noteLastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID = "noteLastEditedPersonId";
+	@JsonProperty(JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID)
+	private String noteLastEditedPersonId;
 
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
@@ -514,17 +529,74 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		this.labels = labels;
 	}
 
+	public PersonData note(String note) {
+		this.note = note;
+		return this;
+	}
+
+	/**
+	 * Note maintained on this person
+	 * 
+	 * @return note
+	 **/
+	@ApiModelProperty(value = "Note maintained on this person")
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public PersonData noteLastEditedTimestamp(Long noteLastEditedTimestamp) {
+		this.noteLastEditedTimestamp = noteLastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the note was last edited
+	 * 
+	 * @return noteLastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the note was last edited")
+	public Long getNoteLastEditedTimestamp() {
+		return noteLastEditedTimestamp;
+	}
+
+	public void setNoteLastEditedTimestamp(Long noteLastEditedTimestamp) {
+		this.noteLastEditedTimestamp = noteLastEditedTimestamp;
+	}
+
+	public PersonData noteLastEditedPersonId(String noteLastEditedPersonId) {
+		this.noteLastEditedPersonId = noteLastEditedPersonId;
+		return this;
+	}
+
+	/**
+	 * ID of the person who last edited the note
+	 * 
+	 * @return noteLastEditedPersonId
+	 **/
+	@ApiModelProperty(value = "ID of the person who last edited the note")
+	public String getNoteLastEditedPersonId() {
+		return noteLastEditedPersonId;
+	}
+
+	public void setNoteLastEditedPersonId(String noteLastEditedPersonId) {
+		this.noteLastEditedPersonId = noteLastEditedPersonId;
+	}
+
 	public PersonData avatar(ExpandableField<Avatar> avatar) {
 		this.avatar = avatar;
 		return this;
 	}
 
 	/**
-	 * Avatar of the entity: id that can be expanded.
+	 * Avatar of the entity (expandable ID)
 	 * 
 	 * @return avatar
 	 **/
-	@ApiModelProperty(value = "Avatar of the entity: id that can be expanded.")
+	@ApiModelProperty(value = "Avatar of the entity (expandable ID)")
 	public ExpandableField<Avatar> getAvatar() {
 		return avatar;
 	}
@@ -588,13 +660,16 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.phone, personData.phone) &&
 				Objects.equals(this.teamId, personData.teamId) &&
 				Objects.equals(this.labels, personData.labels) &&
+				Objects.equals(this.note, personData.note) &&
+				Objects.equals(this.noteLastEditedTimestamp, personData.noteLastEditedTimestamp) &&
+				Objects.equals(this.noteLastEditedPersonId, personData.noteLastEditedPersonId) &&
 				Objects.equals(this.avatar, personData.avatar) &&
 				Objects.equals(this.metadata, personData.metadata);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, personType, authorizationRole, email, phone, teamId, labels, avatar, metadata);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, avatar, metadata);
 	}
 
 	@Override
@@ -619,6 +694,9 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
 		sb.append("    teamId: ").append(toIndentedString(teamId)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
+		sb.append("    note: ").append(toIndentedString(note)).append("\n");
+		sb.append("    noteLastEditedTimestamp: ").append(toIndentedString(noteLastEditedTimestamp)).append("\n");
+		sb.append("    noteLastEditedPersonId: ").append(toIndentedString(noteLastEditedPersonId)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("}");

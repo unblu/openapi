@@ -50,11 +50,6 @@ public enum EOffboardingReason {
 	CONVERSATION_UNASSIGNED("CONVERSATION_UNASSIGNED"),
 
 	/**
-	 * EXTERNAL_CHANNEL_CLOSED: The external channel connected to this conversation has closed, no further messages are possible.
-	 */
-	EXTERNAL_CHANNEL_CLOSED("EXTERNAL_CHANNEL_CLOSED"),
-
-	/**
 	 * CONVERSATION_CANCELED: The conversation was canceled before it was started
 	 */
 	CONVERSATION_CANCELED("CONVERSATION_CANCELED"),

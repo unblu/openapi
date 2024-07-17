@@ -39,6 +39,9 @@ import io.swagger.annotations.ApiModelProperty;
 	ContextPersonInfo.JSON_PROPERTY_PHONE,
 	ContextPersonInfo.JSON_PROPERTY_TEAM_ID,
 	ContextPersonInfo.JSON_PROPERTY_LABELS,
+	ContextPersonInfo.JSON_PROPERTY_NOTE,
+	ContextPersonInfo.JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP,
+	ContextPersonInfo.JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID,
 	ContextPersonInfo.JSON_PROPERTY_AVATAR,
 	ContextPersonInfo.JSON_PROPERTY_OS_NAME,
 	ContextPersonInfo.JSON_PROPERTY_OS_VERSION,
@@ -154,6 +157,18 @@ public class ContextPersonInfo {
 	public static final String JSON_PROPERTY_LABELS = "labels";
 	@JsonProperty(JSON_PROPERTY_LABELS)
 	private List<PersonLabel> labels = null;
+
+	public static final String JSON_PROPERTY_NOTE = "note";
+	@JsonProperty(JSON_PROPERTY_NOTE)
+	private String note;
+
+	public static final String JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP = "noteLastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP)
+	private Long noteLastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID = "noteLastEditedPersonId";
+	@JsonProperty(JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID)
+	private String noteLastEditedPersonId;
 
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
@@ -542,17 +557,74 @@ public class ContextPersonInfo {
 		this.labels = labels;
 	}
 
+	public ContextPersonInfo note(String note) {
+		this.note = note;
+		return this;
+	}
+
+	/**
+	 * Note maintained on this person
+	 * 
+	 * @return note
+	 **/
+	@ApiModelProperty(value = "Note maintained on this person")
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public ContextPersonInfo noteLastEditedTimestamp(Long noteLastEditedTimestamp) {
+		this.noteLastEditedTimestamp = noteLastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the note was last edited
+	 * 
+	 * @return noteLastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the note was last edited")
+	public Long getNoteLastEditedTimestamp() {
+		return noteLastEditedTimestamp;
+	}
+
+	public void setNoteLastEditedTimestamp(Long noteLastEditedTimestamp) {
+		this.noteLastEditedTimestamp = noteLastEditedTimestamp;
+	}
+
+	public ContextPersonInfo noteLastEditedPersonId(String noteLastEditedPersonId) {
+		this.noteLastEditedPersonId = noteLastEditedPersonId;
+		return this;
+	}
+
+	/**
+	 * ID of the person who last edited the note
+	 * 
+	 * @return noteLastEditedPersonId
+	 **/
+	@ApiModelProperty(value = "ID of the person who last edited the note")
+	public String getNoteLastEditedPersonId() {
+		return noteLastEditedPersonId;
+	}
+
+	public void setNoteLastEditedPersonId(String noteLastEditedPersonId) {
+		this.noteLastEditedPersonId = noteLastEditedPersonId;
+	}
+
 	public ContextPersonInfo avatar(ExpandableField<Avatar> avatar) {
 		this.avatar = avatar;
 		return this;
 	}
 
 	/**
-	 * Avatar of the entity: id that can be expanded.
+	 * Avatar of the entity (expandable ID)
 	 * 
 	 * @return avatar
 	 **/
-	@ApiModelProperty(value = "Avatar of the entity: id that can be expanded.")
+	@ApiModelProperty(value = "Avatar of the entity (expandable ID)")
 	public ExpandableField<Avatar> getAvatar() {
 		return avatar;
 	}
@@ -721,6 +793,9 @@ public class ContextPersonInfo {
 				Objects.equals(this.phone, contextPersonInfo.phone) &&
 				Objects.equals(this.teamId, contextPersonInfo.teamId) &&
 				Objects.equals(this.labels, contextPersonInfo.labels) &&
+				Objects.equals(this.note, contextPersonInfo.note) &&
+				Objects.equals(this.noteLastEditedTimestamp, contextPersonInfo.noteLastEditedTimestamp) &&
+				Objects.equals(this.noteLastEditedPersonId, contextPersonInfo.noteLastEditedPersonId) &&
 				Objects.equals(this.avatar, contextPersonInfo.avatar) &&
 				Objects.equals(this.osName, contextPersonInfo.osName) &&
 				Objects.equals(this.osVersion, contextPersonInfo.osVersion) &&
@@ -733,7 +808,7 @@ public class ContextPersonInfo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, personType, authorizationRole, email, phone, teamId, labels, avatar, osName, osVersion, browserName, browserVersion, locale, city, country);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, avatar, osName, osVersion, browserName, browserVersion, locale, city, country);
 	}
 
 	@Override
@@ -758,6 +833,9 @@ public class ContextPersonInfo {
 		sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
 		sb.append("    teamId: ").append(toIndentedString(teamId)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
+		sb.append("    note: ").append(toIndentedString(note)).append("\n");
+		sb.append("    noteLastEditedTimestamp: ").append(toIndentedString(noteLastEditedTimestamp)).append("\n");
+		sb.append("    noteLastEditedPersonId: ").append(toIndentedString(noteLastEditedPersonId)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("    osName: ").append(toIndentedString(osName)).append("\n");
 		sb.append("    osVersion: ").append(toIndentedString(osVersion)).append("\n");

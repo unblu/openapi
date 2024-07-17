@@ -25,6 +25,7 @@ import com.unblu.webapi.model.v4.PersonsAddAutoPauseNotificationsReasonBody;
 import com.unblu.webapi.model.v4.PersonsPauseNotificationsBody;
 import com.unblu.webapi.model.v4.PersonsRemoveAutoPauseNotificationsReasonBody;
 import com.unblu.webapi.model.v4.PersonsSetAwayBody;
+import com.unblu.webapi.model.v4.PersonsSetNoteBody;
 import com.unblu.webapi.model.v4.PersonsSetStatusMessageBody;
 import com.unblu.webapi.model.v4.VisitorPersonStateResult;
 import com.unblu.webapi.model.v4.VisitorStateQuery;
@@ -1243,6 +1244,69 @@ public class PersonsApi {
 
 		// create path and map variables
 		String localVarPath = "/persons/{personId}/setLabels"
+				.replaceAll("\\{" + "personId" + "\\}", apiClient.escapeString(personId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * setNote Sets the note on the person to the given value&lt;br&gt;
+	 * 
+	 * @param personId The ID of the person to set the note on (required)
+	 * @param personsSetNoteBody (required)
+	 * @param expand (optional)
+	 * @return PersonData
+	 * @throws ApiException if fails to make API call
+	 */
+	public PersonData personsSetNote(String personId, PersonsSetNoteBody personsSetNoteBody, List<ExpandFields> expand) throws ApiException {
+		return personsSetNoteWithHttpInfo(personId, personsSetNoteBody, expand).getData();
+	}
+
+	/**
+	 * setNote Sets the note on the person to the given value&lt;br&gt;
+	 * 
+	 * @param personId The ID of the person to set the note on (required)
+	 * @param personsSetNoteBody (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;PersonData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<PersonData> personsSetNoteWithHttpInfo(String personId, PersonsSetNoteBody personsSetNoteBody, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = personsSetNoteBody;
+
+		// verify the required parameter 'personId' is set
+		if (personId == null) {
+			throw new ApiException(400, "Missing the required parameter 'personId' when calling personsSetNote");
+		}
+
+		// verify the required parameter 'personsSetNoteBody' is set
+		if (personsSetNoteBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'personsSetNoteBody' when calling personsSetNote");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/{personId}/setNote"
 				.replaceAll("\\{" + "personId" + "\\}", apiClient.escapeString(personId.toString()));
 
 		// query params

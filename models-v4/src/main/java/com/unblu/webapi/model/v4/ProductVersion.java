@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ProductVersion.JSON_PROPERTY_$_TYPE,
 	ProductVersion.JSON_PROPERTY_PRODUCT_VERSION,
 	ProductVersion.JSON_PROPERTY_PRODUCT_GUID,
+	ProductVersion.JSON_PROPERTY_BUILD_TIMESTAMP,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ProductVersion {
@@ -69,6 +70,10 @@ public class ProductVersion {
 	public static final String JSON_PROPERTY_PRODUCT_GUID = "productGuid";
 	@JsonProperty(JSON_PROPERTY_PRODUCT_GUID)
 	private String productGuid;
+
+	public static final String JSON_PROPERTY_BUILD_TIMESTAMP = "buildTimestamp";
+	@JsonProperty(JSON_PROPERTY_BUILD_TIMESTAMP)
+	private Long buildTimestamp;
 
 	public ProductVersion $type(TypeEnum $type) {
 		this.$type = $type;
@@ -127,6 +132,25 @@ public class ProductVersion {
 		this.productGuid = productGuid;
 	}
 
+	public ProductVersion buildTimestamp(Long buildTimestamp) {
+		this.buildTimestamp = buildTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) of the product build
+	 * 
+	 * @return buildTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) of the product build")
+	public Long getBuildTimestamp() {
+		return buildTimestamp;
+	}
+
+	public void setBuildTimestamp(Long buildTimestamp) {
+		this.buildTimestamp = buildTimestamp;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -138,12 +162,13 @@ public class ProductVersion {
 		ProductVersion productVersion = (ProductVersion) o;
 		return Objects.equals(this.$type, productVersion.$type) &&
 				Objects.equals(this.productVersion, productVersion.productVersion) &&
-				Objects.equals(this.productGuid, productVersion.productGuid);
+				Objects.equals(this.productGuid, productVersion.productGuid) &&
+				Objects.equals(this.buildTimestamp, productVersion.buildTimestamp);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, productVersion, productGuid);
+		return Objects.hash($type, productVersion, productGuid, buildTimestamp);
 	}
 
 	@Override
@@ -153,6 +178,7 @@ public class ProductVersion {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    productVersion: ").append(toIndentedString(productVersion)).append("\n");
 		sb.append("    productGuid: ").append(toIndentedString(productGuid)).append("\n");
+		sb.append("    buildTimestamp: ").append(toIndentedString(buildTimestamp)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
