@@ -14,6 +14,8 @@ import com.unblu.webapi.jersey.v3.invoker.Configuration;
 import com.unblu.webapi.jersey.v3.invoker.Pair;
 import com.unblu.webapi.model.v3.EPersonSource;
 import com.unblu.webapi.model.v3.NotificationCountData;
+import com.unblu.webapi.model.v3.NotificationCountForConversationsData;
+import com.unblu.webapi.model.v3.NotificationCountForConversationsRequest;
 import com.unblu.webapi.model.v3.PersonData;
 import com.unblu.webapi.model.v3.PersonQuery;
 import com.unblu.webapi.model.v3.PersonResult;
@@ -388,6 +390,67 @@ public class PersonsApi {
 		GenericType<NotificationCountData> localVarReturnType = new GenericType<NotificationCountData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * getNotificationCountForConversations Returns The sum of all notifications the given person has across the provided conversations. &lt;p&gt; Note: Only
+	 * existing conversations the given person is participating in are taken into account.&lt;br&gt;
+	 * 
+	 * @param personId (required)
+	 * @param notificationCountForConversationsRequest (required)
+	 * @return NotificationCountForConversationsData
+	 * @throws ApiException if fails to make API call
+	 */
+	public NotificationCountForConversationsData personsGetNotificationCountForConversations(String personId, NotificationCountForConversationsRequest notificationCountForConversationsRequest) throws ApiException {
+		return personsGetNotificationCountForConversationsWithHttpInfo(personId, notificationCountForConversationsRequest).getData();
+	}
+
+	/**
+	 * getNotificationCountForConversations Returns The sum of all notifications the given person has across the provided conversations. &lt;p&gt; Note: Only
+	 * existing conversations the given person is participating in are taken into account.&lt;br&gt;
+	 * 
+	 * @param personId (required)
+	 * @param notificationCountForConversationsRequest (required)
+	 * @return ApiResponse&lt;NotificationCountForConversationsData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<NotificationCountForConversationsData> personsGetNotificationCountForConversationsWithHttpInfo(String personId, NotificationCountForConversationsRequest notificationCountForConversationsRequest) throws ApiException {
+		Object localVarPostBody = notificationCountForConversationsRequest;
+
+		// verify the required parameter 'personId' is set
+		if (personId == null) {
+			throw new ApiException(400, "Missing the required parameter 'personId' when calling personsGetNotificationCountForConversations");
+		}
+
+		// verify the required parameter 'notificationCountForConversationsRequest' is set
+		if (notificationCountForConversationsRequest == null) {
+			throw new ApiException(400, "Missing the required parameter 'notificationCountForConversationsRequest' when calling personsGetNotificationCountForConversations");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/{personId}/getNotificationCountForConversations"
+				.replaceAll("\\{" + "personId" + "\\}", apiClient.escapeString(personId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<NotificationCountForConversationsData> localVarReturnType = new GenericType<NotificationCountForConversationsData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**

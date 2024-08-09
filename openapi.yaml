@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.48.1
+  version: 7.49.1
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -9010,6 +9010,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotificationCountData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /persons/{personId}/getNotificationCountForConversations:
+    post:
+      tags:
+      - Persons
+      summary: getNotificationCountForConversations
+      description: "Returns The sum of all notifications the given person has across the provided conversations. <p> Note: Only existing conversations the given person is participating in are taken into account.<br>"
+      operationId: personsGetNotificationCountForConversations
+      parameters:
+      - name: personId
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationCountForConversationsRequest'
+        required: true
+      responses:
+        "200":
+          description: The sum of all notifications the given person has across the provided conversations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationCountForConversationsData'
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -26505,6 +26538,31 @@ components:
           type: integer
           format: int32
           description: The sum of all a person's notifications across all their conversations
+    NotificationCountForConversationsData:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotificationCountForConversationsData
+          enum:
+          - NotificationCountForConversationsData
+        notificationCount:
+          type: integer
+          format: int32
+          description: The sum of all a person's notifications across a given set of conversations
+    NotificationCountForConversationsRequest:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotificationCountForConversationsRequest
+          enum:
+          - NotificationCountForConversationsRequest
+        conversationIds:
+          type: array
+          description: List of the conversation IDs to use when determining the number of notifications for a person
+          items:
+            type: string
     OnlineStateOperator:
       oneOf:
       - $ref: '#/components/schemas/EqualsOnlineStateOperator'
