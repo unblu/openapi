@@ -16,6 +16,8 @@ import com.unblu.webapi.model.v4.AgentStateQuery;
 import com.unblu.webapi.model.v4.EPersonSource;
 import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.NotificationCountData;
+import com.unblu.webapi.model.v4.NotificationCountForConversationsData;
+import com.unblu.webapi.model.v4.NotificationCountForConversationsRequest;
 import com.unblu.webapi.model.v4.PersonData;
 import com.unblu.webapi.model.v4.PersonQuery;
 import com.unblu.webapi.model.v4.PersonResult;
@@ -461,6 +463,67 @@ public class PersonsApi {
 		GenericType<NotificationCountData> localVarReturnType = new GenericType<NotificationCountData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * getNotificationCountForConversations Returns The sum of all notifications the given person has across the provided conversations. &lt;p&gt; Note: Only
+	 * existing conversations the given person is participating in are taken into account.&lt;br&gt;
+	 * 
+	 * @param personId (required)
+	 * @param notificationCountForConversationsRequest (required)
+	 * @return NotificationCountForConversationsData
+	 * @throws ApiException if fails to make API call
+	 */
+	public NotificationCountForConversationsData personsGetNotificationCountForConversations(String personId, NotificationCountForConversationsRequest notificationCountForConversationsRequest) throws ApiException {
+		return personsGetNotificationCountForConversationsWithHttpInfo(personId, notificationCountForConversationsRequest).getData();
+	}
+
+	/**
+	 * getNotificationCountForConversations Returns The sum of all notifications the given person has across the provided conversations. &lt;p&gt; Note: Only
+	 * existing conversations the given person is participating in are taken into account.&lt;br&gt;
+	 * 
+	 * @param personId (required)
+	 * @param notificationCountForConversationsRequest (required)
+	 * @return ApiResponse&lt;NotificationCountForConversationsData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<NotificationCountForConversationsData> personsGetNotificationCountForConversationsWithHttpInfo(String personId, NotificationCountForConversationsRequest notificationCountForConversationsRequest) throws ApiException {
+		Object localVarPostBody = notificationCountForConversationsRequest;
+
+		// verify the required parameter 'personId' is set
+		if (personId == null) {
+			throw new ApiException(400, "Missing the required parameter 'personId' when calling personsGetNotificationCountForConversations");
+		}
+
+		// verify the required parameter 'notificationCountForConversationsRequest' is set
+		if (notificationCountForConversationsRequest == null) {
+			throw new ApiException(400, "Missing the required parameter 'notificationCountForConversationsRequest' when calling personsGetNotificationCountForConversations");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/{personId}/getNotificationCountForConversations"
+				.replaceAll("\\{" + "personId" + "\\}", apiClient.escapeString(personId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<NotificationCountForConversationsData> localVarReturnType = new GenericType<NotificationCountForConversationsData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**
@@ -1206,7 +1269,9 @@ public class PersonsApi {
 	/**
 	 * setLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Sets labels with the given names on the person specified. Labels already set on the person but
 	 * missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in
-	 * the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for.&lt;br&gt;
+	 * the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for. Attempts to set a
+	 * label that doesn&#39;t exist or that the executing user doesn&#39;t have the permission to set result in an error. Labels already assigned to the person that
+	 * the executing user doesn&#39;t have permission to set are not affected by the call.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
 	 * @param requestBody List of the labels to set on the person (required)
@@ -1221,7 +1286,9 @@ public class PersonsApi {
 	/**
 	 * setLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Sets labels with the given names on the person specified. Labels already set on the person but
 	 * missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in
-	 * the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for.&lt;br&gt;
+	 * the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for. Attempts to set a
+	 * label that doesn&#39;t exist or that the executing user doesn&#39;t have the permission to set result in an error. Labels already assigned to the person that
+	 * the executing user doesn&#39;t have permission to set are not affected by the call.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
 	 * @param requestBody List of the labels to set on the person (required)

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.5.0
+  version: 8.6.0
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -9751,6 +9751,39 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /persons/{personId}/getNotificationCountForConversations:
+    post:
+      tags:
+      - Persons
+      summary: getNotificationCountForConversations
+      description: "Returns The sum of all notifications the given person has across the provided conversations. <p> Note: Only existing conversations the given person is participating in are taken into account.<br>"
+      operationId: personsGetNotificationCountForConversations
+      parameters:
+      - name: personId
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationCountForConversationsRequest'
+        required: true
+      responses:
+        "200":
+          description: The sum of all notifications the given person has across the provided conversations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationCountForConversationsData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /persons/{personId}/pauseNotifications:
     post:
       tags:
@@ -10186,7 +10219,7 @@ paths:
       tags:
       - Persons
       summary: setLabels
-      description: <p>This endpoint is in preview mode.</p>Sets labels with the given names on the person specified. Labels already set on the person but missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for.<br>
+      description: <p>This endpoint is in preview mode.</p>Sets labels with the given names on the person specified. Labels already set on the person but missing from the list provided are deleted. Labels already set and present in the list provided remain unchanged. Labels not set on the person but present in the list provided are added to the person. The changes to the person only take affect for labels the executing user has permissions for. Attempts to set a label that doesn't exist or that the executing user doesn't have the permission to set result in an error. Labels already assigned to the person that the executing user doesn't have permission to set are not affected by the call.<br>
       operationId: personsSetLabels
       parameters:
       - name: personId
@@ -21343,6 +21376,7 @@ components:
       - TARGET_ID
       - EXPIRATION_TIMESTAMP
       - CREATION_TIMESTAMP
+      - RESOLUTION_TIMESTAMP
       - CREATOR_TYPE
       - CREATOR_ID
       - REDEEMER_PERSON_ID
@@ -21354,6 +21388,7 @@ components:
       - "TARGET_ID: Sort by the 'targetId' attribute"
       - "EXPIRATION_TIMESTAMP: Sort by the 'expirationTimestamp' attribute"
       - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "RESOLUTION_TIMESTAMP: Filter by the 'resolutionTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "CREATOR_TYPE: Sort by the 'creatorType' attribute"
       - "CREATOR_ID: Sort by the 'creatorId' attribute"
       - "REDEEMER_PERSON_ID: Sort by the 'redeemerPersonId' attribute"
@@ -21367,6 +21402,7 @@ components:
       - TARGET_ID
       - EXPIRATION_TIMESTAMP
       - CREATION_TIMESTAMP
+      - RESOLUTION_TIMESTAMP
       - CREATOR_TYPE
       - CREATOR_PERSON_ID
       - REDEEMING_PERSON_ID
@@ -21378,6 +21414,7 @@ components:
       - "TARGET_ID: Filter by the 'targetId' attribute"
       - "EXPIRATION_TIMESTAMP: Filter by the 'expirationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "RESOLUTION_TIMESTAMP: Filter by the 'resolutionTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "CREATOR_TYPE: Filter by the 'creatorType' attribute"
       - "CREATOR_PERSON_ID: Filter by the 'creatorId' attribute"
       - "REDEEMING_PERSON_ID: Filter by the 'redeemerPersonId' attribute"
@@ -28484,6 +28521,31 @@ components:
           type: integer
           format: int32
           description: The sum of all a person's notifications across all their conversations
+    NotificationCountForConversationsData:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotificationCountForConversationsData
+          enum:
+          - NotificationCountForConversationsData
+        notificationCount:
+          type: integer
+          format: int32
+          description: The sum of all a person's notifications across a given set of conversations
+    NotificationCountForConversationsRequest:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotificationCountForConversationsRequest
+          enum:
+          - NotificationCountForConversationsRequest
+        conversationIds:
+          type: array
+          description: List of the conversation IDs to use when determining the number of notifications for a person
+          items:
+            type: string
     OnlineStateAgentStateSearchFilter:
       type: object
       properties:

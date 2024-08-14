@@ -40,6 +40,11 @@ public enum EConversationInvitationSearchFilterField {
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 
 	/**
+	 * RESOLUTION_TIMESTAMP: Filter by the &#39;resolutionTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
+	 */
+	RESOLUTION_TIMESTAMP("RESOLUTION_TIMESTAMP"),
+
+	/**
 	 * CREATOR_TYPE: Filter by the &#39;creatorType&#39; attribute
 	 */
 	CREATOR_TYPE("CREATOR_TYPE"),
