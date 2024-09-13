@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = FirstNamePersonTypedSearchFilter.class, name = "FIRST_NAME"),
 	@JsonSubTypes.Type(value = LastNamePersonTypedSearchFilter.class, name = "LAST_NAME"),
 	@JsonSubTypes.Type(value = NicknamePersonTypedSearchFilter.class, name = "NICKNAME"),
-	@JsonSubTypes.Type(value = PersonLabelNamePersonTypedSearchFilter.class, name = "PERSON_LABEL_NAME"),
+	@JsonSubTypes.Type(value = PersonLabelsPersonTypedSearchFilter.class, name = "PERSON_LABELS"),
 	@JsonSubTypes.Type(value = PhonePersonTypedSearchFilter.class, name = "PHONE"),
 	@JsonSubTypes.Type(value = SourceIdPersonTypedSearchFilter.class, name = "SOURCE_ID"),
 	@JsonSubTypes.Type(value = TeamIdPersonTypedSearchFilter.class, name = "TEAM_ID"),

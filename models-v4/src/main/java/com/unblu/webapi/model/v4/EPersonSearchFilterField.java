@@ -70,9 +70,9 @@ public enum EPersonSearchFilterField {
 	TEAM_ID("TEAM_ID"),
 
 	/**
-	 * PERSON_LABEL_NAME: Filter by the &#39;name&#39; attribute of assigned person labels
+	 * PERSON_LABELS: Filter by the &#39;name&#39; attribute of assigned person labels
 	 */
-	PERSON_LABEL_NAME("PERSON_LABEL_NAME"),
+	PERSON_LABELS("PERSON_LABELS"),
 
 	/**
 	 * COMPOUND: Filter for linking other filters with logical AND/OR

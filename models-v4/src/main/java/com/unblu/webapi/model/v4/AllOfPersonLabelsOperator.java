@@ -12,23 +12,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * HavingPersonLabelNameOperator
+ * Checks if all of the provided label names are present.
  */
+@ApiModel(description = "Checks if all of the provided label names are present.")
 
 @JsonPropertyOrder({
-	HavingPersonLabelNameOperator.JSON_PROPERTY_$_TYPE,
-	HavingPersonLabelNameOperator.JSON_PROPERTY_VALUES,
+	AllOfPersonLabelsOperator.JSON_PROPERTY_$_TYPE,
+	AllOfPersonLabelsOperator.JSON_PROPERTY_TYPE,
+	AllOfPersonLabelsOperator.JSON_PROPERTY_VALUES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class HavingPersonLabelNameOperator {
+public class AllOfPersonLabelsOperator implements PersonLabelsOperator {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		HAVINGPERSONLABELNAMEOPERATOR("HavingPersonLabelNameOperator");
+		ALLOFPERSONLABELSOPERATOR("AllOfPersonLabelsOperator");
 
 		private String value;
 
@@ -53,19 +56,23 @@ public class HavingPersonLabelNameOperator {
 					return b;
 				}
 			}
-			return TypeEnum.HAVINGPERSONLABELNAMEOPERATOR;
+			return TypeEnum.ALLOFPERSONLABELSOPERATOR;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.HAVINGPERSONLABELNAMEOPERATOR;
+	private TypeEnum $type = TypeEnum.ALLOFPERSONLABELSOPERATOR;
+
+	public static final String JSON_PROPERTY_TYPE = "type";
+	@JsonProperty(JSON_PROPERTY_TYPE)
+	private EPersonLabelsOperatorType type = EPersonLabelsOperatorType.ALL_OF;
 
 	public static final String JSON_PROPERTY_VALUES = "values";
 	@JsonProperty(JSON_PROPERTY_VALUES)
 	private List<String> values = null;
 
-	public HavingPersonLabelNameOperator $type(TypeEnum $type) {
+	public AllOfPersonLabelsOperator $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -84,12 +91,31 @@ public class HavingPersonLabelNameOperator {
 		this.$type = $type;
 	}
 
-	public HavingPersonLabelNameOperator values(List<String> values) {
+	public AllOfPersonLabelsOperator type(EPersonLabelsOperatorType type) {
+		this.type = type;
+		return this;
+	}
+
+	/**
+	 * Get type
+	 * 
+	 * @return type
+	 **/
+	@ApiModelProperty(value = "")
+	public EPersonLabelsOperatorType getType() {
+		return type;
+	}
+
+	public void setType(EPersonLabelsOperatorType type) {
+		this.type = type;
+	}
+
+	public AllOfPersonLabelsOperator values(List<String> values) {
 		this.values = values;
 		return this;
 	}
 
-	public HavingPersonLabelNameOperator addValuesItem(String valuesItem) {
+	public AllOfPersonLabelsOperator addValuesItem(String valuesItem) {
 		if (this.values == null) {
 			this.values = new ArrayList<>();
 		}
@@ -119,21 +145,23 @@ public class HavingPersonLabelNameOperator {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		HavingPersonLabelNameOperator havingPersonLabelNameOperator = (HavingPersonLabelNameOperator) o;
-		return Objects.equals(this.$type, havingPersonLabelNameOperator.$type) &&
-				Objects.equals(this.values, havingPersonLabelNameOperator.values);
+		AllOfPersonLabelsOperator allOfPersonLabelsOperator = (AllOfPersonLabelsOperator) o;
+		return Objects.equals(this.$type, allOfPersonLabelsOperator.$type) &&
+				Objects.equals(this.type, allOfPersonLabelsOperator.type) &&
+				Objects.equals(this.values, allOfPersonLabelsOperator.values);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, values);
+		return Objects.hash($type, type, values);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class HavingPersonLabelNameOperator {\n");
+		sb.append("class AllOfPersonLabelsOperator {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
+		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    values: ").append(toIndentedString(values)).append("\n");
 		sb.append("}");
 		return sb.toString();

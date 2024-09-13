@@ -13,21 +13,21 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * PersonLabelNamePersonSearchFilter
+ * PersonLabelsPersonSearchFilter
  */
 
 @JsonPropertyOrder({
-	PersonLabelNamePersonSearchFilter.JSON_PROPERTY_$_TYPE,
-	PersonLabelNamePersonSearchFilter.JSON_PROPERTY_FIELD,
-	PersonLabelNamePersonSearchFilter.JSON_PROPERTY_OPERATOR,
+	PersonLabelsPersonSearchFilter.JSON_PROPERTY_$_TYPE,
+	PersonLabelsPersonSearchFilter.JSON_PROPERTY_FIELD,
+	PersonLabelsPersonSearchFilter.JSON_PROPERTY_OPERATOR,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class PersonLabelNamePersonSearchFilter implements PersonSearchFilter {
+public class PersonLabelsPersonSearchFilter implements PersonSearchFilter {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PERSONLABELNAMEPERSONSEARCHFILTER("PersonLabelNamePersonSearchFilter");
+		PERSONLABELSPERSONSEARCHFILTER("PersonLabelsPersonSearchFilter");
 
 		private String value;
 
@@ -52,23 +52,23 @@ public class PersonLabelNamePersonSearchFilter implements PersonSearchFilter {
 					return b;
 				}
 			}
-			return TypeEnum.PERSONLABELNAMEPERSONSEARCHFILTER;
+			return TypeEnum.PERSONLABELSPERSONSEARCHFILTER;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PERSONLABELNAMEPERSONSEARCHFILTER;
+	private TypeEnum $type = TypeEnum.PERSONLABELSPERSONSEARCHFILTER;
 
 	public static final String JSON_PROPERTY_FIELD = "field";
 	@JsonProperty(JSON_PROPERTY_FIELD)
-	private EPersonSearchFilterField field = EPersonSearchFilterField.PERSON_LABEL_NAME;
+	private EPersonSearchFilterField field = EPersonSearchFilterField.PERSON_LABELS;
 
 	public static final String JSON_PROPERTY_OPERATOR = "operator";
 	@JsonProperty(JSON_PROPERTY_OPERATOR)
-	private HavingPersonLabelNameOperator operator = null;
+	private PersonLabelsOperator operator = null;
 
-	public PersonLabelNamePersonSearchFilter $type(TypeEnum $type) {
+	public PersonLabelsPersonSearchFilter $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -87,7 +87,7 @@ public class PersonLabelNamePersonSearchFilter implements PersonSearchFilter {
 		this.$type = $type;
 	}
 
-	public PersonLabelNamePersonSearchFilter field(EPersonSearchFilterField field) {
+	public PersonLabelsPersonSearchFilter field(EPersonSearchFilterField field) {
 		this.field = field;
 		return this;
 	}
@@ -106,7 +106,7 @@ public class PersonLabelNamePersonSearchFilter implements PersonSearchFilter {
 		this.field = field;
 	}
 
-	public PersonLabelNamePersonSearchFilter operator(HavingPersonLabelNameOperator operator) {
+	public PersonLabelsPersonSearchFilter operator(PersonLabelsOperator operator) {
 		this.operator = operator;
 		return this;
 	}
@@ -117,11 +117,11 @@ public class PersonLabelNamePersonSearchFilter implements PersonSearchFilter {
 	 * @return operator
 	 **/
 	@ApiModelProperty(value = "")
-	public HavingPersonLabelNameOperator getOperator() {
+	public PersonLabelsOperator getOperator() {
 		return operator;
 	}
 
-	public void setOperator(HavingPersonLabelNameOperator operator) {
+	public void setOperator(PersonLabelsOperator operator) {
 		this.operator = operator;
 	}
 
@@ -133,10 +133,10 @@ public class PersonLabelNamePersonSearchFilter implements PersonSearchFilter {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PersonLabelNamePersonSearchFilter personLabelNamePersonSearchFilter = (PersonLabelNamePersonSearchFilter) o;
-		return Objects.equals(this.$type, personLabelNamePersonSearchFilter.$type) &&
-				Objects.equals(this.field, personLabelNamePersonSearchFilter.field) &&
-				Objects.equals(this.operator, personLabelNamePersonSearchFilter.operator);
+		PersonLabelsPersonSearchFilter personLabelsPersonSearchFilter = (PersonLabelsPersonSearchFilter) o;
+		return Objects.equals(this.$type, personLabelsPersonSearchFilter.$type) &&
+				Objects.equals(this.field, personLabelsPersonSearchFilter.field) &&
+				Objects.equals(this.operator, personLabelsPersonSearchFilter.operator);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class PersonLabelNamePersonSearchFilter implements PersonSearchFilter {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class PersonLabelNamePersonSearchFilter {\n");
+		sb.append("class PersonLabelsPersonSearchFilter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    field: ").append(toIndentedString(field)).append("\n");
 		sb.append("    operator: ").append(toIndentedString(operator)).append("\n");

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.6.0
+  version: 8.7.0
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -13799,6 +13799,21 @@ components:
           type: array
           items:
             type: string
+    AllOfPersonLabelsOperator:
+      type: object
+      description: Checks if all of the provided label names are present.
+      properties:
+        $_type:
+          type: string
+          default: AllOfPersonLabelsOperator
+          enum:
+          - AllOfPersonLabelsOperator
+        type:
+          $ref: '#/components/schemas/EPersonLabelsOperatorType'
+        values:
+          type: array
+          items:
+            type: string
     AndCompoundOperator:
       type: object
       properties:
@@ -13820,6 +13835,21 @@ components:
           - AnyOfIdListOperator
         type:
           $ref: '#/components/schemas/EIdListOperatorType'
+        values:
+          type: array
+          items:
+            type: string
+    AnyOfPersonLabelsOperator:
+      type: object
+      description: Checks if any of the provided label names are present.
+      properties:
+        $_type:
+          type: string
+          default: AnyOfPersonLabelsOperator
+          enum:
+          - AnyOfPersonLabelsOperator
+        type:
+          $ref: '#/components/schemas/EPersonLabelsOperatorType'
         values:
           type: array
           items:
@@ -22817,6 +22847,17 @@ components:
       - "ANONYMOUS_VISITOR: Anonymous visitor"
       - "AUTHENTICATED_VISITOR: Authenticated visitor"
       - "BOT: Bot"
+    EPersonLabelsOperatorType:
+      type: string
+      description: Operator types corresponding to operators defined by `PersonLabelsOperator`
+      enum:
+      - ALL_OF
+      - ANY_OF
+      - NONE_OF
+      x-enum-descriptions:
+      - "ALL_OF: Checks if all of the label names provided by the operator are present on the persons returned."
+      - "ANY_OF: Checks if any of the label names provided by the operator are present on the persons returned."
+      - "NONE_OF: Check if none of the label names provided by the operator are present on the persons returned."
     EPersonOrderByField:
       type: string
       enum:
@@ -22880,7 +22921,7 @@ components:
       - EMAIL
       - PHONE
       - TEAM_ID
-      - PERSON_LABEL_NAME
+      - PERSON_LABELS
       - COMPOUND
       x-enum-descriptions:
       - "PERSON_SOURCE: Filter by the 'personSource' attribute"
@@ -22895,7 +22936,7 @@ components:
       - "EMAIL: Filter by the 'email' attribute"
       - "PHONE: Filter by the 'phone' attribute"
       - "TEAM_ID: Filter by the 'teamId' attribute"
-      - "PERSON_LABEL_NAME: Filter by the 'name' attribute of assigned person labels"
+      - "PERSON_LABELS: Filter by the 'name' attribute of assigned person labels"
       - "COMPOUND: Filter for linking other filters with logical AND/OR"
     EPersonSource:
       type: string
@@ -22987,7 +23028,7 @@ components:
       - EMAIL
       - PHONE
       - TEAM_ID
-      - PERSON_LABEL_NAME
+      - PERSON_LABELS
       - COMPOUND
       x-enum-descriptions:
       - "SOURCE_ID: Filter by the 'sourceId' attribute"
@@ -22999,7 +23040,7 @@ components:
       - "EMAIL: Filter by the 'email' attribute"
       - "PHONE: Filter by the 'phone' attribute"
       - "TEAM_ID: Filter by the 'teamId' attribute"
-      - "PERSON_LABEL_NAME: Filter by the 'name' attribute of assigned person labels"
+      - "PERSON_LABELS: Filter by the 'name' attribute of assigned person labels"
       - "COMPOUND: Filter meant for linking other filters with logical AND/OR"
     EPersonVisibilityLabelSelection:
       type: string
@@ -25240,18 +25281,6 @@ components:
         hasPassword:
           type: boolean
           description: Whether or not the user has a password
-    HavingPersonLabelNameOperator:
-      type: object
-      properties:
-        $_type:
-          type: string
-          default: HavingPersonLabelNameOperator
-          enum:
-          - HavingPersonLabelNameOperator
-        values:
-          type: array
-          items:
-            type: string
     IdExternalMessengerContactSearchFilter:
       type: object
       properties:
@@ -27829,6 +27858,21 @@ components:
           $ref: '#/components/schemas/EPersonTypedSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    NoneOfPersonLabelsOperator:
+      type: object
+      description: Checks if none of the provided label names are present.
+      properties:
+        $_type:
+          type: string
+          default: NoneOfPersonLabelsOperator
+          enum:
+          - NoneOfPersonLabelsOperator
+        type:
+          $ref: '#/components/schemas/EPersonLabelsOperatorType'
+        values:
+          type: array
+          items:
+            type: string
     NotEqualsAuditChangeInteractionTypeOperator:
       type: object
       properties:
@@ -29277,30 +29321,6 @@ components:
           $ref: '#/components/schemas/PersonLabel'
         editingUser:
           $ref: '#/components/schemas/UserInfo'
-    PersonLabelNamePersonSearchFilter:
-      type: object
-      properties:
-        $_type:
-          type: string
-          default: PersonLabelNamePersonSearchFilter
-          enum:
-          - PersonLabelNamePersonSearchFilter
-        field:
-          $ref: '#/components/schemas/EPersonSearchFilterField'
-        operator:
-          $ref: '#/components/schemas/HavingPersonLabelNameOperator'
-    PersonLabelNamePersonTypedSearchFilter:
-      type: object
-      properties:
-        $_type:
-          type: string
-          default: PersonLabelNamePersonTypedSearchFilter
-          enum:
-          - PersonLabelNamePersonTypedSearchFilter
-        field:
-          $ref: '#/components/schemas/EPersonTypedSearchFilterField'
-        operator:
-          $ref: '#/components/schemas/HavingPersonLabelNameOperator'
     PersonLabelOrderBy:
       type: object
       description: PersonLabel orderBy item
@@ -29377,6 +29397,41 @@ components:
         scope:
           type: string
           description: The scope to search for labels in
+    PersonLabelsOperator:
+      oneOf:
+      - $ref: '#/components/schemas/AllOfPersonLabelsOperator'
+      - $ref: '#/components/schemas/AnyOfPersonLabelsOperator'
+      - $ref: '#/components/schemas/NoneOfPersonLabelsOperator'
+      discriminator:
+        propertyName: type
+        mapping:
+          ALL_OF: '#/components/schemas/AllOfPersonLabelsOperator'
+          ANY_OF: '#/components/schemas/AnyOfPersonLabelsOperator'
+          NONE_OF: '#/components/schemas/NoneOfPersonLabelsOperator'
+    PersonLabelsPersonSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: PersonLabelsPersonSearchFilter
+          enum:
+          - PersonLabelsPersonSearchFilter
+        field:
+          $ref: '#/components/schemas/EPersonSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/PersonLabelsOperator'
+    PersonLabelsPersonTypedSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: PersonLabelsPersonTypedSearchFilter
+          enum:
+          - PersonLabelsPersonTypedSearchFilter
+        field:
+          $ref: '#/components/schemas/EPersonTypedSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/PersonLabelsOperator'
     PersonModificationEvent:
       type: object
       description: "An event triggered every time a `Person` is created, deleted or changed."
@@ -29599,7 +29654,7 @@ components:
       - $ref: '#/components/schemas/SourceIdPersonSearchFilter'
       - $ref: '#/components/schemas/TeamIdPersonSearchFilter'
       - $ref: '#/components/schemas/UsernamePersonSearchFilter'
-      - $ref: '#/components/schemas/PersonLabelNamePersonSearchFilter'
+      - $ref: '#/components/schemas/PersonLabelsPersonSearchFilter'
       - $ref: '#/components/schemas/PersonCompoundSearchFilter'
       discriminator:
         propertyName: field
@@ -29610,7 +29665,7 @@ components:
           FIRST_NAME: '#/components/schemas/FirstNamePersonSearchFilter'
           LAST_NAME: '#/components/schemas/LastNamePersonSearchFilter'
           NICKNAME: '#/components/schemas/NicknamePersonSearchFilter'
-          PERSON_LABEL_NAME: '#/components/schemas/PersonLabelNamePersonSearchFilter'
+          PERSON_LABELS: '#/components/schemas/PersonLabelsPersonSearchFilter'
           PERSON_SOURCE: '#/components/schemas/PersonSourcePersonSearchFilter'
           PERSON_TYPE: '#/components/schemas/PersonTypePersonSearchFilter'
           PHONE: '#/components/schemas/PhonePersonSearchFilter'
@@ -29747,7 +29802,7 @@ components:
       - $ref: '#/components/schemas/SourceIdPersonTypedSearchFilter'
       - $ref: '#/components/schemas/TeamIdPersonTypedSearchFilter'
       - $ref: '#/components/schemas/UsernamePersonTypedSearchFilter'
-      - $ref: '#/components/schemas/PersonLabelNamePersonTypedSearchFilter'
+      - $ref: '#/components/schemas/PersonLabelsPersonTypedSearchFilter'
       - $ref: '#/components/schemas/PersonTypedCompoundSearchFilter'
       discriminator:
         propertyName: field
@@ -29758,7 +29813,7 @@ components:
           FIRST_NAME: '#/components/schemas/FirstNamePersonTypedSearchFilter'
           LAST_NAME: '#/components/schemas/LastNamePersonTypedSearchFilter'
           NICKNAME: '#/components/schemas/NicknamePersonTypedSearchFilter'
-          PERSON_LABEL_NAME: '#/components/schemas/PersonLabelNamePersonTypedSearchFilter'
+          PERSON_LABELS: '#/components/schemas/PersonLabelsPersonTypedSearchFilter'
           PHONE: '#/components/schemas/PhonePersonTypedSearchFilter'
           SOURCE_ID: '#/components/schemas/SourceIdPersonTypedSearchFilter'
           TEAM_ID: '#/components/schemas/TeamIdPersonTypedSearchFilter'
