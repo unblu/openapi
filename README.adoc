@@ -3,7 +3,7 @@
 :gh-repo-name: openapi
 
 :project-name: Unblu OpenAPI
-:git-branch: main/7.x.x
+:git-branch: main/8.x.x
 :license: http://www.apache.org/licenses/LICENSE-2.0
 :license-name: Apache 2.0 License
 
