@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TextChatSuggestionResponse.JSON_PROPERTY_$_TYPE,
 	TextChatSuggestionResponse.JSON_PROPERTY_TYPE,
 	TextChatSuggestionResponse.JSON_PROPERTY_SUGGESTION_TEXT,
+	TextChatSuggestionResponse.JSON_PROPERTY_SUGGESTION_COMMENT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class TextChatSuggestionResponse implements ChatSuggestionResponse {
@@ -69,6 +70,10 @@ public class TextChatSuggestionResponse implements ChatSuggestionResponse {
 	public static final String JSON_PROPERTY_SUGGESTION_TEXT = "suggestionText";
 	@JsonProperty(JSON_PROPERTY_SUGGESTION_TEXT)
 	private String suggestionText;
+
+	public static final String JSON_PROPERTY_SUGGESTION_COMMENT = "suggestionComment";
+	@JsonProperty(JSON_PROPERTY_SUGGESTION_COMMENT)
+	private String suggestionComment;
 
 	public TextChatSuggestionResponse $type(TypeEnum $type) {
 		this.$type = $type;
@@ -127,6 +132,25 @@ public class TextChatSuggestionResponse implements ChatSuggestionResponse {
 		this.suggestionText = suggestionText;
 	}
 
+	public TextChatSuggestionResponse suggestionComment(String suggestionComment) {
+		this.suggestionComment = suggestionComment;
+		return this;
+	}
+
+	/**
+	 * Comment on the suggestion. The comment is displayed to the agent but not sent as part of the suggested message. Can be Markdown. Optional.
+	 * 
+	 * @return suggestionComment
+	 **/
+	@ApiModelProperty(value = "Comment on the suggestion. The comment is displayed to the agent but not sent as part of the suggested message. Can be Markdown. Optional.")
+	public String getSuggestionComment() {
+		return suggestionComment;
+	}
+
+	public void setSuggestionComment(String suggestionComment) {
+		this.suggestionComment = suggestionComment;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -138,12 +162,13 @@ public class TextChatSuggestionResponse implements ChatSuggestionResponse {
 		TextChatSuggestionResponse textChatSuggestionResponse = (TextChatSuggestionResponse) o;
 		return Objects.equals(this.$type, textChatSuggestionResponse.$type) &&
 				Objects.equals(this.type, textChatSuggestionResponse.type) &&
-				Objects.equals(this.suggestionText, textChatSuggestionResponse.suggestionText);
+				Objects.equals(this.suggestionText, textChatSuggestionResponse.suggestionText) &&
+				Objects.equals(this.suggestionComment, textChatSuggestionResponse.suggestionComment);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, suggestionText);
+		return Objects.hash($type, type, suggestionText, suggestionComment);
 	}
 
 	@Override
@@ -153,6 +178,7 @@ public class TextChatSuggestionResponse implements ChatSuggestionResponse {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    suggestionText: ").append(toIndentedString(suggestionText)).append("\n");
+		sb.append("    suggestionComment: ").append(toIndentedString(suggestionComment)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

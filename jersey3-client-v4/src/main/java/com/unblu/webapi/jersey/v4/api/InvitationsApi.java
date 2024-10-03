@@ -25,6 +25,7 @@ import com.unblu.webapi.model.v4.InvitationsInviteAnonymousVisitorToConversation
 import com.unblu.webapi.model.v4.InvitationsInviteAnonymousVisitorToConversationWithPinBody;
 import com.unblu.webapi.model.v4.InvitationsInviteTeamToConversationBody;
 import com.unblu.webapi.model.v4.InvitationsRequeueConversationBody;
+import com.unblu.webapi.model.v4.InvitationsStartDeputyDelegationBody;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -875,6 +876,59 @@ public class InvitationsApi {
 		String[] localVarAuthNames = new String[] { "basicAuth" };
 
 		GenericType<ConversationInvitationResult> localVarReturnType = new GenericType<ConversationInvitationResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * startDeputyDelegation Starts a delegation for an assigned agent who doesn&#39;t react to messages. The delegation starts at the level specified and informs
+	 * the agent&#39;s deputies on that level.&lt;br&gt; Note: There can only be one deputy delegation invitation per conversation at any one time.&lt;br&gt;
+	 * 
+	 * @param invitationsStartDeputyDelegationBody (required)
+	 * @return ConversationInvitationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationInvitationData invitationsStartDeputyDelegation(InvitationsStartDeputyDelegationBody invitationsStartDeputyDelegationBody) throws ApiException {
+		return invitationsStartDeputyDelegationWithHttpInfo(invitationsStartDeputyDelegationBody).getData();
+	}
+
+	/**
+	 * startDeputyDelegation Starts a delegation for an assigned agent who doesn&#39;t react to messages. The delegation starts at the level specified and informs
+	 * the agent&#39;s deputies on that level.&lt;br&gt; Note: There can only be one deputy delegation invitation per conversation at any one time.&lt;br&gt;
+	 * 
+	 * @param invitationsStartDeputyDelegationBody (required)
+	 * @return ApiResponse&lt;ConversationInvitationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationInvitationData> invitationsStartDeputyDelegationWithHttpInfo(InvitationsStartDeputyDelegationBody invitationsStartDeputyDelegationBody) throws ApiException {
+		Object localVarPostBody = invitationsStartDeputyDelegationBody;
+
+		// verify the required parameter 'invitationsStartDeputyDelegationBody' is set
+		if (invitationsStartDeputyDelegationBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'invitationsStartDeputyDelegationBody' when calling invitationsStartDeputyDelegation");
+		}
+
+		// create path and map variables
+		String localVarPath = "/invitations/startDeputyDelegation";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

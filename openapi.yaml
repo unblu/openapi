@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.7.0
+  version: 8.8.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -4325,7 +4325,7 @@ paths:
       tags:
       - Conversations
       summary: setVisitorData
-      description: Sets custom visitor data.<br>
+      description: Sets custom visitor data. The data is readable on the visitor side. Don't include any confidential information. Security-related data should be stored in the conversation metadata.<br>
       operationId: conversationsSetVisitorData
       parameters:
       - name: conversationId
@@ -8103,6 +8103,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConversationInvitationResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /invitations/startDeputyDelegation:
+    post:
+      tags:
+      - Invitations
+      summary: startDeputyDelegation
+      description: "Starts a delegation for an assigned agent who doesn't react to messages. The delegation starts at the level specified and informs the agent's deputies on that level.<br> Note: There can only be one deputy delegation invitation per conversation at any one time.<br>"
+      operationId: invitationsStartDeputyDelegation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitationsStartDeputyDelegationBody'
+        required: true
+      responses:
+        "200":
+          description: The data of the deputy delegation invitation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationInvitationData'
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -17160,7 +17185,7 @@ components:
         endTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the conversation has ended (all participants have finished their offboarding).
+          description: "Unix timestamp (ms) when the conversation ended, that is, all participants have finished their offboarding.<br> Null if the conversation hasn't ended yet."
         id:
           type: string
           description: The unique ID of the conversation
@@ -17202,10 +17227,10 @@ components:
           description: Locale of the conversation language (as BCP 47 language tag form including region if available)
         tokboxSessionId:
           type: string
-          description: Tokbox session ID
+          description: Tokbox session ID May be null.
         visitorData:
           type: string
-          description: Custom data for the visitor. This has no specific format.
+          description: Custom data for the visitor. The data is readable and writable on the visitor side. Don't include any confidential information. Security-related data should be stored in the conversation metadata.<br> May be null.
         conversationTemplateId:
           type: string
           description: Template ID that this conversation is based on
@@ -17236,7 +17261,7 @@ components:
         awaitedPersonTypeChangeTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the awaited person type last changed
+          description: Unix timestamp (ms) when the awaited person type last changed.<br> May be null.
         metadata:
           type: object
           description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
@@ -22480,12 +22505,14 @@ components:
       - ASSIGNMENT_REQUEST
       - AGENT_FORWARDING
       - AGENT_INVITATION
+      - DEPUTY_INVITATION
       - VISITOR_INVITATION
       - PIN_CONVERSATION
       x-enum-descriptions:
       - "ASSIGNMENT_REQUEST: Conversations that don't have any agent participants but require an assigned agent, for example new inbound chats, audio/video calls, or conversations that are pushed back to the queue."
       - "AGENT_FORWARDING: Conversation forwarding to an other agent, directly or via a team. <ul> <li>The forwarding agent will leave the conversation once it has been accepted.</li> <li>The assignee will change to the forwarded agent once it has been accepted.</li> </ul>"
       - "AGENT_INVITATION: Invites an other agent into the conversation, directly or via a team. <ul> <li>The inviting agent stays in the conversation.</li> <li>The assignee will NOT change when the invited agent accepts the invitation.</li> </ul>"
+      - "DEPUTY_INVITATION: Invites deputies of the assigned agent to the conversation"
       - "VISITOR_INVITATION: Anonymous Visitor invitation <ul> <li>Anyone with the invitations ticket (and the accounts API key) may enter the conversation as a Visitor.</li> <li>Once the invitation has been redeemed it can not be reused by other Visitors.</li> </ul>"
       - "PIN_CONVERSATION: Universal / Embedded / Mobile PIN Session. <ul> <li>The conversation doesn't really start until the invitation is redeemed.</li> <li>Anyone with the invitations ticket (and the accounts API key) may enter the conversation as a Visitor.</li> <li>Once the ticket has been redeemed it can not be reused by other Visitors.</li> </ul>"
     EInvitationTypeOperatorType:
@@ -26257,6 +26284,18 @@ components:
           description: Conversation ID
         agentRemovalType:
           $ref: '#/components/schemas/EAgentRemovalType'
+    InvitationsStartDeputyDelegationBody:
+      type: object
+      description: Request body for the 'invitationsStartDeputyDelegation' operation
+      properties:
+        conversationId:
+          type: string
+          description: The ID of the conversation to delegate to a deputy
+        joinDeputyHidden:
+          type: boolean
+          description: "If true, the deputy who accepts the delegation invitation joins the conversation as a hidden participant, otherwise the visitor can see them"
+        delegationLevel:
+          $ref: '#/components/schemas/EDeputyDelegationEscalationLevel'
     IsNotNullBooleanOperator:
       type: object
       properties:
@@ -31941,6 +31980,9 @@ components:
         suggestionText:
           type: string
           description: The suggested text
+        suggestionComment:
+          type: string
+          description: Comment on the suggestion. The comment is displayed to the agent but not sent as part of the suggested message. Can be Markdown. Optional.
     TextMessageData:
       type: object
       description: Text message

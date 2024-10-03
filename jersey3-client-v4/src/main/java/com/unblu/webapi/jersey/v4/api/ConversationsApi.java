@@ -1376,7 +1376,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setVisitorData Sets custom visitor data.&lt;br&gt;
+	 * setVisitorData Sets custom visitor data. The data is readable on the visitor side. Don&#39;t include any confidential information. Security-related data
+	 * should be stored in the conversation metadata.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation where the custom data should be added (required)
 	 * @param conversationsSetVisitorDataBody the custom visitor data (required)
@@ -1389,7 +1390,8 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * setVisitorData Sets custom visitor data.&lt;br&gt;
+	 * setVisitorData Sets custom visitor data. The data is readable on the visitor side. Don&#39;t include any confidential information. Security-related data
+	 * should be stored in the conversation metadata.&lt;br&gt;
 	 * 
 	 * @param conversationId the conversation where the custom data should be added (required)
 	 * @param conversationsSetVisitorDataBody the custom visitor data (required)

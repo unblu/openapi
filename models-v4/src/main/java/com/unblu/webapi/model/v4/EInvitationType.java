@@ -28,6 +28,11 @@ public enum EInvitationType {
 	AGENT_INVITATION("AGENT_INVITATION"),
 
 	/**
+	 * DEPUTY_INVITATION: Invites deputies of the assigned agent to the conversation
+	 */
+	DEPUTY_INVITATION("DEPUTY_INVITATION"),
+
+	/**
 	 * VISITOR_INVITATION: Anonymous Visitor invitation &lt;ul&gt; &lt;li&gt;Anyone with the invitations ticket (and the accounts API key) may enter the
 	 * conversation as a Visitor.&lt;/li&gt; &lt;li&gt;Once the invitation has been redeemed it can not be reused by other Visitors.&lt;/li&gt; &lt;/ul&gt;
 	 */

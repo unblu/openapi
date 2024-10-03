@@ -253,11 +253,12 @@ public class ConversationData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the conversation has ended (all participants have finished their offboarding).
+	 * Unix timestamp (ms) when the conversation ended, that is, all participants have finished their offboarding.&lt;br&gt; Null if the conversation hasn&#39;t
+	 * ended yet.
 	 * 
 	 * @return endTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation has ended (all participants have finished their offboarding).")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation ended, that is, all participants have finished their offboarding.<br> Null if the conversation hasn't ended yet.")
 	public Long getEndTimestamp() {
 		return endTimestamp;
 	}
@@ -524,11 +525,11 @@ public class ConversationData {
 	}
 
 	/**
-	 * Tokbox session ID
+	 * Tokbox session ID May be null.
 	 * 
 	 * @return tokboxSessionId
 	 **/
-	@ApiModelProperty(value = "Tokbox session ID")
+	@ApiModelProperty(value = "Tokbox session ID May be null.")
 	public String getTokboxSessionId() {
 		return tokboxSessionId;
 	}
@@ -543,11 +544,12 @@ public class ConversationData {
 	}
 
 	/**
-	 * Custom data for the visitor. This has no specific format.
+	 * Custom data for the visitor. The data is readable and writable on the visitor side. Don&#39;t include any confidential information. Security-related data
+	 * should be stored in the conversation metadata.&lt;br&gt; May be null.
 	 * 
 	 * @return visitorData
 	 **/
-	@ApiModelProperty(value = "Custom data for the visitor. This has no specific format.")
+	@ApiModelProperty(value = "Custom data for the visitor. The data is readable and writable on the visitor side. Don't include any confidential information. Security-related data should be stored in the conversation metadata.<br> May be null.")
 	public String getVisitorData() {
 		return visitorData;
 	}
@@ -745,11 +747,11 @@ public class ConversationData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the awaited person type last changed
+	 * Unix timestamp (ms) when the awaited person type last changed.&lt;br&gt; May be null.
 	 * 
 	 * @return awaitedPersonTypeChangeTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the awaited person type last changed")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the awaited person type last changed.<br> May be null.")
 	public Long getAwaitedPersonTypeChangeTimestamp() {
 		return awaitedPersonTypeChangeTimestamp;
 	}
