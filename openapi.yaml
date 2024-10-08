@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.8.1
+  version: 8.8.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -20085,7 +20085,7 @@ components:
           type: string
           description: The id of the user or team which is the deputy of the defined agent user
         escalationLevel:
-          $ref: '#/components/schemas/EDeputyDelegationEscalationLevel'
+          $ref: '#/components/schemas/EAssistantAndDeputyDelegationEscalationLevel'
     DeputyRelationshipList:
       type: object
       properties:
@@ -20804,6 +20804,19 @@ components:
       - "API_KEY: Filter by the 'apiKey' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EAssistantAndDeputyDelegationEscalationLevel:
+      type: string
+      description: The escalation levels for a deputy delegation
+      enum:
+      - ASSISTANTS
+      - LEVEL_1
+      - LEVEL_2
+      - LEVEL_3
+      x-enum-descriptions:
+      - ASSISTANTS
+      - LEVEL_1
+      - LEVEL_2
+      - LEVEL_3
     EAuditChangeInteractionTypeOperatorType:
       type: string
       enum:
@@ -21490,6 +21503,7 @@ components:
       - CONVERSATION_REQUEUED
       - PUBLIC_DIALIN_ENDED
       - EXTERNAL_CONTACT_UNLINKED
+      - ASSISTANT_SYNCHRONIZATION
       - OTHER
       x-enum-descriptions:
       - FORWARDED
@@ -21504,6 +21518,7 @@ components:
       - CONVERSATION_REQUEUED
       - PUBLIC_DIALIN_ENDED
       - EXTERNAL_CONTACT_UNLINKED
+      - ASSISTANT_SYNCHRONIZATION
       - OTHER
     EConversationLinkType:
       type: string
@@ -22753,6 +22768,7 @@ components:
       - CONVERSATION_REQUEUED
       - NO_AGENT_AVAILABLE
       - PUBLIC_DIALIN_ENDED
+      - ASSISTANT_SYNCHRONIZATION
       - OTHER
       x-enum-descriptions:
       - "FORWARDED: Conversation was forwarded to another agent and this agent therefore left the conversation"
@@ -22769,6 +22785,7 @@ components:
       - "CONVERSATION_REQUEUED: The conversation has been re-queued."
       - "NO_AGENT_AVAILABLE: There was no agent available for the conversation"
       - "PUBLIC_DIALIN_ENDED: The public call dial-in ended, which automatically removes the person from the conversation"
+      - "ASSISTANT_SYNCHRONIZATION: Due to assistant synchronization the person was automatically removed from the conversation"
       - "OTHER: Some other unspecified reason"
     EOnlineState:
       type: string
@@ -23829,7 +23846,7 @@ components:
         type:
           $ref: '#/components/schemas/EDeputyDelegationEscalationLevelOperatorType'
         value:
-          $ref: '#/components/schemas/EDeputyDelegationEscalationLevel'
+          $ref: '#/components/schemas/EAssistantAndDeputyDelegationEscalationLevel'
     EqualsDeputyTypeOperator:
       type: object
       properties:
@@ -25502,7 +25519,7 @@ components:
         values:
           type: array
           items:
-            $ref: '#/components/schemas/EDeputyDelegationEscalationLevel'
+            $ref: '#/components/schemas/EAssistantAndDeputyDelegationEscalationLevel'
     InDeputyTypeOperator:
       type: object
       properties:
@@ -28055,7 +28072,7 @@ components:
         type:
           $ref: '#/components/schemas/EDeputyDelegationEscalationLevelOperatorType'
         value:
-          $ref: '#/components/schemas/EDeputyDelegationEscalationLevel'
+          $ref: '#/components/schemas/EAssistantAndDeputyDelegationEscalationLevel'
     NotEqualsDeputyTypeOperator:
       type: object
       properties:
@@ -28387,7 +28404,7 @@ components:
         values:
           type: array
           items:
-            $ref: '#/components/schemas/EDeputyDelegationEscalationLevel'
+            $ref: '#/components/schemas/EAssistantAndDeputyDelegationEscalationLevel'
     NotInDeputyTypeOperator:
       type: object
       properties:
@@ -28836,6 +28853,9 @@ components:
           $ref: '#/components/schemas/EConversationRealParticipationType'
         person:
           $ref: '#/components/schemas/PersonData'
+        joinedAsAssistant:
+          type: boolean
+          description: Joined the conversation via automatic assistant synchronization
     ParticipantPersonIdConversationHistorySearchFilter:
       type: object
       description: Filters by matching personIds of participants of conversations
@@ -33181,19 +33201,24 @@ components:
         agentUserId:
           type: string
           description: The agent user ID for which the deputies should be defined
+        assistants:
+          type: array
+          description: All `EAssistantAndDeputyDelegationEscalationLevel.ASSISTANTS` deputies
+          items:
+            $ref: '#/components/schemas/DeputyDefinition'
         level1:
           type: array
-          description: All `EDeputyDelegationEscalationLevel.LEVEL_1` deputies
+          description: All `EAssistantAndDeputyDelegationEscalationLevel.LEVEL_1` deputies
           items:
             $ref: '#/components/schemas/DeputyDefinition'
         level2:
           type: array
-          description: All `EDeputyDelegationEscalationLevel.LEVEL_2` deputies
+          description: All `EAssistantAndDeputyDelegationEscalationLevel.LEVEL_2` deputies
           items:
             $ref: '#/components/schemas/DeputyDefinition'
         level3:
           type: array
-          description: All `EDeputyDelegationEscalationLevel.LEVEL_3` deputies
+          description: All `EAssistantAndDeputyDelegationEscalationLevel.LEVEL_3` deputies
           items:
             $ref: '#/components/schemas/DeputyDefinition'
   responses:

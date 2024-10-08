@@ -80,6 +80,11 @@ public enum EOffboardingReason {
 	PUBLIC_DIALIN_ENDED("PUBLIC_DIALIN_ENDED"),
 
 	/**
+	 * ASSISTANT_SYNCHRONIZATION: Due to assistant synchronization the person was automatically removed from the conversation
+	 */
+	ASSISTANT_SYNCHRONIZATION("ASSISTANT_SYNCHRONIZATION"),
+
+	/**
 	 * OTHER: Some other unspecified reason
 	 */
 	OTHER("OTHER");

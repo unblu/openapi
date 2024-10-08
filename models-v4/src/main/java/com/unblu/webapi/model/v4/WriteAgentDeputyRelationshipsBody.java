@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	WriteAgentDeputyRelationshipsBody.JSON_PROPERTY_$_TYPE,
 	WriteAgentDeputyRelationshipsBody.JSON_PROPERTY_AGENT_USER_ID,
+	WriteAgentDeputyRelationshipsBody.JSON_PROPERTY_ASSISTANTS,
 	WriteAgentDeputyRelationshipsBody.JSON_PROPERTY_LEVEL1,
 	WriteAgentDeputyRelationshipsBody.JSON_PROPERTY_LEVEL2,
 	WriteAgentDeputyRelationshipsBody.JSON_PROPERTY_LEVEL3,
@@ -69,6 +70,10 @@ public class WriteAgentDeputyRelationshipsBody {
 	public static final String JSON_PROPERTY_AGENT_USER_ID = "agentUserId";
 	@JsonProperty(JSON_PROPERTY_AGENT_USER_ID)
 	private String agentUserId;
+
+	public static final String JSON_PROPERTY_ASSISTANTS = "assistants";
+	@JsonProperty(JSON_PROPERTY_ASSISTANTS)
+	private List<DeputyDefinition> assistants = null;
 
 	public static final String JSON_PROPERTY_LEVEL1 = "level1";
 	@JsonProperty(JSON_PROPERTY_LEVEL1)
@@ -120,6 +125,33 @@ public class WriteAgentDeputyRelationshipsBody {
 		this.agentUserId = agentUserId;
 	}
 
+	public WriteAgentDeputyRelationshipsBody assistants(List<DeputyDefinition> assistants) {
+		this.assistants = assistants;
+		return this;
+	}
+
+	public WriteAgentDeputyRelationshipsBody addAssistantsItem(DeputyDefinition assistantsItem) {
+		if (this.assistants == null) {
+			this.assistants = new ArrayList<>();
+		}
+		this.assistants.add(assistantsItem);
+		return this;
+	}
+
+	/**
+	 * All &#x60;EAssistantAndDeputyDelegationEscalationLevel.ASSISTANTS&#x60; deputies
+	 * 
+	 * @return assistants
+	 **/
+	@ApiModelProperty(value = "All `EAssistantAndDeputyDelegationEscalationLevel.ASSISTANTS` deputies")
+	public List<DeputyDefinition> getAssistants() {
+		return assistants;
+	}
+
+	public void setAssistants(List<DeputyDefinition> assistants) {
+		this.assistants = assistants;
+	}
+
 	public WriteAgentDeputyRelationshipsBody level1(List<DeputyDefinition> level1) {
 		this.level1 = level1;
 		return this;
@@ -134,11 +166,11 @@ public class WriteAgentDeputyRelationshipsBody {
 	}
 
 	/**
-	 * All &#x60;EDeputyDelegationEscalationLevel.LEVEL_1&#x60; deputies
+	 * All &#x60;EAssistantAndDeputyDelegationEscalationLevel.LEVEL_1&#x60; deputies
 	 * 
 	 * @return level1
 	 **/
-	@ApiModelProperty(value = "All `EDeputyDelegationEscalationLevel.LEVEL_1` deputies")
+	@ApiModelProperty(value = "All `EAssistantAndDeputyDelegationEscalationLevel.LEVEL_1` deputies")
 	public List<DeputyDefinition> getLevel1() {
 		return level1;
 	}
@@ -161,11 +193,11 @@ public class WriteAgentDeputyRelationshipsBody {
 	}
 
 	/**
-	 * All &#x60;EDeputyDelegationEscalationLevel.LEVEL_2&#x60; deputies
+	 * All &#x60;EAssistantAndDeputyDelegationEscalationLevel.LEVEL_2&#x60; deputies
 	 * 
 	 * @return level2
 	 **/
-	@ApiModelProperty(value = "All `EDeputyDelegationEscalationLevel.LEVEL_2` deputies")
+	@ApiModelProperty(value = "All `EAssistantAndDeputyDelegationEscalationLevel.LEVEL_2` deputies")
 	public List<DeputyDefinition> getLevel2() {
 		return level2;
 	}
@@ -188,11 +220,11 @@ public class WriteAgentDeputyRelationshipsBody {
 	}
 
 	/**
-	 * All &#x60;EDeputyDelegationEscalationLevel.LEVEL_3&#x60; deputies
+	 * All &#x60;EAssistantAndDeputyDelegationEscalationLevel.LEVEL_3&#x60; deputies
 	 * 
 	 * @return level3
 	 **/
-	@ApiModelProperty(value = "All `EDeputyDelegationEscalationLevel.LEVEL_3` deputies")
+	@ApiModelProperty(value = "All `EAssistantAndDeputyDelegationEscalationLevel.LEVEL_3` deputies")
 	public List<DeputyDefinition> getLevel3() {
 		return level3;
 	}
@@ -212,6 +244,7 @@ public class WriteAgentDeputyRelationshipsBody {
 		WriteAgentDeputyRelationshipsBody writeAgentDeputyRelationshipsBody = (WriteAgentDeputyRelationshipsBody) o;
 		return Objects.equals(this.$type, writeAgentDeputyRelationshipsBody.$type) &&
 				Objects.equals(this.agentUserId, writeAgentDeputyRelationshipsBody.agentUserId) &&
+				Objects.equals(this.assistants, writeAgentDeputyRelationshipsBody.assistants) &&
 				Objects.equals(this.level1, writeAgentDeputyRelationshipsBody.level1) &&
 				Objects.equals(this.level2, writeAgentDeputyRelationshipsBody.level2) &&
 				Objects.equals(this.level3, writeAgentDeputyRelationshipsBody.level3);
@@ -219,7 +252,7 @@ public class WriteAgentDeputyRelationshipsBody {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, agentUserId, level1, level2, level3);
+		return Objects.hash($type, agentUserId, assistants, level1, level2, level3);
 	}
 
 	@Override
@@ -228,6 +261,7 @@ public class WriteAgentDeputyRelationshipsBody {
 		sb.append("class WriteAgentDeputyRelationshipsBody {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    agentUserId: ").append(toIndentedString(agentUserId)).append("\n");
+		sb.append("    assistants: ").append(toIndentedString(assistants)).append("\n");
 		sb.append("    level1: ").append(toIndentedString(level1)).append("\n");
 		sb.append("    level2: ").append(toIndentedString(level2)).append("\n");
 		sb.append("    level3: ").append(toIndentedString(level3)).append("\n");

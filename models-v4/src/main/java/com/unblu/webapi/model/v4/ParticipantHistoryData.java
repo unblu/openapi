@@ -33,6 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ParticipantHistoryData.JSON_PROPERTY_CONVERSATION_STARRED,
 	ParticipantHistoryData.JSON_PROPERTY_PARTICIPATION_TYPE,
 	ParticipantHistoryData.JSON_PROPERTY_PERSON,
+	ParticipantHistoryData.JSON_PROPERTY_JOINED_AS_ASSISTANT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ParticipantHistoryData {
@@ -124,6 +125,10 @@ public class ParticipantHistoryData {
 	public static final String JSON_PROPERTY_PERSON = "person";
 	@JsonProperty(JSON_PROPERTY_PERSON)
 	private PersonData person = null;
+
+	public static final String JSON_PROPERTY_JOINED_AS_ASSISTANT = "joinedAsAssistant";
+	@JsonProperty(JSON_PROPERTY_JOINED_AS_ASSISTANT)
+	private Boolean joinedAsAssistant;
 
 	public ParticipantHistoryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -394,6 +399,25 @@ public class ParticipantHistoryData {
 		this.person = person;
 	}
 
+	public ParticipantHistoryData joinedAsAssistant(Boolean joinedAsAssistant) {
+		this.joinedAsAssistant = joinedAsAssistant;
+		return this;
+	}
+
+	/**
+	 * Joined the conversation via automatic assistant synchronization
+	 * 
+	 * @return joinedAsAssistant
+	 **/
+	@ApiModelProperty(value = "Joined the conversation via automatic assistant synchronization")
+	public Boolean isJoinedAsAssistant() {
+		return joinedAsAssistant;
+	}
+
+	public void setJoinedAsAssistant(Boolean joinedAsAssistant) {
+		this.joinedAsAssistant = joinedAsAssistant;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -416,12 +440,13 @@ public class ParticipantHistoryData {
 				Objects.equals(this.hidden, participantHistoryData.hidden) &&
 				Objects.equals(this.conversationStarred, participantHistoryData.conversationStarred) &&
 				Objects.equals(this.participationType, participantHistoryData.participationType) &&
-				Objects.equals(this.person, participantHistoryData.person);
+				Objects.equals(this.person, participantHistoryData.person) &&
+				Objects.equals(this.joinedAsAssistant, participantHistoryData.joinedAsAssistant);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, state, createdTimestamp, joinedTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, leftReason, leftComment, conversationRating, hidden, conversationStarred, participationType, person);
+		return Objects.hash($type, state, createdTimestamp, joinedTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, leftReason, leftComment, conversationRating, hidden, conversationStarred, participationType, person, joinedAsAssistant);
 	}
 
 	@Override
@@ -442,6 +467,7 @@ public class ParticipantHistoryData {
 		sb.append("    conversationStarred: ").append(toIndentedString(conversationStarred)).append("\n");
 		sb.append("    participationType: ").append(toIndentedString(participationType)).append("\n");
 		sb.append("    person: ").append(toIndentedString(person)).append("\n");
+		sb.append("    joinedAsAssistant: ").append(toIndentedString(joinedAsAssistant)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

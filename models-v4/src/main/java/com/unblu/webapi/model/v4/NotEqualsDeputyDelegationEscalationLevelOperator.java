@@ -66,7 +66,7 @@ public class NotEqualsDeputyDelegationEscalationLevelOperator implements DeputyD
 
 	public static final String JSON_PROPERTY_VALUE = "value";
 	@JsonProperty(JSON_PROPERTY_VALUE)
-	private EDeputyDelegationEscalationLevel value;
+	private EAssistantAndDeputyDelegationEscalationLevel value;
 
 	public NotEqualsDeputyDelegationEscalationLevelOperator $type(TypeEnum $type) {
 		this.$type = $type;
@@ -106,7 +106,7 @@ public class NotEqualsDeputyDelegationEscalationLevelOperator implements DeputyD
 		this.type = type;
 	}
 
-	public NotEqualsDeputyDelegationEscalationLevelOperator value(EDeputyDelegationEscalationLevel value) {
+	public NotEqualsDeputyDelegationEscalationLevelOperator value(EAssistantAndDeputyDelegationEscalationLevel value) {
 		this.value = value;
 		return this;
 	}
@@ -117,11 +117,11 @@ public class NotEqualsDeputyDelegationEscalationLevelOperator implements DeputyD
 	 * @return value
 	 **/
 	@ApiModelProperty(value = "")
-	public EDeputyDelegationEscalationLevel getValue() {
+	public EAssistantAndDeputyDelegationEscalationLevel getValue() {
 		return value;
 	}
 
-	public void setValue(EDeputyDelegationEscalationLevel value) {
+	public void setValue(EAssistantAndDeputyDelegationEscalationLevel value) {
 		this.value = value;
 	}
 

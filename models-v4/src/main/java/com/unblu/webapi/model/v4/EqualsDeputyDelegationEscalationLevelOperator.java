@@ -66,7 +66,7 @@ public class EqualsDeputyDelegationEscalationLevelOperator implements DeputyDele
 
 	public static final String JSON_PROPERTY_VALUE = "value";
 	@JsonProperty(JSON_PROPERTY_VALUE)
-	private EDeputyDelegationEscalationLevel value;
+	private EAssistantAndDeputyDelegationEscalationLevel value;
 
 	public EqualsDeputyDelegationEscalationLevelOperator $type(TypeEnum $type) {
 		this.$type = $type;
@@ -106,7 +106,7 @@ public class EqualsDeputyDelegationEscalationLevelOperator implements DeputyDele
 		this.type = type;
 	}
 
-	public EqualsDeputyDelegationEscalationLevelOperator value(EDeputyDelegationEscalationLevel value) {
+	public EqualsDeputyDelegationEscalationLevelOperator value(EAssistantAndDeputyDelegationEscalationLevel value) {
 		this.value = value;
 		return this;
 	}
@@ -117,11 +117,11 @@ public class EqualsDeputyDelegationEscalationLevelOperator implements DeputyDele
 	 * @return value
 	 **/
 	@ApiModelProperty(value = "")
-	public EDeputyDelegationEscalationLevel getValue() {
+	public EAssistantAndDeputyDelegationEscalationLevel getValue() {
 		return value;
 	}
 
-	public void setValue(EDeputyDelegationEscalationLevel value) {
+	public void setValue(EAssistantAndDeputyDelegationEscalationLevel value) {
 		this.value = value;
 	}
 

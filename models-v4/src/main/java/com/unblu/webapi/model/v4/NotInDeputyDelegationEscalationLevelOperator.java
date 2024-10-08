@@ -68,7 +68,7 @@ public class NotInDeputyDelegationEscalationLevelOperator implements DeputyDeleg
 
 	public static final String JSON_PROPERTY_VALUES = "values";
 	@JsonProperty(JSON_PROPERTY_VALUES)
-	private List<EDeputyDelegationEscalationLevel> values = null;
+	private List<EAssistantAndDeputyDelegationEscalationLevel> values = null;
 
 	public NotInDeputyDelegationEscalationLevelOperator $type(TypeEnum $type) {
 		this.$type = $type;
@@ -108,12 +108,12 @@ public class NotInDeputyDelegationEscalationLevelOperator implements DeputyDeleg
 		this.type = type;
 	}
 
-	public NotInDeputyDelegationEscalationLevelOperator values(List<EDeputyDelegationEscalationLevel> values) {
+	public NotInDeputyDelegationEscalationLevelOperator values(List<EAssistantAndDeputyDelegationEscalationLevel> values) {
 		this.values = values;
 		return this;
 	}
 
-	public NotInDeputyDelegationEscalationLevelOperator addValuesItem(EDeputyDelegationEscalationLevel valuesItem) {
+	public NotInDeputyDelegationEscalationLevelOperator addValuesItem(EAssistantAndDeputyDelegationEscalationLevel valuesItem) {
 		if (this.values == null) {
 			this.values = new ArrayList<>();
 		}
@@ -127,11 +127,11 @@ public class NotInDeputyDelegationEscalationLevelOperator implements DeputyDeleg
 	 * @return values
 	 **/
 	@ApiModelProperty(value = "")
-	public List<EDeputyDelegationEscalationLevel> getValues() {
+	public List<EAssistantAndDeputyDelegationEscalationLevel> getValues() {
 		return values;
 	}
 
-	public void setValues(List<EDeputyDelegationEscalationLevel> values) {
+	public void setValues(List<EAssistantAndDeputyDelegationEscalationLevel> values) {
 		this.values = values;
 	}
 

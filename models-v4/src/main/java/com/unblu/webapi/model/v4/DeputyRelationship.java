@@ -103,7 +103,7 @@ public class DeputyRelationship {
 
 	public static final String JSON_PROPERTY_ESCALATION_LEVEL = "escalationLevel";
 	@JsonProperty(JSON_PROPERTY_ESCALATION_LEVEL)
-	private EDeputyDelegationEscalationLevel escalationLevel;
+	private EAssistantAndDeputyDelegationEscalationLevel escalationLevel;
 
 	public DeputyRelationship $type(TypeEnum $type) {
 		this.$type = $type;
@@ -281,7 +281,7 @@ public class DeputyRelationship {
 		this.deputyId = deputyId;
 	}
 
-	public DeputyRelationship escalationLevel(EDeputyDelegationEscalationLevel escalationLevel) {
+	public DeputyRelationship escalationLevel(EAssistantAndDeputyDelegationEscalationLevel escalationLevel) {
 		this.escalationLevel = escalationLevel;
 		return this;
 	}
@@ -292,11 +292,11 @@ public class DeputyRelationship {
 	 * @return escalationLevel
 	 **/
 	@ApiModelProperty(value = "")
-	public EDeputyDelegationEscalationLevel getEscalationLevel() {
+	public EAssistantAndDeputyDelegationEscalationLevel getEscalationLevel() {
 		return escalationLevel;
 	}
 
-	public void setEscalationLevel(EDeputyDelegationEscalationLevel escalationLevel) {
+	public void setEscalationLevel(EAssistantAndDeputyDelegationEscalationLevel escalationLevel) {
 		this.escalationLevel = escalationLevel;
 	}
 
