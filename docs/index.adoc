@@ -56,8 +56,12 @@ The output of this command is an HTML page located at `<git repo root>/build/doc
 
 === For project maintainers
 
-`signing.gnupg.keyName` and `signing.gnupg.passphrase` are expected to be set in your local `gradle.properties` file to be able to sign.
-`sonatypeUser` and `sonatypePassword` are expected to be set in order to be able to publish to a distant repository.
+Following properties are expected to be set (for example in `~/.gradle/gradle.properties`):
+
+* `signing.gnupg.keyName` 
+* `signing.gnupg.passphrase`
+* `s01ossSonatypeUsername`
+* `s01ossSonatypePassword`
 					
 Command to build and publish the result to maven central:
 
