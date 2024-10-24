@@ -38,6 +38,8 @@ import io.swagger.annotations.ApiModelProperty;
 	FileMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	FileMessageData.JSON_PROPERTY_INTERNAL,
 	FileMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
+	FileMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
+	FileMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	FileMessageData.JSON_PROPERTY_FILE_NAME,
 	FileMessageData.JSON_PROPERTY_CAPTION,
 	FileMessageData.JSON_PROPERTY_CAPTION_TYPE,
@@ -152,6 +154,14 @@ public class FileMessageData implements MessageData {
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
 	private String replyToMessageId;
+
+	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
+	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
+	private String externalMessageId;
+
+	public static final String JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID = "replyToExternalMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID)
+	private String replyToExternalMessageId;
 
 	public static final String JSON_PROPERTY_FILE_NAME = "fileName";
 	@JsonProperty(JSON_PROPERTY_FILE_NAME)
@@ -532,6 +542,44 @@ public class FileMessageData implements MessageData {
 		this.replyToMessageId = replyToMessageId;
 	}
 
+	public FileMessageData externalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID, for example, for external messengers
+	 * 
+	 * @return externalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID, for example, for external messengers")
+	public String getExternalMessageId() {
+		return externalMessageId;
+	}
+
+	public void setExternalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+	}
+
+	public FileMessageData replyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID that identifies the message this message is replying to
+	 * 
+	 * @return replyToExternalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID that identifies the message this message is replying to")
+	public String getReplyToExternalMessageId() {
+		return replyToExternalMessageId;
+	}
+
+	public void setReplyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+	}
+
 	public FileMessageData fileName(String fileName) {
 		this.fileName = fileName;
 		return this;
@@ -785,6 +833,8 @@ public class FileMessageData implements MessageData {
 				Objects.equals(this.botThreadId, fileMessageData.botThreadId) &&
 				Objects.equals(this.internal, fileMessageData.internal) &&
 				Objects.equals(this.replyToMessageId, fileMessageData.replyToMessageId) &&
+				Objects.equals(this.externalMessageId, fileMessageData.externalMessageId) &&
+				Objects.equals(this.replyToExternalMessageId, fileMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.fileName, fileMessageData.fileName) &&
 				Objects.equals(this.caption, fileMessageData.caption) &&
 				Objects.equals(this.captionType, fileMessageData.captionType) &&
@@ -800,7 +850,7 @@ public class FileMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies);
 	}
 
 	@Override
@@ -824,6 +874,8 @@ public class FileMessageData implements MessageData {
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
+		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
+		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
 		sb.append("    caption: ").append(toIndentedString(caption)).append("\n");
 		sb.append("    captionType: ").append(toIndentedString(captionType)).append("\n");

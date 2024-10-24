@@ -38,6 +38,8 @@ import io.swagger.annotations.ApiModelProperty;
 	QuestionAbortedMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_INTERNAL,
 	QuestionAbortedMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
+	QuestionAbortedMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_VALUE,
 	QuestionAbortedMessageData.JSON_PROPERTY_REASON,
@@ -144,6 +146,14 @@ public class QuestionAbortedMessageData implements MessageData {
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
 	private String replyToMessageId;
+
+	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
+	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
+	private String externalMessageId;
+
+	public static final String JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID = "replyToExternalMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID)
+	private String replyToExternalMessageId;
 
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
@@ -492,6 +502,44 @@ public class QuestionAbortedMessageData implements MessageData {
 		this.replyToMessageId = replyToMessageId;
 	}
 
+	public QuestionAbortedMessageData externalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID, for example, for external messengers
+	 * 
+	 * @return externalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID, for example, for external messengers")
+	public String getExternalMessageId() {
+		return externalMessageId;
+	}
+
+	public void setExternalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+	}
+
+	public QuestionAbortedMessageData replyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID that identifies the message this message is replying to
+	 * 
+	 * @return replyToExternalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID that identifies the message this message is replying to")
+	public String getReplyToExternalMessageId() {
+		return replyToExternalMessageId;
+	}
+
+	public void setReplyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+	}
+
 	public QuestionAbortedMessageData questionMessageId(String questionMessageId) {
 		this.questionMessageId = questionMessageId;
 		return this;
@@ -575,6 +623,8 @@ public class QuestionAbortedMessageData implements MessageData {
 				Objects.equals(this.botThreadId, questionAbortedMessageData.botThreadId) &&
 				Objects.equals(this.internal, questionAbortedMessageData.internal) &&
 				Objects.equals(this.replyToMessageId, questionAbortedMessageData.replyToMessageId) &&
+				Objects.equals(this.externalMessageId, questionAbortedMessageData.externalMessageId) &&
+				Objects.equals(this.replyToExternalMessageId, questionAbortedMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.questionMessageId, questionAbortedMessageData.questionMessageId) &&
 				Objects.equals(this.value, questionAbortedMessageData.value) &&
 				Objects.equals(this.reason, questionAbortedMessageData.reason);
@@ -582,7 +632,7 @@ public class QuestionAbortedMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, questionMessageId, value, reason);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, questionMessageId, value, reason);
 	}
 
 	@Override
@@ -606,6 +656,8 @@ public class QuestionAbortedMessageData implements MessageData {
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
+		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
+		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("    reason: ").append(toIndentedString(reason)).append("\n");

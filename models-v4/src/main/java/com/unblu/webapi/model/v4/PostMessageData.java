@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = ReplyPostMessageData.class, name = "REPLY"),
 	@JsonSubTypes.Type(value = TextPostMessageData.class, name = "TEXT"),
 	@JsonSubTypes.Type(value = TextQuestionPostMessageData.class, name = "TEXT_QUESTION"),
+	@JsonSubTypes.Type(value = WhatsAppTemplatePostMessageData.class, name = "WHATS_APP_TEMPLATE"),
 })
 public interface PostMessageData {
 	void setType(EPostMessageType type);

@@ -10,25 +10,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Success response to a &#x60;ExternalMessengerNewMessageRequest&#x60; API call.
+ * DateTimeParameterValue
  */
-@ApiModel(description = "Success response to a `ExternalMessengerNewMessageRequest` API call.")
 
 @JsonPropertyOrder({
-	ExternalMessengerNewMessageResponse.JSON_PROPERTY_$_TYPE,
-	ExternalMessengerNewMessageResponse.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
+	DateTimeParameterValue.JSON_PROPERTY_$_TYPE,
+	DateTimeParameterValue.JSON_PROPERTY_FALLBACK_VALUE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class ExternalMessengerNewMessageResponse {
+public class DateTimeParameterValue {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		EXTERNALMESSENGERNEWMESSAGERESPONSE("ExternalMessengerNewMessageResponse");
+		DATETIMEPARAMETERVALUE("DateTimeParameterValue");
 
 		private String value;
 
@@ -53,19 +51,19 @@ public class ExternalMessengerNewMessageResponse {
 					return b;
 				}
 			}
-			return TypeEnum.EXTERNALMESSENGERNEWMESSAGERESPONSE;
+			return TypeEnum.DATETIMEPARAMETERVALUE;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.EXTERNALMESSENGERNEWMESSAGERESPONSE;
+	private TypeEnum $type = TypeEnum.DATETIMEPARAMETERVALUE;
 
-	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
-	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
-	private String externalMessageId;
+	public static final String JSON_PROPERTY_FALLBACK_VALUE = "fallbackValue";
+	@JsonProperty(JSON_PROPERTY_FALLBACK_VALUE)
+	private String fallbackValue;
 
-	public ExternalMessengerNewMessageResponse $type(TypeEnum $type) {
+	public DateTimeParameterValue $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -84,23 +82,24 @@ public class ExternalMessengerNewMessageResponse {
 		this.$type = $type;
 	}
 
-	public ExternalMessengerNewMessageResponse externalMessageId(String externalMessageId) {
-		this.externalMessageId = externalMessageId;
+	public DateTimeParameterValue fallbackValue(String fallbackValue) {
+		this.fallbackValue = fallbackValue;
 		return this;
 	}
 
 	/**
-	 * Get externalMessageId
+	 * Required. &lt;p&gt; Default text. For Cloud API, we always use the fallback value, and we do not attempt to localize using other optional fields. &lt;p&gt;
+	 * Alias: fallback_value
 	 * 
-	 * @return externalMessageId
+	 * @return fallbackValue
 	 **/
-	@ApiModelProperty(value = "")
-	public String getExternalMessageId() {
-		return externalMessageId;
+	@ApiModelProperty(value = "Required. <p> Default text. For Cloud API, we always use the fallback value, and we do not attempt to localize using other optional fields. <p> Alias: fallback_value")
+	public String getFallbackValue() {
+		return fallbackValue;
 	}
 
-	public void setExternalMessageId(String externalMessageId) {
-		this.externalMessageId = externalMessageId;
+	public void setFallbackValue(String fallbackValue) {
+		this.fallbackValue = fallbackValue;
 	}
 
 	@Override
@@ -111,22 +110,22 @@ public class ExternalMessengerNewMessageResponse {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ExternalMessengerNewMessageResponse externalMessengerNewMessageResponse = (ExternalMessengerNewMessageResponse) o;
-		return Objects.equals(this.$type, externalMessengerNewMessageResponse.$type) &&
-				Objects.equals(this.externalMessageId, externalMessengerNewMessageResponse.externalMessageId);
+		DateTimeParameterValue dateTimeParameterValue = (DateTimeParameterValue) o;
+		return Objects.equals(this.$type, dateTimeParameterValue.$type) &&
+				Objects.equals(this.fallbackValue, dateTimeParameterValue.fallbackValue);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, externalMessageId);
+		return Objects.hash($type, fallbackValue);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ExternalMessengerNewMessageResponse {\n");
+		sb.append("class DateTimeParameterValue {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
-		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
+		sb.append("    fallbackValue: ").append(toIndentedString(fallbackValue)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

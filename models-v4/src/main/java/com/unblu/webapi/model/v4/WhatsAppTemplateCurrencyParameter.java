@@ -10,25 +10,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Success response to a &#x60;ExternalMessengerNewMessageRequest&#x60; API call.
+ * WhatsAppTemplateCurrencyParameter
  */
-@ApiModel(description = "Success response to a `ExternalMessengerNewMessageRequest` API call.")
 
 @JsonPropertyOrder({
-	ExternalMessengerNewMessageResponse.JSON_PROPERTY_$_TYPE,
-	ExternalMessengerNewMessageResponse.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
+	WhatsAppTemplateCurrencyParameter.JSON_PROPERTY_$_TYPE,
+	WhatsAppTemplateCurrencyParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateCurrencyParameter.JSON_PROPERTY_CURRENCY,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class ExternalMessengerNewMessageResponse {
+public class WhatsAppTemplateCurrencyParameter implements WhatsAppTemplateParameter {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		EXTERNALMESSENGERNEWMESSAGERESPONSE("ExternalMessengerNewMessageResponse");
+		WHATSAPPTEMPLATECURRENCYPARAMETER("WhatsAppTemplateCurrencyParameter");
 
 		private String value;
 
@@ -53,19 +52,23 @@ public class ExternalMessengerNewMessageResponse {
 					return b;
 				}
 			}
-			return TypeEnum.EXTERNALMESSENGERNEWMESSAGERESPONSE;
+			return TypeEnum.WHATSAPPTEMPLATECURRENCYPARAMETER;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.EXTERNALMESSENGERNEWMESSAGERESPONSE;
+	private TypeEnum $type = TypeEnum.WHATSAPPTEMPLATECURRENCYPARAMETER;
 
-	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
-	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
-	private String externalMessageId;
+	public static final String JSON_PROPERTY_TYPE = "type";
+	@JsonProperty(JSON_PROPERTY_TYPE)
+	private ETemplateComponentParameterType type = ETemplateComponentParameterType.CURRENCY;
 
-	public ExternalMessengerNewMessageResponse $type(TypeEnum $type) {
+	public static final String JSON_PROPERTY_CURRENCY = "currency";
+	@JsonProperty(JSON_PROPERTY_CURRENCY)
+	private CurrencyParameterValue currency = null;
+
+	public WhatsAppTemplateCurrencyParameter $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -84,23 +87,42 @@ public class ExternalMessengerNewMessageResponse {
 		this.$type = $type;
 	}
 
-	public ExternalMessengerNewMessageResponse externalMessageId(String externalMessageId) {
-		this.externalMessageId = externalMessageId;
+	public WhatsAppTemplateCurrencyParameter type(ETemplateComponentParameterType type) {
+		this.type = type;
 		return this;
 	}
 
 	/**
-	 * Get externalMessageId
+	 * Get type
 	 * 
-	 * @return externalMessageId
+	 * @return type
 	 **/
 	@ApiModelProperty(value = "")
-	public String getExternalMessageId() {
-		return externalMessageId;
+	public ETemplateComponentParameterType getType() {
+		return type;
 	}
 
-	public void setExternalMessageId(String externalMessageId) {
-		this.externalMessageId = externalMessageId;
+	public void setType(ETemplateComponentParameterType type) {
+		this.type = type;
+	}
+
+	public WhatsAppTemplateCurrencyParameter currency(CurrencyParameterValue currency) {
+		this.currency = currency;
+		return this;
+	}
+
+	/**
+	 * Get currency
+	 * 
+	 * @return currency
+	 **/
+	@ApiModelProperty(value = "")
+	public CurrencyParameterValue getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(CurrencyParameterValue currency) {
+		this.currency = currency;
 	}
 
 	@Override
@@ -111,22 +133,24 @@ public class ExternalMessengerNewMessageResponse {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ExternalMessengerNewMessageResponse externalMessengerNewMessageResponse = (ExternalMessengerNewMessageResponse) o;
-		return Objects.equals(this.$type, externalMessengerNewMessageResponse.$type) &&
-				Objects.equals(this.externalMessageId, externalMessengerNewMessageResponse.externalMessageId);
+		WhatsAppTemplateCurrencyParameter whatsAppTemplateCurrencyParameter = (WhatsAppTemplateCurrencyParameter) o;
+		return Objects.equals(this.$type, whatsAppTemplateCurrencyParameter.$type) &&
+				Objects.equals(this.type, whatsAppTemplateCurrencyParameter.type) &&
+				Objects.equals(this.currency, whatsAppTemplateCurrencyParameter.currency);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, externalMessageId);
+		return Objects.hash($type, type, currency);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ExternalMessengerNewMessageResponse {\n");
+		sb.append("class WhatsAppTemplateCurrencyParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
-		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
+		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

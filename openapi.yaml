@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.8.2
+  version: 8.9.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -6555,6 +6555,8 @@ paths:
                   recipientPersonIds: null
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: TextPostMessageData
                     type: TEXT
@@ -6576,6 +6578,8 @@ paths:
                   recipientPersonIds: null
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: CardPostMessageData
                     type: CARD
@@ -6613,6 +6617,8 @@ paths:
                   recipientPersonIds: null
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: FilePostMessageData
                     type: FILE
@@ -6636,6 +6642,8 @@ paths:
                   recipientPersonIds: null
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: ListPostMessageData
                     type: LIST
@@ -6677,6 +6685,8 @@ paths:
                   - PtwoVi1O-2G9FFCR_rZLKQ
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: MultichoiceQuestionPostMessageData
                     type: MULTICHOICE_QUESTION
@@ -6707,6 +6717,8 @@ paths:
                   - PtwoVi1O-2G9FFCR_rZLKQ
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: RatingQuestionPostMessageData
                     type: RATING_QUESTION
@@ -6733,6 +6745,8 @@ paths:
                   recipientPersonIds: null
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: TextPostMessageData
                     type: TEXT
@@ -6751,6 +6765,8 @@ paths:
                   - PtwoVi1O-2G9FFCR_rZLKQ
                   sourceId: message-source
                   replyToMessageId: null
+                  externalMessageId: null
+                  replyToExternalMessageId: null
                   messageData:
                     $_type: TextQuestionPostMessageData
                     type: TEXT_QUESTION
@@ -10291,7 +10307,7 @@ paths:
       tags:
       - Persons
       summary: setNote
-      description: Sets the note on the person to the given value<br>
+      description: Sets the note on the person to the given value. This is only available for persons of type visitor.<br>
       operationId: personsSetNote
       parameters:
       - name: personId
@@ -14124,6 +14140,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         text:
           type: string
           description: Text of the message
@@ -16541,6 +16563,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         imageUrl:
           type: string
           description: URL of the image displayed at the top of the card.
@@ -17539,6 +17567,9 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
         recipientPersonIds:
           type: array
           description: "IDs of persons that the message was addressed to. <p> If it is null, all active participations are regarded as recipients."
@@ -19106,6 +19137,23 @@ components:
           $ref: '#/components/schemas/EConversationInvitationSearchFilterField'
         operator:
           $ref: '#/components/schemas/InvitationCreatorTypeOperator'
+    CurrencyParameterValue:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CurrencyParameterValue
+          enum:
+          - CurrencyParameterValue
+        fallbackValue:
+          type: string
+          description: "Required. <p> Default text if localization fails. <p> Alias: fallback_value"
+        code:
+          $ref: '#/components/schemas/ECurrencyCode'
+        amount1000:
+          type: number
+          format: double
+          description: "Required. <p> Amount multiplied by 1000. <p> Alias: amount_1000"
     CustomActionData:
       oneOf:
       - $ref: '#/components/schemas/CustomConversationActionData'
@@ -19954,6 +20002,17 @@ components:
           $ref: '#/components/schemas/ConversationData'
         person:
           $ref: '#/components/schemas/PersonData'
+    DateTimeParameterValue:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: DateTimeParameterValue
+          enum:
+          - DateTimeParameterValue
+        fallbackValue:
+          type: string
+          description: "Required. <p> Default text. For Cloud API, we always use the fallback value, and we do not attempt to localize using other optional fields. <p> Alias: fallback_value"
     DefaultTemplateConversationTemplateSearchFilter:
       type: object
       properties:
@@ -20513,6 +20572,23 @@ components:
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampDialogBotSearchFilter'
           MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampDialogBotSearchFilter'
           NAME: '#/components/schemas/NameDialogBotSearchFilter'
+    DocumentMediaParameterValue:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: DocumentMediaParameterValue
+          enum:
+          - DocumentMediaParameterValue
+        id:
+          type: string
+          description: "The media object ID. Do not use this field when message type is set to text. Required when type is audio, document, image, sticker, or video and you are not using a link."
+        link:
+          type: string
+        caption:
+          type: string
+        filename:
+          type: string
     Domain:
       type: object
       description: Model of a domain
@@ -21815,6 +21891,369 @@ components:
       x-enum-descriptions:
       - "EQUALS: Check if the value is equal to the one provided in the operator"
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+    ECurrencyCode:
+      type: string
+      description: List of <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency codes.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      x-enum-descriptions:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
     ECustomActionInvocationResponseType:
       type: string
       enum:
@@ -22698,6 +23137,7 @@ components:
       - REPLY
       - QUESTION_ABORTED
       - RECORDING_AVAILABLE
+      - WHATSAPP_TEMPLATE
       x-enum-descriptions:
       - TEXT
       - SYSTEM
@@ -22711,6 +23151,7 @@ components:
       - REPLY
       - QUESTION_ABORTED
       - RECORDING_AVAILABLE
+      - WHATSAPP_TEMPLATE
     ENamedAreaOrderByField:
       type: string
       enum:
@@ -23136,6 +23577,7 @@ components:
       - RATING_QUESTION
       - TEXT_QUESTION
       - REPLY
+      - WHATS_APP_TEMPLATE
       x-enum-descriptions:
       - "TEXT: See `TextPostMessageData`"
       - "FILE: See `FilePostMessageData`"
@@ -23145,6 +23587,7 @@ components:
       - "RATING_QUESTION: See `RatingQuestionPostMessageData`"
       - "TEXT_QUESTION: See `TextQuestionPostMessageData`"
       - "REPLY: See `ReplyPostMessageData`"
+      - "WHATS_APP_TEMPLATE: See `WhatsAppTemplatePostMessageData`"
     EPropertyOwnerType:
       type: string
       description: Type of an owner of an entity
@@ -23373,6 +23816,48 @@ components:
       - "PARENT_ID: Filter by the 'parentId' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    ETemplateComponentParameterType:
+      type: string
+      enum:
+      - CURRENCY
+      - DATE_TIME
+      - DOCUMENT
+      - IMAGE
+      - TEXT
+      - VIDEO
+      - PAYLOAD
+      - LOCATION
+      x-enum-descriptions:
+      - CURRENCY
+      - DATE_TIME
+      - DOCUMENT
+      - IMAGE
+      - TEXT
+      - VIDEO
+      - "PAYLOAD: Only allowed for components of type `ETemplateComponentParemetersType.BUTTON`"
+      - LOCATION
+    ETemplateComponentParemetersSubType:
+      type: string
+      enum:
+      - QUICK_REPLY
+      - URL
+      - CATALOG
+      x-enum-descriptions:
+      - QUICK_REPLY
+      - URL
+      - CATALOG
+    ETemplateComponentParemetersType:
+      type: string
+      enum:
+      - HEADER
+      - BODY
+      - BUTTON
+      - CAROUSEL
+      x-enum-descriptions:
+      - HEADER
+      - BODY
+      - BUTTON
+      - CAROUSEL
     ETextQuestionType:
       type: string
       description: Type of a question message. Defines the reply value of a text message.
@@ -24182,11 +24667,13 @@ components:
       oneOf:
       - $ref: '#/components/schemas/CustomExternalMessengerChannel'
       - $ref: '#/components/schemas/SmsExternalMessengerChannel'
+      - $ref: '#/components/schemas/WhatsAppExternalMessengerChannel'
       discriminator:
         propertyName: type
         mapping:
           CUSTOM: '#/components/schemas/CustomExternalMessengerChannel'
           SMS: '#/components/schemas/SmsExternalMessengerChannel'
+          WHATS_APP: '#/components/schemas/WhatsAppExternalMessengerChannel'
     ExternalMessengerChannelIdConversationSearchFilter:
       type: object
       properties:
@@ -24742,13 +25229,15 @@ components:
             $ref: '#/components/schemas/ExternalMessengerContact'
     ExternalMessengerNewMessageResponse:
       type: object
-      description: Empty response to a `ExternalMessengerNewMessageRequest` API call.
+      description: Success response to a `ExternalMessengerNewMessageRequest` API call.
       properties:
         $_type:
           type: string
           default: ExternalMessengerNewMessageResponse
           enum:
           - ExternalMessengerNewMessageResponse
+        externalMessageId:
+          type: string
     ExternalMessengerPostMessage:
       type: object
       description: Message from external messenger send to the collaboration server
@@ -24775,6 +25264,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         messageData:
           $ref: '#/components/schemas/PostMessageData'
     ExternalMessengersMessageDeliveredBody:
@@ -24967,6 +25462,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         fileName:
           type: string
           description: The name of the file that is send
@@ -26645,6 +27146,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         header:
           $ref: '#/components/schemas/MessageHeader'
         items:
@@ -26693,6 +27200,28 @@ components:
           description: Optional list of quick replies available to the message's recipients <p> Max number of quick replies is 13.
           items:
             $ref: '#/components/schemas/QuickReply'
+    LocationParameterValue:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: LocationParameterValue
+          enum:
+          - LocationParameterValue
+        address:
+          type: string
+          description: "Address that will appear after the `name` value, below the generic map at the top of the message. <p> Example: 1 Hacker Way, Menlo Park, CA 94025"
+        latitude:
+          type: number
+          format: double
+          description: "Location latitude. <p> Example: 37.483307"
+        longitude:
+          type: number
+          format: double
+          description: "Location longitude. <p> Example: 122.148981"
+        name:
+          type: string
+          description: Text that will appear immediately below the generic map at the top of the message.
     LoginResult:
       type: object
       properties:
@@ -26730,6 +27259,21 @@ components:
         value:
           type: integer
           format: int64
+    MediaParameterValue:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: MediaParameterValue
+          enum:
+          - MediaParameterValue
+        id:
+          type: string
+          description: "The media object ID. Do not use this field when message type is set to text. Required when type is audio, document, image, sticker, or video and you are not using a link."
+        link:
+          type: string
+        caption:
+          type: string
     MessageAction:
       type: object
       description: Message action used in card messages and on list items. <p> Links are rendered with their labels below the body text of the card or list item. Reply actions are only rendered in card messages. They aren't rendered on list items.
@@ -27349,6 +27893,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         text:
           type: string
           description: Text of the message
@@ -30421,7 +30971,7 @@ components:
         action:
           $ref: '#/components/schemas/MessageAction'
     PostMessageData:
-      description: "Base class for all conversation messages sent to the collaboration server. <p> Can be one of `CardPostMessageData`, `FilePostMessageData`, `ListPostMessageData`, `MultichoiceQuestionPostMessageData`,`RatingQuestionPostMessageData`, `ReplyPostMessageData`, `TextPostMessageData` or `TextQuestionPostMessageData`"
+      description: "Base class for all conversation messages sent to the collaboration server. <p> Can be one of `CardPostMessageData`, `FilePostMessageData`, `ListPostMessageData`, `MultichoiceQuestionPostMessageData`,`RatingQuestionPostMessageData`, `ReplyPostMessageData`, `TextPostMessageData`, `TextQuestionPostMessageData` or`WhatsAppTemplatePostMessageData`"
       oneOf:
       - $ref: '#/components/schemas/ListPostMessageData'
       - $ref: '#/components/schemas/CardPostMessageData'
@@ -30431,6 +30981,7 @@ components:
       - $ref: '#/components/schemas/ReplyPostMessageData'
       - $ref: '#/components/schemas/TextPostMessageData'
       - $ref: '#/components/schemas/TextQuestionPostMessageData'
+      - $ref: '#/components/schemas/WhatsAppTemplatePostMessageData'
       discriminator:
         propertyName: type
         mapping:
@@ -30442,6 +30993,7 @@ components:
           REPLY: '#/components/schemas/ReplyPostMessageData'
           TEXT: '#/components/schemas/TextPostMessageData'
           TEXT_QUESTION: '#/components/schemas/TextQuestionPostMessageData'
+          WHATS_APP_TEMPLATE: '#/components/schemas/WhatsAppTemplatePostMessageData'
     ProductVersion:
       type: object
       description: Object to represent the product version
@@ -30533,6 +31085,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -30628,6 +31186,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         text:
           type: string
           description: Text of the message
@@ -30891,6 +31455,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         blobId:
           type: string
           description: The blob store ID of the recording
@@ -30980,6 +31550,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -31681,6 +32257,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         text:
           type: string
           description: Text of the message
@@ -32062,6 +32644,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         text:
           type: string
           description: Text of the message
@@ -32155,6 +32743,12 @@ components:
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
         text:
           type: string
           description: Text of the message
@@ -33189,6 +33783,264 @@ components:
           ENDPOINT: '#/components/schemas/EndpointWebhookRegistrationSearchFilter'
           MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampWebhookRegistrationSearchFilter'
           NAME: '#/components/schemas/NameWebhookRegistrationSearchFilter'
+    WhatsAppExternalMessengerChannel:
+      type: object
+      description: Channel between the collaboration server and WhatsApp<br> It defines the data needed in order to use the WhatsApp API.
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppExternalMessengerChannel
+          enum:
+          - WhatsAppExternalMessengerChannel
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the channel. Needs to be unique in the account.
+        description:
+          type: string
+          description: Optional description of the channel
+        channelIcon:
+          description: "Channel icon of the entity: id that can be expanded."
+          oneOf:
+          - type: string
+          - $ref: '#/components/schemas/Avatar'
+          x-expand-query-key: channelIcon
+          x-type: ExpandableField
+        sourceId:
+          type: string
+          description: Custom identifier to find the source of the channel.<br> Has a maximum of 250 characters
+        type:
+          $ref: '#/components/schemas/EExternalMessengerChannelType'
+        businessAccountId:
+          type: string
+          description: The whatsApp business accountId from which the template will be received
+        phoneNumberId:
+          type: string
+          description: The phone number ID that will be used to send messages
+        accessToken:
+          type: string
+          description: The access token to connect to the WhatsApp API. Can only be written.
+        appSecret:
+          type: string
+          description: The app secret used to validate the webhook payloads
+        inboundTemplateName:
+          type: string
+          description: "The name of the conversation template for new inbound conversation requests. If no template of that name can be found, the default template for`EInitialEngagementType.OFFLINE_CHAT_REQUEST` is used."
+        recipientType:
+          $ref: '#/components/schemas/EConversationRecipientType'
+        recipientName:
+          type: string
+          description: "The name of the conversation recipient for new inbound conversation requests. It is used together with the `recipientType`. If the recipient can't be found, the account is used. <p> For `EConversationRecipientType.ACCOUNT`, the `recipientName` is not relevant. The account that the channel belongs to is used. <p> For `EConversationRecipientType.NAMED_AREA`, the `recipientName` must match the name (not the ID) of a named area. <p> For `EConversationRecipientType.TEAM`, the `recipientName` must match a team's name. <p> For `EConversationRecipientType.AGENT`, the `recipientName` must match an agent's username."
+        active:
+          type: boolean
+          description: If the channel is active or not
+        metadata:
+          type: object
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
+          additionalProperties:
+            type: string
+          x-expand-query-key: metadata
+          x-type: Map
+    WhatsAppTemplateCardParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateCardParameter
+          enum:
+          - WhatsAppTemplateCardParameter
+        cardIndex:
+          type: integer
+          format: int32
+          description: The type of the parameter
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhatsAppTemplateComponentParameters'
+    WhatsAppTemplateComponentParameters:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateComponentParameters
+          enum:
+          - WhatsAppTemplateComponentParameters
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParemetersType'
+        subType:
+          $ref: '#/components/schemas/ETemplateComponentParemetersSubType'
+        index:
+          type: integer
+          format: int32
+          description: Only used for `ETemplateComponentParemetersType.BUTTON`
+        parameters:
+          type: array
+          description: The parameters used in that component. Not used for `ETemplateComponentParemetersType.CAROUSEL`
+          items:
+            $ref: '#/components/schemas/WhatsAppTemplateParameter'
+        cards:
+          type: array
+          description: The card component parameters used in that carousel component. Only used for `ETemplateComponentParemetersType.CAROUSEL`
+          items:
+            $ref: '#/components/schemas/WhatsAppTemplateCardParameter'
+    WhatsAppTemplateCurrencyParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateCurrencyParameter
+          enum:
+          - WhatsAppTemplateCurrencyParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        currency:
+          $ref: '#/components/schemas/CurrencyParameterValue'
+    WhatsAppTemplateDateTimeParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateDateTimeParameter
+          enum:
+          - WhatsAppTemplateDateTimeParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        dateTime:
+          $ref: '#/components/schemas/DateTimeParameterValue'
+    WhatsAppTemplateDocumentParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateDocumentParameter
+          enum:
+          - WhatsAppTemplateDocumentParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        document:
+          $ref: '#/components/schemas/DocumentMediaParameterValue'
+    WhatsAppTemplateImageParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateImageParameter
+          enum:
+          - WhatsAppTemplateImageParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        image:
+          $ref: '#/components/schemas/MediaParameterValue'
+    WhatsAppTemplateLocationParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateLocationParameter
+          enum:
+          - WhatsAppTemplateLocationParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        location:
+          $ref: '#/components/schemas/LocationParameterValue'
+    WhatsAppTemplateParameter:
+      oneOf:
+      - $ref: '#/components/schemas/WhatsAppTemplateCurrencyParameter'
+      - $ref: '#/components/schemas/WhatsAppTemplateDateTimeParameter'
+      - $ref: '#/components/schemas/WhatsAppTemplateDocumentParameter'
+      - $ref: '#/components/schemas/WhatsAppTemplateImageParameter'
+      - $ref: '#/components/schemas/WhatsAppTemplateLocationParameter'
+      - $ref: '#/components/schemas/WhatsAppTemplatePayloadParameter'
+      - $ref: '#/components/schemas/WhatsAppTemplateTextParameter'
+      - $ref: '#/components/schemas/WhatsAppTemplateVideoParameter'
+      discriminator:
+        propertyName: type
+        mapping:
+          CURRENCY: '#/components/schemas/WhatsAppTemplateCurrencyParameter'
+          DATE_TIME: '#/components/schemas/WhatsAppTemplateDateTimeParameter'
+          DOCUMENT: '#/components/schemas/WhatsAppTemplateDocumentParameter'
+          IMAGE: '#/components/schemas/WhatsAppTemplateImageParameter'
+          LOCATION: '#/components/schemas/WhatsAppTemplateLocationParameter'
+          PAYLOAD: '#/components/schemas/WhatsAppTemplatePayloadParameter'
+          TEXT: '#/components/schemas/WhatsAppTemplateTextParameter'
+          VIDEO: '#/components/schemas/WhatsAppTemplateVideoParameter'
+    WhatsAppTemplatePayloadParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplatePayloadParameter
+          enum:
+          - WhatsAppTemplatePayloadParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        payload:
+          type: string
+          description: Payload value of the parameter
+    WhatsAppTemplatePostMessageData:
+      type: object
+      description: Template message
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplatePostMessageData
+          enum:
+          - WhatsAppTemplatePostMessageData
+        type:
+          $ref: '#/components/schemas/EPostMessageType'
+        fallbackText:
+          type: string
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+        templateId:
+          type: string
+          description: ID of the message template
+        components:
+          type: array
+          description: The parameters for the template components
+          items:
+            $ref: '#/components/schemas/WhatsAppTemplateComponentParameters'
+    WhatsAppTemplateTextParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateTextParameter
+          enum:
+          - WhatsAppTemplateTextParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        text:
+          type: string
+          description: "Text value of the parameter. <p> There is a character limit for the whole text message. It varies based on the following included component type. <p> For the header component type: 60 characters <p> For the body component type: 1024 characters if other component types are included. 32768 characters if body is the only component type included <p> No definition for buttons"
+    WhatsAppTemplateVideoParameter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateVideoParameter
+          enum:
+          - WhatsAppTemplateVideoParameter
+        type:
+          $ref: '#/components/schemas/ETemplateComponentParameterType'
+        video:
+          $ref: '#/components/schemas/MediaParameterValue'
     WriteAgentDeputyRelationshipsBody:
       type: object
       description: Container to define a list of deputies for one agent.

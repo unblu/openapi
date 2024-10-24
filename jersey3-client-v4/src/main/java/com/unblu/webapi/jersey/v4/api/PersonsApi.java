@@ -1338,7 +1338,7 @@ public class PersonsApi {
 	}
 
 	/**
-	 * setNote Sets the note on the person to the given value&lt;br&gt;
+	 * setNote Sets the note on the person to the given value. This is only available for persons of type visitor.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the note on (required)
 	 * @param personsSetNoteBody (required)
@@ -1351,7 +1351,7 @@ public class PersonsApi {
 	}
 
 	/**
-	 * setNote Sets the note on the person to the given value&lt;br&gt;
+	 * setNote Sets the note on the person to the given value. This is only available for persons of type visitor.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the note on (required)
 	 * @param personsSetNoteBody (required)

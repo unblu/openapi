@@ -30,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryMessageData.JSON_PROPERTY_TYPE,
 	ConversationHistoryMessageData.JSON_PROPERTY_INTERNAL,
 	ConversationHistoryMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
+	ConversationHistoryMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	ConversationHistoryMessageData.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
 	ConversationHistoryMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	ConversationHistoryMessageData.JSON_PROPERTY_REJECTION_SEVERITY,
@@ -106,6 +107,10 @@ public class ConversationHistoryMessageData {
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
 	private String replyToMessageId;
+
+	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
+	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
+	private String externalMessageId;
 
 	public static final String JSON_PROPERTY_RECIPIENT_PERSON_IDS = "recipientPersonIds";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_PERSON_IDS)
@@ -298,6 +303,25 @@ public class ConversationHistoryMessageData {
 		this.replyToMessageId = replyToMessageId;
 	}
 
+	public ConversationHistoryMessageData externalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID, for example, for external messengers
+	 * 
+	 * @return externalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID, for example, for external messengers")
+	public String getExternalMessageId() {
+		return externalMessageId;
+	}
+
+	public void setExternalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+	}
+
 	public ConversationHistoryMessageData recipientPersonIds(List<String> recipientPersonIds) {
 		this.recipientPersonIds = recipientPersonIds;
 		return this;
@@ -419,6 +443,7 @@ public class ConversationHistoryMessageData {
 				Objects.equals(this.type, conversationHistoryMessageData.type) &&
 				Objects.equals(this.internal, conversationHistoryMessageData.internal) &&
 				Objects.equals(this.replyToMessageId, conversationHistoryMessageData.replyToMessageId) &&
+				Objects.equals(this.externalMessageId, conversationHistoryMessageData.externalMessageId) &&
 				Objects.equals(this.recipientPersonIds, conversationHistoryMessageData.recipientPersonIds) &&
 				Objects.equals(this.botThreadId, conversationHistoryMessageData.botThreadId) &&
 				Objects.equals(this.rejectionSeverity, conversationHistoryMessageData.rejectionSeverity) &&
@@ -428,7 +453,7 @@ public class ConversationHistoryMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, replyToMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text);
+		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, replyToMessageId, externalMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text);
 	}
 
 	@Override
@@ -444,6 +469,7 @@ public class ConversationHistoryMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
+		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    rejectionSeverity: ").append(toIndentedString(rejectionSeverity)).append("\n");

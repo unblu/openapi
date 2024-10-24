@@ -117,4 +117,16 @@ public interface MessageData {
 
 	MessageData replyToMessageId(String replyToMessageId);
 
+	void setExternalMessageId(String externalMessageId);
+
+	String getExternalMessageId();
+
+	MessageData externalMessageId(String externalMessageId);
+
+	void setReplyToExternalMessageId(String replyToExternalMessageId);
+
+	String getReplyToExternalMessageId();
+
+	MessageData replyToExternalMessageId(String replyToExternalMessageId);
+
 }

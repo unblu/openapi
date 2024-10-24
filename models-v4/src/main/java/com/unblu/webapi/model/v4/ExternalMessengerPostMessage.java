@@ -27,6 +27,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ExternalMessengerPostMessage.JSON_PROPERTY_RECIPIENT_PERSON_IDS,
 	ExternalMessengerPostMessage.JSON_PROPERTY_SOURCE_ID,
 	ExternalMessengerPostMessage.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
+	ExternalMessengerPostMessage.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
+	ExternalMessengerPostMessage.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	ExternalMessengerPostMessage.JSON_PROPERTY_MESSAGE_DATA,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -87,6 +89,14 @@ public class ExternalMessengerPostMessage {
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
 	private String replyToMessageId;
+
+	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
+	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
+	private String externalMessageId;
+
+	public static final String JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID = "replyToExternalMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID)
+	private String replyToExternalMessageId;
 
 	public static final String JSON_PROPERTY_MESSAGE_DATA = "messageData";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_DATA)
@@ -214,6 +224,44 @@ public class ExternalMessengerPostMessage {
 		this.replyToMessageId = replyToMessageId;
 	}
 
+	public ExternalMessengerPostMessage externalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID, for example, for external messengers
+	 * 
+	 * @return externalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID, for example, for external messengers")
+	public String getExternalMessageId() {
+		return externalMessageId;
+	}
+
+	public void setExternalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+	}
+
+	public ExternalMessengerPostMessage replyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID that identifies the message this message is replying to
+	 * 
+	 * @return replyToExternalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID that identifies the message this message is replying to")
+	public String getReplyToExternalMessageId() {
+		return replyToExternalMessageId;
+	}
+
+	public void setReplyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+	}
+
 	public ExternalMessengerPostMessage messageData(PostMessageData messageData) {
 		this.messageData = messageData;
 		return this;
@@ -248,12 +296,14 @@ public class ExternalMessengerPostMessage {
 				Objects.equals(this.recipientPersonIds, externalMessengerPostMessage.recipientPersonIds) &&
 				Objects.equals(this.sourceId, externalMessengerPostMessage.sourceId) &&
 				Objects.equals(this.replyToMessageId, externalMessengerPostMessage.replyToMessageId) &&
+				Objects.equals(this.externalMessageId, externalMessengerPostMessage.externalMessageId) &&
+				Objects.equals(this.replyToExternalMessageId, externalMessengerPostMessage.replyToExternalMessageId) &&
 				Objects.equals(this.messageData, externalMessengerPostMessage.messageData);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, senderExternalMessengerContactId, recipientPersonIds, sourceId, replyToMessageId, messageData);
+		return Objects.hash($type, conversationId, senderExternalMessengerContactId, recipientPersonIds, sourceId, replyToMessageId, externalMessageId, replyToExternalMessageId, messageData);
 	}
 
 	@Override
@@ -266,6 +316,8 @@ public class ExternalMessengerPostMessage {
 		sb.append("    recipientPersonIds: ").append(toIndentedString(recipientPersonIds)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
+		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
+		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    messageData: ").append(toIndentedString(messageData)).append("\n");
 		sb.append("}");
 		return sb.toString();

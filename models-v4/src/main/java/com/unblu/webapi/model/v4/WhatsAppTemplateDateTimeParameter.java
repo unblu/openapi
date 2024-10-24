@@ -10,25 +10,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Success response to a &#x60;ExternalMessengerNewMessageRequest&#x60; API call.
+ * WhatsAppTemplateDateTimeParameter
  */
-@ApiModel(description = "Success response to a `ExternalMessengerNewMessageRequest` API call.")
 
 @JsonPropertyOrder({
-	ExternalMessengerNewMessageResponse.JSON_PROPERTY_$_TYPE,
-	ExternalMessengerNewMessageResponse.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
+	WhatsAppTemplateDateTimeParameter.JSON_PROPERTY_$_TYPE,
+	WhatsAppTemplateDateTimeParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateDateTimeParameter.JSON_PROPERTY_DATE_TIME,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class ExternalMessengerNewMessageResponse {
+public class WhatsAppTemplateDateTimeParameter implements WhatsAppTemplateParameter {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		EXTERNALMESSENGERNEWMESSAGERESPONSE("ExternalMessengerNewMessageResponse");
+		WHATSAPPTEMPLATEDATETIMEPARAMETER("WhatsAppTemplateDateTimeParameter");
 
 		private String value;
 
@@ -53,19 +52,23 @@ public class ExternalMessengerNewMessageResponse {
 					return b;
 				}
 			}
-			return TypeEnum.EXTERNALMESSENGERNEWMESSAGERESPONSE;
+			return TypeEnum.WHATSAPPTEMPLATEDATETIMEPARAMETER;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.EXTERNALMESSENGERNEWMESSAGERESPONSE;
+	private TypeEnum $type = TypeEnum.WHATSAPPTEMPLATEDATETIMEPARAMETER;
 
-	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
-	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
-	private String externalMessageId;
+	public static final String JSON_PROPERTY_TYPE = "type";
+	@JsonProperty(JSON_PROPERTY_TYPE)
+	private ETemplateComponentParameterType type = ETemplateComponentParameterType.DATE_TIME;
 
-	public ExternalMessengerNewMessageResponse $type(TypeEnum $type) {
+	public static final String JSON_PROPERTY_DATE_TIME = "dateTime";
+	@JsonProperty(JSON_PROPERTY_DATE_TIME)
+	private DateTimeParameterValue dateTime = null;
+
+	public WhatsAppTemplateDateTimeParameter $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -84,23 +87,42 @@ public class ExternalMessengerNewMessageResponse {
 		this.$type = $type;
 	}
 
-	public ExternalMessengerNewMessageResponse externalMessageId(String externalMessageId) {
-		this.externalMessageId = externalMessageId;
+	public WhatsAppTemplateDateTimeParameter type(ETemplateComponentParameterType type) {
+		this.type = type;
 		return this;
 	}
 
 	/**
-	 * Get externalMessageId
+	 * Get type
 	 * 
-	 * @return externalMessageId
+	 * @return type
 	 **/
 	@ApiModelProperty(value = "")
-	public String getExternalMessageId() {
-		return externalMessageId;
+	public ETemplateComponentParameterType getType() {
+		return type;
 	}
 
-	public void setExternalMessageId(String externalMessageId) {
-		this.externalMessageId = externalMessageId;
+	public void setType(ETemplateComponentParameterType type) {
+		this.type = type;
+	}
+
+	public WhatsAppTemplateDateTimeParameter dateTime(DateTimeParameterValue dateTime) {
+		this.dateTime = dateTime;
+		return this;
+	}
+
+	/**
+	 * Get dateTime
+	 * 
+	 * @return dateTime
+	 **/
+	@ApiModelProperty(value = "")
+	public DateTimeParameterValue getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(DateTimeParameterValue dateTime) {
+		this.dateTime = dateTime;
 	}
 
 	@Override
@@ -111,22 +133,24 @@ public class ExternalMessengerNewMessageResponse {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ExternalMessengerNewMessageResponse externalMessengerNewMessageResponse = (ExternalMessengerNewMessageResponse) o;
-		return Objects.equals(this.$type, externalMessengerNewMessageResponse.$type) &&
-				Objects.equals(this.externalMessageId, externalMessengerNewMessageResponse.externalMessageId);
+		WhatsAppTemplateDateTimeParameter whatsAppTemplateDateTimeParameter = (WhatsAppTemplateDateTimeParameter) o;
+		return Objects.equals(this.$type, whatsAppTemplateDateTimeParameter.$type) &&
+				Objects.equals(this.type, whatsAppTemplateDateTimeParameter.type) &&
+				Objects.equals(this.dateTime, whatsAppTemplateDateTimeParameter.dateTime);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, externalMessageId);
+		return Objects.hash($type, type, dateTime);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ExternalMessengerNewMessageResponse {\n");
+		sb.append("class WhatsAppTemplateDateTimeParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
-		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
+		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

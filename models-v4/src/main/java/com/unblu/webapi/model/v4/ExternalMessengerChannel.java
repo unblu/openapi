@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
 	@JsonSubTypes.Type(value = CustomExternalMessengerChannel.class, name = "CUSTOM"),
 	@JsonSubTypes.Type(value = SmsExternalMessengerChannel.class, name = "SMS"),
+	@JsonSubTypes.Type(value = WhatsAppExternalMessengerChannel.class, name = "WHATS_APP"),
 })
 public interface ExternalMessengerChannel {
 	void setId(String id);
@@ -70,12 +71,6 @@ public interface ExternalMessengerChannel {
 	EExternalMessengerChannelType getType();
 
 	ExternalMessengerChannel type(EExternalMessengerChannelType type);
-
-	void setSupportsMultipleConversationsPerContact(Boolean supportsMultipleConversationsPerContact);
-
-	Boolean isSupportsMultipleConversationsPerContact();
-
-	ExternalMessengerChannel supportsMultipleConversationsPerContact(Boolean supportsMultipleConversationsPerContact);
 
 	void setMetadata(Map<String, String> metadata);
 

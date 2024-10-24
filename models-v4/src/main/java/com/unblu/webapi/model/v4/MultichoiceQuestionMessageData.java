@@ -38,6 +38,8 @@ import io.swagger.annotations.ApiModelProperty;
 	MultichoiceQuestionMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_INTERNAL,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
+	MultichoiceQuestionMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
+	MultichoiceQuestionMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_TEXT,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_TEXT_TYPE,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_OPTIONS,
@@ -145,6 +147,14 @@ public class MultichoiceQuestionMessageData implements MessageData {
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
 	private String replyToMessageId;
+
+	public static final String JSON_PROPERTY_EXTERNAL_MESSAGE_ID = "externalMessageId";
+	@JsonProperty(JSON_PROPERTY_EXTERNAL_MESSAGE_ID)
+	private String externalMessageId;
+
+	public static final String JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID = "replyToExternalMessageId";
+	@JsonProperty(JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID)
+	private String replyToExternalMessageId;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -497,6 +507,44 @@ public class MultichoiceQuestionMessageData implements MessageData {
 		this.replyToMessageId = replyToMessageId;
 	}
 
+	public MultichoiceQuestionMessageData externalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID, for example, for external messengers
+	 * 
+	 * @return externalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID, for example, for external messengers")
+	public String getExternalMessageId() {
+		return externalMessageId;
+	}
+
+	public void setExternalMessageId(String externalMessageId) {
+		this.externalMessageId = externalMessageId;
+	}
+
+	public MultichoiceQuestionMessageData replyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+		return this;
+	}
+
+	/**
+	 * Optional external ID that identifies the message this message is replying to
+	 * 
+	 * @return replyToExternalMessageId
+	 **/
+	@ApiModelProperty(value = "Optional external ID that identifies the message this message is replying to")
+	public String getReplyToExternalMessageId() {
+		return replyToExternalMessageId;
+	}
+
+	public void setReplyToExternalMessageId(String replyToExternalMessageId) {
+		this.replyToExternalMessageId = replyToExternalMessageId;
+	}
+
 	public MultichoiceQuestionMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -607,6 +655,8 @@ public class MultichoiceQuestionMessageData implements MessageData {
 				Objects.equals(this.botThreadId, multichoiceQuestionMessageData.botThreadId) &&
 				Objects.equals(this.internal, multichoiceQuestionMessageData.internal) &&
 				Objects.equals(this.replyToMessageId, multichoiceQuestionMessageData.replyToMessageId) &&
+				Objects.equals(this.externalMessageId, multichoiceQuestionMessageData.externalMessageId) &&
+				Objects.equals(this.replyToExternalMessageId, multichoiceQuestionMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.text, multichoiceQuestionMessageData.text) &&
 				Objects.equals(this.textType, multichoiceQuestionMessageData.textType) &&
 				Objects.equals(this.options, multichoiceQuestionMessageData.options) &&
@@ -615,7 +665,7 @@ public class MultichoiceQuestionMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, text, textType, options, answerStatus);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, text, textType, options, answerStatus);
 	}
 
 	@Override
@@ -639,6 +689,8 @@ public class MultichoiceQuestionMessageData implements MessageData {
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
+		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
+		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

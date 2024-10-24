@@ -47,7 +47,12 @@ public enum EPostMessageType {
 	/**
 	 * REPLY: See &#x60;ReplyPostMessageData&#x60;
 	 */
-	REPLY("REPLY");
+	REPLY("REPLY"),
+
+	/**
+	 * WHATS_APP_TEMPLATE: See &#x60;WhatsAppTemplatePostMessageData&#x60;
+	 */
+	WHATS_APP_TEMPLATE("WHATS_APP_TEMPLATE");
 
 	private String value;
 
