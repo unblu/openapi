@@ -65,8 +65,7 @@ task releaseBuild {
             'checkLastVersionValue',
             'initializeSonatypeStagingRepository', 
             'clean',
-            'build',
-            project.getTasksByName('publishToSonatype', true)
+            'build'
     )
 }
 
@@ -94,5 +93,13 @@ def updateLastVersionValueTask = tasks.register('updateLastVersionValue') {
 model {
     tasks.unSnapshotVersion {
         dependsOn updateLastVersionValueTask
+    }
+}
+// dependency on 'publishToSonatype' must be added in a 'afterEvaluate' block, see https://github.com/gradle/gradle/issues/16543#issuecomment-2529428010
+afterEvaluate {
+    model {
+        tasks.releaseBuild {
+            dependsOn project.getTasksByName('publishToSonatype', true)
+        }
     }
 }
