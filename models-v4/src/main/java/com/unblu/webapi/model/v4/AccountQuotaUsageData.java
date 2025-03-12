@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AccountQuotaUsageData.JSON_PROPERTY_DOMAINS,
 	AccountQuotaUsageData.JSON_PROPERTY_TEAMS,
 	AccountQuotaUsageData.JSON_PROPERTY_USERS,
+	AccountQuotaUsageData.JSON_PROPERTY_BRANCHES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AccountQuotaUsageData {
@@ -79,6 +80,10 @@ public class AccountQuotaUsageData {
 	public static final String JSON_PROPERTY_USERS = "users";
 	@JsonProperty(JSON_PROPERTY_USERS)
 	private QuotaUsageData users = null;
+
+	public static final String JSON_PROPERTY_BRANCHES = "branches";
+	@JsonProperty(JSON_PROPERTY_BRANCHES)
+	private QuotaUsageData branches = null;
 
 	public AccountQuotaUsageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -175,6 +180,25 @@ public class AccountQuotaUsageData {
 		this.users = users;
 	}
 
+	public AccountQuotaUsageData branches(QuotaUsageData branches) {
+		this.branches = branches;
+		return this;
+	}
+
+	/**
+	 * Get branches
+	 * 
+	 * @return branches
+	 **/
+	@ApiModelProperty(value = "")
+	public QuotaUsageData getBranches() {
+		return branches;
+	}
+
+	public void setBranches(QuotaUsageData branches) {
+		this.branches = branches;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -188,12 +212,13 @@ public class AccountQuotaUsageData {
 				Objects.equals(this.apiKeys, accountQuotaUsageData.apiKeys) &&
 				Objects.equals(this.domains, accountQuotaUsageData.domains) &&
 				Objects.equals(this.teams, accountQuotaUsageData.teams) &&
-				Objects.equals(this.users, accountQuotaUsageData.users);
+				Objects.equals(this.users, accountQuotaUsageData.users) &&
+				Objects.equals(this.branches, accountQuotaUsageData.branches);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, apiKeys, domains, teams, users);
+		return Objects.hash($type, apiKeys, domains, teams, users, branches);
 	}
 
 	@Override
@@ -205,6 +230,7 @@ public class AccountQuotaUsageData {
 		sb.append("    domains: ").append(toIndentedString(domains)).append("\n");
 		sb.append("    teams: ").append(toIndentedString(teams)).append("\n");
 		sb.append("    users: ").append(toIndentedString(users)).append("\n");
+		sb.append("    branches: ").append(toIndentedString(branches)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

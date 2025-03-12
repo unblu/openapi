@@ -16,11 +16,11 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Event sent when a person joins a conversation, giving the bot a chance to participate in the person&#39;s onboarding. &lt;p&gt; Bots must accept or decline
  * the dialog offer by responding via the bot web API with the given &#x60;dialogToken&#x60;. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; &lt;ul&gt; &lt;li&gt;if the
- * onboarding person does not fit the onboarding filter defined in the &#x60;DialogBot&#x60; the webhook will not be sent to it&#39;s endpoint.&lt;/li&gt;
+ * onboarding person does not fit the onboarding filter defined in the &#x60;CustomDialogBot&#x60; the webhook will not be sent to it&#39;s endpoint.&lt;/li&gt;
  * &lt;li&gt;the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it&#39;s
  * onboarding&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `DialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>")
+@ApiModel(description = "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `CustomDialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>")
 
 @JsonPropertyOrder({
 	BotOnboardingOfferEvent.JSON_PROPERTY_$_TYPE,

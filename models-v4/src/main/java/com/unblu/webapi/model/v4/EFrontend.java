@@ -52,7 +52,12 @@ public enum EFrontend {
 	/**
 	 * AGENT_MOBILE: Sites for the mobile agent frontend that display the agent inbox and the conversation UI
 	 */
-	AGENT_MOBILE("AGENT_MOBILE");
+	AGENT_MOBILE("AGENT_MOBILE"),
+
+	/**
+	 * BRANCH_CLIENT: Sites that integrate Unblu inside a branch client device using an embedded UI
+	 */
+	BRANCH_CLIENT("BRANCH_CLIENT");
 
 	private String value;
 

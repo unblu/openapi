@@ -28,6 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BotDialogCounterpartChangedRequest.JSON_PROPERTY_DIALOG_TOKEN,
 	BotDialogCounterpartChangedRequest.JSON_PROPERTY_OLD_COUNTERPART_PERSON,
 	BotDialogCounterpartChangedRequest.JSON_PROPERTY_NEW_COUNTERPART_PERSON,
+	BotDialogCounterpartChangedRequest.JSON_PROPERTY_CONVERSATION_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BotDialogCounterpartChangedRequest {
@@ -87,6 +88,10 @@ public class BotDialogCounterpartChangedRequest {
 	public static final String JSON_PROPERTY_NEW_COUNTERPART_PERSON = "newCounterpartPerson";
 	@JsonProperty(JSON_PROPERTY_NEW_COUNTERPART_PERSON)
 	private PersonData newCounterpartPerson = null;
+
+	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
+	private String conversationId;
 
 	public BotDialogCounterpartChangedRequest $type(TypeEnum $type) {
 		this.$type = $type;
@@ -202,6 +207,25 @@ public class BotDialogCounterpartChangedRequest {
 		this.newCounterpartPerson = newCounterpartPerson;
 	}
 
+	public BotDialogCounterpartChangedRequest conversationId(String conversationId) {
+		this.conversationId = conversationId;
+		return this;
+	}
+
+	/**
+	 * ID of the conversation the request is sent to.
+	 * 
+	 * @return conversationId
+	 **/
+	@ApiModelProperty(value = "ID of the conversation the request is sent to.")
+	public String getConversationId() {
+		return conversationId;
+	}
+
+	public void setConversationId(String conversationId) {
+		this.conversationId = conversationId;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -216,12 +240,13 @@ public class BotDialogCounterpartChangedRequest {
 				Objects.equals(this.serviceName, botDialogCounterpartChangedRequest.serviceName) &&
 				Objects.equals(this.dialogToken, botDialogCounterpartChangedRequest.dialogToken) &&
 				Objects.equals(this.oldCounterpartPerson, botDialogCounterpartChangedRequest.oldCounterpartPerson) &&
-				Objects.equals(this.newCounterpartPerson, botDialogCounterpartChangedRequest.newCounterpartPerson);
+				Objects.equals(this.newCounterpartPerson, botDialogCounterpartChangedRequest.newCounterpartPerson) &&
+				Objects.equals(this.conversationId, botDialogCounterpartChangedRequest.conversationId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, accountId, serviceName, dialogToken, oldCounterpartPerson, newCounterpartPerson);
+		return Objects.hash($type, accountId, serviceName, dialogToken, oldCounterpartPerson, newCounterpartPerson, conversationId);
 	}
 
 	@Override
@@ -234,6 +259,7 @@ public class BotDialogCounterpartChangedRequest {
 		sb.append("    dialogToken: ").append(toIndentedString(dialogToken)).append("\n");
 		sb.append("    oldCounterpartPerson: ").append(toIndentedString(oldCounterpartPerson)).append("\n");
 		sb.append("    newCounterpartPerson: ").append(toIndentedString(newCounterpartPerson)).append("\n");
+		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

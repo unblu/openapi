@@ -16,11 +16,11 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person&#39;s reboarding. &lt;p&gt;
  * Bots must accept or decline the dialog offer by responding via the bot web API with the given &#x60;dialogToken&#x60;. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt;
- * &lt;ul&gt; &lt;li&gt;If the reboardingEnabled flag is disabled in &#x60;DialogBot&#x60;, the webhook isn&#39;t sent to the bot&#39;s endpoint.&lt;/li&gt;
- * &lt;li&gt;The bot MUST respond to the webhook. If it doesn&#39;t, the person has to wait for a timeout before their reboarding can proceed.&lt;/li&gt;
- * &lt;/ul&gt;
+ * &lt;ul&gt; &lt;li&gt;If the reboardingEnabled flag is disabled in &#x60;CustomDialogBot&#x60;, the webhook isn&#39;t sent to the bot&#39;s
+ * endpoint.&lt;/li&gt; &lt;li&gt;The bot MUST respond to the webhook. If it doesn&#39;t, the person has to wait for a timeout before their reboarding can
+ * proceed.&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `DialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>")
+@ApiModel(description = "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>")
 
 @JsonPropertyOrder({
 	BotReboardingOfferEvent.JSON_PROPERTY_$_TYPE,

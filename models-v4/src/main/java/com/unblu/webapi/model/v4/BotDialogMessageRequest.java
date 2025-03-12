@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BotDialogMessageRequest.JSON_PROPERTY_SERVICE_NAME,
 	BotDialogMessageRequest.JSON_PROPERTY_DIALOG_TOKEN,
 	BotDialogMessageRequest.JSON_PROPERTY_CONVERSATION_MESSAGE,
+	BotDialogMessageRequest.JSON_PROPERTY_CONVERSATION_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BotDialogMessageRequest {
@@ -80,6 +81,10 @@ public class BotDialogMessageRequest {
 	public static final String JSON_PROPERTY_CONVERSATION_MESSAGE = "conversationMessage";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_MESSAGE)
 	private MessageData conversationMessage = null;
+
+	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
+	private String conversationId;
 
 	public BotDialogMessageRequest $type(TypeEnum $type) {
 		this.$type = $type;
@@ -176,6 +181,25 @@ public class BotDialogMessageRequest {
 		this.conversationMessage = conversationMessage;
 	}
 
+	public BotDialogMessageRequest conversationId(String conversationId) {
+		this.conversationId = conversationId;
+		return this;
+	}
+
+	/**
+	 * ID of the conversation the request is sent to.
+	 * 
+	 * @return conversationId
+	 **/
+	@ApiModelProperty(value = "ID of the conversation the request is sent to.")
+	public String getConversationId() {
+		return conversationId;
+	}
+
+	public void setConversationId(String conversationId) {
+		this.conversationId = conversationId;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -189,12 +213,13 @@ public class BotDialogMessageRequest {
 				Objects.equals(this.accountId, botDialogMessageRequest.accountId) &&
 				Objects.equals(this.serviceName, botDialogMessageRequest.serviceName) &&
 				Objects.equals(this.dialogToken, botDialogMessageRequest.dialogToken) &&
-				Objects.equals(this.conversationMessage, botDialogMessageRequest.conversationMessage);
+				Objects.equals(this.conversationMessage, botDialogMessageRequest.conversationMessage) &&
+				Objects.equals(this.conversationId, botDialogMessageRequest.conversationId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, accountId, serviceName, dialogToken, conversationMessage);
+		return Objects.hash($type, accountId, serviceName, dialogToken, conversationMessage, conversationId);
 	}
 
 	@Override
@@ -206,6 +231,7 @@ public class BotDialogMessageRequest {
 		sb.append("    serviceName: ").append(toIndentedString(serviceName)).append("\n");
 		sb.append("    dialogToken: ").append(toIndentedString(dialogToken)).append("\n");
 		sb.append("    conversationMessage: ").append(toIndentedString(conversationMessage)).append("\n");
+		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

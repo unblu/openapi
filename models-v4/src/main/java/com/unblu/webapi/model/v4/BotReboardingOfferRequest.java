@@ -16,11 +16,11 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person&#39;s reboarding. &lt;p&gt;
  * Bots must accept or decline the dialog offer by responding to the request with a &#x60;BotBoardingOfferResponse&#x60;. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt;
- * &lt;ul&gt; &lt;li&gt;If the reboardingEnabled flag is disabled in &#x60;DialogBot&#x60;, the request isn&#39;t sent to the bot&#39;s endpoint.&lt;/li&gt;
- * &lt;li&gt;The bot MUST respond to the request. If it doesn&#39;t, the person has to wait for a timeout before their reboarding can proceed.&lt;/li&gt;
- * &lt;/ul&gt;
+ * &lt;ul&gt; &lt;li&gt;If the reboardingEnabled flag is disabled in &#x60;CustomDialogBot&#x60;, the request isn&#39;t sent to the bot&#39;s
+ * endpoint.&lt;/li&gt; &lt;li&gt;The bot MUST respond to the request. If it doesn&#39;t, the person has to wait for a timeout before their reboarding can
+ * proceed.&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>")
+@ApiModel(description = "Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>")
 
 @JsonPropertyOrder({
 	BotReboardingOfferRequest.JSON_PROPERTY_$_TYPE,

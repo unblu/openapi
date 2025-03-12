@@ -61,6 +61,11 @@ public enum EInitialEngagementType {
 	VISITOR_COBROWSING("VISITOR_COBROWSING"),
 
 	/**
+	 * BRANCH_CLIENT_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming conversation from a branch client.
+	 */
+	BRANCH_CLIENT_REQUEST("BRANCH_CLIENT_REQUEST"),
+
+	/**
 	 * HEADLESS_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join an universal co-browsing
 	 * conversation.
 	 */

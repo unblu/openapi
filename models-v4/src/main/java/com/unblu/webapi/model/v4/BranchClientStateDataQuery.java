@@ -1,0 +1,240 @@
+
+package com.unblu.webapi.model.v4;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * Container to search branch client states
+ */
+@ApiModel(description = "Container to search branch client states")
+
+@JsonPropertyOrder({
+	BranchClientStateDataQuery.JSON_PROPERTY_$_TYPE,
+	BranchClientStateDataQuery.JSON_PROPERTY_SEARCH_FILTERS,
+	BranchClientStateDataQuery.JSON_PROPERTY_ORDER_BY,
+	BranchClientStateDataQuery.JSON_PROPERTY_OFFSET,
+	BranchClientStateDataQuery.JSON_PROPERTY_LIMIT,
+})
+@JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
+public class BranchClientStateDataQuery {
+	/**
+	 * Gets or Sets $type
+	 */
+	public enum TypeEnum {
+		BRANCHCLIENTSTATEDATAQUERY("BranchClientStateDataQuery");
+
+		private String value;
+
+		TypeEnum(String value) {
+			this.value = value;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+
+		@JsonCreator
+		public static TypeEnum fromValue(String value) {
+			for (TypeEnum b : TypeEnum.values()) {
+				if (b.value.equals(value)) {
+					return b;
+				}
+			}
+			return TypeEnum.BRANCHCLIENTSTATEDATAQUERY;
+		}
+	}
+
+	public static final String JSON_PROPERTY_$_TYPE = "$_type";
+	@JsonProperty(JSON_PROPERTY_$_TYPE)
+	private TypeEnum $type = TypeEnum.BRANCHCLIENTSTATEDATAQUERY;
+
+	public static final String JSON_PROPERTY_SEARCH_FILTERS = "searchFilters";
+	@JsonProperty(JSON_PROPERTY_SEARCH_FILTERS)
+	private List<BranchClientStateDataSearchFilter> searchFilters = null;
+
+	public static final String JSON_PROPERTY_ORDER_BY = "orderBy";
+	@JsonProperty(JSON_PROPERTY_ORDER_BY)
+	private List<BranchClientStateDataOrderBy> orderBy = null;
+
+	public static final String JSON_PROPERTY_OFFSET = "offset";
+	@JsonProperty(JSON_PROPERTY_OFFSET)
+	private Integer offset;
+
+	public static final String JSON_PROPERTY_LIMIT = "limit";
+	@JsonProperty(JSON_PROPERTY_LIMIT)
+	private Integer limit;
+
+	public BranchClientStateDataQuery $type(TypeEnum $type) {
+		this.$type = $type;
+		return this;
+	}
+
+	/**
+	 * Get $type
+	 * 
+	 * @return $type
+	 **/
+	@ApiModelProperty(value = "")
+	public TypeEnum get$Type() {
+		return $type;
+	}
+
+	public void set$Type(TypeEnum $type) {
+		this.$type = $type;
+	}
+
+	public BranchClientStateDataQuery searchFilters(List<BranchClientStateDataSearchFilter> searchFilters) {
+		this.searchFilters = searchFilters;
+		return this;
+	}
+
+	public BranchClientStateDataQuery addSearchFiltersItem(BranchClientStateDataSearchFilter searchFiltersItem) {
+		if (this.searchFilters == null) {
+			this.searchFilters = new ArrayList<>();
+		}
+		this.searchFilters.add(searchFiltersItem);
+		return this;
+	}
+
+	/**
+	 * List of filters to narrow the search of entities
+	 * 
+	 * @return searchFilters
+	 **/
+	@ApiModelProperty(value = "List of filters to narrow the search of entities")
+	public List<BranchClientStateDataSearchFilter> getSearchFilters() {
+		return searchFilters;
+	}
+
+	public void setSearchFilters(List<BranchClientStateDataSearchFilter> searchFilters) {
+		this.searchFilters = searchFilters;
+	}
+
+	public BranchClientStateDataQuery orderBy(List<BranchClientStateDataOrderBy> orderBy) {
+		this.orderBy = orderBy;
+		return this;
+	}
+
+	public BranchClientStateDataQuery addOrderByItem(BranchClientStateDataOrderBy orderByItem) {
+		if (this.orderBy == null) {
+			this.orderBy = new ArrayList<>();
+		}
+		this.orderBy.add(orderByItem);
+		return this;
+	}
+
+	/**
+	 * List of criteria to order the search result list
+	 * 
+	 * @return orderBy
+	 **/
+	@ApiModelProperty(value = "List of criteria to order the search result list")
+	public List<BranchClientStateDataOrderBy> getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(List<BranchClientStateDataOrderBy> orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public BranchClientStateDataQuery offset(Integer offset) {
+		this.offset = offset;
+		return this;
+	}
+
+	/**
+	 * Offset position in the result set to start pagination
+	 * 
+	 * @return offset
+	 **/
+	@ApiModelProperty(value = "Offset position in the result set to start pagination")
+	public Integer getOffset() {
+		return offset;
+	}
+
+	public void setOffset(Integer offset) {
+		this.offset = offset;
+	}
+
+	public BranchClientStateDataQuery limit(Integer limit) {
+		this.limit = limit;
+		return this;
+	}
+
+	/**
+	 * Maximal amount of items returned
+	 * 
+	 * @return limit
+	 **/
+	@ApiModelProperty(value = "Maximal amount of items returned")
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		BranchClientStateDataQuery branchClientStateDataQuery = (BranchClientStateDataQuery) o;
+		return Objects.equals(this.$type, branchClientStateDataQuery.$type) &&
+				Objects.equals(this.searchFilters, branchClientStateDataQuery.searchFilters) &&
+				Objects.equals(this.orderBy, branchClientStateDataQuery.orderBy) &&
+				Objects.equals(this.offset, branchClientStateDataQuery.offset) &&
+				Objects.equals(this.limit, branchClientStateDataQuery.limit);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash($type, searchFilters, orderBy, offset, limit);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class BranchClientStateDataQuery {\n");
+		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
+		sb.append("    searchFilters: ").append(toIndentedString(searchFilters)).append("\n");
+		sb.append("    orderBy: ").append(toIndentedString(orderBy)).append("\n");
+		sb.append("    offset: ").append(toIndentedString(offset)).append("\n");
+		sb.append("    limit: ").append(toIndentedString(limit)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
+
+}

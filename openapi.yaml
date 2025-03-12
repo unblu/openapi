@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.14.4
+  version: 8.15.3
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -22,6 +22,12 @@ tags:
   description: "With this service, the avatar pictures can be managed."
 - name: Bots
   description: Service to manage all kind of bots. Additionally the bots use this service to interact with a conversation/dialog.
+- name: BranchClientStates
+  description: Service to manage branch client states
+- name: BranchClients
+  description: Service to manage branch clients
+- name: Branches
+  description: Service to manage branches
 - name: Calls
   description: Manages all `Call`s
 - name: CannedResponses
@@ -1520,11 +1526,11 @@ paths:
             schema:
               $ref: '#/components/schemas/DialogBotData'
             examples:
-              create-for-visitors-onboarding:
-                summary: create for visitors onboarding
-                description: Create a new dialog bot
+              create-for-copilot-onboarding:
+                summary: create for copilot onboarding
+                description: Create a new copilot dialog bot
                 value:
-                  $_type: DialogBotData
+                  $_type: CopilotDialogBotData
                   id: null
                   creationTimestamp: null
                   modificationTimestamp: null
@@ -1533,11 +1539,6 @@ paths:
                   name: test-bot-1
                   description: null
                   botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
-                  webhookStatus: INACTIVE
-                  webhookEndpoint: https://test.unblu.com
-                  outboundTimeoutMillis: 3000
-                  webhookApiVersion: V4
-                  webhookSecret: null
                   onboardingOrder: 10
                   reboardingOrder: 10
                   offboardingOrder: 10
@@ -1545,9 +1546,44 @@ paths:
                   reboardingEnabled: false
                   offboardingFilter: NONE
                   needsCounterpartPresence: false
+                  onTimeoutBehavior: HAND_OFF
+                  type: COPILOT
+                  authToken: some auth token
+                  copilotId: Some copilot id
+                  copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
+                  active: true
+                  outboundEndpoint: https://test.unblu.com
+                  outboundTimeoutMillis: 5000
+                  outboundApiVersion: V4
+              create-for-visitors-onboarding:
+                summary: create for visitors onboarding
+                description: Create a new dialog bot
+                value:
+                  $_type: CustomDialogBotData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: test-bot-1
+                  description: null
+                  botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
+                  onboardingOrder: 10
+                  reboardingOrder: 10
+                  offboardingOrder: 10
+                  onboardingFilter: VISITORS
+                  reboardingEnabled: false
+                  offboardingFilter: NONE
+                  needsCounterpartPresence: false
+                  onTimeoutBehavior: HAND_OFF
+                  type: CUSTOM
+                  webhookStatus: INACTIVE
+                  webhookEndpoint: https://test.unblu.com
+                  outboundTimeoutMillis: 3000
+                  webhookApiVersion: V4
+                  webhookSecret: null
                   messageStateHandledExternally: false
                   automaticTypingStateHandlingEnabled: true
-                  onTimeoutBehavior: HAND_OFF
         required: true
       responses:
         "200":
@@ -1557,11 +1593,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/DialogBotData'
               examples:
-                create-for-visitors-onboarding:
-                  summary: create for visitors onboarding
-                  description: New dialog bot
+                create-for-copilot-onboarding:
+                  summary: create for copilot onboarding
+                  description: New copilot dialog bot
                   value:
-                    $_type: DialogBotData
+                    $_type: CopilotDialogBotData
                     id: c1a-ED06Dbat9daFBtC4l85
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
@@ -1570,11 +1606,6 @@ paths:
                     name: test-bot-1
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
-                    webhookStatus: INACTIVE
-                    webhookEndpoint: https://test.unblu.com
-                    outboundTimeoutMillis: 3000
-                    webhookApiVersion: V4
-                    webhookSecret: null
                     onboardingOrder: 10
                     reboardingOrder: 10
                     offboardingOrder: 10
@@ -1582,9 +1613,44 @@ paths:
                     reboardingEnabled: false
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
+                    onTimeoutBehavior: HAND_OFF
+                    type: COPILOT
+                    authToken: some auth token
+                    copilotId: Some copilot id
+                    copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
+                    active: true
+                    outboundEndpoint: https://test.unblu.com
+                    outboundTimeoutMillis: 5000
+                    outboundApiVersion: V4
+                create-for-visitors-onboarding:
+                  summary: create for visitors onboarding
+                  description: New dialog bot
+                  value:
+                    $_type: CustomDialogBotData
+                    id: c1a-ED06Dbat9daFBtC4l85
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-bot-1
+                    description: null
+                    botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
+                    onboardingOrder: 10
+                    reboardingOrder: 10
+                    offboardingOrder: 10
+                    onboardingFilter: VISITORS
+                    reboardingEnabled: false
+                    offboardingFilter: NONE
+                    needsCounterpartPresence: false
+                    onTimeoutBehavior: HAND_OFF
+                    type: CUSTOM
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: https://test.unblu.com
+                    outboundTimeoutMillis: 3000
+                    webhookApiVersion: V4
+                    webhookSecret: null
                     messageStateHandledExternally: false
                     automaticTypingStateHandlingEnabled: true
-                    onTimeoutBehavior: HAND_OFF
         default:
           $ref: '#/components/responses/ErrorResponse'
       callbacks:
@@ -1662,7 +1728,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: bot.offboarding_offer
-              description: "Event sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
+              description: "Event sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
               operationId: botOffboardingOfferCallback
               requestBody:
                 content:
@@ -1676,7 +1742,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: bot.onboarding_offer
-              description: "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `DialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>"
+              description: "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `CustomDialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>"
               operationId: botOnboardingOfferCallback
               requestBody:
                 content:
@@ -1690,7 +1756,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: bot.reboarding_offer
-              description: "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `DialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
+              description: "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
               operationId: botReboardingOfferCallback
               requestBody:
                 content:
@@ -1794,7 +1860,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.offboarding_offer
-              description: "Request sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
+              description: "Request sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
               operationId: outboundBotOffboardingOfferCallback
               requestBody:
                 content:
@@ -1812,7 +1878,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.onboarding_offer
-              description: "Request sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the onboarding person does not match the onboarding filter defined in the `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their onboarding can proceed.</li> </ul>"
+              description: "Request sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the onboarding person does not match the onboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their onboarding can proceed.</li> </ul>"
               operationId: outboundBotOnboardingOfferCallback
               requestBody:
                 content:
@@ -1830,7 +1896,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.reboarding_offer
-              description: "Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
+              description: "Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
               operationId: outboundBotReboardingOfferCallback
               requestBody:
                 content:
@@ -1983,7 +2049,7 @@ paths:
                   summary: get by name bot
                   description: Dialog bot
                   value:
-                    $_type: DialogBotData
+                    $_type: CustomDialogBotData
                     id: c1a-ED06Dbat9daFBtC4l85
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
@@ -1992,11 +2058,6 @@ paths:
                     name: test-bot-1
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
-                    webhookStatus: INACTIVE
-                    webhookEndpoint: http://test.webhook.com
-                    outboundTimeoutMillis: 3000
-                    webhookApiVersion: V4
-                    webhookSecret: null
                     onboardingOrder: 10
                     reboardingOrder: 10
                     offboardingOrder: 10
@@ -2004,9 +2065,44 @@ paths:
                     reboardingEnabled: false
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
+                    onTimeoutBehavior: HAND_OFF
+                    type: CUSTOM
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: http://test.webhook.com
+                    outboundTimeoutMillis: 3000
+                    webhookApiVersion: V4
+                    webhookSecret: null
                     messageStateHandledExternally: false
                     automaticTypingStateHandlingEnabled: true
+                get-by-name-copilot-bot:
+                  summary: get by name copilot bot
+                  description: Copilot Dialog bot
+                  value:
+                    $_type: CopilotDialogBotData
+                    id: c1a-ED06Dbat9daFBtC4l85
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-bot-1
+                    description: null
+                    botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
+                    onboardingOrder: 10
+                    reboardingOrder: 10
+                    offboardingOrder: 10
+                    onboardingFilter: NONE
+                    reboardingEnabled: false
+                    offboardingFilter: NONE
+                    needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    type: COPILOT
+                    authToken: some auth token
+                    copilotId: Some copilot id
+                    copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
+                    active: true
+                    outboundEndpoint: http://test.webhook.com
+                    outboundTimeoutMillis: 5000
+                    outboundApiVersion: V4
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -2040,7 +2136,7 @@ paths:
                   summary: read bot
                   description: Dialog bot
                   value:
-                    $_type: DialogBotData
+                    $_type: CustomDialogBotData
                     id: c1a-ED06Dbat9daFBtC4l85
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
@@ -2049,11 +2145,6 @@ paths:
                     name: test-bot-1
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
-                    webhookStatus: INACTIVE
-                    webhookEndpoint: http://test.webhook.com
-                    outboundTimeoutMillis: 3000
-                    webhookApiVersion: V4
-                    webhookSecret: null
                     onboardingOrder: 10
                     reboardingOrder: 10
                     offboardingOrder: 10
@@ -2061,9 +2152,44 @@ paths:
                     reboardingEnabled: false
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
+                    onTimeoutBehavior: HAND_OFF
+                    type: CUSTOM
+                    webhookStatus: INACTIVE
+                    webhookEndpoint: http://test.webhook.com
+                    outboundTimeoutMillis: 3000
+                    webhookApiVersion: V4
+                    webhookSecret: null
                     messageStateHandledExternally: false
                     automaticTypingStateHandlingEnabled: true
+                read-copilot-bot:
+                  summary: read copilot bot
+                  description: Copilot Dialog bot
+                  value:
+                    $_type: CopilotDialogBotData
+                    id: c1a-ED06Dbat9daFBtC4l85
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-bot-1
+                    description: null
+                    botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
+                    onboardingOrder: 10
+                    reboardingOrder: 10
+                    offboardingOrder: 10
+                    onboardingFilter: NONE
+                    reboardingEnabled: false
+                    offboardingFilter: NONE
+                    needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    type: COPILOT
+                    authToken: some auth token
+                    copilotId: Some copilot id
+                    copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
+                    active: true
+                    outboundEndpoint: http://test.webhook.com
+                    outboundTimeoutMillis: 5000
+                    outboundApiVersion: V4
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-required-entry-path: INTERNAL
@@ -2554,6 +2680,1206 @@ paths:
                 $ref: '#/components/schemas/DialogBotData'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branchclientstates/{branchClientId}/read:
+    get:
+      tags:
+      - BranchClientStates
+      summary: read
+      description: Returns the branch client state for the given branch client ID<br>
+      operationId: branchClientStatesRead
+      parameters:
+      - name: branchClientId
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The branch client state for the given branch client ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientStateData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branchclientstates/search:
+    post:
+      tags:
+      - BranchClientStates
+      summary: search
+      description: Search for branch client states in the current account<br>
+      operationId: branchClientStatesSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchClientStateDataQuery'
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientStateDataResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branchclients/create:
+    post:
+      tags:
+      - BranchClients
+      summary: create
+      description: Creates a new branch client<br>
+      operationId: branchClientsCreate
+      requestBody:
+        description: The branch client to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchClientData'
+            examples:
+              request-body:
+                summary: request body
+                description: create branch client
+                value:
+                  $_type: BranchClientData
+                  id: null
+                  accountId: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  name: my-branch-client
+                  description: null
+                  translations: null
+                  branchId: C7UoOAHoSEudeCp7La7SpQ
+                  branchClientKey: sCNM3bmbTESRtJjrfcxdxg
+                  publicKey: null
+                  mainCameraMediaDeviceLabel: main-camera-device-label
+                  microphoneMediaDeviceLabel: microphone-device-label
+                  type: null
+                  iconId: null
+                  x: 0
+                  "y": 0
+                  size: 20
+                  rotation: 0
+                  branchClientDevices: null
+                  branchClientAuxiliaryCameras:
+                  - $_type: BranchClientAuxiliaryCameraData
+                    id: null
+                    name: branchClientAuxiliaryCamera1
+                    type: DOCUMENT
+                    description: null
+                    translations: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    alwaysDisplayDuringCall: true
+                    displayInFloorPlan: true
+                    mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                  - $_type: BranchClientAuxiliaryCameraData
+                    id: null
+                    name: branchClientAuxiliaryCamera2
+                    type: OTHER
+                    description: null
+                    translations: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    alwaysDisplayDuringCall: true
+                    displayInFloorPlan: true
+                    mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                  branchClientLinks:
+                  - $_type: BranchClientLinkData
+                    id: null
+                    name: my-branch-client
+                    description: null
+                    translations: null
+                    type: null
+                    url: '...'
+                    linkTarget: _blank
+                    autoOpen: true
+                    iconId: icon_id
+        required: true
+      responses:
+        "200":
+          description: The created branch client object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientData'
+              examples:
+                response-body:
+                  summary: response body
+                  description: create branch client
+                  value:
+                    $_type: BranchClientData
+                    id: ZRoWTG9nQAGTniY0eeeqcw
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: my-branch-client
+                    description: null
+                    translations: {}
+                    branchId: C7UoOAHoSEudeCp7La7SpQ
+                    branchClientKey: sCNM3bmbTESRtJjrfcxdxg
+                    publicKey: MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAo...c8kCAwEAAQ==
+                    mainCameraMediaDeviceLabel: main-camera-device-label
+                    microphoneMediaDeviceLabel: microphone-device-label
+                    type: OTHER
+                    iconId: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    branchClientDevices: []
+                    branchClientAuxiliaryCameras:
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: e-Jva02KTAqb2P2t5TrbRQ
+                      name: branchClientAuxiliaryCamera1
+                      type: DOCUMENT
+                      description: null
+                      translations: {}
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: e-Jva02KTAqb2P2t5TrbRQ
+                      name: branchClientAuxiliaryCamera2
+                      type: OTHER
+                      description: null
+                      translations: {}
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                    branchClientLinks:
+                    - $_type: BranchClientLinkData
+                      id: BKtnEH2sSe25ey1bfuLH3g
+                      name: my-branch-client
+                      description: null
+                      translations: {}
+                      type: OTHER
+                      url: '...'
+                      linkTarget: _blank
+                      autoOpen: true
+                      iconId: icon_id
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branchclients/{id}/delete:
+    delete:
+      tags:
+      - BranchClients
+      summary: delete
+      description: Deletes a branch client<br>
+      operationId: branchClientsDelete
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the branch client to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branchclients/{branchClientId}/generateToken:
+    post:
+      tags:
+      - BranchClients
+      summary: generateToken
+      description: Generates a new branch client token<br>
+      operationId: branchClientsGenerateToken
+      parameters:
+      - name: branchClientId
+        in: path
+        description: The ID of the branch client
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchClientsGenerateTokenBody'
+        required: true
+      responses:
+        "200":
+          description: Branch client token result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientTokenResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branchclients/getByBranchId:
+    post:
+      tags:
+      - BranchClients
+      summary: getByBranchId
+      description: Gets all the branch clients currently assigned to the given branch<br>
+      operationId: branchClientsGetByBranchId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchClientsGetByBranchIdBody'
+        required: true
+      responses:
+        "200":
+          description: List of branch clients that are assigned to the given branch ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientDataList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branchclients/{id}/read:
+    get:
+      tags:
+      - BranchClients
+      summary: read
+      description: Returns the branch client for the given ID<br>
+      operationId: branchClientsRead
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The branch client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branchclients/readMultiple:
+    post:
+      tags:
+      - BranchClients
+      summary: readMultiple
+      description: Returns a list of branch clients for the given branch IDs<br>
+      operationId: branchClientsReadMultiple
+      requestBody:
+        description: The branch IDs to fetch the branch clients for
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: A list of branch clients for the given branch IDs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientDataList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branchclients/search:
+    post:
+      tags:
+      - BranchClients
+      summary: search
+      description: Searches for branch clients in the current account<br>
+      operationId: branchClientsSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchClientQuery'
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branchclients/update:
+    post:
+      tags:
+      - BranchClients
+      summary: update
+      description: Updates a branch client<br>
+      operationId: branchClientsUpdate
+      requestBody:
+        description: The branch client to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchClientData'
+            examples:
+              request-body:
+                summary: request body
+                description: update branch client
+                value:
+                  $_type: BranchClientData
+                  id: null
+                  accountId: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  name: my-branch-client
+                  description: null
+                  translations: null
+                  branchId: C7UoOAHoSEudeCp7La7SpQ
+                  branchClientKey: sCNM3bmbTESRtJjrfcxdxg
+                  publicKey: null
+                  mainCameraMediaDeviceLabel: main-camera-device-label
+                  microphoneMediaDeviceLabel: microphone-device-label
+                  type: null
+                  iconId: null
+                  x: 0
+                  "y": 0
+                  size: 20
+                  rotation: 0
+                  branchClientDevices: null
+                  branchClientAuxiliaryCameras:
+                  - $_type: BranchClientAuxiliaryCameraData
+                    id: null
+                    name: branchClientAuxiliaryCamera1
+                    type: DOCUMENT
+                    description: null
+                    translations: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    alwaysDisplayDuringCall: true
+                    displayInFloorPlan: true
+                    mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                  - $_type: BranchClientAuxiliaryCameraData
+                    id: null
+                    name: branchClientAuxiliaryCamera2
+                    type: OTHER
+                    description: null
+                    translations: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    alwaysDisplayDuringCall: true
+                    displayInFloorPlan: true
+                    mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                  branchClientLinks:
+                  - $_type: BranchClientLinkData
+                    id: null
+                    name: my-branch-client
+                    description: null
+                    translations: null
+                    type: null
+                    url: '...'
+                    linkTarget: _blank
+                    autoOpen: true
+                    iconId: icon_id
+        required: true
+      responses:
+        "200":
+          description: The updated branch client object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientData'
+              examples:
+                response-body:
+                  summary: response body
+                  description: update branch client
+                  value:
+                    $_type: BranchClientData
+                    id: ZRoWTG9nQAGTniY0eeeqcw
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: my-branch-client
+                    description: null
+                    translations: {}
+                    branchId: C7UoOAHoSEudeCp7La7SpQ
+                    branchClientKey: sCNM3bmbTESRtJjrfcxdxg
+                    publicKey: MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAo...c8kCAwEAAQ==
+                    mainCameraMediaDeviceLabel: main-camera-device-label
+                    microphoneMediaDeviceLabel: microphone-device-label
+                    type: OTHER
+                    iconId: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    branchClientDevices: []
+                    branchClientAuxiliaryCameras:
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: e-Jva02KTAqb2P2t5TrbRQ
+                      name: branchClientAuxiliaryCamera1-updated
+                      type: DOCUMENT
+                      description: null
+                      translations: {}
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: e-Jva02KTAqb2P2t5TrbRQ
+                      name: branchClientAuxiliaryCamera2
+                      type: OTHER
+                      description: null
+                      translations: {}
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: e-Jva02KTAqb2P2t5TrbRQ
+                      name: branchClientAuxiliaryCamera3
+                      type: OTHER
+                      description: null
+                      translations: {}
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera3_device-label
+                    branchClientLinks: []
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branches/create:
+    post:
+      tags:
+      - Branches
+      summary: create
+      description: Creates a new branch<br>
+      operationId: branchesCreate
+      requestBody:
+        description: The branch to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchData'
+            examples:
+              request-body:
+                summary: request body
+                description: create branch
+                value:
+                  $_type: BranchData
+                  id: null
+                  creationTimestamp: null
+                  accountId: null
+                  modificationTimestamp: null
+                  version: null
+                  name: my-branch
+                  description: null
+                  streetAddress: Gartenstrasse 143
+                  zip: "4052"
+                  city: Basel
+                  region: Basel-Stadt
+                  country: Schweiz
+                  translations: null
+                  state: ACTIVE
+                  floorPlanFileUrl: null
+                  floorPlan: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC"
+                  width: 1000
+                  height: 1000
+                  displayLabelsOnFloorPlan: null
+                  branchClients:
+                  - $_type: BranchClientData
+                    id: null
+                    accountId: null
+                    creationTimestamp: null
+                    modificationTimestamp: null
+                    version: null
+                    name: branchClient1
+                    description: null
+                    translations: null
+                    branchId: null
+                    branchClientKey: sCNM3bmbTESRtJjrfcxdxg
+                    publicKey: null
+                    mainCameraMediaDeviceLabel: main-camera-device-label
+                    microphoneMediaDeviceLabel: microphone-device-label
+                    type: null
+                    iconId: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    branchClientDevices: null
+                    branchClientAuxiliaryCameras:
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: null
+                      name: branchClientAuxiliaryCamera1
+                      type: DOCUMENT
+                      description: null
+                      translations: null
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: null
+                      name: branchClientAuxiliaryCamera2
+                      type: OTHER
+                      description: null
+                      translations: null
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                    branchClientLinks:
+                    - $_type: BranchClientLinkData
+                      id: null
+                      name: branchClient1
+                      description: null
+                      translations: null
+                      type: null
+                      url: '...'
+                      linkTarget: _blank
+                      autoOpen: true
+                      iconId: icon_id
+                  branchDevices:
+                  - $_type: BranchDeviceData
+                    id: null
+                    name: device1
+                    description: null
+                    translations: null
+                    type: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    url: null
+                    linkTarget: null
+                  - $_type: BranchDeviceData
+                    id: null
+                    name: device2
+                    description: null
+                    translations: null
+                    type: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    url: null
+                    linkTarget: null
+                  branchTextBoxes:
+                  - $_type: BranchTextBoxData
+                    id: null
+                    text: textBox1
+                    fontSize: 12
+                    fontColor: null
+                    backgroundColor: null
+                    translations: null
+                    x: 0
+                    "y": 0
+                    width: 20
+                    height: 20
+                    rotation: 0
+                    horizontalTextAlign: null
+                    verticalTextAlign: null
+                  branchLinks:
+                  - $_type: BranchLinkData
+                    id: null
+                    name: link1
+                    description: null
+                    translations: null
+                    type: null
+                    url: '...'
+                    linkTarget: _blank
+                    iconId: icon_id
+        required: true
+      responses:
+        "200":
+          description: The created branch object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchData'
+              examples:
+                response-body:
+                  summary: response body
+                  description: create branch
+                  value:
+                    $_type: BranchData
+                    id: C7UoOAHoSEudeCp7La7SpQ
+                    creationTimestamp: 1546300800000
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: my-branch
+                    description: null
+                    streetAddress: Gartenstrasse 143
+                    zip: "4052"
+                    city: Basel
+                    region: Basel-Stadt
+                    country: Schweiz
+                    translations: {}
+                    state: ACTIVE
+                    floorPlanFileUrl: '.../app/rest/fileDownload/jhzu2Z1HQUibSAD976AONw'
+                    floorPlan: null
+                    width: 1000
+                    height: 1000
+                    displayLabelsOnFloorPlan: false
+                    branchClients:
+                    - $_type: BranchClientData
+                      id: ZRoWTG9nQAGTniY0eeeqcw
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      name: branchClient1
+                      description: null
+                      translations: {}
+                      branchId: C7UoOAHoSEudeCp7La7SpQ
+                      branchClientKey: sCNM3bmbTESRtJjrfcxdxg
+                      publicKey: MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAo...c8kCAwEAAQ==
+                      mainCameraMediaDeviceLabel: main-camera-device-label
+                      microphoneMediaDeviceLabel: microphone-device-label
+                      type: OTHER
+                      iconId: null
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      branchClientDevices: []
+                      branchClientAuxiliaryCameras:
+                      - $_type: BranchClientAuxiliaryCameraData
+                        id: e-Jva02KTAqb2P2t5TrbRQ
+                        name: branchClientAuxiliaryCamera1
+                        type: DOCUMENT
+                        description: null
+                        translations: {}
+                        x: 0
+                        "y": 0
+                        size: 20
+                        rotation: 0
+                        iconId: icon_id
+                        alwaysDisplayDuringCall: true
+                        displayInFloorPlan: true
+                        mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                      - $_type: BranchClientAuxiliaryCameraData
+                        id: e-Jva02KTAqb2P2t5TrbRQ
+                        name: branchClientAuxiliaryCamera2
+                        type: OTHER
+                        description: null
+                        translations: {}
+                        x: 0
+                        "y": 0
+                        size: 20
+                        rotation: 0
+                        iconId: icon_id
+                        alwaysDisplayDuringCall: true
+                        displayInFloorPlan: true
+                        mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                      branchClientLinks:
+                      - $_type: BranchClientLinkData
+                        id: BKtnEH2sSe25ey1bfuLH3g
+                        name: branchClient1
+                        description: null
+                        translations: {}
+                        type: OTHER
+                        url: '...'
+                        linkTarget: _blank
+                        autoOpen: true
+                        iconId: icon_id
+                    branchDevices:
+                    - $_type: BranchDeviceData
+                      id: DpkS7DWeQeiDzGUN58Og_Q
+                      name: device1
+                      description: null
+                      translations: {}
+                      type: OTHER
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      url: null
+                      linkTarget: _blank
+                    - $_type: BranchDeviceData
+                      id: DpkS7DWeQeiDzGUN58Og_Q
+                      name: device2
+                      description: null
+                      translations: {}
+                      type: OTHER
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      url: null
+                      linkTarget: _blank
+                    branchTextBoxes:
+                    - $_type: BranchTextBoxData
+                      id: JASZlVmHRyK_W-qA3eEA1Q
+                      text: textBox1
+                      fontSize: 12
+                      fontColor: null
+                      backgroundColor: null
+                      translations: {}
+                      x: 0
+                      "y": 0
+                      width: 20
+                      height: 20
+                      rotation: 0
+                      horizontalTextAlign: MIDDLE
+                      verticalTextAlign: MIDDLE
+                    branchLinks:
+                    - $_type: BranchLinkData
+                      id: rD-qNMpURCqRNlcGMYYYCA
+                      name: link1
+                      description: null
+                      translations: {}
+                      type: OTHER
+                      url: '...'
+                      linkTarget: _blank
+                      iconId: icon_id
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branches/{id}/delete:
+    delete:
+      tags:
+      - Branches
+      summary: delete
+      description: Deletes a branch. This will also delete all related branch clients.<br>
+      operationId: branchesDelete
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the branch to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branches/{id}/read:
+    get:
+      tags:
+      - Branches
+      summary: read
+      description: Returns the branch for the given branch ID<br>
+      operationId: branchesRead
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The branch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchData'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branches/readMultiple:
+    post:
+      tags:
+      - Branches
+      summary: readMultiple
+      description: Gets a list of branches for the given IDs<br>
+      operationId: branchesReadMultiple
+      requestBody:
+        description: The IDs to fetch the branches for
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: A list of branches for the given IDs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchDataList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branches/search:
+    post:
+      tags:
+      - Branches
+      summary: search
+      description: Searches for branches in the current account<br>
+      operationId: branchesSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchQuery'
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /branches/update:
+    post:
+      tags:
+      - Branches
+      summary: update
+      description: Updates a branch<br>
+      operationId: branchesUpdate
+      requestBody:
+        description: The branch to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchData'
+            examples:
+              request-body:
+                summary: request body
+                description: update branch
+                value:
+                  $_type: BranchData
+                  id: null
+                  creationTimestamp: null
+                  accountId: null
+                  modificationTimestamp: null
+                  version: null
+                  name: my-branch
+                  description: null
+                  streetAddress: Gartenstrasse 143
+                  zip: "4052"
+                  city: Basel
+                  region: Basel-Stadt
+                  country: Schweiz
+                  translations: null
+                  state: ACTIVE
+                  floorPlanFileUrl: null
+                  floorPlan: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC"
+                  width: 1000
+                  height: 1000
+                  displayLabelsOnFloorPlan: null
+                  branchClients:
+                  - $_type: BranchClientData
+                    id: null
+                    accountId: null
+                    creationTimestamp: null
+                    modificationTimestamp: null
+                    version: null
+                    name: branchClient1
+                    description: null
+                    translations: null
+                    branchId: null
+                    branchClientKey: sCNM3bmbTESRtJjrfcxdxg
+                    publicKey: null
+                    mainCameraMediaDeviceLabel: main-camera-device-label
+                    microphoneMediaDeviceLabel: microphone-device-label
+                    type: null
+                    iconId: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    branchClientDevices: null
+                    branchClientAuxiliaryCameras:
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: null
+                      name: branchClientAuxiliaryCamera1
+                      type: DOCUMENT
+                      description: null
+                      translations: null
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                    - $_type: BranchClientAuxiliaryCameraData
+                      id: null
+                      name: branchClientAuxiliaryCamera2
+                      type: OTHER
+                      description: null
+                      translations: null
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      alwaysDisplayDuringCall: true
+                      displayInFloorPlan: true
+                      mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                    branchClientLinks:
+                    - $_type: BranchClientLinkData
+                      id: null
+                      name: branchClient1
+                      description: null
+                      translations: null
+                      type: null
+                      url: '...'
+                      linkTarget: _blank
+                      autoOpen: true
+                      iconId: icon_id
+                  branchDevices:
+                  - $_type: BranchDeviceData
+                    id: null
+                    name: device1
+                    description: null
+                    translations: null
+                    type: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    url: null
+                    linkTarget: null
+                  - $_type: BranchDeviceData
+                    id: null
+                    name: device2
+                    description: null
+                    translations: null
+                    type: null
+                    x: 0
+                    "y": 0
+                    size: 20
+                    rotation: 0
+                    iconId: icon_id
+                    url: null
+                    linkTarget: null
+                  branchTextBoxes:
+                  - $_type: BranchTextBoxData
+                    id: null
+                    text: textBox1
+                    fontSize: 12
+                    fontColor: null
+                    backgroundColor: null
+                    translations: null
+                    x: 0
+                    "y": 0
+                    width: 20
+                    height: 20
+                    rotation: 0
+                    horizontalTextAlign: null
+                    verticalTextAlign: null
+                  branchLinks:
+                  - $_type: BranchLinkData
+                    id: null
+                    name: link1
+                    description: null
+                    translations: null
+                    type: null
+                    url: '...'
+                    linkTarget: _blank
+                    iconId: icon_id
+        required: true
+      responses:
+        "200":
+          description: The updated branch object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchData'
+              examples:
+                response-body:
+                  summary: response body
+                  description: update branch
+                  value:
+                    $_type: BranchData
+                    id: C7UoOAHoSEudeCp7La7SpQ
+                    creationTimestamp: 1546300800000
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    modificationTimestamp: 1548979200000
+                    version: 2
+                    name: my-branch
+                    description: null
+                    streetAddress: Gartenstrasse 143
+                    zip: "4052"
+                    city: Basel
+                    region: Basel-Stadt
+                    country: Schweiz
+                    translations: {}
+                    state: ACTIVE
+                    floorPlanFileUrl: '.../app/rest/fileDownload/jhzu2Z1HQUibSAD976AONw'
+                    floorPlan: null
+                    width: 1000
+                    height: 1000
+                    displayLabelsOnFloorPlan: false
+                    branchClients: []
+                    branchDevices:
+                    - $_type: BranchDeviceData
+                      id: DpkS7DWeQeiDzGUN58Og_Q
+                      name: device2-updated
+                      description: null
+                      translations: {}
+                      type: OTHER
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      url: null
+                      linkTarget: _blank
+                    - $_type: BranchDeviceData
+                      id: DpkS7DWeQeiDzGUN58Og_Q
+                      name: device3
+                      description: null
+                      translations: {}
+                      type: OTHER
+                      x: 0
+                      "y": 0
+                      size: 20
+                      rotation: 0
+                      iconId: icon_id
+                      url: null
+                      linkTarget: _blank
+                    branchTextBoxes:
+                    - $_type: BranchTextBoxData
+                      id: JASZlVmHRyK_W-qA3eEA1Q
+                      text: textBox1
+                      fontSize: 12
+                      fontColor: null
+                      backgroundColor: null
+                      translations: {}
+                      x: 0
+                      "y": 0
+                      width: 20
+                      height: 20
+                      rotation: 0
+                      horizontalTextAlign: MIDDLE
+                      verticalTextAlign: MIDDLE
+                    branchLinks:
+                    - $_type: BranchLinkData
+                      id: rD-qNMpURCqRNlcGMYYYCA
+                      name: link1
+                      description: null
+                      translations: {}
+                      type: OTHER
+                      url: '...'
+                      linkTarget: _blank
+                      iconId: icon_id
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -12072,6 +13398,48 @@ paths:
               responses:
                 "200":
                   description: OK
+        branch.branch:
+          '{$request.body#/endpoint}':
+            post:
+              summary: branch.branch
+              description: "An event triggered every time a `BranchData` is created, deleted or changed."
+              operationId: branchBranchCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BranchModificationEvent'
+              responses:
+                "200":
+                  description: OK
+        branch.branch_client:
+          '{$request.body#/endpoint}':
+            post:
+              summary: branch.branch_client
+              description: "An event triggered every time a `BranchClientData` is created, deleted or changed."
+              operationId: branchBranchClientCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BranchClientModificationEvent'
+              responses:
+                "200":
+                  description: OK
+        branch.branch_client_state:
+          '{$request.body#/endpoint}':
+            post:
+              summary: branch.branch_client_state
+              description: "An event triggered every time a `BranchClientState` is created, deleted or changed."
+              operationId: branchBranchClientStateCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BranchClientStateChangeEvent'
+              responses:
+                "200":
+                  description: OK
         chat_suggestion.accepted:
           '{$request.body#/endpoint}':
             post:
@@ -12713,6 +14081,48 @@ paths:
                   application/json:
                     schema:
                       $ref: '#/components/schemas/InterceptorFileRejectedEvent'
+              responses:
+                "200":
+                  description: OK
+        invitation.reservation_declined:
+          '{$request.body#/endpoint}':
+            post:
+              summary: invitation.reservation_declined
+              description: Invitation reservation declined event
+              operationId: invitationReservationDeclinedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/InvitationReservationDeclinedEvent'
+              responses:
+                "200":
+                  description: OK
+        invitation.reservation_timedout:
+          '{$request.body#/endpoint}':
+            post:
+              summary: invitation.reservation_timedout
+              description: Invitation reservation timed out event
+              operationId: invitationReservationTimedoutCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/InvitationReservationTimedOutEvent'
+              responses:
+                "200":
+                  description: OK
+        invitation.reserved:
+          '{$request.body#/endpoint}':
+            post:
+              summary: invitation.reserved
+              description: Invitation reservation reserved event
+              operationId: invitationReservedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/InvitationReservedEvent'
               responses:
                 "200":
                   description: OK
@@ -13569,6 +14979,8 @@ components:
           $ref: '#/components/schemas/QuotaUsageData'
         users:
           $ref: '#/components/schemas/QuotaUsageData'
+        branches:
+          $ref: '#/components/schemas/QuotaUsageData'
     AccountResult:
       type: object
       description: Container to return list of accounts
@@ -13673,6 +15085,18 @@ components:
           $ref: '#/components/schemas/Account'
         adminUser:
           $ref: '#/components/schemas/User'
+    ActiveConversationIdBranchClientStateDataSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ActiveConversationIdBranchClientStateDataSearchFilter
+          enum:
+          - ActiveConversationIdBranchClientStateDataSearchFilter
+        field:
+          $ref: '#/components/schemas/EBranchClientStateDataSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
     AgentAvailabilityStateData:
       type: object
       description: Information about an agent's availability for inbound conversation requests
@@ -13820,6 +15244,8 @@ components:
         comment:
           type: string
           description: Text provided by the creator for the target
+        invitationResponseState:
+          $ref: '#/components/schemas/EInvitationResponseState'
     AgentInvitationCreatedEvent:
       type: object
       description: Agent invitation created event
@@ -13962,6 +15388,8 @@ components:
         joinHidden:
           type: boolean
           description: Determines if the target is added as a hidden agent once the invitation is redeemed
+        invitationResponseState:
+          $ref: '#/components/schemas/EInvitationResponseState'
     AgentLabelSelectionPersonVisibilityRuleSearchFilter:
       type: object
       properties:
@@ -15329,6 +16757,9 @@ components:
           $ref: '#/components/schemas/PersonData'
         newCounterpartPerson:
           $ref: '#/components/schemas/PersonData'
+        conversationId:
+          type: string
+          description: ID of the conversation the request is sent to.
     BotDialogCounterpartChangedRequest:
       type: object
       description: Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
@@ -15349,6 +16780,9 @@ components:
           $ref: '#/components/schemas/PersonData'
         newCounterpartPerson:
           $ref: '#/components/schemas/PersonData'
+        conversationId:
+          type: string
+          description: ID of the conversation the request is sent to.
     BotDialogCounterpartChangedResponse:
       type: object
       properties:
@@ -15381,6 +16815,9 @@ components:
           description: Token for this dialog. It is present in every dialog webhook and must be passed to all Bot Web-API service calls to identify the dialog.
         conversationMessage:
           $ref: '#/components/schemas/MessageData'
+        conversationId:
+          type: string
+          description: ID of the conversation the request is sent to.
     BotDialogMessageRequest:
       type: object
       description: Request sent when a new message is sent in a dialog between a person and a bot. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
@@ -15399,6 +16836,9 @@ components:
           description: Token for this dialog. It is present in every dialog webhook and must be passed to all bot web API service calls to identify the dialog.
         conversationMessage:
           $ref: '#/components/schemas/MessageData'
+        conversationId:
+          type: string
+          description: ID of the conversation the request is sent to.
     BotDialogMessageResponse:
       type: object
       properties:
@@ -15549,7 +16989,7 @@ components:
           $ref: '#/components/schemas/PostMessageData'
     BotOffboardingOfferEvent:
       type: object
-      description: "Event sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
+      description: "Event sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
       properties:
         $_type:
           type: string
@@ -15577,7 +17017,7 @@ components:
           $ref: '#/components/schemas/ConversationData'
     BotOffboardingOfferRequest:
       type: object
-      description: "Request sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
+      description: "Request sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
       properties:
         $_type:
           type: string
@@ -15599,7 +17039,7 @@ components:
           $ref: '#/components/schemas/ConversationData'
     BotOnboardingOfferEvent:
       type: object
-      description: "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `DialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>"
+      description: "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `CustomDialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>"
       properties:
         $_type:
           type: string
@@ -15625,7 +17065,7 @@ components:
           $ref: '#/components/schemas/ConversationData'
     BotOnboardingOfferRequest:
       type: object
-      description: "Request sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the onboarding person does not match the onboarding filter defined in the `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their onboarding can proceed.</li> </ul>"
+      description: "Request sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the onboarding person does not match the onboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their onboarding can proceed.</li> </ul>"
       properties:
         $_type:
           type: string
@@ -15736,7 +17176,7 @@ components:
           $ref: '#/components/schemas/PostMessageData'
     BotReboardingOfferEvent:
       type: object
-      description: "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `DialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
+      description: "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
       properties:
         $_type:
           type: string
@@ -15762,7 +17202,7 @@ components:
           $ref: '#/components/schemas/ConversationData'
     BotReboardingOfferRequest:
       type: object
-      description: "Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `DialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
+      description: "Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
       properties:
         $_type:
           type: string
@@ -15851,6 +17291,1010 @@ components:
         dialogToken:
           type: string
           description: The token that belongs to the bot's dialog
+    BranchClientAuxiliaryCameraData:
+      type: object
+      description: Data model object for a branch client auxiliary camera
+      properties:
+        $_type:
+          type: string
+          default: BranchClientAuxiliaryCameraData
+          enum:
+          - BranchClientAuxiliaryCameraData
+        id:
+          type: string
+          description: ID of the branch client auxiliary camera
+        name:
+          type: string
+          description: Name of the branch client auxiliary camera. Maximum of 250 characters. Mandatory.
+        type:
+          $ref: '#/components/schemas/EBranchClientAuxiliaryCameraType'
+        description:
+          type: string
+          description: Description of the branch client auxiliary camera. Maximum of 500 characters. Optional.
+        translations:
+          type: object
+          description: A Map of localized versions of the name and description of the branch client auxiliary camera
+          additionalProperties:
+            $ref: '#/components/schemas/BranchClientAuxiliaryCameraTranslation'
+        x:
+          type: integer
+          format: int32
+          description: X coordinate of the camera's icon on the floor plan. 0 marks the left edge of the plan.
+        "y":
+          type: integer
+          format: int32
+          description: Y coordinate of the camera's icon on the floor plan. 0 marks the top edge of the plan.
+        size:
+          type: integer
+          format: int32
+          description: Size of the camera's icon on the floor plan
+        rotation:
+          type: integer
+          format: int32
+          description: "Rotation, in degrees, of the camera's icon on the floor plan. 0 degree is to the right and the rotation is clockwise."
+        iconId:
+          type: string
+          description: File ID of the icon
+        alwaysDisplayDuringCall:
+          type: boolean
+          description: "If set to true, the video feed of this camera is automatically displayed to the agent during calls, otherwise the feed must be activated manually."
+        displayInFloorPlan:
+          type: boolean
+          description: Display in floor plan
+        mediaDeviceLabel:
+          type: string
+          description: Media device label of the branch client auxiliary camera. The name is provided by the device. Maximum of 250 characters. Mandatory.
+    BranchClientAuxiliaryCameraTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientAuxiliaryCameraTranslation
+          enum:
+          - BranchClientAuxiliaryCameraTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    BranchClientData:
+      type: object
+      description: Data model object for a branch client
+      properties:
+        $_type:
+          type: string
+          default: BranchClientData
+          enum:
+          - BranchClientData
+        id:
+          type: string
+          description: ID of the branch client
+        accountId:
+          type: string
+          description: Account ID that the branch client belongs to
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        name:
+          type: string
+          description: Name of the branch client. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the branch client. Maximum of 500 characters. Optional.
+        translations:
+          type: object
+          description: A Map of localized versions of the name and description of the branch client
+          additionalProperties:
+            $ref: '#/components/schemas/BranchClientTranslation'
+        branchId:
+          type: string
+          description: The branch ID that the branch client belongs to
+        branchClientKey:
+          type: string
+          description: Branch Client Key
+        publicKey:
+          type: string
+          description: Public key for JWT token validation
+        mainCameraMediaDeviceLabel:
+          type: string
+          description: Media device label of the main branch client camera. The name is provided by the device. Maximum of 250 characters. Optional.
+        microphoneMediaDeviceLabel:
+          type: string
+          description: Media device label of the branch client microphone. The name is provided by the device. Maximum of 250 characters. Optional.
+        type:
+          $ref: '#/components/schemas/EBranchClientType'
+        iconId:
+          type: string
+          description: File ID of the icon
+        x:
+          type: integer
+          format: int32
+          description: X coordinate of the client's icon on the floor plan. 0 marks the left edge of the plan.
+        "y":
+          type: integer
+          format: int32
+          description: Y coordinate of the client's icon on the floor plan. 0 marks the top edge of the plan.
+        size:
+          type: integer
+          format: int32
+          description: Size of the client's icon on the floor plan
+        rotation:
+          type: integer
+          format: int32
+          description: "Rotation, in degrees, of the client's icon on the floor plan. 0 degree is to the right and the rotation is clockwise."
+        branchClientDevices:
+          type: array
+          description: List of all branch client devices that belong to the branch client
+          items:
+            $ref: '#/components/schemas/BranchClientDeviceData'
+        branchClientAuxiliaryCameras:
+          type: array
+          description: List of all branch client auxiliary cameras that belong to the branch client
+          items:
+            $ref: '#/components/schemas/BranchClientAuxiliaryCameraData'
+        branchClientLinks:
+          type: array
+          description: List of all branch client links that belong to the branch client
+          items:
+            $ref: '#/components/schemas/BranchClientLinkData'
+    BranchClientDataList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientDataList
+          enum:
+          - BranchClientDataList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: '#/components/schemas/BranchClientData'
+    BranchClientDeviceData:
+      type: object
+      description: Data model for a branch device
+      properties:
+        $_type:
+          type: string
+          default: BranchClientDeviceData
+          enum:
+          - BranchClientDeviceData
+        id:
+          type: string
+          description: ID of the branch device
+        name:
+          type: string
+          description: Name of the branch device. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the branch device. Maximum of 500 characters. Optional.
+        translations:
+          type: object
+          description: A Map of localized versions of the name and description of the branch device
+          additionalProperties:
+            $ref: '#/components/schemas/BranchClientDeviceTranslation'
+        type:
+          $ref: '#/components/schemas/EBranchDeviceType'
+        x:
+          type: integer
+          format: int32
+          description: X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan.
+        "y":
+          type: integer
+          format: int32
+          description: Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan.
+        size:
+          type: integer
+          format: int32
+          description: Size of the device's icon on the floor plan
+        rotation:
+          type: integer
+          format: int32
+          description: "Rotation, in degrees, of the device's icon on the floor plan"
+        iconId:
+          type: string
+          description: File ID of the icon
+        url:
+          type: string
+          description: URL to open when the branch device is clicked on the floor plan. Maximum of 250 characters. Optional.
+        linkTarget:
+          type: string
+          description: Target when opening the link. Maximum of 250 characters. The default value is "_blank".
+    BranchClientDeviceTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientDeviceTranslation
+          enum:
+          - BranchClientDeviceTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    BranchClientIdBranchClientStateDataSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientIdBranchClientStateDataSearchFilter
+          enum:
+          - BranchClientIdBranchClientStateDataSearchFilter
+        field:
+          $ref: '#/components/schemas/EBranchClientStateDataSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    BranchClientKeyBranchClientSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientKeyBranchClientSearchFilter
+          enum:
+          - BranchClientKeyBranchClientSearchFilter
+        field:
+          $ref: '#/components/schemas/EBranchClientSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    BranchClientLinkData:
+      type: object
+      description: Data model object for a branch client link
+      properties:
+        $_type:
+          type: string
+          default: BranchClientLinkData
+          enum:
+          - BranchClientLinkData
+        id:
+          type: string
+          description: ID of the branch client link
+        name:
+          type: string
+          description: Name of the branch client link. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the branch client link. Maximum of 500 characters. Optional.
+        translations:
+          type: object
+          description: A Map of localized versions of the name and description of the branch client link
+          additionalProperties:
+            $ref: '#/components/schemas/BranchClientLinkTranslation'
+        type:
+          $ref: '#/components/schemas/EBranchLinkType'
+        url:
+          type: string
+          description: "URL to open when the branch client link is clicked on the floor plan, or when a connection to the branch client is established (if auto-open is enabled). Maximum of 250 characters. Optional."
+        linkTarget:
+          type: string
+          description: Target when opening the link. Maximum of 250 characters. The default value is "_blank".
+        autoOpen:
+          type: boolean
+          description: Open branch client link automatically once a connection is established
+        iconId:
+          type: string
+          description: File ID of the icon
+    BranchClientLinkTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientLinkTranslation
+          enum:
+          - BranchClientLinkTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    BranchClientModificationEvent:
+      type: object
+      description: "An event triggered every time a `BranchClientData` is created, deleted or changed."
+      properties:
+        $_type:
+          type: string
+          default: BranchClientModificationEvent
+          enum:
+          - BranchClientModificationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        action:
+          $ref: '#/components/schemas/EntityModificationAction'
+        entity:
+          $ref: '#/components/schemas/BranchClientData'
+        editingUser:
+          $ref: '#/components/schemas/UserInfo'
+    BranchClientOrderBy:
+      type: object
+      description: Branch orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: BranchClientOrderBy
+          enum:
+          - BranchClientOrderBy
+        field:
+          $ref: '#/components/schemas/EBranchClientOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    BranchClientQuery:
+      type: object
+      description: Container to search branches
+      properties:
+        $_type:
+          type: string
+          default: BranchClientQuery
+          enum:
+          - BranchClientQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/BranchClientSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/BranchClientOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    BranchClientResult:
+      type: object
+      description: Container to return list of branches
+      properties:
+        $_type:
+          type: string
+          default: BranchClientResult
+          enum:
+          - BranchClientResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/BranchClientData'
+    BranchClientSearchFilter:
+      description: Branch filter item.
+      oneOf:
+      - $ref: '#/components/schemas/NameBranchClientSearchFilter'
+      - $ref: '#/components/schemas/BranchClientKeyBranchClientSearchFilter'
+      - $ref: '#/components/schemas/BranchIdBranchClientSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          BRANCH_CLIENT_KEY: '#/components/schemas/BranchClientKeyBranchClientSearchFilter'
+          BRANCH_ID: '#/components/schemas/BranchIdBranchClientSearchFilter'
+          NAME: '#/components/schemas/NameBranchClientSearchFilter'
+    BranchClientStateChangeEvent:
+      type: object
+      description: "An event triggered every time a `BranchClientState` is created, deleted or changed."
+      properties:
+        $_type:
+          type: string
+          default: BranchClientStateChangeEvent
+          enum:
+          - BranchClientStateChangeEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        action:
+          $ref: '#/components/schemas/EntityModificationAction'
+        entity:
+          $ref: '#/components/schemas/BranchClientStateData'
+        editingUser:
+          $ref: '#/components/schemas/UserInfo'
+    BranchClientStateData:
+      type: object
+      description: Data model object for a branch client state
+      properties:
+        $_type:
+          type: string
+          default: BranchClientStateData
+          enum:
+          - BranchClientStateData
+        branchClientId:
+          type: string
+          description: ID of the branch client the state belongs to
+        accountId:
+          type: string
+          description: Account ID to which the branch client state belongs to
+        key:
+          type: string
+          description: Key of the branch client the state belongs to
+        name:
+          type: string
+          description: Name of the branch client the state belongs to
+        state:
+          $ref: '#/components/schemas/EBranchClientState'
+        activeConversationId:
+          type: string
+          description: "ID of the conversation the branch client is currently part of. If not set, the branch client is not in a conversation."
+        clientIssues:
+          type: array
+          description: "List of issues types the branch client currently has.<br> If there are no issues, the list is empty."
+          items:
+            $ref: '#/components/schemas/EBranchClientIssueType'
+    BranchClientStateDataOrderBy:
+      type: object
+      description: Branch client state orderBy item
+      properties:
+        $_type:
+          type: string
+          default: BranchClientStateDataOrderBy
+          enum:
+          - BranchClientStateDataOrderBy
+        field:
+          $ref: '#/components/schemas/EBranchClientStateDataOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    BranchClientStateDataQuery:
+      type: object
+      description: Container to search branch client states
+      properties:
+        $_type:
+          type: string
+          default: BranchClientStateDataQuery
+          enum:
+          - BranchClientStateDataQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/BranchClientStateDataSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/BranchClientStateDataOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    BranchClientStateDataResult:
+      type: object
+      description: Container to return list of branch client states
+      properties:
+        $_type:
+          type: string
+          default: BranchClientStateDataResult
+          enum:
+          - BranchClientStateDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/BranchClientStateData'
+    BranchClientStateDataSearchFilter:
+      description: Branch client state filter item
+      oneOf:
+      - $ref: '#/components/schemas/BranchClientIdBranchClientStateDataSearchFilter'
+      - $ref: '#/components/schemas/ActiveConversationIdBranchClientStateDataSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          ACTIVE_CONVERSATION_ID: '#/components/schemas/ActiveConversationIdBranchClientStateDataSearchFilter'
+          BRANCH_CLIENT_ID: '#/components/schemas/BranchClientIdBranchClientStateDataSearchFilter'
+    BranchClientTokenResult:
+      type: object
+      description: Model of a branch client token result
+      properties:
+        $_type:
+          type: string
+          default: BranchClientTokenResult
+          enum:
+          - BranchClientTokenResult
+        token:
+          type: string
+          description: Generated JWT token
+        expiresAt:
+          type: integer
+          format: int64
+          description: "Expiration date of the token, in Unix timestamp format (0 -> doesn't expire)"
+    BranchClientTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientTranslation
+          enum:
+          - BranchClientTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    BranchClientsGenerateTokenBody:
+      type: object
+      description: Request body for the 'branchClientsGenerateToken' operation
+      properties:
+        expiresAt:
+          type: integer
+          format: int64
+          description: Expiration date as a Unix timestamp. Set to 0 if the token shouldn't expire.
+    BranchClientsGetByBranchIdBody:
+      type: object
+      description: Request body for the 'branchClientsGetByBranchId' operation
+      properties:
+        branchId:
+          type: string
+          description: The branch ID the branch clients are assigned to
+    BranchData:
+      type: object
+      description: Data model object for a branch
+      properties:
+        $_type:
+          type: string
+          default: BranchData
+          enum:
+          - BranchData
+        id:
+          type: string
+          description: ID of the branch
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        accountId:
+          type: string
+          description: Account ID the branch belongs to
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        name:
+          type: string
+          description: Name of the branch. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the branch. Maximum of 500 characters. Optional.
+        streetAddress:
+          type: string
+          description: Street address including the street number. Maximum of 250 characters. Optional.
+        zip:
+          type: string
+          description: Zip code. Maximum of 20 characters. Optional.
+        city:
+          type: string
+          description: City. Maximum of 250 characters. Optional.
+        region:
+          type: string
+          description: Region. Maximum of 250 characters. Optional.
+        country:
+          type: string
+          description: Country. Maximum of 250 characters. Optional.
+        translations:
+          type: object
+          description: "A Map of localized versions of the name, description and info of the branch"
+          additionalProperties:
+            $ref: '#/components/schemas/BranchTranslation'
+        state:
+          $ref: '#/components/schemas/EBranchState'
+        floorPlanFileUrl:
+          type: string
+          description: File URL of the branch floor plan for the agent side
+        floorPlan:
+          type: string
+          description: Floor plan image in Base64 format. Use this field when creating a branch or updating the floor plan. Will always be null in returned BranchData.
+        width:
+          type: integer
+          format: int32
+          description: Width of the floor plan. Derived from the uploaded image if not set.
+        height:
+          type: integer
+          format: int32
+          description: Height of the floor plan. Derived from the uploaded image if not set.
+        displayLabelsOnFloorPlan:
+          type: boolean
+          description: Display the labels of branch elements inside the floor plan. False if not explicitly set.
+        branchClients:
+          type: array
+          description: List of all branch clients that are assigned to the branch
+          items:
+            $ref: '#/components/schemas/BranchClientData'
+        branchDevices:
+          type: array
+          description: List of all branch devices that belong to the branch
+          items:
+            $ref: '#/components/schemas/BranchDeviceData'
+        branchTextBoxes:
+          type: array
+          description: List of all branch text boxes that belong to the branch
+          items:
+            $ref: '#/components/schemas/BranchTextBoxData'
+        branchLinks:
+          type: array
+          description: List of all branch links that belong to the branch
+          items:
+            $ref: '#/components/schemas/BranchLinkData'
+    BranchDataList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchDataList
+          enum:
+          - BranchDataList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: '#/components/schemas/BranchData'
+    BranchDeviceData:
+      type: object
+      description: Data model for a branch device
+      properties:
+        $_type:
+          type: string
+          default: BranchDeviceData
+          enum:
+          - BranchDeviceData
+        id:
+          type: string
+          description: ID of the branch device
+        name:
+          type: string
+          description: Name of the branch device. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the branch device. Maximum of 500 characters. Optional.
+        translations:
+          type: object
+          description: A Map of localized versions of the name and description of the branch device
+          additionalProperties:
+            $ref: '#/components/schemas/BranchDeviceTranslation'
+        type:
+          $ref: '#/components/schemas/EBranchDeviceType'
+        x:
+          type: integer
+          format: int32
+          description: X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan.
+        "y":
+          type: integer
+          format: int32
+          description: Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan.
+        size:
+          type: integer
+          format: int32
+          description: Size of the device's icon on the floor plan
+        rotation:
+          type: integer
+          format: int32
+          description: "Rotation, in degrees, of the device's icon on the floor plan. 0 degree is to the right and the rotation is clockwise."
+        iconId:
+          type: string
+          description: File ID of the icon
+        url:
+          type: string
+          description: URL to open when the branch device is clicked on the floor plan. Maximum of 250 characters. Optional.
+        linkTarget:
+          type: string
+          description: Target when opening the link. Maximum of 250 characters. The default value is "_blank".
+    BranchDeviceTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchDeviceTranslation
+          enum:
+          - BranchDeviceTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    BranchIdBranchClientSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchIdBranchClientSearchFilter
+          enum:
+          - BranchIdBranchClientSearchFilter
+        field:
+          $ref: '#/components/schemas/EBranchClientSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    BranchLinkData:
+      type: object
+      description: Data model for a branch link
+      properties:
+        $_type:
+          type: string
+          default: BranchLinkData
+          enum:
+          - BranchLinkData
+        id:
+          type: string
+          description: ID of the branch link
+        name:
+          type: string
+          description: Name of the branch link. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the branch link. Maximum of 500 characters. Optional.
+        translations:
+          type: object
+          description: A Map of localized versions of the name and description of the branch link
+          additionalProperties:
+            $ref: '#/components/schemas/BranchLinkTranslation'
+        type:
+          $ref: '#/components/schemas/EBranchLinkType'
+        url:
+          type: string
+          description: URL to open when the branch link is clicked on the floor plan. Maximum of 250 characters. Optional.
+        linkTarget:
+          type: string
+          description: Target when opening the link. Maximum of 250 characters. The default value is "_blank".
+        iconId:
+          type: string
+          description: File ID of the icon
+    BranchLinkTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchLinkTranslation
+          enum:
+          - BranchLinkTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    BranchModificationEvent:
+      type: object
+      description: "An event triggered every time a `BranchData` is created, deleted or changed."
+      properties:
+        $_type:
+          type: string
+          default: BranchModificationEvent
+          enum:
+          - BranchModificationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        action:
+          $ref: '#/components/schemas/EntityModificationAction'
+        entity:
+          $ref: '#/components/schemas/BranchData'
+        editingUser:
+          $ref: '#/components/schemas/UserInfo'
+    BranchOrderBy:
+      type: object
+      description: Branch orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: BranchOrderBy
+          enum:
+          - BranchOrderBy
+        field:
+          $ref: '#/components/schemas/EBranchOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    BranchQuery:
+      type: object
+      description: Container to search branches
+      properties:
+        $_type:
+          type: string
+          default: BranchQuery
+          enum:
+          - BranchQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/BranchSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/BranchOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    BranchResult:
+      type: object
+      description: Container to return list of branches
+      properties:
+        $_type:
+          type: string
+          default: BranchResult
+          enum:
+          - BranchResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/BranchData'
+    BranchSearchFilter:
+      description: Branch filter item.
+      oneOf:
+      - $ref: '#/components/schemas/NameBranchSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          NAME: '#/components/schemas/NameBranchSearchFilter'
+    BranchTextBoxData:
+      type: object
+      description: Data model for a branch text box
+      properties:
+        $_type:
+          type: string
+          default: BranchTextBoxData
+          enum:
+          - BranchTextBoxData
+        id:
+          type: string
+          description: ID of the branch text box
+        text:
+          type: string
+          description: Text of the branch text box. Maximum of 500 characters. Optional.
+        fontSize:
+          type: integer
+          format: int32
+          description: Font size in the text box
+        fontColor:
+          type: string
+          description: Color of text in the text box
+        backgroundColor:
+          type: string
+          description: Background color of the text box
+        translations:
+          type: object
+          description: A Map of localized versions of the text field of the branch text box
+          additionalProperties:
+            $ref: '#/components/schemas/BranchTextBoxTranslation'
+        x:
+          type: integer
+          format: int32
+          description: X coordinate of the text box on the floor plan. 0 marks the left edge of the plan.
+        "y":
+          type: integer
+          format: int32
+          description: Y coordinate of the text box on the floor plan. 0 marks the top edge of the plan.
+        width:
+          type: integer
+          format: int32
+          description: Width of the text box on the floor plan
+        height:
+          type: integer
+          format: int32
+          description: Height of the text box on the floor plan
+        rotation:
+          type: integer
+          format: int32
+          description: "Rotation, in degrees, of the text box on the floor plan. The rotation is clockwise."
+        horizontalTextAlign:
+          $ref: '#/components/schemas/ETextBoxAlign'
+        verticalTextAlign:
+          $ref: '#/components/schemas/ETextBoxAlign'
+    BranchTextBoxTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchTextBoxTranslation
+          enum:
+          - BranchTextBoxTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+    BranchTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchTranslation
+          enum:
+          - BranchTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
     Call:
       type: object
       description: Call metadata class
@@ -19499,6 +21943,89 @@ components:
         visitorData:
           type: string
           description: Custom visitor data in any format.
+    CopilotDialogBotData:
+      type: object
+      description: Model representing an external copilot dialog bot that can handle conversation onboarding and offboarding.
+      properties:
+        $_type:
+          type: string
+          default: CopilotDialogBotData
+          enum:
+          - CopilotDialogBotData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the dialog bot. Maximum length of 250 characters. Can not be omitted.
+        description:
+          type: string
+          description: Description of the dialog bot. Maximum length of 500 characters. Can be omitted.
+        botPersonId:
+          type: string
+          description: ID of the person representing the bot
+        onboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the onboarding order of this bot. <p> If more than one bots want to participate in an onboarding, the one with the lowest order value will go first."
+        reboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the reboarding order of this bot. <p> If more than one bots want to participate in an reboarding, the one with the lowest order value will go first."
+        offboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the offboarding priority of this bot. <p> If more than one bots want to participate in an offboarding, the one with the lowest order value will go first."
+        onboardingFilter:
+          $ref: '#/components/schemas/EBotDialogFilter'
+        reboardingEnabled:
+          type: boolean
+          description: "Defines if this bot can reboard. <p> A reboarding offer will be sent only if this flag is enabled, giving the bot the chance to be part of the reboarding."
+        offboardingFilter:
+          $ref: '#/components/schemas/EBotDialogFilter'
+        needsCounterpartPresence:
+          type: boolean
+          description: Defines if the counterpart has to be online for the onboarding to start. E.g. if questions have to be answered live.
+        onTimeoutBehavior:
+          $ref: '#/components/schemas/EBotDialogTimeoutBehavior'
+        type:
+          $ref: '#/components/schemas/EBotType'
+        authToken:
+          type: string
+          description: "The Authentication Token for the Microsoft Copilot Agent. Maximum length: 2000 characters"
+        copilotId:
+          type: string
+          description: "The Copilot Agent ID for selecting the correct copilot. Maximum length: 36 characters"
+        copilotEnvironmentId:
+          type: string
+          description: "The Microsoft environment ID. Used by Microsoft Copilot. Maximum length: 2000 characters"
+        active:
+          type: boolean
+          description: Specifies whether the bot is active
+        outboundEndpoint:
+          type: string
+          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> Based on the configured filters/flags the following events will be sent to the endpoint: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a preaviously accepted bot dialog starts</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul>"
+        outboundTimeoutMillis:
+          type: integer
+          format: int64
+          description: The timeout for the requests sent to the outbound endpoint. Mandatory for webhookApiVersion greater than 3.
+        outboundApiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
     CopilotSuggestionSourceData:
       type: object
       description: API model that represents a copilot suggestion source
@@ -20223,6 +22750,88 @@ components:
           $ref: '#/components/schemas/PersonData'
         conversation:
           $ref: '#/components/schemas/ConversationData'
+    CustomDialogBotData:
+      type: object
+      description: Model representing an external dialog bot that can handle conversation onboarding and offboarding.
+      properties:
+        $_type:
+          type: string
+          default: CustomDialogBotData
+          enum:
+          - CustomDialogBotData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the dialog bot. Maximum length of 250 characters. Can not be omitted.
+        description:
+          type: string
+          description: Description of the dialog bot. Maximum length of 500 characters. Can be omitted.
+        botPersonId:
+          type: string
+          description: ID of the person representing the bot
+        onboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the onboarding order of this bot. <p> If more than one bots want to participate in an onboarding, the one with the lowest order value will go first."
+        reboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the reboarding order of this bot. <p> If more than one bots want to participate in an reboarding, the one with the lowest order value will go first."
+        offboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the offboarding priority of this bot. <p> If more than one bots want to participate in an offboarding, the one with the lowest order value will go first."
+        onboardingFilter:
+          $ref: '#/components/schemas/EBotDialogFilter'
+        reboardingEnabled:
+          type: boolean
+          description: "Defines if this bot can reboard. <p> A reboarding offer will be sent only if this flag is enabled, giving the bot the chance to be part of the reboarding."
+        offboardingFilter:
+          $ref: '#/components/schemas/EBotDialogFilter'
+        needsCounterpartPresence:
+          type: boolean
+          description: Defines if the counterpart has to be online for the onboarding to start. E.g. if questions have to be answered live.
+        onTimeoutBehavior:
+          $ref: '#/components/schemas/EBotDialogTimeoutBehavior'
+        type:
+          $ref: '#/components/schemas/EBotType'
+        webhookStatus:
+          $ref: '#/components/schemas/ERegistrationStatus'
+        webhookEndpoint:
+          type: string
+          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> Based on the configured filters/flags the following events will be sent to the endpoint: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a preaviously accepted bot dialog starts</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul>"
+        outboundTimeoutMillis:
+          type: integer
+          format: int64
+          description: The timeout for the requests sent to the outbound endpoint. Mandatory for webhookApiVersion greater than 3.
+        webhookApiVersion:
+          $ref: '#/components/schemas/EWebApiVersion'
+        webhookSecret:
+          type: string
+          description: Optional secret which is send with each webhook event. <p> Maximum length of 4000 characters.
+        messageStateHandledExternally:
+          type: boolean
+          description: "Defines if the delivered/read state of messages is handled externally or by the collaboration server. <br> If the collaboration server handles the state, the messages are marked as delivered and read a soon as the webhook could be successfully dispatched to the configured webhookEndpoint.<br> If the it is handled externally, the external service has to call the api function to mark the message as delivered/read. Additionally webhook events for the message state of messages from the bot are dispatched."
+        automaticTypingStateHandlingEnabled:
+          type: boolean
+          description: "Defines if the bot should automatically display a typing indicator after receiving a message from the counterpart person. The indication starts 1s after the message is received. The typing state can also be influenced through the web API, independently of this property."
     CustomExternalMessengerChannel:
       type: object
       description: "Channel between the collaboration server and an external messenger server. This could be emails, sms or other channels.<br> It defines basically a webhook endpoint where the collaboration server sends new messages to. Messages from the external messenger can be send via the ExternalMessengers web api."
@@ -21201,85 +23810,15 @@ components:
           format: int64
           description: Timestamp for the last successful two-factor authentication (2FA). Used to check if the current 2FA is still valid.
     DialogBotData:
-      type: object
       description: Model representing an external dialog bot that can handle conversation onboarding and offboarding.
-      properties:
-        $_type:
-          type: string
-          default: DialogBotData
-          enum:
-          - DialogBotData
-        id:
-          type: string
-          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
-        creationTimestamp:
-          type: integer
-          format: int64
-          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
-        modificationTimestamp:
-          type: integer
-          format: int64
-          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
-        version:
-          type: integer
-          format: int64
-          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
-        accountId:
-          type: string
-          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
-        name:
-          type: string
-          description: Name of the dialog bot. Maximum length of 250 characters. Can not be omitted.
-        description:
-          type: string
-          description: Description of the dialog bot. Maximum length of 500 characters. Can be omitted.
-        botPersonId:
-          type: string
-          description: ID of the person representing the bot
-        webhookStatus:
-          $ref: '#/components/schemas/ERegistrationStatus'
-        webhookEndpoint:
-          type: string
-          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> Based on the configured filters/flags the following events will be sent to the endpoint: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a preaviously accepted bot dialog starts</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul>"
-        outboundTimeoutMillis:
-          type: integer
-          format: int64
-          description: The timeout for the requests sent to the outbound endpoint. Mandatory for webhookApiVersion greater than 3.
-        webhookApiVersion:
-          $ref: '#/components/schemas/EWebApiVersion'
-        webhookSecret:
-          type: string
-          description: Optional secret which is send with each webhook event. <p> Maximum length of 4000 characters.
-        onboardingOrder:
-          type: integer
-          format: int32
-          description: "Defines the onboarding order of this bot. <p> If more than one bots want to participate in an onboarding, the one with the lowest order value will go first."
-        reboardingOrder:
-          type: integer
-          format: int32
-          description: "Defines the reboarding order of this bot. <p> If more than one bots want to participate in an reboarding, the one with the lowest order value will go first."
-        offboardingOrder:
-          type: integer
-          format: int32
-          description: "Defines the offboarding priority of this bot. <p> If more than one bots want to participate in an offboarding, the one with the lowest order value will go first."
-        onboardingFilter:
-          $ref: '#/components/schemas/EBotDialogFilter'
-        reboardingEnabled:
-          type: boolean
-          description: "Defines if this bot can reboard. <p> A reboarding offer will be sent only if this flag is enabled, giving the bot the chance to be part of the reboarding."
-        offboardingFilter:
-          $ref: '#/components/schemas/EBotDialogFilter'
-        needsCounterpartPresence:
-          type: boolean
-          description: Defines if the counterpart has to be online for the onboarding to start. E.g. if questions have to be answered live.
-        messageStateHandledExternally:
-          type: boolean
-          description: "Defines if the delivered/read state of messages is handled externally or by the collaboration server. <br> If the collaboration server handles the state, the messages are marked as delivered and read a soon as the webhook could be successfully dispatched to the configured webhookEndpoint.<br> If the it is handled externally, the external service has to call the api function to mark the message as delivered/read. Additionally webhook events for the message state of messages from the bot are dispatched."
-        automaticTypingStateHandlingEnabled:
-          type: boolean
-          description: "Defines if the bot should automatically display a typing indicator after receiving a message from the counterpart person. The indication starts 1s after the message is received. The typing state can also be influenced through the web API, independently of this property."
-        onTimeoutBehavior:
-          $ref: '#/components/schemas/EBotDialogTimeoutBehavior'
+      oneOf:
+      - $ref: '#/components/schemas/CustomDialogBotData'
+      - $ref: '#/components/schemas/CopilotDialogBotData'
+      discriminator:
+        propertyName: type
+        mapping:
+          COPILOT: '#/components/schemas/CopilotDialogBotData'
+          CUSTOM: '#/components/schemas/CustomDialogBotData'
     DialogBotOrderBy:
       type: object
       description: DialogBot orderBy item.
@@ -21880,6 +24419,152 @@ components:
       - ONBOARDING
       - REBOARDING
       - OFFBOARDING
+    EBotType:
+      type: string
+      description: Type of a dialog bot
+      enum:
+      - COPILOT
+      - CUSTOM
+      x-enum-descriptions:
+      - COPILOT
+      - CUSTOM
+    EBranchClientAuxiliaryCameraType:
+      type: string
+      enum:
+      - DOCUMENT
+      - ROOM
+      - OTHER
+      x-enum-descriptions:
+      - "DOCUMENT: Document camera"
+      - "ROOM: Room camera"
+      - "OTHER: Any other camera type"
+    EBranchClientIssueType:
+      type: string
+      description: Type of issues a branch client can have
+      enum:
+      - MAIN_CAMERA
+      - AUXILIARY_CAMERA
+      - MICROPHONE
+      - OTHER
+      x-enum-descriptions:
+      - "MAIN_CAMERA: There is an issue with the main camera, for example label of the configured device doesn't match any camera connected to the branch client"
+      - "AUXILIARY_CAMERA: There is an issue with one or more auxiliary cameras, for example, the label of the configured device doesn't match any camera connected to the branch client"
+      - "MICROPHONE: There is an issue with the microphone, for example, the label of the configured device doesn't match any microphone connected to the branch client"
+      - "OTHER: There is a general issue with the branch client"
+    EBranchClientOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - BRANCH_CLIENT_KEY
+      - BRANCH_ID
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "BRANCH_CLIENT_KEY: Sort by the 'branchClientKey' attribute"
+      - "BRANCH_ID: Sort by the 'branchId' attribute"
+    EBranchClientSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - BRANCH_CLIENT_KEY
+      - BRANCH_ID
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+      - "BRANCH_CLIENT_KEY: Filter by the 'branchClientKey' attribute"
+      - "BRANCH_ID: Filter by the 'branchId' attribute"
+    EBranchClientState:
+      type: string
+      enum:
+      - AVAILABLE
+      - OFFLINE
+      x-enum-descriptions:
+      - AVAILABLE
+      - OFFLINE
+    EBranchClientStateDataOrderByField:
+      type: string
+      enum:
+      - ID
+      - BRANCH_CLIENT_ID
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "BRANCH_CLIENT_ID: Sort by the 'branchClientId' attribute"
+    EBranchClientStateDataSearchFilterField:
+      type: string
+      enum:
+      - BRANCH_CLIENT_ID
+      - ACTIVE_CONVERSATION_ID
+      x-enum-descriptions:
+      - "BRANCH_CLIENT_ID: Filter by the 'branchClientId' attribute"
+      - "ACTIVE_CONVERSATION_ID: Filter by the 'activeConversationId' attribute"
+    EBranchClientType:
+      type: string
+      enum:
+      - RECEPTION
+      - SELF_SERVICE
+      - MEETING_ROOM
+      - OTHER
+      x-enum-descriptions:
+      - RECEPTION
+      - SELF_SERVICE
+      - MEETING_ROOM
+      - OTHER
+    EBranchDeviceType:
+      type: string
+      enum:
+      - SIGN_PAD
+      - PRINTER
+      - DOOR
+      - LOCK
+      - INFO
+      - EXTERNAL_APPLICATION
+      - OTHER
+      x-enum-descriptions:
+      - SIGN_PAD
+      - PRINTER
+      - DOOR
+      - LOCK
+      - INFO
+      - EXTERNAL_APPLICATION
+      - OTHER
+    EBranchLinkType:
+      type: string
+      enum:
+      - PHONE_NUMBER
+      - TIME
+      - TEAM
+      - EXTERNAL_APPLICATION
+      - INFO
+      - OTHER
+      x-enum-descriptions:
+      - PHONE_NUMBER
+      - TIME
+      - TEAM
+      - EXTERNAL_APPLICATION
+      - INFO
+      - OTHER
+    EBranchOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+    EBranchSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+    EBranchState:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      x-enum-descriptions:
+      - ACTIVE
+      - INACTIVE
     ECallEndReason:
       type: string
       description: The reason a call has ended
@@ -23537,6 +26222,7 @@ components:
       - TEAMS_AGENT_DESK
       - AGENT_SINGLE_CONVERSATION_DESK
       - AGENT_MOBILE
+      - BRANCH_CLIENT
       x-enum-descriptions:
       - "VISITOR_SITE_INTEGRATION: Sites that integrate Unblu using the Floating Visitor UI"
       - "VISITOR_SITE_EMBEDDED: Sites that integrate Unblu using the Embedded Visitor UI"
@@ -23547,6 +26233,7 @@ components:
       - "TEAMS_AGENT_DESK: The MS Teams Agent Desk"
       - "AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent"
       - "AGENT_MOBILE: Sites for the mobile agent frontend that display the agent inbox and the conversation UI"
+      - "BRANCH_CLIENT: Sites that integrate Unblu inside a branch client device using an embedded UI"
     EIdListOperatorType:
       type: string
       description: Operator types corresponding to operators defined by `IdListOperator`
@@ -23649,6 +26336,7 @@ components:
       - WHITEBOARD_REQUEST
       - SCREEN_SHARING_REQUEST
       - VISITOR_COBROWSING
+      - BRANCH_CLIENT_REQUEST
       - HEADLESS_PIN
       - DOMCAP_PIN
       - MOBILE_PIN
@@ -23671,6 +26359,7 @@ components:
       - "WHITEBOARD_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming whiteboard conversation."
       - "SCREEN_SHARING_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming screen sharing conversation."
       - "VISITOR_COBROWSING: (Api initiated, visitor centered) A visitor creates a conversation via API which is not added to the queue and where he can invite other visitor to do embedded"
+      - "BRANCH_CLIENT_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming conversation from a branch client."
       - "HEADLESS_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join an universal co-browsing conversation."
       - "DOMCAP_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join an embedded co-browsing conversation."
       - "MOBILE_PIN: (Agent initiated, visitor centered) An agent creates a conversation with a PIN invitation for the visitor to join a mobile co-browsing conversation."
@@ -24772,6 +27461,16 @@ components:
       - BODY
       - BUTTON
       - CAROUSEL
+    ETextBoxAlign:
+      type: string
+      enum:
+      - START
+      - MIDDLE
+      - END
+      x-enum-descriptions:
+      - START
+      - MIDDLE
+      - END
     ETextQuestionType:
       type: string
       description: Type of a question message. Defines the reply value of a text message.
@@ -27594,6 +30293,129 @@ components:
           IN: '#/components/schemas/InInvitationCreatorTypeOperator'
           NOT_EQUALS: '#/components/schemas/NotEqualsInvitationCreatorTypeOperator'
           NOT_IN: '#/components/schemas/NotInInvitationCreatorTypeOperator'
+    InvitationReservationDeclinedEvent:
+      type: object
+      description: Invitation reservation declined event
+      properties:
+        $_type:
+          type: string
+          default: InvitationReservationDeclinedEvent
+          enum:
+          - InvitationReservationDeclinedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        invitationId:
+          type: string
+          description: Id of the invitation
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        token:
+          type: string
+          description: Token (digits for pin or character sequence) requested to redeem or revoke the invitation
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the event was created
+        creatorType:
+          $ref: '#/components/schemas/EInvitationCreatorType'
+        creatorPerson:
+          $ref: '#/components/schemas/PersonData'
+        contextPersonInfo:
+          $ref: '#/components/schemas/ContextPersonInfo'
+        target:
+          $ref: '#/components/schemas/ConversationRecipientData'
+        reservationPerson:
+          $ref: '#/components/schemas/PersonData'
+    InvitationReservationTimedOutEvent:
+      type: object
+      description: Invitation reservation timed out event
+      properties:
+        $_type:
+          type: string
+          default: InvitationReservationTimedOutEvent
+          enum:
+          - InvitationReservationTimedOutEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        invitationId:
+          type: string
+          description: Id of the invitation
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        token:
+          type: string
+          description: Token (digits for pin or character sequence) requested to redeem or revoke the invitation
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the event was created
+        creatorType:
+          $ref: '#/components/schemas/EInvitationCreatorType'
+        creatorPerson:
+          $ref: '#/components/schemas/PersonData'
+        contextPersonInfo:
+          $ref: '#/components/schemas/ContextPersonInfo'
+        target:
+          $ref: '#/components/schemas/ConversationRecipientData'
+        reservationPerson:
+          $ref: '#/components/schemas/PersonData'
+    InvitationReservedEvent:
+      type: object
+      description: Invitation reservation reserved event
+      properties:
+        $_type:
+          type: string
+          default: InvitationReservedEvent
+          enum:
+          - InvitationReservedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        invitationId:
+          type: string
+          description: Id of the invitation
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        token:
+          type: string
+          description: Token (digits for pin or character sequence) requested to redeem or revoke the invitation
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the event was created
+        creatorType:
+          $ref: '#/components/schemas/EInvitationCreatorType'
+        creatorPerson:
+          $ref: '#/components/schemas/PersonData'
+        contextPersonInfo:
+          $ref: '#/components/schemas/ContextPersonInfo'
+        target:
+          $ref: '#/components/schemas/ConversationRecipientData'
+        reservationPerson:
+          $ref: '#/components/schemas/PersonData'
     InvitationStateConversationInvitationSearchFilter:
       type: object
       properties:
@@ -29009,6 +31831,30 @@ components:
           - NameApiKeySearchFilter
         field:
           $ref: '#/components/schemas/EApiKeySearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    NameBranchClientSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NameBranchClientSearchFilter
+          enum:
+          - NameBranchClientSearchFilter
+        field:
+          $ref: '#/components/schemas/EBranchClientSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/StringOperator'
+    NameBranchSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NameBranchSearchFilter
+          enum:
+          - NameBranchSearchFilter
+        field:
+          $ref: '#/components/schemas/EBranchSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
     NameConversationTemplateSearchFilter:
