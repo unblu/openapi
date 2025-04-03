@@ -30,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationParticipationData.JSON_PROPERTY_LEFT_REASON,
 	ConversationParticipationData.JSON_PROPERTY_LEFT_COMMENT,
 	ConversationParticipationData.JSON_PROPERTY_CONVERSATION_RATING,
+	ConversationParticipationData.JSON_PROPERTY_CONVERSATION_FEEDBACK,
 	ConversationParticipationData.JSON_PROPERTY_HIDDEN,
 	ConversationParticipationData.JSON_PROPERTY_CONVERSATION_STARRED,
 	ConversationParticipationData.JSON_PROPERTY_CONVERSATION_ID,
@@ -113,6 +114,10 @@ public class ConversationParticipationData {
 	public static final String JSON_PROPERTY_CONVERSATION_RATING = "conversationRating";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_RATING)
 	private Float conversationRating;
+
+	public static final String JSON_PROPERTY_CONVERSATION_FEEDBACK = "conversationFeedback";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_FEEDBACK)
+	private String conversationFeedback;
 
 	public static final String JSON_PROPERTY_HIDDEN = "hidden";
 	@JsonProperty(JSON_PROPERTY_HIDDEN)
@@ -340,6 +345,25 @@ public class ConversationParticipationData {
 		this.conversationRating = conversationRating;
 	}
 
+	public ConversationParticipationData conversationFeedback(String conversationFeedback) {
+		this.conversationFeedback = conversationFeedback;
+		return this;
+	}
+
+	/**
+	 * The feedback the participant gave on the conversation. Null until the participant gives feedback.
+	 * 
+	 * @return conversationFeedback
+	 **/
+	@ApiModelProperty(value = "The feedback the participant gave on the conversation. Null until the participant gives feedback.")
+	public String getConversationFeedback() {
+		return conversationFeedback;
+	}
+
+	public void setConversationFeedback(String conversationFeedback) {
+		this.conversationFeedback = conversationFeedback;
+	}
+
 	public ConversationParticipationData hidden(Boolean hidden) {
 		this.hidden = hidden;
 		return this;
@@ -436,6 +460,7 @@ public class ConversationParticipationData {
 				Objects.equals(this.leftReason, conversationParticipationData.leftReason) &&
 				Objects.equals(this.leftComment, conversationParticipationData.leftComment) &&
 				Objects.equals(this.conversationRating, conversationParticipationData.conversationRating) &&
+				Objects.equals(this.conversationFeedback, conversationParticipationData.conversationFeedback) &&
 				Objects.equals(this.hidden, conversationParticipationData.hidden) &&
 				Objects.equals(this.conversationStarred, conversationParticipationData.conversationStarred) &&
 				Objects.equals(this.conversationId, conversationParticipationData.conversationId) &&
@@ -444,7 +469,7 @@ public class ConversationParticipationData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, state, createdTimestamp, onboardingTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, leftReason, leftComment, conversationRating, hidden, conversationStarred, conversationId, person);
+		return Objects.hash($type, id, state, createdTimestamp, onboardingTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, leftReason, leftComment, conversationRating, conversationFeedback, hidden, conversationStarred, conversationId, person);
 	}
 
 	@Override
@@ -462,6 +487,7 @@ public class ConversationParticipationData {
 		sb.append("    leftReason: ").append(toIndentedString(leftReason)).append("\n");
 		sb.append("    leftComment: ").append(toIndentedString(leftComment)).append("\n");
 		sb.append("    conversationRating: ").append(toIndentedString(conversationRating)).append("\n");
+		sb.append("    conversationFeedback: ").append(toIndentedString(conversationFeedback)).append("\n");
 		sb.append("    hidden: ").append(toIndentedString(hidden)).append("\n");
 		sb.append("    conversationStarred: ").append(toIndentedString(conversationStarred)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");

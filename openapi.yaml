@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.15.3
+  version: 8.16.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -1565,7 +1565,7 @@ paths:
                   modificationTimestamp: null
                   version: null
                   accountId: null
-                  name: test-bot-1
+                  name: test-bot-default-
                   description: null
                   botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                   onboardingOrder: 10
@@ -1632,7 +1632,7 @@ paths:
                     modificationTimestamp: 1548979200000
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
-                    name: test-bot-1
+                    name: test-bot-default-
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     onboardingOrder: 10
@@ -2055,7 +2055,7 @@ paths:
                     modificationTimestamp: 1548979200000
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
-                    name: test-bot-1
+                    name: test-bot-disabled-
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     onboardingOrder: 10
@@ -2142,7 +2142,7 @@ paths:
                     modificationTimestamp: 1548979200000
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
-                    name: test-bot-1
+                    name: test-bot-disabled-
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     onboardingOrder: 10
@@ -2894,7 +2894,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
-  /branchclients/{id}/delete:
+  /branchclients/{branchClientId}/delete:
     delete:
       tags:
       - BranchClients
@@ -2902,7 +2902,7 @@ paths:
       description: Deletes a branch client<br>
       operationId: branchClientsDelete
       parameters:
-      - name: id
+      - name: branchClientId
         in: path
         description: The ID of the branch client to delete
         required: true
@@ -2980,7 +2980,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
-  /branchclients/{id}/read:
+  /branchclients/{branchClientId}/read:
     get:
       tags:
       - BranchClients
@@ -2988,8 +2988,9 @@ paths:
       description: Returns the branch client for the given ID<br>
       operationId: branchClientsRead
       parameters:
-      - name: id
+      - name: branchClientId
         in: path
+        description: ID of the branch client
         required: true
         schema:
           type: string
@@ -3531,7 +3532,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
-  /branches/{id}/delete:
+  /branches/{branchId}/delete:
     delete:
       tags:
       - Branches
@@ -3539,7 +3540,7 @@ paths:
       description: Deletes a branch. This will also delete all related branch clients.<br>
       operationId: branchesDelete
       parameters:
-      - name: id
+      - name: branchId
         in: path
         description: The ID of the branch to delete
         required: true
@@ -3556,7 +3557,7 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
-  /branches/{id}/read:
+  /branches/{branchId}/read:
     get:
       tags:
       - Branches
@@ -3564,8 +3565,9 @@ paths:
       description: Returns the branch for the given branch ID<br>
       operationId: branchesRead
       parameters:
-      - name: id
+      - name: branchId
         in: path
+        description: ID of the branch
         required: true
         schema:
           type: string
@@ -13818,6 +13820,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.participation.conversation_feedback:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.conversation_feedback
+              description: An event triggered every time a participant leaves feedback on a conversation
+              operationId: conversationParticipationConversationFeedbackCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ParticipationConversationFeedbackEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.participation.conversation_rated:
           '{$request.body#/endpoint}':
             post:
@@ -21166,6 +21182,9 @@ components:
           type: number
           format: float
           description: The rating the participant gave the conversation. The rating is mapped to a number from 0-1. Null until the participant rates the conversation.
+        conversationFeedback:
+          type: string
+          description: The feedback the participant gave on the conversation. Null until the participant gives feedback.
         hidden:
           type: boolean
           description: Flag indicating whether the participant is hidden
@@ -29022,6 +29041,9 @@ components:
           type: number
           format: float
           description: Participant's rating of the conversation (between 0 and 1)
+        conversationFeedback:
+          type: string
+          description: Participant's feedback on the conversation
         participationType:
           $ref: '#/components/schemas/EConversationRealVisitorParticipationType'
         person:
@@ -33325,6 +33347,9 @@ components:
           type: number
           format: float
           description: Participant's rating of the conversation (between 0 and 1)
+        conversationFeedback:
+          type: string
+          description: Participant's feedback of the conversation
         hidden:
           type: boolean
           description: Indicates if the participant is hidden in the current conversation.
@@ -33373,6 +33398,27 @@ components:
           default: ParticipationActivatedEvent
           enum:
           - ParticipationActivatedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: '#/components/schemas/ConversationParticipationData'
+    ParticipationConversationFeedbackEvent:
+      type: object
+      description: An event triggered every time a participant leaves feedback on a conversation
+      properties:
+        $_type:
+          type: string
+          default: ParticipationConversationFeedbackEvent
+          enum:
+          - ParticipationConversationFeedbackEvent
         timestamp:
           type: integer
           format: int64

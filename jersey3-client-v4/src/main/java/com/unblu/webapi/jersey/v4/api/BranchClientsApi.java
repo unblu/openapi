@@ -93,31 +93,31 @@ public class BranchClientsApi {
 	/**
 	 * delete Deletes a branch client&lt;br&gt;
 	 * 
-	 * @param id The ID of the branch client to delete (required)
+	 * @param branchClientId The ID of the branch client to delete (required)
 	 * @throws ApiException if fails to make API call
 	 */
-	public void branchClientsDelete(String id) throws ApiException {
+	public void branchClientsDelete(String branchClientId) throws ApiException {
 
-		branchClientsDeleteWithHttpInfo(id);
+		branchClientsDeleteWithHttpInfo(branchClientId);
 	}
 
 	/**
 	 * delete Deletes a branch client&lt;br&gt;
 	 * 
-	 * @param id The ID of the branch client to delete (required)
+	 * @param branchClientId The ID of the branch client to delete (required)
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<Void> branchClientsDeleteWithHttpInfo(String id) throws ApiException {
+	public ApiResponse<Void> branchClientsDeleteWithHttpInfo(String branchClientId) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
-		// verify the required parameter 'id' is set
-		if (id == null) {
-			throw new ApiException(400, "Missing the required parameter 'id' when calling branchClientsDelete");
+		// verify the required parameter 'branchClientId' is set
+		if (branchClientId == null) {
+			throw new ApiException(400, "Missing the required parameter 'branchClientId' when calling branchClientsDelete");
 		}
 
 		// create path and map variables
-		String localVarPath = "/branchclients/{id}/delete"
-				.replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
+		String localVarPath = "/branchclients/{branchClientId}/delete"
+				.replaceAll("\\{" + "branchClientId" + "\\}", apiClient.escapeString(branchClientId.toString()));
 
 		// query params
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -252,32 +252,32 @@ public class BranchClientsApi {
 	/**
 	 * read Returns the branch client for the given ID&lt;br&gt;
 	 * 
-	 * @param id (required)
+	 * @param branchClientId ID of the branch client (required)
 	 * @return BranchClientData
 	 * @throws ApiException if fails to make API call
 	 */
-	public BranchClientData branchClientsRead(String id) throws ApiException {
-		return branchClientsReadWithHttpInfo(id).getData();
+	public BranchClientData branchClientsRead(String branchClientId) throws ApiException {
+		return branchClientsReadWithHttpInfo(branchClientId).getData();
 	}
 
 	/**
 	 * read Returns the branch client for the given ID&lt;br&gt;
 	 * 
-	 * @param id (required)
+	 * @param branchClientId ID of the branch client (required)
 	 * @return ApiResponse&lt;BranchClientData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<BranchClientData> branchClientsReadWithHttpInfo(String id) throws ApiException {
+	public ApiResponse<BranchClientData> branchClientsReadWithHttpInfo(String branchClientId) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
-		// verify the required parameter 'id' is set
-		if (id == null) {
-			throw new ApiException(400, "Missing the required parameter 'id' when calling branchClientsRead");
+		// verify the required parameter 'branchClientId' is set
+		if (branchClientId == null) {
+			throw new ApiException(400, "Missing the required parameter 'branchClientId' when calling branchClientsRead");
 		}
 
 		// create path and map variables
-		String localVarPath = "/branchclients/{id}/read"
-				.replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
+		String localVarPath = "/branchclients/{branchClientId}/read"
+				.replaceAll("\\{" + "branchClientId" + "\\}", apiClient.escapeString(branchClientId.toString()));
 
 		// query params
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();

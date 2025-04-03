@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ExternalParticipantHistoryData.JSON_PROPERTY_LEFT_REASON,
 	ExternalParticipantHistoryData.JSON_PROPERTY_LEFT_COMMENT,
 	ExternalParticipantHistoryData.JSON_PROPERTY_CONVERSATION_RATING,
+	ExternalParticipantHistoryData.JSON_PROPERTY_CONVERSATION_FEEDBACK,
 	ExternalParticipantHistoryData.JSON_PROPERTY_PARTICIPATION_TYPE,
 	ExternalParticipantHistoryData.JSON_PROPERTY_PERSON,
 	ExternalParticipantHistoryData.JSON_PROPERTY_EXTERNAL_MESSENGER_CONTACT,
@@ -107,6 +108,10 @@ public class ExternalParticipantHistoryData {
 	public static final String JSON_PROPERTY_CONVERSATION_RATING = "conversationRating";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_RATING)
 	private Float conversationRating;
+
+	public static final String JSON_PROPERTY_CONVERSATION_FEEDBACK = "conversationFeedback";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_FEEDBACK)
+	private String conversationFeedback;
 
 	public static final String JSON_PROPERTY_PARTICIPATION_TYPE = "participationType";
 	@JsonProperty(JSON_PROPERTY_PARTICIPATION_TYPE)
@@ -313,6 +318,25 @@ public class ExternalParticipantHistoryData {
 		this.conversationRating = conversationRating;
 	}
 
+	public ExternalParticipantHistoryData conversationFeedback(String conversationFeedback) {
+		this.conversationFeedback = conversationFeedback;
+		return this;
+	}
+
+	/**
+	 * Participant&#39;s feedback on the conversation
+	 * 
+	 * @return conversationFeedback
+	 **/
+	@ApiModelProperty(value = "Participant's feedback on the conversation")
+	public String getConversationFeedback() {
+		return conversationFeedback;
+	}
+
+	public void setConversationFeedback(String conversationFeedback) {
+		this.conversationFeedback = conversationFeedback;
+	}
+
 	public ExternalParticipantHistoryData participationType(EConversationRealVisitorParticipationType participationType) {
 		this.participationType = participationType;
 		return this;
@@ -389,6 +413,7 @@ public class ExternalParticipantHistoryData {
 				Objects.equals(this.leftReason, externalParticipantHistoryData.leftReason) &&
 				Objects.equals(this.leftComment, externalParticipantHistoryData.leftComment) &&
 				Objects.equals(this.conversationRating, externalParticipantHistoryData.conversationRating) &&
+				Objects.equals(this.conversationFeedback, externalParticipantHistoryData.conversationFeedback) &&
 				Objects.equals(this.participationType, externalParticipantHistoryData.participationType) &&
 				Objects.equals(this.person, externalParticipantHistoryData.person) &&
 				Objects.equals(this.externalMessengerContact, externalParticipantHistoryData.externalMessengerContact);
@@ -396,7 +421,7 @@ public class ExternalParticipantHistoryData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, state, createdTimestamp, joinedTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, leftReason, leftComment, conversationRating, participationType, person, externalMessengerContact);
+		return Objects.hash($type, state, createdTimestamp, joinedTimestamp, activationTimestamp, offboardingTimestamp, leftTimestamp, leftReason, leftComment, conversationRating, conversationFeedback, participationType, person, externalMessengerContact);
 	}
 
 	@Override
@@ -413,6 +438,7 @@ public class ExternalParticipantHistoryData {
 		sb.append("    leftReason: ").append(toIndentedString(leftReason)).append("\n");
 		sb.append("    leftComment: ").append(toIndentedString(leftComment)).append("\n");
 		sb.append("    conversationRating: ").append(toIndentedString(conversationRating)).append("\n");
+		sb.append("    conversationFeedback: ").append(toIndentedString(conversationFeedback)).append("\n");
 		sb.append("    participationType: ").append(toIndentedString(participationType)).append("\n");
 		sb.append("    person: ").append(toIndentedString(person)).append("\n");
 		sb.append("    externalMessengerContact: ").append(toIndentedString(externalMessengerContact)).append("\n");
