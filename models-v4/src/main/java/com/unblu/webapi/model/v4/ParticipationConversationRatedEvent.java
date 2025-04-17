@@ -14,9 +14,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a participant rates a conversation
+ * An event triggered every time a participant rates a conversation &lt;p&gt; Supported filter keys: &lt;ul&gt;
+ * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.PARTICIPANT_PERSON_ID&#x60;:
+ * participant person ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "An event triggered every time a participant rates a conversation")
+@ApiModel(description = "An event triggered every time a participant rates a conversation <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>")
 
 @JsonPropertyOrder({
 	ParticipationConversationRatedEvent.JSON_PROPERTY_$_TYPE,

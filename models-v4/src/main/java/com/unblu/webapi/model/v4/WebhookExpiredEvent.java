@@ -14,26 +14,24 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a participation changes from \\\&quot;hidden\\\&quot; to \\\&quot;visible\\\&quot; &lt;p&gt; Supported filter keys: &lt;ul&gt;
- * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.PARTICIPANT_PERSON_ID&#x60;:
- * participant person ID&lt;/li&gt; &lt;/ul&gt;
+ * Event sent when a webhook registration expires. At this point, there&#39;s no way to keep the registration alive or to restore it.
  */
-@ApiModel(description = "An event triggered every time a participation changes from \\\"hidden\\\" to \\\"visible\\\" <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>")
+@ApiModel(description = "Event sent when a webhook registration expires. At this point, there's no way to keep the registration alive or to restore it.")
 
 @JsonPropertyOrder({
-	ParticipationUnhiddenEvent.JSON_PROPERTY_$_TYPE,
-	ParticipationUnhiddenEvent.JSON_PROPERTY_TIMESTAMP,
-	ParticipationUnhiddenEvent.JSON_PROPERTY_EVENT_TYPE,
-	ParticipationUnhiddenEvent.JSON_PROPERTY_ACCOUNT_ID,
-	ParticipationUnhiddenEvent.JSON_PROPERTY_PARTICIPATION,
+	WebhookExpiredEvent.JSON_PROPERTY_$_TYPE,
+	WebhookExpiredEvent.JSON_PROPERTY_TIMESTAMP,
+	WebhookExpiredEvent.JSON_PROPERTY_EVENT_TYPE,
+	WebhookExpiredEvent.JSON_PROPERTY_ACCOUNT_ID,
+	WebhookExpiredEvent.JSON_PROPERTY_WEBHOOK_REGISTRATION,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class ParticipationUnhiddenEvent {
+public class WebhookExpiredEvent {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PARTICIPATIONUNHIDDENEVENT("ParticipationUnhiddenEvent");
+		WEBHOOKEXPIREDEVENT("WebhookExpiredEvent");
 
 		private String value;
 
@@ -58,13 +56,13 @@ public class ParticipationUnhiddenEvent {
 					return b;
 				}
 			}
-			return TypeEnum.PARTICIPATIONUNHIDDENEVENT;
+			return TypeEnum.WEBHOOKEXPIREDEVENT;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PARTICIPATIONUNHIDDENEVENT;
+	private TypeEnum $type = TypeEnum.WEBHOOKEXPIREDEVENT;
 
 	public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
 	@JsonProperty(JSON_PROPERTY_TIMESTAMP)
@@ -78,11 +76,11 @@ public class ParticipationUnhiddenEvent {
 	@JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
 	private String accountId;
 
-	public static final String JSON_PROPERTY_PARTICIPATION = "participation";
-	@JsonProperty(JSON_PROPERTY_PARTICIPATION)
-	private ConversationParticipationData participation = null;
+	public static final String JSON_PROPERTY_WEBHOOK_REGISTRATION = "webhookRegistration";
+	@JsonProperty(JSON_PROPERTY_WEBHOOK_REGISTRATION)
+	private WebhookRegistration webhookRegistration = null;
 
-	public ParticipationUnhiddenEvent $type(TypeEnum $type) {
+	public WebhookExpiredEvent $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -101,7 +99,7 @@ public class ParticipationUnhiddenEvent {
 		this.$type = $type;
 	}
 
-	public ParticipationUnhiddenEvent timestamp(Long timestamp) {
+	public WebhookExpiredEvent timestamp(Long timestamp) {
 		this.timestamp = timestamp;
 		return this;
 	}
@@ -120,7 +118,7 @@ public class ParticipationUnhiddenEvent {
 		this.timestamp = timestamp;
 	}
 
-	public ParticipationUnhiddenEvent eventType(String eventType) {
+	public WebhookExpiredEvent eventType(String eventType) {
 		this.eventType = eventType;
 		return this;
 	}
@@ -139,7 +137,7 @@ public class ParticipationUnhiddenEvent {
 		this.eventType = eventType;
 	}
 
-	public ParticipationUnhiddenEvent accountId(String accountId) {
+	public WebhookExpiredEvent accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -158,23 +156,23 @@ public class ParticipationUnhiddenEvent {
 		this.accountId = accountId;
 	}
 
-	public ParticipationUnhiddenEvent participation(ConversationParticipationData participation) {
-		this.participation = participation;
+	public WebhookExpiredEvent webhookRegistration(WebhookRegistration webhookRegistration) {
+		this.webhookRegistration = webhookRegistration;
 		return this;
 	}
 
 	/**
-	 * Get participation
+	 * Get webhookRegistration
 	 * 
-	 * @return participation
+	 * @return webhookRegistration
 	 **/
 	@ApiModelProperty(value = "")
-	public ConversationParticipationData getParticipation() {
-		return participation;
+	public WebhookRegistration getWebhookRegistration() {
+		return webhookRegistration;
 	}
 
-	public void setParticipation(ConversationParticipationData participation) {
-		this.participation = participation;
+	public void setWebhookRegistration(WebhookRegistration webhookRegistration) {
+		this.webhookRegistration = webhookRegistration;
 	}
 
 	@Override
@@ -185,28 +183,28 @@ public class ParticipationUnhiddenEvent {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ParticipationUnhiddenEvent participationUnhiddenEvent = (ParticipationUnhiddenEvent) o;
-		return Objects.equals(this.$type, participationUnhiddenEvent.$type) &&
-				Objects.equals(this.timestamp, participationUnhiddenEvent.timestamp) &&
-				Objects.equals(this.eventType, participationUnhiddenEvent.eventType) &&
-				Objects.equals(this.accountId, participationUnhiddenEvent.accountId) &&
-				Objects.equals(this.participation, participationUnhiddenEvent.participation);
+		WebhookExpiredEvent webhookExpiredEvent = (WebhookExpiredEvent) o;
+		return Objects.equals(this.$type, webhookExpiredEvent.$type) &&
+				Objects.equals(this.timestamp, webhookExpiredEvent.timestamp) &&
+				Objects.equals(this.eventType, webhookExpiredEvent.eventType) &&
+				Objects.equals(this.accountId, webhookExpiredEvent.accountId) &&
+				Objects.equals(this.webhookRegistration, webhookExpiredEvent.webhookRegistration);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, participation);
+		return Objects.hash($type, timestamp, eventType, accountId, webhookRegistration);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ParticipationUnhiddenEvent {\n");
+		sb.append("class WebhookExpiredEvent {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
-		sb.append("    participation: ").append(toIndentedString(participation)).append("\n");
+		sb.append("    webhookRegistration: ").append(toIndentedString(webhookRegistration)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

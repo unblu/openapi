@@ -33,6 +33,8 @@ import io.swagger.annotations.ApiModelProperty;
 	WebhookRegistration.JSON_PROPERTY_ENDPOINT,
 	WebhookRegistration.JSON_PROPERTY_API_VERSION,
 	WebhookRegistration.JSON_PROPERTY_SECRET,
+	WebhookRegistration.JSON_PROPERTY_FILTERS,
+	WebhookRegistration.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
 	WebhookRegistration.JSON_PROPERTY_EVENTS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -117,6 +119,14 @@ public class WebhookRegistration {
 	public static final String JSON_PROPERTY_SECRET = "secret";
 	@JsonProperty(JSON_PROPERTY_SECRET)
 	private String secret;
+
+	public static final String JSON_PROPERTY_FILTERS = "filters";
+	@JsonProperty(JSON_PROPERTY_FILTERS)
+	private List<WebhookRegistrationFilter> filters = null;
+
+	public static final String JSON_PROPERTY_EXPIRATION_TIMESTAMP = "expirationTimestamp";
+	@JsonProperty(JSON_PROPERTY_EXPIRATION_TIMESTAMP)
+	private Long expirationTimestamp;
 
 	public static final String JSON_PROPERTY_EVENTS = "events";
 	@JsonProperty(JSON_PROPERTY_EVENTS)
@@ -356,6 +366,56 @@ public class WebhookRegistration {
 		this.secret = secret;
 	}
 
+	public WebhookRegistration filters(List<WebhookRegistrationFilter> filters) {
+		this.filters = filters;
+		return this;
+	}
+
+	public WebhookRegistration addFiltersItem(WebhookRegistrationFilter filtersItem) {
+		if (this.filters == null) {
+			this.filters = new ArrayList<>();
+		}
+		this.filters.add(filtersItem);
+		return this;
+	}
+
+	/**
+	 * Defines the filters for the webhook registration. Only events that match all the specified filters will be delivered. Webhook registrations with at least one
+	 * filter defined must also specify an &#x60;expirationTimestamp. Please refer to the documentation of each event to understand the filters they support, as
+	 * each event supports a specific set of filters. If the webhook registration is for multiple events, all the filters you apply must be supported by all the
+	 * events.
+	 * 
+	 * @return filters
+	 **/
+	@ApiModelProperty(value = "Defines the filters for the webhook registration. Only events that match all the specified filters will be delivered. Webhook registrations with at least one filter defined must also specify an `expirationTimestamp. Please refer to the documentation of each event to understand the filters they support, as each event supports a specific set of filters. If the webhook registration is for multiple events, all the filters you apply must be supported by all the events.")
+	public List<WebhookRegistrationFilter> getFilters() {
+		return filters;
+	}
+
+	public void setFilters(List<WebhookRegistrationFilter> filters) {
+		this.filters = filters;
+	}
+
+	public WebhookRegistration expirationTimestamp(Long expirationTimestamp) {
+		this.expirationTimestamp = expirationTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when the webhook registration will expire. Mandatory for webhook registrations that define filters. The webhook registration is
+	 * automatically deleted when the expiration time is reached. This timestamp can be updated at any time to extend the life of the webhook registration.
+	 * 
+	 * @return expirationTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when the webhook registration will expire. Mandatory for webhook registrations that define filters. The webhook registration is automatically deleted when the expiration time is reached. This timestamp can be updated at any time to extend the life of the webhook registration.")
+	public Long getExpirationTimestamp() {
+		return expirationTimestamp;
+	}
+
+	public void setExpirationTimestamp(Long expirationTimestamp) {
+		this.expirationTimestamp = expirationTimestamp;
+	}
+
 	public WebhookRegistration events(List<String> events) {
 		this.events = events;
 		return this;
@@ -404,12 +464,14 @@ public class WebhookRegistration {
 				Objects.equals(this.endpoint, webhookRegistration.endpoint) &&
 				Objects.equals(this.apiVersion, webhookRegistration.apiVersion) &&
 				Objects.equals(this.secret, webhookRegistration.secret) &&
+				Objects.equals(this.filters, webhookRegistration.filters) &&
+				Objects.equals(this.expirationTimestamp, webhookRegistration.expirationTimestamp) &&
 				Objects.equals(this.events, webhookRegistration.events);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, status, description, endpoint, apiVersion, secret, events);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, status, description, endpoint, apiVersion, secret, filters, expirationTimestamp, events);
 	}
 
 	@Override
@@ -428,6 +490,8 @@ public class WebhookRegistration {
 		sb.append("    endpoint: ").append(toIndentedString(endpoint)).append("\n");
 		sb.append("    apiVersion: ").append(toIndentedString(apiVersion)).append("\n");
 		sb.append("    secret: ").append(toIndentedString(secret)).append("\n");
+		sb.append("    filters: ").append(toIndentedString(filters)).append("\n");
+		sb.append("    expirationTimestamp: ").append(toIndentedString(expirationTimestamp)).append("\n");
 		sb.append("    events: ").append(toIndentedString(events)).append("\n");
 		sb.append("}");
 		return sb.toString();

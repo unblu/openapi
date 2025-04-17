@@ -14,9 +14,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a conversation&#39;s state changes from ONBOARDING to QUEUED
+ * An event triggered every time a conversation&#39;s state changes from ONBOARDING to QUEUED &lt;p&gt; Supported filter keys: &lt;ul&gt;
+ * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.PARTICIPANT_PERSON_ID&#x60;:
+ * participant person ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "An event triggered every time a conversation's state changes from ONBOARDING to QUEUED")
+@ApiModel(description = "An event triggered every time a conversation's state changes from ONBOARDING to QUEUED <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>")
 
 @JsonPropertyOrder({
 	ConversationQueuedEvent.JSON_PROPERTY_$_TYPE,

@@ -14,9 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a visitor person&#39;s state changes
+ * An event triggered every time a visitor person&#39;s state changes &lt;p&gt; Supported filter keys: &lt;ul&gt;
+ * &lt;li&gt;&#x60;ETypedEventFilterKey.PERSON_ID&#x60;: person ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "An event triggered every time a visitor person's state changes")
+@ApiModel(description = "An event triggered every time a visitor person's state changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.PERSON_ID`: person ID</li> </ul>")
 
 @JsonPropertyOrder({
 	VisitorPersonStateChangedEvent.JSON_PROPERTY_$_TYPE,

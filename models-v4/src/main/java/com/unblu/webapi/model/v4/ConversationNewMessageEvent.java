@@ -14,9 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Event emitted when a new message is sent.
+ * Event emitted when a new message is sent. &lt;p&gt; Supported filter keys: &lt;ul&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;:
+ * conversation ID&lt;/li&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.PARTICIPANT_PERSON_ID&#x60;: sender person ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Event emitted when a new message is sent.")
+@ApiModel(description = "Event emitted when a new message is sent. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: sender person ID</li> </ul>")
 
 @JsonPropertyOrder({
 	ConversationNewMessageEvent.JSON_PROPERTY_$_TYPE,

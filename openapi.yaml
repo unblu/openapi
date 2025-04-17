@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.16.2
+  version: 8.17.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -1536,7 +1536,7 @@ paths:
                   modificationTimestamp: null
                   version: null
                   accountId: null
-                  name: test-bot-1
+                  name: adminApi_createBot_botCreated_
                   description: null
                   botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                   onboardingOrder: 10
@@ -1603,7 +1603,7 @@ paths:
                     modificationTimestamp: 1548979200000
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
-                    name: test-bot-1
+                    name: adminApi_createBot_botCreated_
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     onboardingOrder: 10
@@ -2084,7 +2084,7 @@ paths:
                     modificationTimestamp: 1548979200000
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
-                    name: test-bot-1
+                    name: createdBot_getByName_botMatches_
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     onboardingOrder: 10
@@ -2171,7 +2171,7 @@ paths:
                     modificationTimestamp: 1548979200000
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
-                    name: test-bot-1
+                    name: createdBot_readBot_valideFieldsMatch_
                     description: null
                     botPersonId: BoL9zZSbQeGGXMfCLxWZ4g
                     onboardingOrder: 10
@@ -2812,7 +2812,9 @@ paths:
                     type: null
                     url: '...'
                     linkTarget: _blank
-                    autoOpen: true
+                    autoOpenOnConnect: true
+                    autoOpenOnCallEnd: false
+                    autoOpenOnConversationEnd: false
                     iconId: icon_id
         required: true
       responses:
@@ -2886,7 +2888,9 @@ paths:
                       type: OTHER
                       url: '...'
                       linkTarget: _blank
-                      autoOpen: true
+                      autoOpenOnConnect: true
+                      autoOpenOnCallEnd: false
+                      autoOpenOnConversationEnd: false
                       iconId: icon_id
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -3141,7 +3145,9 @@ paths:
                     type: null
                     url: '...'
                     linkTarget: _blank
-                    autoOpen: true
+                    autoOpenOnConnect: true
+                    autoOpenOnCallEnd: false
+                    autoOpenOnConversationEnd: false
                     iconId: icon_id
         required: true
       responses:
@@ -3325,7 +3331,9 @@ paths:
                       type: null
                       url: '...'
                       linkTarget: _blank
-                      autoOpen: true
+                      autoOpenOnConnect: true
+                      autoOpenOnCallEnd: false
+                      autoOpenOnConversationEnd: false
                       iconId: icon_id
                   branchDevices:
                   - $_type: BranchDeviceData
@@ -3472,7 +3480,9 @@ paths:
                         type: OTHER
                         url: '...'
                         linkTarget: _blank
-                        autoOpen: true
+                        autoOpenOnConnect: true
+                        autoOpenOnCallEnd: false
+                        autoOpenOnConversationEnd: false
                         iconId: icon_id
                     branchDevices:
                     - $_type: BranchDeviceData
@@ -3739,7 +3749,9 @@ paths:
                       type: null
                       url: '...'
                       linkTarget: _blank
-                      autoOpen: true
+                      autoOpenOnConnect: true
+                      autoOpenOnCallEnd: false
+                      autoOpenOnConversationEnd: false
                       iconId: icon_id
                   branchDevices:
                   - $_type: BranchDeviceData
@@ -13306,7 +13318,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: agent_person_state.changed
-              description: An event triggered every time an agent person's state changes
+              description: "An event triggered every time an agent person's state changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.PERSON_ID`: person ID</li> </ul>"
               operationId: agentPersonStateChangedCallback
               requestBody:
                 content:
@@ -13558,7 +13570,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.active
-              description: An event triggered every time a conversation's state is set to ACTIVE
+              description: "An event triggered every time a conversation's state is set to ACTIVE <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationActiveCallback
               requestBody:
                 content:
@@ -13572,7 +13584,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.awaitedpersontype_changed
-              description: An event triggered every time the awaited person type of a conversation changes
+              description: "An event triggered every time the awaited person type of a conversation changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationAwaitedpersontypeChangedCallback
               requestBody:
                 content:
@@ -13726,7 +13738,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.created
-              description: An event triggered every time a conversation is created
+              description: "An event triggered every time a conversation is created <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationCreatedCallback
               requestBody:
                 content:
@@ -13740,7 +13752,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.ended
-              description: An event triggered every time a conversation is ended (all participants have finished their offboarding).
+              description: "An event triggered every time a conversation is ended (all participants have finished their offboarding). <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationEndedCallback
               requestBody:
                 content:
@@ -13754,7 +13766,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.message_state
-              description: Event emitted when message is delivered/read.
+              description: "Event emitted when message is delivered/read. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
               operationId: conversationMessageStateCallback
               requestBody:
                 content:
@@ -13768,7 +13780,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.new_message
-              description: Event emitted when a new message is sent.
+              description: "Event emitted when a new message is sent. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: sender person ID</li> </ul>"
               operationId: conversationNewMessageCallback
               requestBody:
                 content:
@@ -13782,7 +13794,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.offboarding
-              description: An event triggered every time a conversation's state is set to OFFBOARDING
+              description: "An event triggered every time a conversation's state is set to OFFBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationOffboardingCallback
               requestBody:
                 content:
@@ -13796,7 +13808,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.onboarding
-              description: An event triggered every time a conversation's state is set to ONBOARDING
+              description: "An event triggered every time a conversation's state is set to ONBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationOnboardingCallback
               requestBody:
                 content:
@@ -13810,7 +13822,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.activated
-              description: An event triggered every time a participation is activated
+              description: "An event triggered every time a participation is activated <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationActivatedCallback
               requestBody:
                 content:
@@ -13838,7 +13850,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.conversation_rated
-              description: An event triggered every time a participant rates a conversation
+              description: "An event triggered every time a participant rates a conversation <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationConversationRatedCallback
               requestBody:
                 content:
@@ -13852,7 +13864,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.created
-              description: An event triggered every time a participation is created
+              description: "An event triggered every time a participation is created <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationCreatedCallback
               requestBody:
                 content:
@@ -13866,7 +13878,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.hidden
-              description: An event triggered every time a participation is hidden
+              description: "An event triggered every time a participation is hidden <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationHiddenCallback
               requestBody:
                 content:
@@ -13880,7 +13892,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.left
-              description: An event triggered every time a participant leaves a conversation
+              description: "An event triggered every time a participant leaves a conversation <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationLeftCallback
               requestBody:
                 content:
@@ -13894,7 +13906,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.offboarding
-              description: An event triggered every time a participant starts the offboarding process
+              description: "An event triggered every time a participant starts the offboarding process <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationOffboardingCallback
               requestBody:
                 content:
@@ -13908,7 +13920,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.onboarding
-              description: An event triggered every time a participant starts the onboarding process
+              description: "An event triggered every time a participant starts the onboarding process <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationOnboardingCallback
               requestBody:
                 content:
@@ -13922,7 +13934,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.unhidden
-              description: An event triggered every time a participation changes from \"hidden\" to \"visible\"
+              description: "An event triggered every time a participation changes from \\\"hidden\\\" to \\\"visible\\\" <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationUnhiddenCallback
               requestBody:
                 content:
@@ -13936,7 +13948,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.participation.updated
-              description: An event triggered every time a participation changes
+              description: "An event triggered every time a participation changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationParticipationUpdatedCallback
               requestBody:
                 content:
@@ -13950,7 +13962,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.queued
-              description: An event triggered every time a conversation's state changes from ONBOARDING to QUEUED
+              description: "An event triggered every time a conversation's state changes from ONBOARDING to QUEUED <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationQueuedCallback
               requestBody:
                 content:
@@ -13964,7 +13976,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.reboarding
-              description: An event triggered every time a conversation's state is set to REBOARDING
+              description: "An event triggered every time a conversation's state is set to REBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationReboardingCallback
               requestBody:
                 content:
@@ -13978,7 +13990,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.recording_available
-              description: Event emitted when a conversation recording is available
+              description: "Event emitted when a conversation recording is available <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
               operationId: conversationRecordingAvailableCallback
               requestBody:
                 content:
@@ -13992,7 +14004,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.recording_failed
-              description: Event emitted when a conversation recording failed
+              description: "Event emitted when a conversation recording failed <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
               operationId: conversationRecordingFailedCallback
               requestBody:
                 content:
@@ -14006,7 +14018,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.recording_started
-              description: Event emitted when a conversation recording is started
+              description: "Event emitted when a conversation recording is started <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
               operationId: conversationRecordingStartedCallback
               requestBody:
                 content:
@@ -14020,7 +14032,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.requeued
-              description: An event triggered every time a conversation's state changes to QUEUED from any state other than ONBOARDING
+              description: "An event triggered every time a conversation's state changes to QUEUED from any state other than ONBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationRequeuedCallback
               requestBody:
                 content:
@@ -14034,7 +14046,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.unassigned
-              description: An event triggered every time a conversation's state is set to UNASSIGNED
+              description: "An event triggered every time a conversation's state is set to UNASSIGNED <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationUnassignedCallback
               requestBody:
                 content:
@@ -14048,7 +14060,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: conversation.updated
-              description: An event triggered every time a conversation is updated
+              description: "An event triggered every time a conversation is updated <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
               operationId: conversationUpdatedCallback
               requestBody:
                 content:
@@ -14528,13 +14540,27 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: visitor_person_state.changed
-              description: An event triggered every time a visitor person's state changes
+              description: "An event triggered every time a visitor person's state changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.PERSON_ID`: person ID</li> </ul>"
               operationId: visitorPersonStateChangedCallback
               requestBody:
                 content:
                   application/json:
                     schema:
                       $ref: '#/components/schemas/VisitorPersonStateChangedEvent'
+              responses:
+                "200":
+                  description: OK
+        webhook_registration.expired:
+          '{$request.body#/endpoint}':
+            post:
+              summary: webhook_registration.expired
+              description: "Event sent when a webhook registration expires. At this point, there's no way to keep the registration alive or to restore it."
+              operationId: webhookRegistrationExpiredCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/WebhookExpiredEvent'
               responses:
                 "200":
                   description: OK
@@ -14995,6 +15021,8 @@ components:
           $ref: '#/components/schemas/QuotaUsageData'
         users:
           $ref: '#/components/schemas/QuotaUsageData'
+        activeExternalWebhooks:
+          $ref: '#/components/schemas/QuotaUsageData'
         branches:
           $ref: '#/components/schemas/QuotaUsageData'
     AccountResult:
@@ -15420,7 +15448,7 @@ components:
           $ref: '#/components/schemas/VisibilityRuleLabelSelectionOperator'
     AgentPersonStateChangedEvent:
       type: object
-      description: An event triggered every time an agent person's state changes
+      description: "An event triggered every time an agent person's state changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.PERSON_ID`: person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -16609,7 +16637,7 @@ components:
           $ref: '#/components/schemas/TimestampOperator'
     AwaitedPersonTypeChangedEvent:
       type: object
-      description: An event triggered every time the awaited person type of a conversation changes
+      description: "An event triggered every time the awaited person type of a conversation changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -17601,9 +17629,15 @@ components:
         linkTarget:
           type: string
           description: Target when opening the link. Maximum of 250 characters. The default value is "_blank".
-        autoOpen:
+        autoOpenOnConnect:
           type: boolean
-          description: Open branch client link automatically once a connection is established
+          description: Open branch client link automatically once a connection to a branch client inside a conversation is established. <br> This triggers for the agent whenever he opens a conversation with a already connected branch client inside or when the conversation is transferred to another branch client.
+        autoOpenOnCallEnd:
+          type: boolean
+          description: Open branch client link automatically once the call ends
+        autoOpenOnConversationEnd:
+          type: boolean
+          description: Open branch client link automatically once the conversation ends
         iconId:
           type: string
           description: File ID of the icon
@@ -20135,7 +20169,7 @@ components:
           description: The country in which the visitor is (probable)
     ConversationActiveEvent:
       type: object
-      description: An event triggered every time a conversation's state is set to ACTIVE
+      description: "An event triggered every time a conversation's state is set to ACTIVE <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -20156,7 +20190,7 @@ components:
           $ref: '#/components/schemas/ConversationData'
     ConversationCreatedEvent:
       type: object
-      description: An event triggered every time a conversation is created
+      description: "An event triggered every time a conversation is created <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -20453,7 +20487,7 @@ components:
           NOT_IN: '#/components/schemas/NotInConversationEndReasonOperator'
     ConversationEndedEvent:
       type: object
-      description: An event triggered every time a conversation is ended (all participants have finished their offboarding).
+      description: "An event triggered every time a conversation is ended (all participants have finished their offboarding). <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21031,7 +21065,7 @@ components:
           description: Url of the link
     ConversationMessageStateEvent:
       type: object
-      description: Event emitted when message is delivered/read.
+      description: "Event emitted when message is delivered/read. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21058,7 +21092,7 @@ components:
           description: The conversation to which the message belongs to
     ConversationNewMessageEvent:
       type: object
-      description: Event emitted when a new message is sent.
+      description: "Event emitted when a new message is sent. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: sender person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21079,7 +21113,7 @@ components:
           $ref: '#/components/schemas/MessageData'
     ConversationOffboardingEvent:
       type: object
-      description: An event triggered every time a conversation's state is set to OFFBOARDING
+      description: "An event triggered every time a conversation's state is set to OFFBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21107,7 +21141,7 @@ components:
           description: The comment provided when ending the conversation. May be null.
     ConversationOnboardingEvent:
       type: object
-      description: An event triggered every time a conversation's state is set to ONBOARDING
+      description: "An event triggered every time a conversation's state is set to ONBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21225,7 +21259,7 @@ components:
           description: Maximal amount of items returned
     ConversationQueuedEvent:
       type: object
-      description: An event triggered every time a conversation's state changes from ONBOARDING to QUEUED
+      description: "An event triggered every time a conversation's state changes from ONBOARDING to QUEUED <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21246,7 +21280,7 @@ components:
           $ref: '#/components/schemas/ConversationData'
     ConversationReboardingEvent:
       type: object
-      description: An event triggered every time a conversation's state is set to REBOARDING
+      description: "An event triggered every time a conversation's state is set to REBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21294,7 +21328,7 @@ components:
           NOT_IN: '#/components/schemas/NotInConversationRecipientTypeOperator'
     ConversationRecordingAvailableEvent:
       type: object
-      description: Event emitted when a conversation recording is available
+      description: "Event emitted when a conversation recording is available <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21341,7 +21375,7 @@ components:
           $ref: '#/components/schemas/ERecordingEndReason'
     ConversationRecordingFailedEvent:
       type: object
-      description: Event emitted when a conversation recording failed
+      description: "Event emitted when a conversation recording failed <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21433,7 +21467,7 @@ components:
             $ref: '#/components/schemas/ConversationRecordingHistoryData'
     ConversationRecordingStartedEvent:
       type: object
-      description: Event emitted when a conversation recording is started
+      description: "Event emitted when a conversation recording is started <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21480,7 +21514,7 @@ components:
           description: utc timestamp when the conversation recording has started
     ConversationRequeuedEvent:
       type: object
-      description: An event triggered every time a conversation's state changes to QUEUED from any state other than ONBOARDING
+      description: "An event triggered every time a conversation's state changes to QUEUED from any state other than ONBOARDING <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21799,7 +21833,7 @@ components:
           description: Translated description of the corresponding description field of the main entity this translation belongs to
     ConversationUnassignedEvent:
       type: object
-      description: An event triggered every time a conversation's state is set to UNASSIGNED
+      description: "An event triggered every time a conversation's state is set to UNASSIGNED <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21820,7 +21854,7 @@ components:
           $ref: '#/components/schemas/ConversationData'
     ConversationUpdatedEvent:
       type: object
-      description: An event triggered every time a conversation is updated
+      description: "An event triggered every time a conversation is updated <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -27541,6 +27575,17 @@ components:
       - "IS_NOT_NULL: Check if the value is not null"
       - "IN_RANGE: Check if the value is in the range of the provided values. Results equal to the provided values are included."
       - "NOT_IN_RANGE: Check if the value is NOT in the range of the provided values. Results equal to the provided values are not included."
+    ETypedEventFilterKey:
+      type: string
+      description: "The filter that can be used to narrow down the events received by a webhook registration. When a key/value filter is specified in a webhook registration, only events matching the said filter will be dispatched to it. <p> Review the event's description for whether it supports a particular key."
+      enum:
+      - CONVERSATION_ID
+      - PARTICIPANT_PERSON_ID
+      - PERSON_ID
+      x-enum-descriptions:
+      - "CONVERSATION_ID: Filter by conversation ID"
+      - "PARTICIPANT_PERSON_ID: Filter by a conversation participant's person ID"
+      - "PERSON_ID: Filter by person ID"
     EUserOrderByField:
       type: string
       enum:
@@ -33391,7 +33436,7 @@ components:
           $ref: '#/components/schemas/IdListOperator'
     ParticipationActivatedEvent:
       type: object
-      description: An event triggered every time a participation is activated
+      description: "An event triggered every time a participation is activated <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33433,7 +33478,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationConversationRatedEvent:
       type: object
-      description: An event triggered every time a participant rates a conversation
+      description: "An event triggered every time a participant rates a conversation <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33454,7 +33499,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationCreatedEvent:
       type: object
-      description: An event triggered every time a participation is created
+      description: "An event triggered every time a participation is created <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33475,7 +33520,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationHiddenEvent:
       type: object
-      description: An event triggered every time a participation is hidden
+      description: "An event triggered every time a participation is hidden <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33496,7 +33541,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationLeftEvent:
       type: object
-      description: An event triggered every time a participant leaves a conversation
+      description: "An event triggered every time a participant leaves a conversation <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33517,7 +33562,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationOffboardingEvent:
       type: object
-      description: An event triggered every time a participant starts the offboarding process
+      description: "An event triggered every time a participant starts the offboarding process <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33538,7 +33583,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationOnboardingEvent:
       type: object
-      description: An event triggered every time a participant starts the onboarding process
+      description: "An event triggered every time a participant starts the onboarding process <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33559,7 +33604,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationUnhiddenEvent:
       type: object
-      description: An event triggered every time a participation changes from \"hidden\" to \"visible\"
+      description: "An event triggered every time a participation changes from \\\"hidden\\\" to \\\"visible\\\" <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -33580,7 +33625,7 @@ components:
           $ref: '#/components/schemas/ConversationParticipationData'
     ParticipationUpdatedEvent:
       type: object
-      description: An event triggered every time a participation changes
+      description: "An event triggered every time a participation changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -37519,7 +37564,7 @@ components:
           $ref: '#/components/schemas/VisibilityRuleLabelSelectionOperator'
     VisitorPersonStateChangedEvent:
       type: object
-      description: An event triggered every time a visitor person's state changes
+      description: "An event triggered every time a visitor person's state changes <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.PERSON_ID`: person ID</li> </ul>"
       properties:
         $_type:
           type: string
@@ -37652,6 +37697,27 @@ components:
           $ref: '#/components/schemas/AuditChangeType'
         auditEntity:
           type: string
+    WebhookExpiredEvent:
+      type: object
+      description: "Event sent when a webhook registration expires. At this point, there's no way to keep the registration alive or to restore it."
+      properties:
+        $_type:
+          type: string
+          default: WebhookExpiredEvent
+          enum:
+          - WebhookExpiredEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        webhookRegistration:
+          $ref: '#/components/schemas/WebhookRegistration'
     WebhookPingEvent:
       type: object
       description: Event send when using the `ping` to test a webhook
@@ -37716,11 +37782,34 @@ components:
         secret:
           type: string
           description: A secret which is send with each webhook event. Maximum length of 4000 characters. Can be omitted.
+        filters:
+          type: array
+          description: "Defines the filters for the webhook registration. Only events that match all the specified filters will be delivered. Webhook registrations with at least one filter defined must also specify an `expirationTimestamp. Please refer to the documentation of each event to understand the filters they support, as each event supports a specific set of filters. If the webhook registration is for multiple events, all the filters you apply must be supported by all the events."
+          items:
+            $ref: '#/components/schemas/WebhookRegistrationFilter'
+        expirationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the webhook registration will expire. Mandatory for webhook registrations that define filters. The webhook registration is automatically deleted when the expiration time is reached. This timestamp can be updated at any time to extend the life of the webhook registration.
         events:
           type: array
           description: "Events for which the webhook endpoint is called, if they occur. Can not be omitted. Check the Webhook Events for possible values."
           items:
             type: string
+    WebhookRegistrationFilter:
+      type: object
+      description: Model of a webhook registration event filter.
+      properties:
+        $_type:
+          type: string
+          default: WebhookRegistrationFilter
+          enum:
+          - WebhookRegistrationFilter
+        key:
+          $ref: '#/components/schemas/ETypedEventFilterKey'
+        value:
+          type: string
+          description: The value of the filter
     WebhookRegistrationList:
       type: object
       properties:

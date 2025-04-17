@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AccountQuotaUsageData.JSON_PROPERTY_DOMAINS,
 	AccountQuotaUsageData.JSON_PROPERTY_TEAMS,
 	AccountQuotaUsageData.JSON_PROPERTY_USERS,
+	AccountQuotaUsageData.JSON_PROPERTY_ACTIVE_EXTERNAL_WEBHOOKS,
 	AccountQuotaUsageData.JSON_PROPERTY_BRANCHES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -80,6 +81,10 @@ public class AccountQuotaUsageData {
 	public static final String JSON_PROPERTY_USERS = "users";
 	@JsonProperty(JSON_PROPERTY_USERS)
 	private QuotaUsageData users = null;
+
+	public static final String JSON_PROPERTY_ACTIVE_EXTERNAL_WEBHOOKS = "activeExternalWebhooks";
+	@JsonProperty(JSON_PROPERTY_ACTIVE_EXTERNAL_WEBHOOKS)
+	private QuotaUsageData activeExternalWebhooks = null;
 
 	public static final String JSON_PROPERTY_BRANCHES = "branches";
 	@JsonProperty(JSON_PROPERTY_BRANCHES)
@@ -180,6 +185,25 @@ public class AccountQuotaUsageData {
 		this.users = users;
 	}
 
+	public AccountQuotaUsageData activeExternalWebhooks(QuotaUsageData activeExternalWebhooks) {
+		this.activeExternalWebhooks = activeExternalWebhooks;
+		return this;
+	}
+
+	/**
+	 * Get activeExternalWebhooks
+	 * 
+	 * @return activeExternalWebhooks
+	 **/
+	@ApiModelProperty(value = "")
+	public QuotaUsageData getActiveExternalWebhooks() {
+		return activeExternalWebhooks;
+	}
+
+	public void setActiveExternalWebhooks(QuotaUsageData activeExternalWebhooks) {
+		this.activeExternalWebhooks = activeExternalWebhooks;
+	}
+
 	public AccountQuotaUsageData branches(QuotaUsageData branches) {
 		this.branches = branches;
 		return this;
@@ -213,12 +237,13 @@ public class AccountQuotaUsageData {
 				Objects.equals(this.domains, accountQuotaUsageData.domains) &&
 				Objects.equals(this.teams, accountQuotaUsageData.teams) &&
 				Objects.equals(this.users, accountQuotaUsageData.users) &&
+				Objects.equals(this.activeExternalWebhooks, accountQuotaUsageData.activeExternalWebhooks) &&
 				Objects.equals(this.branches, accountQuotaUsageData.branches);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, apiKeys, domains, teams, users, branches);
+		return Objects.hash($type, apiKeys, domains, teams, users, activeExternalWebhooks, branches);
 	}
 
 	@Override
@@ -230,6 +255,7 @@ public class AccountQuotaUsageData {
 		sb.append("    domains: ").append(toIndentedString(domains)).append("\n");
 		sb.append("    teams: ").append(toIndentedString(teams)).append("\n");
 		sb.append("    users: ").append(toIndentedString(users)).append("\n");
+		sb.append("    activeExternalWebhooks: ").append(toIndentedString(activeExternalWebhooks)).append("\n");
 		sb.append("    branches: ").append(toIndentedString(branches)).append("\n");
 		sb.append("}");
 		return sb.toString();

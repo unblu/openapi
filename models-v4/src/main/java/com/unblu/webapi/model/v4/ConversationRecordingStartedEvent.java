@@ -14,9 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Event emitted when a conversation recording is started
+ * Event emitted when a conversation recording is started &lt;p&gt; Supported filter keys: &lt;ul&gt;
+ * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Event emitted when a conversation recording is started")
+@ApiModel(description = "Event emitted when a conversation recording is started <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>")
 
 @JsonPropertyOrder({
 	ConversationRecordingStartedEvent.JSON_PROPERTY_$_TYPE,

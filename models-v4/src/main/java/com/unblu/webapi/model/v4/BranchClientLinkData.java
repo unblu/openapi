@@ -29,7 +29,9 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchClientLinkData.JSON_PROPERTY_TYPE,
 	BranchClientLinkData.JSON_PROPERTY_URL,
 	BranchClientLinkData.JSON_PROPERTY_LINK_TARGET,
-	BranchClientLinkData.JSON_PROPERTY_AUTO_OPEN,
+	BranchClientLinkData.JSON_PROPERTY_AUTO_OPEN_ON_CONNECT,
+	BranchClientLinkData.JSON_PROPERTY_AUTO_OPEN_ON_CALL_END,
+	BranchClientLinkData.JSON_PROPERTY_AUTO_OPEN_ON_CONVERSATION_END,
 	BranchClientLinkData.JSON_PROPERTY_ICON_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -99,9 +101,17 @@ public class BranchClientLinkData {
 	@JsonProperty(JSON_PROPERTY_LINK_TARGET)
 	private String linkTarget;
 
-	public static final String JSON_PROPERTY_AUTO_OPEN = "autoOpen";
-	@JsonProperty(JSON_PROPERTY_AUTO_OPEN)
-	private Boolean autoOpen;
+	public static final String JSON_PROPERTY_AUTO_OPEN_ON_CONNECT = "autoOpenOnConnect";
+	@JsonProperty(JSON_PROPERTY_AUTO_OPEN_ON_CONNECT)
+	private Boolean autoOpenOnConnect;
+
+	public static final String JSON_PROPERTY_AUTO_OPEN_ON_CALL_END = "autoOpenOnCallEnd";
+	@JsonProperty(JSON_PROPERTY_AUTO_OPEN_ON_CALL_END)
+	private Boolean autoOpenOnCallEnd;
+
+	public static final String JSON_PROPERTY_AUTO_OPEN_ON_CONVERSATION_END = "autoOpenOnConversationEnd";
+	@JsonProperty(JSON_PROPERTY_AUTO_OPEN_ON_CONVERSATION_END)
+	private Boolean autoOpenOnConversationEnd;
 
 	public static final String JSON_PROPERTY_ICON_ID = "iconId";
 	@JsonProperty(JSON_PROPERTY_ICON_ID)
@@ -268,23 +278,62 @@ public class BranchClientLinkData {
 		this.linkTarget = linkTarget;
 	}
 
-	public BranchClientLinkData autoOpen(Boolean autoOpen) {
-		this.autoOpen = autoOpen;
+	public BranchClientLinkData autoOpenOnConnect(Boolean autoOpenOnConnect) {
+		this.autoOpenOnConnect = autoOpenOnConnect;
 		return this;
 	}
 
 	/**
-	 * Open branch client link automatically once a connection is established
+	 * Open branch client link automatically once a connection to a branch client inside a conversation is established. &lt;br&gt; This triggers for the agent
+	 * whenever he opens a conversation with a already connected branch client inside or when the conversation is transferred to another branch client.
 	 * 
-	 * @return autoOpen
+	 * @return autoOpenOnConnect
 	 **/
-	@ApiModelProperty(value = "Open branch client link automatically once a connection is established")
-	public Boolean isAutoOpen() {
-		return autoOpen;
+	@ApiModelProperty(value = "Open branch client link automatically once a connection to a branch client inside a conversation is established. <br> This triggers for the agent whenever he opens a conversation with a already connected branch client inside or when the conversation is transferred to another branch client.")
+	public Boolean isAutoOpenOnConnect() {
+		return autoOpenOnConnect;
 	}
 
-	public void setAutoOpen(Boolean autoOpen) {
-		this.autoOpen = autoOpen;
+	public void setAutoOpenOnConnect(Boolean autoOpenOnConnect) {
+		this.autoOpenOnConnect = autoOpenOnConnect;
+	}
+
+	public BranchClientLinkData autoOpenOnCallEnd(Boolean autoOpenOnCallEnd) {
+		this.autoOpenOnCallEnd = autoOpenOnCallEnd;
+		return this;
+	}
+
+	/**
+	 * Open branch client link automatically once the call ends
+	 * 
+	 * @return autoOpenOnCallEnd
+	 **/
+	@ApiModelProperty(value = "Open branch client link automatically once the call ends")
+	public Boolean isAutoOpenOnCallEnd() {
+		return autoOpenOnCallEnd;
+	}
+
+	public void setAutoOpenOnCallEnd(Boolean autoOpenOnCallEnd) {
+		this.autoOpenOnCallEnd = autoOpenOnCallEnd;
+	}
+
+	public BranchClientLinkData autoOpenOnConversationEnd(Boolean autoOpenOnConversationEnd) {
+		this.autoOpenOnConversationEnd = autoOpenOnConversationEnd;
+		return this;
+	}
+
+	/**
+	 * Open branch client link automatically once the conversation ends
+	 * 
+	 * @return autoOpenOnConversationEnd
+	 **/
+	@ApiModelProperty(value = "Open branch client link automatically once the conversation ends")
+	public Boolean isAutoOpenOnConversationEnd() {
+		return autoOpenOnConversationEnd;
+	}
+
+	public void setAutoOpenOnConversationEnd(Boolean autoOpenOnConversationEnd) {
+		this.autoOpenOnConversationEnd = autoOpenOnConversationEnd;
 	}
 
 	public BranchClientLinkData iconId(String iconId) {
@@ -323,13 +372,15 @@ public class BranchClientLinkData {
 				Objects.equals(this.type, branchClientLinkData.type) &&
 				Objects.equals(this.url, branchClientLinkData.url) &&
 				Objects.equals(this.linkTarget, branchClientLinkData.linkTarget) &&
-				Objects.equals(this.autoOpen, branchClientLinkData.autoOpen) &&
+				Objects.equals(this.autoOpenOnConnect, branchClientLinkData.autoOpenOnConnect) &&
+				Objects.equals(this.autoOpenOnCallEnd, branchClientLinkData.autoOpenOnCallEnd) &&
+				Objects.equals(this.autoOpenOnConversationEnd, branchClientLinkData.autoOpenOnConversationEnd) &&
 				Objects.equals(this.iconId, branchClientLinkData.iconId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, name, description, translations, type, url, linkTarget, autoOpen, iconId);
+		return Objects.hash($type, id, name, description, translations, type, url, linkTarget, autoOpenOnConnect, autoOpenOnCallEnd, autoOpenOnConversationEnd, iconId);
 	}
 
 	@Override
@@ -344,7 +395,9 @@ public class BranchClientLinkData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    url: ").append(toIndentedString(url)).append("\n");
 		sb.append("    linkTarget: ").append(toIndentedString(linkTarget)).append("\n");
-		sb.append("    autoOpen: ").append(toIndentedString(autoOpen)).append("\n");
+		sb.append("    autoOpenOnConnect: ").append(toIndentedString(autoOpenOnConnect)).append("\n");
+		sb.append("    autoOpenOnCallEnd: ").append(toIndentedString(autoOpenOnCallEnd)).append("\n");
+		sb.append("    autoOpenOnConversationEnd: ").append(toIndentedString(autoOpenOnConversationEnd)).append("\n");
 		sb.append("    iconId: ").append(toIndentedString(iconId)).append("\n");
 		sb.append("}");
 		return sb.toString();
