@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = AuthenticationRequiredChatSuggestionResponse.class, name = "AUTHENTICATION_REQUIRED"),
 	@JsonSubTypes.Type(value = EmptyChatSuggestionResponse.class, name = "EMPTY"),
 	@JsonSubTypes.Type(value = TextChatSuggestionResponse.class, name = "TEXT"),
 })

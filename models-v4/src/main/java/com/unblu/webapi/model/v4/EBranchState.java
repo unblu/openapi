@@ -10,12 +10,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EBranchState {
 
 	/**
-	 * ACTIVE
+	 * ACTIVE: Branch is fully active and can be used
 	 */
 	ACTIVE("ACTIVE"),
 
 	/**
-	 * INACTIVE
+	 * MAINTENANCE: Branch is currently under maintenance and isn&#39;t fully accessible for agents. Technicians can access the branch to configure it and to test
+	 * functionality.
+	 */
+	MAINTENANCE("MAINTENANCE"),
+
+	/**
+	 * INACTIVE: Branch is inactive and cannot be used
 	 */
 	INACTIVE("INACTIVE");
 

@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -14,31 +16,32 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a chat suggestion in a conversation is discarded
+ * An event triggered every time a chat suggestion is successfully retrieved from a suggestion source in a conversation
  */
-@ApiModel(description = "An event triggered every time a chat suggestion in a conversation is discarded")
+@ApiModel(description = "An event triggered every time a chat suggestion is successfully retrieved from a suggestion source in a conversation")
 
 @JsonPropertyOrder({
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_$_TYPE,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_TIMESTAMP,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_EVENT_TYPE,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_ACCOUNT_ID,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_SUGGESTION_TYPE,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_CONVERSATION_ID,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_SUGGESTION_SOURCE_ID,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_SUGGESTION_ID,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_PERSON_ID,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_REQUESTED_TIMESTAMP,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_SUGGESTED_TEXT_MESSAGE,
-	ChatSuggestionDiscardedEvent.JSON_PROPERTY_DISCARDED_TIMESTAMP,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_$_TYPE,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_TIMESTAMP,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_EVENT_TYPE,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_ACCOUNT_ID,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_SUGGESTION_TYPE,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_CONVERSATION_ID,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_SUGGESTION_SOURCE_ID,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_SUGGESTION_ID,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_PERSON_ID,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_REQUESTED_TIMESTAMP,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_SOURCE_MESSAGES,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_SUGGESTED_TEXT,
+	ChatSuggestionProvidedEvent.JSON_PROPERTY_SUGGESTED_COMMENT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class ChatSuggestionDiscardedEvent {
+public class ChatSuggestionProvidedEvent {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		CHATSUGGESTIONDISCARDEDEVENT("ChatSuggestionDiscardedEvent");
+		CHATSUGGESTIONPROVIDEDEVENT("ChatSuggestionProvidedEvent");
 
 		private String value;
 
@@ -63,13 +66,13 @@ public class ChatSuggestionDiscardedEvent {
 					return b;
 				}
 			}
-			return TypeEnum.CHATSUGGESTIONDISCARDEDEVENT;
+			return TypeEnum.CHATSUGGESTIONPROVIDEDEVENT;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.CHATSUGGESTIONDISCARDEDEVENT;
+	private TypeEnum $type = TypeEnum.CHATSUGGESTIONPROVIDEDEVENT;
 
 	public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
 	@JsonProperty(JSON_PROPERTY_TIMESTAMP)
@@ -107,15 +110,19 @@ public class ChatSuggestionDiscardedEvent {
 	@JsonProperty(JSON_PROPERTY_REQUESTED_TIMESTAMP)
 	private Long requestedTimestamp;
 
-	public static final String JSON_PROPERTY_SUGGESTED_TEXT_MESSAGE = "suggestedTextMessage";
-	@JsonProperty(JSON_PROPERTY_SUGGESTED_TEXT_MESSAGE)
-	private String suggestedTextMessage;
+	public static final String JSON_PROPERTY_SOURCE_MESSAGES = "sourceMessages";
+	@JsonProperty(JSON_PROPERTY_SOURCE_MESSAGES)
+	private List<MessageData> sourceMessages = null;
 
-	public static final String JSON_PROPERTY_DISCARDED_TIMESTAMP = "discardedTimestamp";
-	@JsonProperty(JSON_PROPERTY_DISCARDED_TIMESTAMP)
-	private Long discardedTimestamp;
+	public static final String JSON_PROPERTY_SUGGESTED_TEXT = "suggestedText";
+	@JsonProperty(JSON_PROPERTY_SUGGESTED_TEXT)
+	private String suggestedText;
 
-	public ChatSuggestionDiscardedEvent $type(TypeEnum $type) {
+	public static final String JSON_PROPERTY_SUGGESTED_COMMENT = "suggestedComment";
+	@JsonProperty(JSON_PROPERTY_SUGGESTED_COMMENT)
+	private String suggestedComment;
+
+	public ChatSuggestionProvidedEvent $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -134,7 +141,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.$type = $type;
 	}
 
-	public ChatSuggestionDiscardedEvent timestamp(Long timestamp) {
+	public ChatSuggestionProvidedEvent timestamp(Long timestamp) {
 		this.timestamp = timestamp;
 		return this;
 	}
@@ -153,7 +160,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.timestamp = timestamp;
 	}
 
-	public ChatSuggestionDiscardedEvent eventType(String eventType) {
+	public ChatSuggestionProvidedEvent eventType(String eventType) {
 		this.eventType = eventType;
 		return this;
 	}
@@ -172,7 +179,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.eventType = eventType;
 	}
 
-	public ChatSuggestionDiscardedEvent accountId(String accountId) {
+	public ChatSuggestionProvidedEvent accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -191,7 +198,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.accountId = accountId;
 	}
 
-	public ChatSuggestionDiscardedEvent suggestionType(EChatSuggestionType suggestionType) {
+	public ChatSuggestionProvidedEvent suggestionType(EChatSuggestionType suggestionType) {
 		this.suggestionType = suggestionType;
 		return this;
 	}
@@ -210,7 +217,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.suggestionType = suggestionType;
 	}
 
-	public ChatSuggestionDiscardedEvent conversationId(String conversationId) {
+	public ChatSuggestionProvidedEvent conversationId(String conversationId) {
 		this.conversationId = conversationId;
 		return this;
 	}
@@ -229,7 +236,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.conversationId = conversationId;
 	}
 
-	public ChatSuggestionDiscardedEvent suggestionSourceId(String suggestionSourceId) {
+	public ChatSuggestionProvidedEvent suggestionSourceId(String suggestionSourceId) {
 		this.suggestionSourceId = suggestionSourceId;
 		return this;
 	}
@@ -248,7 +255,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.suggestionSourceId = suggestionSourceId;
 	}
 
-	public ChatSuggestionDiscardedEvent suggestionId(String suggestionId) {
+	public ChatSuggestionProvidedEvent suggestionId(String suggestionId) {
 		this.suggestionId = suggestionId;
 		return this;
 	}
@@ -267,7 +274,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.suggestionId = suggestionId;
 	}
 
-	public ChatSuggestionDiscardedEvent personId(String personId) {
+	public ChatSuggestionProvidedEvent personId(String personId) {
 		this.personId = personId;
 		return this;
 	}
@@ -286,7 +293,7 @@ public class ChatSuggestionDiscardedEvent {
 		this.personId = personId;
 	}
 
-	public ChatSuggestionDiscardedEvent requestedTimestamp(Long requestedTimestamp) {
+	public ChatSuggestionProvidedEvent requestedTimestamp(Long requestedTimestamp) {
 		this.requestedTimestamp = requestedTimestamp;
 		return this;
 	}
@@ -305,42 +312,69 @@ public class ChatSuggestionDiscardedEvent {
 		this.requestedTimestamp = requestedTimestamp;
 	}
 
-	public ChatSuggestionDiscardedEvent suggestedTextMessage(String suggestedTextMessage) {
-		this.suggestedTextMessage = suggestedTextMessage;
+	public ChatSuggestionProvidedEvent sourceMessages(List<MessageData> sourceMessages) {
+		this.sourceMessages = sourceMessages;
+		return this;
+	}
+
+	public ChatSuggestionProvidedEvent addSourceMessagesItem(MessageData sourceMessagesItem) {
+		if (this.sourceMessages == null) {
+			this.sourceMessages = new ArrayList<>();
+		}
+		this.sourceMessages.add(sourceMessagesItem);
 		return this;
 	}
 
 	/**
-	 * Get suggestedTextMessage
+	 * The messages used as the source of the suggestion
 	 * 
-	 * @return suggestedTextMessage
+	 * @return sourceMessages
 	 **/
-	@ApiModelProperty(value = "")
-	public String getSuggestedTextMessage() {
-		return suggestedTextMessage;
+	@ApiModelProperty(value = "The messages used as the source of the suggestion")
+	public List<MessageData> getSourceMessages() {
+		return sourceMessages;
 	}
 
-	public void setSuggestedTextMessage(String suggestedTextMessage) {
-		this.suggestedTextMessage = suggestedTextMessage;
+	public void setSourceMessages(List<MessageData> sourceMessages) {
+		this.sourceMessages = sourceMessages;
 	}
 
-	public ChatSuggestionDiscardedEvent discardedTimestamp(Long discardedTimestamp) {
-		this.discardedTimestamp = discardedTimestamp;
+	public ChatSuggestionProvidedEvent suggestedText(String suggestedText) {
+		this.suggestedText = suggestedText;
 		return this;
 	}
 
 	/**
-	 * The server-side time when the suggestion was discarded
+	 * The response text from the suggestion source
 	 * 
-	 * @return discardedTimestamp
+	 * @return suggestedText
 	 **/
-	@ApiModelProperty(value = "The server-side time when the suggestion was discarded")
-	public Long getDiscardedTimestamp() {
-		return discardedTimestamp;
+	@ApiModelProperty(value = "The response text from the suggestion source")
+	public String getSuggestedText() {
+		return suggestedText;
 	}
 
-	public void setDiscardedTimestamp(Long discardedTimestamp) {
-		this.discardedTimestamp = discardedTimestamp;
+	public void setSuggestedText(String suggestedText) {
+		this.suggestedText = suggestedText;
+	}
+
+	public ChatSuggestionProvidedEvent suggestedComment(String suggestedComment) {
+		this.suggestedComment = suggestedComment;
+		return this;
+	}
+
+	/**
+	 * The response comment from the suggestion source
+	 * 
+	 * @return suggestedComment
+	 **/
+	@ApiModelProperty(value = "The response comment from the suggestion source")
+	public String getSuggestedComment() {
+		return suggestedComment;
+	}
+
+	public void setSuggestedComment(String suggestedComment) {
+		this.suggestedComment = suggestedComment;
 	}
 
 	@Override
@@ -351,30 +385,31 @@ public class ChatSuggestionDiscardedEvent {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ChatSuggestionDiscardedEvent chatSuggestionDiscardedEvent = (ChatSuggestionDiscardedEvent) o;
-		return Objects.equals(this.$type, chatSuggestionDiscardedEvent.$type) &&
-				Objects.equals(this.timestamp, chatSuggestionDiscardedEvent.timestamp) &&
-				Objects.equals(this.eventType, chatSuggestionDiscardedEvent.eventType) &&
-				Objects.equals(this.accountId, chatSuggestionDiscardedEvent.accountId) &&
-				Objects.equals(this.suggestionType, chatSuggestionDiscardedEvent.suggestionType) &&
-				Objects.equals(this.conversationId, chatSuggestionDiscardedEvent.conversationId) &&
-				Objects.equals(this.suggestionSourceId, chatSuggestionDiscardedEvent.suggestionSourceId) &&
-				Objects.equals(this.suggestionId, chatSuggestionDiscardedEvent.suggestionId) &&
-				Objects.equals(this.personId, chatSuggestionDiscardedEvent.personId) &&
-				Objects.equals(this.requestedTimestamp, chatSuggestionDiscardedEvent.requestedTimestamp) &&
-				Objects.equals(this.suggestedTextMessage, chatSuggestionDiscardedEvent.suggestedTextMessage) &&
-				Objects.equals(this.discardedTimestamp, chatSuggestionDiscardedEvent.discardedTimestamp);
+		ChatSuggestionProvidedEvent chatSuggestionProvidedEvent = (ChatSuggestionProvidedEvent) o;
+		return Objects.equals(this.$type, chatSuggestionProvidedEvent.$type) &&
+				Objects.equals(this.timestamp, chatSuggestionProvidedEvent.timestamp) &&
+				Objects.equals(this.eventType, chatSuggestionProvidedEvent.eventType) &&
+				Objects.equals(this.accountId, chatSuggestionProvidedEvent.accountId) &&
+				Objects.equals(this.suggestionType, chatSuggestionProvidedEvent.suggestionType) &&
+				Objects.equals(this.conversationId, chatSuggestionProvidedEvent.conversationId) &&
+				Objects.equals(this.suggestionSourceId, chatSuggestionProvidedEvent.suggestionSourceId) &&
+				Objects.equals(this.suggestionId, chatSuggestionProvidedEvent.suggestionId) &&
+				Objects.equals(this.personId, chatSuggestionProvidedEvent.personId) &&
+				Objects.equals(this.requestedTimestamp, chatSuggestionProvidedEvent.requestedTimestamp) &&
+				Objects.equals(this.sourceMessages, chatSuggestionProvidedEvent.sourceMessages) &&
+				Objects.equals(this.suggestedText, chatSuggestionProvidedEvent.suggestedText) &&
+				Objects.equals(this.suggestedComment, chatSuggestionProvidedEvent.suggestedComment);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, suggestionType, conversationId, suggestionSourceId, suggestionId, personId, requestedTimestamp, suggestedTextMessage, discardedTimestamp);
+		return Objects.hash($type, timestamp, eventType, accountId, suggestionType, conversationId, suggestionSourceId, suggestionId, personId, requestedTimestamp, sourceMessages, suggestedText, suggestedComment);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ChatSuggestionDiscardedEvent {\n");
+		sb.append("class ChatSuggestionProvidedEvent {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
@@ -385,8 +420,9 @@ public class ChatSuggestionDiscardedEvent {
 		sb.append("    suggestionId: ").append(toIndentedString(suggestionId)).append("\n");
 		sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
 		sb.append("    requestedTimestamp: ").append(toIndentedString(requestedTimestamp)).append("\n");
-		sb.append("    suggestedTextMessage: ").append(toIndentedString(suggestedTextMessage)).append("\n");
-		sb.append("    discardedTimestamp: ").append(toIndentedString(discardedTimestamp)).append("\n");
+		sb.append("    sourceMessages: ").append(toIndentedString(sourceMessages)).append("\n");
+		sb.append("    suggestedText: ").append(toIndentedString(suggestedText)).append("\n");
+		sb.append("    suggestedComment: ").append(toIndentedString(suggestedComment)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

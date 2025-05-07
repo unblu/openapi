@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EBranchClientAuxiliaryCameraType
+ * Gets or Sets EAuxiliaryCameraType
  */
-public enum EBranchClientAuxiliaryCameraType {
+public enum EAuxiliaryCameraType {
 
 	/**
 	 * DOCUMENT: Document camera
@@ -26,7 +26,7 @@ public enum EBranchClientAuxiliaryCameraType {
 
 	private String value;
 
-	EBranchClientAuxiliaryCameraType(String value) {
+	EAuxiliaryCameraType(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +41,8 @@ public enum EBranchClientAuxiliaryCameraType {
 	}
 
 	@JsonCreator
-	public static EBranchClientAuxiliaryCameraType fromValue(String value) {
-		for (EBranchClientAuxiliaryCameraType b : EBranchClientAuxiliaryCameraType.values()) {
+	public static EAuxiliaryCameraType fromValue(String value) {
+		for (EAuxiliaryCameraType b : EAuxiliaryCameraType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

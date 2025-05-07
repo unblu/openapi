@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.17.1
+  version: 8.18.0
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -13482,6 +13482,34 @@ paths:
               responses:
                 "200":
                   description: OK
+        chat_suggestion.not_provided:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.not_provided
+              description: An event triggered whenever a suggestion source doesn't respond to Unblu's request with a suggestion
+              operationId: chatSuggestionNotProvidedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionNotProvidedEvent'
+              responses:
+                "200":
+                  description: OK
+        chat_suggestion.provided:
+          '{$request.body#/endpoint}':
+            post:
+              summary: chat_suggestion.provided
+              description: An event triggered every time a chat suggestion is successfully retrieved from a suggestion source in a conversation
+              operationId: chatSuggestionProvidedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ChatSuggestionProvidedEvent'
+              responses:
+                "200":
+                  description: OK
         chat_suggestion.requested:
           '{$request.body#/endpoint}':
             post:
@@ -16371,6 +16399,21 @@ components:
       - INTERNAL
       - SYNCJOB
       - GC
+    AuthenticationRequiredChatSuggestionResponse:
+      type: object
+      description: Model that represents the response to a chat suggestion request when authentication is required
+      properties:
+        $_type:
+          type: string
+          default: AuthenticationRequiredChatSuggestionResponse
+          enum:
+          - AuthenticationRequiredChatSuggestionResponse
+        type:
+          $ref: '#/components/schemas/EChatSuggestionResponseType'
+        authenticationUrl:
+          type: string
+        didPreviousAttemptFailed:
+          type: boolean
     AuthenticationTokenCreationResult:
       type: object
       properties:
@@ -17351,7 +17394,7 @@ components:
           type: string
           description: Name of the branch client auxiliary camera. Maximum of 250 characters. Mandatory.
         type:
-          $ref: '#/components/schemas/EBranchClientAuxiliaryCameraType'
+          $ref: '#/components/schemas/EAuxiliaryCameraType'
         description:
           type: string
           description: Description of the branch client auxiliary camera. Maximum of 500 characters. Optional.
@@ -19487,6 +19530,8 @@ components:
         accountId:
           type: string
           description: The account ID the event originated from
+        suggestionType:
+          $ref: '#/components/schemas/EChatSuggestionType'
         conversationId:
           type: string
           description: The conversation ID the event originated from
@@ -19505,6 +19550,7 @@ components:
           description: The timestamp when the suggestion was requested
         suggestedTextMessage:
           type: string
+          description: The text message suggested by the suggestion source
         sentTextMessage:
           type: string
           description: The suggested text as it was sent to the conversation
@@ -19534,6 +19580,8 @@ components:
         accountId:
           type: string
           description: The account ID the event originated from
+        suggestionType:
+          $ref: '#/components/schemas/EChatSuggestionType'
         conversationId:
           type: string
           description: The conversation ID the event originated from
@@ -19556,6 +19604,101 @@ components:
           type: integer
           format: int64
           description: The server-side time when the suggestion was discarded
+    ChatSuggestionNotProvidedEvent:
+      type: object
+      description: An event triggered whenever a suggestion source doesn't respond to Unblu's request with a suggestion
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionNotProvidedEvent
+          enum:
+          - ChatSuggestionNotProvidedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        suggestionType:
+          $ref: '#/components/schemas/EChatSuggestionType'
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        sourceMessages:
+          type: array
+          description: The messages used as the source of the suggestion
+          items:
+            $ref: '#/components/schemas/MessageData'
+        reason:
+          $ref: '#/components/schemas/EEmptyChatSuggestionReason'
+        hint:
+          type: string
+          description: An optional human-readable hint for why no suggestion was provided
+    ChatSuggestionProvidedEvent:
+      type: object
+      description: An event triggered every time a chat suggestion is successfully retrieved from a suggestion source in a conversation
+      properties:
+        $_type:
+          type: string
+          default: ChatSuggestionProvidedEvent
+          enum:
+          - ChatSuggestionProvidedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        suggestionType:
+          $ref: '#/components/schemas/EChatSuggestionType'
+        conversationId:
+          type: string
+          description: The conversation ID the event originated from
+        suggestionSourceId:
+          type: string
+          description: The suggestion source ID the event originated from
+        suggestionId:
+          type: string
+          description: A unique ID identifying the suggestion
+        personId:
+          type: string
+          description: The ID of the person requesting the suggestion
+        requestedTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the suggestion was requested
+        sourceMessages:
+          type: array
+          description: The messages used as the source of the suggestion
+          items:
+            $ref: '#/components/schemas/MessageData'
+        suggestedText:
+          type: string
+          description: The response text from the suggestion source
+        suggestedComment:
+          type: string
+          description: The response comment from the suggestion source
     ChatSuggestionRequest:
       type: object
       description: Model used to request a chat suggestion in a conversation
@@ -19574,6 +19717,8 @@ components:
           description: Unique ID of the request
         requestingPerson:
           $ref: '#/components/schemas/PersonData'
+        suggestionType:
+          $ref: '#/components/schemas/EChatSuggestionType'
         conversation:
           $ref: '#/components/schemas/ConversationData'
         relatedMessages:
@@ -19620,6 +19765,8 @@ components:
         accountId:
           type: string
           description: The account ID the event originated from
+        suggestionType:
+          $ref: '#/components/schemas/EChatSuggestionType'
         conversationId:
           type: string
           description: The conversation ID the event originated from
@@ -19646,9 +19793,11 @@ components:
       oneOf:
       - $ref: '#/components/schemas/TextChatSuggestionResponse'
       - $ref: '#/components/schemas/EmptyChatSuggestionResponse'
+      - $ref: '#/components/schemas/AuthenticationRequiredChatSuggestionResponse'
       discriminator:
         propertyName: type
         mapping:
+          AUTHENTICATION_REQUIRED: '#/components/schemas/AuthenticationRequiredChatSuggestionResponse'
           EMPTY: '#/components/schemas/EmptyChatSuggestionResponse'
           TEXT: '#/components/schemas/TextChatSuggestionResponse'
     CollaborationLayerAbortedEvent:
@@ -24383,6 +24532,16 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EAuxiliaryCameraType:
+      type: string
+      enum:
+      - DOCUMENT
+      - ROOM
+      - OTHER
+      x-enum-descriptions:
+      - "DOCUMENT: Document camera"
+      - "ROOM: Room camera"
+      - "OTHER: Any other camera type"
     EAvailabilityState:
       type: string
       description: Possible state for agents availability
@@ -24481,16 +24640,6 @@ components:
       x-enum-descriptions:
       - COPILOT
       - CUSTOM
-    EBranchClientAuxiliaryCameraType:
-      type: string
-      enum:
-      - DOCUMENT
-      - ROOM
-      - OTHER
-      x-enum-descriptions:
-      - "DOCUMENT: Document camera"
-      - "ROOM: Room camera"
-      - "OTHER: Any other camera type"
     EBranchClientIssueType:
       type: string
       description: Type of issues a branch client can have
@@ -24614,10 +24763,12 @@ components:
       type: string
       enum:
       - ACTIVE
+      - MAINTENANCE
       - INACTIVE
       x-enum-descriptions:
-      - ACTIVE
-      - INACTIVE
+      - "ACTIVE: Branch is fully active and can be used"
+      - "MAINTENANCE: Branch is currently under maintenance and isn't fully accessible for agents. Technicians can access the branch to configure it and to test functionality."
+      - "INACTIVE: Branch is inactive and cannot be used"
     ECallEndReason:
       type: string
       description: The reason a call has ended
@@ -24837,9 +24988,19 @@ components:
       enum:
       - EMPTY
       - TEXT
+      - AUTHENTICATION_REQUIRED
       x-enum-descriptions:
       - EMPTY
       - TEXT
+      - AUTHENTICATION_REQUIRED
+    EChatSuggestionType:
+      type: string
+      enum:
+      - MANUAL
+      - AUTOMATIC
+      x-enum-descriptions:
+      - MANUAL
+      - AUTOMATIC
     ECollaborationLayerLogEntryOrderByField:
       type: string
       enum:
@@ -26607,6 +26768,7 @@ components:
       - DOCUMENT_COBROWSING
       - WHITEBOARD
       - UNIVERSAL_COBROWSING
+      - DOCUMENT_CAMERA_SHARING
       x-enum-descriptions:
       - SCREEN_SHARING
       - EMBEDDED_COBROWSING
@@ -26615,6 +26777,7 @@ components:
       - DOCUMENT_COBROWSING
       - WHITEBOARD
       - UNIVERSAL_COBROWSING
+      - DOCUMENT_CAMERA_SHARING
     ELayerTypeOperatorType:
       type: string
       enum:

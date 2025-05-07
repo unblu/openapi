@@ -5,28 +5,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EChatSuggestionResponseType
+ * Gets or Sets EChatSuggestionType
  */
-public enum EChatSuggestionResponseType {
+public enum EChatSuggestionType {
 
 	/**
-	 * EMPTY
+	 * MANUAL
 	 */
-	EMPTY("EMPTY"),
+	MANUAL("MANUAL"),
 
 	/**
-	 * TEXT
+	 * AUTOMATIC
 	 */
-	TEXT("TEXT"),
-
-	/**
-	 * AUTHENTICATION_REQUIRED
-	 */
-	AUTHENTICATION_REQUIRED("AUTHENTICATION_REQUIRED");
+	AUTOMATIC("AUTOMATIC");
 
 	private String value;
 
-	EChatSuggestionResponseType(String value) {
+	EChatSuggestionType(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +36,8 @@ public enum EChatSuggestionResponseType {
 	}
 
 	@JsonCreator
-	public static EChatSuggestionResponseType fromValue(String value) {
-		for (EChatSuggestionResponseType b : EChatSuggestionResponseType.values()) {
+	public static EChatSuggestionType fromValue(String value) {
+		for (EChatSuggestionType b : EChatSuggestionType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ChatSuggestionRequestedEvent.JSON_PROPERTY_TIMESTAMP,
 	ChatSuggestionRequestedEvent.JSON_PROPERTY_EVENT_TYPE,
 	ChatSuggestionRequestedEvent.JSON_PROPERTY_ACCOUNT_ID,
+	ChatSuggestionRequestedEvent.JSON_PROPERTY_SUGGESTION_TYPE,
 	ChatSuggestionRequestedEvent.JSON_PROPERTY_CONVERSATION_ID,
 	ChatSuggestionRequestedEvent.JSON_PROPERTY_SUGGESTION_SOURCE_ID,
 	ChatSuggestionRequestedEvent.JSON_PROPERTY_SUGGESTION_ID,
@@ -82,6 +83,10 @@ public class ChatSuggestionRequestedEvent {
 	public static final String JSON_PROPERTY_ACCOUNT_ID = "accountId";
 	@JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
 	private String accountId;
+
+	public static final String JSON_PROPERTY_SUGGESTION_TYPE = "suggestionType";
+	@JsonProperty(JSON_PROPERTY_SUGGESTION_TYPE)
+	private EChatSuggestionType suggestionType;
 
 	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
@@ -181,6 +186,25 @@ public class ChatSuggestionRequestedEvent {
 
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
+	}
+
+	public ChatSuggestionRequestedEvent suggestionType(EChatSuggestionType suggestionType) {
+		this.suggestionType = suggestionType;
+		return this;
+	}
+
+	/**
+	 * Get suggestionType
+	 * 
+	 * @return suggestionType
+	 **/
+	@ApiModelProperty(value = "")
+	public EChatSuggestionType getSuggestionType() {
+		return suggestionType;
+	}
+
+	public void setSuggestionType(EChatSuggestionType suggestionType) {
+		this.suggestionType = suggestionType;
 	}
 
 	public ChatSuggestionRequestedEvent conversationId(String conversationId) {
@@ -318,6 +342,7 @@ public class ChatSuggestionRequestedEvent {
 				Objects.equals(this.timestamp, chatSuggestionRequestedEvent.timestamp) &&
 				Objects.equals(this.eventType, chatSuggestionRequestedEvent.eventType) &&
 				Objects.equals(this.accountId, chatSuggestionRequestedEvent.accountId) &&
+				Objects.equals(this.suggestionType, chatSuggestionRequestedEvent.suggestionType) &&
 				Objects.equals(this.conversationId, chatSuggestionRequestedEvent.conversationId) &&
 				Objects.equals(this.suggestionSourceId, chatSuggestionRequestedEvent.suggestionSourceId) &&
 				Objects.equals(this.suggestionId, chatSuggestionRequestedEvent.suggestionId) &&
@@ -328,7 +353,7 @@ public class ChatSuggestionRequestedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversationId, suggestionSourceId, suggestionId, personId, requestedTimestamp, sourceMessages);
+		return Objects.hash($type, timestamp, eventType, accountId, suggestionType, conversationId, suggestionSourceId, suggestionId, personId, requestedTimestamp, sourceMessages);
 	}
 
 	@Override
@@ -339,6 +364,7 @@ public class ChatSuggestionRequestedEvent {
 		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
+		sb.append("    suggestionType: ").append(toIndentedString(suggestionType)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    suggestionSourceId: ").append(toIndentedString(suggestionSourceId)).append("\n");
 		sb.append("    suggestionId: ").append(toIndentedString(suggestionId)).append("\n");

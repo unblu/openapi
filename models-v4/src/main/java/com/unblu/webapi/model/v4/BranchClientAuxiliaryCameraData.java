@@ -85,7 +85,7 @@ public class BranchClientAuxiliaryCameraData {
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
-	private EBranchClientAuxiliaryCameraType type;
+	private EAuxiliaryCameraType type;
 
 	public static final String JSON_PROPERTY_DESCRIPTION = "description";
 	@JsonProperty(JSON_PROPERTY_DESCRIPTION)
@@ -184,7 +184,7 @@ public class BranchClientAuxiliaryCameraData {
 		this.name = name;
 	}
 
-	public BranchClientAuxiliaryCameraData type(EBranchClientAuxiliaryCameraType type) {
+	public BranchClientAuxiliaryCameraData type(EAuxiliaryCameraType type) {
 		this.type = type;
 		return this;
 	}
@@ -195,11 +195,11 @@ public class BranchClientAuxiliaryCameraData {
 	 * @return type
 	 **/
 	@ApiModelProperty(value = "")
-	public EBranchClientAuxiliaryCameraType getType() {
+	public EAuxiliaryCameraType getType() {
 		return type;
 	}
 
-	public void setType(EBranchClientAuxiliaryCameraType type) {
+	public void setType(EAuxiliaryCameraType type) {
 		this.type = type;
 	}
 

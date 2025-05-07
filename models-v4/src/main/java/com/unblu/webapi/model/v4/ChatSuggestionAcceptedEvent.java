@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ChatSuggestionAcceptedEvent.JSON_PROPERTY_TIMESTAMP,
 	ChatSuggestionAcceptedEvent.JSON_PROPERTY_EVENT_TYPE,
 	ChatSuggestionAcceptedEvent.JSON_PROPERTY_ACCOUNT_ID,
+	ChatSuggestionAcceptedEvent.JSON_PROPERTY_SUGGESTION_TYPE,
 	ChatSuggestionAcceptedEvent.JSON_PROPERTY_CONVERSATION_ID,
 	ChatSuggestionAcceptedEvent.JSON_PROPERTY_SUGGESTION_SOURCE_ID,
 	ChatSuggestionAcceptedEvent.JSON_PROPERTY_SUGGESTION_ID,
@@ -83,6 +84,10 @@ public class ChatSuggestionAcceptedEvent {
 	public static final String JSON_PROPERTY_ACCOUNT_ID = "accountId";
 	@JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
 	private String accountId;
+
+	public static final String JSON_PROPERTY_SUGGESTION_TYPE = "suggestionType";
+	@JsonProperty(JSON_PROPERTY_SUGGESTION_TYPE)
+	private EChatSuggestionType suggestionType;
 
 	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
@@ -196,6 +201,25 @@ public class ChatSuggestionAcceptedEvent {
 		this.accountId = accountId;
 	}
 
+	public ChatSuggestionAcceptedEvent suggestionType(EChatSuggestionType suggestionType) {
+		this.suggestionType = suggestionType;
+		return this;
+	}
+
+	/**
+	 * Get suggestionType
+	 * 
+	 * @return suggestionType
+	 **/
+	@ApiModelProperty(value = "")
+	public EChatSuggestionType getSuggestionType() {
+		return suggestionType;
+	}
+
+	public void setSuggestionType(EChatSuggestionType suggestionType) {
+		this.suggestionType = suggestionType;
+	}
+
 	public ChatSuggestionAcceptedEvent conversationId(String conversationId) {
 		this.conversationId = conversationId;
 		return this;
@@ -297,11 +321,11 @@ public class ChatSuggestionAcceptedEvent {
 	}
 
 	/**
-	 * Get suggestedTextMessage
+	 * The text message suggested by the suggestion source
 	 * 
 	 * @return suggestedTextMessage
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The text message suggested by the suggestion source")
 	public String getSuggestedTextMessage() {
 		return suggestedTextMessage;
 	}
@@ -380,6 +404,7 @@ public class ChatSuggestionAcceptedEvent {
 				Objects.equals(this.timestamp, chatSuggestionAcceptedEvent.timestamp) &&
 				Objects.equals(this.eventType, chatSuggestionAcceptedEvent.eventType) &&
 				Objects.equals(this.accountId, chatSuggestionAcceptedEvent.accountId) &&
+				Objects.equals(this.suggestionType, chatSuggestionAcceptedEvent.suggestionType) &&
 				Objects.equals(this.conversationId, chatSuggestionAcceptedEvent.conversationId) &&
 				Objects.equals(this.suggestionSourceId, chatSuggestionAcceptedEvent.suggestionSourceId) &&
 				Objects.equals(this.suggestionId, chatSuggestionAcceptedEvent.suggestionId) &&
@@ -393,7 +418,7 @@ public class ChatSuggestionAcceptedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversationId, suggestionSourceId, suggestionId, personId, requestedTimestamp, suggestedTextMessage, sentTextMessage, acceptedTimestamp, modified);
+		return Objects.hash($type, timestamp, eventType, accountId, suggestionType, conversationId, suggestionSourceId, suggestionId, personId, requestedTimestamp, suggestedTextMessage, sentTextMessage, acceptedTimestamp, modified);
 	}
 
 	@Override
@@ -404,6 +429,7 @@ public class ChatSuggestionAcceptedEvent {
 		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
+		sb.append("    suggestionType: ").append(toIndentedString(suggestionType)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    suggestionSourceId: ").append(toIndentedString(suggestionSourceId)).append("\n");
 		sb.append("    suggestionId: ").append(toIndentedString(suggestionId)).append("\n");
