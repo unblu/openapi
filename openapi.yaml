@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.18.0
+  version: 8.19.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -1059,6 +1059,7 @@ paths:
                 value:
                   username: r@email.com
                   password: L0remPf18!
+                  tokenTtl: null
         required: true
       responses:
         "200":
@@ -2978,6 +2979,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BranchClientDataList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /branchclients/{branchClientId}/invalidateTokens:
+    post:
+      tags:
+      - BranchClients
+      summary: invalidateTokens
+      description: Invalidates all tokens that were generated for the given Branch client<br>
+      operationId: branchClientsInvalidateTokens
+      parameters:
+      - name: branchClientId
+        in: path
+        description: The branch client ID for which the tokens should be invalidated
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The updated branch client data instance containing a new public key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchClientData'
         default:
           $ref: '#/components/responses/ErrorResponse'
       x-allow-impersonated-access: "true"
@@ -14042,6 +14072,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.recording_postprocessing:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.recording_postprocessing
+              description: An event emitted when the postprocessing of a conversation recording starts
+              operationId: conversationRecordingPostprocessingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ConversationRecordingPostprocessingEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.recording_started:
           '{$request.body#/endpoint}':
             post:
@@ -16424,6 +16468,10 @@ components:
           - AuthenticationTokenCreationResult
         token:
           type: string
+        deviceIdentifier:
+          type: string
+        cookiePrefix:
+          type: string
     AuthenticatorCreateAuthenticationTokenBody:
       type: object
       description: Request body for the 'authenticatorCreateAuthenticationToken' operation
@@ -16434,6 +16482,8 @@ components:
         password:
           type: string
           description: The password of the user to authenticate
+        tokenTtl:
+          $ref: '#/components/schemas/EAuthenticationTokenTtl'
     AuthenticatorImpersonateBody:
       type: object
       description: Request body for the 'authenticatorImpersonate' operation
@@ -21614,6 +21664,46 @@ components:
           description: The list of mapped entities
           items:
             $ref: '#/components/schemas/ConversationRecordingHistoryData'
+    ConversationRecordingPostprocessingEvent:
+      type: object
+      description: An event emitted when the postprocessing of a conversation recording starts
+      properties:
+        $_type:
+          type: string
+          default: ConversationRecordingPostprocessingEvent
+          enum:
+          - ConversationRecordingPostprocessingEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationId:
+          type: string
+          description: ID of the conversation the recording belongs to
+        blobStoreId:
+          type: string
+          description: The blob store ID of the recording
+        mimeType:
+          type: string
+          description: The MIME type of the recording
+        totalSize:
+          type: integer
+          format: int64
+          description: The total size of the recording in bytes
+        recordingStartTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the conversation recording started
+        recordingEndTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the conversation recording ended
     ConversationRecordingStartedEvent:
       type: object
       description: "Event emitted when a conversation recording is started <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
@@ -24499,6 +24589,14 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EAuthenticationTokenTtl:
+      type: string
+      enum:
+      - STANDARD
+      - EXTENDED
+      x-enum-descriptions:
+      - "STANDARD: Standard authentication token TTL (short-lived default)"
+      - "EXTENDED: Extended authentication token TTL (longer duration for trusted devices)"
     EAuthorizationRole:
       type: string
       description: The authorization role is mainly used for access definition of a service
@@ -27478,10 +27576,12 @@ components:
       enum:
       - INITIALIZING
       - PENDING
+      - PENDING_POSTPROCESSING
       - COMPLETE
       x-enum-descriptions:
       - "INITIALIZING: Recording initializing"
       - "PENDING: Recording pending"
+      - "PENDING_POSTPROCESSING: Recording finished, postprocessing pending"
       - "COMPLETE: Recording completed"
     ERecordingType:
       type: string

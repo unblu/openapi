@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	AuthenticatorCreateAuthenticationTokenBody.JSON_PROPERTY_USERNAME,
 	AuthenticatorCreateAuthenticationTokenBody.JSON_PROPERTY_PASSWORD,
+	AuthenticatorCreateAuthenticationTokenBody.JSON_PROPERTY_TOKEN_TTL,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AuthenticatorCreateAuthenticationTokenBody {
@@ -29,6 +30,10 @@ public class AuthenticatorCreateAuthenticationTokenBody {
 	public static final String JSON_PROPERTY_PASSWORD = "password";
 	@JsonProperty(JSON_PROPERTY_PASSWORD)
 	private String password;
+
+	public static final String JSON_PROPERTY_TOKEN_TTL = "tokenTtl";
+	@JsonProperty(JSON_PROPERTY_TOKEN_TTL)
+	private EAuthenticationTokenTtl tokenTtl;
 
 	public AuthenticatorCreateAuthenticationTokenBody username(String username) {
 		this.username = username;
@@ -68,6 +73,25 @@ public class AuthenticatorCreateAuthenticationTokenBody {
 		this.password = password;
 	}
 
+	public AuthenticatorCreateAuthenticationTokenBody tokenTtl(EAuthenticationTokenTtl tokenTtl) {
+		this.tokenTtl = tokenTtl;
+		return this;
+	}
+
+	/**
+	 * Get tokenTtl
+	 * 
+	 * @return tokenTtl
+	 **/
+	@ApiModelProperty(value = "")
+	public EAuthenticationTokenTtl getTokenTtl() {
+		return tokenTtl;
+	}
+
+	public void setTokenTtl(EAuthenticationTokenTtl tokenTtl) {
+		this.tokenTtl = tokenTtl;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -78,12 +102,13 @@ public class AuthenticatorCreateAuthenticationTokenBody {
 		}
 		AuthenticatorCreateAuthenticationTokenBody authenticatorCreateAuthenticationTokenBody = (AuthenticatorCreateAuthenticationTokenBody) o;
 		return Objects.equals(this.username, authenticatorCreateAuthenticationTokenBody.username) &&
-				Objects.equals(this.password, authenticatorCreateAuthenticationTokenBody.password);
+				Objects.equals(this.password, authenticatorCreateAuthenticationTokenBody.password) &&
+				Objects.equals(this.tokenTtl, authenticatorCreateAuthenticationTokenBody.tokenTtl);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(username, password);
+		return Objects.hash(username, password, tokenTtl);
 	}
 
 	@Override
@@ -92,6 +117,7 @@ public class AuthenticatorCreateAuthenticationTokenBody {
 		sb.append("class AuthenticatorCreateAuthenticationTokenBody {\n");
 		sb.append("    username: ").append(toIndentedString(username)).append("\n");
 		sb.append("    password: ").append(toIndentedString(password)).append("\n");
+		sb.append("    tokenTtl: ").append(toIndentedString(tokenTtl)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

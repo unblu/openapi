@@ -19,6 +19,8 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	AuthenticationTokenCreationResult.JSON_PROPERTY_$_TYPE,
 	AuthenticationTokenCreationResult.JSON_PROPERTY_TOKEN,
+	AuthenticationTokenCreationResult.JSON_PROPERTY_DEVICE_IDENTIFIER,
+	AuthenticationTokenCreationResult.JSON_PROPERTY_COOKIE_PREFIX,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AuthenticationTokenCreationResult {
@@ -63,6 +65,14 @@ public class AuthenticationTokenCreationResult {
 	@JsonProperty(JSON_PROPERTY_TOKEN)
 	private String token;
 
+	public static final String JSON_PROPERTY_DEVICE_IDENTIFIER = "deviceIdentifier";
+	@JsonProperty(JSON_PROPERTY_DEVICE_IDENTIFIER)
+	private String deviceIdentifier;
+
+	public static final String JSON_PROPERTY_COOKIE_PREFIX = "cookiePrefix";
+	@JsonProperty(JSON_PROPERTY_COOKIE_PREFIX)
+	private String cookiePrefix;
+
 	public AuthenticationTokenCreationResult $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
@@ -101,6 +111,44 @@ public class AuthenticationTokenCreationResult {
 		this.token = token;
 	}
 
+	public AuthenticationTokenCreationResult deviceIdentifier(String deviceIdentifier) {
+		this.deviceIdentifier = deviceIdentifier;
+		return this;
+	}
+
+	/**
+	 * Get deviceIdentifier
+	 * 
+	 * @return deviceIdentifier
+	 **/
+	@ApiModelProperty(value = "")
+	public String getDeviceIdentifier() {
+		return deviceIdentifier;
+	}
+
+	public void setDeviceIdentifier(String deviceIdentifier) {
+		this.deviceIdentifier = deviceIdentifier;
+	}
+
+	public AuthenticationTokenCreationResult cookiePrefix(String cookiePrefix) {
+		this.cookiePrefix = cookiePrefix;
+		return this;
+	}
+
+	/**
+	 * Get cookiePrefix
+	 * 
+	 * @return cookiePrefix
+	 **/
+	@ApiModelProperty(value = "")
+	public String getCookiePrefix() {
+		return cookiePrefix;
+	}
+
+	public void setCookiePrefix(String cookiePrefix) {
+		this.cookiePrefix = cookiePrefix;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -111,12 +159,14 @@ public class AuthenticationTokenCreationResult {
 		}
 		AuthenticationTokenCreationResult authenticationTokenCreationResult = (AuthenticationTokenCreationResult) o;
 		return Objects.equals(this.$type, authenticationTokenCreationResult.$type) &&
-				Objects.equals(this.token, authenticationTokenCreationResult.token);
+				Objects.equals(this.token, authenticationTokenCreationResult.token) &&
+				Objects.equals(this.deviceIdentifier, authenticationTokenCreationResult.deviceIdentifier) &&
+				Objects.equals(this.cookiePrefix, authenticationTokenCreationResult.cookiePrefix);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, token);
+		return Objects.hash($type, token, deviceIdentifier, cookiePrefix);
 	}
 
 	@Override
@@ -125,6 +175,8 @@ public class AuthenticationTokenCreationResult {
 		sb.append("class AuthenticationTokenCreationResult {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    token: ").append(toIndentedString(token)).append("\n");
+		sb.append("    deviceIdentifier: ").append(toIndentedString(deviceIdentifier)).append("\n");
+		sb.append("    cookiePrefix: ").append(toIndentedString(cookiePrefix)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -250,6 +250,58 @@ public class BranchClientsApi {
 	}
 
 	/**
+	 * invalidateTokens Invalidates all tokens that were generated for the given Branch client&lt;br&gt;
+	 * 
+	 * @param branchClientId The branch client ID for which the tokens should be invalidated (required)
+	 * @return BranchClientData
+	 * @throws ApiException if fails to make API call
+	 */
+	public BranchClientData branchClientsInvalidateTokens(String branchClientId) throws ApiException {
+		return branchClientsInvalidateTokensWithHttpInfo(branchClientId).getData();
+	}
+
+	/**
+	 * invalidateTokens Invalidates all tokens that were generated for the given Branch client&lt;br&gt;
+	 * 
+	 * @param branchClientId The branch client ID for which the tokens should be invalidated (required)
+	 * @return ApiResponse&lt;BranchClientData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<BranchClientData> branchClientsInvalidateTokensWithHttpInfo(String branchClientId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'branchClientId' is set
+		if (branchClientId == null) {
+			throw new ApiException(400, "Missing the required parameter 'branchClientId' when calling branchClientsInvalidateTokens");
+		}
+
+		// create path and map variables
+		String localVarPath = "/branchclients/{branchClientId}/invalidateTokens"
+				.replaceAll("\\{" + "branchClientId" + "\\}", apiClient.escapeString(branchClientId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<BranchClientData> localVarReturnType = new GenericType<BranchClientData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * read Returns the branch client for the given ID&lt;br&gt;
 	 * 
 	 * @param branchClientId ID of the branch client (required)

@@ -20,6 +20,11 @@ public enum ERecordingStatus {
 	PENDING("PENDING"),
 
 	/**
+	 * PENDING_POSTPROCESSING: Recording finished, postprocessing pending
+	 */
+	PENDING_POSTPROCESSING("PENDING_POSTPROCESSING"),
+
+	/**
 	 * COMPLETE: Recording completed
 	 */
 	COMPLETE("COMPLETE");
