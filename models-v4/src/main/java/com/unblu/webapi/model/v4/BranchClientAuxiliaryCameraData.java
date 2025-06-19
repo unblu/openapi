@@ -1,7 +1,9 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchClientAuxiliaryCameraData.JSON_PROPERTY_ALWAYS_DISPLAY_DURING_CALL,
 	BranchClientAuxiliaryCameraData.JSON_PROPERTY_DISPLAY_IN_FLOOR_PLAN,
 	BranchClientAuxiliaryCameraData.JSON_PROPERTY_MEDIA_DEVICE_LABEL,
+	BranchClientAuxiliaryCameraData.JSON_PROPERTY_PTZ_PRESETS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BranchClientAuxiliaryCameraData {
@@ -126,6 +129,10 @@ public class BranchClientAuxiliaryCameraData {
 	public static final String JSON_PROPERTY_MEDIA_DEVICE_LABEL = "mediaDeviceLabel";
 	@JsonProperty(JSON_PROPERTY_MEDIA_DEVICE_LABEL)
 	private String mediaDeviceLabel;
+
+	public static final String JSON_PROPERTY_PTZ_PRESETS = "ptzPresets";
+	@JsonProperty(JSON_PROPERTY_PTZ_PRESETS)
+	private List<BranchClientAuxiliaryCameraPtzPresetData> ptzPresets = null;
 
 	public BranchClientAuxiliaryCameraData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -401,6 +408,33 @@ public class BranchClientAuxiliaryCameraData {
 		this.mediaDeviceLabel = mediaDeviceLabel;
 	}
 
+	public BranchClientAuxiliaryCameraData ptzPresets(List<BranchClientAuxiliaryCameraPtzPresetData> ptzPresets) {
+		this.ptzPresets = ptzPresets;
+		return this;
+	}
+
+	public BranchClientAuxiliaryCameraData addPtzPresetsItem(BranchClientAuxiliaryCameraPtzPresetData ptzPresetsItem) {
+		if (this.ptzPresets == null) {
+			this.ptzPresets = new ArrayList<>();
+		}
+		this.ptzPresets.add(ptzPresetsItem);
+		return this;
+	}
+
+	/**
+	 * List of all PTZ presets that belong to the auxiliary camera
+	 * 
+	 * @return ptzPresets
+	 **/
+	@ApiModelProperty(value = "List of all PTZ presets that belong to the auxiliary camera")
+	public List<BranchClientAuxiliaryCameraPtzPresetData> getPtzPresets() {
+		return ptzPresets;
+	}
+
+	public void setPtzPresets(List<BranchClientAuxiliaryCameraPtzPresetData> ptzPresets) {
+		this.ptzPresets = ptzPresets;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -423,12 +457,13 @@ public class BranchClientAuxiliaryCameraData {
 				Objects.equals(this.iconId, branchClientAuxiliaryCameraData.iconId) &&
 				Objects.equals(this.alwaysDisplayDuringCall, branchClientAuxiliaryCameraData.alwaysDisplayDuringCall) &&
 				Objects.equals(this.displayInFloorPlan, branchClientAuxiliaryCameraData.displayInFloorPlan) &&
-				Objects.equals(this.mediaDeviceLabel, branchClientAuxiliaryCameraData.mediaDeviceLabel);
+				Objects.equals(this.mediaDeviceLabel, branchClientAuxiliaryCameraData.mediaDeviceLabel) &&
+				Objects.equals(this.ptzPresets, branchClientAuxiliaryCameraData.ptzPresets);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, name, type, description, translations, x, y, size, rotation, iconId, alwaysDisplayDuringCall, displayInFloorPlan, mediaDeviceLabel);
+		return Objects.hash($type, id, name, type, description, translations, x, y, size, rotation, iconId, alwaysDisplayDuringCall, displayInFloorPlan, mediaDeviceLabel, ptzPresets);
 	}
 
 	@Override
@@ -449,6 +484,7 @@ public class BranchClientAuxiliaryCameraData {
 		sb.append("    alwaysDisplayDuringCall: ").append(toIndentedString(alwaysDisplayDuringCall)).append("\n");
 		sb.append("    displayInFloorPlan: ").append(toIndentedString(displayInFloorPlan)).append("\n");
 		sb.append("    mediaDeviceLabel: ").append(toIndentedString(mediaDeviceLabel)).append("\n");
+		sb.append("    ptzPresets: ").append(toIndentedString(ptzPresets)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

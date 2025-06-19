@@ -702,9 +702,71 @@ public class UsersApi {
 	}
 
 	/**
+	 * transformPhysicalToVirtual Converts the user with the given ID from a physical to a virtual user. This also changes the related &#x60;Person&#x60; entity to
+	 * a virtual &#x60;Person&#x60;. If the user is already virtual, the endpoint returns the user unchanged. If no user with the given ID exists or the user is a
+	 * visitor, the endpoint returns an error. If the converted user is to be used for ID propagation, you must use the username as the identifier. Note: Usernames
+	 * must be finalized before conversion to virtual users, as virtual users can&#39;t be mutated afterward.&lt;br&gt;
+	 * 
+	 * @param userId The user ID of the user that should be converted to a virtual user (required)
+	 * @param expand (optional)
+	 * @return User
+	 * @throws ApiException if fails to make API call
+	 */
+	public User usersTransformPhysicalToVirtual(String userId, List<ExpandFields> expand) throws ApiException {
+		return usersTransformPhysicalToVirtualWithHttpInfo(userId, expand).getData();
+	}
+
+	/**
+	 * transformPhysicalToVirtual Converts the user with the given ID from a physical to a virtual user. This also changes the related &#x60;Person&#x60; entity to
+	 * a virtual &#x60;Person&#x60;. If the user is already virtual, the endpoint returns the user unchanged. If no user with the given ID exists or the user is a
+	 * visitor, the endpoint returns an error. If the converted user is to be used for ID propagation, you must use the username as the identifier. Note: Usernames
+	 * must be finalized before conversion to virtual users, as virtual users can&#39;t be mutated afterward.&lt;br&gt;
+	 * 
+	 * @param userId The user ID of the user that should be converted to a virtual user (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;User&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<User> usersTransformPhysicalToVirtualWithHttpInfo(String userId, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'userId' is set
+		if (userId == null) {
+			throw new ApiException(400, "Missing the required parameter 'userId' when calling usersTransformPhysicalToVirtual");
+		}
+
+		// create path and map variables
+		String localVarPath = "/users/{userId}/transformPhysicalToVirtual"
+				.replaceAll("\\{" + "userId" + "\\}", apiClient.escapeString(userId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth" };
+
+		GenericType<User> localVarReturnType = new GenericType<User>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * transformVirtualToPhysical Converts the user with the given username from a virtual to a physical user. This also changes the related &#x60;Person&#x60;
-	 * entity to a physical&#x60;Person&#x60;. If the user&#39;s already physical, the user is simply returned. If no user with the given username exists, the
-	 * endpoint returns an error.&lt;br&gt;
+	 * entity to a physical&#x60;Person&#x60;. If the user is already physical, the endpoint returns the user unchanged. If no user with the given username exists
+	 * or the user is a visitor, the endpoint returns an error.&lt;br&gt;
 	 * 
 	 * @param usersTransformVirtualToPhysicalBody (required)
 	 * @param expand (optional)
@@ -717,8 +779,8 @@ public class UsersApi {
 
 	/**
 	 * transformVirtualToPhysical Converts the user with the given username from a virtual to a physical user. This also changes the related &#x60;Person&#x60;
-	 * entity to a physical&#x60;Person&#x60;. If the user&#39;s already physical, the user is simply returned. If no user with the given username exists, the
-	 * endpoint returns an error.&lt;br&gt;
+	 * entity to a physical&#x60;Person&#x60;. If the user is already physical, the endpoint returns the user unchanged. If no user with the given username exists
+	 * or the user is a visitor, the endpoint returns an error.&lt;br&gt;
 	 * 
 	 * @param usersTransformVirtualToPhysicalBody (required)
 	 * @param expand (optional)

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.19.1
+  version: 8.20.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -2790,6 +2790,34 @@ paths:
                     alwaysDisplayDuringCall: true
                     displayInFloorPlan: true
                     mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                    ptzPresets:
+                    - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                      id: null
+                      name: ID
+                      description: null
+                      translations: null
+                      pan: null
+                      tilt: null
+                      zoom: 400.0
+                      defaultValue: false
+                    - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                      id: null
+                      name: Passport
+                      description: null
+                      translations: null
+                      pan: null
+                      tilt: null
+                      zoom: 200.0
+                      defaultValue: false
+                    - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                      id: null
+                      name: Document
+                      description: null
+                      translations: null
+                      pan: null
+                      tilt: null
+                      zoom: 0.0
+                      defaultValue: true
                   - $_type: BranchClientAuxiliaryCameraData
                     id: null
                     name: branchClientAuxiliaryCamera2
@@ -2804,6 +2832,7 @@ paths:
                     alwaysDisplayDuringCall: true
                     displayInFloorPlan: true
                     mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                    ptzPresets: []
                   branchClientLinks:
                   - $_type: BranchClientLinkData
                     id: null
@@ -2866,6 +2895,34 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                      ptzPresets:
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: IbWH5D8nT-i-4xoAf3MGSA
+                        name: ID
+                        description: null
+                        translations: {}
+                        pan: null
+                        tilt: null
+                        zoom: 400.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: IbWH5D8nT-i-4xoAf3MGSA
+                        name: Passport
+                        description: null
+                        translations: {}
+                        pan: null
+                        tilt: null
+                        zoom: 200.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: IbWH5D8nT-i-4xoAf3MGSA
+                        name: Document
+                        description: null
+                        translations: {}
+                        pan: null
+                        tilt: null
+                        zoom: 0.0
+                        defaultValue: true
                     - $_type: BranchClientAuxiliaryCameraData
                       id: e-Jva02KTAqb2P2t5TrbRQ
                       name: branchClientAuxiliaryCamera2
@@ -2880,6 +2937,7 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                      ptzPresets: []
                     branchClientLinks:
                     - $_type: BranchClientLinkData
                       id: BKtnEH2sSe25ey1bfuLH3g
@@ -3152,6 +3210,34 @@ paths:
                     alwaysDisplayDuringCall: true
                     displayInFloorPlan: true
                     mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                    ptzPresets:
+                    - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                      id: null
+                      name: ID
+                      description: null
+                      translations: null
+                      pan: null
+                      tilt: null
+                      zoom: 400.0
+                      defaultValue: false
+                    - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                      id: null
+                      name: Passport
+                      description: null
+                      translations: null
+                      pan: null
+                      tilt: null
+                      zoom: 200.0
+                      defaultValue: false
+                    - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                      id: null
+                      name: Document
+                      description: null
+                      translations: null
+                      pan: null
+                      tilt: null
+                      zoom: 0.0
+                      defaultValue: true
                   - $_type: BranchClientAuxiliaryCameraData
                     id: null
                     name: branchClientAuxiliaryCamera2
@@ -3166,6 +3252,7 @@ paths:
                     alwaysDisplayDuringCall: true
                     displayInFloorPlan: true
                     mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                    ptzPresets: []
                   branchClientLinks:
                   - $_type: BranchClientLinkData
                     id: null
@@ -3228,6 +3315,34 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                      ptzPresets:
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: IbWH5D8nT-i-4xoAf3MGSA
+                        name: ID
+                        description: null
+                        translations: {}
+                        pan: null
+                        tilt: null
+                        zoom: 400.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: IbWH5D8nT-i-4xoAf3MGSA
+                        name: Passport
+                        description: null
+                        translations: {}
+                        pan: null
+                        tilt: null
+                        zoom: 200.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: IbWH5D8nT-i-4xoAf3MGSA
+                        name: Document
+                        description: null
+                        translations: {}
+                        pan: null
+                        tilt: null
+                        zoom: 0.0
+                        defaultValue: true
                     - $_type: BranchClientAuxiliaryCameraData
                       id: e-Jva02KTAqb2P2t5TrbRQ
                       name: branchClientAuxiliaryCamera2
@@ -3242,6 +3357,7 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                      ptzPresets: []
                     - $_type: BranchClientAuxiliaryCameraData
                       id: e-Jva02KTAqb2P2t5TrbRQ
                       name: branchClientAuxiliaryCamera3
@@ -3256,6 +3372,7 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera3_device-label
+                      ptzPresets: []
                     branchClientLinks: []
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -3338,6 +3455,34 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                      ptzPresets:
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: null
+                        name: ID
+                        description: null
+                        translations: null
+                        pan: null
+                        tilt: null
+                        zoom: 400.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: null
+                        name: Passport
+                        description: null
+                        translations: null
+                        pan: null
+                        tilt: null
+                        zoom: 200.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: null
+                        name: Document
+                        description: null
+                        translations: null
+                        pan: null
+                        tilt: null
+                        zoom: 0.0
+                        defaultValue: true
                     - $_type: BranchClientAuxiliaryCameraData
                       id: null
                       name: branchClientAuxiliaryCamera2
@@ -3352,6 +3497,7 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                      ptzPresets: []
                     branchClientLinks:
                     - $_type: BranchClientLinkData
                       id: null
@@ -3487,6 +3633,34 @@ paths:
                         alwaysDisplayDuringCall: true
                         displayInFloorPlan: true
                         mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                        ptzPresets:
+                        - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                          id: IbWH5D8nT-i-4xoAf3MGSA
+                          name: ID
+                          description: null
+                          translations: {}
+                          pan: null
+                          tilt: null
+                          zoom: 400.0
+                          defaultValue: false
+                        - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                          id: IbWH5D8nT-i-4xoAf3MGSA
+                          name: Passport
+                          description: null
+                          translations: {}
+                          pan: null
+                          tilt: null
+                          zoom: 200.0
+                          defaultValue: false
+                        - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                          id: IbWH5D8nT-i-4xoAf3MGSA
+                          name: Document
+                          description: null
+                          translations: {}
+                          pan: null
+                          tilt: null
+                          zoom: 0.0
+                          defaultValue: true
                       - $_type: BranchClientAuxiliaryCameraData
                         id: e-Jva02KTAqb2P2t5TrbRQ
                         name: branchClientAuxiliaryCamera2
@@ -3501,6 +3675,7 @@ paths:
                         alwaysDisplayDuringCall: true
                         displayInFloorPlan: true
                         mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                        ptzPresets: []
                       branchClientLinks:
                       - $_type: BranchClientLinkData
                         id: BKtnEH2sSe25ey1bfuLH3g
@@ -3756,6 +3931,34 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera1_device-label
+                      ptzPresets:
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: null
+                        name: ID
+                        description: null
+                        translations: null
+                        pan: null
+                        tilt: null
+                        zoom: 400.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: null
+                        name: Passport
+                        description: null
+                        translations: null
+                        pan: null
+                        tilt: null
+                        zoom: 200.0
+                        defaultValue: false
+                      - $_type: BranchClientAuxiliaryCameraPtzPresetData
+                        id: null
+                        name: Document
+                        description: null
+                        translations: null
+                        pan: null
+                        tilt: null
+                        zoom: 0.0
+                        defaultValue: true
                     - $_type: BranchClientAuxiliaryCameraData
                       id: null
                       name: branchClientAuxiliaryCamera2
@@ -3770,6 +3973,7 @@ paths:
                       alwaysDisplayDuringCall: true
                       displayInFloorPlan: true
                       mediaDeviceLabel: branchClientAuxiliaryCamera2_device-label
+                      ptzPresets: []
                     branchClientLinks:
                     - $_type: BranchClientLinkData
                       id: null
@@ -13125,12 +13329,50 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /users/{userId}/transformPhysicalToVirtual:
+    post:
+      tags:
+      - Users
+      summary: transformPhysicalToVirtual
+      description: "Converts the user with the given ID from a physical to a virtual user. This also changes the related `Person` entity to a virtual `Person`. If the user is already virtual, the endpoint returns the user unchanged. If no user with the given ID exists or the user is a visitor, the endpoint returns an error. If the converted user is to be used for ID propagation, you must use the username as the identifier. Note: Usernames must be finalized before conversion to virtual users, as virtual users can't be mutated afterward.<br>"
+      operationId: usersTransformPhysicalToVirtual
+      parameters:
+      - name: userId
+        in: path
+        description: The user ID of the user that should be converted to a virtual user
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpandFields'
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: The updated instance of the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /users/transformVirtualToPhysical:
     post:
       tags:
       - Users
       summary: transformVirtualToPhysical
-      description: "Converts the user with the given username from a virtual to a physical user. This also changes the related `Person` entity to a physical`Person`. If the user's already physical, the user is simply returned. If no user with the given username exists, the endpoint returns an error.<br>"
+      description: "Converts the user with the given username from a virtual to a physical user. This also changes the related `Person` entity to a physical`Person`. If the user is already physical, the endpoint returns the user unchanged. If no user with the given username exists or the user is a visitor, the endpoint returns an error.<br>"
       operationId: usersTransformVirtualToPhysical
       parameters:
       - name: expand
@@ -13439,6 +13681,90 @@ paths:
                   application/json:
                     schema:
                       $ref: '#/components/schemas/WebhookAuditEvent'
+              responses:
+                "200":
+                  description: OK
+        bot_thread.offboarding.ended:
+          '{$request.body#/endpoint}':
+            post:
+              summary: bot_thread.offboarding.ended
+              description: An event triggered every time a `BotThread` is ended during offboarding
+              operationId: botThreadOffboardingEndedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BotThreadOffboardingEndedEvent'
+              responses:
+                "200":
+                  description: OK
+        bot_thread.offboarding.started:
+          '{$request.body#/endpoint}':
+            post:
+              summary: bot_thread.offboarding.started
+              description: An event triggered every time a `BotThread` is started during offboarding
+              operationId: botThreadOffboardingStartedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BotThreadOffboardingStartedEvent'
+              responses:
+                "200":
+                  description: OK
+        bot_thread.onboarding.ended:
+          '{$request.body#/endpoint}':
+            post:
+              summary: bot_thread.onboarding.ended
+              description: An event triggered every time a `BotThread` is ended during onboarding
+              operationId: botThreadOnboardingEndedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BotThreadOnboardingEndedEvent'
+              responses:
+                "200":
+                  description: OK
+        bot_thread.onboarding.started:
+          '{$request.body#/endpoint}':
+            post:
+              summary: bot_thread.onboarding.started
+              description: An event triggered every time a `BotThread` is started during onboarding
+              operationId: botThreadOnboardingStartedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BotThreadOnboardingStartedEvent'
+              responses:
+                "200":
+                  description: OK
+        bot_thread.reboarding.ended:
+          '{$request.body#/endpoint}':
+            post:
+              summary: bot_thread.reboarding.ended
+              description: An event triggered every time a `BotThread` is ended during reboarding
+              operationId: botThreadReboardingEndedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BotThreadReboardingEndedEvent'
+              responses:
+                "200":
+                  description: OK
+        bot_thread.reboarding.started:
+          '{$request.body#/endpoint}':
+            post:
+              summary: bot_thread.reboarding.started
+              description: An event triggered every time a `BotThread` is started during reboarding
+              operationId: botThreadReboardingStartedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/BotThreadReboardingStartedEvent'
               responses:
                 "200":
                   description: OK
@@ -17124,6 +17450,23 @@ components:
           description: The token belonging to the dialog the bot wants the message to
         messageData:
           $ref: '#/components/schemas/PostMessageData'
+    BotDialogStateData:
+      type: object
+      description: Bot dialog state of a bot thread
+      properties:
+        $_type:
+          type: string
+          default: BotDialogStateData
+          enum:
+          - BotDialogStateData
+        dialogBotId:
+          type: string
+          description: ID of the dialog bot
+        dialogBotName:
+          type: string
+          description: Name of the bot
+        state:
+          $ref: '#/components/schemas/EBotDialogStatus'
     BotOffboardingOfferEvent:
       type: object
       description: "Event sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
@@ -17357,6 +17700,250 @@ components:
           $ref: '#/components/schemas/PersonData'
         conversation:
           $ref: '#/components/schemas/ConversationData'
+    BotThreadOffboardingEndedEvent:
+      type: object
+      description: An event triggered every time a `BotThread` is ended during offboarding
+      properties:
+        $_type:
+          type: string
+          default: BotThreadOffboardingEndedEvent
+          enum:
+          - BotThreadOffboardingEndedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        botThreadId:
+          type: string
+          description: The bot thread ID
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        counterpartPersonId:
+          type: string
+          description: The bot thread counterpart person ID
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread start timestamp
+        participatingDialogBots:
+          type: array
+          description: The dialog bot state data of all bots belonging to the bot thread. Bots are displayed in order they were executed.
+          items:
+            $ref: '#/components/schemas/BotDialogStateData'
+        botThreadResolution:
+          $ref: '#/components/schemas/EBotThreadResolution'
+        botThreadEndTrigger:
+          $ref: '#/components/schemas/EBotThreadEndTrigger'
+        endTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread end timestamp
+        offboardingReason:
+          $ref: '#/components/schemas/EOffboardingReason'
+    BotThreadOffboardingStartedEvent:
+      type: object
+      description: An event triggered every time a `BotThread` is started during offboarding
+      properties:
+        $_type:
+          type: string
+          default: BotThreadOffboardingStartedEvent
+          enum:
+          - BotThreadOffboardingStartedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        botThreadId:
+          type: string
+          description: The bot thread ID
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        counterpartPersonId:
+          type: string
+          description: The bot thread counterpart person ID
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread start timestamp
+        participatingDialogBots:
+          type: array
+          description: The dialog bot state data of all bots belonging to the bot thread. Bots are displayed in order they were executed.
+          items:
+            $ref: '#/components/schemas/BotDialogStateData'
+        offboardingReason:
+          $ref: '#/components/schemas/EOffboardingReason'
+    BotThreadOnboardingEndedEvent:
+      type: object
+      description: An event triggered every time a `BotThread` is ended during onboarding
+      properties:
+        $_type:
+          type: string
+          default: BotThreadOnboardingEndedEvent
+          enum:
+          - BotThreadOnboardingEndedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        botThreadId:
+          type: string
+          description: The bot thread ID
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        counterpartPersonId:
+          type: string
+          description: The bot thread counterpart person ID
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread start timestamp
+        participatingDialogBots:
+          type: array
+          description: The dialog bot state data of all bots belonging to the bot thread. Bots are displayed in order they were executed.
+          items:
+            $ref: '#/components/schemas/BotDialogStateData'
+        botThreadResolution:
+          $ref: '#/components/schemas/EBotThreadResolution'
+        botThreadEndTrigger:
+          $ref: '#/components/schemas/EBotThreadEndTrigger'
+        endTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread end timestamp
+    BotThreadOnboardingStartedEvent:
+      type: object
+      description: An event triggered every time a `BotThread` is started during onboarding
+      properties:
+        $_type:
+          type: string
+          default: BotThreadOnboardingStartedEvent
+          enum:
+          - BotThreadOnboardingStartedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        botThreadId:
+          type: string
+          description: The bot thread ID
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        counterpartPersonId:
+          type: string
+          description: The bot thread counterpart person ID
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread start timestamp
+        participatingDialogBots:
+          type: array
+          description: The dialog bot state data of all bots belonging to the bot thread. Bots are displayed in order they were executed.
+          items:
+            $ref: '#/components/schemas/BotDialogStateData'
+    BotThreadReboardingEndedEvent:
+      type: object
+      description: An event triggered every time a `BotThread` is ended during reboarding
+      properties:
+        $_type:
+          type: string
+          default: BotThreadReboardingEndedEvent
+          enum:
+          - BotThreadReboardingEndedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        botThreadId:
+          type: string
+          description: The bot thread ID
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        counterpartPersonId:
+          type: string
+          description: The bot thread counterpart person ID
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread start timestamp
+        participatingDialogBots:
+          type: array
+          description: The dialog bot state data of all bots belonging to the bot thread. Bots are displayed in order they were executed.
+          items:
+            $ref: '#/components/schemas/BotDialogStateData'
+        botThreadResolution:
+          $ref: '#/components/schemas/EBotThreadResolution'
+        botThreadEndTrigger:
+          $ref: '#/components/schemas/EBotThreadEndTrigger'
+        endTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread end timestamp
+    BotThreadReboardingStartedEvent:
+      type: object
+      description: An event triggered every time a `BotThread` is started during reboarding
+      properties:
+        $_type:
+          type: string
+          default: BotThreadReboardingStartedEvent
+          enum:
+          - BotThreadReboardingStartedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        botThreadId:
+          type: string
+          description: The bot thread ID
+        conversation:
+          $ref: '#/components/schemas/ConversationData'
+        counterpartPersonId:
+          type: string
+          description: The bot thread counterpart person ID
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The bot thread start timestamp
+        participatingDialogBots:
+          type: array
+          description: The dialog bot state data of all bots belonging to the bot thread. Bots are displayed in order they were executed.
+          items:
+            $ref: '#/components/schemas/BotDialogStateData'
     BotsCancelDialogBotTypingIndicatorBody:
       type: object
       description: Request body for the 'botsCancelDialogBotTypingIndicator' operation
@@ -17481,6 +18068,66 @@ components:
         mediaDeviceLabel:
           type: string
           description: Media device label of the branch client auxiliary camera. The name is provided by the device. Maximum of 250 characters. Mandatory.
+        ptzPresets:
+          type: array
+          description: List of all PTZ presets that belong to the auxiliary camera
+          items:
+            $ref: '#/components/schemas/BranchClientAuxiliaryCameraPtzPresetData'
+    BranchClientAuxiliaryCameraPtzPresetData:
+      type: object
+      description: Data model object for a branch client auxiliary camera PTZ preset
+      properties:
+        $_type:
+          type: string
+          default: BranchClientAuxiliaryCameraPtzPresetData
+          enum:
+          - BranchClientAuxiliaryCameraPtzPresetData
+        id:
+          type: string
+          description: ID of the branch client auxiliary camera PTZ preset
+        name:
+          type: string
+          description: Name of the branch client auxiliary camera PTZ preset. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the branch client auxiliary camera PTZ preset. Maximum of 500 characters. Optional.
+        translations:
+          type: object
+          description: A Map of localized versions of the name and description of the branch client auxiliary camera PTZ preset
+          additionalProperties:
+            $ref: '#/components/schemas/BranchClientAuxiliaryCameraPtzPresetTranslation'
+        pan:
+          type: number
+          format: float
+          description: "Target pan value for the PTZ camera source (if set to null, no pan will be applied)"
+        tilt:
+          type: number
+          format: float
+          description: "Target tilt value for the PTZ camera source (if set to null, no tilt will be applied)"
+        zoom:
+          type: number
+          format: float
+          description: "Target zoom value for the PTZ camera source (if set to null, no zoom will be applied)"
+        defaultValue:
+          type: boolean
+          description: "If set to true, this PTZ preset will be activated by default"
+    BranchClientAuxiliaryCameraPtzPresetTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BranchClientAuxiliaryCameraPtzPresetTranslation
+          enum:
+          - BranchClientAuxiliaryCameraPtzPresetTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
     BranchClientAuxiliaryCameraTranslation:
       type: object
       properties:
@@ -24709,6 +25356,17 @@ components:
       - "HAND_OFF: The bot is done with his part and the next bot can to the on-, re- or offboarding."
       - "SOLVED: The problem of the dialog was solved and therefore no further bots are invoked."
       - "ABORTED: The dialog was not successful and the on-, re- or offboarding has to be aborted."
+    EBotDialogStatus:
+      type: string
+      description: An enumeration of the possible statuses a bot can be in inside a bot dialog.<br> A bot thread can consist of multiple bots for which each bot has its own bot dialog.
+      enum:
+      - DIALOG_OFFER_ACCEPTED
+      - DIALOG_OPEN
+      - DIALOG_CLOSED
+      x-enum-descriptions:
+      - "DIALOG_OFFER_ACCEPTED: The bot accepted the dialog offer, but it hasn't yet opened the dialog. <p> This is the initial state for a bot in a bot thread."
+      - "DIALOG_OPEN: The bot has already opened the dialog"
+      - "DIALOG_CLOSED: The bot has closed the dialog (either through a dialog close event or an error)"
     EBotDialogTimeoutBehavior:
       type: string
       description: Defines what should happen with the conversation when it comes to timeout during on-boarding.<br> When omitted the default for external bots is set to HAND_OFF.
@@ -24729,6 +25387,40 @@ components:
       - ONBOARDING
       - REBOARDING
       - OFFBOARDING
+    EBotThreadEndTrigger:
+      type: string
+      description: The trigger for a bot thread end
+      enum:
+      - GLOBAL_TIMEOUT
+      - IDLE_TIMEOUT
+      - PARTICIPANT_LEFT
+      - PARTICIPANT_USER_CHANGED
+      - PARTICIPANT_REMOVED
+      - BOT_ACTION
+      - CONVERSATION_ENDED
+      - OTHER
+      - ERROR
+      x-enum-descriptions:
+      - "GLOBAL_TIMEOUT: The bot thread ended because of a global boarding timeout"
+      - "IDLE_TIMEOUT: The bot thread ended because of a boarding idle timeout"
+      - "PARTICIPANT_LEFT: The bot thread ended because the boarding participant left"
+      - "PARTICIPANT_USER_CHANGED: The bot thread ended because the boarding participant changed"
+      - "PARTICIPANT_REMOVED: The bot thread ended because the boarding participant was removed"
+      - "BOT_ACTION: The bot thread ended because the bot decided to end it"
+      - "CONVERSATION_ENDED: The bot thread ended because the conversation ended"
+      - "OTHER: The bot thread ended for some other reason"
+      - "ERROR: The bot thread ended because of an unexpected error"
+    EBotThreadResolution:
+      type: string
+      description: The bot thread resolution
+      enum:
+      - HAND_OFF
+      - SOLVED
+      - ABORTED
+      x-enum-descriptions:
+      - "HAND_OFF: The bot thread handed the conversation off to an agent"
+      - "SOLVED: The bot thread solved the conversation and ended it or put it to unassigned state"
+      - "ABORTED: The bot thread was aborted by either the bot or another action"
     EBotType:
       type: string
       description: Type of a dialog bot
@@ -26660,6 +27352,7 @@ components:
       - WHITEBOARD_INVITE
       - SCREEN_SHARING_INVITE
       - SCHEDULED_CONVERSATION
+      - BRANCH_CLIENT_PREVIEW
       x-enum-descriptions:
       - "CHAT_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming chat conversation."
       - "OFFLINE_CHAT_REQUEST: (Visitor initiated, visitor centered) A visitor creates an incoming chat conversation while all agents are offline."
@@ -26683,6 +27376,7 @@ components:
       - "WHITEBOARD_INVITE: (Agent initiated, agent centered) An agent creates whiteboard conversation and invites customer later."
       - "SCREEN_SHARING_INVITE: (Agent initiated, agent centered) An agent creates screen sharing conversation and invites customer later."
       - "SCHEDULED_CONVERSATION: (Agent initiated, agent centered) Conversation created with a certain topic and scheduled for some point in time."
+      - "BRANCH_CLIENT_PREVIEW: (Agent initiated, agent centered) Conversation created by an agent to view a branch client."
     EInitialEngagementTypeOperatorType:
       type: string
       enum:

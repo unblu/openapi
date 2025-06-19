@@ -122,7 +122,12 @@ public enum EInitialEngagementType {
 	/**
 	 * SCHEDULED_CONVERSATION: (Agent initiated, agent centered) Conversation created with a certain topic and scheduled for some point in time.
 	 */
-	SCHEDULED_CONVERSATION("SCHEDULED_CONVERSATION");
+	SCHEDULED_CONVERSATION("SCHEDULED_CONVERSATION"),
+
+	/**
+	 * BRANCH_CLIENT_PREVIEW: (Agent initiated, agent centered) Conversation created by an agent to view a branch client.
+	 */
+	BRANCH_CLIENT_PREVIEW("BRANCH_CLIENT_PREVIEW");
 
 	private String value;
 
