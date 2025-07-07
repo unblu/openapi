@@ -87,9 +87,7 @@ release {
         'checkLastVersionValue',
         'clean',
         'publish',
-        'jreleaserDeploy',
-        'clean',
-        'build'
+        'jreleaserDeploy'
     ]
     git {
         requireBranch.set('main/7.x.x')
