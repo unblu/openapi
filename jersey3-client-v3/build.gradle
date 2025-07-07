@@ -32,6 +32,7 @@ publishing {
                 }
                 developers {
                     developer {
+                        id = 'unblu'
                         url = 'https://github.com/orgs/' + "$githubRepositoryOwner" + '/people'
                     }
                 }
