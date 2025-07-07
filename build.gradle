@@ -11,8 +11,8 @@ plugins {
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'org.ajoberstar.git-publish' version '3.0.1'
     id 'org.ajoberstar.grgit' version '4.1.1'
-    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
-    id 'net.researchgate.release' version '3.0.2'
+    id 'org.jreleaser' version '1.19.0'
+    id 'net.researchgate.release' version '3.1.0'
 }
 
 wrapper {
@@ -20,6 +20,7 @@ wrapper {
 }
 
 String groupId = 'com.unblu.openapi'
+group = groupId
 
 subprojects {
     apply plugin: 'java'
@@ -27,17 +28,6 @@ subprojects {
     apply plugin: 'maven-publish'
 
     group = groupId
-
-    signing {
-        useGpgCmd()
-        sign(publishing.publications)
-    }
-
-    tasks.withType(Sign) {
-        onlyIf {
-            project.hasProperty('signing.gnupg.keyName')
-        }
-    }
 
     java {
         withJavadocJar()
@@ -52,15 +42,50 @@ subprojects {
     repositories {
         mavenCentral()
     }
+
+    publishing {
+        repositories {
+            maven {
+                url = rootProject.file('build/staging-deploy')
+            }
+        }
+    }
 }
 
-nexusPublishing {
-    packageGroup = 'com.unblu'
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            username = project.findProperty('s01ossSonatypeUsername') ?: ''
-            password = project.findProperty('s01ossSonatypePassword') ?: ''
+jreleaser {
+    signing {
+        active = 'RELEASE'
+        armored = true
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                unblu {
+                    active = 'RELEASE'
+                    namespace = 'com.unblu'
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    stagingRepository('build/staging-deploy')
+                    retryDelay = 30
+                    maxRetries = 150
+                }
+            }
+        }
+    }
+    release {
+        github {
+            enabled = true
+            repoOwner = "$githubRepositoryOwner"
+            name = "$githubRepositoryName"
+            tagName = '{{projectVersion}}'
+            overwrite = true
+            skipTag = true
+            makeLatest = 'true'
+            releaseNotes {
+                enabled = true
+            }
+            changelog {
+                enabled = false
+            }
         }
     }
 }
@@ -120,21 +145,17 @@ gitPublish {
 }
 
 release {
-    buildTasks = ['releaseBuild']
+    buildTasks = [
+        'checkLastVersionValue',
+        'clean',
+        'publish',
+        'jreleaserDeploy',
+        'asciidoctor',
+        'gitPublishPush'
+    ]
     git {
         requireBranch.set('main/8.x.x')
     }
-}
-
-task releaseBuild {
-    dependsOn(
-            'checkLastVersionValue',
-            'initializeSonatypeStagingRepository', 
-            'clean',
-            'build',
-            'asciidoctor',
-            'gitPublishPush'
-    )
 }
 
 tasks.register('checkLastVersionValue') {
@@ -164,13 +185,5 @@ model {
     }
     tasks.gitPublishCopy {
         dependsOn asciidoctor
-    }
-}
-// dependency on 'publishToSonatype' must be added in a 'afterEvaluate' block, see https://github.com/gradle/gradle/issues/16543#issuecomment-2529428010
-afterEvaluate {
-    model {
-        tasks.releaseBuild {
-            dependsOn project.getTasksByName('publishToSonatype', true)
-        }
     }
 }
