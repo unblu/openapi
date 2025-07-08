@@ -531,8 +531,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1>Unblu OpenAPI</h1>
 <div class="details">
-<span id="revnumber">version 8.20.2,</span>
-<span id="revdate">2025-06-19</span>
+<span id="revnumber">version 8.21.0,</span>
+<span id="revdate">2025-07-08</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -614,14 +614,14 @@ Do you want to improve this page? Please <a href="https://github.com/unblu/opena
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
   <span class="tag">&lt;groupId&gt;</span>com.unblu.openapi<span class="tag">&lt;/groupId&gt;</span>
   <span class="tag">&lt;artifactId&gt;</span>models-v4<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;version&gt;</span>8.20.2<span class="tag">&lt;/version&gt;</span>
+  <span class="tag">&lt;version&gt;</span>8.21.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Listing 2. Maven coordinates of the 'Models v4' project  (single line notation)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:models-v4:8.20.2</code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:models-v4:8.21.0</code></pre>
 </div>
 </div>
 </div>
@@ -646,14 +646,14 @@ It requires the <a href="https://github.com/unblu/openapi/tree/main/8.x.x/model-
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
   <span class="tag">&lt;groupId&gt;</span>com.unblu.openapi<span class="tag">&lt;/groupId&gt;</span>
   <span class="tag">&lt;artifactId&gt;</span>jersey3-client-v4<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;version&gt;</span>8.20.2<span class="tag">&lt;/version&gt;</span>
+  <span class="tag">&lt;version&gt;</span>8.21.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Listing 4. Maven coordinates of the 'Jersey Client v4' project  (single line notation)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:jersey3-client-v4:8.20.2</code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml">com.unblu.openapi:jersey3-client-v4:8.21.0</code></pre>
 </div>
 </div>
 </div>
@@ -703,38 +703,45 @@ It requires the <a href="https://github.com/unblu/openapi/tree/main/8.x.x/model-
 <div class="sect2">
 <h3 id="for-project-maintainers"><a class="anchor" href="#for-project-maintainers"></a>For project maintainers</h3>
 <div class="paragraph">
-<p>Following properties are expected to be set (for example in <code>~/.gradle/gradle.properties</code>):</p>
+<p>Publication to maven central is using jreleaser, following properties are expected to be set (for example in <code>~/.jreleaser/config.toml</code> or as environment variables):</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>signing.gnupg.keyName</code></p>
+<p><code>JRELEASER_MAVENCENTRAL_USERNAME</code></p>
 </li>
 <li>
-<p><code>signing.gnupg.passphrase</code></p>
+<p><code>JRELEASER_MAVENCENTRAL_PASSWORD</code></p>
 </li>
 <li>
-<p><code>s01ossSonatypeUsername</code></p>
+<p><code>JRELEASER_GPG_PASSPHRASE</code></p>
 </li>
 <li>
-<p><code>s01ossSonatypePassword</code></p>
+<p><code>JRELEASER_GPG_PUBLIC_KEY</code></p>
+</li>
+<li>
+<p><code>JRELEASER_GPG_SECRET_KEY</code></p>
+</li>
+<li>
+<p><code>JRELEASER_GITHUB_TOKEN</code></p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Following command can be used to verify that jreleaser is correctly configured:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./gradlew jreleaserConfig</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Command to build and publish the result to maven central:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>./gradlew publishToSonatype</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Command to upload the documentation page on GitHub pages:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>./gradlew gitPublishPush</pre>
+<pre>./gradlew publish
+./gradlew jreleaserDeploy</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -791,8 +798,8 @@ ssh-add ~/.ssh/id_rsa</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 8.20.2<br>
-Last updated 2025-05-23 15:44:50 +0200
+Version 8.21.0<br>
+Last updated 2025-07-07 17:43:19 +0200
 </div>
 </div>
 </body>
