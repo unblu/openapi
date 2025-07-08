@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.20.2
+  version: 8.21.0
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -34,6 +34,7 @@ tags:
   description: "Service to manage canned responses.<br> The canned responses a user can edit and the ones they can use in chats can differ. The ones they can edit depend on their role. The ones they can use in a chat depend on their role as well as the team setup. Refer to the following policies for the list of canned responses available for chat: <ul> <li>All canned responses of the own user.</li> <li>All canned responses of the team cascade (the user's team and all of its parent teams)</li> <li>All canned responses of the subteams if role is: SUPERVISOR or higher.</li> <li>All canned responses of all teams if role is: ADMIN or higher.</li> <li>All canned responses of the users account.</li> </ul> Compare that to list of policies for creating, editing, and deleting canned responses: <ul> <li>All canned responses of the own user.</li> <li>All canned responses of the subteams if role is: SUPERVISOR or higher.</li> <li>All canned responses of all teams if role is: ADMIN or higher.</li> <li>All canned responses of the users account if role is: ADMIN or higher.</li> <li></li> </ul>"
 - name: CannedResponsesUsage
   description: Service for Canned Response Usage
+- name: CollaborationLayerEvents
 - name: CollaborationLayerLogs
   description: Service to manage all kind of collaboration layer log entries.
 - name: ConversationHistory
@@ -4498,6 +4499,89 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /collaborationlayerevents/search:
+    post:
+      tags:
+      - CollaborationLayerEvents
+      summary: search
+      description: Search for collaboration layer events in the current account<br>
+      operationId: collaborationLayerEventsSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollaborationLayerEventQuery'
+            examples:
+              request-body:
+                summary: request body
+                description: Search for Collaboration Layer Event with all possible filters
+                value:
+                  $_type: CollaborationLayerEventQuery
+                  searchFilters:
+                  - $_type: EventTimestampCollaborationLayerEventSearchFilter
+                    field: EVENT_TIMESTAMP
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1706745500
+                      maximum: 1706745700
+                  - $_type: ConversationIdCollaborationLayerEventSearchFilter
+                    field: CONVERSATION_ID
+                    operator:
+                      $_type: EqualsIdOperator
+                      type: EQUALS
+                      value: "1000"
+                  - $_type: EventSourceTypeCollaborationLayerEventSearchFilter
+                    field: EVENT_SOURCE_TYPE
+                    operator:
+                      $_type: EqualsCollaborationLayerEventSourceTypeOperator
+                      type: EQUALS
+                      value: EMBEDDED_COBROWSING
+                  - $_type: TriggeringPersonIdCollaborationLayerEventSearchFilter
+                    field: TRIGGERING_PERSON_ID
+                    operator:
+                      $_type: EqualsIdOperator
+                      type: EQUALS
+                      value: "1000"
+                  orderBy:
+                  - $_type: CollaborationLayerEventOrderBy
+                    field: EVENT_TIMESTAMP
+                    order: ASCENDING
+                  offset: 0
+                  limit: 1
+              response-body:
+                summary: response body
+                description: Search for Collaboration Layer Event with all possible filters
+                value:
+                  $_type: CollaborationLayerEventResult
+                  hasMoreItems: false
+                  nextOffset: null
+                  items:
+                  - $_type: EmbeddedCobrowsingCollaborationLayerEventData
+                    layerId: "1000"
+                    layerOwnerPersonId: "1000"
+                    layerOwnerPersonPresenceId: "1000"
+                    triggeringPersonId: "1000"
+                    triggeringPersonPresenceId: "1000"
+                    conversationId: AcviDb210C5BoFd6e_79oan
+                    eventTimestamp: 1551398400000
+                    layerSourceType: EMBEDDED_COBROWSING
+                    url: '...'
+                    pageTitle: Test
+                    navigationType: FULL_PAGE
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollaborationLayerEventResult'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /collaborationlayerlogs/search:
     post:
       tags:
@@ -13950,6 +14034,48 @@ paths:
               responses:
                 "200":
                   description: OK
+        collaboration_layer_event.document_cobrowsing:
+          '{$request.body#/endpoint}':
+            post:
+              summary: collaboration_layer_event.document_cobrowsing
+              description: An event triggered every time a document action takes place in a document co-browsing collaboration layer
+              operationId: collaborationLayerEventDocumentCobrowsingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CollaborationDocumentNavigationEvent'
+              responses:
+                "200":
+                  description: OK
+        collaboration_layer_event.embedded_cobrowsing:
+          '{$request.body#/endpoint}':
+            post:
+              summary: collaboration_layer_event.embedded_cobrowsing
+              description: An event triggered every time a new URL is accessed in an embedded co-browsing collaboration layer
+              operationId: collaborationLayerEventEmbeddedCobrowsingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CollaborationEmbeddedCobrowsingNavigationEvent'
+              responses:
+                "200":
+                  description: OK
+        collaboration_layer_event.universal_cobrowsing:
+          '{$request.body#/endpoint}':
+            post:
+              summary: collaboration_layer_event.universal_cobrowsing
+              description: An event triggered every time a new URL is accessed in a universal co-browsing collaboration layer
+              operationId: collaborationLayerEventUniversalCobrowsingCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/CollaborationUniversalCobrowsingNavigationEvent'
+              responses:
+                "200":
+                  description: OK
         conversation.active:
           '{$request.body#/endpoint}':
             post:
@@ -15583,7 +15709,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -15630,7 +15756,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -15674,7 +15800,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -15718,7 +15844,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -15768,7 +15894,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -15815,7 +15941,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -16409,7 +16535,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -16453,7 +16579,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -16494,7 +16620,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -16533,7 +16659,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -20497,6 +20623,116 @@ components:
           AUTHENTICATION_REQUIRED: '#/components/schemas/AuthenticationRequiredChatSuggestionResponse'
           EMPTY: '#/components/schemas/EmptyChatSuggestionResponse'
           TEXT: '#/components/schemas/TextChatSuggestionResponse'
+    CollaborationDocumentNavigationEvent:
+      type: object
+      description: An event triggered every time a document action takes place in a document co-browsing collaboration layer
+      properties:
+        $_type:
+          type: string
+          default: CollaborationDocumentNavigationEvent
+          enum:
+          - CollaborationDocumentNavigationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        layerId:
+          type: string
+          description: The ID of the collaboration layer
+        conversationId:
+          type: string
+          description: The ID of the conversation that the layer belongs to
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the event occurred
+        layerOwnerPersonId:
+          type: string
+          description: The ID of the person who started the layer
+        layerOwnerPersonPresenceId:
+          type: string
+          description: The ID of the person presence in the conversation who started the layer
+        triggeringPersonId:
+          type: string
+          description: The ID of the person currently in control of navigation
+        triggeringPersonPresenceId:
+          type: string
+          description: The person presence ID of the person currently in control of navigation
+        fileId:
+          type: string
+          description: "The file store ID of the actual content of the file, which was shared in the conversation. Stored by the Collaboration Server."
+        documentActionType:
+          $ref: '#/components/schemas/EDocumentActionType'
+        fileName:
+          type: string
+          description: The name of the file shared in the conversation
+        fileSize:
+          type: integer
+          format: int64
+          description: "The total size, in bytes, of the file, which was shared in the conversation. Not always set."
+        mimeType:
+          type: string
+          description: The MIME type of the file shared in the conversation
+        links:
+          type: array
+          description: "URLs to download the file. One link is to download the file via the web API, the other is to download the file from the Agent Desk. The URLs are only accessible to authenticated users that have access to the referenced conversation. Authentication is possible with basic authentication or a valid session cookie.<br> If the file is currently being reviewed by one or more file interceptors, calling one of the URLs returns a 403 code until the file upload has been approved."
+          items:
+            $ref: '#/components/schemas/DownloadLink'
+    CollaborationEmbeddedCobrowsingNavigationEvent:
+      type: object
+      description: An event triggered every time a new URL is accessed in an embedded co-browsing collaboration layer
+      properties:
+        $_type:
+          type: string
+          default: CollaborationEmbeddedCobrowsingNavigationEvent
+          enum:
+          - CollaborationEmbeddedCobrowsingNavigationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        layerId:
+          type: string
+          description: The ID of the collaboration layer
+        conversationId:
+          type: string
+          description: The ID of the conversation that the layer belongs to
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the event occurred
+        layerOwnerPersonId:
+          type: string
+          description: The ID of the person who started the layer
+        layerOwnerPersonPresenceId:
+          type: string
+          description: The ID of the person presence in the conversation who started the layer
+        triggeringPersonId:
+          type: string
+          description: The ID of the person currently in control of navigation
+        triggeringPersonPresenceId:
+          type: string
+          description: The person presence ID of the person currently in control of navigation
+        url:
+          type: string
+          description: The URL of the web page visited
+        pageTitle:
+          type: string
+          description: The page title of the web page visited
+        navigationType:
+          $ref: '#/components/schemas/ENavigationType'
     CollaborationLayerAbortedEvent:
       type: object
       description: An event triggered every time collaboration layer in a conversation aborts
@@ -20617,6 +20853,106 @@ components:
           type: integer
           format: int64
           description: The timestamp when the layer was approved by all necessary participants
+    CollaborationLayerEventData:
+      description: An event triggered every time any defined event is fired in a collaboration layer
+      oneOf:
+      - $ref: '#/components/schemas/UniversalCobrowsingCollaborationLayerEventData'
+      - $ref: '#/components/schemas/EmbeddedCobrowsingCollaborationLayerEventData'
+      - $ref: '#/components/schemas/DocumentCobrowsingCollaborationLayerEventData'
+      discriminator:
+        propertyName: layerSourceType
+        mapping:
+          DOCUMENT_COBROWSING: '#/components/schemas/DocumentCobrowsingCollaborationLayerEventData'
+          EMBEDDED_COBROWSING: '#/components/schemas/EmbeddedCobrowsingCollaborationLayerEventData'
+          UNIVERSAL_COBROWSING: '#/components/schemas/UniversalCobrowsingCollaborationLayerEventData'
+    CollaborationLayerEventOrderBy:
+      type: object
+      description: Collaboration layer event orderBy item
+      properties:
+        $_type:
+          type: string
+          default: CollaborationLayerEventOrderBy
+          enum:
+          - CollaborationLayerEventOrderBy
+        field:
+          $ref: '#/components/schemas/ECollaborationLayerEventOrderByField'
+        order:
+          $ref: '#/components/schemas/Order'
+    CollaborationLayerEventQuery:
+      type: object
+      description: Container to search for a collaboration layer event
+      properties:
+        $_type:
+          type: string
+          default: CollaborationLayerEventQuery
+          enum:
+          - CollaborationLayerEventQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: '#/components/schemas/CollaborationLayerEventSearchFilter'
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: '#/components/schemas/CollaborationLayerEventOrderBy'
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    CollaborationLayerEventResult:
+      type: object
+      description: Container to return a list of collaboration layer events
+      properties:
+        $_type:
+          type: string
+          default: CollaborationLayerEventResult
+          enum:
+          - CollaborationLayerEventResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: '#/components/schemas/CollaborationLayerEventData'
+    CollaborationLayerEventSearchFilter:
+      description: Collaboration layer event filter item
+      oneOf:
+      - $ref: '#/components/schemas/TriggeringPersonIdCollaborationLayerEventSearchFilter'
+      - $ref: '#/components/schemas/ConversationIdCollaborationLayerEventSearchFilter'
+      - $ref: '#/components/schemas/EventTimestampCollaborationLayerEventSearchFilter'
+      - $ref: '#/components/schemas/EventSourceTypeCollaborationLayerEventSearchFilter'
+      discriminator:
+        propertyName: field
+        mapping:
+          CONVERSATION_ID: '#/components/schemas/ConversationIdCollaborationLayerEventSearchFilter'
+          EVENT_SOURCE_TYPE: '#/components/schemas/EventSourceTypeCollaborationLayerEventSearchFilter'
+          EVENT_TIMESTAMP: '#/components/schemas/EventTimestampCollaborationLayerEventSearchFilter'
+          TRIGGERING_PERSON_ID: '#/components/schemas/TriggeringPersonIdCollaborationLayerEventSearchFilter'
+    CollaborationLayerEventSourceTypeOperator:
+      oneOf:
+      - $ref: '#/components/schemas/EqualsCollaborationLayerEventSourceTypeOperator'
+      - $ref: '#/components/schemas/NotEqualsCollaborationLayerEventSourceTypeOperator'
+      - $ref: '#/components/schemas/InCollaborationLayerEventSourceTypeOperator'
+      - $ref: '#/components/schemas/NotInCollaborationLayerEventSourceTypeOperator'
+      discriminator:
+        propertyName: type
+        mapping:
+          EQUALS: '#/components/schemas/EqualsCollaborationLayerEventSourceTypeOperator'
+          IN: '#/components/schemas/InCollaborationLayerEventSourceTypeOperator'
+          NOT_EQUALS: '#/components/schemas/NotEqualsCollaborationLayerEventSourceTypeOperator'
+          NOT_IN: '#/components/schemas/NotInCollaborationLayerEventSourceTypeOperator'
     CollaborationLayerLogEntryData:
       type: object
       description: Data class for collaboration layer log entries.
@@ -20822,6 +21158,55 @@ components:
           description: The timestamp when the layer was approved by all necessary participants
         layerStopReason:
           $ref: '#/components/schemas/ELayerStopReason'
+    CollaborationUniversalCobrowsingNavigationEvent:
+      type: object
+      description: An event triggered every time a new URL is accessed in a universal co-browsing collaboration layer
+      properties:
+        $_type:
+          type: string
+          default: CollaborationUniversalCobrowsingNavigationEvent
+          enum:
+          - CollaborationUniversalCobrowsingNavigationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        layerId:
+          type: string
+          description: The ID of the collaboration layer
+        conversationId:
+          type: string
+          description: The ID of the conversation that the layer belongs to
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the event occurred
+        layerOwnerPersonId:
+          type: string
+          description: The ID of the person who started the layer
+        layerOwnerPersonPresenceId:
+          type: string
+          description: The ID of the person presence in the conversation who started the layer
+        triggeringPersonId:
+          type: string
+          description: The ID of the person currently in control of navigation
+        triggeringPersonPresenceId:
+          type: string
+          description: The person presence ID of the person currently in control of navigation
+        url:
+          type: string
+          description: The URL of the web page visited
+        pageTitle:
+          type: string
+          description: The page title of the web page visited
+        navigationType:
+          $ref: '#/components/schemas/ENavigationType'
     CompoundOperator:
       oneOf:
       - $ref: '#/components/schemas/AndCompoundOperator'
@@ -21699,6 +22084,18 @@ components:
           - ConversationIdCannedResponseUsageSearchFilter
         field:
           $ref: '#/components/schemas/ECannedResponseUsageSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/IdOperator'
+    ConversationIdCollaborationLayerEventSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationIdCollaborationLayerEventSearchFilter
+          enum:
+          - ConversationIdCollaborationLayerEventSearchFilter
+        field:
+          $ref: '#/components/schemas/ECollaborationLayerEventSearchFilterField'
         operator:
           $ref: '#/components/schemas/IdOperator'
     ConversationIdCollaborationLayerLogEntrySearchFilter:
@@ -24833,6 +25230,44 @@ components:
           CREATION_TIMESTAMP: '#/components/schemas/CreationTimestampDialogBotSearchFilter'
           MODIFICATION_TIMESTAMP: '#/components/schemas/ModificationTimestampDialogBotSearchFilter'
           NAME: '#/components/schemas/NameDialogBotSearchFilter'
+    DocumentCobrowsingCollaborationLayerEventData:
+      type: object
+      description: An event triggered every time a document action happens in a document co-browsing collaboration layer
+      properties:
+        $_type:
+          type: string
+          default: DocumentCobrowsingCollaborationLayerEventData
+          enum:
+          - DocumentCobrowsingCollaborationLayerEventData
+        layerId:
+          type: string
+          description: The ID of the collaboration layer
+        layerOwnerPersonId:
+          type: string
+          description: The ID of the person who provided the layer. Null if the layer is provided by the system.
+        layerOwnerPersonPresenceId:
+          type: string
+          description: he ID of the person presence in the conversation who provided the layer. Null if the layer is provided by the system.
+        triggeringPersonId:
+          type: string
+          description: The ID of the person currently in control of navigation
+        triggeringPersonPresenceId:
+          type: string
+          description: The person presence ID of the person currently in control of navigation
+        conversationId:
+          type: string
+          description: The ID of the conversation that the layer belongs to
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the event occurred
+        layerSourceType:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceType'
+        fileId:
+          type: string
+          description: The ID of the file in the file store
+        documentActionType:
+          $ref: '#/components/schemas/EDocumentActionType'
     DocumentMediaParameterValue:
       type: object
       properties:
@@ -25791,6 +26226,56 @@ components:
       x-enum-descriptions:
       - MANUAL
       - AUTOMATIC
+    ECollaborationLayerEventOrderByField:
+      type: string
+      description: Collaboration layer event orderBy values
+      enum:
+      - TRIGGERING_PERSON_ID
+      - EVENT_SOURCE_TYPE
+      - EVENT_TIMESTAMP
+      - CONVERSATION_ID
+      x-enum-descriptions:
+      - "TRIGGERING_PERSON_ID: Sort by the 'triggeringPersonId' attribute"
+      - "EVENT_SOURCE_TYPE: Sort by the 'eventSourceType' attribute"
+      - "EVENT_TIMESTAMP: Sort by the 'eventTimestamp' attribute"
+      - "CONVERSATION_ID: Sort by the 'conversationId' attribute"
+    ECollaborationLayerEventSearchFilterField:
+      type: string
+      description: Filter fields corresponding to fields defined by `CollaborationLayerEventSearchFilter`
+      enum:
+      - EVENT_SOURCE_TYPE
+      - CONVERSATION_ID
+      - EVENT_TIMESTAMP
+      - TRIGGERING_PERSON_ID
+      x-enum-descriptions:
+      - "EVENT_SOURCE_TYPE: Filter by the 'eventSourceType' attribute"
+      - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
+      - "EVENT_TIMESTAMP: Filter by the 'eventTimestamp' attribute. Specify the timestamp in the UTC timezone in milliseconds."
+      - "TRIGGERING_PERSON_ID: Filter by the 'triggeringPersonId' attribute."
+    ECollaborationLayerEventSourceType:
+      type: string
+      description: Collaboration layer types for logging events
+      enum:
+      - UNIVERSAL_COBROWSING
+      - EMBEDDED_COBROWSING
+      - DOCUMENT_COBROWSING
+      x-enum-descriptions:
+      - "UNIVERSAL_COBROWSING: Event type for universal co-browsing"
+      - "EMBEDDED_COBROWSING: Event type for embedded co-browsing"
+      - "DOCUMENT_COBROWSING: Event type for document co-browsing"
+    ECollaborationLayerEventSourceTypeOperatorType:
+      type: string
+      description: Operator types corresponding to operators defined by `CollaborationLayerEventSourceTypeOperator`
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      - IN
+      - NOT_IN
+      x-enum-descriptions:
+      - "EQUALS: Check if the value is equal to the one provided in the operator"
+      - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+      - "IN: Check if the value is one of the ones provided in the operator"
+      - "NOT_IN: Check if the value is none of the ones provided in the operator"
     ECollaborationLayerLogEntryOrderByField:
       type: string
       enum:
@@ -27020,6 +27505,15 @@ components:
       - "BOT_PERSON_ID: Filter by the 'botPersonId' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EDocumentActionType:
+      type: string
+      description: Document co-browsing event action type for differentiating the triggering personId field
+      enum:
+      - DOCUMENT_OPENED
+      - DOCUMENT_SIGNED
+      x-enum-descriptions:
+      - "DOCUMENT_OPENED: Document has been opened in a new tab, the triggering person is the one who opened it"
+      - "DOCUMENT_SIGNED: Document has been signed, the triggering person is the one who signed it"
     EDomainOrderByField:
       type: string
       enum:
@@ -27792,6 +28286,17 @@ components:
       x-enum-descriptions:
       - "META_TAG: A meta tag"
       - "DOMAIN: a (sub)domain"
+    ENavigationType:
+      type: string
+      description: The source of navigation
+      enum:
+      - FULL_PAGE
+      - FRAME
+      - LOCAL_CHANGE
+      x-enum-descriptions:
+      - "FULL_PAGE: Full web page was loaded"
+      - "FRAME: URL of an iframe within the web page was loaded"
+      - "LOCAL_CHANGE: Local navigation (e.g. text fragments) on the web page"
     EOffboardingReason:
       type: string
       description: Reason why the offboarding from a conversation was triggered for an individual person.
@@ -28688,6 +29193,47 @@ components:
           $ref: '#/components/schemas/EUserSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    EmbeddedCobrowsingCollaborationLayerEventData:
+      type: object
+      description: An event triggered every time a new URL is accessed in the embedded co-browsing collaboration layer
+      properties:
+        $_type:
+          type: string
+          default: EmbeddedCobrowsingCollaborationLayerEventData
+          enum:
+          - EmbeddedCobrowsingCollaborationLayerEventData
+        layerId:
+          type: string
+          description: The ID of the collaboration layer
+        layerOwnerPersonId:
+          type: string
+          description: The ID of the person who provided the layer. Null if the layer is provided by the system.
+        layerOwnerPersonPresenceId:
+          type: string
+          description: he ID of the person presence in the conversation who provided the layer. Null if the layer is provided by the system.
+        triggeringPersonId:
+          type: string
+          description: The ID of the person currently in control of navigation
+        triggeringPersonPresenceId:
+          type: string
+          description: The person presence ID of the person currently in control of navigation
+        conversationId:
+          type: string
+          description: The ID of the conversation that the layer belongs to
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the event occurred
+        layerSourceType:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceType'
+        url:
+          type: string
+          description: The URL of the visited web site
+        pageTitle:
+          type: string
+          description: The page title of the visited web site
+        navigationType:
+          $ref: '#/components/schemas/ENavigationType'
     EmptyChatSuggestionResponse:
       type: object
       description: Model representing the response to a chat suggestion request when no suggestion could be generated
@@ -28894,6 +29440,18 @@ components:
           $ref: '#/components/schemas/ECallServiceProviderOperatorType'
         value:
           $ref: '#/components/schemas/ECallServiceProvider'
+    EqualsCollaborationLayerEventSourceTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: EqualsCollaborationLayerEventSourceTypeOperator
+          enum:
+          - EqualsCollaborationLayerEventSourceTypeOperator
+        type:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceTypeOperatorType'
+        value:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceType'
     EqualsContactIdentifierFieldTypeOperator:
       type: object
       properties:
@@ -29248,6 +29806,30 @@ components:
           - EstablishedTimestampCallSearchFilter
         field:
           $ref: '#/components/schemas/ECallSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    EventSourceTypeCollaborationLayerEventSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: EventSourceTypeCollaborationLayerEventSearchFilter
+          enum:
+          - EventSourceTypeCollaborationLayerEventSearchFilter
+        field:
+          $ref: '#/components/schemas/ECollaborationLayerEventSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/CollaborationLayerEventSourceTypeOperator'
+    EventTimestampCollaborationLayerEventSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: EventTimestampCollaborationLayerEventSearchFilter
+          enum:
+          - EventTimestampCollaborationLayerEventSearchFilter
+        field:
+          $ref: '#/components/schemas/ECollaborationLayerEventSearchFilterField'
         operator:
           $ref: '#/components/schemas/TimestampOperator'
     ExpandFields:
@@ -30618,6 +31200,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EAwaitedPersonType'
+    InCollaborationLayerEventSourceTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: InCollaborationLayerEventSourceTypeOperator
+          enum:
+          - InCollaborationLayerEventSourceTypeOperator
+        type:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceTypeOperatorType'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ECollaborationLayerEventSourceType'
     InContactIdentifierFieldTypeOperator:
       type: object
       properties:
@@ -31347,7 +31943,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -31388,7 +31984,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -31429,7 +32025,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -33455,6 +34051,18 @@ components:
           $ref: '#/components/schemas/ECallServiceProviderOperatorType'
         value:
           $ref: '#/components/schemas/ECallServiceProvider'
+    NotEqualsCollaborationLayerEventSourceTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotEqualsCollaborationLayerEventSourceTypeOperator
+          enum:
+          - NotEqualsCollaborationLayerEventSourceTypeOperator
+        type:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceTypeOperatorType'
+        value:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceType'
     NotEqualsContactIdentifierFieldTypeOperator:
       type: object
       properties:
@@ -33813,6 +34421,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EAwaitedPersonType'
+    NotInCollaborationLayerEventSourceTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NotInCollaborationLayerEventSourceTypeOperator
+          enum:
+          - NotInCollaborationLayerEventSourceTypeOperator
+        type:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceTypeOperatorType'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ECollaborationLayerEventSourceType'
     NotInContactIdentifierFieldTypeOperator:
       type: object
       properties:
@@ -35698,7 +36320,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -35742,7 +36364,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -35783,7 +36405,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -35827,7 +36449,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -37944,6 +38566,18 @@ components:
           $ref: '#/components/schemas/EConversationSearchFilterField'
         operator:
           $ref: '#/components/schemas/StringOperator'
+    TriggeringPersonIdCollaborationLayerEventSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: TriggeringPersonIdCollaborationLayerEventSearchFilter
+          enum:
+          - TriggeringPersonIdCollaborationLayerEventSearchFilter
+        field:
+          $ref: '#/components/schemas/ECollaborationLayerEventSearchFilterField'
+        operator:
+          $ref: '#/components/schemas/IdOperator'
     TypeExternalMessengerChannelSearchFilter:
       type: object
       properties:
@@ -37956,6 +38590,47 @@ components:
           $ref: '#/components/schemas/EExternalMessengerChannelSearchFilterField'
         operator:
           $ref: '#/components/schemas/ExternalMessengerChannelTypeOperator'
+    UniversalCobrowsingCollaborationLayerEventData:
+      type: object
+      description: An event triggered every time a new URL is accessed in the universal co-browsing collaboration layer
+      properties:
+        $_type:
+          type: string
+          default: UniversalCobrowsingCollaborationLayerEventData
+          enum:
+          - UniversalCobrowsingCollaborationLayerEventData
+        layerId:
+          type: string
+          description: The ID of the collaboration layer
+        layerOwnerPersonId:
+          type: string
+          description: The ID of the person who provided the layer. Null if the layer is provided by the system.
+        layerOwnerPersonPresenceId:
+          type: string
+          description: he ID of the person presence in the conversation who provided the layer. Null if the layer is provided by the system.
+        triggeringPersonId:
+          type: string
+          description: The ID of the person currently in control of navigation
+        triggeringPersonPresenceId:
+          type: string
+          description: The person presence ID of the person currently in control of navigation
+        conversationId:
+          type: string
+          description: The ID of the conversation that the layer belongs to
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp when the event occurred
+        layerSourceType:
+          $ref: '#/components/schemas/ECollaborationLayerEventSourceType'
+        url:
+          type: string
+          description: The URL of the visited web site
+        pageTitle:
+          type: string
+          description: The page title of the visited web site
+        navigationType:
+          $ref: '#/components/schemas/ENavigationType'
     User:
       type: object
       description: Model of a user. A user is normally an agent and/or a person who manages the system
@@ -38345,7 +39020,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -38395,7 +39070,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -38442,7 +39117,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:
@@ -38492,7 +39167,7 @@ components:
         creationTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the event was created
+          description: Unix timestamp (ms) when the invitation was created
         creatorType:
           $ref: '#/components/schemas/EInvitationCreatorType'
         creatorPerson:

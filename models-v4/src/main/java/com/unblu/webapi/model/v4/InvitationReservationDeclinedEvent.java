@@ -259,11 +259,11 @@ public class InvitationReservationDeclinedEvent {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the event was created
+	 * Unix timestamp (ms) when the invitation was created
 	 * 
 	 * @return creationTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the event was created")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the invitation was created")
 	public Long getCreationTimestamp() {
 		return creationTimestamp;
 	}
