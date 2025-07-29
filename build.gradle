@@ -63,21 +63,10 @@ jreleaser {
             }
         }
     }
+    //One releaser must be configured, see https://github.com/jreleaser/jreleaser/discussions/1725
     release {
-        github {
-            enabled = true
-            repoOwner = "$githubRepositoryOwner"
-            name = "$githubRepositoryName"
-            tagName = '{{projectVersion}}'
-            overwrite = true
-            skipTag = true
-            makeLatest = 'legacy'
-            releaseNotes {
-                enabled = true
-            }
-            changelog {
-                enabled = false
-            }
+        generic {
+            skipRelease = true
         }
     }
 }
