@@ -402,7 +402,13 @@ public class AuthenticatorApi {
 	}
 
 	/**
-	 * logout Call this to log out (clear internal session and session cookie on response)&lt;br&gt;
+	 * logout Call this to log out the current user and terminate all connections between the calling device and the Collaboration Server pods. &lt;p&gt; For
+	 * locally authenticated users, the authentication cookie is removed from the response. &lt;p&gt; In the case of ID propagation, this endpoint can be used by a
+	 * proxy or firewall when the user logs out from the webpage that integrates Unblu. The proxy or firewall can use it to terminate all connections between the
+	 * Collaboration Server and the device being logged out. This also causes the user to no longer appear as online in Unblu. If the endpoint isn&#39;t called, the
+	 * connections are terminated after they time out.&lt;br&gt; When called for ID propagation, this request should be the last one for the user. No further
+	 * requests should reach the Unblu server or they may result in the user appearing to be online again. &lt;p&gt; Be sure to send all of the user&#39;s cookies
+	 * and authentication parameters in the request. This ensures that the device whose connections should be terminated can be identified correctly.&lt;br&gt;
 	 * 
 	 * @param authenticatorLogoutBody (required)
 	 * @throws ApiException if fails to make API call
@@ -413,7 +419,13 @@ public class AuthenticatorApi {
 	}
 
 	/**
-	 * logout Call this to log out (clear internal session and session cookie on response)&lt;br&gt;
+	 * logout Call this to log out the current user and terminate all connections between the calling device and the Collaboration Server pods. &lt;p&gt; For
+	 * locally authenticated users, the authentication cookie is removed from the response. &lt;p&gt; In the case of ID propagation, this endpoint can be used by a
+	 * proxy or firewall when the user logs out from the webpage that integrates Unblu. The proxy or firewall can use it to terminate all connections between the
+	 * Collaboration Server and the device being logged out. This also causes the user to no longer appear as online in Unblu. If the endpoint isn&#39;t called, the
+	 * connections are terminated after they time out.&lt;br&gt; When called for ID propagation, this request should be the last one for the user. No further
+	 * requests should reach the Unblu server or they may result in the user appearing to be online again. &lt;p&gt; Be sure to send all of the user&#39;s cookies
+	 * and authentication parameters in the request. This ensures that the device whose connections should be terminated can be identified correctly.&lt;br&gt;
 	 * 
 	 * @param authenticatorLogoutBody (required)
 	 * @throws ApiException if fails to make API call

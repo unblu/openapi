@@ -41,6 +41,7 @@ import io.swagger.annotations.ApiModelProperty;
 	QuestionAbortedMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_LOCALE,
+	QuestionAbortedMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	QuestionAbortedMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_VALUE,
 	QuestionAbortedMessageData.JSON_PROPERTY_REASON,
@@ -159,6 +160,10 @@ public class QuestionAbortedMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
+	private String conversationLocale;
 
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
@@ -551,18 +556,37 @@ public class QuestionAbortedMessageData implements MessageData {
 	}
 
 	/**
-	 * Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it&#39;s in
-	 * the conversation language.
+	 * The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if
+	 * it&#39;s in the conversation language.
 	 * 
 	 * @return locale
 	 **/
-	@ApiModelProperty(value = "Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it's in the conversation language.")
+	@ApiModelProperty(value = "The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if it's in the conversation language.")
 	public String getLocale() {
 		return locale;
 	}
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public QuestionAbortedMessageData conversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
+		return this;
+	}
+
+	/**
+	 * The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.
+	 * 
+	 * @return conversationLocale
+	 **/
+	@ApiModelProperty(value = "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.")
+	public String getConversationLocale() {
+		return conversationLocale;
+	}
+
+	public void setConversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
 	}
 
 	public QuestionAbortedMessageData questionMessageId(String questionMessageId) {
@@ -651,6 +675,7 @@ public class QuestionAbortedMessageData implements MessageData {
 				Objects.equals(this.externalMessageId, questionAbortedMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, questionAbortedMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, questionAbortedMessageData.locale) &&
+				Objects.equals(this.conversationLocale, questionAbortedMessageData.conversationLocale) &&
 				Objects.equals(this.questionMessageId, questionAbortedMessageData.questionMessageId) &&
 				Objects.equals(this.value, questionAbortedMessageData.value) &&
 				Objects.equals(this.reason, questionAbortedMessageData.reason);
@@ -658,7 +683,7 @@ public class QuestionAbortedMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, questionMessageId, value, reason);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, questionMessageId, value, reason);
 	}
 
 	@Override
@@ -685,6 +710,7 @@ public class QuestionAbortedMessageData implements MessageData {
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("    reason: ").append(toIndentedString(reason)).append("\n");

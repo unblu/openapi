@@ -5,27 +5,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ExpandFields
+ * The type of index. Different elements (messages, transcripts, etc.) are indexed in different indices.
  */
-public enum ExpandFields {
+public enum ESearchIndexType {
 
-	ACTIONICON("actionIcon"),
-
-	AVATAR("avatar"),
-
-	CHANNELICON("channelIcon"),
-
-	CONFIGURATION("configuration"),
-
-	FLOORPLANIMAGE("floorPlanImage"),
-
-	METADATA("metadata"),
-
-	TEXT("text");
+	/**
+	 * CONVERSATION_MESSAGES: The index for messages in a conversation
+	 */
+	CONVERSATION_MESSAGES("CONVERSATION_MESSAGES");
 
 	private String value;
 
-	ExpandFields(String value) {
+	ESearchIndexType(String value) {
 		this.value = value;
 	}
 
@@ -40,8 +31,8 @@ public enum ExpandFields {
 	}
 
 	@JsonCreator
-	public static ExpandFields fromValue(String value) {
-		for (ExpandFields b : ExpandFields.values()) {
+	public static ESearchIndexType fromValue(String value) {
+		for (ESearchIndexType b : ESearchIndexType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

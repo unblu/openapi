@@ -41,6 +41,7 @@ import io.swagger.annotations.ApiModelProperty;
 	MultichoiceQuestionMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_LOCALE,
+	MultichoiceQuestionMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_TEXT,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_TEXT_TYPE,
 	MultichoiceQuestionMessageData.JSON_PROPERTY_OPTIONS,
@@ -160,6 +161,10 @@ public class MultichoiceQuestionMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
+	private String conversationLocale;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -556,18 +561,37 @@ public class MultichoiceQuestionMessageData implements MessageData {
 	}
 
 	/**
-	 * Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it&#39;s in
-	 * the conversation language.
+	 * The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if
+	 * it&#39;s in the conversation language.
 	 * 
 	 * @return locale
 	 **/
-	@ApiModelProperty(value = "Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it's in the conversation language.")
+	@ApiModelProperty(value = "The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if it's in the conversation language.")
 	public String getLocale() {
 		return locale;
 	}
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public MultichoiceQuestionMessageData conversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
+		return this;
+	}
+
+	/**
+	 * The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.
+	 * 
+	 * @return conversationLocale
+	 **/
+	@ApiModelProperty(value = "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.")
+	public String getConversationLocale() {
+		return conversationLocale;
+	}
+
+	public void setConversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
 	}
 
 	public MultichoiceQuestionMessageData text(String text) {
@@ -683,6 +707,7 @@ public class MultichoiceQuestionMessageData implements MessageData {
 				Objects.equals(this.externalMessageId, multichoiceQuestionMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, multichoiceQuestionMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, multichoiceQuestionMessageData.locale) &&
+				Objects.equals(this.conversationLocale, multichoiceQuestionMessageData.conversationLocale) &&
 				Objects.equals(this.text, multichoiceQuestionMessageData.text) &&
 				Objects.equals(this.textType, multichoiceQuestionMessageData.textType) &&
 				Objects.equals(this.options, multichoiceQuestionMessageData.options) &&
@@ -691,7 +716,7 @@ public class MultichoiceQuestionMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, text, textType, options, answerStatus);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, options, answerStatus);
 	}
 
 	@Override
@@ -718,6 +743,7 @@ public class MultichoiceQuestionMessageData implements MessageData {
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

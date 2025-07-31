@@ -14,6 +14,7 @@ import com.unblu.webapi.model.v4.BranchData;
 import com.unblu.webapi.model.v4.BranchDataList;
 import com.unblu.webapi.model.v4.BranchQuery;
 import com.unblu.webapi.model.v4.BranchResult;
+import com.unblu.webapi.model.v4.ExpandFields;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -40,21 +41,23 @@ public class BranchesApi {
 	 * create Creates a new branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to create (required)
+	 * @param expand (optional)
 	 * @return BranchData
 	 * @throws ApiException if fails to make API call
 	 */
-	public BranchData branchesCreate(BranchData branchData) throws ApiException {
-		return branchesCreateWithHttpInfo(branchData).getData();
+	public BranchData branchesCreate(BranchData branchData, List<ExpandFields> expand) throws ApiException {
+		return branchesCreateWithHttpInfo(branchData, expand).getData();
 	}
 
 	/**
 	 * create Creates a new branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to create (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;BranchData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<BranchData> branchesCreateWithHttpInfo(BranchData branchData) throws ApiException {
+	public ApiResponse<BranchData> branchesCreateWithHttpInfo(BranchData branchData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = branchData;
 
 		// verify the required parameter 'branchData' is set
@@ -69,6 +72,8 @@ public class BranchesApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -140,21 +145,23 @@ public class BranchesApi {
 	 * read Returns the branch for the given branch ID&lt;br&gt;
 	 * 
 	 * @param branchId ID of the branch (required)
+	 * @param expand (optional)
 	 * @return BranchData
 	 * @throws ApiException if fails to make API call
 	 */
-	public BranchData branchesRead(String branchId) throws ApiException {
-		return branchesReadWithHttpInfo(branchId).getData();
+	public BranchData branchesRead(String branchId, List<ExpandFields> expand) throws ApiException {
+		return branchesReadWithHttpInfo(branchId, expand).getData();
 	}
 
 	/**
 	 * read Returns the branch for the given branch ID&lt;br&gt;
 	 * 
 	 * @param branchId ID of the branch (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;BranchData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<BranchData> branchesReadWithHttpInfo(String branchId) throws ApiException {
+	public ApiResponse<BranchData> branchesReadWithHttpInfo(String branchId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'branchId' is set
@@ -170,6 +177,8 @@ public class BranchesApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -294,21 +303,23 @@ public class BranchesApi {
 	 * update Updates a branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to update (required)
+	 * @param expand (optional)
 	 * @return BranchData
 	 * @throws ApiException if fails to make API call
 	 */
-	public BranchData branchesUpdate(BranchData branchData) throws ApiException {
-		return branchesUpdateWithHttpInfo(branchData).getData();
+	public BranchData branchesUpdate(BranchData branchData, List<ExpandFields> expand) throws ApiException {
+		return branchesUpdateWithHttpInfo(branchData, expand).getData();
 	}
 
 	/**
 	 * update Updates a branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to update (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;BranchData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<BranchData> branchesUpdateWithHttpInfo(BranchData branchData) throws ApiException {
+	public ApiResponse<BranchData> branchesUpdateWithHttpInfo(BranchData branchData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = branchData;
 
 		// verify the required parameter 'branchData' is set
@@ -323,6 +334,8 @@ public class BranchesApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

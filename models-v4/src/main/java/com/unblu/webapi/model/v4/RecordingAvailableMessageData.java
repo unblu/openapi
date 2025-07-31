@@ -41,6 +41,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordingAvailableMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_LOCALE,
+	RecordingAvailableMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_SIZE,
 	RecordingAvailableMessageData.JSON_PROPERTY_FILE_NAME,
@@ -161,6 +162,10 @@ public class RecordingAvailableMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
+	private String conversationLocale;
 
 	public static final String JSON_PROPERTY_BLOB_ID = "blobId";
 	@JsonProperty(JSON_PROPERTY_BLOB_ID)
@@ -561,18 +566,37 @@ public class RecordingAvailableMessageData implements MessageData {
 	}
 
 	/**
-	 * Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it&#39;s in
-	 * the conversation language.
+	 * The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if
+	 * it&#39;s in the conversation language.
 	 * 
 	 * @return locale
 	 **/
-	@ApiModelProperty(value = "Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it's in the conversation language.")
+	@ApiModelProperty(value = "The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if it's in the conversation language.")
 	public String getLocale() {
 		return locale;
 	}
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public RecordingAvailableMessageData conversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
+		return this;
+	}
+
+	/**
+	 * The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.
+	 * 
+	 * @return conversationLocale
+	 **/
+	@ApiModelProperty(value = "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.")
+	public String getConversationLocale() {
+		return conversationLocale;
+	}
+
+	public void setConversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
 	}
 
 	public RecordingAvailableMessageData blobId(String blobId) {
@@ -699,6 +723,7 @@ public class RecordingAvailableMessageData implements MessageData {
 				Objects.equals(this.externalMessageId, recordingAvailableMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, recordingAvailableMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, recordingAvailableMessageData.locale) &&
+				Objects.equals(this.conversationLocale, recordingAvailableMessageData.conversationLocale) &&
 				Objects.equals(this.blobId, recordingAvailableMessageData.blobId) &&
 				Objects.equals(this.blobSize, recordingAvailableMessageData.blobSize) &&
 				Objects.equals(this.fileName, recordingAvailableMessageData.fileName) &&
@@ -708,7 +733,7 @@ public class RecordingAvailableMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, blobId, blobSize, fileName, startTimestamp, endTimestamp);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, blobId, blobSize, fileName, startTimestamp, endTimestamp);
 	}
 
 	@Override
@@ -735,6 +760,7 @@ public class RecordingAvailableMessageData implements MessageData {
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    blobId: ").append(toIndentedString(blobId)).append("\n");
 		sb.append("    blobSize: ").append(toIndentedString(blobSize)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");

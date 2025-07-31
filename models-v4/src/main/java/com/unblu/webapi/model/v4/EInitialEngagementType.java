@@ -105,9 +105,19 @@ public enum EInitialEngagementType {
 	CHAT_INVITE("CHAT_INVITE"),
 
 	/**
+	 * EMBEDDED_COBROWSING_INVITE: (Agent initiated, agent centered) An agent creates an embedded co-browsing conversation and invites customer later.
+	 */
+	EMBEDDED_COBROWSING_INVITE("EMBEDDED_COBROWSING_INVITE"),
+
+	/**
 	 * HEADLESS_INVITE: (Agent initiated, agent centered) An agent creates universal co-browsing conversation and invites customer later.
 	 */
 	HEADLESS_INVITE("HEADLESS_INVITE"),
+
+	/**
+	 * MOBILE_COBROWSING_INVITE: (Agent initiated, agent centered) An agent creates a mobile co-browsing conversation and invites customer later.
+	 */
+	MOBILE_COBROWSING_INVITE("MOBILE_COBROWSING_INVITE"),
 
 	/**
 	 * WHITEBOARD_INVITE: (Agent initiated, agent centered) An agent creates whiteboard conversation and invites customer later.

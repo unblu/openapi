@@ -38,8 +38,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchData.JSON_PROPERTY_COUNTRY,
 	BranchData.JSON_PROPERTY_TRANSLATIONS,
 	BranchData.JSON_PROPERTY_STATE,
-	BranchData.JSON_PROPERTY_FLOOR_PLAN_FILE_URL,
-	BranchData.JSON_PROPERTY_FLOOR_PLAN,
+	BranchData.JSON_PROPERTY_FLOOR_PLAN_IMAGE,
 	BranchData.JSON_PROPERTY_WIDTH,
 	BranchData.JSON_PROPERTY_HEIGHT,
 	BranchData.JSON_PROPERTY_DISPLAY_LABELS_ON_FLOOR_PLAN,
@@ -143,13 +142,9 @@ public class BranchData {
 	@JsonProperty(JSON_PROPERTY_STATE)
 	private EBranchState state;
 
-	public static final String JSON_PROPERTY_FLOOR_PLAN_FILE_URL = "floorPlanFileUrl";
-	@JsonProperty(JSON_PROPERTY_FLOOR_PLAN_FILE_URL)
-	private String floorPlanFileUrl;
-
-	public static final String JSON_PROPERTY_FLOOR_PLAN = "floorPlan";
-	@JsonProperty(JSON_PROPERTY_FLOOR_PLAN)
-	private String floorPlan;
+	public static final String JSON_PROPERTY_FLOOR_PLAN_IMAGE = "floorPlanImage";
+	@JsonProperty(JSON_PROPERTY_FLOOR_PLAN_IMAGE)
+	private ExpandableField<Image> floorPlanImage = null;
 
 	public static final String JSON_PROPERTY_WIDTH = "width";
 	@JsonProperty(JSON_PROPERTY_WIDTH)
@@ -476,42 +471,23 @@ public class BranchData {
 		this.state = state;
 	}
 
-	public BranchData floorPlanFileUrl(String floorPlanFileUrl) {
-		this.floorPlanFileUrl = floorPlanFileUrl;
+	public BranchData floorPlanImage(ExpandableField<Image> floorPlanImage) {
+		this.floorPlanImage = floorPlanImage;
 		return this;
 	}
 
 	/**
-	 * File URL of the branch floor plan for the agent side
+	 * Image of the entity: ID that can be expanded.
 	 * 
-	 * @return floorPlanFileUrl
+	 * @return floorPlanImage
 	 **/
-	@ApiModelProperty(value = "File URL of the branch floor plan for the agent side")
-	public String getFloorPlanFileUrl() {
-		return floorPlanFileUrl;
+	@ApiModelProperty(value = "Image of the entity: ID that can be expanded.")
+	public ExpandableField<Image> getFloorPlanImage() {
+		return floorPlanImage;
 	}
 
-	public void setFloorPlanFileUrl(String floorPlanFileUrl) {
-		this.floorPlanFileUrl = floorPlanFileUrl;
-	}
-
-	public BranchData floorPlan(String floorPlan) {
-		this.floorPlan = floorPlan;
-		return this;
-	}
-
-	/**
-	 * Floor plan image in Base64 format. Use this field when creating a branch or updating the floor plan. Will always be null in returned BranchData.
-	 * 
-	 * @return floorPlan
-	 **/
-	@ApiModelProperty(value = "Floor plan image in Base64 format. Use this field when creating a branch or updating the floor plan. Will always be null in returned BranchData.")
-	public String getFloorPlan() {
-		return floorPlan;
-	}
-
-	public void setFloorPlan(String floorPlan) {
-		this.floorPlan = floorPlan;
+	public void setFloorPlanImage(ExpandableField<Image> floorPlanImage) {
+		this.floorPlanImage = floorPlanImage;
 	}
 
 	public BranchData width(Integer width) {
@@ -703,8 +679,7 @@ public class BranchData {
 				Objects.equals(this.country, branchData.country) &&
 				Objects.equals(this.translations, branchData.translations) &&
 				Objects.equals(this.state, branchData.state) &&
-				Objects.equals(this.floorPlanFileUrl, branchData.floorPlanFileUrl) &&
-				Objects.equals(this.floorPlan, branchData.floorPlan) &&
+				Objects.equals(this.floorPlanImage, branchData.floorPlanImage) &&
 				Objects.equals(this.width, branchData.width) &&
 				Objects.equals(this.height, branchData.height) &&
 				Objects.equals(this.displayLabelsOnFloorPlan, branchData.displayLabelsOnFloorPlan) &&
@@ -716,7 +691,7 @@ public class BranchData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, accountId, modificationTimestamp, version, name, description, streetAddress, zip, city, region, country, translations, state, floorPlanFileUrl, floorPlan, width, height, displayLabelsOnFloorPlan, branchClients, branchDevices, branchTextBoxes, branchLinks);
+		return Objects.hash($type, id, creationTimestamp, accountId, modificationTimestamp, version, name, description, streetAddress, zip, city, region, country, translations, state, floorPlanImage, width, height, displayLabelsOnFloorPlan, branchClients, branchDevices, branchTextBoxes, branchLinks);
 	}
 
 	@Override
@@ -738,8 +713,7 @@ public class BranchData {
 		sb.append("    country: ").append(toIndentedString(country)).append("\n");
 		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
 		sb.append("    state: ").append(toIndentedString(state)).append("\n");
-		sb.append("    floorPlanFileUrl: ").append(toIndentedString(floorPlanFileUrl)).append("\n");
-		sb.append("    floorPlan: ").append(toIndentedString(floorPlan)).append("\n");
+		sb.append("    floorPlanImage: ").append(toIndentedString(floorPlanImage)).append("\n");
 		sb.append("    width: ").append(toIndentedString(width)).append("\n");
 		sb.append("    height: ").append(toIndentedString(height)).append("\n");
 		sb.append("    displayLabelsOnFloorPlan: ").append(toIndentedString(displayLabelsOnFloorPlan)).append("\n");

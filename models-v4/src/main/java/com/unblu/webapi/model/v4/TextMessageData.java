@@ -41,9 +41,11 @@ import io.swagger.annotations.ApiModelProperty;
 	TextMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	TextMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	TextMessageData.JSON_PROPERTY_LOCALE,
+	TextMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	TextMessageData.JSON_PROPERTY_TEXT,
 	TextMessageData.JSON_PROPERTY_TEXT_TYPE,
 	TextMessageData.JSON_PROPERTY_QUICK_REPLIES,
+	TextMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class TextMessageData implements MessageData {
@@ -160,6 +162,10 @@ public class TextMessageData implements MessageData {
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
 
+	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
+	private String conversationLocale;
+
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private String text;
@@ -171,6 +177,10 @@ public class TextMessageData implements MessageData {
 	public static final String JSON_PROPERTY_QUICK_REPLIES = "quickReplies";
 	@JsonProperty(JSON_PROPERTY_QUICK_REPLIES)
 	private List<QuickReply> quickReplies = null;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<TextMessageTranslation> availableTranslations = null;
 
 	public TextMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -551,18 +561,37 @@ public class TextMessageData implements MessageData {
 	}
 
 	/**
-	 * Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it&#39;s in
-	 * the conversation language.
+	 * The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if
+	 * it&#39;s in the conversation language.
 	 * 
 	 * @return locale
 	 **/
-	@ApiModelProperty(value = "Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it's in the conversation language.")
+	@ApiModelProperty(value = "The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if it's in the conversation language.")
 	public String getLocale() {
 		return locale;
 	}
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public TextMessageData conversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
+		return this;
+	}
+
+	/**
+	 * The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.
+	 * 
+	 * @return conversationLocale
+	 **/
+	@ApiModelProperty(value = "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.")
+	public String getConversationLocale() {
+		return conversationLocale;
+	}
+
+	public void setConversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
 	}
 
 	public TextMessageData text(String text) {
@@ -630,6 +659,34 @@ public class TextMessageData implements MessageData {
 		this.quickReplies = quickReplies;
 	}
 
+	public TextMessageData availableTranslations(List<TextMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public TextMessageData addAvailableTranslationsItem(TextMessageTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Text message translations. These are only available if the message has already been translated into the specific language. The available languages may vary,
+	 * as translations are added with each translation request.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Text message translations. These are only available if the message has already been translated into the specific language. The available languages may vary, as translations are added with each translation request.")
+	public List<TextMessageTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<TextMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -659,14 +716,16 @@ public class TextMessageData implements MessageData {
 				Objects.equals(this.externalMessageId, textMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, textMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, textMessageData.locale) &&
+				Objects.equals(this.conversationLocale, textMessageData.conversationLocale) &&
 				Objects.equals(this.text, textMessageData.text) &&
 				Objects.equals(this.textType, textMessageData.textType) &&
-				Objects.equals(this.quickReplies, textMessageData.quickReplies);
+				Objects.equals(this.quickReplies, textMessageData.quickReplies) &&
+				Objects.equals(this.availableTranslations, textMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, text, textType, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -693,9 +752,11 @@ public class TextMessageData implements MessageData {
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    quickReplies: ").append(toIndentedString(quickReplies)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

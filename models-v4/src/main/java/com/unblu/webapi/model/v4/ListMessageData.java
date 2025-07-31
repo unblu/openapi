@@ -41,6 +41,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ListMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	ListMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	ListMessageData.JSON_PROPERTY_LOCALE,
+	ListMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	ListMessageData.JSON_PROPERTY_HEADER,
 	ListMessageData.JSON_PROPERTY_ITEMS,
 	ListMessageData.JSON_PROPERTY_ACTIONS,
@@ -160,6 +161,10 @@ public class ListMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
+	private String conversationLocale;
 
 	public static final String JSON_PROPERTY_HEADER = "header";
 	@JsonProperty(JSON_PROPERTY_HEADER)
@@ -556,18 +561,37 @@ public class ListMessageData implements MessageData {
 	}
 
 	/**
-	 * Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it&#39;s in
-	 * the conversation language.
+	 * The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if
+	 * it&#39;s in the conversation language.
 	 * 
 	 * @return locale
 	 **/
-	@ApiModelProperty(value = "Language of the message provided in the BCP 47 language tag format, including the region if available. If omitted, the message is processed as if it's in the conversation language.")
+	@ApiModelProperty(value = "The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if it's in the conversation language.")
 	public String getLocale() {
 		return locale;
 	}
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public ListMessageData conversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
+		return this;
+	}
+
+	/**
+	 * The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.
+	 * 
+	 * @return conversationLocale
+	 **/
+	@ApiModelProperty(value = "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable.")
+	public String getConversationLocale() {
+		return conversationLocale;
+	}
+
+	public void setConversationLocale(String conversationLocale) {
+		this.conversationLocale = conversationLocale;
 	}
 
 	public ListMessageData header(MessageHeader header) {
@@ -699,6 +723,7 @@ public class ListMessageData implements MessageData {
 				Objects.equals(this.externalMessageId, listMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, listMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, listMessageData.locale) &&
+				Objects.equals(this.conversationLocale, listMessageData.conversationLocale) &&
 				Objects.equals(this.header, listMessageData.header) &&
 				Objects.equals(this.items, listMessageData.items) &&
 				Objects.equals(this.actions, listMessageData.actions) &&
@@ -707,7 +732,7 @@ public class ListMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, header, items, actions, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, header, items, actions, quickReplies);
 	}
 
 	@Override
@@ -734,6 +759,7 @@ public class ListMessageData implements MessageData {
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    header: ").append(toIndentedString(header)).append("\n");
 		sb.append("    items: ").append(toIndentedString(items)).append("\n");
 		sb.append("    actions: ").append(toIndentedString(actions)).append("\n");

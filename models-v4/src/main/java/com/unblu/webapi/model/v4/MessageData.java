@@ -135,4 +135,10 @@ public interface MessageData {
 
 	MessageData locale(String locale);
 
+	void setConversationLocale(String conversationLocale);
+
+	String getConversationLocale();
+
+	MessageData conversationLocale(String conversationLocale);
+
 }
