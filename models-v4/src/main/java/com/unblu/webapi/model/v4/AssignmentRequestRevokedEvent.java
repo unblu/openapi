@@ -31,6 +31,8 @@ import io.swagger.annotations.ApiModelProperty;
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_CREATOR_PERSON,
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	AssignmentRequestRevokedEvent.JSON_PROPERTY_TARGET,
+	AssignmentRequestRevokedEvent.JSON_PROPERTY_TARGET_CHANGE,
+	AssignmentRequestRevokedEvent.JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AssignmentRequestRevokedEvent {
@@ -114,6 +116,14 @@ public class AssignmentRequestRevokedEvent {
 	public static final String JSON_PROPERTY_TARGET = "target";
 	@JsonProperty(JSON_PROPERTY_TARGET)
 	private ConversationRecipientData target = null;
+
+	public static final String JSON_PROPERTY_TARGET_CHANGE = "targetChange";
+	@JsonProperty(JSON_PROPERTY_TARGET_CHANGE)
+	private Boolean targetChange;
+
+	public static final String JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE = "assignmentRequestType";
+	@JsonProperty(JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE)
+	private EAssignmentRequestType assignmentRequestType;
 
 	public AssignmentRequestRevokedEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -343,6 +353,45 @@ public class AssignmentRequestRevokedEvent {
 		this.target = target;
 	}
 
+	public AssignmentRequestRevokedEvent targetChange(Boolean targetChange) {
+		this.targetChange = targetChange;
+		return this;
+	}
+
+	/**
+	 * Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and
+	 * assigns it to the updated recipient.
+	 * 
+	 * @return targetChange
+	 **/
+	@ApiModelProperty(value = "Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and assigns it to the updated recipient.")
+	public Boolean isTargetChange() {
+		return targetChange;
+	}
+
+	public void setTargetChange(Boolean targetChange) {
+		this.targetChange = targetChange;
+	}
+
+	public AssignmentRequestRevokedEvent assignmentRequestType(EAssignmentRequestType assignmentRequestType) {
+		this.assignmentRequestType = assignmentRequestType;
+		return this;
+	}
+
+	/**
+	 * Get assignmentRequestType
+	 * 
+	 * @return assignmentRequestType
+	 **/
+	@ApiModelProperty(value = "")
+	public EAssignmentRequestType getAssignmentRequestType() {
+		return assignmentRequestType;
+	}
+
+	public void setAssignmentRequestType(EAssignmentRequestType assignmentRequestType) {
+		this.assignmentRequestType = assignmentRequestType;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -363,12 +412,14 @@ public class AssignmentRequestRevokedEvent {
 				Objects.equals(this.creatorType, assignmentRequestRevokedEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, assignmentRequestRevokedEvent.creatorPerson) &&
 				Objects.equals(this.contextPersonInfo, assignmentRequestRevokedEvent.contextPersonInfo) &&
-				Objects.equals(this.target, assignmentRequestRevokedEvent.target);
+				Objects.equals(this.target, assignmentRequestRevokedEvent.target) &&
+				Objects.equals(this.targetChange, assignmentRequestRevokedEvent.targetChange) &&
+				Objects.equals(this.assignmentRequestType, assignmentRequestRevokedEvent.assignmentRequestType);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, targetChange, assignmentRequestType);
 	}
 
 	@Override
@@ -387,6 +438,8 @@ public class AssignmentRequestRevokedEvent {
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
+		sb.append("    targetChange: ").append(toIndentedString(targetChange)).append("\n");
+		sb.append("    assignmentRequestType: ").append(toIndentedString(assignmentRequestType)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

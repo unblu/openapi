@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	User.JSON_PROPERTY_DISPLAY_NAME,
 	User.JSON_PROPERTY_FIRST_NAME,
 	User.JSON_PROPERTY_LAST_NAME,
+	User.JSON_PROPERTY_NICKNAME,
 	User.JSON_PROPERTY_EXTERNALLY_MANAGED,
 	User.JSON_PROPERTY_VIRTUAL_USER,
 	User.JSON_PROPERTY_CONFIGURATION,
@@ -135,6 +136,10 @@ public class User {
 	public static final String JSON_PROPERTY_LAST_NAME = "lastName";
 	@JsonProperty(JSON_PROPERTY_LAST_NAME)
 	private String lastName;
+
+	public static final String JSON_PROPERTY_NICKNAME = "nickname";
+	@JsonProperty(JSON_PROPERTY_NICKNAME)
+	private String nickname;
 
 	public static final String JSON_PROPERTY_EXTERNALLY_MANAGED = "externallyManaged";
 	@JsonProperty(JSON_PROPERTY_EXTERNALLY_MANAGED)
@@ -446,6 +451,25 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public User nickname(String nickname) {
+		this.nickname = nickname;
+		return this;
+	}
+
+	/**
+	 * The nickname of the user. Can be omitted.
+	 * 
+	 * @return nickname
+	 **/
+	@ApiModelProperty(value = "The nickname of the user. Can be omitted.")
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public User externallyManaged(Boolean externallyManaged) {
 		this.externallyManaged = externallyManaged;
 		return this;
@@ -565,6 +589,7 @@ public class User {
 				Objects.equals(this.displayName, user.displayName) &&
 				Objects.equals(this.firstName, user.firstName) &&
 				Objects.equals(this.lastName, user.lastName) &&
+				Objects.equals(this.nickname, user.nickname) &&
 				Objects.equals(this.externallyManaged, user.externallyManaged) &&
 				Objects.equals(this.virtualUser, user.virtualUser) &&
 				Objects.equals(this._configuration, user._configuration) &&
@@ -573,7 +598,7 @@ public class User {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, username, email, phone, teamId, authorizationRole, displayName, firstName, lastName, externallyManaged, virtualUser, _configuration, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, username, email, phone, teamId, authorizationRole, displayName, firstName, lastName, nickname, externallyManaged, virtualUser, _configuration, metadata);
 	}
 
 	@Override
@@ -595,6 +620,7 @@ public class User {
 		sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
 		sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
 		sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+		sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
 		sb.append("    externallyManaged: ").append(toIndentedString(externallyManaged)).append("\n");
 		sb.append("    virtualUser: ").append(toIndentedString(virtualUser)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");

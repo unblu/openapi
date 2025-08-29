@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.22.1
+  version: 8.23.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -234,6 +234,7 @@ paths:
                     displayName: J. Doe
                     firstName: John
                     lastName: Doe
+                    nickname: null
                     externallyManaged: null
                     virtualUser: null
                     configuration: null
@@ -13217,6 +13218,7 @@ paths:
                     displayName: null
                     firstName: John
                     lastName: Doe
+                    nickname: null
                     externallyManaged: null
                     virtualUser: null
                     configuration: null
@@ -13721,6 +13723,7 @@ paths:
                   displayName: null
                   firstName: John
                   lastName: Smith
+                  nickname: null
                   externallyManaged: false
                   virtualUser: false
                   configuration: null
@@ -16752,6 +16755,11 @@ components:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
           $ref: "#/components/schemas/ConversationRecipientData"
+        targetChange:
+          type: boolean
+          description: Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and assigns it to the updated recipient.
+        assignmentRequestType:
+          $ref: "#/components/schemas/EAssignmentRequestType"
         links:
           type: array
           description: List of links to accept the assignment request event with the token.<br> Only one link may be used.
@@ -16796,6 +16804,11 @@ components:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
           $ref: "#/components/schemas/ConversationRecipientData"
+        targetChange:
+          type: boolean
+          description: Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and assigns it to the updated recipient.
+        assignmentRequestType:
+          $ref: "#/components/schemas/EAssignmentRequestType"
         redeemingPerson:
           $ref: "#/components/schemas/PersonData"
     AssignmentRequestRevokedEvent:
@@ -16837,6 +16850,11 @@ components:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
           $ref: "#/components/schemas/ConversationRecipientData"
+        targetChange:
+          type: boolean
+          description: Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and assigns it to the updated recipient.
+        assignmentRequestType:
+          $ref: "#/components/schemas/EAssignmentRequestType"
     AssignmentRequestUnansweredEvent:
       type: object
       description: Event sent when an assignment request for a specific agent was not answered. Delegation timed out for all delegation levels.
@@ -16876,6 +16894,11 @@ components:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
           $ref: "#/components/schemas/ConversationRecipientData"
+        targetChange:
+          type: boolean
+          description: Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and assigns it to the updated recipient.
+        assignmentRequestType:
+          $ref: "#/components/schemas/EAssignmentRequestType"
         links:
           type: array
           description: List of links to accept the agent invitation event with the token.<br> Only one link may be used.
@@ -25831,6 +25854,17 @@ components:
       - "API_KEY: Filter by the 'apiKey' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EAssignmentRequestType:
+      type: string
+      description: Provides conversation context related to the assignment request
+      enum:
+      - INITIALLY_QUEUED
+      - REBOARDING_QUEUED
+      - REQUEUED
+      x-enum-descriptions:
+      - "INITIALLY_QUEUED: ConversationState: ONBOARDING -> QUEUED"
+      - "REBOARDING_QUEUED: ConversationState: REBOARDING -> QUEUED"
+      - "REQUEUED: ConversationState: ACTIVE/UNASSIGNED -> QUEUED"
     EAssistantAndDeputyDelegationEscalationLevel:
       type: string
       description: The escalation levels for a deputy delegation
@@ -39191,6 +39225,9 @@ components:
         lastName:
           type: string
           description: The user's last name. Maximum length of 250 characters. Cannot be omitted.
+        nickname:
+          type: string
+          description: The nickname of the user. Can be omitted.
         externallyManaged:
           type: boolean
           description: "True if the user is externally managed and cannot be edited in the Unblu user interface. If omitted, the property is set to false."

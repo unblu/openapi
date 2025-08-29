@@ -33,6 +33,8 @@ import io.swagger.annotations.ApiModelProperty;
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_CREATOR_PERSON,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_TARGET,
+	AssignmentRequestUnansweredEvent.JSON_PROPERTY_TARGET_CHANGE,
+	AssignmentRequestUnansweredEvent.JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_LINKS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -117,6 +119,14 @@ public class AssignmentRequestUnansweredEvent {
 	public static final String JSON_PROPERTY_TARGET = "target";
 	@JsonProperty(JSON_PROPERTY_TARGET)
 	private ConversationRecipientData target = null;
+
+	public static final String JSON_PROPERTY_TARGET_CHANGE = "targetChange";
+	@JsonProperty(JSON_PROPERTY_TARGET_CHANGE)
+	private Boolean targetChange;
+
+	public static final String JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE = "assignmentRequestType";
+	@JsonProperty(JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE)
+	private EAssignmentRequestType assignmentRequestType;
 
 	public static final String JSON_PROPERTY_LINKS = "links";
 	@JsonProperty(JSON_PROPERTY_LINKS)
@@ -350,6 +360,45 @@ public class AssignmentRequestUnansweredEvent {
 		this.target = target;
 	}
 
+	public AssignmentRequestUnansweredEvent targetChange(Boolean targetChange) {
+		this.targetChange = targetChange;
+		return this;
+	}
+
+	/**
+	 * Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and
+	 * assigns it to the updated recipient.
+	 * 
+	 * @return targetChange
+	 **/
+	@ApiModelProperty(value = "Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and assigns it to the updated recipient.")
+	public Boolean isTargetChange() {
+		return targetChange;
+	}
+
+	public void setTargetChange(Boolean targetChange) {
+		this.targetChange = targetChange;
+	}
+
+	public AssignmentRequestUnansweredEvent assignmentRequestType(EAssignmentRequestType assignmentRequestType) {
+		this.assignmentRequestType = assignmentRequestType;
+		return this;
+	}
+
+	/**
+	 * Get assignmentRequestType
+	 * 
+	 * @return assignmentRequestType
+	 **/
+	@ApiModelProperty(value = "")
+	public EAssignmentRequestType getAssignmentRequestType() {
+		return assignmentRequestType;
+	}
+
+	public void setAssignmentRequestType(EAssignmentRequestType assignmentRequestType) {
+		this.assignmentRequestType = assignmentRequestType;
+	}
+
 	public AssignmentRequestUnansweredEvent links(List<ConversationLink> links) {
 		this.links = links;
 		return this;
@@ -398,12 +447,14 @@ public class AssignmentRequestUnansweredEvent {
 				Objects.equals(this.creatorPerson, assignmentRequestUnansweredEvent.creatorPerson) &&
 				Objects.equals(this.contextPersonInfo, assignmentRequestUnansweredEvent.contextPersonInfo) &&
 				Objects.equals(this.target, assignmentRequestUnansweredEvent.target) &&
+				Objects.equals(this.targetChange, assignmentRequestUnansweredEvent.targetChange) &&
+				Objects.equals(this.assignmentRequestType, assignmentRequestUnansweredEvent.assignmentRequestType) &&
 				Objects.equals(this.links, assignmentRequestUnansweredEvent.links);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, links);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, targetChange, assignmentRequestType, links);
 	}
 
 	@Override
@@ -422,6 +473,8 @@ public class AssignmentRequestUnansweredEvent {
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
+		sb.append("    targetChange: ").append(toIndentedString(targetChange)).append("\n");
+		sb.append("    assignmentRequestType: ").append(toIndentedString(assignmentRequestType)).append("\n");
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("}");
 		return sb.toString();

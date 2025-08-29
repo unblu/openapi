@@ -31,6 +31,8 @@ import io.swagger.annotations.ApiModelProperty;
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_CREATOR_PERSON,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_TARGET,
+	AssignmentRequestRedeemedEvent.JSON_PROPERTY_TARGET_CHANGE,
+	AssignmentRequestRedeemedEvent.JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_REDEEMING_PERSON,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -115,6 +117,14 @@ public class AssignmentRequestRedeemedEvent {
 	public static final String JSON_PROPERTY_TARGET = "target";
 	@JsonProperty(JSON_PROPERTY_TARGET)
 	private ConversationRecipientData target = null;
+
+	public static final String JSON_PROPERTY_TARGET_CHANGE = "targetChange";
+	@JsonProperty(JSON_PROPERTY_TARGET_CHANGE)
+	private Boolean targetChange;
+
+	public static final String JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE = "assignmentRequestType";
+	@JsonProperty(JSON_PROPERTY_ASSIGNMENT_REQUEST_TYPE)
+	private EAssignmentRequestType assignmentRequestType;
 
 	public static final String JSON_PROPERTY_REDEEMING_PERSON = "redeemingPerson";
 	@JsonProperty(JSON_PROPERTY_REDEEMING_PERSON)
@@ -348,6 +358,45 @@ public class AssignmentRequestRedeemedEvent {
 		this.target = target;
 	}
 
+	public AssignmentRequestRedeemedEvent targetChange(Boolean targetChange) {
+		this.targetChange = targetChange;
+		return this;
+	}
+
+	/**
+	 * Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and
+	 * assigns it to the updated recipient.
+	 * 
+	 * @return targetChange
+	 **/
+	@ApiModelProperty(value = "Indicates that the assignment request was triggered by a recipient change while a previous request was still open. It replaces the earlier request and assigns it to the updated recipient.")
+	public Boolean isTargetChange() {
+		return targetChange;
+	}
+
+	public void setTargetChange(Boolean targetChange) {
+		this.targetChange = targetChange;
+	}
+
+	public AssignmentRequestRedeemedEvent assignmentRequestType(EAssignmentRequestType assignmentRequestType) {
+		this.assignmentRequestType = assignmentRequestType;
+		return this;
+	}
+
+	/**
+	 * Get assignmentRequestType
+	 * 
+	 * @return assignmentRequestType
+	 **/
+	@ApiModelProperty(value = "")
+	public EAssignmentRequestType getAssignmentRequestType() {
+		return assignmentRequestType;
+	}
+
+	public void setAssignmentRequestType(EAssignmentRequestType assignmentRequestType) {
+		this.assignmentRequestType = assignmentRequestType;
+	}
+
 	public AssignmentRequestRedeemedEvent redeemingPerson(PersonData redeemingPerson) {
 		this.redeemingPerson = redeemingPerson;
 		return this;
@@ -388,12 +437,14 @@ public class AssignmentRequestRedeemedEvent {
 				Objects.equals(this.creatorPerson, assignmentRequestRedeemedEvent.creatorPerson) &&
 				Objects.equals(this.contextPersonInfo, assignmentRequestRedeemedEvent.contextPersonInfo) &&
 				Objects.equals(this.target, assignmentRequestRedeemedEvent.target) &&
+				Objects.equals(this.targetChange, assignmentRequestRedeemedEvent.targetChange) &&
+				Objects.equals(this.assignmentRequestType, assignmentRequestRedeemedEvent.assignmentRequestType) &&
 				Objects.equals(this.redeemingPerson, assignmentRequestRedeemedEvent.redeemingPerson);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, redeemingPerson);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, targetChange, assignmentRequestType, redeemingPerson);
 	}
 
 	@Override
@@ -412,6 +463,8 @@ public class AssignmentRequestRedeemedEvent {
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
+		sb.append("    targetChange: ").append(toIndentedString(targetChange)).append("\n");
+		sb.append("    assignmentRequestType: ").append(toIndentedString(assignmentRequestType)).append("\n");
 		sb.append("    redeemingPerson: ").append(toIndentedString(redeemingPerson)).append("\n");
 		sb.append("}");
 		return sb.toString();
