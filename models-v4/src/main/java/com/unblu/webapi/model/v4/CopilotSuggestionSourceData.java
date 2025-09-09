@@ -30,6 +30,8 @@ import io.swagger.annotations.ApiModelProperty;
 	CopilotSuggestionSourceData.JSON_PROPERTY_OUTBOUND_STATUS,
 	CopilotSuggestionSourceData.JSON_PROPERTY_OUTBOUND_ENDPOINT,
 	CopilotSuggestionSourceData.JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS,
+	CopilotSuggestionSourceData.JSON_PROPERTY_RETRY_COUNT,
+	CopilotSuggestionSourceData.JSON_PROPERTY_RETRY_DELAY,
 	CopilotSuggestionSourceData.JSON_PROPERTY_TYPE,
 	CopilotSuggestionSourceData.JSON_PROPERTY_AUTH_TOKEN,
 	CopilotSuggestionSourceData.JSON_PROPERTY_COPILOT_ID,
@@ -113,6 +115,14 @@ public class CopilotSuggestionSourceData implements SuggestionSourceData {
 	public static final String JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS = "outboundTimeoutMillis";
 	@JsonProperty(JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS)
 	private Long outboundTimeoutMillis;
+
+	public static final String JSON_PROPERTY_RETRY_COUNT = "retryCount";
+	@JsonProperty(JSON_PROPERTY_RETRY_COUNT)
+	private Long retryCount;
+
+	public static final String JSON_PROPERTY_RETRY_DELAY = "retryDelay";
+	@JsonProperty(JSON_PROPERTY_RETRY_DELAY)
+	private Long retryDelay;
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
@@ -347,6 +357,44 @@ public class CopilotSuggestionSourceData implements SuggestionSourceData {
 		this.outboundTimeoutMillis = outboundTimeoutMillis;
 	}
 
+	public CopilotSuggestionSourceData retryCount(Long retryCount) {
+		this.retryCount = retryCount;
+		return this;
+	}
+
+	/**
+	 * Defines the number of retries for failed outbound requests. If omitted, it defaults to 0.
+	 * 
+	 * @return retryCount
+	 **/
+	@ApiModelProperty(value = "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0.")
+	public Long getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(Long retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public CopilotSuggestionSourceData retryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+		return this;
+	}
+
+	/**
+	 * Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0.
+	 * 
+	 * @return retryDelay
+	 **/
+	@ApiModelProperty(value = "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0.")
+	public Long getRetryDelay() {
+		return retryDelay;
+	}
+
+	public void setRetryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+	}
+
 	public CopilotSuggestionSourceData type(ESuggestionSourceType type) {
 		this.type = type;
 		return this;
@@ -443,6 +491,8 @@ public class CopilotSuggestionSourceData implements SuggestionSourceData {
 				Objects.equals(this.outboundStatus, copilotSuggestionSourceData.outboundStatus) &&
 				Objects.equals(this.outboundEndpoint, copilotSuggestionSourceData.outboundEndpoint) &&
 				Objects.equals(this.outboundTimeoutMillis, copilotSuggestionSourceData.outboundTimeoutMillis) &&
+				Objects.equals(this.retryCount, copilotSuggestionSourceData.retryCount) &&
+				Objects.equals(this.retryDelay, copilotSuggestionSourceData.retryDelay) &&
 				Objects.equals(this.type, copilotSuggestionSourceData.type) &&
 				Objects.equals(this.authToken, copilotSuggestionSourceData.authToken) &&
 				Objects.equals(this.copilotId, copilotSuggestionSourceData.copilotId) &&
@@ -451,7 +501,7 @@ public class CopilotSuggestionSourceData implements SuggestionSourceData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, outboundStatus, outboundEndpoint, outboundTimeoutMillis, type, authToken, copilotId, copilotEnvironmentId);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, outboundStatus, outboundEndpoint, outboundTimeoutMillis, retryCount, retryDelay, type, authToken, copilotId, copilotEnvironmentId);
 	}
 
 	@Override
@@ -469,6 +519,8 @@ public class CopilotSuggestionSourceData implements SuggestionSourceData {
 		sb.append("    outboundStatus: ").append(toIndentedString(outboundStatus)).append("\n");
 		sb.append("    outboundEndpoint: ").append(toIndentedString(outboundEndpoint)).append("\n");
 		sb.append("    outboundTimeoutMillis: ").append(toIndentedString(outboundTimeoutMillis)).append("\n");
+		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
+		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    authToken: ").append(toIndentedString(authToken)).append("\n");
 		sb.append("    copilotId: ").append(toIndentedString(copilotId)).append("\n");

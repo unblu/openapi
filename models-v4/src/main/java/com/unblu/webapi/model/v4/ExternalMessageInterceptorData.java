@@ -34,6 +34,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ExternalMessageInterceptorData.JSON_PROPERTY_WEBHOOK_ENDPOINT,
 	ExternalMessageInterceptorData.JSON_PROPERTY_WEBHOOK_API_VERSION,
 	ExternalMessageInterceptorData.JSON_PROPERTY_WEBHOOK_SECRET,
+	ExternalMessageInterceptorData.JSON_PROPERTY_RETRY_COUNT,
+	ExternalMessageInterceptorData.JSON_PROPERTY_RETRY_DELAY,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ExternalMessageInterceptorData implements MessageInterceptorData {
@@ -129,6 +131,14 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 	public static final String JSON_PROPERTY_WEBHOOK_SECRET = "webhookSecret";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_SECRET)
 	private String webhookSecret;
+
+	public static final String JSON_PROPERTY_RETRY_COUNT = "retryCount";
+	@JsonProperty(JSON_PROPERTY_RETRY_COUNT)
+	private Long retryCount;
+
+	public static final String JSON_PROPERTY_RETRY_DELAY = "retryDelay";
+	@JsonProperty(JSON_PROPERTY_RETRY_DELAY)
+	private Long retryDelay;
 
 	public ExternalMessageInterceptorData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -422,6 +432,44 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 		this.webhookSecret = webhookSecret;
 	}
 
+	public ExternalMessageInterceptorData retryCount(Long retryCount) {
+		this.retryCount = retryCount;
+		return this;
+	}
+
+	/**
+	 * Defines the number of retries for failed outbound requests. If omitted, it defaults to 0.
+	 * 
+	 * @return retryCount
+	 **/
+	@ApiModelProperty(value = "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0.")
+	public Long getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(Long retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public ExternalMessageInterceptorData retryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+		return this;
+	}
+
+	/**
+	 * Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0.
+	 * 
+	 * @return retryDelay
+	 **/
+	@ApiModelProperty(value = "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0.")
+	public Long getRetryDelay() {
+		return retryDelay;
+	}
+
+	public void setRetryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -445,12 +493,14 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 				Objects.equals(this.webhookStatus, externalMessageInterceptorData.webhookStatus) &&
 				Objects.equals(this.webhookEndpoint, externalMessageInterceptorData.webhookEndpoint) &&
 				Objects.equals(this.webhookApiVersion, externalMessageInterceptorData.webhookApiVersion) &&
-				Objects.equals(this.webhookSecret, externalMessageInterceptorData.webhookSecret);
+				Objects.equals(this.webhookSecret, externalMessageInterceptorData.webhookSecret) &&
+				Objects.equals(this.retryCount, externalMessageInterceptorData.retryCount) &&
+				Objects.equals(this.retryDelay, externalMessageInterceptorData.retryDelay);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, messageFilter, timeoutBehavior, type, webhookStatus, webhookEndpoint, webhookApiVersion, webhookSecret);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, messageFilter, timeoutBehavior, type, webhookStatus, webhookEndpoint, webhookApiVersion, webhookSecret, retryCount, retryDelay);
 	}
 
 	@Override
@@ -472,6 +522,8 @@ public class ExternalMessageInterceptorData implements MessageInterceptorData {
 		sb.append("    webhookEndpoint: ").append(toIndentedString(webhookEndpoint)).append("\n");
 		sb.append("    webhookApiVersion: ").append(toIndentedString(webhookApiVersion)).append("\n");
 		sb.append("    webhookSecret: ").append(toIndentedString(webhookSecret)).append("\n");
+		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
+		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

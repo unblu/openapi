@@ -40,6 +40,8 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomExternalMessengerChannel.JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY,
 	CustomExternalMessengerChannel.JSON_PROPERTY_OUTBOUND_SUPPORTED,
 	CustomExternalMessengerChannel.JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS,
+	CustomExternalMessengerChannel.JSON_PROPERTY_RETRY_COUNT,
+	CustomExternalMessengerChannel.JSON_PROPERTY_RETRY_DELAY,
 	CustomExternalMessengerChannel.JSON_PROPERTY_CONTACT_IDENTIFIER_FIELD_NAME,
 	CustomExternalMessengerChannel.JSON_PROPERTY_CONTACT_IDENTIFIER_FIELD_TYPE,
 	CustomExternalMessengerChannel.JSON_PROPERTY_CONTACT_IDENTIFIER_TRANSLATIONS,
@@ -152,6 +154,14 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 	public static final String JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS = "outboundTimeoutMillis";
 	@JsonProperty(JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS)
 	private Long outboundTimeoutMillis;
+
+	public static final String JSON_PROPERTY_RETRY_COUNT = "retryCount";
+	@JsonProperty(JSON_PROPERTY_RETRY_COUNT)
+	private Long retryCount;
+
+	public static final String JSON_PROPERTY_RETRY_DELAY = "retryDelay";
+	@JsonProperty(JSON_PROPERTY_RETRY_DELAY)
+	private Long retryDelay;
 
 	public static final String JSON_PROPERTY_CONTACT_IDENTIFIER_FIELD_NAME = "contactIdentifierFieldName";
 	@JsonProperty(JSON_PROPERTY_CONTACT_IDENTIFIER_FIELD_NAME)
@@ -524,6 +534,44 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 		this.outboundTimeoutMillis = outboundTimeoutMillis;
 	}
 
+	public CustomExternalMessengerChannel retryCount(Long retryCount) {
+		this.retryCount = retryCount;
+		return this;
+	}
+
+	/**
+	 * Defines the number of retries for failed outbound requests. If omitted, it defaults to 0.
+	 * 
+	 * @return retryCount
+	 **/
+	@ApiModelProperty(value = "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0.")
+	public Long getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(Long retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public CustomExternalMessengerChannel retryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+		return this;
+	}
+
+	/**
+	 * Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0.
+	 * 
+	 * @return retryDelay
+	 **/
+	@ApiModelProperty(value = "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0.")
+	public Long getRetryDelay() {
+		return retryDelay;
+	}
+
+	public void setRetryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+	}
+
 	public CustomExternalMessengerChannel contactIdentifierFieldName(String contactIdentifierFieldName) {
 		this.contactIdentifierFieldName = contactIdentifierFieldName;
 		return this;
@@ -664,6 +712,8 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 				Objects.equals(this.messageStateHandledExternally, customExternalMessengerChannel.messageStateHandledExternally) &&
 				Objects.equals(this.outboundSupported, customExternalMessengerChannel.outboundSupported) &&
 				Objects.equals(this.outboundTimeoutMillis, customExternalMessengerChannel.outboundTimeoutMillis) &&
+				Objects.equals(this.retryCount, customExternalMessengerChannel.retryCount) &&
+				Objects.equals(this.retryDelay, customExternalMessengerChannel.retryDelay) &&
 				Objects.equals(this.contactIdentifierFieldName, customExternalMessengerChannel.contactIdentifierFieldName) &&
 				Objects.equals(this.contactIdentifierFieldType, customExternalMessengerChannel.contactIdentifierFieldType) &&
 				Objects.equals(this.contactIdentifierTranslations, customExternalMessengerChannel.contactIdentifierTranslations) &&
@@ -673,7 +723,7 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, channelIcon, sourceId, type, webhookEndpoint, webhookApiVersion, webhookSecret, webhookStatus, messageStateHandledExternally, outboundSupported, outboundTimeoutMillis, contactIdentifierFieldName, contactIdentifierFieldType, contactIdentifierTranslations, supportsMultipleConversationsPerContact, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, channelIcon, sourceId, type, webhookEndpoint, webhookApiVersion, webhookSecret, webhookStatus, messageStateHandledExternally, outboundSupported, outboundTimeoutMillis, retryCount, retryDelay, contactIdentifierFieldName, contactIdentifierFieldType, contactIdentifierTranslations, supportsMultipleConversationsPerContact, metadata);
 	}
 
 	@Override
@@ -698,6 +748,8 @@ public class CustomExternalMessengerChannel implements ExternalMessengerChannel 
 		sb.append("    messageStateHandledExternally: ").append(toIndentedString(messageStateHandledExternally)).append("\n");
 		sb.append("    outboundSupported: ").append(toIndentedString(outboundSupported)).append("\n");
 		sb.append("    outboundTimeoutMillis: ").append(toIndentedString(outboundTimeoutMillis)).append("\n");
+		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
+		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    contactIdentifierFieldName: ").append(toIndentedString(contactIdentifierFieldName)).append("\n");
 		sb.append("    contactIdentifierFieldType: ").append(toIndentedString(contactIdentifierFieldType)).append("\n");
 		sb.append("    contactIdentifierTranslations: ").append(toIndentedString(contactIdentifierTranslations)).append("\n");

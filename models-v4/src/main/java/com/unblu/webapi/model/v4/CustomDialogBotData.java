@@ -36,6 +36,8 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomDialogBotData.JSON_PROPERTY_OFFBOARDING_FILTER,
 	CustomDialogBotData.JSON_PROPERTY_NEEDS_COUNTERPART_PRESENCE,
 	CustomDialogBotData.JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR,
+	CustomDialogBotData.JSON_PROPERTY_RETRY_COUNT,
+	CustomDialogBotData.JSON_PROPERTY_RETRY_DELAY,
 	CustomDialogBotData.JSON_PROPERTY_TYPE,
 	CustomDialogBotData.JSON_PROPERTY_WEBHOOK_STATUS,
 	CustomDialogBotData.JSON_PROPERTY_WEBHOOK_ENDPOINT,
@@ -147,6 +149,14 @@ public class CustomDialogBotData implements DialogBotData {
 	public static final String JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR = "onTimeoutBehavior";
 	@JsonProperty(JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR)
 	private EBotDialogTimeoutBehavior onTimeoutBehavior;
+
+	public static final String JSON_PROPERTY_RETRY_COUNT = "retryCount";
+	@JsonProperty(JSON_PROPERTY_RETRY_COUNT)
+	private Long retryCount;
+
+	public static final String JSON_PROPERTY_RETRY_DELAY = "retryDelay";
+	@JsonProperty(JSON_PROPERTY_RETRY_DELAY)
+	private Long retryDelay;
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
@@ -512,6 +522,44 @@ public class CustomDialogBotData implements DialogBotData {
 		this.onTimeoutBehavior = onTimeoutBehavior;
 	}
 
+	public CustomDialogBotData retryCount(Long retryCount) {
+		this.retryCount = retryCount;
+		return this;
+	}
+
+	/**
+	 * Defines the number of retries for failed outbound requests. If omitted, the default is 0.
+	 * 
+	 * @return retryCount
+	 **/
+	@ApiModelProperty(value = "Defines the number of retries for failed outbound requests. If omitted, the default is 0.")
+	public Long getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(Long retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public CustomDialogBotData retryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+		return this;
+	}
+
+	/**
+	 * Defines the delay between retries for failed outbound requests. If omitted, the default is 0.
+	 * 
+	 * @return retryDelay
+	 **/
+	@ApiModelProperty(value = "Defines the delay between retries for failed outbound requests. If omitted, the default is 0.")
+	public Long getRetryDelay() {
+		return retryDelay;
+	}
+
+	public void setRetryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+	}
+
 	public CustomDialogBotData type(EBotType type) {
 		this.type = type;
 		return this;
@@ -702,6 +750,8 @@ public class CustomDialogBotData implements DialogBotData {
 				Objects.equals(this.offboardingFilter, customDialogBotData.offboardingFilter) &&
 				Objects.equals(this.needsCounterpartPresence, customDialogBotData.needsCounterpartPresence) &&
 				Objects.equals(this.onTimeoutBehavior, customDialogBotData.onTimeoutBehavior) &&
+				Objects.equals(this.retryCount, customDialogBotData.retryCount) &&
+				Objects.equals(this.retryDelay, customDialogBotData.retryDelay) &&
 				Objects.equals(this.type, customDialogBotData.type) &&
 				Objects.equals(this.webhookStatus, customDialogBotData.webhookStatus) &&
 				Objects.equals(this.webhookEndpoint, customDialogBotData.webhookEndpoint) &&
@@ -714,7 +764,7 @@ public class CustomDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, type, webhookStatus, webhookEndpoint, outboundTimeoutMillis, webhookApiVersion, webhookSecret, messageStateHandledExternally, automaticTypingStateHandlingEnabled);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, webhookStatus, webhookEndpoint, outboundTimeoutMillis, webhookApiVersion, webhookSecret, messageStateHandledExternally, automaticTypingStateHandlingEnabled);
 	}
 
 	@Override
@@ -738,6 +788,8 @@ public class CustomDialogBotData implements DialogBotData {
 		sb.append("    offboardingFilter: ").append(toIndentedString(offboardingFilter)).append("\n");
 		sb.append("    needsCounterpartPresence: ").append(toIndentedString(needsCounterpartPresence)).append("\n");
 		sb.append("    onTimeoutBehavior: ").append(toIndentedString(onTimeoutBehavior)).append("\n");
+		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
+		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    webhookStatus: ").append(toIndentedString(webhookStatus)).append("\n");
 		sb.append("    webhookEndpoint: ").append(toIndentedString(webhookEndpoint)).append("\n");

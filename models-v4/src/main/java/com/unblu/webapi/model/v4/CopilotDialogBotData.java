@@ -36,6 +36,8 @@ import io.swagger.annotations.ApiModelProperty;
 	CopilotDialogBotData.JSON_PROPERTY_OFFBOARDING_FILTER,
 	CopilotDialogBotData.JSON_PROPERTY_NEEDS_COUNTERPART_PRESENCE,
 	CopilotDialogBotData.JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR,
+	CopilotDialogBotData.JSON_PROPERTY_RETRY_COUNT,
+	CopilotDialogBotData.JSON_PROPERTY_RETRY_DELAY,
 	CopilotDialogBotData.JSON_PROPERTY_TYPE,
 	CopilotDialogBotData.JSON_PROPERTY_AUTH_TOKEN,
 	CopilotDialogBotData.JSON_PROPERTY_COPILOT_ID,
@@ -147,6 +149,14 @@ public class CopilotDialogBotData implements DialogBotData {
 	public static final String JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR = "onTimeoutBehavior";
 	@JsonProperty(JSON_PROPERTY_ON_TIMEOUT_BEHAVIOR)
 	private EBotDialogTimeoutBehavior onTimeoutBehavior;
+
+	public static final String JSON_PROPERTY_RETRY_COUNT = "retryCount";
+	@JsonProperty(JSON_PROPERTY_RETRY_COUNT)
+	private Long retryCount;
+
+	public static final String JSON_PROPERTY_RETRY_DELAY = "retryDelay";
+	@JsonProperty(JSON_PROPERTY_RETRY_DELAY)
+	private Long retryDelay;
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
@@ -512,6 +522,44 @@ public class CopilotDialogBotData implements DialogBotData {
 		this.onTimeoutBehavior = onTimeoutBehavior;
 	}
 
+	public CopilotDialogBotData retryCount(Long retryCount) {
+		this.retryCount = retryCount;
+		return this;
+	}
+
+	/**
+	 * Defines the number of retries for failed outbound requests. If omitted, the default is 0.
+	 * 
+	 * @return retryCount
+	 **/
+	@ApiModelProperty(value = "Defines the number of retries for failed outbound requests. If omitted, the default is 0.")
+	public Long getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(Long retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public CopilotDialogBotData retryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+		return this;
+	}
+
+	/**
+	 * Defines the delay between retries for failed outbound requests. If omitted, the default is 0.
+	 * 
+	 * @return retryDelay
+	 **/
+	@ApiModelProperty(value = "Defines the delay between retries for failed outbound requests. If omitted, the default is 0.")
+	public Long getRetryDelay() {
+		return retryDelay;
+	}
+
+	public void setRetryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+	}
+
 	public CopilotDialogBotData type(EBotType type) {
 		this.type = type;
 		return this;
@@ -698,6 +746,8 @@ public class CopilotDialogBotData implements DialogBotData {
 				Objects.equals(this.offboardingFilter, copilotDialogBotData.offboardingFilter) &&
 				Objects.equals(this.needsCounterpartPresence, copilotDialogBotData.needsCounterpartPresence) &&
 				Objects.equals(this.onTimeoutBehavior, copilotDialogBotData.onTimeoutBehavior) &&
+				Objects.equals(this.retryCount, copilotDialogBotData.retryCount) &&
+				Objects.equals(this.retryDelay, copilotDialogBotData.retryDelay) &&
 				Objects.equals(this.type, copilotDialogBotData.type) &&
 				Objects.equals(this.authToken, copilotDialogBotData.authToken) &&
 				Objects.equals(this.copilotId, copilotDialogBotData.copilotId) &&
@@ -710,7 +760,7 @@ public class CopilotDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, type, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
 	}
 
 	@Override
@@ -734,6 +784,8 @@ public class CopilotDialogBotData implements DialogBotData {
 		sb.append("    offboardingFilter: ").append(toIndentedString(offboardingFilter)).append("\n");
 		sb.append("    needsCounterpartPresence: ").append(toIndentedString(needsCounterpartPresence)).append("\n");
 		sb.append("    onTimeoutBehavior: ").append(toIndentedString(onTimeoutBehavior)).append("\n");
+		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
+		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    authToken: ").append(toIndentedString(authToken)).append("\n");
 		sb.append("    copilotId: ").append(toIndentedString(copilotId)).append("\n");

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.23.2
+  version: 8.24.0
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -1554,6 +1554,8 @@ paths:
                   offboardingFilter: NONE
                   needsCounterpartPresence: false
                   onTimeoutBehavior: HAND_OFF
+                  retryCount: null
+                  retryDelay: null
                   type: COPILOT
                   authToken: some auth token
                   copilotId: Some copilot id
@@ -1583,6 +1585,8 @@ paths:
                   offboardingFilter: NONE
                   needsCounterpartPresence: false
                   onTimeoutBehavior: HAND_OFF
+                  retryCount: null
+                  retryDelay: null
                   type: CUSTOM
                   webhookStatus: INACTIVE
                   webhookEndpoint: https://test.unblu.com
@@ -1621,6 +1625,8 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    retryCount: 0
+                    retryDelay: 0
                     type: COPILOT
                     authToken: some auth token
                     copilotId: Some copilot id
@@ -1650,6 +1656,8 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    retryCount: 0
+                    retryDelay: 0
                     type: CUSTOM
                     webhookStatus: INACTIVE
                     webhookEndpoint: https://test.unblu.com
@@ -2073,6 +2081,8 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    retryCount: 0
+                    retryDelay: 0
                     type: CUSTOM
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
@@ -2102,6 +2112,8 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    retryCount: 0
+                    retryDelay: 0
                     type: COPILOT
                     authToken: some auth token
                     copilotId: Some copilot id
@@ -2160,6 +2172,8 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    retryCount: 0
+                    retryDelay: 0
                     type: CUSTOM
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
@@ -2189,6 +2203,8 @@ paths:
                     offboardingFilter: NONE
                     needsCounterpartPresence: false
                     onTimeoutBehavior: HAND_OFF
+                    retryCount: 0
+                    retryDelay: 0
                     type: COPILOT
                     authToken: some auth token
                     copilotId: Some copilot id
@@ -6727,6 +6743,8 @@ paths:
                     apiVersion: V4
                     secret: null
                     outboundTimeout: 5000
+                    retryCount: null
+                    retryDelay: null
                   invocableFromFrontends:
                   - AGENT_DESK
                   - AGENT_SINGLE_CONVERSATION_DESK
@@ -6799,6 +6817,8 @@ paths:
                       apiVersion: V4
                       secret: null
                       outboundTimeout: 5000
+                      retryCount: 0
+                      retryDelay: 0
                     invocableFromFrontends:
                     - AGENT_DESK
                     - AGENT_SINGLE_CONVERSATION_DESK
@@ -7004,6 +7024,8 @@ paths:
                       apiVersion: V4
                       secret: null
                       outboundTimeout: 5000
+                      retryCount: 0
+                      retryDelay: 0
                     invocableFromFrontends:
                     - AGENT_DESK
                     - AGENT_SINGLE_CONVERSATION_DESK
@@ -7150,6 +7172,8 @@ paths:
                     apiVersion: V4
                     secret: null
                     outboundTimeout: 5000
+                    retryCount: 0
+                    retryDelay: 0
                   invocableFromFrontends:
                   - AGENT_DESK
                   - AGENT_SINGLE_CONVERSATION_DESK
@@ -7214,6 +7238,8 @@ paths:
                       apiVersion: V4
                       secret: null
                       outboundTimeout: 5000
+                      retryCount: 0
+                      retryDelay: 0
                     invocableFromFrontends:
                     - AGENT_DESK
                     - AGENT_SINGLE_CONVERSATION_DESK
@@ -7878,6 +7904,8 @@ paths:
                   messageStateHandledExternally: null
                   outboundSupported: false
                   outboundTimeoutMillis: 5000
+                  retryCount: null
+                  retryDelay: null
                   contactIdentifierFieldName: ""
                   contactIdentifierFieldType: OTHER
                   contactIdentifierTranslations: null
@@ -7914,6 +7942,8 @@ paths:
                     messageStateHandledExternally: false
                     outboundSupported: false
                     outboundTimeoutMillis: 5000
+                    retryCount: 0
+                    retryDelay: 0
                     contactIdentifierFieldName: ""
                     contactIdentifierFieldType: OTHER
                     contactIdentifierTranslations: {}
@@ -8104,6 +8134,8 @@ paths:
                     messageStateHandledExternally: false
                     outboundSupported: false
                     outboundTimeoutMillis: 5000
+                    retryCount: 0
+                    retryDelay: 0
                     contactIdentifierFieldName: ""
                     contactIdentifierFieldType: OTHER
                     contactIdentifierTranslations: {}
@@ -8305,6 +8337,8 @@ paths:
                     messageStateHandledExternally: false
                     outboundSupported: false
                     outboundTimeoutMillis: 5000
+                    retryCount: 0
+                    retryDelay: 0
                     contactIdentifierFieldName: ""
                     contactIdentifierFieldType: OTHER
                     contactIdentifierTranslations: {}
@@ -8780,6 +8814,8 @@ paths:
                   messageStateHandledExternally: false
                   outboundSupported: false
                   outboundTimeoutMillis: 10000
+                  retryCount: 0
+                  retryDelay: 0
                   contactIdentifierFieldName: ""
                   contactIdentifierFieldType: OTHER
                   contactIdentifierTranslations: {}
@@ -8816,6 +8852,8 @@ paths:
                     messageStateHandledExternally: false
                     outboundSupported: false
                     outboundTimeoutMillis: 10000
+                    retryCount: 0
+                    retryDelay: 0
                     contactIdentifierFieldName: ""
                     contactIdentifierFieldType: OTHER
                     contactIdentifierTranslations: {}
@@ -10116,6 +10154,8 @@ paths:
                   webhookEndpoint: http://external.interceptor.endpoint
                   webhookApiVersion: V4
                   webhookSecret: hash-secret
+                  retryCount: null
+                  retryDelay: null
               create-internal:
                 summary: create internal
                 description: create a new internal message interceptor
@@ -10166,6 +10206,8 @@ paths:
                     webhookEndpoint: http://external.interceptor.endpoint
                     webhookApiVersion: V4
                     webhookSecret: hash-secret
+                    retryCount: 0
+                    retryDelay: 0
                 read-internal:
                   summary: read internal
                   description: create a new internal message interceptor
@@ -10392,6 +10434,8 @@ paths:
                   webhookEndpoint: http://external.interceptor.endpoint
                   webhookApiVersion: V4
                   webhookSecret: hash-secret
+                  retryCount: 0
+                  retryDelay: 0
               create-internal:
                 summary: create internal
                 description: update an existing internal message interceptor
@@ -10442,6 +10486,8 @@ paths:
                     webhookEndpoint: http://external.interceptor.endpoint
                     webhookApiVersion: V4
                     webhookSecret: hash-secret
+                    retryCount: 0
+                    retryDelay: 0
                 update-internal:
                   summary: update internal
                   description: update an existing internal message interceptor
@@ -12541,6 +12587,8 @@ paths:
                   outboundStatus: DISABLED
                   outboundEndpoint: https://test.unblu.com
                   outboundTimeoutMillis: 5000
+                  retryCount: null
+                  retryDelay: null
                   type: CUSTOM
                   outboundApiVersion: V4
                   outboundSecret: null
@@ -12568,6 +12616,8 @@ paths:
                     outboundStatus: DISABLED
                     outboundEndpoint: https://test.unblu.com
                     outboundTimeoutMillis: 5000
+                    retryCount: 0
+                    retryDelay: 0
                     type: CUSTOM
                     outboundApiVersion: V4
                     outboundSecret: null
@@ -12658,6 +12708,8 @@ paths:
                     outboundStatus: DISABLED
                     outboundEndpoint: http://test.webhook.com
                     outboundTimeoutMillis: 5000
+                    retryCount: 0
+                    retryDelay: 0
                     type: CUSTOM
                     outboundApiVersion: V4
                     outboundSecret: null
@@ -12705,6 +12757,8 @@ paths:
                     outboundStatus: DISABLED
                     outboundEndpoint: http://test.webhook.com
                     outboundTimeoutMillis: 5000
+                    retryCount: 0
+                    retryDelay: 0
                     type: CUSTOM
                     outboundApiVersion: V4
                     outboundSecret: null
@@ -23617,6 +23671,14 @@ components:
           description: Defines if the counterpart has to be online for the onboarding to start. E.g. if questions have to be answered live.
         onTimeoutBehavior:
           $ref: "#/components/schemas/EBotDialogTimeoutBehavior"
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, the default is 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, the default is 0."
         type:
           $ref: "#/components/schemas/EBotType"
         authToken:
@@ -23682,6 +23744,14 @@ components:
           type: integer
           format: int64
           description: The timeout for the requests sent to the outbound endpoint. Mandatory.
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0."
         type:
           $ref: "#/components/schemas/ESuggestionSourceType"
         authToken:
@@ -24190,6 +24260,14 @@ components:
           type: integer
           format: int64
           description: Timeout time for the outbound requests.
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, the default is 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, the default is 0."
     CustomChannelContactIdentifierTranslation:
       type: object
       properties:
@@ -24424,6 +24502,14 @@ components:
           description: Defines if the counterpart has to be online for the onboarding to start. E.g. if questions have to be answered live.
         onTimeoutBehavior:
           $ref: "#/components/schemas/EBotDialogTimeoutBehavior"
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, the default is 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, the default is 0."
         type:
           $ref: "#/components/schemas/EBotType"
         webhookStatus:
@@ -24511,6 +24597,14 @@ components:
           type: integer
           format: int64
           description: The timeout for the requests sent to the outbound endpoint. Mandatory.
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0."
         contactIdentifierFieldName:
           type: string
           description: "The name of the field that contacts can be identified by in the external messenger. This can be an email address, a phone number, a number, or some other identifier."
@@ -24997,6 +25091,14 @@ components:
           type: integer
           format: int64
           description: The timeout for the requests sent to the outbound endpoint. Mandatory.
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0."
         type:
           $ref: "#/components/schemas/ESuggestionSourceType"
         outboundApiVersion:
@@ -30248,6 +30350,14 @@ components:
         webhookSecret:
           type: string
           description: Optional secret sent with each webhook event <p> Maximum length of 4000 characters.
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0."
     ExternalMessengerChannel:
       description: Representation of an external messenger which is linked to the collaboration server.
       oneOf:

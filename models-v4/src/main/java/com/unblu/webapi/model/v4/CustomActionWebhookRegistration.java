@@ -26,6 +26,8 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomActionWebhookRegistration.JSON_PROPERTY_API_VERSION,
 	CustomActionWebhookRegistration.JSON_PROPERTY_SECRET,
 	CustomActionWebhookRegistration.JSON_PROPERTY_OUTBOUND_TIMEOUT,
+	CustomActionWebhookRegistration.JSON_PROPERTY_RETRY_COUNT,
+	CustomActionWebhookRegistration.JSON_PROPERTY_RETRY_DELAY,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class CustomActionWebhookRegistration {
@@ -81,6 +83,14 @@ public class CustomActionWebhookRegistration {
 	public static final String JSON_PROPERTY_OUTBOUND_TIMEOUT = "outboundTimeout";
 	@JsonProperty(JSON_PROPERTY_OUTBOUND_TIMEOUT)
 	private Long outboundTimeout;
+
+	public static final String JSON_PROPERTY_RETRY_COUNT = "retryCount";
+	@JsonProperty(JSON_PROPERTY_RETRY_COUNT)
+	private Long retryCount;
+
+	public static final String JSON_PROPERTY_RETRY_DELAY = "retryDelay";
+	@JsonProperty(JSON_PROPERTY_RETRY_DELAY)
+	private Long retryDelay;
 
 	public CustomActionWebhookRegistration $type(TypeEnum $type) {
 		this.$type = $type;
@@ -178,6 +188,44 @@ public class CustomActionWebhookRegistration {
 		this.outboundTimeout = outboundTimeout;
 	}
 
+	public CustomActionWebhookRegistration retryCount(Long retryCount) {
+		this.retryCount = retryCount;
+		return this;
+	}
+
+	/**
+	 * Defines the number of retries for failed outbound requests. If omitted, the default is 0.
+	 * 
+	 * @return retryCount
+	 **/
+	@ApiModelProperty(value = "Defines the number of retries for failed outbound requests. If omitted, the default is 0.")
+	public Long getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(Long retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public CustomActionWebhookRegistration retryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+		return this;
+	}
+
+	/**
+	 * Defines the delay between retries for failed outbound requests. If omitted, the default is 0.
+	 * 
+	 * @return retryDelay
+	 **/
+	@ApiModelProperty(value = "Defines the delay between retries for failed outbound requests. If omitted, the default is 0.")
+	public Long getRetryDelay() {
+		return retryDelay;
+	}
+
+	public void setRetryDelay(Long retryDelay) {
+		this.retryDelay = retryDelay;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -191,12 +239,14 @@ public class CustomActionWebhookRegistration {
 				Objects.equals(this.endpoint, customActionWebhookRegistration.endpoint) &&
 				Objects.equals(this.apiVersion, customActionWebhookRegistration.apiVersion) &&
 				Objects.equals(this.secret, customActionWebhookRegistration.secret) &&
-				Objects.equals(this.outboundTimeout, customActionWebhookRegistration.outboundTimeout);
+				Objects.equals(this.outboundTimeout, customActionWebhookRegistration.outboundTimeout) &&
+				Objects.equals(this.retryCount, customActionWebhookRegistration.retryCount) &&
+				Objects.equals(this.retryDelay, customActionWebhookRegistration.retryDelay);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, endpoint, apiVersion, secret, outboundTimeout);
+		return Objects.hash($type, endpoint, apiVersion, secret, outboundTimeout, retryCount, retryDelay);
 	}
 
 	@Override
@@ -208,6 +258,8 @@ public class CustomActionWebhookRegistration {
 		sb.append("    apiVersion: ").append(toIndentedString(apiVersion)).append("\n");
 		sb.append("    secret: ").append(toIndentedString(secret)).append("\n");
 		sb.append("    outboundTimeout: ").append(toIndentedString(outboundTimeout)).append("\n");
+		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
+		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
