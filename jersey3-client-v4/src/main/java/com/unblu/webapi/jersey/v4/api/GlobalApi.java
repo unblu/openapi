@@ -83,7 +83,7 @@ public class GlobalApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<RecordedMinutesData> localVarReturnType = new GenericType<RecordedMinutesData>() {
 		};
@@ -138,7 +138,7 @@ public class GlobalApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<GlobalData> localVarReturnType = new GenericType<GlobalData>() {
 		};
@@ -184,7 +184,7 @@ public class GlobalApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<GlobalPingResponse> localVarReturnType = new GenericType<GlobalPingResponse>() {
 		};
@@ -228,7 +228,7 @@ public class GlobalApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ProductVersion> localVarReturnType = new GenericType<ProductVersion>() {
 		};
@@ -276,7 +276,7 @@ public class GlobalApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<GlobalData> localVarReturnType = new GenericType<GlobalData>() {
 		};
@@ -324,7 +324,7 @@ public class GlobalApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<GlobalData> localVarReturnType = new GenericType<GlobalData>() {
 		};
@@ -381,7 +381,7 @@ public class GlobalApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<GlobalData> localVarReturnType = new GenericType<GlobalData>() {
 		};

@@ -78,7 +78,7 @@ public class ImagesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<Image> localVarReturnType = new GenericType<Image>() {
 		};

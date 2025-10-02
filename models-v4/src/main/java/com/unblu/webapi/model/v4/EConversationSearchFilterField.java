@@ -106,12 +106,18 @@ public enum EConversationSearchFilterField {
 	EXTERNAL_MESSENGER_CHANNEL_ID("EXTERNAL_MESSENGER_CHANNEL_ID"),
 
 	/**
-	 * VISIBILITY
+	 * VISIBILITY: Filter by the &#39;conversationVisibility&#39; attribute
 	 */
 	VISIBILITY("VISIBILITY"),
 
 	/**
-	 * COMPOUND
+	 * HAS_UNREAD_MESSAGES: Filter by the existence of &#39;notificationCount&#39; attribute in &#39;ConversationParticipation&#39; for the assignee or context
+	 * person
+	 */
+	HAS_UNREAD_MESSAGES("HAS_UNREAD_MESSAGES"),
+
+	/**
+	 * COMPOUND: Filter for linking other filters with logical AND/OR
 	 */
 	COMPOUND("COMPOUND");
 

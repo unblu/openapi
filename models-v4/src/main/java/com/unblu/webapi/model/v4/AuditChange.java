@@ -31,6 +31,8 @@ import io.swagger.annotations.ApiModelProperty;
 	AuditChange.JSON_PROPERTY_USER_ANONYMOUS,
 	AuditChange.JSON_PROPERTY_USER_VIRTUAL,
 	AuditChange.JSON_PROPERTY_USER_PROPAGATED,
+	AuditChange.JSON_PROPERTY_USER_SERVICE_PRINCIPAL,
+	AuditChange.JSON_PROPERTY_USER_AUTHENTICATED_WITH_API_SECRET,
 	AuditChange.JSON_PROPERTY_USER_IMPERSONATION_TYPE,
 	AuditChange.JSON_PROPERTY_IMPERSONATION_ACCOUNT_ID,
 	AuditChange.JSON_PROPERTY_IMPERSONATION_USER_ID,
@@ -131,6 +133,14 @@ public class AuditChange {
 	public static final String JSON_PROPERTY_USER_PROPAGATED = "userPropagated";
 	@JsonProperty(JSON_PROPERTY_USER_PROPAGATED)
 	private Boolean userPropagated;
+
+	public static final String JSON_PROPERTY_USER_SERVICE_PRINCIPAL = "userServicePrincipal";
+	@JsonProperty(JSON_PROPERTY_USER_SERVICE_PRINCIPAL)
+	private Boolean userServicePrincipal;
+
+	public static final String JSON_PROPERTY_USER_AUTHENTICATED_WITH_API_SECRET = "userAuthenticatedWithApiSecret";
+	@JsonProperty(JSON_PROPERTY_USER_AUTHENTICATED_WITH_API_SECRET)
+	private Boolean userAuthenticatedWithApiSecret;
 
 	public static final String JSON_PROPERTY_USER_IMPERSONATION_TYPE = "userImpersonationType";
 	@JsonProperty(JSON_PROPERTY_USER_IMPERSONATION_TYPE)
@@ -427,6 +437,44 @@ public class AuditChange {
 
 	public void setUserPropagated(Boolean userPropagated) {
 		this.userPropagated = userPropagated;
+	}
+
+	public AuditChange userServicePrincipal(Boolean userServicePrincipal) {
+		this.userServicePrincipal = userServicePrincipal;
+		return this;
+	}
+
+	/**
+	 * Get userServicePrincipal
+	 * 
+	 * @return userServicePrincipal
+	 **/
+	@ApiModelProperty(value = "")
+	public Boolean isUserServicePrincipal() {
+		return userServicePrincipal;
+	}
+
+	public void setUserServicePrincipal(Boolean userServicePrincipal) {
+		this.userServicePrincipal = userServicePrincipal;
+	}
+
+	public AuditChange userAuthenticatedWithApiSecret(Boolean userAuthenticatedWithApiSecret) {
+		this.userAuthenticatedWithApiSecret = userAuthenticatedWithApiSecret;
+		return this;
+	}
+
+	/**
+	 * Get userAuthenticatedWithApiSecret
+	 * 
+	 * @return userAuthenticatedWithApiSecret
+	 **/
+	@ApiModelProperty(value = "")
+	public Boolean isUserAuthenticatedWithApiSecret() {
+		return userAuthenticatedWithApiSecret;
+	}
+
+	public void setUserAuthenticatedWithApiSecret(Boolean userAuthenticatedWithApiSecret) {
+		this.userAuthenticatedWithApiSecret = userAuthenticatedWithApiSecret;
 	}
 
 	public AuditChange userImpersonationType(String userImpersonationType) {
@@ -777,6 +825,8 @@ public class AuditChange {
 				Objects.equals(this.userAnonymous, auditChange.userAnonymous) &&
 				Objects.equals(this.userVirtual, auditChange.userVirtual) &&
 				Objects.equals(this.userPropagated, auditChange.userPropagated) &&
+				Objects.equals(this.userServicePrincipal, auditChange.userServicePrincipal) &&
+				Objects.equals(this.userAuthenticatedWithApiSecret, auditChange.userAuthenticatedWithApiSecret) &&
 				Objects.equals(this.userImpersonationType, auditChange.userImpersonationType) &&
 				Objects.equals(this.impersonationAccountId, auditChange.impersonationAccountId) &&
 				Objects.equals(this.impersonationUserId, auditChange.impersonationUserId) &&
@@ -798,7 +848,7 @@ public class AuditChange {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, accountId, interactionType, interactionName, userName, userId, userRole, userAnonymous, userVirtual, userPropagated, userImpersonationType, impersonationAccountId, impersonationUserId, userAuthInfo, sourceIp, productVersion, changeType, entityType, entityName, entityId, oldState, newState, ownerType, ownerId, ownerEntity, globalChange, accountChange);
+		return Objects.hash($type, id, creationTimestamp, accountId, interactionType, interactionName, userName, userId, userRole, userAnonymous, userVirtual, userPropagated, userServicePrincipal, userAuthenticatedWithApiSecret, userImpersonationType, impersonationAccountId, impersonationUserId, userAuthInfo, sourceIp, productVersion, changeType, entityType, entityName, entityId, oldState, newState, ownerType, ownerId, ownerEntity, globalChange, accountChange);
 	}
 
 	@Override
@@ -817,6 +867,8 @@ public class AuditChange {
 		sb.append("    userAnonymous: ").append(toIndentedString(userAnonymous)).append("\n");
 		sb.append("    userVirtual: ").append(toIndentedString(userVirtual)).append("\n");
 		sb.append("    userPropagated: ").append(toIndentedString(userPropagated)).append("\n");
+		sb.append("    userServicePrincipal: ").append(toIndentedString(userServicePrincipal)).append("\n");
+		sb.append("    userAuthenticatedWithApiSecret: ").append(toIndentedString(userAuthenticatedWithApiSecret)).append("\n");
 		sb.append("    userImpersonationType: ").append(toIndentedString(userImpersonationType)).append("\n");
 		sb.append("    impersonationAccountId: ").append(toIndentedString(impersonationAccountId)).append("\n");
 		sb.append("    impersonationUserId: ").append(toIndentedString(impersonationUserId)).append("\n");

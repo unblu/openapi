@@ -83,7 +83,7 @@ public class DeputyRelationshipsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<DeputyRelationship> localVarReturnType = new GenericType<DeputyRelationship>() {
 		};
@@ -134,7 +134,7 @@ public class DeputyRelationshipsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -184,7 +184,7 @@ public class DeputyRelationshipsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<DeputyRelationship> localVarReturnType = new GenericType<DeputyRelationship>() {
 		};
@@ -235,7 +235,7 @@ public class DeputyRelationshipsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<DeputyRelationshipList> localVarReturnType = new GenericType<DeputyRelationshipList>() {
 		};
@@ -286,7 +286,7 @@ public class DeputyRelationshipsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<DeputyRelationshipResult> localVarReturnType = new GenericType<DeputyRelationshipResult>() {
 		};
@@ -337,7 +337,7 @@ public class DeputyRelationshipsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<DeputyRelationship> localVarReturnType = new GenericType<DeputyRelationship>() {
 		};
@@ -387,7 +387,7 @@ public class DeputyRelationshipsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}

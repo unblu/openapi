@@ -3,11 +3,12 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.24.0
+  version: 8.25.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
 - basicAuth: []
+- bearerAuth: []
 tags:
 - name: Accounts
   description: With this service the accounts of the unblu system can be managed. Most of the provided interface needs super admin permissions. Especially if the edited account is not the one of the current user.<br>
@@ -39,6 +40,10 @@ tags:
   description: Service to manage all kind of collaboration layer log entries.
 - name: ConversationHistory
   description: Service to get the history of conversations
+- name: ConversationSummaries
+  description: Service to manage conversation summary.
+- name: ConversationSummaryTemplates
+  description: Service to manage conversation summary template.
 - name: ConversationTemplates
   description: Service to manage all conversation templates.
 - name: Conversations
@@ -59,6 +64,8 @@ tags:
   description: Service to manage file upload interceptors. File upload interceptors also use this service to interact with Unblu.
 - name: Global
   description: With this service the global Unblu system can be managed.<br> <br> For super-admin the Global object can be expanded to set configuration or translations.
+- name: GlobalServicePrincipals
+  description: "The global API service for the service principal. To create service principals on normal account, use`com.unblu.core.server.collaboration.serviceprincipal.webapi.IServicePrincipalApiService`"
 - name: Images
   description: A service for managing images.
 - name: Invitations
@@ -79,6 +86,8 @@ tags:
   description: Service for loading and updating the record retention configuration. The configuration is account-specific.
 - name: SearchIndex
   description: Service to manage search indices
+- name: ServicePrincipals
+  description: "Account-based API service for the service principal. To create global service principals, use`com.unblu.core.server.collaboration.serviceprincipal.webapi.IServicePrincipalGlobalApiService`"
 - name: SuggestionSources
   description: Service to manage all kind of suggestion sources.
 - name: Teams
@@ -4938,6 +4947,297 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /conversationsummaries/{conversationSummaryId}/getAvailableTranslations:
+    get:
+      tags:
+      - ConversationSummaries
+      summary: getAvailableTranslations
+      description: getAvailableTranslations operation
+      operationId: conversationSummariesGetAvailableTranslations
+      parameters:
+      - name: conversationSummaryId
+        in: path
+        description: The ID of the conversation summary used for the research
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryAvailableTranslations"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummaries/getByConversationId:
+    get:
+      tags:
+      - ConversationSummaries
+      summary: getByConversationId
+      description: Searches for a conversation summary with the given conversationId<br>
+      operationId: conversationSummariesGetByConversationId
+      parameters:
+      - name: conversationId
+        in: query
+        description: The conversationId of the conversation
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The conversation summary with the given conversationId or an error if no conversation summary of that conversation is found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummaries/{conversationSummaryId}/read:
+    get:
+      tags:
+      - ConversationSummaries
+      summary: read
+      description: Reads an existing conversation summary.<br>
+      operationId: conversationSummariesRead
+      parameters:
+      - name: conversationSummaryId
+        in: path
+        description: The ID of the conversation summary to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The conversation summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummaries/search:
+    post:
+      tags:
+      - ConversationSummaries
+      summary: search
+      description: Searches for conversation summaries in the current account<br>
+      operationId: conversationSummariesSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationSummaryQuery"
+        required: true
+      responses:
+        "200":
+          description: A result conversation summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummarytemplates/create:
+    post:
+      tags:
+      - ConversationSummaryTemplates
+      summary: create
+      description: Creates a new conversation summary template<br>
+      operationId: conversationSummaryTemplatesCreate
+      requestBody:
+        description: The conversation summary template to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationSummaryTemplateData"
+        required: true
+      responses:
+        "200":
+          description: The created conversation summary template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryTemplateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummarytemplates/{conversationSummaryTemplateId}/delete:
+    delete:
+      tags:
+      - ConversationSummaryTemplates
+      summary: delete
+      description: Deletes an existing conversation summary template<br>
+      operationId: conversationSummaryTemplatesDelete
+      parameters:
+      - name: conversationSummaryTemplateId
+        in: path
+        description: The ID of the conversation summary template which should be deleted
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummarytemplates/findByName:
+    get:
+      tags:
+      - ConversationSummaryTemplates
+      summary: findByName
+      description: Searches for a conversation summary template with the given name<br>
+      operationId: conversationSummaryTemplatesFindByName
+      parameters:
+      - name: name
+        in: query
+        description: The name of the conversation summary template
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The conversation summary template with the given name or an error if no conversation summary template of that name is found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryTemplateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummarytemplates/generateSummaryTryForTemplate:
+    post:
+      tags:
+      - ConversationSummaryTemplates
+      summary: generateSummaryTryForTemplate
+      description: Test a summary template<br>
+      operationId: conversationSummaryTemplatesGenerateSummaryTryForTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationSummaryTemplateTest"
+        required: true
+      responses:
+        "200":
+          description: The created conversation summary data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummarytemplates/{conversationSummaryTemplateId}/read:
+    get:
+      tags:
+      - ConversationSummaryTemplates
+      summary: read
+      description: Reads an existing conversation summary template.<br>
+      operationId: conversationSummaryTemplatesRead
+      parameters:
+      - name: conversationSummaryTemplateId
+        in: path
+        description: The ID of the conversation summary template to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The conversation summary template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryTemplateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummarytemplates/search:
+    post:
+      tags:
+      - ConversationSummaryTemplates
+      summary: search
+      description: Searches for conversation summary templates in the current account<br>
+      operationId: conversationSummaryTemplatesSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationSummaryTemplateQuery"
+        required: true
+      responses:
+        "200":
+          description: A result conversation summary template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryTemplateResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationsummarytemplates/update:
+    post:
+      tags:
+      - ConversationSummaryTemplates
+      summary: update
+      description: Updates an existing conversation summary template<br>
+      operationId: conversationSummaryTemplatesUpdate
+      requestBody:
+        description: The conversation summary template to update
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationSummaryTemplateData"
+        required: true
+      responses:
+        "200":
+          description: The updated conversation summary template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationSummaryTemplateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /conversationtemplates/create:
     post:
       tags:
@@ -9666,6 +9966,184 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
+  /globalserviceprincipals/create:
+    post:
+      tags:
+      - GlobalServicePrincipals
+      summary: create
+      description: Creates a new global service principal<br>
+      operationId: globalServicePrincipalsCreate
+      requestBody:
+        description: The service principal to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServicePrincipalCreateBody"
+        required: true
+      responses:
+        "200":
+          description: The created service principal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServicePrincipalData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /globalserviceprincipals/{servicePrincipalId}/createApiSecret:
+    post:
+      tags:
+      - GlobalServicePrincipals
+      summary: createApiSecret
+      description: Creates a new API secret for the global service principal<br>
+      operationId: globalServicePrincipalsCreateApiSecret
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal for which to create an API secret
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The secret to be created
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiSecretCreateBody"
+        required: true
+      responses:
+        "200":
+          description: The newly created API secret
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSecretCreateResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /globalserviceprincipals/{servicePrincipalId}/delete:
+    delete:
+      tags:
+      - GlobalServicePrincipals
+      summary: delete
+      description: Deletes the global service principal with the specified ID<br>
+      operationId: globalServicePrincipalsDelete
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal to be deleted
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /globalserviceprincipals/{servicePrincipalId}/read:
+    get:
+      tags:
+      - GlobalServicePrincipals
+      summary: read
+      description: Reads the existing global service principal<br>
+      operationId: globalServicePrincipalsRead
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The requested service principal or an error if the service principal doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServicePrincipalData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /globalserviceprincipals/{servicePrincipalId}/revokeApiSecret:
+    post:
+      tags:
+      - GlobalServicePrincipals
+      summary: revokeApiSecret
+      description: Revokes the API secret for the global service principal<br>
+      operationId: globalServicePrincipalsRevokeApiSecret
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlobalServicePrincipalsRevokeApiSecretBody"
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
+  /globalserviceprincipals/{servicePrincipalId}/update:
+    post:
+      tags:
+      - GlobalServicePrincipals
+      summary: update
+      description: Updates the existing global service principal<br>
+      operationId: globalServicePrincipalsUpdate
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the global service principal to be updated
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The entity with the updated values
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServicePrincipalUpdateBody"
+        required: true
+      responses:
+        "200":
+          description: The updated service principal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServicePrincipalData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPER_ADMIN
   /images/{imageId}/read:
     get:
       tags:
@@ -12558,6 +13036,184 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
+  /serviceprincipals/create:
+    post:
+      tags:
+      - ServicePrincipals
+      summary: create
+      description: Creates a new service principal<br>
+      operationId: servicePrincipalsCreate
+      requestBody:
+        description: The service principal to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServicePrincipalCreateBody"
+        required: true
+      responses:
+        "200":
+          description: The created service principal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServicePrincipalData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /serviceprincipals/{servicePrincipalId}/createApiSecret:
+    post:
+      tags:
+      - ServicePrincipals
+      summary: createApiSecret
+      description: Creates a new API Secret for the service principal<br>
+      operationId: servicePrincipalsCreateApiSecret
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal for which to create an API secret
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The API secret to be created
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiSecretCreateBody"
+        required: true
+      responses:
+        "200":
+          description: The newly created API secret
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSecretCreateResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /serviceprincipals/{servicePrincipalId}/delete:
+    delete:
+      tags:
+      - ServicePrincipals
+      summary: delete
+      description: Deletes the service principal with the specified ID<br>
+      operationId: servicePrincipalsDelete
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal to be deleted
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /serviceprincipals/{servicePrincipalId}/read:
+    get:
+      tags:
+      - ServicePrincipals
+      summary: read
+      description: Reads the existing service principal<br>
+      operationId: servicePrincipalsRead
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The requested service principal or an error if the service principal doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServicePrincipalData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /serviceprincipals/{servicePrincipalId}/revokeApiSecret:
+    post:
+      tags:
+      - ServicePrincipals
+      summary: revokeApiSecret
+      description: Revokes the API secret for the service principal<br>
+      operationId: servicePrincipalsRevokeApiSecret
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServicePrincipalsRevokeApiSecretBody"
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /serviceprincipals/{servicePrincipalId}/update:
+    post:
+      tags:
+      - ServicePrincipals
+      summary: update
+      description: Updates the existing service principal<br>
+      operationId: servicePrincipalsUpdate
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        description: The ID of the service principal to be updated
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The entity with the updated values
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServicePrincipalUpdateBody"
+        required: true
+      responses:
+        "200":
+          description: The updated service principal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServicePrincipalData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /suggestionsources/create:
     post:
       tags:
@@ -13227,6 +13883,40 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /users/{userId}/createApiSecret:
+    post:
+      tags:
+      - Users
+      summary: createApiSecret
+      description: "Creates a new API Secret for a user with the given ID. If no user with the given ID exists, the endpoint returns an error.<br>"
+      operationId: usersCreateApiSecret
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user for whom the API secret will be created
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersCreateApiSecretBody"
+        required: true
+      responses:
+        "200":
+          description: The newly created API secret
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSecretCreateResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /users/createWithPassword:
     post:
       tags:
@@ -13536,6 +14226,36 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /users/{userId}/revokeApiSecret:
+    post:
+      tags:
+      - Users
+      summary: revokeApiSecret
+      description: "Revokes an API secret for a user with the given ID and name of the API secret. If no user with the given ID exists or no API secret with the given name exists, the endpoint returns an error.<br>"
+      operationId: usersRevokeApiSecret
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersRevokeApiSecretBody"
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /users/search:
     post:
       tags:
@@ -14646,6 +15366,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.participation.handling_time:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.participation.handling_time
+              description: "An event triggered every time an assigned agent's handling of a conversation ends:<br> - If the conversation is forwarded to another agent, team, or named area<br> - If the agent leaves the conversation<br> - If the conversation ends"
+              operationId: conversationParticipationHandlingTimeCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ParticipationHandlingTimeEvent"
+              responses:
+                "200":
+                  description: OK
         conversation.participation.hidden:
           '{$request.body#/endpoint}':
             post:
@@ -14853,6 +15587,62 @@ paths:
                   application/json:
                     schema:
                       $ref: "#/components/schemas/ConversationUpdatedEvent"
+              responses:
+                "200":
+                  description: OK
+        conversation_summary.approved:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation_summary.approved
+              description: An event triggered every time a conversation summary is reviewed.
+              operationId: conversationSummaryApprovedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationSummaryApprovedEvent"
+              responses:
+                "200":
+                  description: OK
+        conversation_summary.failed:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation_summary.failed
+              description: An event triggered every time a conversation summary request fails.
+              operationId: conversationSummaryFailedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationSummaryFailedEvent"
+              responses:
+                "200":
+                  description: OK
+        conversation_summary.generated:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation_summary.generated
+              description: An event triggered every time a conversation summary is generated.
+              operationId: conversationSummaryGeneratedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationSummaryGeneratedEvent"
+              responses:
+                "200":
+                  description: OK
+        conversation_summary.rejected:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation_summary.rejected
+              description: An event triggered every time a conversation summary is rejected during review.
+              operationId: conversationSummaryRejectedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationSummaryRejectedEvent"
               responses:
                 "200":
                   description: OK
@@ -16661,6 +17451,70 @@ components:
           DESCRIPTION: "#/components/schemas/DescriptionApiKeySearchFilter"
           MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampApiKeySearchFilter"
           NAME: "#/components/schemas/NameApiKeySearchFilter"
+    ApiSecretCreateBody:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ApiSecretCreateBody
+          enum:
+          - ApiSecretCreateBody
+        name:
+          type: string
+          description: Name of the API secret. The name of the secret must be unique per service principal the secret belongs to.
+        expirationTimestamp:
+          type: integer
+          format: int64
+          description: "Expiration time of the API secret. The minimum value is 1 minute, the maximum value is 2 years in the future."
+    ApiSecretCreateResult:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ApiSecretCreateResult
+          enum:
+          - ApiSecretCreateResult
+        id:
+          type: string
+          description: ID of the API secret
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp, in ms, when the API secret was created"
+        name:
+          type: string
+          description: Name of the API secret
+        expirationTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp when the API secret expires
+        secret:
+          type: string
+          description: "A string representation of the API secret. The secret must be stored, as it can't be retrieved again later."
+    ApiSecretData:
+      type: object
+      description: The Data entity for the API Secret. The secret in clear text can only be found in`com.unblu.core.shared.storage.authentication.model.ApiSecretCreateResult`
+      properties:
+        $_type:
+          type: string
+          default: ApiSecretData
+          enum:
+          - ApiSecretData
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp when the API secret was created, defined when the secret is first stored in Unblu. Any value you include when creating an API secret is ignored and can therefore be omitted then. If you set the timestamp, Unblu returns the same value but doesn't store it."
+        name:
+          type: string
+          description: The name of the API secret. The name must be unique per service principal
+        expirationTimestamp:
+          type: integer
+          format: int64
+          description: Expiration timestamp of the API secret
+        lastUsedTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp when the API secret was last used
     ApprovalRequestMessageData:
       type: object
       description: Special case of a `MultichoiceQuestionMessageData`.<br> It is send to approve a layer action inside a conversation.
@@ -16991,6 +17845,10 @@ components:
         userVirtual:
           type: boolean
         userPropagated:
+          type: boolean
+        userServicePrincipal:
+          type: boolean
+        userAuthenticatedWithApiSecret:
           type: boolean
         userImpersonationType:
           type: string
@@ -22422,6 +23280,18 @@ components:
           $ref: "#/components/schemas/EConversationInvitationSearchFilterField"
         operator:
           $ref: "#/components/schemas/IdOperator"
+    ConversationIdConversationSummarySearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationIdConversationSummarySearchFilter
+          enum:
+          - ConversationIdConversationSummarySearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummarySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/EqualsStringOperator"
     ConversationInvitationData:
       type: object
       properties:
@@ -23192,6 +24062,7 @@ components:
       - $ref: "#/components/schemas/SourceIdConversationSearchFilter"
       - $ref: "#/components/schemas/ExternalMessengerChannelIdConversationSearchFilter"
       - $ref: "#/components/schemas/VisibilityConversationSearchFilter"
+      - $ref: "#/components/schemas/HasUnreadMessagesConversationSearchFilter"
       discriminator:
         propertyName: field
         mapping:
@@ -23204,6 +24075,7 @@ components:
           END_REASON: "#/components/schemas/EndReasonConversationSearchFilter"
           END_TIMESTAMP: "#/components/schemas/EndTimestampConversationSearchFilter"
           EXTERNAL_MESSENGER_CHANNEL_ID: "#/components/schemas/ExternalMessengerChannelIdConversationSearchFilter"
+          HAS_UNREAD_MESSAGES: "#/components/schemas/HasUnreadMessagesConversationSearchFilter"
           INITIAL_ENGAGEMENT_TYPE: "#/components/schemas/InitialEngagementTypeConversationSearchFilter"
           PARTICIPANT_EXTERNAL_MESSENGER_CONTACT_ID: "#/components/schemas/ParticipantExternalMessengerContactIdConversationSearchFilter"
           PARTICIPANT_PERSON_ID: "#/components/schemas/ParticipantPersonIdConversationSearchFilter"
@@ -23242,6 +24114,767 @@ components:
           IN: "#/components/schemas/InConversationStateOperator"
           NOT_EQUALS: "#/components/schemas/NotEqualsConversationStateOperator"
           NOT_IN: "#/components/schemas/NotInConversationStateOperator"
+    ConversationSummaryApprovedEvent:
+      type: object
+      description: An event triggered every time a conversation summary is reviewed.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryApprovedEvent
+          enum:
+          - ConversationSummaryApprovedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        summaryTriggerType:
+          $ref: "#/components/schemas/EConversationSummaryTriggerType"
+        conversationId:
+          type: string
+          description: The ID of the conversation that the event originated from.
+        conversationSummaryTemplateId:
+          type: string
+          description: ID of the template used for the summary.
+        conversationSummaryId:
+          type: string
+          description: ID identifying the conversation summary
+        requestingAgentPersonId:
+          type: string
+          description: ID of the agent who requested the summary. Only present if the summary was requested manually.
+        firstMessageId:
+          type: string
+          description: ID of the first message included in the summary.
+        lastMessageId:
+          type: string
+          description: ID of the last message included in the summary.
+        firstCallTranscriptId:
+          type: string
+          description: ID of the first call transcript included in the summary.
+        lastCallTranscriptId:
+          type: string
+          description: ID of the last call transcript included in the summary.
+        participatingPersonIds:
+          type: array
+          description: IDs of all the conversation participants in the summarized part of the conversation. This includes participants who didn't play an active part in the conversation during the part summarized.
+          items:
+            type: string
+        startTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the first conversation item (message or call transcript) included in the summary.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the last conversation item (message or call transcript) used in the summary.
+        processingTime:
+          type: integer
+          format: int64
+          description: How long it took to generate the summary.
+        summaryServiceProvider:
+          $ref: "#/components/schemas/EConversationSummaryProvider"
+        summaryServiceDetails:
+          type: string
+          description: Details of the service used to generate the summary.
+        summarizedContentLength:
+          type: integer
+          format: int64
+          description: Number of characters in the summarized content.
+        summaryLanguage:
+          type: string
+          description: Original language of the summary
+        summarizationTimeFrame:
+          $ref: "#/components/schemas/ESummarizationTimeFrame"
+        generatedSummary:
+          type: string
+          description: The generated summary
+        reviewRequired:
+          type: boolean
+          description: Specify whether the summary requires reviewing. <p> Its value is defined by the corresponding value of the `ConversationSummaryTemplate` when it was created.
+        reviewableBy:
+          type: array
+          description: Conversation participant types allowed to review the summary. Only relevant if `reviewRequired` is "true". <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        visibleTo:
+          type: array
+          description: Conversation participation types allowed to see the summary. <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        reviewingAgentPersonId:
+          type: string
+          description: ID of the agent who reviewed the summary. Only present if review is required and has been completed.
+        reviewTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the review.
+        reviewedSummary:
+          type: string
+          description: The summary after being reviewed. This version of the summary may have been edited by the person who reviewed it.
+    ConversationSummaryAvailableTranslations:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryAvailableTranslations
+          enum:
+          - ConversationSummaryAvailableTranslations
+        conversationSummaryId:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+    ConversationSummaryData:
+      type: object
+      description: A model that represents a conversation summary.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryData
+          enum:
+          - ConversationSummaryData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It is filled by the Unblu server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        summaryTriggerType:
+          $ref: "#/components/schemas/EConversationSummaryTriggerType"
+        conversationSummaryTemplateId:
+          type: string
+          description: ID of the template to use for the summary.
+        summarizationState:
+          $ref: "#/components/schemas/EConversationSummarizationState"
+        requestingAgentPersonId:
+          type: string
+          description: ID of the agent who requested the summary. Only present if the summary was requested manually.
+        reviewingAgentPersonId:
+          type: string
+          description: ID of the agent who reviewed the summary. Only present if review is required and has been completed.
+        reviewTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the review.
+        rejectingReason:
+          type: string
+          description: The reason why the summary was rejected.
+        failReason:
+          $ref: "#/components/schemas/EConversationSummaryFailReason"
+        conversationId:
+          type: string
+          description: The ID of the conversation that the event originated from.
+        firstMessageId:
+          type: string
+          description: ID of the first message included in the summary.
+        lastMessageId:
+          type: string
+          description: ID of the last message included in the summary.
+        summarizedMessagesCount:
+          type: integer
+          format: int64
+          description: The number of messages summarized.
+        firstCallTranscriptId:
+          type: string
+          description: ID of the first call transcript included in the summary. Only present if at least one call transcript was part of the summarized content.
+        lastCallTranscriptId:
+          type: string
+          description: ID of the last call transcript included in the summary. Only present if at least one call transcript was part of the summarized content.
+        participatingPersonIds:
+          type: array
+          description: IDs of all the conversation participants in the summarized part of the conversation. This includes participants who didn't play an active part in the conversation during the part summarized.
+          items:
+            type: string
+        startTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the first conversation item (message or call transcript) included in the summary.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the last conversation item (message or call transcript) used in the summary.
+        processingTime:
+          type: integer
+          format: int64
+          description: How long it took to generate the summary.
+        summaryServiceProvider:
+          $ref: "#/components/schemas/EConversationSummaryProvider"
+        summaryServiceDetails:
+          type: string
+          description: Details of the service used to generate the summary.
+        summarizedContentLength:
+          type: integer
+          format: int64
+          description: Number of characters in the summarized content
+        generatedSummary:
+          type: string
+          description: The generated summary
+        reviewedSummary:
+          type: string
+          description: The summary after being reviewed. This version of the summary may have been edited by the person who reviewed it.
+        summaryLanguage:
+          type: string
+          description: Original language of the summary
+        reviewRequired:
+          type: boolean
+          description: Specify whether the summary requires reviewing. <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+        reviewableBy:
+          type: array
+          description: Conversation participant types allowed to review the summary. Only relevant if `reviewRequired` is "true". <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        visibleTo:
+          type: array
+          description: Conversation participation types allowed to see the summary. <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        summarizationTimeFrame:
+          $ref: "#/components/schemas/ESummarizationTimeFrame"
+    ConversationSummaryFailedEvent:
+      type: object
+      description: An event triggered every time a conversation summary request fails.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryFailedEvent
+          enum:
+          - ConversationSummaryFailedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        summaryTriggerType:
+          $ref: "#/components/schemas/EConversationSummaryTriggerType"
+        conversationId:
+          type: string
+          description: The ID of the conversation that the event originated from.
+        conversationSummaryTemplateId:
+          type: string
+          description: ID of the template used for the summary.
+        conversationSummaryId:
+          type: string
+          description: ID identifying the conversation summary
+        requestingAgentPersonId:
+          type: string
+          description: ID of the agent who requested the summary. Only present if the summary was requested manually.
+        firstMessageId:
+          type: string
+          description: ID of the first message included in the summary.
+        lastMessageId:
+          type: string
+          description: ID of the last message included in the summary.
+        firstCallTranscriptId:
+          type: string
+          description: ID of the first call transcript included in the summary.
+        lastCallTranscriptId:
+          type: string
+          description: ID of the last call transcript included in the summary.
+        participatingPersonIds:
+          type: array
+          description: IDs of all the conversation participants in the summarized part of the conversation. This includes participants who didn't play an active part in the conversation during the part summarized.
+          items:
+            type: string
+        startTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the first conversation item (message or call transcript) included in the summary.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the last conversation item (message or call transcript) used in the summary.
+        processingTime:
+          type: integer
+          format: int64
+          description: How long it took to generate the summary.
+        summaryServiceProvider:
+          $ref: "#/components/schemas/EConversationSummaryProvider"
+        summaryServiceDetails:
+          type: string
+          description: Details of the service used to generate the summary.
+        summarizedContentLength:
+          type: integer
+          format: int64
+          description: Number of characters in the summarized content.
+        summaryLanguage:
+          type: string
+          description: Original language of the summary
+        summarizationTimeFrame:
+          $ref: "#/components/schemas/ESummarizationTimeFrame"
+        failReason:
+          $ref: "#/components/schemas/EConversationSummaryFailReason"
+    ConversationSummaryGeneratedEvent:
+      type: object
+      description: An event triggered every time a conversation summary is generated.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryGeneratedEvent
+          enum:
+          - ConversationSummaryGeneratedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        summaryTriggerType:
+          $ref: "#/components/schemas/EConversationSummaryTriggerType"
+        conversationId:
+          type: string
+          description: The ID of the conversation that the event originated from.
+        conversationSummaryTemplateId:
+          type: string
+          description: ID of the template used for the summary.
+        conversationSummaryId:
+          type: string
+          description: ID identifying the conversation summary
+        requestingAgentPersonId:
+          type: string
+          description: ID of the agent who requested the summary. Only present if the summary was requested manually.
+        firstMessageId:
+          type: string
+          description: ID of the first message included in the summary.
+        lastMessageId:
+          type: string
+          description: ID of the last message included in the summary.
+        firstCallTranscriptId:
+          type: string
+          description: ID of the first call transcript included in the summary.
+        lastCallTranscriptId:
+          type: string
+          description: ID of the last call transcript included in the summary.
+        participatingPersonIds:
+          type: array
+          description: IDs of all the conversation participants in the summarized part of the conversation. This includes participants who didn't play an active part in the conversation during the part summarized.
+          items:
+            type: string
+        startTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the first conversation item (message or call transcript) included in the summary.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the last conversation item (message or call transcript) used in the summary.
+        processingTime:
+          type: integer
+          format: int64
+          description: How long it took to generate the summary.
+        summaryServiceProvider:
+          $ref: "#/components/schemas/EConversationSummaryProvider"
+        summaryServiceDetails:
+          type: string
+          description: Details of the service used to generate the summary.
+        summarizedContentLength:
+          type: integer
+          format: int64
+          description: Number of characters in the summarized content.
+        summaryLanguage:
+          type: string
+          description: Original language of the summary
+        summarizationTimeFrame:
+          $ref: "#/components/schemas/ESummarizationTimeFrame"
+        generatedSummary:
+          type: string
+          description: The generated summary
+        reviewRequired:
+          type: boolean
+          description: Specify whether the summary requires reviewing. <p> Its value is defined by the corresponding value of the `ConversationSummaryTemplate` when it was created.
+        reviewableBy:
+          type: array
+          description: Conversation participant types allowed to review the summary. Only relevant if `reviewRequired` is "true". <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        visibleTo:
+          type: array
+          description: Conversation participation types allowed to see the summary. <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+    ConversationSummaryOrderBy:
+      type: object
+      description: ConversationSummary orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryOrderBy
+          enum:
+          - ConversationSummaryOrderBy
+        field:
+          $ref: "#/components/schemas/EConversationSummaryOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    ConversationSummaryQuery:
+      type: object
+      description: Container to search Conversation Summary
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryQuery
+          enum:
+          - ConversationSummaryQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: "#/components/schemas/ConversationSummarySearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: "#/components/schemas/ConversationSummaryOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    ConversationSummaryRejectedEvent:
+      type: object
+      description: An event triggered every time a conversation summary is rejected during review.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryRejectedEvent
+          enum:
+          - ConversationSummaryRejectedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        summaryTriggerType:
+          $ref: "#/components/schemas/EConversationSummaryTriggerType"
+        conversationId:
+          type: string
+          description: The ID of the conversation that the event originated from.
+        conversationSummaryTemplateId:
+          type: string
+          description: ID of the template used for the summary.
+        conversationSummaryId:
+          type: string
+          description: ID identifying the conversation summary
+        requestingAgentPersonId:
+          type: string
+          description: ID of the agent who requested the summary. Only present if the summary was requested manually.
+        firstMessageId:
+          type: string
+          description: ID of the first message included in the summary.
+        lastMessageId:
+          type: string
+          description: ID of the last message included in the summary.
+        firstCallTranscriptId:
+          type: string
+          description: ID of the first call transcript included in the summary.
+        lastCallTranscriptId:
+          type: string
+          description: ID of the last call transcript included in the summary.
+        participatingPersonIds:
+          type: array
+          description: IDs of all the conversation participants in the summarized part of the conversation. This includes participants who didn't play an active part in the conversation during the part summarized.
+          items:
+            type: string
+        startTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the first conversation item (message or call transcript) included in the summary.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the last conversation item (message or call transcript) used in the summary.
+        processingTime:
+          type: integer
+          format: int64
+          description: How long it took to generate the summary.
+        summaryServiceProvider:
+          $ref: "#/components/schemas/EConversationSummaryProvider"
+        summaryServiceDetails:
+          type: string
+          description: Details of the service used to generate the summary.
+        summarizedContentLength:
+          type: integer
+          format: int64
+          description: Number of characters in the summarized content.
+        summaryLanguage:
+          type: string
+          description: Original language of the summary
+        summarizationTimeFrame:
+          $ref: "#/components/schemas/ESummarizationTimeFrame"
+        generatedSummary:
+          type: string
+          description: The generated summary
+        reviewRequired:
+          type: boolean
+          description: Specify whether the summary requires reviewing. <p> Its value is defined by the corresponding value of the `ConversationSummaryTemplate` when it was created.
+        reviewableBy:
+          type: array
+          description: Conversation participant types allowed to review the summary. Only relevant if `reviewRequired` is "true". <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        visibleTo:
+          type: array
+          description: Conversation participation types allowed to see the summary. <p> The value is inherited from the corresponding value of the `ConversationSummaryTemplate` used.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        reviewingAgentPersonId:
+          type: string
+          description: ID of the agent who reviewed the summary. Only present if review is required and has been completed.
+        reviewTimestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the review.
+    ConversationSummaryResult:
+      type: object
+      description: Container to return list of conversation summary
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryResult
+          enum:
+          - ConversationSummaryResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/ConversationSummaryData"
+    ConversationSummarySearchFilter:
+      description: ConversationSummary filter item.
+      oneOf:
+      - $ref: "#/components/schemas/CreationTimestampConversationSummarySearchFilter"
+      - $ref: "#/components/schemas/ModificationTimestampConversationSummarySearchFilter"
+      - $ref: "#/components/schemas/ConversationIdConversationSummarySearchFilter"
+      - $ref: "#/components/schemas/ConversationSummaryTemplateIdConversationSummarySearchFilter"
+      - $ref: "#/components/schemas/SummaryTriggerTypeConversationSummarySearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          CONVERSATION_ID: "#/components/schemas/ConversationIdConversationSummarySearchFilter"
+          CONVERSATION_SUMMARY_TEMPLATE_ID: "#/components/schemas/ConversationSummaryTemplateIdConversationSummarySearchFilter"
+          CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampConversationSummarySearchFilter"
+          MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampConversationSummarySearchFilter"
+          SUMMARY_TRIGGER_TYPE: "#/components/schemas/SummaryTriggerTypeConversationSummarySearchFilter"
+    ConversationSummaryTemplateData:
+      type: object
+      description: A model that represents a conversation summary template.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryTemplateData
+          enum:
+          - ConversationSummaryTemplateData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the conversation summary template. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the conversation summary template. Maximum length of 500 characters.
+        reviewRequired:
+          type: boolean
+          description: Specify whether summaries created with this template require reviewing. Mandatory.
+        reviewableBy:
+          type: array
+          description: "Conversation participation types allowed to review summaries created with this template. Mandatory if `reviewRequired` is \"true\", ignored otherwise."
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        visibleTo:
+          type: array
+          description: Conversation participation types allowed to see summaries created with this template. Mandatory.
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        summarizationLanguageConfiguration:
+          $ref: "#/components/schemas/ESummarizationLanguageConfiguration"
+        specificGenerationLanguage:
+          type: string
+          description: "The language used for all summaries created with this template. Mandatory if summarizationLanguageConfiguration is set to DEFINED_LANGUAGE, ignored otherwise."
+        promptStructure:
+          type: string
+          description: Customizable part of the prompt used to generate summaries. It describes the expected output structure of the summary. Maximum length of 2000 characters. Optional.
+        promptCustomization:
+          type: string
+          description: Customizable part of the prompt used to generate summaries. It describes specific behavior the model should have when generating the summary. Maximum length of 2000 characters. Optional.
+        minCharacterCountFilter:
+          type: integer
+          format: int64
+          description: "Minimum character count to generate a summary. If the number of characters is smaller than this value, no summary is created. Mandatory."
+        summarizationTimeFrame:
+          $ref: "#/components/schemas/ESummarizationTimeFrame"
+        translations:
+          type: object
+          description: A map of localized versions of the name and description of this entity
+          additionalProperties:
+            $ref: "#/components/schemas/ConversationSummaryTemplateTranslation"
+    ConversationSummaryTemplateIdConversationSummarySearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryTemplateIdConversationSummarySearchFilter
+          enum:
+          - ConversationSummaryTemplateIdConversationSummarySearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummarySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/EqualsStringOperator"
+    ConversationSummaryTemplateOrderBy:
+      type: object
+      description: ConversationSummaryTemplate orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryTemplateOrderBy
+          enum:
+          - ConversationSummaryTemplateOrderBy
+        field:
+          $ref: "#/components/schemas/EConversationSummaryTemplateOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    ConversationSummaryTemplateQuery:
+      type: object
+      description: Container to search Conversation Summary Template
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryTemplateQuery
+          enum:
+          - ConversationSummaryTemplateQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: "#/components/schemas/ConversationSummaryTemplateSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: "#/components/schemas/ConversationSummaryTemplateOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    ConversationSummaryTemplateResult:
+      type: object
+      description: Container to return list of conversation summary template
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryTemplateResult
+          enum:
+          - ConversationSummaryTemplateResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/ConversationSummaryTemplateData"
+    ConversationSummaryTemplateSearchFilter:
+      description: ConversationSummaryTemplate filter item.
+      oneOf:
+      - $ref: "#/components/schemas/CreationTimestampConversationSummaryTemplateSearchFilter"
+      - $ref: "#/components/schemas/ModificationTimestampConversationSummaryTemplateSearchFilter"
+      - $ref: "#/components/schemas/NameConversationSummaryTemplateSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampConversationSummaryTemplateSearchFilter"
+          MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampConversationSummaryTemplateSearchFilter"
+          NAME: "#/components/schemas/NameConversationSummaryTemplateSearchFilter"
+    ConversationSummaryTemplateTest:
+      type: object
+      description: Container to test a summary template
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryTemplateTest
+          enum:
+          - ConversationSummaryTemplateTest
+        conversationSummaryTemplateData:
+          $ref: "#/components/schemas/ConversationSummaryTemplateData"
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/MessageData"
+    ConversationSummaryTemplateTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationSummaryTemplateTranslation
+          enum:
+          - ConversationSummaryTemplateTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
     ConversationTemplate:
       type: object
       description: Model of a messenger conversation. The Conversation template is a container for default conversation configuration
@@ -23870,6 +25503,30 @@ components:
           - CreationTimestampConversationSearchFilter
         field:
           $ref: "#/components/schemas/EConversationSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
+    CreationTimestampConversationSummarySearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampConversationSummarySearchFilter
+          enum:
+          - CreationTimestampConversationSummarySearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummarySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
+    CreationTimestampConversationSummaryTemplateSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampConversationSummaryTemplateSearchFilter
+          enum:
+          - CreationTimestampConversationSummaryTemplateSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummaryTemplateSearchFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampConversationTemplateSearchFilter:
@@ -26750,6 +28407,17 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EConversationAgentParticipationType:
+      type: string
+      description: "This enum contains all agent participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`EConversationImpactingParticipationType`</b> All human participation types (No recorder) <li><b>`EConversationRealParticipationType`</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
+      enum:
+      - ASSIGNED_AGENT
+      - SECONDARY_AGENT
+      - GHOST
+      x-enum-descriptions:
+      - ASSIGNED_AGENT
+      - SECONDARY_AGENT
+      - GHOST
     EConversationEndReason:
       type: string
       description: Closing reason of a conversation
@@ -27205,6 +28873,7 @@ components:
       - SOURCE_ID
       - EXTERNAL_MESSENGER_CHANNEL_ID
       - VISIBILITY
+      - HAS_UNREAD_MESSAGES
       - COMPOUND
       x-enum-descriptions:
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
@@ -27226,8 +28895,9 @@ components:
       - "TOKBOX_SESSION_ID: Filter by the 'tokboxSessionId' attribute"
       - "SOURCE_ID: Filter by the 'sourceId' attribute"
       - "EXTERNAL_MESSENGER_CHANNEL_ID: Filter by the 'externalMessengerChannelId' attribute"
-      - VISIBILITY
-      - COMPOUND
+      - "VISIBILITY: Filter by the 'conversationVisibility' attribute"
+      - "HAS_UNREAD_MESSAGES: Filter by the existence of 'notificationCount' attribute in 'ConversationParticipation' for the assignee or context person"
+      - "COMPOUND: Filter for linking other filters with logical AND/OR"
     EConversationState:
       type: string
       description: "Life cycle state of the conversation. Following transitions are possible: <ul> <li>`CREATED` --> `ONBOARDING`, `OFFBOARDING`</li> <li>`ONBOARDING` --> `QUEUED`, `ACTIVE`, `OFFBOARDING`, `UNASSIGNED`</li> <li>`REBOARDING` --> `QUEUED`, `UNASSIGNED`, `OFFBOARDING`</li> <li>`QUEUED` --> `ACTIVE`, `OFFBOARDING`, `UNASSIGNED`</li> <li>`ACTIVE` --> `UNASSIGNED`, `OFFBOARDING`, `QUEUED`</li> <li>`UNASSIGNED` --> `REBOARDING`, `OFFBOARDING`, `QUEUED`, `ACTIVE`</li> <li>`OFFBOARDING` --> `ENDED`</li> <li>`ENDED` --> none</li> </ul>"
@@ -27261,6 +28931,99 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EConversationSummarizationState:
+      type: string
+      enum:
+      - PENDING
+      - PROCESSING
+      - FAILED
+      - DRAFT
+      - APPROVED
+      - REJECTED
+      - GENERATED
+      - DISMISSED
+      x-enum-descriptions:
+      - "PENDING: Conversation summary creation requested but awaiting processing start. Next states can be PROCESSING or FAILED."
+      - "PROCESSING: Conversation summary generation currently in progress. Next states can be DRAFT, GENERATED or FAILED."
+      - "FAILED: Conversation summary generation ended with an error"
+      - "DRAFT: Conversation summary completed but requires approval before finalization. Next states can be APPROVED or REJECTED."
+      - "APPROVED: Conversation summary completed and approved. It is a final state."
+      - "REJECTED: Conversation summary completed but rejected. It is a final state."
+      - "GENERATED: Conversation summary successfully created and ready (no approval needed). It is a final state."
+      - "DISMISSED: Conversation summary ended with an error. It is a final state."
+    EConversationSummaryFailReason:
+      type: string
+      enum:
+      - TIMEOUT
+      - CONVERSATION_SEGMENTATION_ERROR
+      - VALIDATORS_FAILED
+      - OTHER
+      x-enum-descriptions:
+      - "TIMEOUT: The summary creation took longer than the timeout defined by the configuration 'com.unblu.ai.conversationsummary.conversationsummarytimeout'"
+      - "CONVERSATION_SEGMENTATION_ERROR: An error occurred while splitting the conversations into smaller chunks used to create the summary."
+      - "VALIDATORS_FAILED: A validator failed either before or after the summary was generated due to an unmet input or output condition."
+      - "OTHER: An unexpected error occurred while creating the summary."
+    EConversationSummaryOrderByField:
+      type: string
+      enum:
+      - ID
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EConversationSummaryProvider:
+      type: string
+      description: Defines the provider used to create a conversation summary
+      enum:
+      - NATIVE_LLM
+      x-enum-descriptions:
+      - "NATIVE_LLM: The conversation summary will be created using the native LLM implementation and the LLM provider defined by the configuration property 'com.unblu.ai.conversationSummary.conversationSummaryProviderType'."
+    EConversationSummarySearchFilterField:
+      type: string
+      enum:
+      - CONVERSATION_ID
+      - CONVERSATION_SUMMARY_TEMPLATE_ID
+      - SUMMARY_TRIGGER_TYPE
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
+      - "CONVERSATION_SUMMARY_TEMPLATE_ID: Filter by the 'conversationSummaryTemplateId' attribute"
+      - "SUMMARY_TRIGGER_TYPE: Filter by the 'summaryTriggerType' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+    EConversationSummaryTemplateOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EConversationSummaryTemplateSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - NAME
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+    EConversationSummaryTriggerType:
+      type: string
+      enum:
+      - CONVERSATION_OFFBOARDING
+      - CONVERSATION_UNASSIGNED
+      x-enum-descriptions:
+      - "CONVERSATION_OFFBOARDING: This happens when the conversation moves to the `EConversationState.OFFBOARDING` state. <p> If the `ConversationSummaryTemplate` uses the value `ESummarizationTimeFrame.TRIGGER_SPECIFC`, the final `ESummarizationTimeFrame` used will be `ESummarizationTimeFrame.WHOLE_CONVERSATION`"
+      - "CONVERSATION_UNASSIGNED: This happens when the conversation moves to the `EConversationState.UNASSIGNED` state. <p> If the `ConversationSummaryTemplate` uses the value `ESummarizationTimeFrame.TRIGGER_SPECIFC`, the final `ESummarizationTimeFrame` used will be `ESummarizationTimeFrame.UNTIL_LAST_UNASSIGNED`"
     EConversationTemplateOrderByField:
       type: string
       enum:
@@ -28140,6 +29903,19 @@ components:
       - "AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent"
       - "AGENT_MOBILE: Sites for the mobile agent frontend that display the agent inbox and the conversation UI"
       - "BRANCH_CLIENT: Sites that integrate Unblu inside a branch client device using an embedded UI"
+    EHandlingTimeTrigger:
+      type: string
+      description: The reason that triggered the calculation of an agent's handling time.
+      enum:
+      - FORWARDED
+      - PUSHED_TO_QUEUE
+      - PARTICIPATION_ENDED
+      - CONVERSATION_ENDED
+      x-enum-descriptions:
+      - "FORWARDED: The conversation was forwarded to another agent or team."
+      - "PUSHED_TO_QUEUE: The conversation was pushed to a queue."
+      - "PARTICIPATION_ENDED: The participation of this agent has ended."
+      - "CONVERSATION_ENDED: The conversation has ended."
     EIdListOperatorType:
       type: string
       description: Operator types corresponding to operators defined by `IdListOperator`
@@ -28787,6 +30563,15 @@ components:
       x-enum-descriptions:
       - "ENABLED: The endpoint is enabled and calls are allowed."
       - "DISABLED: The endpoint is disabled and calls should be avoided, since they won't work."
+    EParticipationType:
+      type: string
+      description: The type of a participant in a conversation
+      enum:
+      - ASSIGNED_AGENT
+      - CONTEXT_PERSON
+      x-enum-descriptions:
+      - "ASSIGNED_AGENT: Assignee person participant"
+      - "CONTEXT_PERSON: Context person participant"
     EPauseNotificationsMode:
       type: string
       description: Defines the mode whether and how the notifications should be paused or not.
@@ -29351,6 +31136,28 @@ components:
       x-enum-descriptions:
       - "CUSTOM: Suggestion source that uses the Unblu web API"
       - "COPILOT: Suggestion source that uses Microsoft Copilot"
+    ESummarizationLanguageConfiguration:
+      type: string
+      enum:
+      - CONVERSATION_LANGUAGE
+      - DEFINED_LANGUAGE
+      x-enum-descriptions:
+      - "CONVERSATION_LANGUAGE: Summary will be generated using the conversation language."
+      - "DEFINED_LANGUAGE: Summary will be generated using the language defined with the `ConversationSummaryTemplate` specificGenerationLanguage field."
+    ESummarizationTimeFrame:
+      type: string
+      enum:
+      - WHOLE_CONVERSATION
+      - WHOLE_CONVERSATION_WITHOUT_ONBOARDING
+      - UNTIL_LAST_SUMMARY
+      - UNTIL_LAST_UNASSIGNED
+      - TRIGGER_SPECIFIC
+      x-enum-descriptions:
+      - "WHOLE_CONVERSATION: The entire conversation will be used to generate the summary"
+      - "WHOLE_CONVERSATION_WITHOUT_ONBOARDING: The entire conversation, with the exception of the onboarding phase, will be used to generate the summary"
+      - "UNTIL_LAST_SUMMARY: All the messages sent in the conversation, after last summary was generated, will be used to generate the summary"
+      - "UNTIL_LAST_UNASSIGNED: All the messages sent in the conversation, after the second last time the conversation moved to the `EConversationState.UNASSIGNED`, and before the last time the conversation moved to the `EConversationState.UNASSIGNED`, will be used to generate the summary"
+      - "TRIGGER_SPECIFIC: The time frame of the messages used to generate the summary will depend on the `EConversationSummaryTriggerType` triggering the summary generation"
     ETeamOrderByField:
       type: string
       enum:
@@ -31497,6 +33304,13 @@ components:
         status:
           type: string
           description: The status of the system
+    GlobalServicePrincipalsRevokeApiSecretBody:
+      type: object
+      description: Request body for the 'globalServicePrincipalsRevokeApiSecret' operation
+      properties:
+        name:
+          type: string
+          description: The name of the API secret
     GreaterThanOrNullTimestampOperator:
       type: object
       properties:
@@ -31534,6 +33348,18 @@ components:
         hasPassword:
           type: boolean
           description: Whether or not the user has a password
+    HasUnreadMessagesConversationSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: HasUnreadMessagesConversationSearchFilter
+          enum:
+          - HasUnreadMessagesConversationSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/ParticipationTypeOperator"
     IdExternalMessengerContactSearchFilter:
       type: object
       properties:
@@ -33612,6 +35438,30 @@ components:
           $ref: "#/components/schemas/ECannedResponseSearchFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
+    ModificationTimestampConversationSummarySearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampConversationSummarySearchFilter
+          enum:
+          - ModificationTimestampConversationSummarySearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummarySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
+    ModificationTimestampConversationSummaryTemplateSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampConversationSummaryTemplateSearchFilter
+          enum:
+          - ModificationTimestampConversationSummaryTemplateSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummaryTemplateSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampConversationTemplateSearchFilter:
       type: object
       properties:
@@ -33980,6 +35830,18 @@ components:
           - NameBranchSearchFilter
         field:
           $ref: "#/components/schemas/EBranchSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
+    NameConversationSummaryTemplateSearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: NameConversationSummaryTemplateSearchFilter
+          enum:
+          - NameConversationSummaryTemplateSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummaryTemplateSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
     NameConversationTemplateSearchFilter:
@@ -35602,6 +37464,45 @@ components:
           description: The account ID the event originated from
         participation:
           $ref: "#/components/schemas/ConversationParticipationData"
+    ParticipationHandlingTimeEvent:
+      type: object
+      description: "An event triggered every time an assigned agent's handling of a conversation ends:<br> - If the conversation is forwarded to another agent, team, or named area<br> - If the agent leaves the conversation<br> - If the conversation ends"
+      properties:
+        $_type:
+          type: string
+          default: ParticipationHandlingTimeEvent
+          enum:
+          - ParticipationHandlingTimeEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        participation:
+          $ref: "#/components/schemas/ConversationParticipationData"
+        conversation:
+          $ref: "#/components/schemas/ConversationData"
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The start timestamp of handling.
+        resolutionTimestamp:
+          type: integer
+          format: int64
+          description: The end timestamp of handling.
+        handlingTime:
+          type: integer
+          format: int64
+          description: The total handling time in milliseconds.
+        resolutionType:
+          $ref: "#/components/schemas/EHandlingTimeTrigger"
+        contextPerson:
+          $ref: "#/components/schemas/PersonData"
     ParticipationHiddenEvent:
       type: object
       description: "An event triggered every time a participation is hidden <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
@@ -35686,6 +37587,16 @@ components:
           description: The account ID the event originated from
         participation:
           $ref: "#/components/schemas/ConversationParticipationData"
+    ParticipationTypeOperator:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ParticipationTypeOperator
+          enum:
+          - ParticipationTypeOperator
+        value:
+          $ref: "#/components/schemas/EParticipationType"
     ParticipationUnhiddenEvent:
       type: object
       description: "An event triggered every time a participation changes from \\\"hidden\\\" to \\\"visible\\\" <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
@@ -37995,6 +39906,71 @@ components:
           $ref: "#/components/schemas/EMessageExportFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
+    ServicePrincipalCreateBody:
+      type: object
+      description: Model for creating new service principals
+      properties:
+        $_type:
+          type: string
+          default: ServicePrincipalCreateBody
+          enum:
+          - ServicePrincipalCreateBody
+        name:
+          type: string
+          description: Name of the service principal. Must be unique within the account.
+        description:
+          type: string
+          description: Description of the service principal
+    ServicePrincipalData:
+      type: object
+      description: Body to return a service principal via web API
+      properties:
+        $_type:
+          type: string
+          default: ServicePrincipalData
+          enum:
+          - ServicePrincipalData
+        id:
+          type: string
+          description: ID of the Service Principal
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp when the service principal was created, defined when the service principal is first stored in Unblu. Any value you include when creating a service principal is ignored and can therefore be omitted then. If you set the timestamp, Unblu returns the same value but doesn't store it"
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp when the service principal was last modified. This property is for information purposes only and can be omitted when sending data to Unblu. If included it is ignored. If you set the timestamp, Unblu returns the same value but doesn't store it."
+        name:
+          type: string
+          description: Name of the service principal
+        description:
+          type: string
+          description: Description of the service principal
+        apiSecrets:
+          type: array
+          description: Array of API secrets belonging to the service principal. If the service principal doesn't have any secrets the array is empty. Secrets that are expired will also be included in the array and won't be deleted right away if they expire.
+          items:
+            $ref: "#/components/schemas/ApiSecretData"
+    ServicePrincipalUpdateBody:
+      type: object
+      description: Body of a web API request to update a service principal
+      properties:
+        $_type:
+          type: string
+          default: ServicePrincipalUpdateBody
+          enum:
+          - ServicePrincipalUpdateBody
+        description:
+          type: string
+          description: The description of the service principal to update
+    ServicePrincipalsRevokeApiSecretBody:
+      type: object
+      description: Request body for the 'servicePrincipalsRevokeApiSecret' operation
+      properties:
+        name:
+          type: string
+          description: The name of the API secret
     ServiceProviderCallIdCallSearchFilter:
       type: object
       properties:
@@ -38442,6 +40418,18 @@ components:
           CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampSuggestionSourceSearchFilter"
           MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampSuggestionSourceSearchFilter"
           NAME: "#/components/schemas/NameSuggestionSourceSearchFilter"
+    SummaryTriggerTypeConversationSummarySearchFilter:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: SummaryTriggerTypeConversationSummarySearchFilter
+          enum:
+          - SummaryTriggerTypeConversationSummarySearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSummarySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/EqualsStringOperator"
     SystemMessageData:
       type: object
       description: Represents a System message
@@ -39581,6 +41569,20 @@ components:
           $ref: "#/components/schemas/EUserSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    UsersCreateApiSecretBody:
+      type: object
+      description: Request body for the 'usersCreateApiSecret' operation
+      properties:
+        name:
+          type: string
+          description: The name of the API secret to be created
+    UsersRevokeApiSecretBody:
+      type: object
+      description: Request body for the 'usersRevokeApiSecret' operation
+      properties:
+        name:
+          type: string
+          description: The name of the API secret
     UsersSetPasswordBody:
       type: object
       description: Request body for the 'usersSetPassword' operation
@@ -40486,3 +42488,6 @@ components:
     basicAuth:
       type: http
       scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer

@@ -93,7 +93,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<LoginResult> localVarReturnType = new GenericType<LoginResult>() {
 		};
@@ -144,7 +144,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AuthenticationTokenCreationResult> localVarReturnType = new GenericType<AuthenticationTokenCreationResult>() {
 		};
@@ -188,7 +188,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AuthenticationTokenCreationResult> localVarReturnType = new GenericType<AuthenticationTokenCreationResult>() {
 		};
@@ -236,7 +236,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -287,7 +287,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<LoginResult> localVarReturnType = new GenericType<LoginResult>() {
 		};
@@ -340,7 +340,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<LoginResult> localVarReturnType = new GenericType<LoginResult>() {
 		};
@@ -396,7 +396,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -456,7 +456,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -508,7 +508,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -557,7 +557,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<LoginResult> localVarReturnType = new GenericType<LoginResult>() {
 		};
@@ -609,7 +609,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -660,7 +660,7 @@ public class AuthenticatorApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<LoginResult> localVarReturnType = new GenericType<LoginResult>() {
 		};

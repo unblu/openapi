@@ -10,6 +10,7 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+import com.unblu.webapi.model.v4.ApiSecretCreateResult;
 import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.HasPasswordData;
 import com.unblu.webapi.model.v4.User;
@@ -17,6 +18,8 @@ import com.unblu.webapi.model.v4.UserList;
 import com.unblu.webapi.model.v4.UserPasswordContainer;
 import com.unblu.webapi.model.v4.UserQuery;
 import com.unblu.webapi.model.v4.UserResult;
+import com.unblu.webapi.model.v4.UsersCreateApiSecretBody;
+import com.unblu.webapi.model.v4.UsersRevokeApiSecretBody;
 import com.unblu.webapi.model.v4.UsersSetPasswordBody;
 import com.unblu.webapi.model.v4.UsersTransformVirtualToPhysicalBody;
 
@@ -89,9 +92,68 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * createApiSecret Creates a new API Secret for a user with the given ID. If no user with the given ID exists, the endpoint returns an error.&lt;br&gt;
+	 * 
+	 * @param userId The ID of the user for whom the API secret will be created (required)
+	 * @param usersCreateApiSecretBody (required)
+	 * @return ApiSecretCreateResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiSecretCreateResult usersCreateApiSecret(String userId, UsersCreateApiSecretBody usersCreateApiSecretBody) throws ApiException {
+		return usersCreateApiSecretWithHttpInfo(userId, usersCreateApiSecretBody).getData();
+	}
+
+	/**
+	 * createApiSecret Creates a new API Secret for a user with the given ID. If no user with the given ID exists, the endpoint returns an error.&lt;br&gt;
+	 * 
+	 * @param userId The ID of the user for whom the API secret will be created (required)
+	 * @param usersCreateApiSecretBody (required)
+	 * @return ApiResponse&lt;ApiSecretCreateResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ApiSecretCreateResult> usersCreateApiSecretWithHttpInfo(String userId, UsersCreateApiSecretBody usersCreateApiSecretBody) throws ApiException {
+		Object localVarPostBody = usersCreateApiSecretBody;
+
+		// verify the required parameter 'userId' is set
+		if (userId == null) {
+			throw new ApiException(400, "Missing the required parameter 'userId' when calling usersCreateApiSecret");
+		}
+
+		// verify the required parameter 'usersCreateApiSecretBody' is set
+		if (usersCreateApiSecretBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'usersCreateApiSecretBody' when calling usersCreateApiSecret");
+		}
+
+		// create path and map variables
+		String localVarPath = "/users/{userId}/createApiSecret"
+				.replaceAll("\\{" + "userId" + "\\}", apiClient.escapeString(userId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ApiSecretCreateResult> localVarReturnType = new GenericType<ApiSecretCreateResult>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
@@ -144,7 +206,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -199,7 +261,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -250,7 +312,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -299,7 +361,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -351,7 +413,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<HasPasswordData> localVarReturnType = new GenericType<HasPasswordData>() {
 		};
@@ -407,7 +469,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -462,7 +524,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<UserList> localVarReturnType = new GenericType<UserList>() {
 		};
@@ -520,11 +582,69 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * revokeApiSecret Revokes an API secret for a user with the given ID and name of the API secret. If no user with the given ID exists or no API secret with the
+	 * given name exists, the endpoint returns an error.&lt;br&gt;
+	 * 
+	 * @param userId The ID of the user (required)
+	 * @param usersRevokeApiSecretBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void usersRevokeApiSecret(String userId, UsersRevokeApiSecretBody usersRevokeApiSecretBody) throws ApiException {
+
+		usersRevokeApiSecretWithHttpInfo(userId, usersRevokeApiSecretBody);
+	}
+
+	/**
+	 * revokeApiSecret Revokes an API secret for a user with the given ID and name of the API secret. If no user with the given ID exists or no API secret with the
+	 * given name exists, the endpoint returns an error.&lt;br&gt;
+	 * 
+	 * @param userId The ID of the user (required)
+	 * @param usersRevokeApiSecretBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> usersRevokeApiSecretWithHttpInfo(String userId, UsersRevokeApiSecretBody usersRevokeApiSecretBody) throws ApiException {
+		Object localVarPostBody = usersRevokeApiSecretBody;
+
+		// verify the required parameter 'userId' is set
+		if (userId == null) {
+			throw new ApiException(400, "Missing the required parameter 'userId' when calling usersRevokeApiSecret");
+		}
+
+		// verify the required parameter 'usersRevokeApiSecretBody' is set
+		if (usersRevokeApiSecretBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'usersRevokeApiSecretBody' when calling usersRevokeApiSecret");
+		}
+
+		// create path and map variables
+		String localVarPath = "/users/{userId}/revokeApiSecret"
+				.replaceAll("\\{" + "userId" + "\\}", apiClient.escapeString(userId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**
@@ -575,7 +695,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<UserResult> localVarReturnType = new GenericType<UserResult>() {
 		};
@@ -638,7 +758,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -694,7 +814,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -756,7 +876,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -815,7 +935,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};
@@ -870,7 +990,7 @@ public class UsersApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<User> localVarReturnType = new GenericType<User>() {
 		};

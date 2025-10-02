@@ -78,7 +78,7 @@ public class CollaborationLayerEventsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<CollaborationLayerEventResult> localVarReturnType = new GenericType<CollaborationLayerEventResult>() {
 		};

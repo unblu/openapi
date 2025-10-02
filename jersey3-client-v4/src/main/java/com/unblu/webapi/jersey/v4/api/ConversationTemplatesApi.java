@@ -86,7 +86,7 @@ public class ConversationTemplatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationTemplate> localVarReturnType = new GenericType<ConversationTemplate>() {
 		};
@@ -137,7 +137,7 @@ public class ConversationTemplatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -186,7 +186,7 @@ public class ConversationTemplatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationTemplate> localVarReturnType = new GenericType<ConversationTemplate>() {
 		};
@@ -242,7 +242,7 @@ public class ConversationTemplatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationTemplate> localVarReturnType = new GenericType<ConversationTemplate>() {
 		};
@@ -297,7 +297,7 @@ public class ConversationTemplatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationTemplateList> localVarReturnType = new GenericType<ConversationTemplateList>() {
 		};
@@ -352,7 +352,7 @@ public class ConversationTemplatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationTemplateResult> localVarReturnType = new GenericType<ConversationTemplateResult>() {
 		};
@@ -407,7 +407,7 @@ public class ConversationTemplatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationTemplate> localVarReturnType = new GenericType<ConversationTemplate>() {
 		};

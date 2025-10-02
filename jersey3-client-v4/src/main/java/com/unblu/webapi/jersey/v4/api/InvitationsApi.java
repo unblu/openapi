@@ -110,7 +110,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -171,7 +171,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -228,7 +228,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -285,7 +285,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -344,7 +344,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AcceptLinkData> localVarReturnType = new GenericType<AcceptLinkData>() {
 		};
@@ -397,7 +397,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -450,7 +450,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -503,7 +503,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -556,7 +556,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -611,7 +611,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -663,7 +663,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -715,7 +715,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -770,7 +770,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -822,7 +822,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};
@@ -873,7 +873,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationResult> localVarReturnType = new GenericType<ConversationInvitationResult>() {
 		};
@@ -926,7 +926,7 @@ public class InvitationsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationInvitationData> localVarReturnType = new GenericType<ConversationInvitationData>() {
 		};

@@ -80,7 +80,7 @@ public class BranchClientStatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientStateData> localVarReturnType = new GenericType<BranchClientStateData>() {
 		};
@@ -131,7 +131,7 @@ public class BranchClientStatesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientStateDataResult> localVarReturnType = new GenericType<BranchClientStateDataResult>() {
 		};

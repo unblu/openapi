@@ -111,7 +111,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
 		};
@@ -178,7 +178,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -234,7 +234,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
 		};
@@ -289,7 +289,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -344,7 +344,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -406,7 +406,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -458,7 +458,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<NotificationCountData> localVarReturnType = new GenericType<NotificationCountData>() {
 		};
@@ -519,7 +519,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<NotificationCountForConversationsData> localVarReturnType = new GenericType<NotificationCountForConversationsData>() {
 		};
@@ -582,7 +582,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
 		};
@@ -640,7 +640,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -692,7 +692,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonStateData> localVarReturnType = new GenericType<PersonStateData>() {
 		};
@@ -751,7 +751,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
 		};
@@ -818,7 +818,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -872,7 +872,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
 		};
@@ -927,7 +927,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonResult> localVarReturnType = new GenericType<PersonResult>() {
 		};
@@ -982,7 +982,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonResult> localVarReturnType = new GenericType<PersonResult>() {
 		};
@@ -1033,7 +1033,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateResult> localVarReturnType = new GenericType<AgentPersonStateResult>() {
 		};
@@ -1088,7 +1088,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonResult> localVarReturnType = new GenericType<PersonResult>() {
 		};
@@ -1143,7 +1143,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonResult> localVarReturnType = new GenericType<PersonResult>() {
 		};
@@ -1194,7 +1194,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<VisitorPersonStateResult> localVarReturnType = new GenericType<VisitorPersonStateResult>() {
 		};
@@ -1259,7 +1259,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
 		};
@@ -1330,7 +1330,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -1393,7 +1393,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
 		};
@@ -1452,7 +1452,7 @@ public class PersonsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
 		};

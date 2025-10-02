@@ -80,7 +80,7 @@ public class MessageInterceptorsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessageInterceptorData> localVarReturnType = new GenericType<MessageInterceptorData>() {
 		};
@@ -131,7 +131,7 @@ public class MessageInterceptorsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -177,7 +177,7 @@ public class MessageInterceptorsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessageInterceptorData> localVarReturnType = new GenericType<MessageInterceptorData>() {
 		};
@@ -229,7 +229,7 @@ public class MessageInterceptorsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessageInterceptorData> localVarReturnType = new GenericType<MessageInterceptorData>() {
 		};
@@ -280,7 +280,7 @@ public class MessageInterceptorsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessageInterceptorResult> localVarReturnType = new GenericType<MessageInterceptorResult>() {
 		};
@@ -334,7 +334,7 @@ public class MessageInterceptorsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PingResponse> localVarReturnType = new GenericType<PingResponse>() {
 		};
@@ -385,7 +385,7 @@ public class MessageInterceptorsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessageInterceptorData> localVarReturnType = new GenericType<MessageInterceptorData>() {
 		};

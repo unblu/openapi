@@ -82,7 +82,7 @@ public class SearchIndexApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SearchIndexIndexingOperationStateData> localVarReturnType = new GenericType<SearchIndexIndexingOperationStateData>() {
 		};
@@ -130,7 +130,7 @@ public class SearchIndexApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SearchIndexStateData> localVarReturnType = new GenericType<SearchIndexStateData>() {
 		};
@@ -178,7 +178,7 @@ public class SearchIndexApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SearchIndexIndexingOperationStateData> localVarReturnType = new GenericType<SearchIndexIndexingOperationStateData>() {
 		};
@@ -229,7 +229,7 @@ public class SearchIndexApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SearchIndexIndexingOperationStateData> localVarReturnType = new GenericType<SearchIndexIndexingOperationStateData>() {
 		};
@@ -280,7 +280,7 @@ public class SearchIndexApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MultiSearchIndexIndexingOperationStateData> localVarReturnType = new GenericType<MultiSearchIndexIndexingOperationStateData>() {
 		};

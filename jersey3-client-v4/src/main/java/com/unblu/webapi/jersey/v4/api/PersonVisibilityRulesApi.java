@@ -83,7 +83,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonVisibilityRuleData> localVarReturnType = new GenericType<PersonVisibilityRuleData>() {
 		};
@@ -134,7 +134,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -185,7 +185,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonVisibilityRuleDataList> localVarReturnType = new GenericType<PersonVisibilityRuleDataList>() {
 		};
@@ -238,7 +238,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonVisibilityRuleDataList> localVarReturnType = new GenericType<PersonVisibilityRuleDataList>() {
 		};
@@ -290,7 +290,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonVisibilityRuleData> localVarReturnType = new GenericType<PersonVisibilityRuleData>() {
 		};
@@ -343,7 +343,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonVisibilityRuleDataList> localVarReturnType = new GenericType<PersonVisibilityRuleDataList>() {
 		};
@@ -394,7 +394,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonVisibilityRuleResult> localVarReturnType = new GenericType<PersonVisibilityRuleResult>() {
 		};
@@ -447,7 +447,7 @@ public class PersonVisibilityRulesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonVisibilityRuleData> localVarReturnType = new GenericType<PersonVisibilityRuleData>() {
 		};

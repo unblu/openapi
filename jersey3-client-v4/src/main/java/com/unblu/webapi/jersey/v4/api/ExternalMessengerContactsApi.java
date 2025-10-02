@@ -83,7 +83,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ExternalMessengerContact> localVarReturnType = new GenericType<ExternalMessengerContact>() {
 		};
@@ -138,7 +138,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -207,7 +207,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ExternalMessengerContact> localVarReturnType = new GenericType<ExternalMessengerContact>() {
 		};
@@ -286,7 +286,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ExternalMessengerContact> localVarReturnType = new GenericType<ExternalMessengerContact>() {
 		};
@@ -340,7 +340,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ExternalMessengerContact> localVarReturnType = new GenericType<ExternalMessengerContact>() {
 		};
@@ -391,7 +391,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ExternalMessengerContactList> localVarReturnType = new GenericType<ExternalMessengerContactList>() {
 		};
@@ -442,7 +442,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ExternalMessengerContactResult> localVarReturnType = new GenericType<ExternalMessengerContactResult>() {
 		};
@@ -499,7 +499,7 @@ public class ExternalMessengerContactsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ExternalMessengerContact> localVarReturnType = new GenericType<ExternalMessengerContact>() {
 		};

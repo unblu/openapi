@@ -78,7 +78,7 @@ public class AvatarsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<Avatar> localVarReturnType = new GenericType<Avatar>() {
 		};

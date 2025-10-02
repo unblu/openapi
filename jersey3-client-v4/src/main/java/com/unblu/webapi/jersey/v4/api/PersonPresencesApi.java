@@ -80,7 +80,7 @@ public class PersonPresencesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonPresenceData> localVarReturnType = new GenericType<PersonPresenceData>() {
 		};
@@ -131,7 +131,7 @@ public class PersonPresencesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonPresenceResult> localVarReturnType = new GenericType<PersonPresenceResult>() {
 		};

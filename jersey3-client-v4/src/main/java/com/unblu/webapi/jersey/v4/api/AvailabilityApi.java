@@ -92,7 +92,7 @@ public class AvailabilityApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AgentAvailabilityStateData> localVarReturnType = new GenericType<AgentAvailabilityStateData>() {
 		};

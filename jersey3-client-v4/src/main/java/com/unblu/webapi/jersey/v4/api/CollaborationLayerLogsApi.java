@@ -83,7 +83,7 @@ public class CollaborationLayerLogsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<CollaborationLayerLogEntryResult> localVarReturnType = new GenericType<CollaborationLayerLogEntryResult>() {
 		};

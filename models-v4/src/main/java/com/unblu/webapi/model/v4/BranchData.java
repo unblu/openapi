@@ -55,9 +55,9 @@ public class BranchData {
 	public enum TypeEnum {
 		BRANCHDATA("BranchData");
 
-		private final String value;
+		private String value;
 
-		TypeEnum(final String value) {
+		TypeEnum(String value) {
 			this.value = value;
 		}
 
@@ -72,8 +72,8 @@ public class BranchData {
 		}
 
 		@JsonCreator
-		public static TypeEnum fromValue(final String value) {
-			for (final TypeEnum b : TypeEnum.values()) {
+		public static TypeEnum fromValue(String value) {
+			for (TypeEnum b : TypeEnum.values()) {
 				if (b.value.equals(value)) {
 					return b;
 				}
@@ -174,14 +174,14 @@ public class BranchData {
 	@JsonProperty(JSON_PROPERTY_BRANCH_LINKS)
 	private List<BranchLinkData> branchLinks = null;
 
-	public BranchData $type(final TypeEnum $type) {
+	public BranchData $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
 
 	/**
 	 * Get $type
-	 *
+	 * 
 	 * @return $type
 	 **/
 	@ApiModelProperty(value = "")
@@ -189,18 +189,18 @@ public class BranchData {
 		return $type;
 	}
 
-	public void set$Type(final TypeEnum $type) {
+	public void set$Type(TypeEnum $type) {
 		this.$type = $type;
 	}
 
-	public BranchData id(final String id) {
+	public BranchData id(String id) {
 		this.id = id;
 		return this;
 	}
 
 	/**
 	 * ID of the branch
-	 *
+	 * 
 	 * @return id
 	 **/
 	@ApiModelProperty(value = "ID of the branch")
@@ -208,11 +208,11 @@ public class BranchData {
 		return id;
 	}
 
-	public void setId(final String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public BranchData creationTimestamp(final Long creationTimestamp) {
+	public BranchData creationTimestamp(Long creationTimestamp) {
 		this.creationTimestamp = creationTimestamp;
 		return this;
 	}
@@ -220,7 +220,7 @@ public class BranchData {
 	/**
 	 * Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be
 	 * omitted. Note: If you set this property, Unblu returns the same value, but it isn&#39;t written to storage and doesn&#39;t affect data consistency.
-	 *
+	 * 
 	 * @return creationTimestamp
 	 **/
 	@ApiModelProperty(value = "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency.")
@@ -228,18 +228,18 @@ public class BranchData {
 		return creationTimestamp;
 	}
 
-	public void setCreationTimestamp(final Long creationTimestamp) {
+	public void setCreationTimestamp(Long creationTimestamp) {
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public BranchData accountId(final String accountId) {
+	public BranchData accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
 
 	/**
 	 * Account ID the branch belongs to
-	 *
+	 * 
 	 * @return accountId
 	 **/
 	@ApiModelProperty(value = "Account ID the branch belongs to")
@@ -247,11 +247,11 @@ public class BranchData {
 		return accountId;
 	}
 
-	public void setAccountId(final String accountId) {
+	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
 
-	public BranchData modificationTimestamp(final Long modificationTimestamp) {
+	public BranchData modificationTimestamp(Long modificationTimestamp) {
 		this.modificationTimestamp = modificationTimestamp;
 		return this;
 	}
@@ -260,7 +260,7 @@ public class BranchData {
 	 * Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is
 	 * ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn&#39;t written to storage and doesn&#39;t
 	 * affect the data consistency.
-	 *
+	 * 
 	 * @return modificationTimestamp
 	 **/
 	@ApiModelProperty(value = "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency.")
@@ -268,11 +268,11 @@ public class BranchData {
 		return modificationTimestamp;
 	}
 
-	public void setModificationTimestamp(final Long modificationTimestamp) {
+	public void setModificationTimestamp(Long modificationTimestamp) {
 		this.modificationTimestamp = modificationTimestamp;
 	}
 
-	public BranchData version(final Long version) {
+	public BranchData version(Long version) {
 		this.version = version;
 		return this;
 	}
@@ -280,7 +280,7 @@ public class BranchData {
 	/**
 	 * Version of the entity, incremented on each change. Updates must always be based on the latest version or they&#39;re rejected. When creating an object, the
 	 * version can be omitted.
-	 *
+	 * 
 	 * @return version
 	 **/
 	@ApiModelProperty(value = "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted.")
@@ -288,18 +288,18 @@ public class BranchData {
 		return version;
 	}
 
-	public void setVersion(final Long version) {
+	public void setVersion(Long version) {
 		this.version = version;
 	}
 
-	public BranchData name(final String name) {
+	public BranchData name(String name) {
 		this.name = name;
 		return this;
 	}
 
 	/**
 	 * Name of the branch. Maximum of 250 characters. Mandatory.
-	 *
+	 * 
 	 * @return name
 	 **/
 	@ApiModelProperty(value = "Name of the branch. Maximum of 250 characters. Mandatory.")
@@ -307,18 +307,18 @@ public class BranchData {
 		return name;
 	}
 
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public BranchData description(final String description) {
+	public BranchData description(String description) {
 		this.description = description;
 		return this;
 	}
 
 	/**
 	 * Description of the branch. Maximum of 500 characters. Optional.
-	 *
+	 * 
 	 * @return description
 	 **/
 	@ApiModelProperty(value = "Description of the branch. Maximum of 500 characters. Optional.")
@@ -326,18 +326,18 @@ public class BranchData {
 		return description;
 	}
 
-	public void setDescription(final String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public BranchData streetAddress(final String streetAddress) {
+	public BranchData streetAddress(String streetAddress) {
 		this.streetAddress = streetAddress;
 		return this;
 	}
 
 	/**
 	 * Street address including the street number. Maximum of 250 characters. Optional.
-	 *
+	 * 
 	 * @return streetAddress
 	 **/
 	@ApiModelProperty(value = "Street address including the street number. Maximum of 250 characters. Optional.")
@@ -345,18 +345,18 @@ public class BranchData {
 		return streetAddress;
 	}
 
-	public void setStreetAddress(final String streetAddress) {
+	public void setStreetAddress(String streetAddress) {
 		this.streetAddress = streetAddress;
 	}
 
-	public BranchData zip(final String zip) {
+	public BranchData zip(String zip) {
 		this.zip = zip;
 		return this;
 	}
 
 	/**
 	 * Zip code. Maximum of 20 characters. Optional.
-	 *
+	 * 
 	 * @return zip
 	 **/
 	@ApiModelProperty(value = "Zip code. Maximum of 20 characters. Optional.")
@@ -364,18 +364,18 @@ public class BranchData {
 		return zip;
 	}
 
-	public void setZip(final String zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
-	public BranchData city(final String city) {
+	public BranchData city(String city) {
 		this.city = city;
 		return this;
 	}
 
 	/**
 	 * City. Maximum of 250 characters. Optional.
-	 *
+	 * 
 	 * @return city
 	 **/
 	@ApiModelProperty(value = "City. Maximum of 250 characters. Optional.")
@@ -383,18 +383,18 @@ public class BranchData {
 		return city;
 	}
 
-	public void setCity(final String city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public BranchData region(final String region) {
+	public BranchData region(String region) {
 		this.region = region;
 		return this;
 	}
 
 	/**
 	 * Region. Maximum of 250 characters. Optional.
-	 *
+	 * 
 	 * @return region
 	 **/
 	@ApiModelProperty(value = "Region. Maximum of 250 characters. Optional.")
@@ -402,18 +402,18 @@ public class BranchData {
 		return region;
 	}
 
-	public void setRegion(final String region) {
+	public void setRegion(String region) {
 		this.region = region;
 	}
 
-	public BranchData country(final String country) {
+	public BranchData country(String country) {
 		this.country = country;
 		return this;
 	}
 
 	/**
 	 * Country. Maximum of 250 characters. Optional.
-	 *
+	 * 
 	 * @return country
 	 **/
 	@ApiModelProperty(value = "Country. Maximum of 250 characters. Optional.")
@@ -421,16 +421,16 @@ public class BranchData {
 		return country;
 	}
 
-	public void setCountry(final String country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
-	public BranchData translations(final Map<String, BranchTranslation> translations) {
+	public BranchData translations(Map<String, BranchTranslation> translations) {
 		this.translations = translations;
 		return this;
 	}
 
-	public BranchData putTranslationsItem(final String key, final BranchTranslation translationsItem) {
+	public BranchData putTranslationsItem(String key, BranchTranslation translationsItem) {
 		if (this.translations == null) {
 			this.translations = new HashMap<>();
 		}
@@ -440,7 +440,7 @@ public class BranchData {
 
 	/**
 	 * A Map of localized versions of the name, description and info of the branch
-	 *
+	 * 
 	 * @return translations
 	 **/
 	@ApiModelProperty(value = "A Map of localized versions of the name, description and info of the branch")
@@ -448,18 +448,18 @@ public class BranchData {
 		return translations;
 	}
 
-	public void setTranslations(final Map<String, BranchTranslation> translations) {
+	public void setTranslations(Map<String, BranchTranslation> translations) {
 		this.translations = translations;
 	}
 
-	public BranchData state(final EBranchState state) {
+	public BranchData state(EBranchState state) {
 		this.state = state;
 		return this;
 	}
 
 	/**
 	 * Get state
-	 *
+	 * 
 	 * @return state
 	 **/
 	@ApiModelProperty(value = "")
@@ -467,18 +467,18 @@ public class BranchData {
 		return state;
 	}
 
-	public void setState(final EBranchState state) {
+	public void setState(EBranchState state) {
 		this.state = state;
 	}
 
-	public BranchData floorPlanImage(final ExpandableField<Image> floorPlanImage) {
+	public BranchData floorPlanImage(ExpandableField<Image> floorPlanImage) {
 		this.floorPlanImage = floorPlanImage;
 		return this;
 	}
 
 	/**
 	 * Image of the entity: ID that can be expanded.
-	 *
+	 * 
 	 * @return floorPlanImage
 	 **/
 	@ApiModelProperty(value = "Image of the entity: ID that can be expanded.")
@@ -486,18 +486,18 @@ public class BranchData {
 		return floorPlanImage;
 	}
 
-	public void setFloorPlanImage(final ExpandableField<Image> floorPlanImage) {
+	public void setFloorPlanImage(ExpandableField<Image> floorPlanImage) {
 		this.floorPlanImage = floorPlanImage;
 	}
 
-	public BranchData width(final Integer width) {
+	public BranchData width(Integer width) {
 		this.width = width;
 		return this;
 	}
 
 	/**
 	 * Width of the floor plan. Derived from the uploaded image if not set.
-	 *
+	 * 
 	 * @return width
 	 **/
 	@ApiModelProperty(value = "Width of the floor plan. Derived from the uploaded image if not set.")
@@ -505,18 +505,18 @@ public class BranchData {
 		return width;
 	}
 
-	public void setWidth(final Integer width) {
+	public void setWidth(Integer width) {
 		this.width = width;
 	}
 
-	public BranchData height(final Integer height) {
+	public BranchData height(Integer height) {
 		this.height = height;
 		return this;
 	}
 
 	/**
 	 * Height of the floor plan. Derived from the uploaded image if not set.
-	 *
+	 * 
 	 * @return height
 	 **/
 	@ApiModelProperty(value = "Height of the floor plan. Derived from the uploaded image if not set.")
@@ -524,18 +524,18 @@ public class BranchData {
 		return height;
 	}
 
-	public void setHeight(final Integer height) {
+	public void setHeight(Integer height) {
 		this.height = height;
 	}
 
-	public BranchData displayLabelsOnFloorPlan(final Boolean displayLabelsOnFloorPlan) {
+	public BranchData displayLabelsOnFloorPlan(Boolean displayLabelsOnFloorPlan) {
 		this.displayLabelsOnFloorPlan = displayLabelsOnFloorPlan;
 		return this;
 	}
 
 	/**
 	 * Display the labels of branch elements inside the floor plan. False if not explicitly set.
-	 *
+	 * 
 	 * @return displayLabelsOnFloorPlan
 	 **/
 	@ApiModelProperty(value = "Display the labels of branch elements inside the floor plan. False if not explicitly set.")
@@ -543,16 +543,16 @@ public class BranchData {
 		return displayLabelsOnFloorPlan;
 	}
 
-	public void setDisplayLabelsOnFloorPlan(final Boolean displayLabelsOnFloorPlan) {
+	public void setDisplayLabelsOnFloorPlan(Boolean displayLabelsOnFloorPlan) {
 		this.displayLabelsOnFloorPlan = displayLabelsOnFloorPlan;
 	}
 
-	public BranchData branchClients(final List<BranchClientData> branchClients) {
+	public BranchData branchClients(List<BranchClientData> branchClients) {
 		this.branchClients = branchClients;
 		return this;
 	}
 
-	public BranchData addBranchClientsItem(final BranchClientData branchClientsItem) {
+	public BranchData addBranchClientsItem(BranchClientData branchClientsItem) {
 		if (this.branchClients == null) {
 			this.branchClients = new ArrayList<>();
 		}
@@ -562,7 +562,7 @@ public class BranchData {
 
 	/**
 	 * List of all branch clients that are assigned to the branch
-	 *
+	 * 
 	 * @return branchClients
 	 **/
 	@ApiModelProperty(value = "List of all branch clients that are assigned to the branch")
@@ -570,16 +570,16 @@ public class BranchData {
 		return branchClients;
 	}
 
-	public void setBranchClients(final List<BranchClientData> branchClients) {
+	public void setBranchClients(List<BranchClientData> branchClients) {
 		this.branchClients = branchClients;
 	}
 
-	public BranchData branchDevices(final List<BranchDeviceData> branchDevices) {
+	public BranchData branchDevices(List<BranchDeviceData> branchDevices) {
 		this.branchDevices = branchDevices;
 		return this;
 	}
 
-	public BranchData addBranchDevicesItem(final BranchDeviceData branchDevicesItem) {
+	public BranchData addBranchDevicesItem(BranchDeviceData branchDevicesItem) {
 		if (this.branchDevices == null) {
 			this.branchDevices = new ArrayList<>();
 		}
@@ -589,7 +589,7 @@ public class BranchData {
 
 	/**
 	 * List of all branch devices that belong to the branch
-	 *
+	 * 
 	 * @return branchDevices
 	 **/
 	@ApiModelProperty(value = "List of all branch devices that belong to the branch")
@@ -597,16 +597,16 @@ public class BranchData {
 		return branchDevices;
 	}
 
-	public void setBranchDevices(final List<BranchDeviceData> branchDevices) {
+	public void setBranchDevices(List<BranchDeviceData> branchDevices) {
 		this.branchDevices = branchDevices;
 	}
 
-	public BranchData branchTextBoxes(final List<BranchTextBoxData> branchTextBoxes) {
+	public BranchData branchTextBoxes(List<BranchTextBoxData> branchTextBoxes) {
 		this.branchTextBoxes = branchTextBoxes;
 		return this;
 	}
 
-	public BranchData addBranchTextBoxesItem(final BranchTextBoxData branchTextBoxesItem) {
+	public BranchData addBranchTextBoxesItem(BranchTextBoxData branchTextBoxesItem) {
 		if (this.branchTextBoxes == null) {
 			this.branchTextBoxes = new ArrayList<>();
 		}
@@ -616,7 +616,7 @@ public class BranchData {
 
 	/**
 	 * List of all branch text boxes that belong to the branch
-	 *
+	 * 
 	 * @return branchTextBoxes
 	 **/
 	@ApiModelProperty(value = "List of all branch text boxes that belong to the branch")
@@ -624,16 +624,16 @@ public class BranchData {
 		return branchTextBoxes;
 	}
 
-	public void setBranchTextBoxes(final List<BranchTextBoxData> branchTextBoxes) {
+	public void setBranchTextBoxes(List<BranchTextBoxData> branchTextBoxes) {
 		this.branchTextBoxes = branchTextBoxes;
 	}
 
-	public BranchData branchLinks(final List<BranchLinkData> branchLinks) {
+	public BranchData branchLinks(List<BranchLinkData> branchLinks) {
 		this.branchLinks = branchLinks;
 		return this;
 	}
 
-	public BranchData addBranchLinksItem(final BranchLinkData branchLinksItem) {
+	public BranchData addBranchLinksItem(BranchLinkData branchLinksItem) {
 		if (this.branchLinks == null) {
 			this.branchLinks = new ArrayList<>();
 		}
@@ -643,7 +643,7 @@ public class BranchData {
 
 	/**
 	 * List of all branch links that belong to the branch
-	 *
+	 * 
 	 * @return branchLinks
 	 **/
 	@ApiModelProperty(value = "List of all branch links that belong to the branch")
@@ -651,19 +651,19 @@ public class BranchData {
 		return branchLinks;
 	}
 
-	public void setBranchLinks(final List<BranchLinkData> branchLinks) {
+	public void setBranchLinks(List<BranchLinkData> branchLinks) {
 		this.branchLinks = branchLinks;
 	}
 
 	@Override
-	public boolean equals(final java.lang.Object o) {
+	public boolean equals(java.lang.Object o) {
 		if (this == o) {
 			return true;
 		}
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		final BranchData branchData = (BranchData) o;
+		BranchData branchData = (BranchData) o;
 		return Objects.equals(this.$type, branchData.$type) &&
 				Objects.equals(this.id, branchData.id) &&
 				Objects.equals(this.creationTimestamp, branchData.creationTimestamp) &&
@@ -696,7 +696,7 @@ public class BranchData {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		sb.append("class BranchData {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
@@ -728,7 +728,7 @@ public class BranchData {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces (except the first line).
 	 */
-	private String toIndentedString(final java.lang.Object o) {
+	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {
 			return "null";
 		}

@@ -91,7 +91,7 @@ public class ConversationHistoryApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessageExportResult> localVarReturnType = new GenericType<MessageExportResult>() {
 		};
@@ -143,7 +143,7 @@ public class ConversationHistoryApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationRecordingHistoryDataList> localVarReturnType = new GenericType<ConversationRecordingHistoryDataList>() {
 		};
@@ -199,7 +199,7 @@ public class ConversationHistoryApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationHistoryData> localVarReturnType = new GenericType<ConversationHistoryData>() {
 		};
@@ -254,7 +254,7 @@ public class ConversationHistoryApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationHistoryDataResult> localVarReturnType = new GenericType<ConversationHistoryDataResult>() {
 		};

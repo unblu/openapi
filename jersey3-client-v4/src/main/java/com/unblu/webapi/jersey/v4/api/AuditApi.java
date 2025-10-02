@@ -80,7 +80,7 @@ public class AuditApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<AuditChangeResult> localVarReturnType = new GenericType<AuditChangeResult>() {
 		};

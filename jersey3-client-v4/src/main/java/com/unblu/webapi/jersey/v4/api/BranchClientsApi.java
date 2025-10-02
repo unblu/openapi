@@ -83,7 +83,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientData> localVarReturnType = new GenericType<BranchClientData>() {
 		};
@@ -134,7 +134,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -191,7 +191,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientTokenResult> localVarReturnType = new GenericType<BranchClientTokenResult>() {
 		};
@@ -242,7 +242,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientDataList> localVarReturnType = new GenericType<BranchClientDataList>() {
 		};
@@ -294,7 +294,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientData> localVarReturnType = new GenericType<BranchClientData>() {
 		};
@@ -346,7 +346,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientData> localVarReturnType = new GenericType<BranchClientData>() {
 		};
@@ -397,7 +397,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientDataList> localVarReturnType = new GenericType<BranchClientDataList>() {
 		};
@@ -448,7 +448,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientResult> localVarReturnType = new GenericType<BranchClientResult>() {
 		};
@@ -499,7 +499,7 @@ public class BranchClientsApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<BranchClientData> localVarReturnType = new GenericType<BranchClientData>() {
 		};

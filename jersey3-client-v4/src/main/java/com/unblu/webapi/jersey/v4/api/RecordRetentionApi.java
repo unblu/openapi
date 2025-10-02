@@ -70,7 +70,7 @@ public class RecordRetentionApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<RecordRetentionData> localVarReturnType = new GenericType<RecordRetentionData>() {
 		};
@@ -121,7 +121,7 @@ public class RecordRetentionApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<RecordRetentionData> localVarReturnType = new GenericType<RecordRetentionData>() {
 		};

@@ -80,7 +80,7 @@ public class SuggestionSourcesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SuggestionSourceData> localVarReturnType = new GenericType<SuggestionSourceData>() {
 		};
@@ -131,7 +131,7 @@ public class SuggestionSourcesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
@@ -177,7 +177,7 @@ public class SuggestionSourcesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SuggestionSourceData> localVarReturnType = new GenericType<SuggestionSourceData>() {
 		};
@@ -229,7 +229,7 @@ public class SuggestionSourcesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SuggestionSourceData> localVarReturnType = new GenericType<SuggestionSourceData>() {
 		};
@@ -280,7 +280,7 @@ public class SuggestionSourcesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SuggestionSourceResult> localVarReturnType = new GenericType<SuggestionSourceResult>() {
 		};
@@ -334,7 +334,7 @@ public class SuggestionSourcesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PingResponse> localVarReturnType = new GenericType<PingResponse>() {
 		};
@@ -385,7 +385,7 @@ public class SuggestionSourcesApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<SuggestionSourceData> localVarReturnType = new GenericType<SuggestionSourceData>() {
 		};

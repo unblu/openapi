@@ -80,7 +80,7 @@ public class CannedResponsesUsageApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<CountResult> localVarReturnType = new GenericType<CountResult>() {
 		};
@@ -131,7 +131,7 @@ public class CannedResponsesUsageApi {
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-		String[] localVarAuthNames = new String[] { "basicAuth" };
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<CannedResponseUsageResult> localVarReturnType = new GenericType<CannedResponseUsageResult>() {
 		};
