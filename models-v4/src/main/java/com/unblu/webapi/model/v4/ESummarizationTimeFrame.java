@@ -15,11 +15,6 @@ public enum ESummarizationTimeFrame {
 	WHOLE_CONVERSATION("WHOLE_CONVERSATION"),
 
 	/**
-	 * WHOLE_CONVERSATION_WITHOUT_ONBOARDING: The entire conversation, with the exception of the onboarding phase, will be used to generate the summary
-	 */
-	WHOLE_CONVERSATION_WITHOUT_ONBOARDING("WHOLE_CONVERSATION_WITHOUT_ONBOARDING"),
-
-	/**
 	 * UNTIL_LAST_SUMMARY: All the messages sent in the conversation, after last summary was generated, will be used to generate the summary
 	 */
 	UNTIL_LAST_SUMMARY("UNTIL_LAST_SUMMARY"),

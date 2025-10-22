@@ -15,7 +15,13 @@ public enum EConversationSummaryFailReason {
 	TIMEOUT("TIMEOUT"),
 
 	/**
-	 * CONVERSATION_SEGMENTATION_ERROR: An error occurred while splitting the conversations into smaller chunks used to create the summary.
+	 * CONVERSATION_SUMMARY_TEMPLATE_NOT_FOUND: The conversation summary template to be used for generating the summary couldn&#39;t be found. It might have been
+	 * deleted but is still in use.
+	 */
+	CONVERSATION_SUMMARY_TEMPLATE_NOT_FOUND("CONVERSATION_SUMMARY_TEMPLATE_NOT_FOUND"),
+
+	/**
+	 * CONVERSATION_SEGMENTATION_ERROR: An error occurred while splitting the conversation into smaller chunks to create the summary
 	 */
 	CONVERSATION_SEGMENTATION_ERROR("CONVERSATION_SEGMENTATION_ERROR"),
 

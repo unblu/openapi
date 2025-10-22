@@ -10,11 +10,9 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
-import com.unblu.webapi.model.v4.ConversationSummaryData;
 import com.unblu.webapi.model.v4.ConversationSummaryTemplateData;
 import com.unblu.webapi.model.v4.ConversationSummaryTemplateQuery;
 import com.unblu.webapi.model.v4.ConversationSummaryTemplateResult;
-import com.unblu.webapi.model.v4.ConversationSummaryTemplateTest;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -183,57 +181,6 @@ public class ConversationSummaryTemplatesApi {
 		GenericType<ConversationSummaryTemplateData> localVarReturnType = new GenericType<ConversationSummaryTemplateData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-	}
-
-	/**
-	 * generateSummaryTryForTemplate Test a summary template&lt;br&gt;
-	 * 
-	 * @param conversationSummaryTemplateTest (required)
-	 * @return ConversationSummaryData
-	 * @throws ApiException if fails to make API call
-	 */
-	public ConversationSummaryData conversationSummaryTemplatesGenerateSummaryTryForTemplate(ConversationSummaryTemplateTest conversationSummaryTemplateTest) throws ApiException {
-		return conversationSummaryTemplatesGenerateSummaryTryForTemplateWithHttpInfo(conversationSummaryTemplateTest).getData();
-	}
-
-	/**
-	 * generateSummaryTryForTemplate Test a summary template&lt;br&gt;
-	 * 
-	 * @param conversationSummaryTemplateTest (required)
-	 * @return ApiResponse&lt;ConversationSummaryData&gt;
-	 * @throws ApiException if fails to make API call
-	 */
-	public ApiResponse<ConversationSummaryData> conversationSummaryTemplatesGenerateSummaryTryForTemplateWithHttpInfo(ConversationSummaryTemplateTest conversationSummaryTemplateTest) throws ApiException {
-		Object localVarPostBody = conversationSummaryTemplateTest;
-
-		// verify the required parameter 'conversationSummaryTemplateTest' is set
-		if (conversationSummaryTemplateTest == null) {
-			throw new ApiException(400, "Missing the required parameter 'conversationSummaryTemplateTest' when calling conversationSummaryTemplatesGenerateSummaryTryForTemplate");
-		}
-
-		// create path and map variables
-		String localVarPath = "/conversationsummarytemplates/generateSummaryTryForTemplate";
-
-		// query params
-		List<Pair> localVarQueryParams = new ArrayList<Pair>();
-		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-		final String[] localVarAccepts = {
-			"application/json"
-		};
-		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-
-		final String[] localVarContentTypes = {
-			"application/json"
-		};
-		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-
-		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
-
-		GenericType<ConversationSummaryData> localVarReturnType = new GenericType<ConversationSummaryData>() {
-		};
-		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**

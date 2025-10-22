@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.25.1
+  version: 8.26.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -4739,6 +4739,7 @@ paths:
                       note: ""
                       noteLastEditedTimestamp: null
                       noteLastEditedPersonId: null
+                      links: null
                       avatar: null
                       metadata: null
                     startingPersonData:
@@ -4765,6 +4766,7 @@ paths:
                       note: ""
                       noteLastEditedTimestamp: null
                       noteLastEditedPersonId: null
+                      links: null
                       avatar: null
                       metadata: null
                     stoppingPersonData:
@@ -4791,6 +4793,7 @@ paths:
                       note: ""
                       noteLastEditedTimestamp: null
                       noteLastEditedPersonId: null
+                      links: null
                       avatar: null
                       metadata: null
                     startingTimestamp: 1551398400000
@@ -5129,31 +5132,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ConversationSummaryTemplateData"
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-      x-required-entry-path: INTERNAL
-      x-required-role:
-      - ADMIN
-  /conversationsummarytemplates/generateSummaryTryForTemplate:
-    post:
-      tags:
-      - ConversationSummaryTemplates
-      summary: generateSummaryTryForTemplate
-      description: Test a summary template<br>
-      operationId: conversationSummaryTemplatesGenerateSummaryTryForTemplate
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ConversationSummaryTemplateTest"
-        required: true
-      responses:
-        "200":
-          description: The created conversation summary data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ConversationSummaryData"
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -22528,6 +22506,10 @@ components:
         noteLastEditedPersonId:
           type: string
           description: ID of the person who last edited the note
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/PersonLink"
         avatar:
           description: Avatar of the entity (expandable ID)
           oneOf:
@@ -24190,6 +24172,18 @@ components:
           description: Original language of the summary
         summarizationTimeFrame:
           $ref: "#/components/schemas/ESummarizationTimeFrame"
+        includeInternalMessages:
+          type: boolean
+          description: Specify whether internal messages are taken into account for the summary. Mandatory.
+        includeOnboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.
+        includeOffboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.
+        includeReboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
         generatedSummary:
           type: string
           description: The generated summary
@@ -24344,6 +24338,18 @@ components:
             $ref: "#/components/schemas/EConversationAgentParticipationType"
         summarizationTimeFrame:
           $ref: "#/components/schemas/ESummarizationTimeFrame"
+        includeInternalMessages:
+          type: boolean
+          description: Specify whether internal messages are taken into account for the summary. Mandatory.
+        includeOnboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.
+        includeOffboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.
+        includeReboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
     ConversationSummaryFailedEvent:
       type: object
       description: An event triggered every time a conversation summary request fails.
@@ -24420,6 +24426,18 @@ components:
           description: Original language of the summary
         summarizationTimeFrame:
           $ref: "#/components/schemas/ESummarizationTimeFrame"
+        includeInternalMessages:
+          type: boolean
+          description: Specify whether internal messages are taken into account for the summary. Mandatory.
+        includeOnboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.
+        includeOffboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.
+        includeReboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
         failReason:
           $ref: "#/components/schemas/EConversationSummaryFailReason"
     ConversationSummaryGeneratedEvent:
@@ -24498,6 +24516,18 @@ components:
           description: Original language of the summary
         summarizationTimeFrame:
           $ref: "#/components/schemas/ESummarizationTimeFrame"
+        includeInternalMessages:
+          type: boolean
+          description: Specify whether internal messages are taken into account for the summary. Mandatory.
+        includeOnboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.
+        includeOffboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.
+        includeReboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
         generatedSummary:
           type: string
           description: The generated summary
@@ -24630,6 +24660,18 @@ components:
           description: Original language of the summary
         summarizationTimeFrame:
           $ref: "#/components/schemas/ESummarizationTimeFrame"
+        includeInternalMessages:
+          type: boolean
+          description: Specify whether internal messages are taken into account for the summary. Mandatory.
+        includeOnboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.
+        includeOffboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.
+        includeReboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
         generatedSummary:
           type: string
           description: The generated summary
@@ -24753,6 +24795,18 @@ components:
           description: "Minimum character count to generate a summary. If the number of characters is smaller than this value, no summary is created. Mandatory."
         summarizationTimeFrame:
           $ref: "#/components/schemas/ESummarizationTimeFrame"
+        includeInternalMessages:
+          type: boolean
+          description: Specify whether internal messages should be used when generating summaries with this template. Mandatory.
+        includeOnboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during onboarding should be used when generating summaries with this template. Mandatory.
+        includeOffboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during offboarding should be used when generating summaries with this template. Mandatory.
+        includeReboardingMessages:
+          type: boolean
+          description: Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
         translations:
           type: object
           description: A map of localized versions of the name and description of this entity
@@ -24843,21 +24897,6 @@ components:
           CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampConversationSummaryTemplateSearchFilter"
           MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampConversationSummaryTemplateSearchFilter"
           NAME: "#/components/schemas/NameConversationSummaryTemplateSearchFilter"
-    ConversationSummaryTemplateTest:
-      type: object
-      description: Container to test a summary template
-      properties:
-        $_type:
-          type: string
-          default: ConversationSummaryTemplateTest
-          enum:
-          - ConversationSummaryTemplateTest
-        conversationSummaryTemplateData:
-          $ref: "#/components/schemas/ConversationSummaryTemplateData"
-        messages:
-          type: array
-          items:
-            $ref: "#/components/schemas/MessageData"
     ConversationSummaryTemplateTranslation:
       type: object
       properties:
@@ -28955,12 +28994,14 @@ components:
       type: string
       enum:
       - TIMEOUT
+      - CONVERSATION_SUMMARY_TEMPLATE_NOT_FOUND
       - CONVERSATION_SEGMENTATION_ERROR
       - VALIDATORS_FAILED
       - OTHER
       x-enum-descriptions:
       - "TIMEOUT: The summary creation took longer than the timeout defined by the configuration 'com.unblu.ai.conversationsummary.conversationsummarytimeout'"
-      - "CONVERSATION_SEGMENTATION_ERROR: An error occurred while splitting the conversations into smaller chunks used to create the summary."
+      - "CONVERSATION_SUMMARY_TEMPLATE_NOT_FOUND: The conversation summary template to be used for generating the summary couldn't be found. It might have been deleted but is still in use."
+      - "CONVERSATION_SEGMENTATION_ERROR: An error occurred while splitting the conversation into smaller chunks to create the summary"
       - "VALIDATORS_FAILED: A validator failed either before or after the summary was generated due to an unmet input or output condition."
       - "OTHER: An unexpected error occurred while creating the summary."
     EConversationSummaryOrderByField:
@@ -30661,6 +30702,13 @@ components:
       - "ALL_OF: Checks if all of the label names provided by the operator are present on the persons returned."
       - "ANY_OF: Checks if any of the label names provided by the operator are present on the persons returned."
       - "NONE_OF: Check if none of the label names provided by the operator are present on the persons returned."
+    EPersonLinkType:
+      type: string
+      description: Type of link used to navigate to the customer view of a person.
+      enum:
+      - AGENT_DESK_VISITOR_DETAILS
+      x-enum-descriptions:
+      - "AGENT_DESK_VISITOR_DETAILS: The agent link for the details view of an authenticated visitor"
     EPersonOrderByField:
       type: string
       enum:
@@ -31148,13 +31196,11 @@ components:
       type: string
       enum:
       - WHOLE_CONVERSATION
-      - WHOLE_CONVERSATION_WITHOUT_ONBOARDING
       - UNTIL_LAST_SUMMARY
       - UNTIL_LAST_UNASSIGNED
       - TRIGGER_SPECIFIC
       x-enum-descriptions:
       - "WHOLE_CONVERSATION: The entire conversation will be used to generate the summary"
-      - "WHOLE_CONVERSATION_WITHOUT_ONBOARDING: The entire conversation, with the exception of the onboarding phase, will be used to generate the summary"
       - "UNTIL_LAST_SUMMARY: All the messages sent in the conversation, after last summary was generated, will be used to generate the summary"
       - "UNTIL_LAST_UNASSIGNED: All the messages sent in the conversation, after the second last time the conversation moved to the `EConversationState.UNASSIGNED`, and before the last time the conversation moved to the `EConversationState.UNASSIGNED`, will be used to generate the summary"
       - "TRIGGER_SPECIFIC: The time frame of the messages used to generate the summary will depend on the `EConversationSummaryTriggerType` triggering the summary generation"
@@ -37785,6 +37831,10 @@ components:
         noteLastEditedPersonId:
           type: string
           description: ID of the person who last edited the note
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/PersonLink"
         avatar:
           description: Avatar of the entity (expandable ID)
           oneOf:
@@ -38065,6 +38115,19 @@ components:
           $ref: "#/components/schemas/EPersonTypedSearchFilterField"
         operator:
           $ref: "#/components/schemas/PersonLabelsOperator"
+    PersonLink:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: PersonLink
+          enum:
+          - PersonLink
+        type:
+          $ref: "#/components/schemas/EPersonLinkType"
+        url:
+          type: string
+          description: The URL of the link
     PersonModificationEvent:
       type: object
       description: "An event triggered every time a `Person` is created, deleted or changed."

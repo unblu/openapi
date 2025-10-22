@@ -54,6 +54,10 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationSummaryData.JSON_PROPERTY_REVIEWABLE_BY,
 	ConversationSummaryData.JSON_PROPERTY_VISIBLE_TO,
 	ConversationSummaryData.JSON_PROPERTY_SUMMARIZATION_TIME_FRAME,
+	ConversationSummaryData.JSON_PROPERTY_INCLUDE_INTERNAL_MESSAGES,
+	ConversationSummaryData.JSON_PROPERTY_INCLUDE_ONBOARDING_MESSAGES,
+	ConversationSummaryData.JSON_PROPERTY_INCLUDE_OFFBOARDING_MESSAGES,
+	ConversationSummaryData.JSON_PROPERTY_INCLUDE_REBOARDING_MESSAGES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationSummaryData {
@@ -221,6 +225,22 @@ public class ConversationSummaryData {
 	public static final String JSON_PROPERTY_SUMMARIZATION_TIME_FRAME = "summarizationTimeFrame";
 	@JsonProperty(JSON_PROPERTY_SUMMARIZATION_TIME_FRAME)
 	private ESummarizationTimeFrame summarizationTimeFrame;
+
+	public static final String JSON_PROPERTY_INCLUDE_INTERNAL_MESSAGES = "includeInternalMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_INTERNAL_MESSAGES)
+	private Boolean includeInternalMessages;
+
+	public static final String JSON_PROPERTY_INCLUDE_ONBOARDING_MESSAGES = "includeOnboardingMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_ONBOARDING_MESSAGES)
+	private Boolean includeOnboardingMessages;
+
+	public static final String JSON_PROPERTY_INCLUDE_OFFBOARDING_MESSAGES = "includeOffboardingMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_OFFBOARDING_MESSAGES)
+	private Boolean includeOffboardingMessages;
+
+	public static final String JSON_PROPERTY_INCLUDE_REBOARDING_MESSAGES = "includeReboardingMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_REBOARDING_MESSAGES)
+	private Boolean includeReboardingMessages;
 
 	public ConversationSummaryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -881,6 +901,82 @@ public class ConversationSummaryData {
 		this.summarizationTimeFrame = summarizationTimeFrame;
 	}
 
+	public ConversationSummaryData includeInternalMessages(Boolean includeInternalMessages) {
+		this.includeInternalMessages = includeInternalMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether internal messages are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeInternalMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether internal messages are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeInternalMessages() {
+		return includeInternalMessages;
+	}
+
+	public void setIncludeInternalMessages(Boolean includeInternalMessages) {
+		this.includeInternalMessages = includeInternalMessages;
+	}
+
+	public ConversationSummaryData includeOnboardingMessages(Boolean includeOnboardingMessages) {
+		this.includeOnboardingMessages = includeOnboardingMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeOnboardingMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeOnboardingMessages() {
+		return includeOnboardingMessages;
+	}
+
+	public void setIncludeOnboardingMessages(Boolean includeOnboardingMessages) {
+		this.includeOnboardingMessages = includeOnboardingMessages;
+	}
+
+	public ConversationSummaryData includeOffboardingMessages(Boolean includeOffboardingMessages) {
+		this.includeOffboardingMessages = includeOffboardingMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeOffboardingMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeOffboardingMessages() {
+		return includeOffboardingMessages;
+	}
+
+	public void setIncludeOffboardingMessages(Boolean includeOffboardingMessages) {
+		this.includeOffboardingMessages = includeOffboardingMessages;
+	}
+
+	public ConversationSummaryData includeReboardingMessages(Boolean includeReboardingMessages) {
+		this.includeReboardingMessages = includeReboardingMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeReboardingMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeReboardingMessages() {
+		return includeReboardingMessages;
+	}
+
+	public void setIncludeReboardingMessages(Boolean includeReboardingMessages) {
+		this.includeReboardingMessages = includeReboardingMessages;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -922,12 +1018,16 @@ public class ConversationSummaryData {
 				Objects.equals(this.reviewRequired, conversationSummaryData.reviewRequired) &&
 				Objects.equals(this.reviewableBy, conversationSummaryData.reviewableBy) &&
 				Objects.equals(this.visibleTo, conversationSummaryData.visibleTo) &&
-				Objects.equals(this.summarizationTimeFrame, conversationSummaryData.summarizationTimeFrame);
+				Objects.equals(this.summarizationTimeFrame, conversationSummaryData.summarizationTimeFrame) &&
+				Objects.equals(this.includeInternalMessages, conversationSummaryData.includeInternalMessages) &&
+				Objects.equals(this.includeOnboardingMessages, conversationSummaryData.includeOnboardingMessages) &&
+				Objects.equals(this.includeOffboardingMessages, conversationSummaryData.includeOffboardingMessages) &&
+				Objects.equals(this.includeReboardingMessages, conversationSummaryData.includeReboardingMessages);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, accountId, summaryTriggerType, conversationSummaryTemplateId, summarizationState, requestingAgentPersonId, reviewingAgentPersonId, reviewTimestamp, rejectingReason, failReason, conversationId, firstMessageId, lastMessageId, summarizedMessagesCount, firstCallTranscriptId, lastCallTranscriptId, participatingPersonIds, startTimestamp, endTimestamp, processingTime, summaryServiceProvider, summaryServiceDetails, summarizedContentLength, generatedSummary, reviewedSummary, summaryLanguage, reviewRequired, reviewableBy, visibleTo, summarizationTimeFrame);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, accountId, summaryTriggerType, conversationSummaryTemplateId, summarizationState, requestingAgentPersonId, reviewingAgentPersonId, reviewTimestamp, rejectingReason, failReason, conversationId, firstMessageId, lastMessageId, summarizedMessagesCount, firstCallTranscriptId, lastCallTranscriptId, participatingPersonIds, startTimestamp, endTimestamp, processingTime, summaryServiceProvider, summaryServiceDetails, summarizedContentLength, generatedSummary, reviewedSummary, summaryLanguage, reviewRequired, reviewableBy, visibleTo, summarizationTimeFrame, includeInternalMessages, includeOnboardingMessages, includeOffboardingMessages, includeReboardingMessages);
 	}
 
 	@Override
@@ -967,6 +1067,10 @@ public class ConversationSummaryData {
 		sb.append("    reviewableBy: ").append(toIndentedString(reviewableBy)).append("\n");
 		sb.append("    visibleTo: ").append(toIndentedString(visibleTo)).append("\n");
 		sb.append("    summarizationTimeFrame: ").append(toIndentedString(summarizationTimeFrame)).append("\n");
+		sb.append("    includeInternalMessages: ").append(toIndentedString(includeInternalMessages)).append("\n");
+		sb.append("    includeOnboardingMessages: ").append(toIndentedString(includeOnboardingMessages)).append("\n");
+		sb.append("    includeOffboardingMessages: ").append(toIndentedString(includeOffboardingMessages)).append("\n");
+		sb.append("    includeReboardingMessages: ").append(toIndentedString(includeReboardingMessages)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

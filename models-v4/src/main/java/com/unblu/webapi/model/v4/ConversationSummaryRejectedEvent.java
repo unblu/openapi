@@ -43,6 +43,10 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationSummaryRejectedEvent.JSON_PROPERTY_SUMMARIZED_CONTENT_LENGTH,
 	ConversationSummaryRejectedEvent.JSON_PROPERTY_SUMMARY_LANGUAGE,
 	ConversationSummaryRejectedEvent.JSON_PROPERTY_SUMMARIZATION_TIME_FRAME,
+	ConversationSummaryRejectedEvent.JSON_PROPERTY_INCLUDE_INTERNAL_MESSAGES,
+	ConversationSummaryRejectedEvent.JSON_PROPERTY_INCLUDE_ONBOARDING_MESSAGES,
+	ConversationSummaryRejectedEvent.JSON_PROPERTY_INCLUDE_OFFBOARDING_MESSAGES,
+	ConversationSummaryRejectedEvent.JSON_PROPERTY_INCLUDE_REBOARDING_MESSAGES,
 	ConversationSummaryRejectedEvent.JSON_PROPERTY_GENERATED_SUMMARY,
 	ConversationSummaryRejectedEvent.JSON_PROPERTY_REVIEW_REQUIRED,
 	ConversationSummaryRejectedEvent.JSON_PROPERTY_REVIEWABLE_BY,
@@ -172,6 +176,22 @@ public class ConversationSummaryRejectedEvent {
 	public static final String JSON_PROPERTY_SUMMARIZATION_TIME_FRAME = "summarizationTimeFrame";
 	@JsonProperty(JSON_PROPERTY_SUMMARIZATION_TIME_FRAME)
 	private ESummarizationTimeFrame summarizationTimeFrame;
+
+	public static final String JSON_PROPERTY_INCLUDE_INTERNAL_MESSAGES = "includeInternalMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_INTERNAL_MESSAGES)
+	private Boolean includeInternalMessages;
+
+	public static final String JSON_PROPERTY_INCLUDE_ONBOARDING_MESSAGES = "includeOnboardingMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_ONBOARDING_MESSAGES)
+	private Boolean includeOnboardingMessages;
+
+	public static final String JSON_PROPERTY_INCLUDE_OFFBOARDING_MESSAGES = "includeOffboardingMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_OFFBOARDING_MESSAGES)
+	private Boolean includeOffboardingMessages;
+
+	public static final String JSON_PROPERTY_INCLUDE_REBOARDING_MESSAGES = "includeReboardingMessages";
+	@JsonProperty(JSON_PROPERTY_INCLUDE_REBOARDING_MESSAGES)
+	private Boolean includeReboardingMessages;
 
 	public static final String JSON_PROPERTY_GENERATED_SUMMARY = "generatedSummary";
 	@JsonProperty(JSON_PROPERTY_GENERATED_SUMMARY)
@@ -624,6 +644,82 @@ public class ConversationSummaryRejectedEvent {
 		this.summarizationTimeFrame = summarizationTimeFrame;
 	}
 
+	public ConversationSummaryRejectedEvent includeInternalMessages(Boolean includeInternalMessages) {
+		this.includeInternalMessages = includeInternalMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether internal messages are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeInternalMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether internal messages are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeInternalMessages() {
+		return includeInternalMessages;
+	}
+
+	public void setIncludeInternalMessages(Boolean includeInternalMessages) {
+		this.includeInternalMessages = includeInternalMessages;
+	}
+
+	public ConversationSummaryRejectedEvent includeOnboardingMessages(Boolean includeOnboardingMessages) {
+		this.includeOnboardingMessages = includeOnboardingMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeOnboardingMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether messages sent during onboarding are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeOnboardingMessages() {
+		return includeOnboardingMessages;
+	}
+
+	public void setIncludeOnboardingMessages(Boolean includeOnboardingMessages) {
+		this.includeOnboardingMessages = includeOnboardingMessages;
+	}
+
+	public ConversationSummaryRejectedEvent includeOffboardingMessages(Boolean includeOffboardingMessages) {
+		this.includeOffboardingMessages = includeOffboardingMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeOffboardingMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether messages sent during offboarding are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeOffboardingMessages() {
+		return includeOffboardingMessages;
+	}
+
+	public void setIncludeOffboardingMessages(Boolean includeOffboardingMessages) {
+		this.includeOffboardingMessages = includeOffboardingMessages;
+	}
+
+	public ConversationSummaryRejectedEvent includeReboardingMessages(Boolean includeReboardingMessages) {
+		this.includeReboardingMessages = includeReboardingMessages;
+		return this;
+	}
+
+	/**
+	 * Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.
+	 * 
+	 * @return includeReboardingMessages
+	 **/
+	@ApiModelProperty(value = "Specify whether messages sent during reboarding are taken into account for the summary. Mandatory.")
+	public Boolean isIncludeReboardingMessages() {
+		return includeReboardingMessages;
+	}
+
+	public void setIncludeReboardingMessages(Boolean includeReboardingMessages) {
+		this.includeReboardingMessages = includeReboardingMessages;
+	}
+
 	public ConversationSummaryRejectedEvent generatedSummary(String generatedSummary) {
 		this.generatedSummary = generatedSummary;
 		return this;
@@ -788,6 +884,10 @@ public class ConversationSummaryRejectedEvent {
 				Objects.equals(this.summarizedContentLength, conversationSummaryRejectedEvent.summarizedContentLength) &&
 				Objects.equals(this.summaryLanguage, conversationSummaryRejectedEvent.summaryLanguage) &&
 				Objects.equals(this.summarizationTimeFrame, conversationSummaryRejectedEvent.summarizationTimeFrame) &&
+				Objects.equals(this.includeInternalMessages, conversationSummaryRejectedEvent.includeInternalMessages) &&
+				Objects.equals(this.includeOnboardingMessages, conversationSummaryRejectedEvent.includeOnboardingMessages) &&
+				Objects.equals(this.includeOffboardingMessages, conversationSummaryRejectedEvent.includeOffboardingMessages) &&
+				Objects.equals(this.includeReboardingMessages, conversationSummaryRejectedEvent.includeReboardingMessages) &&
 				Objects.equals(this.generatedSummary, conversationSummaryRejectedEvent.generatedSummary) &&
 				Objects.equals(this.reviewRequired, conversationSummaryRejectedEvent.reviewRequired) &&
 				Objects.equals(this.reviewableBy, conversationSummaryRejectedEvent.reviewableBy) &&
@@ -798,7 +898,7 @@ public class ConversationSummaryRejectedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, summaryTriggerType, conversationId, conversationSummaryTemplateId, conversationSummaryId, requestingAgentPersonId, firstMessageId, lastMessageId, firstCallTranscriptId, lastCallTranscriptId, participatingPersonIds, startTimestamp, endTimestamp, processingTime, summaryServiceProvider, summaryServiceDetails, summarizedContentLength, summaryLanguage, summarizationTimeFrame, generatedSummary, reviewRequired, reviewableBy, visibleTo, reviewingAgentPersonId, reviewTimestamp);
+		return Objects.hash($type, timestamp, eventType, accountId, summaryTriggerType, conversationId, conversationSummaryTemplateId, conversationSummaryId, requestingAgentPersonId, firstMessageId, lastMessageId, firstCallTranscriptId, lastCallTranscriptId, participatingPersonIds, startTimestamp, endTimestamp, processingTime, summaryServiceProvider, summaryServiceDetails, summarizedContentLength, summaryLanguage, summarizationTimeFrame, includeInternalMessages, includeOnboardingMessages, includeOffboardingMessages, includeReboardingMessages, generatedSummary, reviewRequired, reviewableBy, visibleTo, reviewingAgentPersonId, reviewTimestamp);
 	}
 
 	@Override
@@ -827,6 +927,10 @@ public class ConversationSummaryRejectedEvent {
 		sb.append("    summarizedContentLength: ").append(toIndentedString(summarizedContentLength)).append("\n");
 		sb.append("    summaryLanguage: ").append(toIndentedString(summaryLanguage)).append("\n");
 		sb.append("    summarizationTimeFrame: ").append(toIndentedString(summarizationTimeFrame)).append("\n");
+		sb.append("    includeInternalMessages: ").append(toIndentedString(includeInternalMessages)).append("\n");
+		sb.append("    includeOnboardingMessages: ").append(toIndentedString(includeOnboardingMessages)).append("\n");
+		sb.append("    includeOffboardingMessages: ").append(toIndentedString(includeOffboardingMessages)).append("\n");
+		sb.append("    includeReboardingMessages: ").append(toIndentedString(includeReboardingMessages)).append("\n");
 		sb.append("    generatedSummary: ").append(toIndentedString(generatedSummary)).append("\n");
 		sb.append("    reviewRequired: ").append(toIndentedString(reviewRequired)).append("\n");
 		sb.append("    reviewableBy: ").append(toIndentedString(reviewableBy)).append("\n");

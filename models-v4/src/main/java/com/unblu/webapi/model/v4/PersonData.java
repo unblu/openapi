@@ -46,6 +46,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PersonData.JSON_PROPERTY_NOTE,
 	PersonData.JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP,
 	PersonData.JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID,
+	PersonData.JSON_PROPERTY_LINKS,
 	PersonData.JSON_PROPERTY_AVATAR,
 	PersonData.JSON_PROPERTY_METADATA,
 })
@@ -175,6 +176,10 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID = "noteLastEditedPersonId";
 	@JsonProperty(JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID)
 	private String noteLastEditedPersonId;
+
+	public static final String JSON_PROPERTY_LINKS = "links";
+	@JsonProperty(JSON_PROPERTY_LINKS)
+	private List<PersonLink> links = null;
 
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
@@ -634,6 +639,33 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		this.noteLastEditedPersonId = noteLastEditedPersonId;
 	}
 
+	public PersonData links(List<PersonLink> links) {
+		this.links = links;
+		return this;
+	}
+
+	public PersonData addLinksItem(PersonLink linksItem) {
+		if (this.links == null) {
+			this.links = new ArrayList<>();
+		}
+		this.links.add(linksItem);
+		return this;
+	}
+
+	/**
+	 * Get links
+	 * 
+	 * @return links
+	 **/
+	@ApiModelProperty(value = "")
+	public List<PersonLink> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<PersonLink> links) {
+		this.links = links;
+	}
+
 	public PersonData avatar(ExpandableField<Avatar> avatar) {
 		this.avatar = avatar;
 		return this;
@@ -713,13 +745,14 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.note, personData.note) &&
 				Objects.equals(this.noteLastEditedTimestamp, personData.noteLastEditedTimestamp) &&
 				Objects.equals(this.noteLastEditedPersonId, personData.noteLastEditedPersonId) &&
+				Objects.equals(this.links, personData.links) &&
 				Objects.equals(this.avatar, personData.avatar) &&
 				Objects.equals(this.metadata, personData.metadata);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, avatar, metadata);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, links, avatar, metadata);
 	}
 
 	@Override
@@ -749,6 +782,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    note: ").append(toIndentedString(note)).append("\n");
 		sb.append("    noteLastEditedTimestamp: ").append(toIndentedString(noteLastEditedTimestamp)).append("\n");
 		sb.append("    noteLastEditedPersonId: ").append(toIndentedString(noteLastEditedPersonId)).append("\n");
+		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("}");
