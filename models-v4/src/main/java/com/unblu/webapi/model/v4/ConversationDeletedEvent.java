@@ -1,0 +1,224 @@
+
+package com.unblu.webapi.model.v4;
+
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * An event triggered every time a conversation is deleted &lt;p&gt; Supported filter keys: &lt;ul&gt;
+ * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.PARTICIPANT_PERSON_ID&#x60;:
+ * participant person ID&lt;/li&gt; &lt;/ul&gt;
+ */
+@ApiModel(description = "An event triggered every time a conversation is deleted <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>")
+
+@JsonPropertyOrder({
+	ConversationDeletedEvent.JSON_PROPERTY_$_TYPE,
+	ConversationDeletedEvent.JSON_PROPERTY_TIMESTAMP,
+	ConversationDeletedEvent.JSON_PROPERTY_EVENT_TYPE,
+	ConversationDeletedEvent.JSON_PROPERTY_ACCOUNT_ID,
+	ConversationDeletedEvent.JSON_PROPERTY_CONVERSATION,
+})
+@JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
+public class ConversationDeletedEvent {
+	/**
+	 * Gets or Sets $type
+	 */
+	public enum TypeEnum {
+		CONVERSATIONDELETEDEVENT("ConversationDeletedEvent");
+
+		private String value;
+
+		TypeEnum(String value) {
+			this.value = value;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+
+		@JsonCreator
+		public static TypeEnum fromValue(String value) {
+			for (TypeEnum b : TypeEnum.values()) {
+				if (b.value.equals(value)) {
+					return b;
+				}
+			}
+			return TypeEnum.CONVERSATIONDELETEDEVENT;
+		}
+	}
+
+	public static final String JSON_PROPERTY_$_TYPE = "$_type";
+	@JsonProperty(JSON_PROPERTY_$_TYPE)
+	private TypeEnum $type = TypeEnum.CONVERSATIONDELETEDEVENT;
+
+	public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
+	@JsonProperty(JSON_PROPERTY_TIMESTAMP)
+	private Long timestamp;
+
+	public static final String JSON_PROPERTY_EVENT_TYPE = "eventType";
+	@JsonProperty(JSON_PROPERTY_EVENT_TYPE)
+	private String eventType;
+
+	public static final String JSON_PROPERTY_ACCOUNT_ID = "accountId";
+	@JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
+	private String accountId;
+
+	public static final String JSON_PROPERTY_CONVERSATION = "conversation";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION)
+	private ConversationData conversation = null;
+
+	public ConversationDeletedEvent $type(TypeEnum $type) {
+		this.$type = $type;
+		return this;
+	}
+
+	/**
+	 * Get $type
+	 * 
+	 * @return $type
+	 **/
+	@ApiModelProperty(value = "")
+	public TypeEnum get$Type() {
+		return $type;
+	}
+
+	public void set$Type(TypeEnum $type) {
+		this.$type = $type;
+	}
+
+	public ConversationDeletedEvent timestamp(Long timestamp) {
+		this.timestamp = timestamp;
+		return this;
+	}
+
+	/**
+	 * The time (Unix time in ms) when the event was generated
+	 * 
+	 * @return timestamp
+	 **/
+	@ApiModelProperty(value = "The time (Unix time in ms) when the event was generated")
+	public Long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public ConversationDeletedEvent eventType(String eventType) {
+		this.eventType = eventType;
+		return this;
+	}
+
+	/**
+	 * The name of the event
+	 * 
+	 * @return eventType
+	 **/
+	@ApiModelProperty(value = "The name of the event")
+	public String getEventType() {
+		return eventType;
+	}
+
+	public void setEventType(String eventType) {
+		this.eventType = eventType;
+	}
+
+	public ConversationDeletedEvent accountId(String accountId) {
+		this.accountId = accountId;
+		return this;
+	}
+
+	/**
+	 * The account ID the event originated from
+	 * 
+	 * @return accountId
+	 **/
+	@ApiModelProperty(value = "The account ID the event originated from")
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+
+	public ConversationDeletedEvent conversation(ConversationData conversation) {
+		this.conversation = conversation;
+		return this;
+	}
+
+	/**
+	 * Get conversation
+	 * 
+	 * @return conversation
+	 **/
+	@ApiModelProperty(value = "")
+	public ConversationData getConversation() {
+		return conversation;
+	}
+
+	public void setConversation(ConversationData conversation) {
+		this.conversation = conversation;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ConversationDeletedEvent conversationDeletedEvent = (ConversationDeletedEvent) o;
+		return Objects.equals(this.$type, conversationDeletedEvent.$type) &&
+				Objects.equals(this.timestamp, conversationDeletedEvent.timestamp) &&
+				Objects.equals(this.eventType, conversationDeletedEvent.eventType) &&
+				Objects.equals(this.accountId, conversationDeletedEvent.accountId) &&
+				Objects.equals(this.conversation, conversationDeletedEvent.conversation);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash($type, timestamp, eventType, accountId, conversation);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class ConversationDeletedEvent {\n");
+		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
+		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
+		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
+		sb.append("    conversation: ").append(toIndentedString(conversation)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
+
+}

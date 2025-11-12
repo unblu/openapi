@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.26.2
+  version: 8.27.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -2339,23 +2339,29 @@ paths:
                       actionType: LINK_INTERNAL
                       label: Unblu homepage
                       value: https://unblu.com
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: LINK_EXTERNAL
                       label: Wikipedia
                       value: https://www.wikipedia.org/
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: LINK_COBROWSABLE
                       label: Cobrowse Unblu homepage
                       value: https://unblu.com
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: REPLY_MESSAGE
                       label: More info
                       value: Could you provide me with more info?
+                      availableTranslations: null
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: "Great, that helped a lot"
+                      availableTranslations: null
               send-card-with-techid-message:
                 summary: send card-with techid message
                 description: Send card message from the bot
@@ -2382,11 +2388,14 @@ paths:
                       actionType: REPLY_MESSAGE_WITH_TECHNICAL_VALUE
                       label: Start over
                       value: tech-id-4711
+                      availableTranslations: null
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: "Great, that helped a lot"
+                      availableTranslations: null
               send-file-message:
                 summary: send file message
                 description: Send file message from the bot
@@ -2410,8 +2419,10 @@ paths:
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: I meant something else
+                      availableTranslations: null
               send-list-message:
                 summary: send list message
                 description: Send list message from the bot
@@ -2435,6 +2446,7 @@ paths:
                       title: Title
                       body: This is the **body text** with markdown
                       bodyTextType: MARKDOWN
+                      availableTranslations: null
                     items:
                     - $_type: PostListMessageCardItemData
                       imageUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURfolAT39/6qSgZ2hko6xpLeDbrzfdCUAAAFvSURBVHja7c8BDYBADASwBQfvAAkkSOCRgH8rmLgwAq2D1lYZy+hVIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLvjxx7xuyOjI8QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERedB5hXRH1koRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERH5S2Sm3Pdeq7vUBkC2AAAAAElFTkSuQmCC"
@@ -2454,6 +2466,7 @@ paths:
                         actionType: LINK_INTERNAL
                         label: Unblu homepage
                         value: https://unblu.com
+                        availableTranslations: null
                     - $_type: PostListMessageCardItemData
                       imageUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURfolAT39/6qSgZ2hko6xpLeDbrzfdCUAAAFvSURBVHja7c8BDYBADASwBQfvAAkkSOCRgH8rmLgwAq2D1lYZy+hVIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLvjxx7xuyOjI8QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERedB5hXRH1koRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERH5S2Sm3Pdeq7vUBkC2AAAAAElFTkSuQmCC"
                       imageAltText: test image
@@ -2465,28 +2478,35 @@ paths:
                         actionType: LINK_COBROWSABLE
                         label: Cobrowse Unblu homepage
                         value: https://unblu.com
+                        availableTranslations: null
                     actions:
                     - $_type: MessageAction
                       actionType: LINK_INTERNAL
                       label: Unblu homepage
                       value: https://unblu.com
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: LINK_EXTERNAL
                       label: Wikipedia
                       value: https://www.wikipedia.org/
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: LINK_COBROWSABLE
                       label: Cobrowse Unblu homepage
                       value: https://unblu.com
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: REPLY_MESSAGE
                       label: More info
                       value: Could you provide me with more info?
+                      availableTranslations: null
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: "Ok, will choose one"
+                      availableTranslations: null
               send-multi-choice-question:
                 summary: send multi-choice question
                 description: Send multiple choice question message from the bot
@@ -2510,10 +2530,12 @@ paths:
                       label: Option 1
                       value: "1"
                       primary: true
+                      availableTranslations: null
                     - $_type: MultichoiceQuestionOption
                       label: Option 2
                       value: "2"
                       primary: false
+                      availableTranslations: null
               send-question-message:
                 summary: send question message
                 description: Send question message to the bot
@@ -2555,9 +2577,11 @@ paths:
                     - $_type: RatingQuestionOption
                       label: Rate 1
                       value: "1"
+                      availableTranslations: null
                     - $_type: RatingQuestionOption
                       label: Rate 2
                       value: "2"
+                      availableTranslations: null
                     declinable: true
                     declineLabel: Decline
                     declineValue: DECLINE
@@ -2582,8 +2606,10 @@ paths:
                     quickReplies:
                     - $_type: QuickReply
                       text: I need information regarding topic 1
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: Can I talk to someone?
+                      availableTranslations: null
               send-text-question:
                 summary: send text question
                 description: Send text question message from the bot
@@ -6211,6 +6237,49 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversations/{conversationId}/setInheritConfigurationAndTexts:
+    post:
+      tags:
+      - Conversations
+      summary: setInheritConfigurationAndTexts
+      description: "Manually modify the inheritance of configuration and text properties for a specific conversation <ul> <li>When enabled, all configuration and text properties explicitly set on the conversation are removed, and the values from the conversation template are applied. <li>When disabled, all configuration and text properties from the conversation template are copied to the conversation, and the conversation no longer inherits them. If any configurations and/or text properties are already set on the conversation, they are removed, and only the values from the corresponding conversation template are used. </ul><br>"
+      operationId: conversationsSetInheritConfigurationAndTexts
+      parameters:
+      - name: conversationId
+        in: path
+        description: The conversation for which the configuration and text property inheritance are updated.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationsSetInheritConfigurationAndTextsBody"
+        required: true
+      responses:
+        "200":
+          description: The updated conversation.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /conversations/{conversationId}/setLocale:
     post:
       tags:
@@ -8776,8 +8845,10 @@ paths:
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: Is that all I can do for you?
+                      availableTranslations: null
               send-card-message:
                 summary: send card message
                 description: Send card message to external messenger channel
@@ -8805,19 +8876,24 @@ paths:
                       actionType: LINK_INTERNAL
                       label: Unblu homepage
                       value: https://unblu.com
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: LINK_EXTERNAL
                       label: Wikipedia
                       value: https://www.wikipedia.org/
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: REPLY_MESSAGE
                       label: More info
                       value: Could you provide me with more info?
+                      availableTranslations: null
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: "Great, that helped a lot"
+                      availableTranslations: null
               send-file-message:
                 summary: send file message
                 description: Send file message to external messenger channel
@@ -8842,8 +8918,10 @@ paths:
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: I meant something else
+                      availableTranslations: null
               send-list-message:
                 summary: send list message
                 description: Send list message to external messenger channel
@@ -8868,25 +8946,31 @@ paths:
                       title: List Title
                       body: This is the **list body text** with markdown
                       bodyTextType: MARKDOWN
+                      availableTranslations: null
                     items: null
                     actions:
                     - $_type: MessageAction
                       actionType: LINK_INTERNAL
                       label: Unblu homepage
                       value: https://unblu.com
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: LINK_EXTERNAL
                       label: Wikipedia
                       value: https://www.wikipedia.org/
+                      availableTranslations: null
                     - $_type: MessageAction
                       actionType: REPLY_MESSAGE
                       label: More info
                       value: Could you provide me with more info?
+                      availableTranslations: null
                     quickReplies:
                     - $_type: QuickReply
                       text: Thank you
+                      availableTranslations: null
                     - $_type: QuickReply
                       text: "Great, that helped a lot"
+                      availableTranslations: null
               send-multi-choice-question:
                 summary: send multi-choice question
                 description: Send multiple choice question message to external messenger channel
@@ -8912,14 +8996,17 @@ paths:
                       label: label1
                       value: "1"
                       primary: false
+                      availableTranslations: null
                     - $_type: MultichoiceQuestionOption
                       label: label2
                       value: "2"
                       primary: true
+                      availableTranslations: null
                     - $_type: MultichoiceQuestionOption
                       label: label3
                       value: "3"
                       primary: null
+                      availableTranslations: null
               send-rating-question-message:
                 summary: send rating question message
                 description: Send rating question message to external messenger channel
@@ -8944,9 +9031,11 @@ paths:
                     - $_type: RatingQuestionOption
                       label: label1
                       value: "1"
+                      availableTranslations: null
                     - $_type: RatingQuestionOption
                       label: label2
                       value: "2"
+                      availableTranslations: null
                     declinable: false
                     declineLabel: null
                     declineValue: null
@@ -15204,6 +15293,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.deleted:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.deleted
+              description: "An event triggered every time a conversation is deleted <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
+              operationId: conversationDeletedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationDeletedEvent"
+              responses:
+                "200":
+                  description: OK
         conversation.ended:
           '{$request.body#/endpoint}':
             post:
@@ -17576,6 +17679,11 @@ components:
             $ref: "#/components/schemas/MultichoiceQuestionOption"
         answerStatus:
           $ref: "#/components/schemas/EAnswerStatus"
+        availableTranslations:
+          type: array
+          description: "Multichoice question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/MultichoiceQuestionMessageTranslation"
     AssigneePersonIdConversationHistorySearchFilter:
       type: object
       description: Filters conversations history by their assigneePersonId field.
@@ -21417,6 +21525,32 @@ components:
           description: Optional quick replies which will be displayed above the chat input as a possible response options
           items:
             $ref: "#/components/schemas/QuickReply"
+        availableTranslations:
+          type: array
+          description: "Card message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary. <br> The translations of a card message's actions and quick replies may be found in the individual message actions and quick replies, respectively."
+          items:
+            $ref: "#/components/schemas/CardMessageTranslation"
+    CardMessageTranslation:
+      type: object
+      description: The translation of a card message's contents.
+      properties:
+        $_type:
+          type: string
+          default: CardMessageTranslation
+          enum:
+          - CardMessageTranslation
+        title:
+          type: string
+          description: The translated title of the card message.
+        body:
+          type: string
+          description: The translated body text of the card message.
+        imageAltText:
+          type: string
+          description: The translated image alt text of the card message.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     CardPostMessageData:
       type: object
       description: "Card message which may contain an image, title, body and actions. All of these parts are optional as long as it contains at least one of them. <p> This model is used when creating a card message to send to a conversation."
@@ -22843,6 +22977,27 @@ components:
               type: string
           x-expand-query-key: text
           x-type: Map
+    ConversationDeletedEvent:
+      type: object
+      description: "An event triggered every time a conversation is deleted <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: ConversationDeletedEvent
+          enum:
+          - ConversationDeletedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: "#/components/schemas/ConversationData"
     ConversationEndReasonOperator:
       oneOf:
       - $ref: "#/components/schemas/EqualsConversationEndReasonOperator"
@@ -25233,6 +25388,13 @@ components:
       properties:
         personId:
           type: string
+    ConversationsSetInheritConfigurationAndTextsBody:
+      type: object
+      description: Request body for the 'conversationsSetInheritConfigurationAndTexts' operation
+      properties:
+        inherit:
+          type: boolean
+          description: Whether to inherit the configuration and text properties from the conversation template or not.
     ConversationsSetLocaleBody:
       type: object
       description: Request body for the 'conversationsSetLocale' operation
@@ -25257,7 +25419,7 @@ components:
           description: the person for whom the starred status will be set
         starred:
           type: boolean
-          description: the starred status to b set
+          description: the starred status to be set
     ConversationsSetTopicBody:
       type: object
       description: Request body for the 'conversationsSetTopic' operation
@@ -33063,6 +33225,26 @@ components:
           description: Optional quick replies which will be displayed above the chat input as a possible response options
           items:
             $ref: "#/components/schemas/QuickReply"
+        availableTranslations:
+          type: array
+          description: "File message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary. <br> The actual file is not translated."
+          items:
+            $ref: "#/components/schemas/FileMessageTranslation"
+    FileMessageTranslation:
+      type: object
+      description: The translation of a file message's contents. <br> The actual file is not translated.
+      properties:
+        $_type:
+          type: string
+          default: FileMessageTranslation
+          enum:
+          - FileMessageTranslation
+        caption:
+          type: string
+          description: The translated caption of the file message.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     FilePostMessageData:
       type: object
       description: Message which contains a file and optionally a caption text. The text should be a description of the attached file.
@@ -34908,6 +35090,35 @@ components:
           $ref: "#/components/schemas/EConversationMessageTextType"
         action:
           $ref: "#/components/schemas/MessageAction"
+        availableTranslations:
+          type: array
+          description: "List message card item translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/ListMessageCardItemTranslation"
+    ListMessageCardItemTranslation:
+      type: object
+      description: The translation of a list message card item's contents.
+      properties:
+        $_type:
+          type: string
+          default: ListMessageCardItemTranslation
+          enum:
+          - ListMessageCardItemTranslation
+        title:
+          type: string
+          description: The translated title of the list message card item.
+        body:
+          type: string
+          description: The translated body of the list message card item.
+        imageAltText:
+          type: string
+          description: The translated image alternative text of the list message card item.
+        actionLabel:
+          type: string
+          description: The translated action label of the list message card item.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     ListMessageData:
       type: object
       description: "List message which may contain a header, list elements and actions"
@@ -34996,6 +35207,11 @@ components:
           description: Optional quick replies which will be displayed above the chat input as a possible response options
           items:
             $ref: "#/components/schemas/QuickReply"
+        availableTranslations:
+          type: array
+          description: "List message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.<br> The translations of a list message's actions, items and quick replies may be found in the individual message actions, items and quick replies, respectively."
+          items:
+            $ref: "#/components/schemas/MessageHeaderTranslation"
     ListPostMessageData:
       type: object
       description: "List message which may contain a header, items and actions. <p> All of these parts are optional as long as it contains at least one of them."
@@ -35121,6 +35337,26 @@ components:
         value:
           type: string
           description: "The content of this parameter depends on the action type: <ul> <li>If the action type is a link, the parameter contains the URL to open. <li>If the action type is `EConversationMessageActionType.REPLY_MESSAGE`, the parameter contains the reply message. <li>If the action type is `EConversationMessageActionType.REPLY_MESSAGE_WITH_TECHNICAL_VALUE`, the parameter contains a technical value sent along with the reply message. The reply message itself is taken from the @link label parameter. </ul>"
+        availableTranslations:
+          type: array
+          description: "Message action translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/MessageActionTranslation"
+    MessageActionTranslation:
+      type: object
+      description: The translation of a message action's contents.
+      properties:
+        $_type:
+          type: string
+          default: MessageActionTranslation
+          enum:
+          - MessageActionTranslation
+        label:
+          type: string
+          description: The translated label of the message action.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     MessageData:
       description: Base class for all conversation messages
       oneOf:
@@ -35240,9 +35476,35 @@ components:
           description: Title displayed bold below the image. <p> Max length is 64 characters.
         body:
           type: string
-          description: Body text which may optionally contain markdown. <p> Max length is 256 characters.
+          description: Body text which may optionally contain markdown. <p> Max length is 5000 characters.
         bodyTextType:
           $ref: "#/components/schemas/EConversationMessageTextType"
+        availableTranslations:
+          type: array
+          description: "Message header translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/MessageHeaderTranslation"
+    MessageHeaderTranslation:
+      type: object
+      description: The translation of a message header's contents.
+      properties:
+        $_type:
+          type: string
+          default: MessageHeaderTranslation
+          enum:
+          - MessageHeaderTranslation
+        title:
+          type: string
+          description: The translated title of the message header.
+        body:
+          type: string
+          description: The translated body of the message header.
+        imageAltText:
+          type: string
+          description: The translated image alt text of the message header.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     MessageIdCannedResponseUsageSearchFilter:
       type: object
       properties:
@@ -35785,6 +36047,26 @@ components:
             $ref: "#/components/schemas/MultichoiceQuestionOption"
         answerStatus:
           $ref: "#/components/schemas/EAnswerStatus"
+        availableTranslations:
+          type: array
+          description: "Multichoice question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/MultichoiceQuestionMessageTranslation"
+    MultichoiceQuestionMessageTranslation:
+      type: object
+      description: The translation of a multichoice question message's contents.
+      properties:
+        $_type:
+          type: string
+          default: MultichoiceQuestionMessageTranslation
+          enum:
+          - MultichoiceQuestionMessageTranslation
+        text:
+          type: string
+          description: The translated question.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     MultichoiceQuestionOption:
       type: object
       description: Possible option of a multi choice question message.
@@ -35803,6 +36085,26 @@ components:
         primary:
           type: boolean
           description: Defines if the option is a primary or only a secondary choice.
+        availableTranslations:
+          type: array
+          description: "Option translations. Only languages that the option has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/MultichoiceQuestionOptionTranslation"
+    MultichoiceQuestionOptionTranslation:
+      type: object
+      description: The translation of a multichoice question option.
+      properties:
+        $_type:
+          type: string
+          default: MultichoiceQuestionOptionTranslation
+          enum:
+          - MultichoiceQuestionOptionTranslation
+        label:
+          type: string
+          description: The translated label of the option.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     MultichoiceQuestionPostMessageData:
       type: object
       description: Question message which can have multiple defined response options that are displayed as buttons of which one can be selected.
@@ -39190,6 +39492,11 @@ components:
         value:
           type: string
           description: The reply value for the question message.
+        availableTranslations:
+          type: array
+          description: "Reply message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/ReplyMessageTranslation"
         reason:
           $ref: "#/components/schemas/EQuestionMessageAbortReason"
     QuickReply:
@@ -39204,6 +39511,26 @@ components:
         text:
           type: string
           description: "Quick reply text displayed as button available to the message's recipient. <p> Simple text, max 40 characters."
+        availableTranslations:
+          type: array
+          description: "Quick Reply translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/QuickReplyTranslation"
+    QuickReplyTranslation:
+      type: object
+      description: The translation of a quick reply text.
+      properties:
+        $_type:
+          type: string
+          default: QuickReplyTranslation
+          enum:
+          - QuickReplyTranslation
+        text:
+          type: string
+          description: The translated text of the quick reply.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     QuotaUsageData:
       type: object
       description: Information on the current quota usage value and its limit
@@ -39312,6 +39639,29 @@ components:
         declineValue:
           type: string
           description: Value which will be propagated as reply value if the question is declined
+        availableTranslations:
+          type: array
+          description: "Rating question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/RatingQuestionMessageTranslation"
+    RatingQuestionMessageTranslation:
+      type: object
+      description: The translation of a rating question message's contents.
+      properties:
+        $_type:
+          type: string
+          default: RatingQuestionMessageTranslation
+          enum:
+          - RatingQuestionMessageTranslation
+        text:
+          type: string
+          description: The translated rating question.
+        declineLabel:
+          type: string
+          description: The translated label for the "decline" button. This is also be used as the text for the reply.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     RatingQuestionOption:
       type: object
       description: Possible option of a rating question message.
@@ -39327,6 +39677,26 @@ components:
         value:
           type: string
           description: "Value of the option, which is used in a `ReplyMessageData`"
+        availableTranslations:
+          type: array
+          description: "Option translations. Only languages that the option has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/RatingQuestionOptionTranslation"
+    RatingQuestionOptionTranslation:
+      type: object
+      description: The translation of a rating question option.
+      properties:
+        $_type:
+          type: string
+          default: RatingQuestionOptionTranslation
+          enum:
+          - RatingQuestionOptionTranslation
+        label:
+          type: string
+          description: Translated label of the option.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     RatingQuestionPostMessageData:
       type: object
       description: Special case of a `MultichoiceQuestionPostMessageData` which is used to rate the conversation in which it is send. Typically used during the offboarding phase. <p> <b>Note:</b> an answer to this message does not automatically set this rating for the answering participant. This must be done manually via the API.
@@ -39474,6 +39844,10 @@ components:
           type: integer
           format: int64
           description: "Retention interval of conversations represented as number of seconds. Conversations are deleted after the interval, counting from when they ended."
+        retentionIntervalConversationDataSeconds:
+          type: integer
+          format: int64
+          description: "Retention interval, in seconds, of conversation data. All messages or other conversation data older than the period specified by the interval are deleted."
         retentionIntervalPresenceSeconds:
           type: integer
           format: int64
@@ -39676,6 +40050,26 @@ components:
         value:
           type: string
           description: The reply value for the question message.
+        availableTranslations:
+          type: array
+          description: "Reply message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/ReplyMessageTranslation"
+    ReplyMessageTranslation:
+      type: object
+      description: The translation of a reply message's contents.
+      properties:
+        $_type:
+          type: string
+          default: ReplyMessageTranslation
+          enum:
+          - ReplyMessageTranslation
+        value:
+          type: string
+          description: Translation of the reply value.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     ReplyPostMessageData:
       type: object
       description: Message to reply to a specific question message.
@@ -40969,24 +41363,24 @@ components:
             $ref: "#/components/schemas/QuickReply"
         availableTranslations:
           type: array
-          description: "Text message translations. These are only available if the message has already been translated into the specific language. The available languages may vary, as translations are added with each translation request."
+          description: "Text message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
           items:
             $ref: "#/components/schemas/TextMessageTranslation"
     TextMessageTranslation:
       type: object
-      description: Represents the translation of the original text into the conversation's language `PostMessageData`
+      description: The translation of a text message's contents.
       properties:
         $_type:
           type: string
           default: TextMessageTranslation
           enum:
           - TextMessageTranslation
-        translatedText:
+        text:
           type: string
-          description: Translation of the original text
+          description: Translation of the original text.
         locale:
           type: string
-          description: "Language into which the original text is translated, specified using the BCP 47 language tag format."
+          description: The target language specified in the BCP 47 language tag format.
     TextPostMessageData:
       type: object
       description: Text message
@@ -41117,6 +41511,29 @@ components:
           description: Value which will be propagated as reply value if the question is declined
         answerStatus:
           $ref: "#/components/schemas/EAnswerStatus"
+        availableTranslations:
+          type: array
+          description: "Text question message. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/TextQuestionMessageTranslation"
+    TextQuestionMessageTranslation:
+      type: object
+      description: The translation of a text question message's contents.
+      properties:
+        $_type:
+          type: string
+          default: TextQuestionMessageTranslation
+          enum:
+          - TextQuestionMessageTranslation
+        text:
+          type: string
+          description: Translation of the question text.
+        hint:
+          type: string
+          description: Translation of the hint text.
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
     TextQuestionPostMessageData:
       type: object
       description: "Question message which should be answered with a some kind of a free text. There are several predifined types of answer possibilities. <p> <b>Note:</b> The answer to this question is entered into a separat text input directly linked to the message. For questions that should be answered via the normal chat-input, please use TextPostMessageData messages."

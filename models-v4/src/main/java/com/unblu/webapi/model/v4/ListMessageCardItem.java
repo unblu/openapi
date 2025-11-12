@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -26,6 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ListMessageCardItem.JSON_PROPERTY_BODY,
 	ListMessageCardItem.JSON_PROPERTY_BODY_TEXT_TYPE,
 	ListMessageCardItem.JSON_PROPERTY_ACTION,
+	ListMessageCardItem.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ListMessageCardItem {
@@ -89,6 +92,10 @@ public class ListMessageCardItem {
 	public static final String JSON_PROPERTY_ACTION = "action";
 	@JsonProperty(JSON_PROPERTY_ACTION)
 	private MessageAction action = null;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<ListMessageCardItemTranslation> availableTranslations = null;
 
 	public ListMessageCardItem $type(TypeEnum $type) {
 		this.$type = $type;
@@ -223,6 +230,34 @@ public class ListMessageCardItem {
 		this.action = action;
 	}
 
+	public ListMessageCardItem availableTranslations(List<ListMessageCardItemTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public ListMessageCardItem addAvailableTranslationsItem(ListMessageCardItemTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * List message card item translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation
+	 * into a particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "List message card item translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<ListMessageCardItemTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<ListMessageCardItemTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -238,12 +273,13 @@ public class ListMessageCardItem {
 				Objects.equals(this.title, listMessageCardItem.title) &&
 				Objects.equals(this.body, listMessageCardItem.body) &&
 				Objects.equals(this.bodyTextType, listMessageCardItem.bodyTextType) &&
-				Objects.equals(this.action, listMessageCardItem.action);
+				Objects.equals(this.action, listMessageCardItem.action) &&
+				Objects.equals(this.availableTranslations, listMessageCardItem.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, imageUrl, imageAltText, title, body, bodyTextType, action);
+		return Objects.hash($type, imageUrl, imageAltText, title, body, bodyTextType, action, availableTranslations);
 	}
 
 	@Override
@@ -257,6 +293,7 @@ public class ListMessageCardItem {
 		sb.append("    body: ").append(toIndentedString(body)).append("\n");
 		sb.append("    bodyTextType: ").append(toIndentedString(bodyTextType)).append("\n");
 		sb.append("    action: ").append(toIndentedString(action)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

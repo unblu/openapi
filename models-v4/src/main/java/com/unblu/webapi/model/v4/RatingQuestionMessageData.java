@@ -50,6 +50,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RatingQuestionMessageData.JSON_PROPERTY_DECLINABLE,
 	RatingQuestionMessageData.JSON_PROPERTY_DECLINE_LABEL,
 	RatingQuestionMessageData.JSON_PROPERTY_DECLINE_VALUE,
+	RatingQuestionMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class RatingQuestionMessageData implements MessageData {
@@ -197,6 +198,10 @@ public class RatingQuestionMessageData implements MessageData {
 	public static final String JSON_PROPERTY_DECLINE_VALUE = "declineValue";
 	@JsonProperty(JSON_PROPERTY_DECLINE_VALUE)
 	private String declineValue;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<RatingQuestionMessageTranslation> availableTranslations = null;
 
 	public RatingQuestionMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -751,6 +756,34 @@ public class RatingQuestionMessageData implements MessageData {
 		this.declineValue = declineValue;
 	}
 
+	public RatingQuestionMessageData availableTranslations(List<RatingQuestionMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public RatingQuestionMessageData addAvailableTranslationsItem(RatingQuestionMessageTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Rating question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation
+	 * into a particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Rating question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<RatingQuestionMessageTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<RatingQuestionMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -787,12 +820,13 @@ public class RatingQuestionMessageData implements MessageData {
 				Objects.equals(this.answerStatus, ratingQuestionMessageData.answerStatus) &&
 				Objects.equals(this.declinable, ratingQuestionMessageData.declinable) &&
 				Objects.equals(this.declineLabel, ratingQuestionMessageData.declineLabel) &&
-				Objects.equals(this.declineValue, ratingQuestionMessageData.declineValue);
+				Objects.equals(this.declineValue, ratingQuestionMessageData.declineValue) &&
+				Objects.equals(this.availableTranslations, ratingQuestionMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, options, answerStatus, declinable, declineLabel, declineValue);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, options, answerStatus, declinable, declineLabel, declineValue, availableTranslations);
 	}
 
 	@Override
@@ -827,6 +861,7 @@ public class RatingQuestionMessageData implements MessageData {
 		sb.append("    declinable: ").append(toIndentedString(declinable)).append("\n");
 		sb.append("    declineLabel: ").append(toIndentedString(declineLabel)).append("\n");
 		sb.append("    declineValue: ").append(toIndentedString(declineValue)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -44,6 +44,7 @@ import io.swagger.annotations.ApiModelProperty;
 	QuestionAbortedMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	QuestionAbortedMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_VALUE,
+	QuestionAbortedMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 	QuestionAbortedMessageData.JSON_PROPERTY_REASON,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -172,6 +173,10 @@ public class QuestionAbortedMessageData implements MessageData {
 	public static final String JSON_PROPERTY_VALUE = "value";
 	@JsonProperty(JSON_PROPERTY_VALUE)
 	private String value;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<ReplyMessageTranslation> availableTranslations = null;
 
 	public static final String JSON_PROPERTY_REASON = "reason";
 	@JsonProperty(JSON_PROPERTY_REASON)
@@ -627,6 +632,34 @@ public class QuestionAbortedMessageData implements MessageData {
 		this.value = value;
 	}
 
+	public QuestionAbortedMessageData availableTranslations(List<ReplyMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public QuestionAbortedMessageData addAvailableTranslationsItem(ReplyMessageTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Reply message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Reply message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<ReplyMessageTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<ReplyMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	public QuestionAbortedMessageData reason(EQuestionMessageAbortReason reason) {
 		this.reason = reason;
 		return this;
@@ -678,12 +711,13 @@ public class QuestionAbortedMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, questionAbortedMessageData.conversationLocale) &&
 				Objects.equals(this.questionMessageId, questionAbortedMessageData.questionMessageId) &&
 				Objects.equals(this.value, questionAbortedMessageData.value) &&
+				Objects.equals(this.availableTranslations, questionAbortedMessageData.availableTranslations) &&
 				Objects.equals(this.reason, questionAbortedMessageData.reason);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, questionMessageId, value, reason);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, questionMessageId, value, availableTranslations, reason);
 	}
 
 	@Override
@@ -713,6 +747,7 @@ public class QuestionAbortedMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
 		sb.append("}");
 		return sb.toString();

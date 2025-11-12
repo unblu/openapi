@@ -49,6 +49,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CardMessageData.JSON_PROPERTY_BODY_TEXT_TYPE,
 	CardMessageData.JSON_PROPERTY_ACTIONS,
 	CardMessageData.JSON_PROPERTY_QUICK_REPLIES,
+	CardMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class CardMessageData implements MessageData {
@@ -196,6 +197,10 @@ public class CardMessageData implements MessageData {
 	public static final String JSON_PROPERTY_QUICK_REPLIES = "quickReplies";
 	@JsonProperty(JSON_PROPERTY_QUICK_REPLIES)
 	private List<QuickReply> quickReplies = null;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<CardMessageTranslation> availableTranslations = null;
 
 	public CardMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -758,6 +763,35 @@ public class CardMessageData implements MessageData {
 		this.quickReplies = quickReplies;
 	}
 
+	public CardMessageData availableTranslations(List<CardMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public CardMessageData addAvailableTranslationsItem(CardMessageTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Card message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary. &lt;br&gt; The translations of a card message&#39;s
+	 * actions and quick replies may be found in the individual message actions and quick replies, respectively.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Card message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary. <br> The translations of a card message's actions and quick replies may be found in the individual message actions and quick replies, respectively.")
+	public List<CardMessageTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<CardMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -794,12 +828,13 @@ public class CardMessageData implements MessageData {
 				Objects.equals(this.body, cardMessageData.body) &&
 				Objects.equals(this.bodyTextType, cardMessageData.bodyTextType) &&
 				Objects.equals(this.actions, cardMessageData.actions) &&
-				Objects.equals(this.quickReplies, cardMessageData.quickReplies);
+				Objects.equals(this.quickReplies, cardMessageData.quickReplies) &&
+				Objects.equals(this.availableTranslations, cardMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -834,6 +869,7 @@ public class CardMessageData implements MessageData {
 		sb.append("    bodyTextType: ").append(toIndentedString(bodyTextType)).append("\n");
 		sb.append("    actions: ").append(toIndentedString(actions)).append("\n");
 		sb.append("    quickReplies: ").append(toIndentedString(quickReplies)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

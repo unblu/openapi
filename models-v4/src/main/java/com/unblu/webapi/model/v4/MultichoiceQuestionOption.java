@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -23,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	MultichoiceQuestionOption.JSON_PROPERTY_LABEL,
 	MultichoiceQuestionOption.JSON_PROPERTY_VALUE,
 	MultichoiceQuestionOption.JSON_PROPERTY_PRIMARY,
+	MultichoiceQuestionOption.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class MultichoiceQuestionOption {
@@ -74,6 +77,10 @@ public class MultichoiceQuestionOption {
 	public static final String JSON_PROPERTY_PRIMARY = "primary";
 	@JsonProperty(JSON_PROPERTY_PRIMARY)
 	private Boolean primary;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<MultichoiceQuestionOptionTranslation> availableTranslations = null;
 
 	public MultichoiceQuestionOption $type(TypeEnum $type) {
 		this.$type = $type;
@@ -151,6 +158,34 @@ public class MultichoiceQuestionOption {
 		this.primary = primary;
 	}
 
+	public MultichoiceQuestionOption availableTranslations(List<MultichoiceQuestionOptionTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public MultichoiceQuestionOption addAvailableTranslationsItem(MultichoiceQuestionOptionTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Option translations. Only languages that the option has already been translated into are included. Whenever someone requests a translation into a particular
+	 * language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Option translations. Only languages that the option has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<MultichoiceQuestionOptionTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<MultichoiceQuestionOptionTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -163,12 +198,13 @@ public class MultichoiceQuestionOption {
 		return Objects.equals(this.$type, multichoiceQuestionOption.$type) &&
 				Objects.equals(this.label, multichoiceQuestionOption.label) &&
 				Objects.equals(this.value, multichoiceQuestionOption.value) &&
-				Objects.equals(this.primary, multichoiceQuestionOption.primary);
+				Objects.equals(this.primary, multichoiceQuestionOption.primary) &&
+				Objects.equals(this.availableTranslations, multichoiceQuestionOption.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, label, value, primary);
+		return Objects.hash($type, label, value, primary, availableTranslations);
 	}
 
 	@Override
@@ -179,6 +215,7 @@ public class MultichoiceQuestionOption {
 		sb.append("    label: ").append(toIndentedString(label)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("    primary: ").append(toIndentedString(primary)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

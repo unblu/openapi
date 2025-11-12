@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordRetentionData.JSON_PROPERTY_$_TYPE,
 	RecordRetentionData.JSON_PROPERTY_ACCOUNT_ID,
 	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_CONVERSATION_SECONDS,
+	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_CONVERSATION_DATA_SECONDS,
 	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_PRESENCE_SECONDS,
 	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_WEBHOOK_DELIVERY_LOG_SECONDS,
 	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_AUDIT_LOG_SECONDS,
@@ -72,6 +73,10 @@ public class RecordRetentionData {
 	public static final String JSON_PROPERTY_RETENTION_INTERVAL_CONVERSATION_SECONDS = "retentionIntervalConversationSeconds";
 	@JsonProperty(JSON_PROPERTY_RETENTION_INTERVAL_CONVERSATION_SECONDS)
 	private Long retentionIntervalConversationSeconds;
+
+	public static final String JSON_PROPERTY_RETENTION_INTERVAL_CONVERSATION_DATA_SECONDS = "retentionIntervalConversationDataSeconds";
+	@JsonProperty(JSON_PROPERTY_RETENTION_INTERVAL_CONVERSATION_DATA_SECONDS)
+	private Long retentionIntervalConversationDataSeconds;
 
 	public static final String JSON_PROPERTY_RETENTION_INTERVAL_PRESENCE_SECONDS = "retentionIntervalPresenceSeconds";
 	@JsonProperty(JSON_PROPERTY_RETENTION_INTERVAL_PRESENCE_SECONDS)
@@ -140,6 +145,25 @@ public class RecordRetentionData {
 
 	public void setRetentionIntervalConversationSeconds(Long retentionIntervalConversationSeconds) {
 		this.retentionIntervalConversationSeconds = retentionIntervalConversationSeconds;
+	}
+
+	public RecordRetentionData retentionIntervalConversationDataSeconds(Long retentionIntervalConversationDataSeconds) {
+		this.retentionIntervalConversationDataSeconds = retentionIntervalConversationDataSeconds;
+		return this;
+	}
+
+	/**
+	 * Retention interval, in seconds, of conversation data. All messages or other conversation data older than the period specified by the interval are deleted.
+	 * 
+	 * @return retentionIntervalConversationDataSeconds
+	 **/
+	@ApiModelProperty(value = "Retention interval, in seconds, of conversation data. All messages or other conversation data older than the period specified by the interval are deleted.")
+	public Long getRetentionIntervalConversationDataSeconds() {
+		return retentionIntervalConversationDataSeconds;
+	}
+
+	public void setRetentionIntervalConversationDataSeconds(Long retentionIntervalConversationDataSeconds) {
+		this.retentionIntervalConversationDataSeconds = retentionIntervalConversationDataSeconds;
 	}
 
 	public RecordRetentionData retentionIntervalPresenceSeconds(Long retentionIntervalPresenceSeconds) {
@@ -213,6 +237,7 @@ public class RecordRetentionData {
 		return Objects.equals(this.$type, recordRetentionData.$type) &&
 				Objects.equals(this.accountId, recordRetentionData.accountId) &&
 				Objects.equals(this.retentionIntervalConversationSeconds, recordRetentionData.retentionIntervalConversationSeconds) &&
+				Objects.equals(this.retentionIntervalConversationDataSeconds, recordRetentionData.retentionIntervalConversationDataSeconds) &&
 				Objects.equals(this.retentionIntervalPresenceSeconds, recordRetentionData.retentionIntervalPresenceSeconds) &&
 				Objects.equals(this.retentionIntervalWebhookDeliveryLogSeconds, recordRetentionData.retentionIntervalWebhookDeliveryLogSeconds) &&
 				Objects.equals(this.retentionIntervalAuditLogSeconds, recordRetentionData.retentionIntervalAuditLogSeconds);
@@ -220,7 +245,7 @@ public class RecordRetentionData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, accountId, retentionIntervalConversationSeconds, retentionIntervalPresenceSeconds, retentionIntervalWebhookDeliveryLogSeconds, retentionIntervalAuditLogSeconds);
+		return Objects.hash($type, accountId, retentionIntervalConversationSeconds, retentionIntervalConversationDataSeconds, retentionIntervalPresenceSeconds, retentionIntervalWebhookDeliveryLogSeconds, retentionIntervalAuditLogSeconds);
 	}
 
 	@Override
@@ -230,6 +255,7 @@ public class RecordRetentionData {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    retentionIntervalConversationSeconds: ").append(toIndentedString(retentionIntervalConversationSeconds)).append("\n");
+		sb.append("    retentionIntervalConversationDataSeconds: ").append(toIndentedString(retentionIntervalConversationDataSeconds)).append("\n");
 		sb.append("    retentionIntervalPresenceSeconds: ").append(toIndentedString(retentionIntervalPresenceSeconds)).append("\n");
 		sb.append("    retentionIntervalWebhookDeliveryLogSeconds: ").append(toIndentedString(retentionIntervalWebhookDeliveryLogSeconds)).append("\n");
 		sb.append("    retentionIntervalAuditLogSeconds: ").append(toIndentedString(retentionIntervalAuditLogSeconds)).append("\n");

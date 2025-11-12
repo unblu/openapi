@@ -14,22 +14,22 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * The translation of a text message&#39;s contents.
+ * The translation of a reply message&#39;s contents.
  */
-@ApiModel(description = "The translation of a text message's contents.")
+@ApiModel(description = "The translation of a reply message's contents.")
 
 @JsonPropertyOrder({
-	TextMessageTranslation.JSON_PROPERTY_$_TYPE,
-	TextMessageTranslation.JSON_PROPERTY_TEXT,
-	TextMessageTranslation.JSON_PROPERTY_LOCALE,
+	ReplyMessageTranslation.JSON_PROPERTY_$_TYPE,
+	ReplyMessageTranslation.JSON_PROPERTY_VALUE,
+	ReplyMessageTranslation.JSON_PROPERTY_LOCALE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class TextMessageTranslation {
+public class ReplyMessageTranslation {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		TEXTMESSAGETRANSLATION("TextMessageTranslation");
+		REPLYMESSAGETRANSLATION("ReplyMessageTranslation");
 
 		private String value;
 
@@ -54,23 +54,23 @@ public class TextMessageTranslation {
 					return b;
 				}
 			}
-			return TypeEnum.TEXTMESSAGETRANSLATION;
+			return TypeEnum.REPLYMESSAGETRANSLATION;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.TEXTMESSAGETRANSLATION;
+	private TypeEnum $type = TypeEnum.REPLYMESSAGETRANSLATION;
 
-	public static final String JSON_PROPERTY_TEXT = "text";
-	@JsonProperty(JSON_PROPERTY_TEXT)
-	private String text;
+	public static final String JSON_PROPERTY_VALUE = "value";
+	@JsonProperty(JSON_PROPERTY_VALUE)
+	private String value;
 
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
 
-	public TextMessageTranslation $type(TypeEnum $type) {
+	public ReplyMessageTranslation $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -89,26 +89,26 @@ public class TextMessageTranslation {
 		this.$type = $type;
 	}
 
-	public TextMessageTranslation text(String text) {
-		this.text = text;
+	public ReplyMessageTranslation value(String value) {
+		this.value = value;
 		return this;
 	}
 
 	/**
-	 * Translation of the original text.
+	 * Translation of the reply value.
 	 * 
-	 * @return text
+	 * @return value
 	 **/
-	@ApiModelProperty(value = "Translation of the original text.")
-	public String getText() {
-		return text;
+	@ApiModelProperty(value = "Translation of the reply value.")
+	public String getValue() {
+		return value;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
-	public TextMessageTranslation locale(String locale) {
+	public ReplyMessageTranslation locale(String locale) {
 		this.locale = locale;
 		return this;
 	}
@@ -135,23 +135,23 @@ public class TextMessageTranslation {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		TextMessageTranslation textMessageTranslation = (TextMessageTranslation) o;
-		return Objects.equals(this.$type, textMessageTranslation.$type) &&
-				Objects.equals(this.text, textMessageTranslation.text) &&
-				Objects.equals(this.locale, textMessageTranslation.locale);
+		ReplyMessageTranslation replyMessageTranslation = (ReplyMessageTranslation) o;
+		return Objects.equals(this.$type, replyMessageTranslation.$type) &&
+				Objects.equals(this.value, replyMessageTranslation.value) &&
+				Objects.equals(this.locale, replyMessageTranslation.locale);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, text, locale);
+		return Objects.hash($type, value, locale);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class TextMessageTranslation {\n");
+		sb.append("class ReplyMessageTranslation {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
-		sb.append("    text: ").append(toIndentedString(text)).append("\n");
+		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("}");
 		return sb.toString();

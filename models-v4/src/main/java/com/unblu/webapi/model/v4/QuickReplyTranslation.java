@@ -14,22 +14,22 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * The translation of a text message&#39;s contents.
+ * The translation of a quick reply text.
  */
-@ApiModel(description = "The translation of a text message's contents.")
+@ApiModel(description = "The translation of a quick reply text.")
 
 @JsonPropertyOrder({
-	TextMessageTranslation.JSON_PROPERTY_$_TYPE,
-	TextMessageTranslation.JSON_PROPERTY_TEXT,
-	TextMessageTranslation.JSON_PROPERTY_LOCALE,
+	QuickReplyTranslation.JSON_PROPERTY_$_TYPE,
+	QuickReplyTranslation.JSON_PROPERTY_TEXT,
+	QuickReplyTranslation.JSON_PROPERTY_LOCALE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class TextMessageTranslation {
+public class QuickReplyTranslation {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		TEXTMESSAGETRANSLATION("TextMessageTranslation");
+		QUICKREPLYTRANSLATION("QuickReplyTranslation");
 
 		private String value;
 
@@ -54,13 +54,13 @@ public class TextMessageTranslation {
 					return b;
 				}
 			}
-			return TypeEnum.TEXTMESSAGETRANSLATION;
+			return TypeEnum.QUICKREPLYTRANSLATION;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.TEXTMESSAGETRANSLATION;
+	private TypeEnum $type = TypeEnum.QUICKREPLYTRANSLATION;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -70,7 +70,7 @@ public class TextMessageTranslation {
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
 
-	public TextMessageTranslation $type(TypeEnum $type) {
+	public QuickReplyTranslation $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -89,17 +89,17 @@ public class TextMessageTranslation {
 		this.$type = $type;
 	}
 
-	public TextMessageTranslation text(String text) {
+	public QuickReplyTranslation text(String text) {
 		this.text = text;
 		return this;
 	}
 
 	/**
-	 * Translation of the original text.
+	 * The translated text of the quick reply.
 	 * 
 	 * @return text
 	 **/
-	@ApiModelProperty(value = "Translation of the original text.")
+	@ApiModelProperty(value = "The translated text of the quick reply.")
 	public String getText() {
 		return text;
 	}
@@ -108,7 +108,7 @@ public class TextMessageTranslation {
 		this.text = text;
 	}
 
-	public TextMessageTranslation locale(String locale) {
+	public QuickReplyTranslation locale(String locale) {
 		this.locale = locale;
 		return this;
 	}
@@ -135,10 +135,10 @@ public class TextMessageTranslation {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		TextMessageTranslation textMessageTranslation = (TextMessageTranslation) o;
-		return Objects.equals(this.$type, textMessageTranslation.$type) &&
-				Objects.equals(this.text, textMessageTranslation.text) &&
-				Objects.equals(this.locale, textMessageTranslation.locale);
+		QuickReplyTranslation quickReplyTranslation = (QuickReplyTranslation) o;
+		return Objects.equals(this.$type, quickReplyTranslation.$type) &&
+				Objects.equals(this.text, quickReplyTranslation.text) &&
+				Objects.equals(this.locale, quickReplyTranslation.locale);
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class TextMessageTranslation {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class TextMessageTranslation {\n");
+		sb.append("class QuickReplyTranslation {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");

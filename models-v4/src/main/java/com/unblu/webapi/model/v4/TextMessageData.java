@@ -673,12 +673,12 @@ public class TextMessageData implements MessageData {
 	}
 
 	/**
-	 * Text message translations. These are only available if the message has already been translated into the specific language. The available languages may vary,
-	 * as translations are added with each translation request.
+	 * Text message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary.
 	 * 
 	 * @return availableTranslations
 	 **/
-	@ApiModelProperty(value = "Text message translations. These are only available if the message has already been translated into the specific language. The available languages may vary, as translations are added with each translation request.")
+	@ApiModelProperty(value = "Text message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
 	public List<TextMessageTranslation> getAvailableTranslations() {
 		return availableTranslations;
 	}

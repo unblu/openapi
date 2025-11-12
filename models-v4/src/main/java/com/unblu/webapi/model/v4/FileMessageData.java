@@ -53,6 +53,7 @@ import io.swagger.annotations.ApiModelProperty;
 	FileMessageData.JSON_PROPERTY_UPLOADED_SIZE,
 	FileMessageData.JSON_PROPERTY_DOWNLOAD_LINKS,
 	FileMessageData.JSON_PROPERTY_QUICK_REPLIES,
+	FileMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class FileMessageData implements MessageData {
@@ -216,6 +217,10 @@ public class FileMessageData implements MessageData {
 	public static final String JSON_PROPERTY_QUICK_REPLIES = "quickReplies";
 	@JsonProperty(JSON_PROPERTY_QUICK_REPLIES)
 	private List<QuickReply> quickReplies = null;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<FileMessageTranslation> availableTranslations = null;
 
 	public FileMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -856,6 +861,34 @@ public class FileMessageData implements MessageData {
 		this.quickReplies = quickReplies;
 	}
 
+	public FileMessageData availableTranslations(List<FileMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public FileMessageData addAvailableTranslationsItem(FileMessageTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * File message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary. &lt;br&gt; The actual file is not translated.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "File message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary. <br> The actual file is not translated.")
+	public List<FileMessageTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<FileMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -896,12 +929,13 @@ public class FileMessageData implements MessageData {
 				Objects.equals(this.totalSize, fileMessageData.totalSize) &&
 				Objects.equals(this.uploadedSize, fileMessageData.uploadedSize) &&
 				Objects.equals(this.downloadLinks, fileMessageData.downloadLinks) &&
-				Objects.equals(this.quickReplies, fileMessageData.quickReplies);
+				Objects.equals(this.quickReplies, fileMessageData.quickReplies) &&
+				Objects.equals(this.availableTranslations, fileMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -940,6 +974,7 @@ public class FileMessageData implements MessageData {
 		sb.append("    uploadedSize: ").append(toIndentedString(uploadedSize)).append("\n");
 		sb.append("    downloadLinks: ").append(toIndentedString(downloadLinks)).append("\n");
 		sb.append("    quickReplies: ").append(toIndentedString(quickReplies)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

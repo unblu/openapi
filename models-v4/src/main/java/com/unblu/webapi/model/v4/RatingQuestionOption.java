@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -22,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RatingQuestionOption.JSON_PROPERTY_$_TYPE,
 	RatingQuestionOption.JSON_PROPERTY_LABEL,
 	RatingQuestionOption.JSON_PROPERTY_VALUE,
+	RatingQuestionOption.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class RatingQuestionOption {
@@ -69,6 +72,10 @@ public class RatingQuestionOption {
 	public static final String JSON_PROPERTY_VALUE = "value";
 	@JsonProperty(JSON_PROPERTY_VALUE)
 	private String value;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<RatingQuestionOptionTranslation> availableTranslations = null;
 
 	public RatingQuestionOption $type(TypeEnum $type) {
 		this.$type = $type;
@@ -127,6 +134,34 @@ public class RatingQuestionOption {
 		this.value = value;
 	}
 
+	public RatingQuestionOption availableTranslations(List<RatingQuestionOptionTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public RatingQuestionOption addAvailableTranslationsItem(RatingQuestionOptionTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Option translations. Only languages that the option has already been translated into are included. Whenever someone requests a translation into a particular
+	 * language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Option translations. Only languages that the option has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<RatingQuestionOptionTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<RatingQuestionOptionTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -138,12 +173,13 @@ public class RatingQuestionOption {
 		RatingQuestionOption ratingQuestionOption = (RatingQuestionOption) o;
 		return Objects.equals(this.$type, ratingQuestionOption.$type) &&
 				Objects.equals(this.label, ratingQuestionOption.label) &&
-				Objects.equals(this.value, ratingQuestionOption.value);
+				Objects.equals(this.value, ratingQuestionOption.value) &&
+				Objects.equals(this.availableTranslations, ratingQuestionOption.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, label, value);
+		return Objects.hash($type, label, value, availableTranslations);
 	}
 
 	@Override
@@ -153,6 +189,7 @@ public class RatingQuestionOption {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    label: ").append(toIndentedString(label)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

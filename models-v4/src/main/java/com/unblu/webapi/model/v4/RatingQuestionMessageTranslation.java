@@ -14,22 +14,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * The translation of a text message&#39;s contents.
+ * The translation of a rating question message&#39;s contents.
  */
-@ApiModel(description = "The translation of a text message's contents.")
+@ApiModel(description = "The translation of a rating question message's contents.")
 
 @JsonPropertyOrder({
-	TextMessageTranslation.JSON_PROPERTY_$_TYPE,
-	TextMessageTranslation.JSON_PROPERTY_TEXT,
-	TextMessageTranslation.JSON_PROPERTY_LOCALE,
+	RatingQuestionMessageTranslation.JSON_PROPERTY_$_TYPE,
+	RatingQuestionMessageTranslation.JSON_PROPERTY_TEXT,
+	RatingQuestionMessageTranslation.JSON_PROPERTY_DECLINE_LABEL,
+	RatingQuestionMessageTranslation.JSON_PROPERTY_LOCALE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class TextMessageTranslation {
+public class RatingQuestionMessageTranslation {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		TEXTMESSAGETRANSLATION("TextMessageTranslation");
+		RATINGQUESTIONMESSAGETRANSLATION("RatingQuestionMessageTranslation");
 
 		private String value;
 
@@ -54,23 +55,27 @@ public class TextMessageTranslation {
 					return b;
 				}
 			}
-			return TypeEnum.TEXTMESSAGETRANSLATION;
+			return TypeEnum.RATINGQUESTIONMESSAGETRANSLATION;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.TEXTMESSAGETRANSLATION;
+	private TypeEnum $type = TypeEnum.RATINGQUESTIONMESSAGETRANSLATION;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private String text;
 
+	public static final String JSON_PROPERTY_DECLINE_LABEL = "declineLabel";
+	@JsonProperty(JSON_PROPERTY_DECLINE_LABEL)
+	private String declineLabel;
+
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
 
-	public TextMessageTranslation $type(TypeEnum $type) {
+	public RatingQuestionMessageTranslation $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -89,17 +94,17 @@ public class TextMessageTranslation {
 		this.$type = $type;
 	}
 
-	public TextMessageTranslation text(String text) {
+	public RatingQuestionMessageTranslation text(String text) {
 		this.text = text;
 		return this;
 	}
 
 	/**
-	 * Translation of the original text.
+	 * The translated rating question.
 	 * 
 	 * @return text
 	 **/
-	@ApiModelProperty(value = "Translation of the original text.")
+	@ApiModelProperty(value = "The translated rating question.")
 	public String getText() {
 		return text;
 	}
@@ -108,7 +113,26 @@ public class TextMessageTranslation {
 		this.text = text;
 	}
 
-	public TextMessageTranslation locale(String locale) {
+	public RatingQuestionMessageTranslation declineLabel(String declineLabel) {
+		this.declineLabel = declineLabel;
+		return this;
+	}
+
+	/**
+	 * The translated label for the \&quot;decline\&quot; button. This is also be used as the text for the reply.
+	 * 
+	 * @return declineLabel
+	 **/
+	@ApiModelProperty(value = "The translated label for the \"decline\" button. This is also be used as the text for the reply.")
+	public String getDeclineLabel() {
+		return declineLabel;
+	}
+
+	public void setDeclineLabel(String declineLabel) {
+		this.declineLabel = declineLabel;
+	}
+
+	public RatingQuestionMessageTranslation locale(String locale) {
 		this.locale = locale;
 		return this;
 	}
@@ -135,23 +159,25 @@ public class TextMessageTranslation {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		TextMessageTranslation textMessageTranslation = (TextMessageTranslation) o;
-		return Objects.equals(this.$type, textMessageTranslation.$type) &&
-				Objects.equals(this.text, textMessageTranslation.text) &&
-				Objects.equals(this.locale, textMessageTranslation.locale);
+		RatingQuestionMessageTranslation ratingQuestionMessageTranslation = (RatingQuestionMessageTranslation) o;
+		return Objects.equals(this.$type, ratingQuestionMessageTranslation.$type) &&
+				Objects.equals(this.text, ratingQuestionMessageTranslation.text) &&
+				Objects.equals(this.declineLabel, ratingQuestionMessageTranslation.declineLabel) &&
+				Objects.equals(this.locale, ratingQuestionMessageTranslation.locale);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, text, locale);
+		return Objects.hash($type, text, declineLabel, locale);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class TextMessageTranslation {\n");
+		sb.append("class RatingQuestionMessageTranslation {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
+		sb.append("    declineLabel: ").append(toIndentedString(declineLabel)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("}");
 		return sb.toString();

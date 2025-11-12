@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -25,6 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
 	MessageHeader.JSON_PROPERTY_TITLE,
 	MessageHeader.JSON_PROPERTY_BODY,
 	MessageHeader.JSON_PROPERTY_BODY_TEXT_TYPE,
+	MessageHeader.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class MessageHeader {
@@ -84,6 +87,10 @@ public class MessageHeader {
 	public static final String JSON_PROPERTY_BODY_TEXT_TYPE = "bodyTextType";
 	@JsonProperty(JSON_PROPERTY_BODY_TEXT_TYPE)
 	private EConversationMessageTextType bodyTextType;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<MessageHeaderTranslation> availableTranslations = null;
 
 	public MessageHeader $type(TypeEnum $type) {
 		this.$type = $type;
@@ -167,11 +174,11 @@ public class MessageHeader {
 	}
 
 	/**
-	 * Body text which may optionally contain markdown. &lt;p&gt; Max length is 256 characters.
+	 * Body text which may optionally contain markdown. &lt;p&gt; Max length is 5000 characters.
 	 * 
 	 * @return body
 	 **/
-	@ApiModelProperty(value = "Body text which may optionally contain markdown. <p> Max length is 256 characters.")
+	@ApiModelProperty(value = "Body text which may optionally contain markdown. <p> Max length is 5000 characters.")
 	public String getBody() {
 		return body;
 	}
@@ -199,6 +206,34 @@ public class MessageHeader {
 		this.bodyTextType = bodyTextType;
 	}
 
+	public MessageHeader availableTranslations(List<MessageHeaderTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public MessageHeader addAvailableTranslationsItem(MessageHeaderTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Message header translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Message header translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<MessageHeaderTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<MessageHeaderTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -213,12 +248,13 @@ public class MessageHeader {
 				Objects.equals(this.imageAltText, messageHeader.imageAltText) &&
 				Objects.equals(this.title, messageHeader.title) &&
 				Objects.equals(this.body, messageHeader.body) &&
-				Objects.equals(this.bodyTextType, messageHeader.bodyTextType);
+				Objects.equals(this.bodyTextType, messageHeader.bodyTextType) &&
+				Objects.equals(this.availableTranslations, messageHeader.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, imageUrl, imageAltText, title, body, bodyTextType);
+		return Objects.hash($type, imageUrl, imageAltText, title, body, bodyTextType, availableTranslations);
 	}
 
 	@Override
@@ -231,6 +267,7 @@ public class MessageHeader {
 		sb.append("    title: ").append(toIndentedString(title)).append("\n");
 		sb.append("    body: ").append(toIndentedString(body)).append("\n");
 		sb.append("    bodyTextType: ").append(toIndentedString(bodyTextType)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

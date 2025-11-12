@@ -46,6 +46,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ListMessageData.JSON_PROPERTY_ITEMS,
 	ListMessageData.JSON_PROPERTY_ACTIONS,
 	ListMessageData.JSON_PROPERTY_QUICK_REPLIES,
+	ListMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ListMessageData implements MessageData {
@@ -181,6 +182,10 @@ public class ListMessageData implements MessageData {
 	public static final String JSON_PROPERTY_QUICK_REPLIES = "quickReplies";
 	@JsonProperty(JSON_PROPERTY_QUICK_REPLIES)
 	private List<QuickReply> quickReplies = null;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<MessageHeaderTranslation> availableTranslations = null;
 
 	public ListMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -694,6 +699,35 @@ public class ListMessageData implements MessageData {
 		this.quickReplies = quickReplies;
 	}
 
+	public ListMessageData availableTranslations(List<MessageHeaderTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public ListMessageData addAvailableTranslationsItem(MessageHeaderTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * List message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary.&lt;br&gt; The translations of a list message&#39;s
+	 * actions, items and quick replies may be found in the individual message actions, items and quick replies, respectively.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "List message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.<br> The translations of a list message's actions, items and quick replies may be found in the individual message actions, items and quick replies, respectively.")
+	public List<MessageHeaderTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<MessageHeaderTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -727,12 +761,13 @@ public class ListMessageData implements MessageData {
 				Objects.equals(this.header, listMessageData.header) &&
 				Objects.equals(this.items, listMessageData.items) &&
 				Objects.equals(this.actions, listMessageData.actions) &&
-				Objects.equals(this.quickReplies, listMessageData.quickReplies);
+				Objects.equals(this.quickReplies, listMessageData.quickReplies) &&
+				Objects.equals(this.availableTranslations, listMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, header, items, actions, quickReplies);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, header, items, actions, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -764,6 +799,7 @@ public class ListMessageData implements MessageData {
 		sb.append("    items: ").append(toIndentedString(items)).append("\n");
 		sb.append("    actions: ").append(toIndentedString(actions)).append("\n");
 		sb.append("    quickReplies: ").append(toIndentedString(quickReplies)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -21,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	QuickReply.JSON_PROPERTY_$_TYPE,
 	QuickReply.JSON_PROPERTY_TEXT,
+	QuickReply.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class QuickReply {
@@ -65,6 +68,10 @@ public class QuickReply {
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private String text;
 
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<QuickReplyTranslation> availableTranslations = null;
+
 	public QuickReply $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
@@ -103,6 +110,34 @@ public class QuickReply {
 		this.text = text;
 	}
 
+	public QuickReply availableTranslations(List<QuickReplyTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public QuickReply addAvailableTranslationsItem(QuickReplyTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Quick Reply translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Quick Reply translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<QuickReplyTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<QuickReplyTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -113,12 +148,13 @@ public class QuickReply {
 		}
 		QuickReply quickReply = (QuickReply) o;
 		return Objects.equals(this.$type, quickReply.$type) &&
-				Objects.equals(this.text, quickReply.text);
+				Objects.equals(this.text, quickReply.text) &&
+				Objects.equals(this.availableTranslations, quickReply.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, text);
+		return Objects.hash($type, text, availableTranslations);
 	}
 
 	@Override
@@ -127,6 +163,7 @@ public class QuickReply {
 		sb.append("class QuickReply {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

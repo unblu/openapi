@@ -25,6 +25,7 @@ import com.unblu.webapi.model.v4.ConversationsOffboardParticipantBody;
 import com.unblu.webapi.model.v4.ConversationsSetAssigneePersonBody;
 import com.unblu.webapi.model.v4.ConversationsSetAwaitedPersonTypeBody;
 import com.unblu.webapi.model.v4.ConversationsSetContextPersonBody;
+import com.unblu.webapi.model.v4.ConversationsSetInheritConfigurationAndTextsBody;
 import com.unblu.webapi.model.v4.ConversationsSetLocaleBody;
 import com.unblu.webapi.model.v4.ConversationsSetScheduledTimestampBody;
 import com.unblu.webapi.model.v4.ConversationsSetStarredBody;
@@ -945,6 +946,77 @@ public class ConversationsApi {
 
 		// create path and map variables
 		String localVarPath = "/conversations/{conversationId}/setContextPerson"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * setInheritConfigurationAndTexts Manually modify the inheritance of configuration and text properties for a specific conversation &lt;ul&gt; &lt;li&gt;When
+	 * enabled, all configuration and text properties explicitly set on the conversation are removed, and the values from the conversation template are applied.
+	 * &lt;li&gt;When disabled, all configuration and text properties from the conversation template are copied to the conversation, and the conversation no longer
+	 * inherits them. If any configurations and/or text properties are already set on the conversation, they are removed, and only the values from the corresponding
+	 * conversation template are used. &lt;/ul&gt;&lt;br&gt;
+	 * 
+	 * @param conversationId The conversation for which the configuration and text property inheritance are updated. (required)
+	 * @param conversationsSetInheritConfigurationAndTextsBody (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsSetInheritConfigurationAndTexts(String conversationId, ConversationsSetInheritConfigurationAndTextsBody conversationsSetInheritConfigurationAndTextsBody, List<ExpandFields> expand) throws ApiException {
+		return conversationsSetInheritConfigurationAndTextsWithHttpInfo(conversationId, conversationsSetInheritConfigurationAndTextsBody, expand).getData();
+	}
+
+	/**
+	 * setInheritConfigurationAndTexts Manually modify the inheritance of configuration and text properties for a specific conversation &lt;ul&gt; &lt;li&gt;When
+	 * enabled, all configuration and text properties explicitly set on the conversation are removed, and the values from the conversation template are applied.
+	 * &lt;li&gt;When disabled, all configuration and text properties from the conversation template are copied to the conversation, and the conversation no longer
+	 * inherits them. If any configurations and/or text properties are already set on the conversation, they are removed, and only the values from the corresponding
+	 * conversation template are used. &lt;/ul&gt;&lt;br&gt;
+	 * 
+	 * @param conversationId The conversation for which the configuration and text property inheritance are updated. (required)
+	 * @param conversationsSetInheritConfigurationAndTextsBody (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsSetInheritConfigurationAndTextsWithHttpInfo(String conversationId, ConversationsSetInheritConfigurationAndTextsBody conversationsSetInheritConfigurationAndTextsBody, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = conversationsSetInheritConfigurationAndTextsBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsSetInheritConfigurationAndTexts");
+		}
+
+		// verify the required parameter 'conversationsSetInheritConfigurationAndTextsBody' is set
+		if (conversationsSetInheritConfigurationAndTextsBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationsSetInheritConfigurationAndTextsBody' when calling conversationsSetInheritConfigurationAndTexts");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/setInheritConfigurationAndTexts"
 				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
 
 		// query params

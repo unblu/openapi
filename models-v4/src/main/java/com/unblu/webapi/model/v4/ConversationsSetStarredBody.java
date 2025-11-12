@@ -55,11 +55,11 @@ public class ConversationsSetStarredBody {
 	}
 
 	/**
-	 * the starred status to b set
+	 * the starred status to be set
 	 * 
 	 * @return starred
 	 **/
-	@ApiModelProperty(value = "the starred status to b set")
+	@ApiModelProperty(value = "the starred status to be set")
 	public Boolean isStarred() {
 		return starred;
 	}

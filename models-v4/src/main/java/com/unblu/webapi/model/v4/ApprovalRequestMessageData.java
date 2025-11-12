@@ -46,6 +46,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ApprovalRequestMessageData.JSON_PROPERTY_TEXT_TYPE,
 	ApprovalRequestMessageData.JSON_PROPERTY_OPTIONS,
 	ApprovalRequestMessageData.JSON_PROPERTY_ANSWER_STATUS,
+	ApprovalRequestMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ApprovalRequestMessageData implements MessageData {
@@ -181,6 +182,10 @@ public class ApprovalRequestMessageData implements MessageData {
 	public static final String JSON_PROPERTY_ANSWER_STATUS = "answerStatus";
 	@JsonProperty(JSON_PROPERTY_ANSWER_STATUS)
 	private EAnswerStatus answerStatus;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<MultichoiceQuestionMessageTranslation> availableTranslations = null;
 
 	public ApprovalRequestMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -678,6 +683,34 @@ public class ApprovalRequestMessageData implements MessageData {
 		this.answerStatus = answerStatus;
 	}
 
+	public ApprovalRequestMessageData availableTranslations(List<MultichoiceQuestionMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public ApprovalRequestMessageData addAvailableTranslationsItem(MultichoiceQuestionMessageTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Multichoice question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a
+	 * translation into a particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Multichoice question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<MultichoiceQuestionMessageTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<MultichoiceQuestionMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -711,12 +744,13 @@ public class ApprovalRequestMessageData implements MessageData {
 				Objects.equals(this.text, approvalRequestMessageData.text) &&
 				Objects.equals(this.textType, approvalRequestMessageData.textType) &&
 				Objects.equals(this.options, approvalRequestMessageData.options) &&
-				Objects.equals(this.answerStatus, approvalRequestMessageData.answerStatus);
+				Objects.equals(this.answerStatus, approvalRequestMessageData.answerStatus) &&
+				Objects.equals(this.availableTranslations, approvalRequestMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, options, answerStatus);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, options, answerStatus, availableTranslations);
 	}
 
 	@Override
@@ -748,6 +782,7 @@ public class ApprovalRequestMessageData implements MessageData {
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");
 		sb.append("    answerStatus: ").append(toIndentedString(answerStatus)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

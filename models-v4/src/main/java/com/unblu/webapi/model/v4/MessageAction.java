@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -24,6 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 	MessageAction.JSON_PROPERTY_ACTION_TYPE,
 	MessageAction.JSON_PROPERTY_LABEL,
 	MessageAction.JSON_PROPERTY_VALUE,
+	MessageAction.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class MessageAction {
@@ -75,6 +78,10 @@ public class MessageAction {
 	public static final String JSON_PROPERTY_VALUE = "value";
 	@JsonProperty(JSON_PROPERTY_VALUE)
 	private String value;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<MessageActionTranslation> availableTranslations = null;
 
 	public MessageAction $type(TypeEnum $type) {
 		this.$type = $type;
@@ -157,6 +164,34 @@ public class MessageAction {
 		this.value = value;
 	}
 
+	public MessageAction availableTranslations(List<MessageActionTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public MessageAction addAvailableTranslationsItem(MessageActionTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Message action translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Message action translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<MessageActionTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<MessageActionTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -169,12 +204,13 @@ public class MessageAction {
 		return Objects.equals(this.$type, messageAction.$type) &&
 				Objects.equals(this.actionType, messageAction.actionType) &&
 				Objects.equals(this.label, messageAction.label) &&
-				Objects.equals(this.value, messageAction.value);
+				Objects.equals(this.value, messageAction.value) &&
+				Objects.equals(this.availableTranslations, messageAction.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, actionType, label, value);
+		return Objects.hash($type, actionType, label, value, availableTranslations);
 	}
 
 	@Override
@@ -185,6 +221,7 @@ public class MessageAction {
 		sb.append("    actionType: ").append(toIndentedString(actionType)).append("\n");
 		sb.append("    label: ").append(toIndentedString(label)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

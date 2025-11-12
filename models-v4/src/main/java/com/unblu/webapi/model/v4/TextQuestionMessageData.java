@@ -53,6 +53,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TextQuestionMessageData.JSON_PROPERTY_DECLINE_LABEL,
 	TextQuestionMessageData.JSON_PROPERTY_DECLINE_VALUE,
 	TextQuestionMessageData.JSON_PROPERTY_ANSWER_STATUS,
+	TextQuestionMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class TextQuestionMessageData implements MessageData {
@@ -216,6 +217,10 @@ public class TextQuestionMessageData implements MessageData {
 	public static final String JSON_PROPERTY_ANSWER_STATUS = "answerStatus";
 	@JsonProperty(JSON_PROPERTY_ANSWER_STATUS)
 	private EAnswerStatus answerStatus;
+
+	public static final String JSON_PROPERTY_AVAILABLE_TRANSLATIONS = "availableTranslations";
+	@JsonProperty(JSON_PROPERTY_AVAILABLE_TRANSLATIONS)
+	private List<TextQuestionMessageTranslation> availableTranslations = null;
 
 	public TextQuestionMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -838,6 +843,34 @@ public class TextQuestionMessageData implements MessageData {
 		this.answerStatus = answerStatus;
 	}
 
+	public TextQuestionMessageData availableTranslations(List<TextQuestionMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+		return this;
+	}
+
+	public TextQuestionMessageData addAvailableTranslationsItem(TextQuestionMessageTranslation availableTranslationsItem) {
+		if (this.availableTranslations == null) {
+			this.availableTranslations = new ArrayList<>();
+		}
+		this.availableTranslations.add(availableTranslationsItem);
+		return this;
+	}
+
+	/**
+	 * Text question message. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a
+	 * particular language, the translation is added here. As a result, the content of the variable may vary.
+	 * 
+	 * @return availableTranslations
+	 **/
+	@ApiModelProperty(value = "Text question message. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary.")
+	public List<TextQuestionMessageTranslation> getAvailableTranslations() {
+		return availableTranslations;
+	}
+
+	public void setAvailableTranslations(List<TextQuestionMessageTranslation> availableTranslations) {
+		this.availableTranslations = availableTranslations;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -878,12 +911,13 @@ public class TextQuestionMessageData implements MessageData {
 				Objects.equals(this.declinable, textQuestionMessageData.declinable) &&
 				Objects.equals(this.declineLabel, textQuestionMessageData.declineLabel) &&
 				Objects.equals(this.declineValue, textQuestionMessageData.declineValue) &&
-				Objects.equals(this.answerStatus, textQuestionMessageData.answerStatus);
+				Objects.equals(this.answerStatus, textQuestionMessageData.answerStatus) &&
+				Objects.equals(this.availableTranslations, textQuestionMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, questionType, hint, minCharacters, maxCharacters, additionalRegex, declinable, declineLabel, declineValue, answerStatus);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, questionType, hint, minCharacters, maxCharacters, additionalRegex, declinable, declineLabel, declineValue, answerStatus, availableTranslations);
 	}
 
 	@Override
@@ -922,6 +956,7 @@ public class TextQuestionMessageData implements MessageData {
 		sb.append("    declineLabel: ").append(toIndentedString(declineLabel)).append("\n");
 		sb.append("    declineValue: ").append(toIndentedString(declineValue)).append("\n");
 		sb.append("    answerStatus: ").append(toIndentedString(answerStatus)).append("\n");
+		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
