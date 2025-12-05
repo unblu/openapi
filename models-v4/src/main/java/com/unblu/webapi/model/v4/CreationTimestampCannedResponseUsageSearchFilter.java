@@ -97,7 +97,7 @@ public class CreationTimestampCannedResponseUsageSearchFilter implements CannedR
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECannedResponseUsageSearchFilterField getField() {
 		return field;
 	}

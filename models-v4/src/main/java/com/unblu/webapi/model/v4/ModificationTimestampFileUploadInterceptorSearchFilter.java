@@ -97,7 +97,7 @@ public class ModificationTimestampFileUploadInterceptorSearchFilter implements F
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EFileUploadInterceptorSearchFilterField getField() {
 		return field;
 	}

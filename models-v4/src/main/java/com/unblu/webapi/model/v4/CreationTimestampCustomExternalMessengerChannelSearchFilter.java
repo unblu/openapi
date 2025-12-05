@@ -97,7 +97,7 @@ public class CreationTimestampCustomExternalMessengerChannelSearchFilter impleme
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECustomExternalMessengerChannelSearchFilterField getField() {
 		return field;
 	}

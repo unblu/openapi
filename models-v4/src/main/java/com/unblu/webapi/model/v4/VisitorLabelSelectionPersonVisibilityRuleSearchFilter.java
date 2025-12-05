@@ -97,7 +97,7 @@ public class VisitorLabelSelectionPersonVisibilityRuleSearchFilter implements Pe
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonVisibilityRuleSearchFilterField getField() {
 		return field;
 	}

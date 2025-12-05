@@ -97,7 +97,7 @@ public class NotEqualsPauseNotificationsStateOperator implements PauseNotificati
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPauseNotificationsStateOperatorType getType() {
 		return type;
 	}

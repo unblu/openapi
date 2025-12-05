@@ -37,7 +37,12 @@ public enum EConversationTemplateSearchFilterField {
 	/**
 	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
-	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP");
+	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP"),
+
+	/**
+	 * INHERIT_CONFIGURATION_AND_TEXTS: Filter by the &#39;inheritConfigurationAndTexts&#39; attribute
+	 */
+	INHERIT_CONFIGURATION_AND_TEXTS("INHERIT_CONFIGURATION_AND_TEXTS");
 
 	private String value;
 

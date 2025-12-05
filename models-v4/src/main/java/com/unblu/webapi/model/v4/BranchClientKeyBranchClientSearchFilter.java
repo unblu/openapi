@@ -97,7 +97,7 @@ public class BranchClientKeyBranchClientSearchFilter implements BranchClientSear
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EBranchClientSearchFilterField getField() {
 		return field;
 	}

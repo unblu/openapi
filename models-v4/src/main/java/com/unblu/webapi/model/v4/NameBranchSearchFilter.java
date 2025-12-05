@@ -97,7 +97,7 @@ public class NameBranchSearchFilter implements BranchSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EBranchSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class WhatsAppTemplateLocationParameter implements WhatsAppTemplateParame
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ETemplateComponentParameterType getType() {
 		return type;
 	}

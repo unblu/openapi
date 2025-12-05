@@ -97,7 +97,7 @@ public class StartingTimestampCollaborationLayerLogEntrySearchFilter implements 
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerLogEntrySearchFilterField getField() {
 		return field;
 	}

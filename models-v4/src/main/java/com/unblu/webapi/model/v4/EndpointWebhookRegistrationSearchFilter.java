@@ -97,7 +97,7 @@ public class EndpointWebhookRegistrationSearchFilter implements WebhookRegistrat
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EWebhookRegistrationSearchFilterField getField() {
 		return field;
 	}

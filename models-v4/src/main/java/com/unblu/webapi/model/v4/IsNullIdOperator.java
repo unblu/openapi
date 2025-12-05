@@ -94,7 +94,7 @@ public class IsNullIdOperator implements IdOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EIdOperatorType getType() {
 		return type;
 	}

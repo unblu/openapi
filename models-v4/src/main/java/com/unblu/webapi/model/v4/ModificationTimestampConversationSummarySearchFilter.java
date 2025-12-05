@@ -97,7 +97,7 @@ public class ModificationTimestampConversationSummarySearchFilter implements Con
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSummarySearchFilterField getField() {
 		return field;
 	}

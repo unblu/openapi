@@ -99,7 +99,7 @@ public class InTimestampOperator implements TimestampOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ETimestampOperatorType getType() {
 		return type;
 	}

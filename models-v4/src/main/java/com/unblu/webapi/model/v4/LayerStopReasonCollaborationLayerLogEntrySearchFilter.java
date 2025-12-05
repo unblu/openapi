@@ -97,7 +97,7 @@ public class LayerStopReasonCollaborationLayerLogEntrySearchFilter implements Co
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerLogEntrySearchFilterField getField() {
 		return field;
 	}

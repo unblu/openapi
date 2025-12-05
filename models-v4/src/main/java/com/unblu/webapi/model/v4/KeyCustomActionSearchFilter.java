@@ -97,7 +97,7 @@ public class KeyCustomActionSearchFilter implements CustomActionSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECustomActionSearchFilterField getField() {
 		return field;
 	}

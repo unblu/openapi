@@ -99,7 +99,7 @@ public class AssigneePersonIdConversationHistorySearchFilter implements Conversa
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationHistorySearchFilterField getField() {
 		return field;
 	}

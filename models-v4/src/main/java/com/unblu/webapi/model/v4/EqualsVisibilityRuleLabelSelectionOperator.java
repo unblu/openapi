@@ -97,7 +97,7 @@ public class EqualsVisibilityRuleLabelSelectionOperator implements VisibilityRul
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EVisibilityRuleLabelSelectionOperatorType getType() {
 		return type;
 	}

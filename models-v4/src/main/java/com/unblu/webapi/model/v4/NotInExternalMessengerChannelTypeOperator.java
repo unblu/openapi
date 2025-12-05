@@ -99,7 +99,7 @@ public class NotInExternalMessengerChannelTypeOperator implements ExternalMessen
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerChannelTypeOperatorType getType() {
 		return type;
 	}

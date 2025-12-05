@@ -97,7 +97,7 @@ public class OnlineStateVisitorStateSearchFilter implements VisitorStateSearchFi
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EVisitorStateSearchFilterField getField() {
 		return field;
 	}

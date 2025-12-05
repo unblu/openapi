@@ -95,7 +95,7 @@ public class CustomActionInvocationExecutedResponse implements CustomActionInvoc
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECustomActionInvocationResponseType getType() {
 		return type;
 	}

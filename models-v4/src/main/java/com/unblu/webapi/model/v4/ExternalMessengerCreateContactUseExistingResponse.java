@@ -101,7 +101,7 @@ public class ExternalMessengerCreateContactUseExistingResponse implements Extern
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerContactCreationResponseType getType() {
 		return type;
 	}

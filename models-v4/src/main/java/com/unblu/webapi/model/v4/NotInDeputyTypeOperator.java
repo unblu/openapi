@@ -99,7 +99,7 @@ public class NotInDeputyTypeOperator implements DeputyTypeOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDeputyTypeOperatorType getType() {
 		return type;
 	}

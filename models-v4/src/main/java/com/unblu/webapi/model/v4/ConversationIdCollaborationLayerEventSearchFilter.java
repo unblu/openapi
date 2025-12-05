@@ -97,7 +97,7 @@ public class ConversationIdCollaborationLayerEventSearchFilter implements Collab
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerEventSearchFilterField getField() {
 		return field;
 	}

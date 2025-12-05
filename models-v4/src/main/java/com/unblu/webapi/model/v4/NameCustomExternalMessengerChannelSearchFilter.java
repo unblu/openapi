@@ -97,7 +97,7 @@ public class NameCustomExternalMessengerChannelSearchFilter implements CustomExt
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECustomExternalMessengerChannelSearchFilterField getField() {
 		return field;
 	}

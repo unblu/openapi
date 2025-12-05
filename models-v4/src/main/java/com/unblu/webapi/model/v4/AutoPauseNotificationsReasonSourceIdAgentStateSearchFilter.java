@@ -99,7 +99,7 @@ public class AutoPauseNotificationsReasonSourceIdAgentStateSearchFilter implemen
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAgentStateSearchFilterField getField() {
 		return field;
 	}

@@ -570,7 +570,7 @@ public class CustomDialogBotData implements DialogBotData {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EBotType getType() {
 		return type;
 	}

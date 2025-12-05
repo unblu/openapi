@@ -99,7 +99,7 @@ public class InInvitationTargetTypeOperator implements InvitationTargetTypeOpera
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInvitationTargetTypeOperatorType getType() {
 		return type;
 	}

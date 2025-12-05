@@ -97,7 +97,7 @@ public class EqualsCallServiceProviderOperator implements CallServiceProviderOpe
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECallServiceProviderOperatorType getType() {
 		return type;
 	}

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = EndTimestampConversationSearchFilter.class, name = "END_TIMESTAMP"),
 	@JsonSubTypes.Type(value = ExternalMessengerChannelIdConversationSearchFilter.class, name = "EXTERNAL_MESSENGER_CHANNEL_ID"),
 	@JsonSubTypes.Type(value = HasUnreadMessagesConversationSearchFilter.class, name = "HAS_UNREAD_MESSAGES"),
+	@JsonSubTypes.Type(value = InheritConfigurationAndTextsConversationSearchFilter.class, name = "INHERIT_CONFIGURATION_AND_TEXTS"),
 	@JsonSubTypes.Type(value = InitialEngagementTypeConversationSearchFilter.class, name = "INITIAL_ENGAGEMENT_TYPE"),
 	@JsonSubTypes.Type(value = ParticipantExternalMessengerContactIdConversationSearchFilter.class, name = "PARTICIPANT_EXTERNAL_MESSENGER_CONTACT_ID"),
 	@JsonSubTypes.Type(value = ParticipantPersonIdConversationSearchFilter.class, name = "PARTICIPANT_PERSON_ID"),

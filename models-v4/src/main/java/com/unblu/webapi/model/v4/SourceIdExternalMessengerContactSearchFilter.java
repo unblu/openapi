@@ -97,7 +97,7 @@ public class SourceIdExternalMessengerContactSearchFilter implements ExternalMes
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerContactSearchFilterField getField() {
 		return field;
 	}

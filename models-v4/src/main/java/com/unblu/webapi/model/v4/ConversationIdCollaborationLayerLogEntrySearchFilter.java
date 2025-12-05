@@ -97,7 +97,7 @@ public class ConversationIdCollaborationLayerLogEntrySearchFilter implements Col
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerLogEntrySearchFilterField getField() {
 		return field;
 	}

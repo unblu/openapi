@@ -97,7 +97,7 @@ public class PersonIdPersonPresenceSearchFilter implements PersonPresenceSearchF
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonPresenceSearchFilterField getField() {
 		return field;
 	}

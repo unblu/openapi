@@ -104,7 +104,7 @@ public class AuthenticationRequiredChatSuggestionResponse implements ChatSuggest
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EChatSuggestionResponseType getType() {
 		return type;
 	}

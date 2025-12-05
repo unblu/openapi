@@ -100,7 +100,7 @@ public class CustomActionInvocationErrorResponse implements CustomActionInvocati
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECustomActionInvocationResponseType getType() {
 		return type;
 	}

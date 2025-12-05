@@ -97,7 +97,7 @@ public class NameConversationSummaryTemplateSearchFilter implements Conversation
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSummaryTemplateSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class NamePersonLabelSearchFilter implements PersonLabelSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonLabelSearchFilterField getField() {
 		return field;
 	}

@@ -99,7 +99,7 @@ public class InCollaborationLayerEventSourceTypeOperator implements Collaboratio
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerEventSourceTypeOperatorType getType() {
 		return type;
 	}

@@ -111,9 +111,14 @@ public enum EConversationHistorySearchFilterField {
 	LAST_COMPLETED_RECORDING_TIMESTAMP("LAST_COMPLETED_RECORDING_TIMESTAMP"),
 
 	/**
-	 * VISIBILITY
+	 * VISIBILITY: Filter by the &#39;conversationVisibility&#39; attribute
 	 */
-	VISIBILITY("VISIBILITY");
+	VISIBILITY("VISIBILITY"),
+
+	/**
+	 * INHERIT_CONFIGURATION_AND_TEXTS: Filter by the &#39;inheritConfigurationAndTexts&#39; attribute
+	 */
+	INHERIT_CONFIGURATION_AND_TEXTS("INHERIT_CONFIGURATION_AND_TEXTS");
 
 	private String value;
 

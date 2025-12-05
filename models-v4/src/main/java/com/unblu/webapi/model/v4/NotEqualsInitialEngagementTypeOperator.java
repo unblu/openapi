@@ -97,7 +97,7 @@ public class NotEqualsInitialEngagementTypeOperator implements InitialEngagement
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInitialEngagementTypeOperatorType getType() {
 		return type;
 	}

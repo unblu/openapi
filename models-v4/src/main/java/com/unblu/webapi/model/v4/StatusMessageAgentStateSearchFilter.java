@@ -97,7 +97,7 @@ public class StatusMessageAgentStateSearchFilter implements AgentStateSearchFilt
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAgentStateSearchFilterField getField() {
 		return field;
 	}

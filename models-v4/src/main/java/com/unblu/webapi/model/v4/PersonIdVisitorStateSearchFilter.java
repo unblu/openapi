@@ -97,7 +97,7 @@ public class PersonIdVisitorStateSearchFilter implements VisitorStateSearchFilte
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EVisitorStateSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class CreatorPersonIdConversationInvitationSearchFilter implements Conver
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationInvitationSearchFilterField getField() {
 		return field;
 	}

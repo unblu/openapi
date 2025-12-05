@@ -97,7 +97,7 @@ public class SendTimestampMessageExportFilter implements MessageExportFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EMessageExportFilterField getField() {
 		return field;
 	}

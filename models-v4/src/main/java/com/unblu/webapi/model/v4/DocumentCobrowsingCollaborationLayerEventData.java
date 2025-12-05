@@ -272,7 +272,7 @@ public class DocumentCobrowsingCollaborationLayerEventData implements Collaborat
 	 * 
 	 * @return layerSourceType
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerEventSourceType getLayerSourceType() {
 		return layerSourceType;
 	}

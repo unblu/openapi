@@ -97,7 +97,7 @@ public class ServiceProviderCallIdCallSearchFilter implements CallSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECallSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class SummaryTriggerTypeConversationSummarySearchFilter implements Conver
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSummarySearchFilterField getField() {
 		return field;
 	}

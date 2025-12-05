@@ -97,7 +97,7 @@ public class PhonePersonTypedSearchFilter implements PersonTypedSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonTypedSearchFilterField getField() {
 		return field;
 	}

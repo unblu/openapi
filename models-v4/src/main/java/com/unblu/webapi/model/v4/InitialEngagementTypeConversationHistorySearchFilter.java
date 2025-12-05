@@ -97,7 +97,7 @@ public class InitialEngagementTypeConversationHistorySearchFilter implements Con
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationHistorySearchFilterField getField() {
 		return field;
 	}

@@ -100,7 +100,7 @@ public class ExternalMessengerCreateConversationErrorResponse implements Externa
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerConversationCreationResponseType getType() {
 		return type;
 	}

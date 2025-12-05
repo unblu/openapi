@@ -112,7 +112,7 @@ public class ExternalMessengerCreateConversationCreateResponse implements Extern
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerConversationCreationResponseType getType() {
 		return type;
 	}

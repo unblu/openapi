@@ -97,7 +97,7 @@ public class DescriptionTeamSearchFilter implements TeamSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ETeamSearchFilterField getField() {
 		return field;
 	}

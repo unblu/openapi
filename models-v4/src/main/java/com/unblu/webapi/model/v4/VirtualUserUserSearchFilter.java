@@ -97,7 +97,7 @@ public class VirtualUserUserSearchFilter implements UserSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EUserSearchFilterField getField() {
 		return field;
 	}

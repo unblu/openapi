@@ -277,7 +277,7 @@ public class UniversalCobrowsingCollaborationLayerEventData implements Collabora
 	 * 
 	 * @return layerSourceType
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerEventSourceType getLayerSourceType() {
 		return layerSourceType;
 	}

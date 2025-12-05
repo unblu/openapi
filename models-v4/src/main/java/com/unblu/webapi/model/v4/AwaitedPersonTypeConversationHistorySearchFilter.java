@@ -97,7 +97,7 @@ public class AwaitedPersonTypeConversationHistorySearchFilter implements Convers
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationHistorySearchFilterField getField() {
 		return field;
 	}

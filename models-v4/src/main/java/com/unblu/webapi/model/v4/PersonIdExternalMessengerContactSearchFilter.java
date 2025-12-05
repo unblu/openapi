@@ -97,7 +97,7 @@ public class PersonIdExternalMessengerContactSearchFilter implements ExternalMes
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerContactSearchFilterField getField() {
 		return field;
 	}

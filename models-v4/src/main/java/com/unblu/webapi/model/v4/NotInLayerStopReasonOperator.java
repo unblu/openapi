@@ -99,7 +99,7 @@ public class NotInLayerStopReasonOperator implements LayerStopReasonOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ELayerStopReasonOperatorType getType() {
 		return type;
 	}

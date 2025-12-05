@@ -97,7 +97,7 @@ public class NameFileUploadInterceptorSearchFilter implements FileUploadIntercep
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EFileUploadInterceptorSearchFilterField getField() {
 		return field;
 	}

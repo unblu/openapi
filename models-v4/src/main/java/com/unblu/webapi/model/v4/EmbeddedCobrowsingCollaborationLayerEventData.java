@@ -277,7 +277,7 @@ public class EmbeddedCobrowsingCollaborationLayerEventData implements Collaborat
 	 * 
 	 * @return layerSourceType
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerEventSourceType getLayerSourceType() {
 		return layerSourceType;
 	}

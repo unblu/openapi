@@ -97,7 +97,7 @@ public class TopicConversationSearchFilter implements ConversationSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSearchFilterField getField() {
 		return field;
 	}

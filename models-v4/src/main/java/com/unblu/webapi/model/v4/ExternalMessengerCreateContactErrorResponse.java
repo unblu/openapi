@@ -100,7 +100,7 @@ public class ExternalMessengerCreateContactErrorResponse implements ExternalMess
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerContactCreationResponseType getType() {
 		return type;
 	}

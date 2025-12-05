@@ -97,7 +97,7 @@ public class StopTimestampCollaborationLayerLogEntrySearchFilter implements Coll
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerLogEntrySearchFilterField getField() {
 		return field;
 	}

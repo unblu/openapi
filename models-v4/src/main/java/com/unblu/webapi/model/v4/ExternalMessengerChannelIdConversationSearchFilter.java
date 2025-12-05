@@ -97,7 +97,7 @@ public class ExternalMessengerChannelIdConversationSearchFilter implements Conve
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSearchFilterField getField() {
 		return field;
 	}

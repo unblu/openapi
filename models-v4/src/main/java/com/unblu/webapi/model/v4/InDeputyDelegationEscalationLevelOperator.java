@@ -99,7 +99,7 @@ public class InDeputyDelegationEscalationLevelOperator implements DeputyDelegati
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDeputyDelegationEscalationLevelOperatorType getType() {
 		return type;
 	}

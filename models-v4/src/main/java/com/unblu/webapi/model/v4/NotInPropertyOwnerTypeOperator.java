@@ -99,7 +99,7 @@ public class NotInPropertyOwnerTypeOperator implements PropertyOwnerTypeOperator
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPropertyOwnerTypeOperatorType getType() {
 		return type;
 	}

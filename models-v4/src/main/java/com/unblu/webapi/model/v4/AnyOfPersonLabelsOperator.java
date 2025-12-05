@@ -101,7 +101,7 @@ public class AnyOfPersonLabelsOperator implements PersonLabelsOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonLabelsOperatorType getType() {
 		return type;
 	}

@@ -97,7 +97,7 @@ public class NameSuggestionSourceSearchFilter implements SuggestionSourceSearchF
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ESuggestionSourceSearchFilterField getField() {
 		return field;
 	}

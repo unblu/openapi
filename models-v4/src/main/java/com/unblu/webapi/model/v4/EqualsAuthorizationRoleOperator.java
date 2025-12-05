@@ -97,7 +97,7 @@ public class EqualsAuthorizationRoleOperator implements AuthorizationRoleOperato
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAuthorizationRoleOperatorType getType() {
 		return type;
 	}

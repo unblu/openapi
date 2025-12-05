@@ -97,7 +97,7 @@ public class NotEqualsDeputyDelegationEscalationLevelOperator implements DeputyD
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDeputyDelegationEscalationLevelOperatorType getType() {
 		return type;
 	}

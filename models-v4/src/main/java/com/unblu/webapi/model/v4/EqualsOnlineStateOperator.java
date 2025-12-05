@@ -97,7 +97,7 @@ public class EqualsOnlineStateOperator implements OnlineStateOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EOnlineStateOperatorType getType() {
 		return type;
 	}

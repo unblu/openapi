@@ -97,7 +97,7 @@ public class PhoneNumberSmsExternalMessengerChannelSearchFilter implements SmsEx
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ESmsExternalMessengerChannelSearchFilterField getField() {
 		return field;
 	}

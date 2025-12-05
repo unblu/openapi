@@ -99,7 +99,7 @@ public class NotInImpersonationTypeOperator implements ImpersonationTypeOperator
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EImpersonationTypeOperatorType getType() {
 		return type;
 	}

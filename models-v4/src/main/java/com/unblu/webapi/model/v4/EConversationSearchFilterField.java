@@ -117,6 +117,11 @@ public enum EConversationSearchFilterField {
 	HAS_UNREAD_MESSAGES("HAS_UNREAD_MESSAGES"),
 
 	/**
+	 * INHERIT_CONFIGURATION_AND_TEXTS: Filter by the &#39;inheritConfigurationAndTexts&#39; attribute
+	 */
+	INHERIT_CONFIGURATION_AND_TEXTS("INHERIT_CONFIGURATION_AND_TEXTS"),
+
+	/**
 	 * COMPOUND: Filter for linking other filters with logical AND/OR
 	 */
 	COMPOUND("COMPOUND");

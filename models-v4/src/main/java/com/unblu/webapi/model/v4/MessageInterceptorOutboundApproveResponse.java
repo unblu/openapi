@@ -94,7 +94,7 @@ public class MessageInterceptorOutboundApproveResponse implements MessageInterce
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EMessageInterceptorOutboundResponseType getType() {
 		return type;
 	}

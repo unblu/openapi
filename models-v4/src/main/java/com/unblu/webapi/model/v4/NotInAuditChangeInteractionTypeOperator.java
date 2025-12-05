@@ -99,7 +99,7 @@ public class NotInAuditChangeInteractionTypeOperator implements AuditChangeInter
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAuditChangeInteractionTypeOperatorType getType() {
 		return type;
 	}

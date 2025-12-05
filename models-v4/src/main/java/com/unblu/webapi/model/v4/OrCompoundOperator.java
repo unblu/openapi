@@ -92,7 +92,7 @@ public class OrCompoundOperator implements CompoundOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECompoundOperatorType getType() {
 		return type;
 	}

@@ -97,7 +97,7 @@ public class CreationTimestampConversationSearchFilter implements ConversationSe
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSearchFilterField getField() {
 		return field;
 	}

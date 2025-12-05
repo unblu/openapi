@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	InboundRequestPushNotificationEvent.JSON_PROPERTY_LOCALE,
 	InboundRequestPushNotificationEvent.JSON_PROPERTY_CONVERSATION_ID,
 	InboundRequestPushNotificationEvent.JSON_PROPERTY_DEVICE_TOKENS,
+	InboundRequestPushNotificationEvent.JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA,
 	InboundRequestPushNotificationEvent.JSON_PROPERTY_INVITATION_ID,
 	InboundRequestPushNotificationEvent.JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE,
 	InboundRequestPushNotificationEvent.JSON_PROPERTY_CONTEXT_PERSON,
@@ -100,6 +101,10 @@ public class InboundRequestPushNotificationEvent {
 	public static final String JSON_PROPERTY_DEVICE_TOKENS = "deviceTokens";
 	@JsonProperty(JSON_PROPERTY_DEVICE_TOKENS)
 	private List<String> deviceTokens = null;
+
+	public static final String JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA = "internalMobilePushNotificationData";
+	@JsonProperty(JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA)
+	private String internalMobilePushNotificationData;
 
 	public static final String JSON_PROPERTY_INVITATION_ID = "invitationId";
 	@JsonProperty(JSON_PROPERTY_INVITATION_ID)
@@ -277,6 +282,26 @@ public class InboundRequestPushNotificationEvent {
 		this.deviceTokens = deviceTokens;
 	}
 
+	public InboundRequestPushNotificationEvent internalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+		return this;
+	}
+
+	/**
+	 * Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way
+	 * it would if it were sent directly from Unblu Spark via Firebase or APNs.
+	 * 
+	 * @return internalMobilePushNotificationData
+	 **/
+	@ApiModelProperty(value = "Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way it would if it were sent directly from Unblu Spark via Firebase or APNs.")
+	public String getInternalMobilePushNotificationData() {
+		return internalMobilePushNotificationData;
+	}
+
+	public void setInternalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+	}
+
 	public InboundRequestPushNotificationEvent invitationId(String invitationId) {
 		this.invitationId = invitationId;
 		return this;
@@ -370,6 +395,7 @@ public class InboundRequestPushNotificationEvent {
 				Objects.equals(this.locale, inboundRequestPushNotificationEvent.locale) &&
 				Objects.equals(this.conversationId, inboundRequestPushNotificationEvent.conversationId) &&
 				Objects.equals(this.deviceTokens, inboundRequestPushNotificationEvent.deviceTokens) &&
+				Objects.equals(this.internalMobilePushNotificationData, inboundRequestPushNotificationEvent.internalMobilePushNotificationData) &&
 				Objects.equals(this.invitationId, inboundRequestPushNotificationEvent.invitationId) &&
 				Objects.equals(this.initialEngagementType, inboundRequestPushNotificationEvent.initialEngagementType) &&
 				Objects.equals(this.contextPerson, inboundRequestPushNotificationEvent.contextPerson) &&
@@ -378,7 +404,7 @@ public class InboundRequestPushNotificationEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, invitationId, initialEngagementType, contextPerson, conversationStartUrl);
+		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, internalMobilePushNotificationData, invitationId, initialEngagementType, contextPerson, conversationStartUrl);
 	}
 
 	@Override
@@ -393,6 +419,7 @@ public class InboundRequestPushNotificationEvent {
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    deviceTokens: ").append(toIndentedString(deviceTokens)).append("\n");
+		sb.append("    internalMobilePushNotificationData: ").append(toIndentedString(internalMobilePushNotificationData)).append("\n");
 		sb.append("    invitationId: ").append(toIndentedString(invitationId)).append("\n");
 		sb.append("    initialEngagementType: ").append(toIndentedString(initialEngagementType)).append("\n");
 		sb.append("    contextPerson: ").append(toIndentedString(contextPerson)).append("\n");

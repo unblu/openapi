@@ -97,7 +97,7 @@ public class TargetTypeConversationInvitationSearchFilter implements Conversatio
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationInvitationSearchFilterField getField() {
 		return field;
 	}

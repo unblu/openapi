@@ -97,7 +97,7 @@ public class NotEqualsConversationVisibilityOperator implements ConversationVisi
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationVisibilityOperatorType getType() {
 		return type;
 	}

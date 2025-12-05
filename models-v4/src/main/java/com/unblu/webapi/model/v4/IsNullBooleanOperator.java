@@ -92,7 +92,7 @@ public class IsNullBooleanOperator implements BooleanOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EBooleanOperatorType getType() {
 		return type;
 	}

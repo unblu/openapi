@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RevokeCallPushNotificationEvent.JSON_PROPERTY_LOCALE,
 	RevokeCallPushNotificationEvent.JSON_PROPERTY_CONVERSATION_ID,
 	RevokeCallPushNotificationEvent.JSON_PROPERTY_DEVICE_TOKENS,
+	RevokeCallPushNotificationEvent.JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA,
 	RevokeCallPushNotificationEvent.JSON_PROPERTY_CALL_STATE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -97,6 +98,10 @@ public class RevokeCallPushNotificationEvent {
 	public static final String JSON_PROPERTY_DEVICE_TOKENS = "deviceTokens";
 	@JsonProperty(JSON_PROPERTY_DEVICE_TOKENS)
 	private List<String> deviceTokens = null;
+
+	public static final String JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA = "internalMobilePushNotificationData";
+	@JsonProperty(JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA)
+	private String internalMobilePushNotificationData;
 
 	public static final String JSON_PROPERTY_CALL_STATE = "callState";
 	@JsonProperty(JSON_PROPERTY_CALL_STATE)
@@ -262,6 +267,26 @@ public class RevokeCallPushNotificationEvent {
 		this.deviceTokens = deviceTokens;
 	}
 
+	public RevokeCallPushNotificationEvent internalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+		return this;
+	}
+
+	/**
+	 * Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way
+	 * it would if it were sent directly from Unblu Spark via Firebase or APNs.
+	 * 
+	 * @return internalMobilePushNotificationData
+	 **/
+	@ApiModelProperty(value = "Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way it would if it were sent directly from Unblu Spark via Firebase or APNs.")
+	public String getInternalMobilePushNotificationData() {
+		return internalMobilePushNotificationData;
+	}
+
+	public void setInternalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+	}
+
 	public RevokeCallPushNotificationEvent callState(ECallState callState) {
 		this.callState = callState;
 		return this;
@@ -298,12 +323,13 @@ public class RevokeCallPushNotificationEvent {
 				Objects.equals(this.locale, revokeCallPushNotificationEvent.locale) &&
 				Objects.equals(this.conversationId, revokeCallPushNotificationEvent.conversationId) &&
 				Objects.equals(this.deviceTokens, revokeCallPushNotificationEvent.deviceTokens) &&
+				Objects.equals(this.internalMobilePushNotificationData, revokeCallPushNotificationEvent.internalMobilePushNotificationData) &&
 				Objects.equals(this.callState, revokeCallPushNotificationEvent.callState);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, callState);
+		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, internalMobilePushNotificationData, callState);
 	}
 
 	@Override
@@ -318,6 +344,7 @@ public class RevokeCallPushNotificationEvent {
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    deviceTokens: ").append(toIndentedString(deviceTokens)).append("\n");
+		sb.append("    internalMobilePushNotificationData: ").append(toIndentedString(internalMobilePushNotificationData)).append("\n");
 		sb.append("    callState: ").append(toIndentedString(callState)).append("\n");
 		sb.append("}");
 		return sb.toString();

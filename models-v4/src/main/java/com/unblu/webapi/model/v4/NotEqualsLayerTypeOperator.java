@@ -97,7 +97,7 @@ public class NotEqualsLayerTypeOperator implements LayerTypeOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ELayerTypeOperatorType getType() {
 		return type;
 	}

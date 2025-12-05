@@ -142,7 +142,7 @@ public class VisitorPersonStateData implements PersonStateData {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonStateType getType() {
 		return type;
 	}

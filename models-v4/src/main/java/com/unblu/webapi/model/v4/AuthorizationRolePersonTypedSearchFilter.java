@@ -97,7 +97,7 @@ public class AuthorizationRolePersonTypedSearchFilter implements PersonTypedSear
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonTypedSearchFilterField getField() {
 		return field;
 	}

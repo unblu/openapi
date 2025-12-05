@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	IncomingCallPushNotificationEvent.JSON_PROPERTY_LOCALE,
 	IncomingCallPushNotificationEvent.JSON_PROPERTY_CONVERSATION_ID,
 	IncomingCallPushNotificationEvent.JSON_PROPERTY_DEVICE_TOKENS,
+	IncomingCallPushNotificationEvent.JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA,
 	IncomingCallPushNotificationEvent.JSON_PROPERTY_CALL_STATE,
 	IncomingCallPushNotificationEvent.JSON_PROPERTY_CALL_TYPE,
 	IncomingCallPushNotificationEvent.JSON_PROPERTY_CALL_START_TIMESTAMP,
@@ -101,6 +102,10 @@ public class IncomingCallPushNotificationEvent {
 	public static final String JSON_PROPERTY_DEVICE_TOKENS = "deviceTokens";
 	@JsonProperty(JSON_PROPERTY_DEVICE_TOKENS)
 	private List<String> deviceTokens = null;
+
+	public static final String JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA = "internalMobilePushNotificationData";
+	@JsonProperty(JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA)
+	private String internalMobilePushNotificationData;
 
 	public static final String JSON_PROPERTY_CALL_STATE = "callState";
 	@JsonProperty(JSON_PROPERTY_CALL_STATE)
@@ -282,6 +287,26 @@ public class IncomingCallPushNotificationEvent {
 		this.deviceTokens = deviceTokens;
 	}
 
+	public IncomingCallPushNotificationEvent internalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+		return this;
+	}
+
+	/**
+	 * Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way
+	 * it would if it were sent directly from Unblu Spark via Firebase or APNs.
+	 * 
+	 * @return internalMobilePushNotificationData
+	 **/
+	@ApiModelProperty(value = "Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way it would if it were sent directly from Unblu Spark via Firebase or APNs.")
+	public String getInternalMobilePushNotificationData() {
+		return internalMobilePushNotificationData;
+	}
+
+	public void setInternalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+	}
+
 	public IncomingCallPushNotificationEvent callState(ECallState callState) {
 		this.callState = callState;
 		return this;
@@ -394,6 +419,7 @@ public class IncomingCallPushNotificationEvent {
 				Objects.equals(this.locale, incomingCallPushNotificationEvent.locale) &&
 				Objects.equals(this.conversationId, incomingCallPushNotificationEvent.conversationId) &&
 				Objects.equals(this.deviceTokens, incomingCallPushNotificationEvent.deviceTokens) &&
+				Objects.equals(this.internalMobilePushNotificationData, incomingCallPushNotificationEvent.internalMobilePushNotificationData) &&
 				Objects.equals(this.callState, incomingCallPushNotificationEvent.callState) &&
 				Objects.equals(this.callType, incomingCallPushNotificationEvent.callType) &&
 				Objects.equals(this.callStartTimestamp, incomingCallPushNotificationEvent.callStartTimestamp) &&
@@ -403,7 +429,7 @@ public class IncomingCallPushNotificationEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, callState, callType, callStartTimestamp, callerName, callerPersonId);
+		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, internalMobilePushNotificationData, callState, callType, callStartTimestamp, callerName, callerPersonId);
 	}
 
 	@Override
@@ -418,6 +444,7 @@ public class IncomingCallPushNotificationEvent {
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    deviceTokens: ").append(toIndentedString(deviceTokens)).append("\n");
+		sb.append("    internalMobilePushNotificationData: ").append(toIndentedString(internalMobilePushNotificationData)).append("\n");
 		sb.append("    callState: ").append(toIndentedString(callState)).append("\n");
 		sb.append("    callType: ").append(toIndentedString(callType)).append("\n");
 		sb.append("    callStartTimestamp: ").append(toIndentedString(callStartTimestamp)).append("\n");

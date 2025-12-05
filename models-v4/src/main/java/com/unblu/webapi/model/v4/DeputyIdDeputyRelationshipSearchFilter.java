@@ -97,7 +97,7 @@ public class DeputyIdDeputyRelationshipSearchFilter implements DeputyRelationshi
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDeputyRelationshipSearchFilterField getField() {
 		return field;
 	}

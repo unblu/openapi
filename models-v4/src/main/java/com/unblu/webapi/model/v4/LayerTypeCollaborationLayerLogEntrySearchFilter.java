@@ -97,7 +97,7 @@ public class LayerTypeCollaborationLayerLogEntrySearchFilter implements Collabor
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerLogEntrySearchFilterField getField() {
 		return field;
 	}

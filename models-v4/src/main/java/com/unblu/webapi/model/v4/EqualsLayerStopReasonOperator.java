@@ -97,7 +97,7 @@ public class EqualsLayerStopReasonOperator implements LayerStopReasonOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ELayerStopReasonOperatorType getType() {
 		return type;
 	}

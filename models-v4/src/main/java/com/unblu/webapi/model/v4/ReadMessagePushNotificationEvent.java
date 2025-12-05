@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_LOCALE,
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_CONVERSATION_ID,
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_DEVICE_TOKENS,
+	ReadMessagePushNotificationEvent.JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA,
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_MESSAGE_ID,
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_READ_TIMESTAMP,
 	ReadMessagePushNotificationEvent.JSON_PROPERTY_NOTIFICATION_COUNT,
@@ -100,6 +101,10 @@ public class ReadMessagePushNotificationEvent {
 	public static final String JSON_PROPERTY_DEVICE_TOKENS = "deviceTokens";
 	@JsonProperty(JSON_PROPERTY_DEVICE_TOKENS)
 	private List<String> deviceTokens = null;
+
+	public static final String JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA = "internalMobilePushNotificationData";
+	@JsonProperty(JSON_PROPERTY_INTERNAL_MOBILE_PUSH_NOTIFICATION_DATA)
+	private String internalMobilePushNotificationData;
 
 	public static final String JSON_PROPERTY_MESSAGE_ID = "messageId";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_ID)
@@ -277,6 +282,26 @@ public class ReadMessagePushNotificationEvent {
 		this.deviceTokens = deviceTokens;
 	}
 
+	public ReadMessagePushNotificationEvent internalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+		return this;
+	}
+
+	/**
+	 * Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way
+	 * it would if it were sent directly from Unblu Spark via Firebase or APNs.
+	 * 
+	 * @return internalMobilePushNotificationData
+	 **/
+	@ApiModelProperty(value = "Internal data that must be passed to the Unblu mobile SDK without modification. This is required for the SDK to handle the push notification in the same way it would if it were sent directly from Unblu Spark via Firebase or APNs.")
+	public String getInternalMobilePushNotificationData() {
+		return internalMobilePushNotificationData;
+	}
+
+	public void setInternalMobilePushNotificationData(String internalMobilePushNotificationData) {
+		this.internalMobilePushNotificationData = internalMobilePushNotificationData;
+	}
+
 	public ReadMessagePushNotificationEvent messageId(String messageId) {
 		this.messageId = messageId;
 		return this;
@@ -370,6 +395,7 @@ public class ReadMessagePushNotificationEvent {
 				Objects.equals(this.locale, readMessagePushNotificationEvent.locale) &&
 				Objects.equals(this.conversationId, readMessagePushNotificationEvent.conversationId) &&
 				Objects.equals(this.deviceTokens, readMessagePushNotificationEvent.deviceTokens) &&
+				Objects.equals(this.internalMobilePushNotificationData, readMessagePushNotificationEvent.internalMobilePushNotificationData) &&
 				Objects.equals(this.messageId, readMessagePushNotificationEvent.messageId) &&
 				Objects.equals(this.readTimestamp, readMessagePushNotificationEvent.readTimestamp) &&
 				Objects.equals(this.notificationCount, readMessagePushNotificationEvent.notificationCount) &&
@@ -378,7 +404,7 @@ public class ReadMessagePushNotificationEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, messageId, readTimestamp, notificationCount, recipientNotificationCount);
+		return Objects.hash($type, timestamp, eventType, accountId, recipient, locale, conversationId, deviceTokens, internalMobilePushNotificationData, messageId, readTimestamp, notificationCount, recipientNotificationCount);
 	}
 
 	@Override
@@ -393,6 +419,7 @@ public class ReadMessagePushNotificationEvent {
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    deviceTokens: ").append(toIndentedString(deviceTokens)).append("\n");
+		sb.append("    internalMobilePushNotificationData: ").append(toIndentedString(internalMobilePushNotificationData)).append("\n");
 		sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
 		sb.append("    readTimestamp: ").append(toIndentedString(readTimestamp)).append("\n");
 		sb.append("    notificationCount: ").append(toIndentedString(notificationCount)).append("\n");

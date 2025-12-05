@@ -352,7 +352,7 @@ public class InternalMessageInterceptorData implements MessageInterceptorData {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EMessageInterceptorType getType() {
 		return type;
 	}

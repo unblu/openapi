@@ -97,7 +97,7 @@ public class EqualsInitialEngagementTypeOperator implements InitialEngagementTyp
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInitialEngagementTypeOperatorType getType() {
 		return type;
 	}

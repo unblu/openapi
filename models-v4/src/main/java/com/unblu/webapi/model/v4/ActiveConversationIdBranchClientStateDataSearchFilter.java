@@ -97,7 +97,7 @@ public class ActiveConversationIdBranchClientStateDataSearchFilter implements Br
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EBranchClientStateDataSearchFilterField getField() {
 		return field;
 	}

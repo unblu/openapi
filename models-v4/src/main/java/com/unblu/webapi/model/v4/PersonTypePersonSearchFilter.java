@@ -97,7 +97,7 @@ public class PersonTypePersonSearchFilter implements PersonSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonSearchFilterField getField() {
 		return field;
 	}

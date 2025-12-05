@@ -97,7 +97,7 @@ public class BranchIdBranchClientSearchFilter implements BranchClientSearchFilte
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EBranchClientSearchFilterField getField() {
 		return field;
 	}

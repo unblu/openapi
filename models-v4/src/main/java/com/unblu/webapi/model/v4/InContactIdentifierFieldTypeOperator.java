@@ -99,7 +99,7 @@ public class InContactIdentifierFieldTypeOperator implements ContactIdentifierFi
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EContactIdentifierFieldTypeOperatorType getType() {
 		return type;
 	}

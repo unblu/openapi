@@ -97,7 +97,7 @@ public class VisibilityConversationSearchFilter implements ConversationSearchFil
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSearchFilterField getField() {
 		return field;
 	}

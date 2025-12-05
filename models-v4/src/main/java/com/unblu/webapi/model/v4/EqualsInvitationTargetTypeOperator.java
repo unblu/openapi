@@ -97,7 +97,7 @@ public class EqualsInvitationTargetTypeOperator implements InvitationTargetTypeO
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInvitationTargetTypeOperatorType getType() {
 		return type;
 	}

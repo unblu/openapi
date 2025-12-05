@@ -97,7 +97,7 @@ public class EqualsContactIdentifierFieldTypeOperator implements ContactIdentifi
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EContactIdentifierFieldTypeOperatorType getType() {
 		return type;
 	}

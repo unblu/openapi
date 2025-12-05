@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = CreationTimestampConversationTemplateSearchFilter.class, name = "CREATION_TIMESTAMP"),
 	@JsonSubTypes.Type(value = DefaultTemplateConversationTemplateSearchFilter.class, name = "DEFAULT_TEMPLATE"),
 	@JsonSubTypes.Type(value = DescriptionConversationTemplateSearchFilter.class, name = "DESCRIPTION"),
+	@JsonSubTypes.Type(value = InheritConfigurationAndTextsConversationTemplateSearchFilter.class, name = "INHERIT_CONFIGURATION_AND_TEXTS"),
 	@JsonSubTypes.Type(value = InitialEngagementTypeConversationTemplateSearchFilter.class, name = "INITIAL_ENGAGEMENT_TYPE"),
 	@JsonSubTypes.Type(value = ModificationTimestampConversationTemplateSearchFilter.class, name = "MODIFICATION_TIMESTAMP"),
 	@JsonSubTypes.Type(value = NameConversationTemplateSearchFilter.class, name = "NAME"),

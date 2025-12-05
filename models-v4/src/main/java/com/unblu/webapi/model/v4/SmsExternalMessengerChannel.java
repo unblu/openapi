@@ -363,7 +363,7 @@ public class SmsExternalMessengerChannel implements ExternalMessengerChannel {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerChannelType getType() {
 		return type;
 	}

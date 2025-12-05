@@ -97,7 +97,7 @@ public class NotEqualsCollaborationLayerEventSourceTypeOperator implements Colla
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECollaborationLayerEventSourceTypeOperatorType getType() {
 		return type;
 	}

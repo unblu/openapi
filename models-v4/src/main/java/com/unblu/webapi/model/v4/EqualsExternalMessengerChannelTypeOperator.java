@@ -97,7 +97,7 @@ public class EqualsExternalMessengerChannelTypeOperator implements ExternalMesse
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerChannelTypeOperatorType getType() {
 		return type;
 	}

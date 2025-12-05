@@ -97,7 +97,7 @@ public class NotEqualsExternalMessengerChannelTypeOperator implements ExternalMe
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerChannelTypeOperatorType getType() {
 		return type;
 	}

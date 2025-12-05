@@ -97,7 +97,7 @@ public class EqualsAwaitedPersonTypeOperator implements AwaitedPersonTypeOperato
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAwaitedPersonTypeOperatorType getType() {
 		return type;
 	}

@@ -97,7 +97,7 @@ public class SourceIdConversationSearchFilter implements ConversationSearchFilte
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSearchFilterField getField() {
 		return field;
 	}

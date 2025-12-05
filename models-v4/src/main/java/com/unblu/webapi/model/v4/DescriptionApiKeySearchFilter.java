@@ -97,7 +97,7 @@ public class DescriptionApiKeySearchFilter implements ApiKeySearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EApiKeySearchFilterField getField() {
 		return field;
 	}

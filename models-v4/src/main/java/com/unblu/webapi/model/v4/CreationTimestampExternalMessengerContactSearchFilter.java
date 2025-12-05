@@ -97,7 +97,7 @@ public class CreationTimestampExternalMessengerContactSearchFilter implements Ex
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EExternalMessengerContactSearchFilterField getField() {
 		return field;
 	}
