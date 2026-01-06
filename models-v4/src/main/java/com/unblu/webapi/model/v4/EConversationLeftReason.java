@@ -75,6 +75,11 @@ public enum EConversationLeftReason {
 	ASSISTANT_SYNCHRONIZATION("ASSISTANT_SYNCHRONIZATION"),
 
 	/**
+	 * DEPUTY_REMOVAL
+	 */
+	DEPUTY_REMOVAL("DEPUTY_REMOVAL"),
+
+	/**
 	 * OTHER
 	 */
 	OTHER("OTHER");

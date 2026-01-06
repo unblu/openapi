@@ -85,6 +85,11 @@ public enum EOffboardingReason {
 	ASSISTANT_SYNCHRONIZATION("ASSISTANT_SYNCHRONIZATION"),
 
 	/**
+	 * DEPUTY_REMOVAL: Due to automatic deputy removal the person was removed from the conversation
+	 */
+	DEPUTY_REMOVAL("DEPUTY_REMOVAL"),
+
+	/**
 	 * CALL_NOT_ANSWERED: The incoming audio or video call was not answered in time for the conversation
 	 */
 	CALL_NOT_ANSWERED("CALL_NOT_ANSWERED"),

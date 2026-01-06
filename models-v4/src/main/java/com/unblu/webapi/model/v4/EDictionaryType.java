@@ -5,31 +5,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ExpandFields
+ * Type of dictionary
  */
-public enum ExpandFields {
+public enum EDictionaryType {
 
-	ACTIONICON("actionIcon"),
-
-	AFFFILE("affFile"),
-
-	AVATAR("avatar"),
-
-	CHANNELICON("channelIcon"),
-
-	CONFIGURATION("configuration"),
-
-	DICFILE("dicFile"),
-
-	FLOORPLANIMAGE("floorPlanImage"),
-
-	METADATA("metadata"),
-
-	TEXT("text");
+	/**
+	 * HUNSPELL: HUNSPELL: Dictionary in Hunspell format
+	 */
+	HUNSPELL("HUNSPELL");
 
 	private String value;
 
-	ExpandFields(String value) {
+	EDictionaryType(String value) {
 		this.value = value;
 	}
 
@@ -44,8 +31,8 @@ public enum ExpandFields {
 	}
 
 	@JsonCreator
-	public static ExpandFields fromValue(String value) {
-		for (ExpandFields b : ExpandFields.values()) {
+	public static EDictionaryType fromValue(String value) {
+		for (EDictionaryType b : EDictionaryType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

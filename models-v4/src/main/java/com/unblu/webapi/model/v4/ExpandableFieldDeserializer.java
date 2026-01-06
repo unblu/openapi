@@ -42,6 +42,8 @@ public class ExpandableFieldDeserializer extends JsonDeserializer<ExpandableFiel
 				return Avatar.class;
 			case "image":
 				return Image.class;
+			case "dictionaryfilecontent":
+				return DictionaryFileContent.class;
 			default:
 				throw new JsonParseException(p, "Can not deserialize expandable value, unxpected '$_type' value:" + type);
 			}

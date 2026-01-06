@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.28.4
+  version: 8.29.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -52,6 +52,10 @@ tags:
   description: Service for Custom Actions
 - name: DeputyRelationships
   description: Service to manage deputy relationships. A deputy relationship is needed if deputy delegation should be executed for unhandled conversation requests.
+- name: Dictionaries
+  description: Service to manage dictionaries.
+- name: DictionaryEntryService
+  description: "Service to manage dictionary entries.<br> Dictionary entries can be created at the account level (accessible to all users in the account) or at the user level (accessible only to the specific user). <p> The entries a user can edit depend on their role: <ul> <li>All dictionary entries of their own user.</li> <li>All dictionary entries of the account if role is: ADMIN or higher.</li> <li>All dictionary entries of other users if role is: ADMIN or higher.</li> </ul>"
 - name: Domains
   description: Service to manage the domains of the account. A domain needs to be defined to use unblu on it.
 - name: ExternalMessengerContacts
@@ -7799,6 +7803,319 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /dictionaries/create:
+    post:
+      tags:
+      - Dictionaries
+      summary: create
+      description: Creates a new dictionary.<br>
+      operationId: dictionariesCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: the dictionary to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DictionaryData"
+        required: true
+      responses:
+        "200":
+          description: the dictionary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DictionaryData"
+              examples:
+                create-dictionary:
+                  summary: create dictionary
+                  description: New dictionary
+                  value:
+                    $_type: DictionaryData
+                    id: EAAadabo2FBDEcn-356Cm66
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    type: HUNSPELL
+                    language: cs
+                    affFile: DEFAULT_AFF_cs
+                    dicFile: DEFAULT_DIC_cs
+                create-expanded-dictionary:
+                  summary: create expanded dictionary
+                  description: New expanded dictionary
+                  value:
+                    $_type: DictionaryData
+                    id: EAAadabo2FBDEcn-356Cm66
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    type: HUNSPELL
+                    language: cs
+                    affFile:
+                      $_type: DictionaryFileContent
+                      id: AAEadabo2FBDEcn-356Cm8d
+                      content: "data:text/plain;base64,YWZmIGNvbnRlbnQ="
+                    dicFile:
+                      $_type: DictionaryFileContent
+                      id: AAEadabo2FBDEcn-356Cm8d
+                      content: "data:text/plain;base64,ZGljIGNvbnRlbnQ="
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /dictionaries/{dictionaryId}/delete:
+    delete:
+      tags:
+      - Dictionaries
+      summary: delete
+      description: Deletes an existing dictionary.<br>
+      operationId: dictionariesDelete
+      parameters:
+      - name: dictionaryId
+        in: path
+        description: the ID of the dictionary to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /dictionaries/getByLanguage:
+    get:
+      tags:
+      - Dictionaries
+      summary: getByLanguage
+      description: Searches for an existing dictionary with the specified language.<br>
+      operationId: dictionariesGetByLanguage
+      parameters:
+      - name: language
+        in: query
+        description: the language of the dictionary
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: "the suggestion source with the specified name, or an error if none is found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DictionaryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: PUBLIC
+      x-required-role:
+      - ANONYMOUS_USER
+  /dictionaries/{dictionaryId}/read:
+    get:
+      tags:
+      - Dictionaries
+      summary: read
+      description: Reads an existing dictionary.<br>
+      operationId: dictionariesRead
+      parameters:
+      - name: dictionaryId
+        in: path
+        description: the ID of the dictionary
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: the dictionary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DictionaryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /dictionaries/update:
+    post:
+      tags:
+      - Dictionaries
+      summary: update
+      description: Updates an existing dictionary.<br>
+      operationId: dictionariesUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: the dictionary to update
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DictionaryData"
+        required: true
+      responses:
+        "200":
+          description: the updated dictionary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DictionaryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /dictionaryentryservice/create:
+    post:
+      tags:
+      - DictionaryEntryService
+      summary: create
+      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
+      operationId: dictionaryEntryServiceCreate
+      requestBody:
+        description: The entity to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DictionaryEntry"
+        required: true
+      responses:
+        "200":
+          description: The entity as it exists now in the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DictionaryEntry"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /dictionaryentryservice/{dictionaryEntryId}/delete:
+    delete:
+      tags:
+      - DictionaryEntryService
+      summary: delete
+      description: Deletes the dictionary entry with the given ID<br>
+      operationId: dictionaryEntryServiceDelete
+      parameters:
+      - name: dictionaryEntryId
+        in: path
+        description: The ID of the dictionary entry to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /dictionaryentryservice/{dictionaryEntryId}/read:
+    get:
+      tags:
+      - DictionaryEntryService
+      summary: read
+      description: Returns the dictionary entry with the given ID<br>
+      operationId: dictionaryEntryServiceRead
+      parameters:
+      - name: dictionaryEntryId
+        in: path
+        description: ID of the dictionary entry to return
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The dictionary entry with the given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DictionaryEntry"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /dictionaryentryservice/update:
+    post:
+      tags:
+      - DictionaryEntryService
+      summary: update
+      description: Updates the entity in the system with the given entity.<br>
+      operationId: dictionaryEntryServiceUpdate
+      requestBody:
+        description: The entity to update
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DictionaryEntry"
+        required: true
+      responses:
+        "200":
+          description: The updated version of the entity. Use always this instance for further processing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DictionaryEntry"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /domains/create:
     post:
       tags:
@@ -27677,6 +27994,104 @@ components:
           CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampDialogBotSearchFilter"
           MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampDialogBotSearchFilter"
           NAME: "#/components/schemas/NameDialogBotSearchFilter"
+    DictionaryData:
+      type: object
+      description: Dictionary model class for spell checking
+      properties:
+        $_type:
+          type: string
+          default: DictionaryData
+          enum:
+          - DictionaryData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        type:
+          $ref: "#/components/schemas/EDictionaryType"
+        language:
+          type: string
+          description: "Language of the dictionary (e.g., \"en\", \"de\", \"fr\")"
+        affFile:
+          description: "AFF file of the entity: ID that can be expanded."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/DictionaryFileContent"
+          x-expand-query-key: affFile
+          x-type: ExpandableField
+        dicFile:
+          description: "DIC file of the entity: ID that can be expanded."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/DictionaryFileContent"
+          x-expand-query-key: dicFile
+          x-type: ExpandableField
+    DictionaryEntry:
+      type: object
+      description: Model of dictionary. Dictionaries contain words for spell checking purposes.
+      properties:
+        $_type:
+          type: string
+          default: DictionaryEntry
+          enum:
+          - DictionaryEntry
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        ownerId:
+          type: string
+          description: Id of the owner of the entity. Can not be omitted.
+        ownerType:
+          $ref: "#/components/schemas/EPropertyOwnerType"
+        word:
+          type: string
+          description: The word stored in the dictionary. Maximum of 100 characters.
+        language:
+          type: string
+          description: "<p> Only dictionary words without a language or matching a conversation's language are used for spell checking.<br> The following rules apply: <ul> <li>Dictionary words with no language defined are used for all conversations.</li> <li>If the conversation language (e.g. \"en-us\") is more specific than the language of the dictionary word (e.g. \"en\"), the dictionary word is also used.</li> <li>If the language of the dictionary word (e.g. \"en-us\") is <i>more</i> specific than the conversation language (e.g. \"en\"), the dictionary word <b>isn't</b> used.</li>"
+    DictionaryFileContent:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: DictionaryFileContent
+          enum:
+          - DictionaryFileContent
+        id:
+          type: string
+          description: The id of the file in the Blob Store
+        content:
+          type: string
+          description: "File content as a data URL, prefixed with the <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code> scheme according to RFC2397"
     DocumentCobrowsingCollaborationLayerEventData:
       type: object
       description: An event triggered every time a document action happens in a document co-browsing collaboration layer
@@ -29064,6 +29479,7 @@ components:
       - PUBLIC_DIALIN_ENDED
       - EXTERNAL_CONTACT_UNLINKED
       - ASSISTANT_SYNCHRONIZATION
+      - DEPUTY_REMOVAL
       - OTHER
       x-enum-descriptions:
       - FORWARDED
@@ -29079,6 +29495,7 @@ components:
       - PUBLIC_DIALIN_ENDED
       - EXTERNAL_CONTACT_UNLINKED
       - ASSISTANT_SYNCHRONIZATION
+      - DEPUTY_REMOVAL
       - OTHER
     EConversationLinkType:
       type: string
@@ -30098,6 +30515,13 @@ components:
       - "BOT_PERSON_ID: Filter by the 'botPersonId' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EDictionaryType:
+      type: string
+      description: Type of dictionary
+      enum:
+      - HUNSPELL
+      x-enum-descriptions:
+      - "HUNSPELL: HUNSPELL: Dictionary in Hunspell format"
     EDocumentActionType:
       type: string
       description: Document co-browsing event action type for differentiating the triggering personId field
@@ -30939,6 +31363,7 @@ components:
       - NO_AGENT_AVAILABLE
       - PUBLIC_DIALIN_ENDED
       - ASSISTANT_SYNCHRONIZATION
+      - DEPUTY_REMOVAL
       - CALL_NOT_ANSWERED
       - OTHER
       x-enum-descriptions:
@@ -30957,6 +31382,7 @@ components:
       - "NO_AGENT_AVAILABLE: There was no agent available for the conversation"
       - "PUBLIC_DIALIN_ENDED: The public call dial-in ended, which automatically removes the person from the conversation"
       - "ASSISTANT_SYNCHRONIZATION: Due to assistant synchronization the person was automatically removed from the conversation"
+      - "DEPUTY_REMOVAL: Due to automatic deputy removal the person was removed from the conversation"
       - "CALL_NOT_ANSWERED: The incoming audio or video call was not answered in time for the conversation"
       - "OTHER: Some other unspecified reason"
     EOnlineState:
@@ -32619,9 +33045,11 @@ components:
       type: string
       enum:
       - actionIcon
+      - affFile
       - avatar
       - channelIcon
       - configuration
+      - dicFile
       - floorPlanImage
       - metadata
       - text
