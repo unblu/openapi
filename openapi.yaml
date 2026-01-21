@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.29.1
+  version: 8.30.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -15638,6 +15638,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.message_deleted:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.message_deleted
+              description: "Represents an event that is triggered when a message is deleted in a conversation. <p> Participants may delete a message for all participants or just themselves. In the latter case, the event is triggered each time a participant deletes the message for themselves. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+              operationId: conversationMessageDeletedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationMessageDeletedEvent"
+              responses:
+                "200":
+                  description: OK
         conversation.message_state:
           '{$request.body#/endpoint}':
             post:
@@ -24034,6 +24048,38 @@ components:
         url:
           type: string
           description: Url of the link
+    ConversationMessageDeletedEvent:
+      type: object
+      description: "Represents an event that is triggered when a message is deleted in a conversation. <p> Participants may delete a message for all participants or just themselves. In the latter case, the event is triggered each time a participant deletes the message for themselves. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: ConversationMessageDeletedEvent
+          enum:
+          - ConversationMessageDeletedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The time (Unix time in ms) when the event was generated
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationMessage:
+          $ref: "#/components/schemas/MessageData"
+        markedAsDeletedForEverybody:
+          type: boolean
+          description: Whether the message is deleted for all participants
+        deletingPersonId:
+          type: string
+          description: The ID of the person who marked the message as deleted for all participants. Null if the message wasn't deleted for all participants.
+        deletedOnlyForPersonIds:
+          type: array
+          description: The IDs of the participants who have marked this message as deleted for themselves
+          items:
+            type: string
     ConversationMessageStateEvent:
       type: object
       description: "Event emitted when message is delivered/read. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
