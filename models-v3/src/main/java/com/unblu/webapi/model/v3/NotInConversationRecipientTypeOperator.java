@@ -99,7 +99,7 @@ public class NotInConversationRecipientTypeOperator implements ConversationRecip
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationRecipientTypeOperatorType getType() {
 		return type;
 	}

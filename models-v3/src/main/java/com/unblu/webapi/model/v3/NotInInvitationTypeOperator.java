@@ -99,7 +99,7 @@ public class NotInInvitationTypeOperator implements InvitationTypeOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInvitationTypeOperatorType getType() {
 		return type;
 	}

@@ -97,7 +97,7 @@ public class OnlineStatePersonStateSearchFilter implements PersonStateSearchFilt
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonStateSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class EndpointWebhookCallLogSearchFilter implements WebhookCallLogSearchF
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EWebhookCallLogSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class EndTimestampConversationSearchFilter implements ConversationSearchF
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSearchFilterField getField() {
 		return field;
 	}

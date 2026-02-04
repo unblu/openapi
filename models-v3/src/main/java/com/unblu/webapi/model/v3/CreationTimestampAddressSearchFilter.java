@@ -97,7 +97,7 @@ public class CreationTimestampAddressSearchFilter implements AddressSearchFilter
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAddressSearchFilterField getField() {
 		return field;
 	}

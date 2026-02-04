@@ -97,7 +97,7 @@ public class LowerThanLongOperator implements LongOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ELongOperatorType getType() {
 		return type;
 	}

@@ -108,7 +108,7 @@ public class BodyElement implements IBody {
 	 * 
 	 * @return $type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public TypeEnum get$Type() {
 		return $type;
 	}

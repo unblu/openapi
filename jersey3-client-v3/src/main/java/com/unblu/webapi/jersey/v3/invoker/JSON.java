@@ -18,20 +18,25 @@ public class JSON implements ContextResolver<ObjectMapper> {
 	private final ObjectMapper mapper;
 
 	public JSON() {
-		mapper = new ObjectMapper();
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
-		mapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
-		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		mapper.disable(MapperFeature.AUTO_DETECT_CREATORS);
-		mapper.disable(MapperFeature.AUTO_DETECT_FIELDS);
-		mapper.disable(MapperFeature.AUTO_DETECT_GETTERS);
-		mapper.disable(MapperFeature.AUTO_DETECT_IS_GETTERS);
-		mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-		mapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
-		mapper.setDateFormat(new RFC3339DateFormat());
-		mapper.registerModule(new JavaTimeModule());
+		mapper = createObjectMapper();
+	}
+
+	public static ObjectMapper createObjectMapper() {
+		final ObjectMapper m = new ObjectMapper();
+		m.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		m.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
+		m.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+		m.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		m.disable(MapperFeature.AUTO_DETECT_CREATORS);
+		m.disable(MapperFeature.AUTO_DETECT_FIELDS);
+		m.disable(MapperFeature.AUTO_DETECT_GETTERS);
+		m.disable(MapperFeature.AUTO_DETECT_IS_GETTERS);
+		m.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+		m.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
+		m.setDateFormat(new RFC3339DateFormat());
+		m.registerModule(new JavaTimeModule());
+		return m;
 	}
 
 	/**

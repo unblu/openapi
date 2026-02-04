@@ -97,7 +97,7 @@ public class EqualsAuditChangeInteractionTypeOperator implements AuditChangeInte
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAuditChangeInteractionTypeOperatorType getType() {
 		return type;
 	}

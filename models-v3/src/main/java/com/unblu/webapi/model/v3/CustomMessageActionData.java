@@ -690,7 +690,7 @@ public class CustomMessageActionData implements CustomActionData {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECustomActionType getType() {
 		return type;
 	}

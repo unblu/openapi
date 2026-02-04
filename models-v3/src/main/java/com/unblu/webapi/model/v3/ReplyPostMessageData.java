@@ -109,7 +109,7 @@ public class ReplyPostMessageData implements PostMessageData {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPostMessageType getType() {
 		return type;
 	}

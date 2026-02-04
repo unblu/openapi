@@ -97,7 +97,7 @@ public class NotEqualsAuditChangeTypeOperator implements AuditChangeTypeOperator
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAuditChangeTypeOperatorType getType() {
 		return type;
 	}

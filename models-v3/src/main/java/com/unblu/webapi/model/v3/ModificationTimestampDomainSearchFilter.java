@@ -97,7 +97,7 @@ public class ModificationTimestampDomainSearchFilter implements DomainSearchFilt
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDomainSearchFilterField getField() {
 		return field;
 	}

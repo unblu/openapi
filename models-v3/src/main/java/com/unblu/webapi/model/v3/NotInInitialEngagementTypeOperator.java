@@ -99,7 +99,7 @@ public class NotInInitialEngagementTypeOperator implements InitialEngagementType
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInitialEngagementTypeOperatorType getType() {
 		return type;
 	}

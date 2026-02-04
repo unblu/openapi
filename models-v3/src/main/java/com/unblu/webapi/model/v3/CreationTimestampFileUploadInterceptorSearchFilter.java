@@ -97,7 +97,7 @@ public class CreationTimestampFileUploadInterceptorSearchFilter implements FileU
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EFileUploadInterceptorSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class ConversationIdCannedResponseUsageSearchFilter implements CannedResp
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECannedResponseUsageSearchFilterField getField() {
 		return field;
 	}

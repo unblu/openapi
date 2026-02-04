@@ -97,7 +97,7 @@ public class NameNamedAreaSearchFilter implements NamedAreaSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ENamedAreaSearchFilterField getField() {
 		return field;
 	}

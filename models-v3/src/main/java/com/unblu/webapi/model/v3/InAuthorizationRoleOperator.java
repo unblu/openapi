@@ -99,7 +99,7 @@ public class InAuthorizationRoleOperator implements AuthorizationRoleOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAuthorizationRoleOperatorType getType() {
 		return type;
 	}

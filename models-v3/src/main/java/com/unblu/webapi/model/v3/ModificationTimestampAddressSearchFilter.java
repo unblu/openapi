@@ -97,7 +97,7 @@ public class ModificationTimestampAddressSearchFilter implements AddressSearchFi
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAddressSearchFilterField getField() {
 		return field;
 	}

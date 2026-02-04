@@ -97,7 +97,7 @@ public class EqualsPersonSourceOperator implements PersonSourceOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonSourceOperatorType getType() {
 		return type;
 	}

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v3
-  version: 7.57.3
+  version: 7.57.5
 servers:
 - url: https://unblu.cloud/app/rest/v3
 security:
@@ -12576,6 +12576,8 @@ components:
           description: Unix timestamp after which the invitation is no longer valid
     AcceptTimestampCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -12664,6 +12666,8 @@ components:
           x-type: Map
     AccountChangeAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -12677,6 +12681,8 @@ components:
     AccountData:
       type: object
       description: Representation of an Account in a conversation
+      required:
+      - $_type
       properties:
         $_type:
           type: string
@@ -13325,6 +13331,8 @@ components:
           TeamData: "#/components/schemas/TeamData"
     AgentUserIdDeputyRelationshipSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -13338,6 +13346,8 @@ components:
     AllEqualIdListOperator:
       type: object
       description: Check if the lists are of the same length and contain same values.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -13353,6 +13363,8 @@ components:
     AllOfIdListOperator:
       type: object
       description: Check if all input values are present.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -13368,6 +13380,8 @@ components:
     AnyOfIdListOperator:
       type: object
       description: Check if any of the provided values is present.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -13441,6 +13455,8 @@ components:
           x-type: Map
     ApiKeyApiKeySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -13556,6 +13572,8 @@ components:
     ApprovalRequestMessageData:
       type: object
       description: Special case of a `MultichoiceQuestionMessageData`.<br> It is send to approve a layer action inside a conversation.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -13639,6 +13657,8 @@ components:
     ArrayBody:
       type: object
       description: "If body consist of multiple complex types, it must be an array, which is represented by this implementation of `IBody`"
+      required:
+      - $_type
       properties:
         $_type:
           type: string
@@ -13652,6 +13672,8 @@ components:
     AssigneePersonIdConversationHistorySearchFilter:
       type: object
       description: Filters conversations history by their assigneePersonId field.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -13665,6 +13687,8 @@ components:
     AssigneePersonIdConversationSearchFilter:
       type: object
       description: Filters conversations by their assigneePersonId field.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14198,6 +14222,8 @@ components:
           description: redirection URL when the operation is not successful
     AuthorizationRoleAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14223,6 +14249,8 @@ components:
           NOT_IN: "#/components/schemas/NotInAuthorizationRoleOperator"
     AuthorizationRolePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14235,6 +14263,8 @@ components:
           $ref: "#/components/schemas/AuthorizationRoleOperator"
     AuthorizationRoleUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14267,6 +14297,8 @@ components:
     AutoPauseNotificationsReasonExpirationTimestampPersonStateSearchFilter:
       type: object
       description: Filter by the expiration timestamp of reasons for auto-pausing notifications
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14280,6 +14312,8 @@ components:
     AutoPauseNotificationsReasonSourceIdPersonStateSearchFilter:
       type: object
       description: Filter by sourceId of reasons for auto-pausing notifications
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14334,6 +14368,8 @@ components:
           description: "Image content as data URL scheme (RFC2397 - <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code>)"
     AwaitedPersonTypeChangeTimestampConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14346,6 +14382,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     AwaitedPersonTypeChangeTimestampConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14379,6 +14417,8 @@ components:
           $ref: "#/components/schemas/ConversationData"
     AwaitedPersonTypeConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14392,6 +14432,8 @@ components:
     AwaitedPersonTypeConversationSearchFilter:
       type: object
       description: Filters conversations by their 'awaitedPerson' field
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14418,6 +14460,8 @@ components:
     BodyElement:
       type: object
       description: "If body consist of only one complex type, it can be directly this implementation of `IBody`. Otherwise this elements are wrapped by a `ArrayBody`"
+      required:
+      - $_type
       properties:
         $_type:
           type: string
@@ -14668,6 +14712,8 @@ components:
           $ref: "#/components/schemas/ConversationData"
     BotPersonIdDialogBotSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -14925,6 +14971,8 @@ components:
     CallDialInPublication:
       type: object
       description: Call dial-in publication metadata class
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -15194,6 +15242,8 @@ components:
     CallMediaPublication:
       type: object
       description: Call media publication metadata class
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -15568,6 +15618,8 @@ components:
           $ref: "#/components/schemas/EPropertyOwnerType"
     CannedResponseIdCannedResponseUsageSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -15814,6 +15866,8 @@ components:
     CardMessageData:
       type: object
       description: "Card message which may contain an image, title, body and actions. <p> All of these parts are optional as long as it contains at least one of them."
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -15897,6 +15951,8 @@ components:
     CardPostMessageData:
       type: object
       description: "Card message which may contain an image, title, body and actions. All of these parts are optional as long as it contains at least one of them. <p> This model is used when creating a card message to send to a conversation."
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -15934,6 +15990,8 @@ components:
             $ref: "#/components/schemas/QuickReply"
     ChangeTypeAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -16298,6 +16356,8 @@ components:
           MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampContactSearchFilter"
     ContainsStringOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -16311,6 +16371,8 @@ components:
     ContextPersonIdConversationHistorySearchFilter:
       type: object
       description: Filters conversations history by their contextPersonId field.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -16324,6 +16386,8 @@ components:
     ContextPersonIdConversationSearchFilter:
       type: object
       description: Filters conversations by their contextPersonId field.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -16893,6 +16957,8 @@ components:
           TOPIC: "#/components/schemas/TopicConversationHistorySearchFilter"
     ConversationIdCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -16905,6 +16971,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     ConversationIdCannedResponseUsageSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -16917,6 +16985,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     ConversationIdConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -17710,6 +17780,8 @@ components:
           x-type: Map
     ConversationTemplateIdConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -17722,6 +17794,8 @@ components:
           $ref: "#/components/schemas/IdOperator"
     ConversationTemplateIdConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -17989,6 +18063,8 @@ components:
           description: Number of entities found
     CreationTimestampAccountSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18001,6 +18077,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampAddressSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18013,6 +18091,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampApiKeySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18025,6 +18105,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18037,6 +18119,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampCannedResponseSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18049,6 +18133,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampCannedResponseUsageSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18061,6 +18147,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampContactSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18073,6 +18161,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18085,6 +18175,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18097,6 +18189,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18109,6 +18203,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampConversationTemplateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18121,6 +18217,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampDeputyRelationshipSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18133,6 +18231,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampDialogBotSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18145,6 +18245,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampDomainSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18157,6 +18259,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampExternalMessengerChannelSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18169,6 +18273,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampFileUploadInterceptorSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18182,6 +18288,8 @@ components:
     CreationTimestampMessageInterceptorSearchFilter:
       type: object
       description: CreationTimestampMessageInterceptorSearchFilter
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18194,6 +18302,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampNamedAreaSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18206,6 +18316,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampSuggestionSourceSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18218,6 +18330,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampTeamSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18230,6 +18344,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18242,6 +18358,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18254,6 +18372,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampWebhookRegistrationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18266,6 +18386,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     CreatorPersonIdConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18279,6 +18401,8 @@ components:
     CreatorTypeConversationInvitationSearchFilter:
       type: object
       description: Filters participants (personId of the participants) by joining id field of e.g. Conversation table.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18412,6 +18536,8 @@ components:
           description: The ID of the custom action
     CustomConversationActionData:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -18544,6 +18670,8 @@ components:
     CustomExternalMessengerChannel:
       type: object
       description: "Channel between the collaboration server and an external messenger server. This could be emails, sms or other channels.<br> It defines basically a webhook endpoint where the collaboration server sends new messages to. Messages from the external messenger can be send via the ExternalMessengers web api."
+      required:
+      - $_type
       properties:
         $_type:
           type: string
@@ -18608,6 +18736,8 @@ components:
           x-type: Map
     CustomMessageActionData:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -18752,6 +18882,8 @@ components:
           $ref: "#/components/schemas/MessageData"
     CustomPersonActionData:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -18893,6 +19025,8 @@ components:
           $ref: "#/components/schemas/PersonData"
     DefaultTemplateConversationTemplateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -18976,6 +19110,8 @@ components:
           $ref: "#/components/schemas/PersonData"
     DeputyIdDeputyRelationshipSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -19129,6 +19265,8 @@ components:
           MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampDeputyRelationshipSearchFilter"
     DeputyTypeDeputyRelationshipSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -19154,6 +19292,8 @@ components:
           NOT_IN: "#/components/schemas/NotInDeputyTypeOperator"
     DescriptionApiKeySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -19166,6 +19306,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     DescriptionConversationTemplateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -19178,6 +19320,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     DescriptionNamedAreaSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -19190,6 +19334,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     DescriptionTeamSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -19202,6 +19348,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     DescriptionWebhookRegistrationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -19490,6 +19638,8 @@ components:
           $ref: "#/components/schemas/UserInfo"
     DomainNameDomainSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22151,6 +22301,8 @@ components:
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EmailPersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22163,6 +22315,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     EmailUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22176,6 +22330,8 @@ components:
     EmptyChatSuggestionResponse:
       type: object
       description: Model representing the response to a chat suggestion request when no suggestion could be generated
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22190,6 +22346,8 @@ components:
           type: string
     EndReasonConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22202,6 +22360,8 @@ components:
           $ref: "#/components/schemas/ConversationEndReasonOperator"
     EndReasonConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22214,6 +22374,8 @@ components:
           $ref: "#/components/schemas/ConversationEndReasonOperator"
     EndTimestampCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22226,6 +22388,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     EndTimestampConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22238,6 +22402,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     EndTimestampConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22250,6 +22416,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     EndpointWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22262,6 +22430,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     EndpointWebhookRegistrationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22274,6 +22444,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     EntityIdAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22297,6 +22469,8 @@ components:
       - "DELETE: Entity was deleted"
     EntityNameAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22309,6 +22483,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     EntityTypeAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22321,6 +22497,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     EqualsAuditChangeInteractionTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22333,6 +22511,8 @@ components:
           $ref: "#/components/schemas/AuditInteractionType"
     EqualsAuditChangeTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22345,6 +22525,8 @@ components:
           $ref: "#/components/schemas/AuditChangeType"
     EqualsAuthorizationRoleOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22357,6 +22539,8 @@ components:
           $ref: "#/components/schemas/EAuthorizationRole"
     EqualsAwaitedPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22369,6 +22553,8 @@ components:
           $ref: "#/components/schemas/EAwaitedPersonType"
     EqualsBooleanOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22381,6 +22567,8 @@ components:
           type: boolean
     EqualsCallServiceProviderOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22393,6 +22581,8 @@ components:
           $ref: "#/components/schemas/ECallServiceProvider"
     EqualsConversationEndReasonOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22405,6 +22595,8 @@ components:
           $ref: "#/components/schemas/EConversationEndReason"
     EqualsConversationRecipientTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22417,6 +22609,8 @@ components:
           $ref: "#/components/schemas/EConversationRecipientType"
     EqualsConversationStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22429,6 +22623,8 @@ components:
           $ref: "#/components/schemas/EConversationState"
     EqualsDeputyDelegationEscalationLevelOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22441,6 +22637,8 @@ components:
           $ref: "#/components/schemas/EDeputyDelegationEscalationLevel"
     EqualsDeputyTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22454,6 +22652,8 @@ components:
     EqualsIdOperator:
       type: object
       description: Checks equality of 2 id fields of string type.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22466,6 +22666,8 @@ components:
           type: string
     EqualsImpersonationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22478,6 +22680,8 @@ components:
           $ref: "#/components/schemas/EImpersonationType"
     EqualsInitialEngagementTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22490,6 +22694,8 @@ components:
           $ref: "#/components/schemas/EInitialEngagementType"
     EqualsInvitationCreatorTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22502,6 +22708,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
     EqualsInvitationStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22514,6 +22722,8 @@ components:
           $ref: "#/components/schemas/EInvitationState"
     EqualsInvitationTargetTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22526,6 +22736,8 @@ components:
           $ref: "#/components/schemas/EInvitationTargetType"
     EqualsInvitationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22538,6 +22750,8 @@ components:
           $ref: "#/components/schemas/EInvitationType"
     EqualsLongOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22551,6 +22765,8 @@ components:
           format: int64
     EqualsOnlineStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22563,6 +22779,8 @@ components:
           $ref: "#/components/schemas/EOnlineState"
     EqualsPauseNotificationsModeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22575,6 +22793,8 @@ components:
           $ref: "#/components/schemas/EPauseNotificationsMode"
     EqualsPauseNotificationsStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22587,6 +22807,8 @@ components:
           $ref: "#/components/schemas/EPauseNotificationsState"
     EqualsPersonSourceOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22599,6 +22821,8 @@ components:
           $ref: "#/components/schemas/EPersonSource"
     EqualsPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22611,6 +22835,8 @@ components:
           $ref: "#/components/schemas/EPersonType"
     EqualsPropertyOwnerTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22623,6 +22849,8 @@ components:
           $ref: "#/components/schemas/EPropertyOwnerType"
     EqualsStringOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22635,6 +22863,8 @@ components:
           type: string
     EqualsTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22666,6 +22896,8 @@ components:
           description: Description of the error
     EscalationLevelDeputyRelationshipSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22678,6 +22910,8 @@ components:
           $ref: "#/components/schemas/DeputyDelegationEscalationLevelOperator"
     EstablishedTimestampCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22690,6 +22924,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     EventNameWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22702,6 +22938,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     ExecutionTimestampWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22725,6 +22963,8 @@ components:
       - text
     ExpirationTimestampConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -22738,6 +22978,8 @@ components:
     ExternalMessageInterceptorData:
       type: object
       description: Model representing an external message interceptor used to approve or reject messages in a conversation
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -22794,6 +23036,8 @@ components:
           CustomExternalMessengerChannel: "#/components/schemas/CustomExternalMessengerChannel"
     ExternalMessengerChannelIdConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23034,6 +23278,8 @@ components:
           description: The ID of an external messenger channel of type  `EExternalMessengerChannelType.CUSTOM`
     ExternallyManagedUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23047,6 +23293,8 @@ components:
     FileMessageData:
       type: object
       description: Message which contains a file and maybe a caption text. The text field should be a description of the image content.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23144,6 +23392,8 @@ components:
     FilePostMessageData:
       type: object
       description: Message which contains a file and optionally a caption text. The text should be a description of the attached file.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23326,6 +23576,8 @@ components:
           type: string
     FirstNamePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23338,6 +23590,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     FirstNameUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23350,6 +23604,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     GlobalChangeAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23411,6 +23667,8 @@ components:
           description: The status of the system
     GreaterThanLongOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23424,6 +23682,8 @@ components:
           format: int64
     GreaterThanOrNullTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23437,6 +23697,8 @@ components:
           format: int64
     GreaterThanTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23450,6 +23712,8 @@ components:
           format: int64
     HttpResponseCodeWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23504,6 +23768,8 @@ components:
           STARTS_WITH: "#/components/schemas/StartsWithIdOperator"
     ImpersonationTypeAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23529,6 +23795,8 @@ components:
           NOT_IN: "#/components/schemas/NotInImpersonationTypeOperator"
     InAuditChangeInteractionTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23543,6 +23811,8 @@ components:
             $ref: "#/components/schemas/AuditInteractionType"
     InAuditChangeTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23557,6 +23827,8 @@ components:
             $ref: "#/components/schemas/AuditChangeType"
     InAuthorizationRoleOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23571,6 +23843,8 @@ components:
             $ref: "#/components/schemas/EAuthorizationRole"
     InAwaitedPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23585,6 +23859,8 @@ components:
             $ref: "#/components/schemas/EAwaitedPersonType"
     InConversationEndReasonOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23599,6 +23875,8 @@ components:
             $ref: "#/components/schemas/EConversationEndReason"
     InConversationRecipientTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23613,6 +23891,8 @@ components:
             $ref: "#/components/schemas/EConversationRecipientType"
     InConversationStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23627,6 +23907,8 @@ components:
             $ref: "#/components/schemas/EConversationState"
     InDeputyDelegationEscalationLevelOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23641,6 +23923,8 @@ components:
             $ref: "#/components/schemas/EDeputyDelegationEscalationLevel"
     InDeputyTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23656,6 +23940,8 @@ components:
     InIdOperator:
       type: object
       description: Checks if specified string type id fields are present in the provided list.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23670,6 +23956,8 @@ components:
             type: string
     InImpersonationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23684,6 +23972,8 @@ components:
             $ref: "#/components/schemas/EImpersonationType"
     InInitialEngagementTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23698,6 +23988,8 @@ components:
             $ref: "#/components/schemas/EInitialEngagementType"
     InInvitationCreatorTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23712,6 +24004,8 @@ components:
             $ref: "#/components/schemas/EInvitationCreatorType"
     InInvitationTargetTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23726,6 +24020,8 @@ components:
             $ref: "#/components/schemas/EInvitationTargetType"
     InInvitationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23740,6 +24036,8 @@ components:
             $ref: "#/components/schemas/EInvitationType"
     InPersonSourceOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23754,6 +24052,8 @@ components:
             $ref: "#/components/schemas/EPersonSource"
     InPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23768,6 +24068,8 @@ components:
             $ref: "#/components/schemas/EPersonType"
     InPropertyOwnerTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23782,6 +24084,8 @@ components:
             $ref: "#/components/schemas/EPropertyOwnerType"
     InRangeLongOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23798,6 +24102,8 @@ components:
           format: int64
     InRangeTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23814,6 +24120,8 @@ components:
           format: int64
     InStringOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23828,6 +24136,8 @@ components:
             type: string
     InTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -23931,6 +24241,8 @@ components:
           description: Person id of the person calling
     InitialEngagementTypeConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23943,6 +24255,8 @@ components:
           $ref: "#/components/schemas/InitialEngagementTypeOperator"
     InitialEngagementTypeConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23955,6 +24269,8 @@ components:
           $ref: "#/components/schemas/InitialEngagementTypeOperator"
     InitialEngagementTypeConversationTemplateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23980,6 +24296,8 @@ components:
           NOT_IN: "#/components/schemas/NotInInitialEngagementTypeOperator"
     InitiationTimestampCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -23992,6 +24310,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     InitiatorPersonIdCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24004,6 +24324,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     InteractionNameAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24016,6 +24338,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     InteractionTypeAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24141,6 +24465,8 @@ components:
     InternalMessageInterceptorData:
       type: object
       description: Model representing an internal message interceptor used to approve or reject messages in a conversation
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24226,6 +24552,8 @@ components:
           NOT_IN: "#/components/schemas/NotInInvitationCreatorTypeOperator"
     InvitationStateConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24260,6 +24588,8 @@ components:
           NOT_IN: "#/components/schemas/NotInInvitationTargetTypeOperator"
     InvitationTypeConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24406,6 +24736,8 @@ components:
           $ref: "#/components/schemas/EAgentRemovalType"
     IsNotNullBooleanOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24417,6 +24749,8 @@ components:
     IsNotNullIdOperator:
       type: object
       description: Checks if string type id field has a non-null value.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24427,6 +24761,8 @@ components:
           $ref: "#/components/schemas/EIdOperatorType"
     IsNotNullStringOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24437,6 +24773,8 @@ components:
           $ref: "#/components/schemas/EStringOperatorType"
     IsNotNullTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24447,6 +24785,8 @@ components:
           $ref: "#/components/schemas/ETimestampOperatorType"
     IsNullBooleanOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24458,6 +24798,8 @@ components:
     IsNullIdOperator:
       type: object
       description: Checks if string type id field has null value.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24468,6 +24810,8 @@ components:
           $ref: "#/components/schemas/EIdOperatorType"
     IsNullStringOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24478,6 +24822,8 @@ components:
           $ref: "#/components/schemas/EStringOperatorType"
     IsNullTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24488,6 +24834,8 @@ components:
           $ref: "#/components/schemas/ETimestampOperatorType"
     JoinedTimestampPersonPresenceSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24500,6 +24848,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     KeyCannedResponseSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24512,6 +24862,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     KeyCustomActionSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24525,6 +24877,8 @@ components:
     LastCompletedRecordingTimestampConversationHistorySearchFilter:
       type: object
       description: Filters by last completed recording timestamp made for a conversation.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24538,6 +24892,8 @@ components:
     LastMessageTimestampConversationHistorySearchFilter:
       type: object
       description: Filters by timestamp of a last message sent by a human in a conversation.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24550,6 +24906,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     LastNamePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24562,6 +24920,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     LastNameUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24619,6 +24979,8 @@ components:
           description: Error description if the LDAP sync finishes with an error.
     LeftTimestampPersonPresenceSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -24680,6 +25042,8 @@ components:
     ListMessageData:
       type: object
       description: "List message which may contain a header, list elements and actions"
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24756,6 +25120,8 @@ components:
     ListPostMessageData:
       type: object
       description: "List message which may contain a header, items and actions. <p> All of these parts are optional as long as it contains at least one of them."
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24803,6 +25169,8 @@ components:
           NOT_IN_RANGE: "#/components/schemas/NotInRangeLongOperator"
     LowerThanLongOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24816,6 +25184,8 @@ components:
           format: int64
     LowerThanOrNullTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24829,6 +25199,8 @@ components:
           format: int64
     LowerThanTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -24910,6 +25282,8 @@ components:
           $ref: "#/components/schemas/EConversationMessageTextType"
     MessageIdCannedResponseUsageSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25154,6 +25528,8 @@ components:
           $ref: "#/components/schemas/ECallParticipationEndReason"
     ModificationTimestampAccountSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25166,6 +25542,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampAddressSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25178,6 +25556,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampApiKeySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25190,6 +25570,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampCannedResponseSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25202,6 +25584,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampContactSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25214,6 +25598,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampConversationTemplateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25226,6 +25612,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampDeputyRelationshipSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25238,6 +25626,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampDialogBotSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25250,6 +25640,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampDomainSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25262,6 +25654,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampExternalMessengerChannelSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25274,6 +25668,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampFileUploadInterceptorSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25286,6 +25682,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampMessageInterceptorSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25298,6 +25696,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampNamedAreaSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25310,6 +25710,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampSuggestionSourceSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25322,6 +25724,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampTeamSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25334,6 +25738,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25346,6 +25752,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampWebhookRegistrationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25359,6 +25767,8 @@ components:
     MultichoiceQuestionMessageData:
       type: object
       description: Question message which can have multiple defined response options
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25448,6 +25858,8 @@ components:
     MultichoiceQuestionPostMessageData:
       type: object
       description: Question message which can have multiple defined response options that are displayed as buttons of which one can be selected.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25471,6 +25883,8 @@ components:
             $ref: "#/components/schemas/MultichoiceQuestionOption"
     NameAccountSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25483,6 +25897,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameApiKeySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25495,6 +25911,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameConversationTemplateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25507,6 +25925,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameDialogBotSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25519,6 +25939,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameExternalMessengerChannelSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25531,6 +25953,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameFileUploadInterceptorSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25543,6 +25967,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameMessageInterceptorSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25555,6 +25981,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameNamedAreaSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25567,6 +25995,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameSuggestionSourceSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25579,6 +26009,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameTeamSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25591,6 +26023,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NameWebhookRegistrationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25677,6 +26111,8 @@ components:
     NamedAreaData:
       type: object
       description: Representation of a Named Area in a conversation
+      required:
+      - $_type
       properties:
         $_type:
           type: string
@@ -25885,6 +26321,8 @@ components:
           description: Number of notifications (i.e. unread messages) the recipient person has in total
     NicknamePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -25897,6 +26335,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     NotEqualsAuditChangeInteractionTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25909,6 +26349,8 @@ components:
           $ref: "#/components/schemas/AuditInteractionType"
     NotEqualsAuditChangeTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25921,6 +26363,8 @@ components:
           $ref: "#/components/schemas/AuditChangeType"
     NotEqualsAuthorizationRoleOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25933,6 +26377,8 @@ components:
           $ref: "#/components/schemas/EAuthorizationRole"
     NotEqualsAwaitedPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25945,6 +26391,8 @@ components:
           $ref: "#/components/schemas/EAwaitedPersonType"
     NotEqualsBooleanOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25957,6 +26405,8 @@ components:
           type: boolean
     NotEqualsCallServiceProviderOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25969,6 +26419,8 @@ components:
           $ref: "#/components/schemas/ECallServiceProvider"
     NotEqualsConversationEndReasonOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25981,6 +26433,8 @@ components:
           $ref: "#/components/schemas/EConversationEndReason"
     NotEqualsConversationRecipientTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -25993,6 +26447,8 @@ components:
           $ref: "#/components/schemas/EConversationRecipientType"
     NotEqualsConversationStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26005,6 +26461,8 @@ components:
           $ref: "#/components/schemas/EConversationState"
     NotEqualsDeputyDelegationEscalationLevelOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26017,6 +26475,8 @@ components:
           $ref: "#/components/schemas/EDeputyDelegationEscalationLevel"
     NotEqualsDeputyTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26030,6 +26490,8 @@ components:
     NotEqualsIdOperator:
       type: object
       description: Checks if 2 string type id fields are not equal.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26042,6 +26504,8 @@ components:
           type: string
     NotEqualsImpersonationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26054,6 +26518,8 @@ components:
           $ref: "#/components/schemas/EImpersonationType"
     NotEqualsInitialEngagementTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26066,6 +26532,8 @@ components:
           $ref: "#/components/schemas/EInitialEngagementType"
     NotEqualsInvitationCreatorTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26078,6 +26546,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
     NotEqualsInvitationStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26090,6 +26560,8 @@ components:
           $ref: "#/components/schemas/EInvitationState"
     NotEqualsInvitationTargetTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26102,6 +26574,8 @@ components:
           $ref: "#/components/schemas/EInvitationTargetType"
     NotEqualsInvitationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26114,6 +26588,8 @@ components:
           $ref: "#/components/schemas/EInvitationType"
     NotEqualsLongOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26127,6 +26603,8 @@ components:
           format: int64
     NotEqualsPauseNotificationsModeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26139,6 +26617,8 @@ components:
           $ref: "#/components/schemas/EPauseNotificationsMode"
     NotEqualsPauseNotificationsStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26151,6 +26631,8 @@ components:
           $ref: "#/components/schemas/EPauseNotificationsState"
     NotEqualsPersonSourceOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26163,6 +26645,8 @@ components:
           $ref: "#/components/schemas/EPersonSource"
     NotEqualsPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26175,6 +26659,8 @@ components:
           $ref: "#/components/schemas/EPersonType"
     NotEqualsPropertyOwnerTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26187,6 +26673,8 @@ components:
           $ref: "#/components/schemas/EPropertyOwnerType"
     NotEqualsStringOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26199,6 +26687,8 @@ components:
           type: string
     NotEqualsTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26212,6 +26702,8 @@ components:
           format: int64
     NotInAuditChangeInteractionTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26226,6 +26718,8 @@ components:
             $ref: "#/components/schemas/AuditInteractionType"
     NotInAuditChangeTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26240,6 +26734,8 @@ components:
             $ref: "#/components/schemas/AuditChangeType"
     NotInAuthorizationRoleOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26254,6 +26750,8 @@ components:
             $ref: "#/components/schemas/EAuthorizationRole"
     NotInAwaitedPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26268,6 +26766,8 @@ components:
             $ref: "#/components/schemas/EAwaitedPersonType"
     NotInConversationEndReasonOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26282,6 +26782,8 @@ components:
             $ref: "#/components/schemas/EConversationEndReason"
     NotInConversationRecipientTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26296,6 +26798,8 @@ components:
             $ref: "#/components/schemas/EConversationRecipientType"
     NotInConversationStateOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26310,6 +26814,8 @@ components:
             $ref: "#/components/schemas/EConversationState"
     NotInDeputyDelegationEscalationLevelOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26324,6 +26830,8 @@ components:
             $ref: "#/components/schemas/EDeputyDelegationEscalationLevel"
     NotInDeputyTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26339,6 +26847,8 @@ components:
     NotInIdOperator:
       type: object
       description: Checks if specified string type id fields are not present in the provided list.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26353,6 +26863,8 @@ components:
             type: string
     NotInImpersonationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26367,6 +26879,8 @@ components:
             $ref: "#/components/schemas/EImpersonationType"
     NotInInitialEngagementTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26381,6 +26895,8 @@ components:
             $ref: "#/components/schemas/EInitialEngagementType"
     NotInInvitationCreatorTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26395,6 +26911,8 @@ components:
             $ref: "#/components/schemas/EInvitationCreatorType"
     NotInInvitationTargetTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26409,6 +26927,8 @@ components:
             $ref: "#/components/schemas/EInvitationTargetType"
     NotInInvitationTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26423,6 +26943,8 @@ components:
             $ref: "#/components/schemas/EInvitationType"
     NotInPersonSourceOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26437,6 +26959,8 @@ components:
             $ref: "#/components/schemas/EPersonSource"
     NotInPersonTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26451,6 +26975,8 @@ components:
             $ref: "#/components/schemas/EPersonType"
     NotInPropertyOwnerTypeOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26465,6 +26991,8 @@ components:
             $ref: "#/components/schemas/EPropertyOwnerType"
     NotInRangeLongOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26481,6 +27009,8 @@ components:
           format: int64
     NotInRangeTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26497,6 +27027,8 @@ components:
           format: int64
     NotInStringOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26511,6 +27043,8 @@ components:
             type: string
     NotInTimestampOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -26574,6 +27108,8 @@ components:
           EQUALS: "#/components/schemas/EqualsOnlineStateOperator"
     OnlineStatePersonStateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26621,6 +27157,8 @@ components:
           description: The pingId of the request this event is responding to
     OwnerIdAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26633,6 +27171,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     OwnerIdCannedResponseSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26645,6 +27185,8 @@ components:
           $ref: "#/components/schemas/IdOperator"
     OwnerTypeAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26657,6 +27199,8 @@ components:
           $ref: "#/components/schemas/PropertyOwnerTypeOperator"
     OwnerTypeCannedResponseSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26669,6 +27213,8 @@ components:
           $ref: "#/components/schemas/PropertyOwnerTypeOperator"
     ParentIdTeamSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26753,6 +27299,8 @@ components:
     ParticipantPersonIdConversationHistorySearchFilter:
       type: object
       description: Filters participants (personId of the participants) by joining id field of e.g. Conversation table.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26766,6 +27314,8 @@ components:
     ParticipantPersonIdConversationSearchFilter:
       type: object
       description: Filters participants (personId of the participants) by joining id field of e.g. Conversation table.
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26967,6 +27517,8 @@ components:
           $ref: "#/components/schemas/ConversationParticipationData"
     PauseNotificationsEndTimestampPersonStateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -26988,6 +27540,8 @@ components:
           NOT_EQUALS: "#/components/schemas/NotEqualsPauseNotificationsModeOperator"
     PauseNotificationsModePersonStateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27009,6 +27563,8 @@ components:
           NOT_EQUALS: "#/components/schemas/NotEqualsPauseNotificationsStateOperator"
     PauseNotificationsStatePersonStateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27044,6 +27600,8 @@ components:
     PersonData:
       type: object
       description: "Representation of a Person (Agent or Visitor).<br> If a message is send to unblu, only a small set of fields like the ID need to be defined."
+      required:
+      - $_type
       properties:
         $_type:
           type: string
@@ -27114,6 +27672,8 @@ components:
           x-type: Map
     PersonIdCannedResponseUsageSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27126,6 +27686,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     PersonIdPersonPresenceSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27138,6 +27700,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     PersonIdPersonStateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27404,6 +27968,8 @@ components:
           NOT_IN: "#/components/schemas/NotInPersonSourceOperator"
     PersonSourcePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27563,6 +28129,8 @@ components:
           NOT_IN: "#/components/schemas/NotInPersonTypeOperator"
     PersonTypePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27618,6 +28186,8 @@ components:
           description: The status message to display in the person's details
     PhonePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -27972,6 +28542,8 @@ components:
     QuestionAbortedMessageData:
       type: object
       description: "Special case of a reply that informs, that a question was not answered because of a certain reason."
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -28051,6 +28623,8 @@ components:
     RatingQuestionMessageData:
       type: object
       description: Special case of a `MultichoiceQuestionMessageData` which is used to rate the conversation in which it is send. Typically used during the offboarding phase.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -28146,6 +28720,8 @@ components:
     RatingQuestionPostMessageData:
       type: object
       description: Special case of a `MultichoiceQuestionPostMessageData` which is used to rate the conversation in which it is send. Typically used during the offboarding phase. <p> <b>Note:</b> an answer to this message does not automatically set this rating for the answering participant. This must be done manually via the API.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -28225,6 +28801,8 @@ components:
           description: Number of notifications (i.e. unread messages) the recipient person has in total
     RecipientIdConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28237,6 +28815,8 @@ components:
           $ref: "#/components/schemas/IdOperator"
     RecipientIdConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28249,6 +28829,8 @@ components:
           $ref: "#/components/schemas/IdOperator"
     RecipientTypeConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28261,6 +28843,8 @@ components:
           $ref: "#/components/schemas/ConversationRecipientTypeOperator"
     RecipientTypeConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28302,6 +28886,8 @@ components:
     RecordingAvailableMessageData:
       type: object
       description: "Recording available message which contains the blob store ID, blob size, filename, start time and end time"
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -28378,6 +28964,8 @@ components:
           description: UTC timestamp when the conversation recording ended
     RedeemingPersonIdConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28390,6 +28978,8 @@ components:
           $ref: "#/components/schemas/IdOperator"
     RegistrationIdWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28420,6 +29010,8 @@ components:
     ReplyMessageData:
       type: object
       description: Message to reply to a specific question message.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -28485,6 +29077,8 @@ components:
     ReplyPostMessageData:
       type: object
       description: Message to reply to a specific question message.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -28504,6 +29098,8 @@ components:
           description: The reply value for the question message.
     RequestIdWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28579,6 +29175,8 @@ components:
           description: Type of the element
     RetryNrWebhookCallLogSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28711,6 +29309,8 @@ components:
           description: The URL where the conversation started
     ScheduledTimestampConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28723,6 +29323,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ScheduledTimestampConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28748,6 +29350,8 @@ components:
           $ref: "#/components/schemas/ESecureTokenType"
     SendTimestampMessageSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28760,6 +29364,8 @@ components:
           $ref: "#/components/schemas/TimestampOperator"
     ServiceProviderCallIdCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28772,6 +29378,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     ServiceProviderTypeCallSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28955,6 +29563,8 @@ components:
             $ref: "#/components/schemas/ServiceType"
     SiteIdNamedAreaSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28967,6 +29577,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     SourceDataPersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28979,6 +29591,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     SourceIdConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -28991,6 +29605,8 @@ components:
           $ref: "#/components/schemas/IdOperator"
     SourceIdPersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29003,6 +29619,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     StartsWithIdOperator:
       type: object
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -29015,6 +29633,8 @@ components:
           type: string
     StateConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29027,6 +29647,8 @@ components:
           $ref: "#/components/schemas/ConversationStateOperator"
     StateConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29039,6 +29661,8 @@ components:
           $ref: "#/components/schemas/ConversationStateOperator"
     StatusMessagePersonStateSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29197,6 +29821,8 @@ components:
           description: The ID of the suggestion source
     TargetIdConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29209,6 +29835,8 @@ components:
           $ref: "#/components/schemas/IdOperator"
     TargetTypeConversationInvitationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29287,6 +29915,8 @@ components:
     TeamData:
       type: object
       description: Representation of a Team in a conversation
+      required:
+      - $_type
       properties:
         $_type:
           type: string
@@ -29319,6 +29949,8 @@ components:
           description: "Id of the parent team. Only the default team has no parent team. When creating a team and the parentId is omitted, the default team is automatically inserted by the server."
     TeamIdPersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29331,6 +29963,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     TeamIdUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29462,6 +30096,8 @@ components:
           description: Translated description of the corresponding description field of the main entity this translation belongs to
     TextCannedResponseSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29475,6 +30111,8 @@ components:
     TextChatSuggestionResponse:
       type: object
       description: Model representing the response to a chat suggestion request
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -29489,6 +30127,8 @@ components:
     TextMessageData:
       type: object
       description: Text message
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -29558,6 +30198,8 @@ components:
     TextPostMessageData:
       type: object
       description: Text message
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -29582,6 +30224,8 @@ components:
     TextQuestionMessageData:
       type: object
       description: question message which should be answered with a some kind of a free text. There are several predifined types of answer possibilities.
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -29673,6 +30317,8 @@ components:
     TextQuestionPostMessageData:
       type: object
       description: "Question message which should be answered with a some kind of a free text. There are several predifined types of answer possibilities. <p> <b>Note:</b> The answer to this question is entered into a separat text input directly linked to the message. For questions that should be answered via the normal chat-input, please use TextPostMessageData messages."
+      required:
+      - type
       properties:
         $_type:
           type: string
@@ -29745,6 +30391,8 @@ components:
           NOT_IN_RANGE: "#/components/schemas/NotInRangeTimestampOperator"
     TitleCannedResponseSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29757,6 +30405,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     TokboxSessionIdConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29769,6 +30419,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     TokboxSessionIdConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29781,6 +30433,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     TopicConversationHistorySearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29793,6 +30447,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     TopicConversationSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -29882,6 +30538,8 @@ components:
           x-type: Map
     UserIdAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -30044,6 +30702,8 @@ components:
           VIRTUAL_USER: "#/components/schemas/VirtualUserUserSearchFilter"
     UsernameAuditChangeSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -30056,6 +30716,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     UsernamePersonSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -30068,6 +30730,8 @@ components:
           $ref: "#/components/schemas/StringOperator"
     UsernameUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string
@@ -30097,6 +30761,8 @@ components:
           description: The user's new password
     VirtualUserUserSearchFilter:
       type: object
+      required:
+      - field
       properties:
         $_type:
           type: string

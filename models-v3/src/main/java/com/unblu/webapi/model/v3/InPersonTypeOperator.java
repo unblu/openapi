@@ -99,7 +99,7 @@ public class InPersonTypeOperator implements PersonTypeOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonTypeOperatorType getType() {
 		return type;
 	}

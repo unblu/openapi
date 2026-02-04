@@ -97,7 +97,7 @@ public class PauseNotificationsEndTimestampPersonStateSearchFilter implements Pe
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonStateSearchFilterField getField() {
 		return field;
 	}

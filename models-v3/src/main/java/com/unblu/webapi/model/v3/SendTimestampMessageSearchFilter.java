@@ -97,7 +97,7 @@ public class SendTimestampMessageSearchFilter implements MessageSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EMessageSearchFilterField getField() {
 		return field;
 	}

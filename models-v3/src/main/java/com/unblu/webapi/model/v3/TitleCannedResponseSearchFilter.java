@@ -97,7 +97,7 @@ public class TitleCannedResponseSearchFilter implements CannedResponseSearchFilt
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECannedResponseSearchFilterField getField() {
 		return field;
 	}

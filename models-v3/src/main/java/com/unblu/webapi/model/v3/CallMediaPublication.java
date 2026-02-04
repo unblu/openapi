@@ -205,7 +205,7 @@ public class CallMediaPublication implements CallPublication {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECallPublicationType getType() {
 		return type;
 	}

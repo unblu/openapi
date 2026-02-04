@@ -97,7 +97,7 @@ public class ExecutionTimestampWebhookCallLogSearchFilter implements WebhookCall
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EWebhookCallLogSearchFilterField getField() {
 		return field;
 	}

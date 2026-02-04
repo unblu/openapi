@@ -97,7 +97,7 @@ public class OwnerIdAuditChangeSearchFilter implements AuditChangeSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAuditChangeSearchFilterField getField() {
 		return field;
 	}

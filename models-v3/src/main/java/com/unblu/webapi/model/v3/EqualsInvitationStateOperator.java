@@ -97,7 +97,7 @@ public class EqualsInvitationStateOperator implements InvitationStateOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInvitationStateOperatorType getType() {
 		return type;
 	}

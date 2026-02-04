@@ -97,7 +97,7 @@ public class ModificationTimestampDialogBotSearchFilter implements DialogBotSear
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDialogBotSearchFilterField getField() {
 		return field;
 	}

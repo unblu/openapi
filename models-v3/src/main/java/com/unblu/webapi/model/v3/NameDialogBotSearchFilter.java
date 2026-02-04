@@ -97,7 +97,7 @@ public class NameDialogBotSearchFilter implements DialogBotSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDialogBotSearchFilterField getField() {
 		return field;
 	}

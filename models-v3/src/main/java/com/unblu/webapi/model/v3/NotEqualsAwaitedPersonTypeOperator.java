@@ -97,7 +97,7 @@ public class NotEqualsAwaitedPersonTypeOperator implements AwaitedPersonTypeOper
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAwaitedPersonTypeOperatorType getType() {
 		return type;
 	}

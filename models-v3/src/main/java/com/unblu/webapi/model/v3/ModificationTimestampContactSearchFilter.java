@@ -97,7 +97,7 @@ public class ModificationTimestampContactSearchFilter implements ContactSearchFi
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EContactSearchFilterField getField() {
 		return field;
 	}

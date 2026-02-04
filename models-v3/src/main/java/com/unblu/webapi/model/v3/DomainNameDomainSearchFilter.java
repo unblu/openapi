@@ -97,7 +97,7 @@ public class DomainNameDomainSearchFilter implements DomainSearchFilter {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDomainSearchFilterField getField() {
 		return field;
 	}

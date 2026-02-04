@@ -97,7 +97,7 @@ public class CreationTimestampAccountSearchFilter implements AccountSearchFilter
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAccountSearchFilterField getField() {
 		return field;
 	}

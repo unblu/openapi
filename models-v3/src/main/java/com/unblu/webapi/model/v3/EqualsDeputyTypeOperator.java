@@ -97,7 +97,7 @@ public class EqualsDeputyTypeOperator implements DeputyTypeOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EDeputyTypeOperatorType getType() {
 		return type;
 	}

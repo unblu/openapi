@@ -97,7 +97,7 @@ public class NotEqualsInvitationStateOperator implements InvitationStateOperator
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EInvitationStateOperatorType getType() {
 		return type;
 	}

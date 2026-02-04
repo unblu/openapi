@@ -99,7 +99,7 @@ public class CreationTimestampMessageInterceptorSearchFilter implements MessageI
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EMessageInterceptorSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class RetryNrWebhookCallLogSearchFilter implements WebhookCallLogSearchFi
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EWebhookCallLogSearchFilterField getField() {
 		return field;
 	}

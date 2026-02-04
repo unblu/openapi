@@ -99,7 +99,7 @@ public class AutoPauseNotificationsReasonSourceIdPersonStateSearchFilter impleme
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonStateSearchFilterField getField() {
 		return field;
 	}

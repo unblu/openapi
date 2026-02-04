@@ -99,7 +99,7 @@ public class InConversationEndReasonOperator implements ConversationEndReasonOpe
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationEndReasonOperatorType getType() {
 		return type;
 	}

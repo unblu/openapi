@@ -378,7 +378,7 @@ public class TextQuestionMessageData implements MessageData {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EMessageType getType() {
 		return type;
 	}

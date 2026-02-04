@@ -97,7 +97,7 @@ public class GlobalChangeAuditChangeSearchFilter implements AuditChangeSearchFil
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAuditChangeSearchFilterField getField() {
 		return field;
 	}

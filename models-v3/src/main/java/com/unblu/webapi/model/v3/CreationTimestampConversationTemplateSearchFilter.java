@@ -97,7 +97,7 @@ public class CreationTimestampConversationTemplateSearchFilter implements Conver
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationTemplateSearchFilterField getField() {
 		return field;
 	}

@@ -97,7 +97,7 @@ public class NotEqualsImpersonationTypeOperator implements ImpersonationTypeOper
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EImpersonationTypeOperatorType getType() {
 		return type;
 	}

@@ -97,7 +97,7 @@ public class ModificationTimestampWebhookRegistrationSearchFilter implements Web
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EWebhookRegistrationSearchFilterField getField() {
 		return field;
 	}

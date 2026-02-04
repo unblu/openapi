@@ -97,7 +97,7 @@ public class InitialEngagementTypeConversationSearchFilter implements Conversati
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationSearchFilterField getField() {
 		return field;
 	}

@@ -99,7 +99,7 @@ public class InAwaitedPersonTypeOperator implements AwaitedPersonTypeOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAwaitedPersonTypeOperatorType getType() {
 		return type;
 	}

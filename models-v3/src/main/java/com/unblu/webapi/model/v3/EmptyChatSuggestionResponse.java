@@ -104,7 +104,7 @@ public class EmptyChatSuggestionResponse implements ChatSuggestionResponse {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EChatSuggestionResponseType getType() {
 		return type;
 	}

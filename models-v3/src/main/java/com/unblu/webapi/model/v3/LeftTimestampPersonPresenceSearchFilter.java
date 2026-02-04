@@ -97,7 +97,7 @@ public class LeftTimestampPersonPresenceSearchFilter implements PersonPresenceSe
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonPresenceSearchFilterField getField() {
 		return field;
 	}

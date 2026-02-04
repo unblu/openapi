@@ -97,7 +97,7 @@ public class JoinedTimestampPersonPresenceSearchFilter implements PersonPresence
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EPersonPresenceSearchFilterField getField() {
 		return field;
 	}

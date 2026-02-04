@@ -97,7 +97,7 @@ public class ModificationTimestampMessageInterceptorSearchFilter implements Mess
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EMessageInterceptorSearchFilterField getField() {
 		return field;
 	}

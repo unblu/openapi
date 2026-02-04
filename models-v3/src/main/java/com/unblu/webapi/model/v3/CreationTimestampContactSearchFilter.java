@@ -97,7 +97,7 @@ public class CreationTimestampContactSearchFilter implements ContactSearchFilter
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EContactSearchFilterField getField() {
 		return field;
 	}

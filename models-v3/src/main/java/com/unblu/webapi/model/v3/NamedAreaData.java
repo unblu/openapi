@@ -97,7 +97,7 @@ public class NamedAreaData implements ConversationRecipientData {
 	 * 
 	 * @return $type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public TypeEnum get$Type() {
 		return $type;
 	}

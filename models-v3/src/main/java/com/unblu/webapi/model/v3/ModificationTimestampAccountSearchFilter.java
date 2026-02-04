@@ -97,7 +97,7 @@ public class ModificationTimestampAccountSearchFilter implements AccountSearchFi
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EAccountSearchFilterField getField() {
 		return field;
 	}

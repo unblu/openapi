@@ -97,7 +97,7 @@ public class NotEqualsCallServiceProviderOperator implements CallServiceProvider
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECallServiceProviderOperatorType getType() {
 		return type;
 	}

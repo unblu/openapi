@@ -99,7 +99,7 @@ public class LastMessageTimestampConversationHistorySearchFilter implements Conv
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationHistorySearchFilterField getField() {
 		return field;
 	}

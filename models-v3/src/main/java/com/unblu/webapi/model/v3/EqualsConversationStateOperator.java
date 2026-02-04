@@ -97,7 +97,7 @@ public class EqualsConversationStateOperator implements ConversationStateOperato
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EConversationStateOperatorType getType() {
 		return type;
 	}

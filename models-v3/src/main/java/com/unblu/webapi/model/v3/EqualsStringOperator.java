@@ -97,7 +97,7 @@ public class EqualsStringOperator implements StringOperator {
 	 * 
 	 * @return type
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public EStringOperatorType getType() {
 		return type;
 	}

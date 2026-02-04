@@ -97,7 +97,7 @@ public class OwnerIdCannedResponseSearchFilter implements CannedResponseSearchFi
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(required = true, value = "")
 	public ECannedResponseSearchFilterField getField() {
 		return field;
 	}
