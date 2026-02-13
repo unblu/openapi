@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	WhatsAppTemplateDocumentParameter.JSON_PROPERTY_$_TYPE,
 	WhatsAppTemplateDocumentParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateDocumentParameter.JSON_PROPERTY_PARAMETER_NAME,
 	WhatsAppTemplateDocumentParameter.JSON_PROPERTY_DOCUMENT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -64,6 +65,10 @@ public class WhatsAppTemplateDocumentParameter implements WhatsAppTemplateParame
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private ETemplateComponentParameterType type = ETemplateComponentParameterType.DOCUMENT;
 
+	public static final String JSON_PROPERTY_PARAMETER_NAME = "parameterName";
+	@JsonProperty(JSON_PROPERTY_PARAMETER_NAME)
+	private String parameterName;
+
 	public static final String JSON_PROPERTY_DOCUMENT = "document";
 	@JsonProperty(JSON_PROPERTY_DOCUMENT)
 	private DocumentMediaParameterValue document = null;
@@ -106,6 +111,26 @@ public class WhatsAppTemplateDocumentParameter implements WhatsAppTemplateParame
 		this.type = type;
 	}
 
+	public WhatsAppTemplateDocumentParameter parameterName(String parameterName) {
+		this.parameterName = parameterName;
+		return this;
+	}
+
+	/**
+	 * The name of the parameter for templates using named parameters (e.g., \&quot;visitor_name\&quot;, \&quot;agent_name\&quot;). &lt;p&gt; Only used when the
+	 * template uses named parameter format instead of positional format.
+	 * 
+	 * @return parameterName
+	 **/
+	@ApiModelProperty(value = "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format.")
+	public String getParameterName() {
+		return parameterName;
+	}
+
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+
 	public WhatsAppTemplateDocumentParameter document(DocumentMediaParameterValue document) {
 		this.document = document;
 		return this;
@@ -136,12 +161,13 @@ public class WhatsAppTemplateDocumentParameter implements WhatsAppTemplateParame
 		WhatsAppTemplateDocumentParameter whatsAppTemplateDocumentParameter = (WhatsAppTemplateDocumentParameter) o;
 		return Objects.equals(this.$type, whatsAppTemplateDocumentParameter.$type) &&
 				Objects.equals(this.type, whatsAppTemplateDocumentParameter.type) &&
+				Objects.equals(this.parameterName, whatsAppTemplateDocumentParameter.parameterName) &&
 				Objects.equals(this.document, whatsAppTemplateDocumentParameter.document);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, document);
+		return Objects.hash($type, type, parameterName, document);
 	}
 
 	@Override
@@ -150,6 +176,7 @@ public class WhatsAppTemplateDocumentParameter implements WhatsAppTemplateParame
 		sb.append("class WhatsAppTemplateDocumentParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    parameterName: ").append(toIndentedString(parameterName)).append("\n");
 		sb.append("    document: ").append(toIndentedString(document)).append("\n");
 		sb.append("}");
 		return sb.toString();

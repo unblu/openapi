@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	WhatsAppTemplateDateTimeParameter.JSON_PROPERTY_$_TYPE,
 	WhatsAppTemplateDateTimeParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateDateTimeParameter.JSON_PROPERTY_PARAMETER_NAME,
 	WhatsAppTemplateDateTimeParameter.JSON_PROPERTY_DATE_TIME,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -64,6 +65,10 @@ public class WhatsAppTemplateDateTimeParameter implements WhatsAppTemplateParame
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private ETemplateComponentParameterType type = ETemplateComponentParameterType.DATE_TIME;
 
+	public static final String JSON_PROPERTY_PARAMETER_NAME = "parameterName";
+	@JsonProperty(JSON_PROPERTY_PARAMETER_NAME)
+	private String parameterName;
+
 	public static final String JSON_PROPERTY_DATE_TIME = "dateTime";
 	@JsonProperty(JSON_PROPERTY_DATE_TIME)
 	private DateTimeParameterValue dateTime = null;
@@ -106,6 +111,26 @@ public class WhatsAppTemplateDateTimeParameter implements WhatsAppTemplateParame
 		this.type = type;
 	}
 
+	public WhatsAppTemplateDateTimeParameter parameterName(String parameterName) {
+		this.parameterName = parameterName;
+		return this;
+	}
+
+	/**
+	 * The name of the parameter for templates using named parameters (e.g., \&quot;visitor_name\&quot;, \&quot;agent_name\&quot;). &lt;p&gt; Only used when the
+	 * template uses named parameter format instead of positional format.
+	 * 
+	 * @return parameterName
+	 **/
+	@ApiModelProperty(value = "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format.")
+	public String getParameterName() {
+		return parameterName;
+	}
+
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+
 	public WhatsAppTemplateDateTimeParameter dateTime(DateTimeParameterValue dateTime) {
 		this.dateTime = dateTime;
 		return this;
@@ -136,12 +161,13 @@ public class WhatsAppTemplateDateTimeParameter implements WhatsAppTemplateParame
 		WhatsAppTemplateDateTimeParameter whatsAppTemplateDateTimeParameter = (WhatsAppTemplateDateTimeParameter) o;
 		return Objects.equals(this.$type, whatsAppTemplateDateTimeParameter.$type) &&
 				Objects.equals(this.type, whatsAppTemplateDateTimeParameter.type) &&
+				Objects.equals(this.parameterName, whatsAppTemplateDateTimeParameter.parameterName) &&
 				Objects.equals(this.dateTime, whatsAppTemplateDateTimeParameter.dateTime);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, dateTime);
+		return Objects.hash($type, type, parameterName, dateTime);
 	}
 
 	@Override
@@ -150,6 +176,7 @@ public class WhatsAppTemplateDateTimeParameter implements WhatsAppTemplateParame
 		sb.append("class WhatsAppTemplateDateTimeParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    parameterName: ").append(toIndentedString(parameterName)).append("\n");
 		sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
 		sb.append("}");
 		return sb.toString();

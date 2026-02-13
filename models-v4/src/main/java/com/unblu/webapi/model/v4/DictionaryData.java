@@ -27,8 +27,10 @@ import io.swagger.annotations.ApiModelProperty;
 	DictionaryData.JSON_PROPERTY_ACCOUNT_ID,
 	DictionaryData.JSON_PROPERTY_TYPE,
 	DictionaryData.JSON_PROPERTY_LANGUAGE,
+	DictionaryData.JSON_PROPERTY_DESCRIPTION,
 	DictionaryData.JSON_PROPERTY_AFF_FILE,
 	DictionaryData.JSON_PROPERTY_DIC_FILE,
+	DictionaryData.JSON_PROPERTY_HAS_DEFAULT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class DictionaryData {
@@ -97,6 +99,10 @@ public class DictionaryData {
 	@JsonProperty(JSON_PROPERTY_LANGUAGE)
 	private String language;
 
+	public static final String JSON_PROPERTY_DESCRIPTION = "description";
+	@JsonProperty(JSON_PROPERTY_DESCRIPTION)
+	private String description;
+
 	public static final String JSON_PROPERTY_AFF_FILE = "affFile";
 	@JsonProperty(JSON_PROPERTY_AFF_FILE)
 	private ExpandableField<DictionaryFileContent> affFile = null;
@@ -104,6 +110,10 @@ public class DictionaryData {
 	public static final String JSON_PROPERTY_DIC_FILE = "dicFile";
 	@JsonProperty(JSON_PROPERTY_DIC_FILE)
 	private ExpandableField<DictionaryFileContent> dicFile = null;
+
+	public static final String JSON_PROPERTY_HAS_DEFAULT = "hasDefault";
+	@JsonProperty(JSON_PROPERTY_HAS_DEFAULT)
+	private Boolean hasDefault;
 
 	public DictionaryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -262,6 +272,25 @@ public class DictionaryData {
 		this.language = language;
 	}
 
+	public DictionaryData description(String description) {
+		this.description = description;
+		return this;
+	}
+
+	/**
+	 * Optional description of the dictionary
+	 * 
+	 * @return description
+	 **/
+	@ApiModelProperty(value = "Optional description of the dictionary")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public DictionaryData affFile(ExpandableField<DictionaryFileContent> affFile) {
 		this.affFile = affFile;
 		return this;
@@ -300,6 +329,26 @@ public class DictionaryData {
 		this.dicFile = dicFile;
 	}
 
+	public DictionaryData hasDefault(Boolean hasDefault) {
+		this.hasDefault = hasDefault;
+		return this;
+	}
+
+	/**
+	 * Indicates whether a default dictionary file exists for this dictionary&#39;s language.&lt;br&gt; This is a read-only property. Any value provided in create
+	 * or update operations will be ignored.
+	 * 
+	 * @return hasDefault
+	 **/
+	@ApiModelProperty(value = "Indicates whether a default dictionary file exists for this dictionary's language.<br> This is a read-only property. Any value provided in create or update operations will be ignored.")
+	public Boolean isHasDefault() {
+		return hasDefault;
+	}
+
+	public void setHasDefault(Boolean hasDefault) {
+		this.hasDefault = hasDefault;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -317,13 +366,15 @@ public class DictionaryData {
 				Objects.equals(this.accountId, dictionaryData.accountId) &&
 				Objects.equals(this.type, dictionaryData.type) &&
 				Objects.equals(this.language, dictionaryData.language) &&
+				Objects.equals(this.description, dictionaryData.description) &&
 				Objects.equals(this.affFile, dictionaryData.affFile) &&
-				Objects.equals(this.dicFile, dictionaryData.dicFile);
+				Objects.equals(this.dicFile, dictionaryData.dicFile) &&
+				Objects.equals(this.hasDefault, dictionaryData.hasDefault);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, type, language, affFile, dicFile);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, type, language, description, affFile, dicFile, hasDefault);
 	}
 
 	@Override
@@ -338,8 +389,10 @@ public class DictionaryData {
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    language: ").append(toIndentedString(language)).append("\n");
+		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    affFile: ").append(toIndentedString(affFile)).append("\n");
 		sb.append("    dicFile: ").append(toIndentedString(dicFile)).append("\n");
+		sb.append("    hasDefault: ").append(toIndentedString(hasDefault)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

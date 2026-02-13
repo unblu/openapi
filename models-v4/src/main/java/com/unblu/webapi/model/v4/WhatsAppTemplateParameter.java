@@ -21,4 +21,10 @@ public interface WhatsAppTemplateParameter {
 
 	WhatsAppTemplateParameter type(ETemplateComponentParameterType type);
 
+	void setParameterName(String parameterName);
+
+	String getParameterName();
+
+	WhatsAppTemplateParameter parameterName(String parameterName);
+
 }

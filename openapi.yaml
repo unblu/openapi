@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.30.1
+  version: 8.31.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -38,6 +38,8 @@ tags:
 - name: CollaborationLayerEvents
 - name: CollaborationLayerLogs
   description: Service to manage all kind of collaboration layer log entries.
+- name: ConversationAccessInterceptors
+  description: Service to manage conversation access interceptors
 - name: ConversationHistory
   description: Service to get the history of conversations
 - name: ConversationSummaries
@@ -4845,6 +4847,290 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversationaccessinterceptors/create:
+    post:
+      tags:
+      - ConversationAccessInterceptors
+      summary: create
+      description: Creates a new conversation access interceptor<br>
+      operationId: conversationAccessInterceptorsCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationAccessInterceptorData"
+            examples:
+              create:
+                summary: create
+                description: Create a new conversation access interceptor
+                value:
+                  $_type: ConversationAccessInterceptorData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: test-conversation-access-interceptor-
+                  description: null
+                  timeoutBehavior: CONTINUE
+                  interceptedOpeningTypes:
+                  - ACCESS_AS_AGENT_PARTICIPANT
+                  - ACCESS_AS_GHOST_PARTICIPANT
+                  outboundEndpoint: https://test.unblu.com
+                  outboundStatus: DISABLED
+                  outboundSecret: null
+                  outboundApiVersion: V4
+                  retryCount: null
+                  retryDelay: null
+                  order: 3
+                  timeoutMillis: 5000
+        required: true
+      responses:
+        "200":
+          description: The created conversation access interceptor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationAccessInterceptorData"
+              examples:
+                create:
+                  summary: create
+                  description: New conversation access interceptor
+                  value:
+                    $_type: ConversationAccessInterceptorData
+                    id: 03NX1BKHQhGg5MxxXUvUog
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-conversation-access-interceptor-
+                    description: null
+                    timeoutBehavior: CONTINUE
+                    interceptedOpeningTypes:
+                    - ACCESS_AS_AGENT_PARTICIPANT
+                    - ACCESS_AS_GHOST_PARTICIPANT
+                    outboundEndpoint: https://test.unblu.com
+                    outboundStatus: DISABLED
+                    outboundSecret: null
+                    outboundApiVersion: V4
+                    retryCount: 0
+                    retryDelay: 0
+                    order: 3
+                    timeoutMillis: 5000
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationaccessinterceptors/{interceptorId}/delete:
+    delete:
+      tags:
+      - ConversationAccessInterceptors
+      summary: delete
+      description: "Deletes an existing conversation access interceptor. If the interceptor to be deleted can't be found, the HTTP status code 204 is returned.<br>"
+      operationId: conversationAccessInterceptorsDelete
+      parameters:
+      - name: interceptorId
+        in: path
+        description: The ID of the conversation access interceptor which should be deleted
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationaccessinterceptors/getByName:
+    get:
+      tags:
+      - ConversationAccessInterceptors
+      summary: getByName
+      description: Searches for a conversation access interceptor with the given name<br>
+      operationId: conversationAccessInterceptorsGetByName
+      parameters:
+      - name: name
+        in: query
+        description: The name of the conversation access interceptor
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The conversation access interceptor with the given name or an error if none is found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationAccessInterceptorData"
+              examples:
+                get-by-name-interceptor:
+                  summary: get by name interceptor
+                  description: Conversation access interceptor
+                  value:
+                    $_type: ConversationAccessInterceptorData
+                    id: 03NX1BKHQhGg5MxxXUvUog
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-conversation-access-interceptor-
+                    description: null
+                    timeoutBehavior: CONTINUE
+                    interceptedOpeningTypes:
+                    - ACCESS_AS_AGENT_PARTICIPANT
+                    - ACCESS_AS_GHOST_PARTICIPANT
+                    outboundEndpoint: http://test.outbound.com
+                    outboundStatus: DISABLED
+                    outboundSecret: null
+                    outboundApiVersion: V4
+                    retryCount: 0
+                    retryDelay: 0
+                    order: 1
+                    timeoutMillis: 5000
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationaccessinterceptors/{interceptorId}/read:
+    get:
+      tags:
+      - ConversationAccessInterceptors
+      summary: read
+      description: Reads an existing conversation access interceptor<br>
+      operationId: conversationAccessInterceptorsRead
+      parameters:
+      - name: interceptorId
+        in: path
+        description: The ID of the conversation access interceptor to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The conversation access interceptor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationAccessInterceptorData"
+              examples:
+                read-conv-interceptor:
+                  summary: read conv interceptor
+                  description: Conversation access interceptor
+                  value:
+                    $_type: ConversationAccessInterceptorData
+                    id: 03NX1BKHQhGg5MxxXUvUog
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: test-conversation-access-interceptor-
+                    description: null
+                    timeoutBehavior: CONTINUE
+                    interceptedOpeningTypes:
+                    - ACCESS_AS_AGENT_PARTICIPANT
+                    - ACCESS_AS_GHOST_PARTICIPANT
+                    outboundEndpoint: http://test.outbound.com
+                    outboundStatus: DISABLED
+                    outboundSecret: null
+                    outboundApiVersion: V4
+                    retryCount: 0
+                    retryDelay: 0
+                    order: 1
+                    timeoutMillis: 5000
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationaccessinterceptors/search:
+    post:
+      tags:
+      - ConversationAccessInterceptors
+      summary: search
+      description: Searches for conversation access interceptor in the current account<br>
+      operationId: conversationAccessInterceptorsSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationAccessInterceptorQuery"
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationAccessInterceptorResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationaccessinterceptors/{interceptorId}/sendPing:
+    post:
+      tags:
+      - ConversationAccessInterceptors
+      summary: sendPing
+      description: Emits a `PingRequest` on the configured outbound endpoint for the conversation access interceptor. <p><br>
+      operationId: conversationAccessInterceptorsSendPing
+      parameters:
+      - name: interceptorId
+        in: path
+        description: The ID of a conversation access interceptor
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: the  `PingResponse`  to the outbound request or a response with a null pingId if a webhook endpoint is configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PingResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationaccessinterceptors/update:
+    post:
+      tags:
+      - ConversationAccessInterceptors
+      summary: update
+      description: Updates an existing conversation access interceptor<br>
+      operationId: conversationAccessInterceptorsUpdate
+      requestBody:
+        description: The conversation access interceptor to update
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationAccessInterceptorData"
+        required: true
+      responses:
+        "200":
+          description: The updated conversation access interceptor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationAccessInterceptorData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /conversationhistory/{conversationId}/exportMessageLog:
     post:
       tags:
@@ -7861,6 +8147,7 @@ paths:
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
                     type: HUNSPELL
                     language: cs
+                    description: null
                     affFile:
                       $_type: DictionaryFileContent
                       id: AAEadabo2FBDEcn-356Cm8d
@@ -7869,6 +8156,7 @@ paths:
                       $_type: DictionaryFileContent
                       id: AAEadabo2FBDEcn-356Cm8d
                       content: "data:text/plain;base64,ZGljIGNvbnRlbnQ="
+                    hasDefault: false
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -23093,6 +23381,183 @@ components:
         country:
           type: string
           description: The country in which the visitor is (probable)
+    ConversationAccessInterceptorData:
+      type: object
+      description: A model representing a conversation access interceptor. These interceptors are used to approve or reject an attempt to join a conversation.
+      properties:
+        $_type:
+          type: string
+          default: ConversationAccessInterceptorData
+          enum:
+          - ConversationAccessInterceptorData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: A model representing a conversation access interceptor. These interceptors are used to approve or reject an attempt to join a conversation. Mandatory.
+        description:
+          type: string
+          description: Description of the conversation access interceptor. Maximum length of 500 characters.
+        timeoutBehavior:
+          $ref: "#/components/schemas/EConversationAccessInterceptorTimeoutBehavior"
+        interceptedOpeningTypes:
+          type: array
+          description: Defines the different ways in which a conversation can be opened and which of these are intercepted. Mandatory.
+          items:
+            $ref: "#/components/schemas/EConversationAccessType"
+        outboundEndpoint:
+          type: string
+          description: "The URL of the outbound request registration endpoint. Requests for outbound request events are sent to this URL. Maximum length of 4000 characters. Mandatory. <p> The following event is sent to the endpoint: <ul> <li>The `OutboundRequest.ServiceNameConstants#CONVERSATION_ACCESS_INTERCEPTOR_ACCESS_CONVERSATION` event is sent to the endpoint every time a conversation is opened in an Unblu UI.</li> </ul>"
+        outboundStatus:
+          $ref: "#/components/schemas/EOutboundEndpointStatus"
+        outboundSecret:
+          type: string
+          description: Optional secret sent with each outbound event. Mandatory. <p> Maximum length of 4000 characters.
+        outboundApiVersion:
+          $ref: "#/components/schemas/EWebApiVersion"
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0."
+        order:
+          type: integer
+          format: int64
+          description: Order of execution of the file upload interceptor among all the file upload interceptors configured in the account. Mandatory.
+        timeoutMillis:
+          type: integer
+          format: int64
+          description: A long for the amount of miliseconds until the timeout of the interceptor occurs.
+    ConversationAccessInterceptorOrderBy:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationAccessInterceptorOrderBy
+          enum:
+          - ConversationAccessInterceptorOrderBy
+        field:
+          $ref: "#/components/schemas/EConversationAccessInterceptorOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    ConversationAccessInterceptorOutboundDenyResponse:
+      type: object
+      description: Response of a conversation access interceptor which rejected access to a conversation with a reason
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: ConversationAccessInterceptorOutboundDenyResponse
+          enum:
+          - ConversationAccessInterceptorOutboundDenyResponse
+        type:
+          $ref: "#/components/schemas/EConversationAccessInterceptorOutboundResponseType"
+        reason:
+          type: string
+          description: Mandatory field. Holds the message displayed to the rejected person trying to get access to a conversation
+    ConversationAccessInterceptorOutboundGrantResponse:
+      type: object
+      description: "Response from a conversation access interceptor that granted an access, allowing the processing of the message to continue"
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: ConversationAccessInterceptorOutboundGrantResponse
+          enum:
+          - ConversationAccessInterceptorOutboundGrantResponse
+        type:
+          $ref: "#/components/schemas/EConversationAccessInterceptorOutboundResponseType"
+    ConversationAccessInterceptorOutboundResponse:
+      description: Base model for a new conversation access interceptor outbound response
+      oneOf:
+      - $ref: "#/components/schemas/ConversationAccessInterceptorOutboundDenyResponse"
+      - $ref: "#/components/schemas/ConversationAccessInterceptorOutboundGrantResponse"
+      discriminator:
+        propertyName: type
+        mapping:
+          DENY: "#/components/schemas/ConversationAccessInterceptorOutboundDenyResponse"
+          GRANT: "#/components/schemas/ConversationAccessInterceptorOutboundGrantResponse"
+    ConversationAccessInterceptorQuery:
+      type: object
+      description: Container to search ConversationAccessInterceptor
+      properties:
+        $_type:
+          type: string
+          default: ConversationAccessInterceptorQuery
+          enum:
+          - ConversationAccessInterceptorQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: "#/components/schemas/ConversationAccessInterceptorSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: "#/components/schemas/ConversationAccessInterceptorOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    ConversationAccessInterceptorResult:
+      type: object
+      description: Container to return list of conversation access interceptors
+      properties:
+        $_type:
+          type: string
+          default: ConversationAccessInterceptorResult
+          enum:
+          - ConversationAccessInterceptorResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/ConversationAccessInterceptorData"
+    ConversationAccessInterceptorSearchFilter:
+      description: ConversationAccessInterceptorSearchFilter item.
+      oneOf:
+      - $ref: "#/components/schemas/CreationTimestampConversationAccessInterceptorSearchFilter"
+      - $ref: "#/components/schemas/ModificationTimestampConversationAccessInterceptorSearchFilter"
+      - $ref: "#/components/schemas/NameConversationAccessInterceptorSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampConversationAccessInterceptorSearchFilter"
+          MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampConversationAccessInterceptorSearchFilter"
+          NAME: "#/components/schemas/NameConversationAccessInterceptorSearchFilter"
     ConversationActiveEvent:
       type: object
       description: "An event triggered every time a conversation's state is set to ACTIVE <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
@@ -23692,6 +24157,13 @@ components:
         text:
           type: string
           description: Text representation of the message.
+        deletedForAll:
+          $ref: "#/components/schemas/MessageDeletionForAllInfo"
+        deletedForSelf:
+          type: array
+          description: Message deletion information of participants who marked this message as deleted for themselves.
+          items:
+            $ref: "#/components/schemas/MessageDeletionForSelfInfo"
     ConversationHistoryOrderBy:
       type: object
       description: Conversation history orderBy item.
@@ -26161,6 +26633,21 @@ components:
           $ref: "#/components/schemas/ECannedResponseUsageSearchFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
+    CreationTimestampConversationAccessInterceptorSearchFilter:
+      type: object
+      description: CreationTimestampConversationAccessInterceptorSearchFilter
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampConversationAccessInterceptorSearchFilter
+          enum:
+          - CreationTimestampConversationAccessInterceptorSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationAccessInterceptorSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampConversationHistorySearchFilter:
       type: object
       required:
@@ -28072,6 +28559,9 @@ components:
         language:
           type: string
           description: "Language of the dictionary (e.g., \"en\", \"de\", \"fr\")"
+        description:
+          type: string
+          description: Optional description of the dictionary
         affFile:
           description: "AFF file of the entity: ID that can be expanded."
           oneOf:
@@ -28086,6 +28576,9 @@ components:
           - $ref: "#/components/schemas/DictionaryFileContent"
           x-expand-query-key: dicFile
           x-type: ExpandableField
+        hasDefault:
+          type: boolean
+          description: Indicates whether a default dictionary file exists for this dictionary's language.<br> This is a read-only property. Any value provided in create or update operations will be ignored.
     DictionaryEntry:
       type: object
       description: Model of dictionary. Dictionaries contain words for spell checking purposes.
@@ -29282,6 +29775,57 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EConversationAccessInterceptorOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EConversationAccessInterceptorOutboundResponseType:
+      type: string
+      enum:
+      - GRANT
+      - DENY
+      x-enum-descriptions:
+      - GRANT
+      - DENY
+    EConversationAccessInterceptorSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EConversationAccessInterceptorTimeoutBehavior:
+      type: string
+      description: "What should happen with a message when a timeout occurs during interception.<br> If omitted, the value REJECT is used."
+      enum:
+      - REJECT
+      - CONTINUE
+      x-enum-descriptions:
+      - "REJECT: Reject the access attempt when a timeout occurs"
+      - "CONTINUE: Grant access to the conversation when a timeout occurs"
+    EConversationAccessType:
+      type: string
+      enum:
+      - ACCESS_AS_VISITOR_PARTICIPANT
+      - ACCESS_AS_AGENT_PARTICIPANT
+      - ACCESS_AS_GHOST_PARTICIPANT
+      - ACCESS_AS_GHOST_WITHOUT_PARTICIPATION
+      x-enum-descriptions:
+      - "ACCESS_AS_VISITOR_PARTICIPANT: A visitor person with an active conversation participation is trying to open the conversation"
+      - "ACCESS_AS_AGENT_PARTICIPANT: An agent person with an active conversation participation is trying to open the conversation in \"normal\" mode"
+      - "ACCESS_AS_GHOST_PARTICIPANT: An agent person with an active conversation participation is trying to open the conversation as a ghost"
+      - "ACCESS_AS_GHOST_WITHOUT_PARTICIPATION: An agent person without an active conversation participation is trying to open the conversation as a ghost"
     EConversationAgentParticipationType:
       type: string
       description: "This enum contains all agent participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`EConversationImpactingParticipationType`</b> All human participation types (No recorder) <li><b>`EConversationRealParticipationType`</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
@@ -30976,6 +31520,42 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EIntegrationEnvironment:
+      type: string
+      enum:
+      - VISITOR_SITE_INTEGRATION
+      - VISITOR_SITE_EMBEDDED
+      - VISITOR_DESK
+      - VISITOR_POPOUT
+      - VISITOR_BRANCH_CLIENT
+      - AGENT_DESK
+      - TEAMS_AGENT_DESK
+      - AGENT_SINGLE_CONVERSATION_DESK
+      - ACCOUNT_CONFIGURATION
+      - GLOBAL_CONFIGURATION
+      - VISITOR_MOBILE
+      - AGENT_MOBILE
+      - EXTERNAL_MESSENGER_CHANNEL
+      - CONVERSATION_RECORDER
+      - CONVERSATION_RECORDER_AUDIO
+      - WHITEBOARD
+      x-enum-descriptions:
+      - "VISITOR_SITE_INTEGRATION: Site which integrates Unblu for their visitors using a floating UI"
+      - "VISITOR_SITE_EMBEDDED: Site which integrates Unblu for their visitors using an embedded UI"
+      - "VISITOR_DESK: Site for visitors which join a session, but the page was not integrated into any other page"
+      - "VISITOR_POPOUT: Site for site integration pop-outs."
+      - "VISITOR_BRANCH_CLIENT: Site which integrates Unblu inside a branch client device using an embedded UI"
+      - "AGENT_DESK: Site for the agent"
+      - "TEAMS_AGENT_DESK: Site for the MS Teams agent"
+      - "AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent"
+      - "ACCOUNT_CONFIGURATION: Account configuration page"
+      - "GLOBAL_CONFIGURATION: Global configuration page"
+      - "VISITOR_MOBILE: Site for mobile visitor front end and pop-out. It contains the Individual UI of the visitor site integration."
+      - "AGENT_MOBILE: Site for mobile agent front end. It contains the agent inbox and the conversation UI."
+      - "EXTERNAL_MESSENGER_CHANNEL: Joined the conversation via a messenger channel."
+      - "CONVERSATION_RECORDER: Joined the conversation as conversation recorder for audio and video"
+      - "CONVERSATION_RECORDER_AUDIO: Joined the conversation as conversation recorder for audio only"
+      - "WHITEBOARD: Joined the conversation as whiteboard"
     EInternalMessageInterceptorStatus:
       type: string
       description: The status of an internal message interceptor.
@@ -36394,6 +36974,38 @@ components:
           SYSTEM: "#/components/schemas/SystemMessageData"
           TEXT: "#/components/schemas/TextMessageData"
           TEXT_QUESTION: "#/components/schemas/TextQuestionMessageData"
+    MessageDeletionForAllInfo:
+      type: object
+      description: Message deletion information for messages deleted for all participants
+      properties:
+        $_type:
+          type: string
+          default: MessageDeletionForAllInfo
+          enum:
+          - MessageDeletionForAllInfo
+        personId:
+          type: string
+          description: The ID of the person who marked the message as deleted for all participants
+        deletionTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the message was deleted
+    MessageDeletionForSelfInfo:
+      type: object
+      description: Message deletion information for messages deleted for themselves
+      properties:
+        $_type:
+          type: string
+          default: MessageDeletionForSelfInfo
+          enum:
+          - MessageDeletionForSelfInfo
+        personId:
+          type: string
+          description: The ID of the person who marked the message as deleted for themselves
+        deletionTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the message was deleted
     MessageExportFilter:
       description: Message filter item.
       oneOf:
@@ -36766,6 +37378,20 @@ components:
           - ModificationTimestampCannedResponseSearchFilter
         field:
           $ref: "#/components/schemas/ECannedResponseSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
+    ModificationTimestampConversationAccessInterceptorSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampConversationAccessInterceptorSearchFilter
+          enum:
+          - ModificationTimestampConversationAccessInterceptorSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationAccessInterceptorSearchFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampConversationSummarySearchFilter:
@@ -37246,6 +37872,20 @@ components:
           - NameBranchSearchFilter
         field:
           $ref: "#/components/schemas/EBranchSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
+    NameConversationAccessInterceptorSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: NameConversationAccessInterceptorSearchFilter
+          enum:
+          - NameConversationAccessInterceptorSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationAccessInterceptorSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
     NameConversationSummaryTemplateSearchFilter:
@@ -44218,6 +44858,9 @@ components:
           - WhatsAppTemplateCurrencyParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         currency:
           $ref: "#/components/schemas/CurrencyParameterValue"
     WhatsAppTemplateDateTimeParameter:
@@ -44232,6 +44875,9 @@ components:
           - WhatsAppTemplateDateTimeParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         dateTime:
           $ref: "#/components/schemas/DateTimeParameterValue"
     WhatsAppTemplateDocumentParameter:
@@ -44246,6 +44892,9 @@ components:
           - WhatsAppTemplateDocumentParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         document:
           $ref: "#/components/schemas/DocumentMediaParameterValue"
     WhatsAppTemplateImageParameter:
@@ -44260,6 +44909,9 @@ components:
           - WhatsAppTemplateImageParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         image:
           $ref: "#/components/schemas/MediaParameterValue"
     WhatsAppTemplateLocationParameter:
@@ -44274,6 +44926,9 @@ components:
           - WhatsAppTemplateLocationParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         location:
           $ref: "#/components/schemas/LocationParameterValue"
     WhatsAppTemplateParameter:
@@ -44309,6 +44964,9 @@ components:
           - WhatsAppTemplatePayloadParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         payload:
           type: string
           description: Payload value of the parameter
@@ -44351,6 +45009,9 @@ components:
           - WhatsAppTemplateTextParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         text:
           type: string
           description: "Text value of the parameter. <p> There is a character limit for the whole text message. It varies based on the following included component type. <p> For the header component type: 60 characters <p> For the body component type: 1024 characters if other component types are included. 32768 characters if body is the only component type included <p> No definition for buttons"
@@ -44366,6 +45027,9 @@ components:
           - WhatsAppTemplateVideoParameter
         type:
           $ref: "#/components/schemas/ETemplateComponentParameterType"
+        parameterName:
+          type: string
+          description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         video:
           $ref: "#/components/schemas/MediaParameterValue"
     WriteAgentDeputyRelationshipsBody:

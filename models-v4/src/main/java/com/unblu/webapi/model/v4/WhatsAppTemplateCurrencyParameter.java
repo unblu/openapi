@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	WhatsAppTemplateCurrencyParameter.JSON_PROPERTY_$_TYPE,
 	WhatsAppTemplateCurrencyParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateCurrencyParameter.JSON_PROPERTY_PARAMETER_NAME,
 	WhatsAppTemplateCurrencyParameter.JSON_PROPERTY_CURRENCY,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -64,6 +65,10 @@ public class WhatsAppTemplateCurrencyParameter implements WhatsAppTemplateParame
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private ETemplateComponentParameterType type = ETemplateComponentParameterType.CURRENCY;
 
+	public static final String JSON_PROPERTY_PARAMETER_NAME = "parameterName";
+	@JsonProperty(JSON_PROPERTY_PARAMETER_NAME)
+	private String parameterName;
+
 	public static final String JSON_PROPERTY_CURRENCY = "currency";
 	@JsonProperty(JSON_PROPERTY_CURRENCY)
 	private CurrencyParameterValue currency = null;
@@ -106,6 +111,26 @@ public class WhatsAppTemplateCurrencyParameter implements WhatsAppTemplateParame
 		this.type = type;
 	}
 
+	public WhatsAppTemplateCurrencyParameter parameterName(String parameterName) {
+		this.parameterName = parameterName;
+		return this;
+	}
+
+	/**
+	 * The name of the parameter for templates using named parameters (e.g., \&quot;visitor_name\&quot;, \&quot;agent_name\&quot;). &lt;p&gt; Only used when the
+	 * template uses named parameter format instead of positional format.
+	 * 
+	 * @return parameterName
+	 **/
+	@ApiModelProperty(value = "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format.")
+	public String getParameterName() {
+		return parameterName;
+	}
+
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+
 	public WhatsAppTemplateCurrencyParameter currency(CurrencyParameterValue currency) {
 		this.currency = currency;
 		return this;
@@ -136,12 +161,13 @@ public class WhatsAppTemplateCurrencyParameter implements WhatsAppTemplateParame
 		WhatsAppTemplateCurrencyParameter whatsAppTemplateCurrencyParameter = (WhatsAppTemplateCurrencyParameter) o;
 		return Objects.equals(this.$type, whatsAppTemplateCurrencyParameter.$type) &&
 				Objects.equals(this.type, whatsAppTemplateCurrencyParameter.type) &&
+				Objects.equals(this.parameterName, whatsAppTemplateCurrencyParameter.parameterName) &&
 				Objects.equals(this.currency, whatsAppTemplateCurrencyParameter.currency);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, currency);
+		return Objects.hash($type, type, parameterName, currency);
 	}
 
 	@Override
@@ -150,6 +176,7 @@ public class WhatsAppTemplateCurrencyParameter implements WhatsAppTemplateParame
 		sb.append("class WhatsAppTemplateCurrencyParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    parameterName: ").append(toIndentedString(parameterName)).append("\n");
 		sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
 		sb.append("}");
 		return sb.toString();

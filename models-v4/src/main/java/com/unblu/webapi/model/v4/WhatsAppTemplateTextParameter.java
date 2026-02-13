@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	WhatsAppTemplateTextParameter.JSON_PROPERTY_$_TYPE,
 	WhatsAppTemplateTextParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateTextParameter.JSON_PROPERTY_PARAMETER_NAME,
 	WhatsAppTemplateTextParameter.JSON_PROPERTY_TEXT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -64,6 +65,10 @@ public class WhatsAppTemplateTextParameter implements WhatsAppTemplateParameter 
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private ETemplateComponentParameterType type = ETemplateComponentParameterType.TEXT;
 
+	public static final String JSON_PROPERTY_PARAMETER_NAME = "parameterName";
+	@JsonProperty(JSON_PROPERTY_PARAMETER_NAME)
+	private String parameterName;
+
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private String text;
@@ -106,6 +111,26 @@ public class WhatsAppTemplateTextParameter implements WhatsAppTemplateParameter 
 		this.type = type;
 	}
 
+	public WhatsAppTemplateTextParameter parameterName(String parameterName) {
+		this.parameterName = parameterName;
+		return this;
+	}
+
+	/**
+	 * The name of the parameter for templates using named parameters (e.g., \&quot;visitor_name\&quot;, \&quot;agent_name\&quot;). &lt;p&gt; Only used when the
+	 * template uses named parameter format instead of positional format.
+	 * 
+	 * @return parameterName
+	 **/
+	@ApiModelProperty(value = "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format.")
+	public String getParameterName() {
+		return parameterName;
+	}
+
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+
 	public WhatsAppTemplateTextParameter text(String text) {
 		this.text = text;
 		return this;
@@ -138,12 +163,13 @@ public class WhatsAppTemplateTextParameter implements WhatsAppTemplateParameter 
 		WhatsAppTemplateTextParameter whatsAppTemplateTextParameter = (WhatsAppTemplateTextParameter) o;
 		return Objects.equals(this.$type, whatsAppTemplateTextParameter.$type) &&
 				Objects.equals(this.type, whatsAppTemplateTextParameter.type) &&
+				Objects.equals(this.parameterName, whatsAppTemplateTextParameter.parameterName) &&
 				Objects.equals(this.text, whatsAppTemplateTextParameter.text);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, text);
+		return Objects.hash($type, type, parameterName, text);
 	}
 
 	@Override
@@ -152,6 +178,7 @@ public class WhatsAppTemplateTextParameter implements WhatsAppTemplateParameter 
 		sb.append("class WhatsAppTemplateTextParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    parameterName: ").append(toIndentedString(parameterName)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("}");
 		return sb.toString();

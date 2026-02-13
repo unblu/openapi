@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	WhatsAppTemplateImageParameter.JSON_PROPERTY_$_TYPE,
 	WhatsAppTemplateImageParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateImageParameter.JSON_PROPERTY_PARAMETER_NAME,
 	WhatsAppTemplateImageParameter.JSON_PROPERTY_IMAGE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -64,6 +65,10 @@ public class WhatsAppTemplateImageParameter implements WhatsAppTemplateParameter
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private ETemplateComponentParameterType type = ETemplateComponentParameterType.IMAGE;
 
+	public static final String JSON_PROPERTY_PARAMETER_NAME = "parameterName";
+	@JsonProperty(JSON_PROPERTY_PARAMETER_NAME)
+	private String parameterName;
+
 	public static final String JSON_PROPERTY_IMAGE = "image";
 	@JsonProperty(JSON_PROPERTY_IMAGE)
 	private MediaParameterValue image = null;
@@ -106,6 +111,26 @@ public class WhatsAppTemplateImageParameter implements WhatsAppTemplateParameter
 		this.type = type;
 	}
 
+	public WhatsAppTemplateImageParameter parameterName(String parameterName) {
+		this.parameterName = parameterName;
+		return this;
+	}
+
+	/**
+	 * The name of the parameter for templates using named parameters (e.g., \&quot;visitor_name\&quot;, \&quot;agent_name\&quot;). &lt;p&gt; Only used when the
+	 * template uses named parameter format instead of positional format.
+	 * 
+	 * @return parameterName
+	 **/
+	@ApiModelProperty(value = "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format.")
+	public String getParameterName() {
+		return parameterName;
+	}
+
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+
 	public WhatsAppTemplateImageParameter image(MediaParameterValue image) {
 		this.image = image;
 		return this;
@@ -136,12 +161,13 @@ public class WhatsAppTemplateImageParameter implements WhatsAppTemplateParameter
 		WhatsAppTemplateImageParameter whatsAppTemplateImageParameter = (WhatsAppTemplateImageParameter) o;
 		return Objects.equals(this.$type, whatsAppTemplateImageParameter.$type) &&
 				Objects.equals(this.type, whatsAppTemplateImageParameter.type) &&
+				Objects.equals(this.parameterName, whatsAppTemplateImageParameter.parameterName) &&
 				Objects.equals(this.image, whatsAppTemplateImageParameter.image);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, image);
+		return Objects.hash($type, type, parameterName, image);
 	}
 
 	@Override
@@ -150,6 +176,7 @@ public class WhatsAppTemplateImageParameter implements WhatsAppTemplateParameter
 		sb.append("class WhatsAppTemplateImageParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    parameterName: ").append(toIndentedString(parameterName)).append("\n");
 		sb.append("    image: ").append(toIndentedString(image)).append("\n");
 		sb.append("}");
 		return sb.toString();

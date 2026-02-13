@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({
 	WhatsAppTemplateLocationParameter.JSON_PROPERTY_$_TYPE,
 	WhatsAppTemplateLocationParameter.JSON_PROPERTY_TYPE,
+	WhatsAppTemplateLocationParameter.JSON_PROPERTY_PARAMETER_NAME,
 	WhatsAppTemplateLocationParameter.JSON_PROPERTY_LOCATION,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -64,6 +65,10 @@ public class WhatsAppTemplateLocationParameter implements WhatsAppTemplateParame
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private ETemplateComponentParameterType type = ETemplateComponentParameterType.LOCATION;
 
+	public static final String JSON_PROPERTY_PARAMETER_NAME = "parameterName";
+	@JsonProperty(JSON_PROPERTY_PARAMETER_NAME)
+	private String parameterName;
+
 	public static final String JSON_PROPERTY_LOCATION = "location";
 	@JsonProperty(JSON_PROPERTY_LOCATION)
 	private LocationParameterValue location = null;
@@ -106,6 +111,26 @@ public class WhatsAppTemplateLocationParameter implements WhatsAppTemplateParame
 		this.type = type;
 	}
 
+	public WhatsAppTemplateLocationParameter parameterName(String parameterName) {
+		this.parameterName = parameterName;
+		return this;
+	}
+
+	/**
+	 * The name of the parameter for templates using named parameters (e.g., \&quot;visitor_name\&quot;, \&quot;agent_name\&quot;). &lt;p&gt; Only used when the
+	 * template uses named parameter format instead of positional format.
+	 * 
+	 * @return parameterName
+	 **/
+	@ApiModelProperty(value = "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format.")
+	public String getParameterName() {
+		return parameterName;
+	}
+
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+
 	public WhatsAppTemplateLocationParameter location(LocationParameterValue location) {
 		this.location = location;
 		return this;
@@ -136,12 +161,13 @@ public class WhatsAppTemplateLocationParameter implements WhatsAppTemplateParame
 		WhatsAppTemplateLocationParameter whatsAppTemplateLocationParameter = (WhatsAppTemplateLocationParameter) o;
 		return Objects.equals(this.$type, whatsAppTemplateLocationParameter.$type) &&
 				Objects.equals(this.type, whatsAppTemplateLocationParameter.type) &&
+				Objects.equals(this.parameterName, whatsAppTemplateLocationParameter.parameterName) &&
 				Objects.equals(this.location, whatsAppTemplateLocationParameter.location);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, location);
+		return Objects.hash($type, type, parameterName, location);
 	}
 
 	@Override
@@ -150,6 +176,7 @@ public class WhatsAppTemplateLocationParameter implements WhatsAppTemplateParame
 		sb.append("class WhatsAppTemplateLocationParameter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    parameterName: ").append(toIndentedString(parameterName)).append("\n");
 		sb.append("    location: ").append(toIndentedString(location)).append("\n");
 		sb.append("}");
 		return sb.toString();

@@ -36,6 +36,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryMessageData.JSON_PROPERTY_REJECTION_SEVERITY,
 	ConversationHistoryMessageData.JSON_PROPERTY_REJECTION_REASON,
 	ConversationHistoryMessageData.JSON_PROPERTY_TEXT,
+	ConversationHistoryMessageData.JSON_PROPERTY_DELETED_FOR_ALL,
+	ConversationHistoryMessageData.JSON_PROPERTY_DELETED_FOR_SELF,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationHistoryMessageData {
@@ -131,6 +133,14 @@ public class ConversationHistoryMessageData {
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private String text;
+
+	public static final String JSON_PROPERTY_DELETED_FOR_ALL = "deletedForAll";
+	@JsonProperty(JSON_PROPERTY_DELETED_FOR_ALL)
+	private MessageDeletionForAllInfo deletedForAll = null;
+
+	public static final String JSON_PROPERTY_DELETED_FOR_SELF = "deletedForSelf";
+	@JsonProperty(JSON_PROPERTY_DELETED_FOR_SELF)
+	private List<MessageDeletionForSelfInfo> deletedForSelf = null;
 
 	public ConversationHistoryMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -425,6 +435,52 @@ public class ConversationHistoryMessageData {
 		this.text = text;
 	}
 
+	public ConversationHistoryMessageData deletedForAll(MessageDeletionForAllInfo deletedForAll) {
+		this.deletedForAll = deletedForAll;
+		return this;
+	}
+
+	/**
+	 * Get deletedForAll
+	 * 
+	 * @return deletedForAll
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageDeletionForAllInfo getDeletedForAll() {
+		return deletedForAll;
+	}
+
+	public void setDeletedForAll(MessageDeletionForAllInfo deletedForAll) {
+		this.deletedForAll = deletedForAll;
+	}
+
+	public ConversationHistoryMessageData deletedForSelf(List<MessageDeletionForSelfInfo> deletedForSelf) {
+		this.deletedForSelf = deletedForSelf;
+		return this;
+	}
+
+	public ConversationHistoryMessageData addDeletedForSelfItem(MessageDeletionForSelfInfo deletedForSelfItem) {
+		if (this.deletedForSelf == null) {
+			this.deletedForSelf = new ArrayList<>();
+		}
+		this.deletedForSelf.add(deletedForSelfItem);
+		return this;
+	}
+
+	/**
+	 * Message deletion information of participants who marked this message as deleted for themselves.
+	 * 
+	 * @return deletedForSelf
+	 **/
+	@ApiModelProperty(value = "Message deletion information of participants who marked this message as deleted for themselves.")
+	public List<MessageDeletionForSelfInfo> getDeletedForSelf() {
+		return deletedForSelf;
+	}
+
+	public void setDeletedForSelf(List<MessageDeletionForSelfInfo> deletedForSelf) {
+		this.deletedForSelf = deletedForSelf;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -448,12 +504,14 @@ public class ConversationHistoryMessageData {
 				Objects.equals(this.botThreadId, conversationHistoryMessageData.botThreadId) &&
 				Objects.equals(this.rejectionSeverity, conversationHistoryMessageData.rejectionSeverity) &&
 				Objects.equals(this.rejectionReason, conversationHistoryMessageData.rejectionReason) &&
-				Objects.equals(this.text, conversationHistoryMessageData.text);
+				Objects.equals(this.text, conversationHistoryMessageData.text) &&
+				Objects.equals(this.deletedForAll, conversationHistoryMessageData.deletedForAll) &&
+				Objects.equals(this.deletedForSelf, conversationHistoryMessageData.deletedForSelf);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, replyToMessageId, externalMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text);
+		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, replyToMessageId, externalMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text, deletedForAll, deletedForSelf);
 	}
 
 	@Override
@@ -475,6 +533,8 @@ public class ConversationHistoryMessageData {
 		sb.append("    rejectionSeverity: ").append(toIndentedString(rejectionSeverity)).append("\n");
 		sb.append("    rejectionReason: ").append(toIndentedString(rejectionReason)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
+		sb.append("    deletedForAll: ").append(toIndentedString(deletedForAll)).append("\n");
+		sb.append("    deletedForSelf: ").append(toIndentedString(deletedForSelf)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
