@@ -28,6 +28,7 @@ import com.unblu.webapi.model.v4.ConversationsSetContextPersonBody;
 import com.unblu.webapi.model.v4.ConversationsSetInheritConfigurationAndTextsBody;
 import com.unblu.webapi.model.v4.ConversationsSetLocaleBody;
 import com.unblu.webapi.model.v4.ConversationsSetScheduledTimestampBody;
+import com.unblu.webapi.model.v4.ConversationsSetSourceUrlBody;
 import com.unblu.webapi.model.v4.ConversationsSetStarredBody;
 import com.unblu.webapi.model.v4.ConversationsSetTopicBody;
 import com.unblu.webapi.model.v4.ConversationsSetVisibilityBody;
@@ -1220,6 +1221,69 @@ public class ConversationsApi {
 
 		// create path and map variables
 		String localVarPath = "/conversations/{conversationId}/setScheduledTimestamp"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * setSourceUrl Sets the &#x60;sourceUrl&#x60; for the specified conversation. Passing &#x60;null&#x60; deletes the existing &#x60;sourceUrl&#x60;.&lt;br&gt;
+	 * 
+	 * @param conversationId the ID of the conversation to update (required)
+	 * @param conversationsSetSourceUrlBody (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsSetSourceUrl(String conversationId, ConversationsSetSourceUrlBody conversationsSetSourceUrlBody, List<ExpandFields> expand) throws ApiException {
+		return conversationsSetSourceUrlWithHttpInfo(conversationId, conversationsSetSourceUrlBody, expand).getData();
+	}
+
+	/**
+	 * setSourceUrl Sets the &#x60;sourceUrl&#x60; for the specified conversation. Passing &#x60;null&#x60; deletes the existing &#x60;sourceUrl&#x60;.&lt;br&gt;
+	 * 
+	 * @param conversationId the ID of the conversation to update (required)
+	 * @param conversationsSetSourceUrlBody (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsSetSourceUrlWithHttpInfo(String conversationId, ConversationsSetSourceUrlBody conversationsSetSourceUrlBody, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = conversationsSetSourceUrlBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsSetSourceUrl");
+		}
+
+		// verify the required parameter 'conversationsSetSourceUrlBody' is set
+		if (conversationsSetSourceUrlBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationsSetSourceUrlBody' when calling conversationsSetSourceUrl");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/setSourceUrl"
 				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
 
 		// query params

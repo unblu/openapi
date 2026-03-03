@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.31.2
+  version: 8.32.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -12,6 +12,10 @@ security:
 tags:
 - name: Accounts
   description: With this service the accounts of the unblu system can be managed. Most of the provided interface needs super admin permissions. Especially if the edited account is not the one of the current user.<br>
+- name: AnalyticsDashboards
+  description: Service for managing analytics dashboards
+- name: AnalyticsWidgets
+  description: Service for managing analytics widgets
 - name: ApiKeys
   description: With this service the api keys can be managed
 - name: Audit
@@ -710,6 +714,1148 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /analytics/dashboards/create:
+    post:
+      tags:
+      - AnalyticsDashboards
+      summary: create
+      description: "<p>This endpoint is in preview mode.</p>Creates the specified analytics dashboard. The dashboard's ID is generated automatically, therefore any ID provided in the analytics dashboard entity is ignored.<br>"
+      operationId: analyticsDashboardsCreate
+      requestBody:
+        description: The analytics dashboard to create.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsDashboard"
+            examples:
+              request-body:
+                summary: request body
+                description: create analytics dashboard
+                value:
+                  $_type: AnalyticsDashboard
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: my-analytics-dashboard-test
+                  description: null
+                  initialTimeFrameType: TIME_SPAN
+                  initialTimeFrameSpan: MONTH_TO_DATE
+                  initialTimeFrameLastDays: null
+                  initialGranularity: DAY
+                  enabledGlobalFilters: null
+                  translations: null
+        required: true
+      responses:
+        "200":
+          description: The analytics dashboard as created in the system.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDashboard"
+              examples:
+                response-body:
+                  summary: response body
+                  description: create analytics dashboard
+                  value:
+                    $_type: AnalyticsDashboard
+                    id: D60Uit_ARVWSrAvBEm0q1g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: my-analytics-dashboard-test
+                    description: null
+                    initialTimeFrameType: TIME_SPAN
+                    initialTimeFrameSpan: MONTH_TO_DATE
+                    initialTimeFrameLastDays: null
+                    initialGranularity: DAY
+                    enabledGlobalFilters: []
+                    translations: {}
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/dashboards/createFromTemplate:
+    post:
+      tags:
+      - AnalyticsDashboards
+      summary: createFromTemplate
+      description: <p>This endpoint is in preview mode.</p>Creates a new dashboard using the specified template.<br>
+      operationId: analyticsDashboardsCreateFromTemplate
+      requestBody:
+        description: The analytics dashboard from template request.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsDashboardFromTemplateRequest"
+        required: true
+      responses:
+        "200":
+          description: The analytics dashboard as created in the system.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDashboard"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/dashboards/{analyticsDashboardId}/delete:
+    delete:
+      tags:
+      - AnalyticsDashboards
+      summary: delete
+      description: <p>This endpoint is in preview mode.</p>Deletes the analytics dashboard with the specified ID.<br>
+      operationId: analyticsDashboardsDelete
+      parameters:
+      - name: analyticsDashboardId
+        in: path
+        description: The ID of the analytics dashboard to delete.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/dashboards/{analyticsDashboardId}/read:
+    get:
+      tags:
+      - AnalyticsDashboards
+      summary: read
+      description: <p>This endpoint is in preview mode.</p>Returns the analytics dashboard with the specified ID.<br>
+      operationId: analyticsDashboardsRead
+      parameters:
+      - name: analyticsDashboardId
+        in: path
+        description: The ID of the analytics dashboard to return.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The analytics dashboard entity with the ID provided.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDashboard"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /analytics/dashboards/search:
+    post:
+      tags:
+      - AnalyticsDashboards
+      summary: search
+      description: <p>This endpoint is in preview mode.</p>Searches for analytics dashboards matching the specified query.<br>
+      operationId: analyticsDashboardsSearch
+      requestBody:
+        description: The query used for the search.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsDashboardQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: search analytics dashboards order by name ascending
+                value:
+                  $_type: AnalyticsDashboardQuery
+                  searchFilters: null
+                  orderBy:
+                  - $_type: AnalyticsDashboardOrderBy
+                    field: NAME
+                    order: ASCENDING
+                  offset: null
+                  limit: null
+        required: true
+      responses:
+        "200":
+          description: A container of analytics dashboards matching the provided query.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDashboardResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: search analytics dashboards order by name ascending
+                  value:
+                    $_type: AnalyticsDashboardResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items:
+                    - $_type: AnalyticsDashboard
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      name: analytics-dashboard-1
+                      description: null
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      initialGranularity: DAY
+                      enabledGlobalFilters: []
+                      translations: {}
+                    - $_type: AnalyticsDashboard
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      name: analytics-dashboard-2
+                      description: null
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      initialGranularity: DAY
+                      enabledGlobalFilters: []
+                      translations: {}
+                    - $_type: AnalyticsDashboard
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      name: analytics-dashboard-3
+                      description: null
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      initialGranularity: DAY
+                      enabledGlobalFilters: []
+                      translations: {}
+                    - $_type: AnalyticsDashboard
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      name: analytics-dashboard-4
+                      description: null
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      initialGranularity: DAY
+                      enabledGlobalFilters: []
+                      translations: {}
+                    - $_type: AnalyticsDashboard
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      name: analytics-dashboard-5
+                      description: null
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      initialGranularity: DAY
+                      enabledGlobalFilters: []
+                      translations: {}
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /analytics/dashboards/update:
+    post:
+      tags:
+      - AnalyticsDashboards
+      summary: update
+      description: <p>This endpoint is in preview mode.</p>Updates the analytics dashboard in the system with the provided entity. The update fails if no analytics dashboard exists with the specified ID.<br>
+      operationId: analyticsDashboardsUpdate
+      requestBody:
+        description: The details to update the analytics dashboard with.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsDashboard"
+            examples:
+              request-body:
+                summary: request body
+                description: update analytics dashboard
+                value:
+                  $_type: AnalyticsDashboard
+                  id: D60Uit_ARVWSrAvBEm0q1g
+                  creationTimestamp: 1546300800000
+                  modificationTimestamp: 1548979200000
+                  version: 1
+                  accountId: A7d9E_0-c3cC4aoFDb85t6n
+                  name: my-analytics-dashboard-test
+                  description: null
+                  initialTimeFrameType: TIME_SPAN
+                  initialTimeFrameSpan: YEAR_TO_DATE
+                  initialTimeFrameLastDays: null
+                  initialGranularity: MONTH
+                  enabledGlobalFilters: []
+                  translations: {}
+        required: true
+      responses:
+        "200":
+          description: The updated analytics dashboard. Always use this instance for any further processing.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDashboard"
+              examples:
+                response-body:
+                  summary: response body
+                  description: create analytics dashboard
+                  value:
+                    $_type: AnalyticsDashboard
+                    id: D60Uit_ARVWSrAvBEm0q1g
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: my-analytics-dashboard-test
+                    description: null
+                    initialTimeFrameType: TIME_SPAN
+                    initialTimeFrameSpan: MONTH_TO_DATE
+                    initialTimeFrameLastDays: null
+                    initialGranularity: DAY
+                    enabledGlobalFilters: []
+                    translations: {}
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/widgets/create:
+    post:
+      tags:
+      - AnalyticsWidgets
+      summary: create
+      description: "<p>This endpoint is in preview mode.</p>Creates the specified analytics widget. The widget's ID is generated automatically, therefore any ID provided in the analytics widget entity is ignored.<br>"
+      operationId: analyticsWidgetsCreate
+      requestBody:
+        description: The analytics widget to create.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsWidgetData"
+            examples:
+              request-body:
+                summary: request body
+                description: create analytics widget
+                value:
+                  $_type: AvgWaitingTimeAnalyticsWidgetData
+                  id: null
+                  accountId: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                  name: my-analytics-widget
+                  description: null
+                  kpiType: AVG_WAITING_TIME
+                  row: 1
+                  rowSpan: 1
+                  column: 1
+                  columnSpan: 1
+                  displaySingleValueAggregation: NONE
+                  displaySingleValuePreviousPeriodComparison: false
+                  displayChart: LINE
+                  initialTimeFrameType: TIME_SPAN
+                  initialTimeFrameSpan: MONTH_TO_DATE
+                  initialTimeFrameLastDays: null
+                  granularityType: FIXED
+                  fixedGranularity: DAY
+                  translations: null
+                  referenceLines:
+                  - $_type: AnalyticsKpiReferenceLine
+                    id: null
+                    analyticsWidgetId: null
+                    label: label
+                    value: 0.6
+                    color: white
+                    displayType: SOLID
+                    translations: null
+                  filtersType: FIXED
+                  groupBy:
+                  - WAITING_TIME_OUTCOME
+                  filters:
+                    $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                    startTimestamp: null
+                    endTimestamp: null
+                    conversationTemplateIds:
+                    - jvmIMmsASjOyUQYZd2QGyg
+                    - 69GUA3yMSsSFAxhP0YfIUw
+                    conversationLocales:
+                    - en
+                    - de
+                    initialEngagementTypes:
+                    - CHAT_REQUEST
+                    - CHAT_INVITE
+                    recipientAgentPersonIds: null
+                    recipientTeamIds: null
+                    recipientNamedAreaIds: null
+                    recipientAccountId: null
+                    waitingTimeOutcomes:
+                    - ACCEPTED
+                    - ABORTED
+                    waitingTimeTypes:
+                    - INITIALLY_QUEUED
+                    - REBOARDING_QUEUED
+                    invitationAgentPersonIds:
+                    - JIFIh_6bT6eoZUCZbEIbZQ
+                    - J10Sq-d6Rzaxr842E0jvkA
+                    invitationTeamIds: null
+                    invitationNamedAreaIds: null
+                    invitationAccountId: null
+                    invitationAcceptingAgentPersonIds: null
+                    invitationAcceptingAgentTeamIds: null
+        required: true
+      responses:
+        "200":
+          description: The analytics widget as created in the system.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsWidgetData"
+              examples:
+                response-body:
+                  summary: response body
+                  description: create analytics widget
+                  value:
+                    $_type: AvgWaitingTimeAnalyticsWidgetData
+                    id: D60Uit_ARVWSrAvBEm0q1g
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                    name: my-analytics-widget
+                    description: null
+                    kpiType: AVG_WAITING_TIME
+                    row: 1
+                    rowSpan: 1
+                    column: 1
+                    columnSpan: 1
+                    displaySingleValueAggregation: NONE
+                    displaySingleValuePreviousPeriodComparison: false
+                    displayChart: LINE
+                    initialTimeFrameType: TIME_SPAN
+                    initialTimeFrameSpan: MONTH_TO_DATE
+                    initialTimeFrameLastDays: null
+                    granularityType: FIXED
+                    fixedGranularity: DAY
+                    translations: {}
+                    referenceLines:
+                    - $_type: AnalyticsKpiReferenceLine
+                      id: 71awHFWOT0yOfLsbHQjxGQ
+                      analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                      label: label
+                      value: 0.6
+                      color: white
+                      displayType: SOLID
+                      translations: {}
+                    filtersType: FIXED
+                    groupBy:
+                    - WAITING_TIME_OUTCOME
+                    filters:
+                      $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                      startTimestamp: null
+                      endTimestamp: null
+                      conversationTemplateIds:
+                      - jvmIMmsASjOyUQYZd2QGyg
+                      - 69GUA3yMSsSFAxhP0YfIUw
+                      conversationLocales:
+                      - en
+                      - de
+                      initialEngagementTypes:
+                      - CHAT_REQUEST
+                      - CHAT_INVITE
+                      recipientAgentPersonIds: null
+                      recipientTeamIds: null
+                      recipientNamedAreaIds: null
+                      recipientAccountId: null
+                      waitingTimeOutcomes:
+                      - ACCEPTED
+                      - ABORTED
+                      waitingTimeTypes:
+                      - INITIALLY_QUEUED
+                      - REBOARDING_QUEUED
+                      invitationAgentPersonIds:
+                      - JIFIh_6bT6eoZUCZbEIbZQ
+                      - J10Sq-d6Rzaxr842E0jvkA
+                      invitationTeamIds: null
+                      invitationNamedAreaIds: null
+                      invitationAccountId: null
+                      invitationAcceptingAgentPersonIds: null
+                      invitationAcceptingAgentTeamIds: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/widgets/{id}/delete:
+    delete:
+      tags:
+      - AnalyticsWidgets
+      summary: delete
+      description: <p>This endpoint is in preview mode.</p>Deletes the analytics widget with the specified ID.<br>
+      operationId: analyticsWidgetsDelete
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the analytics widget to delete.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/widgets/{id}/read:
+    get:
+      tags:
+      - AnalyticsWidgets
+      summary: read
+      description: <p>This endpoint is in preview mode.</p>Returns the analytics widget with the specified ID.<br>
+      operationId: analyticsWidgetsRead
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the analytics widget to return.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The analytics widget entity with the ID provided.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsWidgetData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /analytics/widgets/readMultiple:
+    post:
+      tags:
+      - AnalyticsWidgets
+      summary: readMultiple
+      description: <p>This endpoint is in preview mode.</p>Returns multiple analytics widgets matching the specified IDs.<br>
+      operationId: analyticsWidgetsReadMultiple
+      requestBody:
+        description: The list of IDs of the analytics widgets to return.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: A list of analytics widgets with the IDs provided.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsWidgetList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /analytics/widgets/search:
+    post:
+      tags:
+      - AnalyticsWidgets
+      summary: search
+      description: <p>This endpoint is in preview mode.</p>Searches for analytics widgets matching the specified query.<br>
+      operationId: analyticsWidgetsSearch
+      requestBody:
+        description: The query used for the search.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsWidgetQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: search analytics widgets order by name ascending
+                value:
+                  $_type: AnalyticsWidgetQuery
+                  searchFilters: null
+                  orderBy:
+                  - $_type: AnalyticsWidgetOrderBy
+                    field: NAME
+                    order: ASCENDING
+                  offset: null
+                  limit: null
+        required: true
+      responses:
+        "200":
+          description: A container of analytics widgets matching the provided query.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsWidgetResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: search analytics widgets order by name ascending
+                  value:
+                    $_type: AnalyticsWidgetResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items:
+                    - $_type: AvgWaitingTimeAnalyticsWidgetData
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                      name: analytics-widget-1
+                      description: null
+                      kpiType: AVG_WAITING_TIME
+                      row: 1
+                      rowSpan: 1
+                      column: 1
+                      columnSpan: 1
+                      displaySingleValueAggregation: NONE
+                      displaySingleValuePreviousPeriodComparison: false
+                      displayChart: LINE
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      granularityType: FIXED
+                      fixedGranularity: DAY
+                      translations: {}
+                      referenceLines:
+                      - $_type: AnalyticsKpiReferenceLine
+                        id: 71awHFWOT0yOfLsbHQjxGQ
+                        analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                        label: label
+                        value: 0.6
+                        color: white
+                        displayType: SOLID
+                        translations: {}
+                      filtersType: FIXED
+                      groupBy:
+                      - WAITING_TIME_OUTCOME
+                      filters:
+                        $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                        startTimestamp: null
+                        endTimestamp: null
+                        conversationTemplateIds:
+                        - jvmIMmsASjOyUQYZd2QGyg
+                        - 69GUA3yMSsSFAxhP0YfIUw
+                        conversationLocales:
+                        - en
+                        - de
+                        initialEngagementTypes:
+                        - CHAT_REQUEST
+                        - CHAT_INVITE
+                        recipientAgentPersonIds: null
+                        recipientTeamIds: null
+                        recipientNamedAreaIds: null
+                        recipientAccountId: null
+                        waitingTimeOutcomes:
+                        - ACCEPTED
+                        - ABORTED
+                        waitingTimeTypes:
+                        - INITIALLY_QUEUED
+                        - REBOARDING_QUEUED
+                        invitationAgentPersonIds:
+                        - JIFIh_6bT6eoZUCZbEIbZQ
+                        - J10Sq-d6Rzaxr842E0jvkA
+                        invitationTeamIds: null
+                        invitationNamedAreaIds: null
+                        invitationAccountId: null
+                        invitationAcceptingAgentPersonIds: null
+                        invitationAcceptingAgentTeamIds: null
+                    - $_type: AvgWaitingTimeAnalyticsWidgetData
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                      name: analytics-widget-2
+                      description: null
+                      kpiType: AVG_WAITING_TIME
+                      row: 1
+                      rowSpan: 1
+                      column: 2
+                      columnSpan: 1
+                      displaySingleValueAggregation: NONE
+                      displaySingleValuePreviousPeriodComparison: false
+                      displayChart: LINE
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      granularityType: FIXED
+                      fixedGranularity: DAY
+                      translations: {}
+                      referenceLines:
+                      - $_type: AnalyticsKpiReferenceLine
+                        id: 71awHFWOT0yOfLsbHQjxGQ
+                        analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                        label: label
+                        value: 0.6
+                        color: white
+                        displayType: SOLID
+                        translations: {}
+                      filtersType: FIXED
+                      groupBy:
+                      - WAITING_TIME_OUTCOME
+                      filters:
+                        $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                        startTimestamp: null
+                        endTimestamp: null
+                        conversationTemplateIds:
+                        - jvmIMmsASjOyUQYZd2QGyg
+                        - 69GUA3yMSsSFAxhP0YfIUw
+                        conversationLocales:
+                        - en
+                        - de
+                        initialEngagementTypes:
+                        - CHAT_REQUEST
+                        - CHAT_INVITE
+                        recipientAgentPersonIds: null
+                        recipientTeamIds: null
+                        recipientNamedAreaIds: null
+                        recipientAccountId: null
+                        waitingTimeOutcomes:
+                        - ACCEPTED
+                        - ABORTED
+                        waitingTimeTypes:
+                        - INITIALLY_QUEUED
+                        - REBOARDING_QUEUED
+                        invitationAgentPersonIds:
+                        - JIFIh_6bT6eoZUCZbEIbZQ
+                        - J10Sq-d6Rzaxr842E0jvkA
+                        invitationTeamIds: null
+                        invitationNamedAreaIds: null
+                        invitationAccountId: null
+                        invitationAcceptingAgentPersonIds: null
+                        invitationAcceptingAgentTeamIds: null
+                    - $_type: AvgWaitingTimeAnalyticsWidgetData
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                      name: analytics-widget-3
+                      description: null
+                      kpiType: AVG_WAITING_TIME
+                      row: 2
+                      rowSpan: 1
+                      column: 1
+                      columnSpan: 1
+                      displaySingleValueAggregation: NONE
+                      displaySingleValuePreviousPeriodComparison: false
+                      displayChart: LINE
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      granularityType: FIXED
+                      fixedGranularity: DAY
+                      translations: {}
+                      referenceLines:
+                      - $_type: AnalyticsKpiReferenceLine
+                        id: 71awHFWOT0yOfLsbHQjxGQ
+                        analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                        label: label
+                        value: 0.6
+                        color: white
+                        displayType: SOLID
+                        translations: {}
+                      filtersType: FIXED
+                      groupBy:
+                      - WAITING_TIME_OUTCOME
+                      filters:
+                        $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                        startTimestamp: null
+                        endTimestamp: null
+                        conversationTemplateIds:
+                        - jvmIMmsASjOyUQYZd2QGyg
+                        - 69GUA3yMSsSFAxhP0YfIUw
+                        conversationLocales:
+                        - en
+                        - de
+                        initialEngagementTypes:
+                        - CHAT_REQUEST
+                        - CHAT_INVITE
+                        recipientAgentPersonIds: null
+                        recipientTeamIds: null
+                        recipientNamedAreaIds: null
+                        recipientAccountId: null
+                        waitingTimeOutcomes:
+                        - ACCEPTED
+                        - ABORTED
+                        waitingTimeTypes:
+                        - INITIALLY_QUEUED
+                        - REBOARDING_QUEUED
+                        invitationAgentPersonIds:
+                        - JIFIh_6bT6eoZUCZbEIbZQ
+                        - J10Sq-d6Rzaxr842E0jvkA
+                        invitationTeamIds: null
+                        invitationNamedAreaIds: null
+                        invitationAccountId: null
+                        invitationAcceptingAgentPersonIds: null
+                        invitationAcceptingAgentTeamIds: null
+                    - $_type: AvgWaitingTimeAnalyticsWidgetData
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                      name: analytics-widget-4
+                      description: null
+                      kpiType: AVG_WAITING_TIME
+                      row: 2
+                      rowSpan: 1
+                      column: 2
+                      columnSpan: 1
+                      displaySingleValueAggregation: NONE
+                      displaySingleValuePreviousPeriodComparison: false
+                      displayChart: LINE
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      granularityType: FIXED
+                      fixedGranularity: DAY
+                      translations: {}
+                      referenceLines:
+                      - $_type: AnalyticsKpiReferenceLine
+                        id: 71awHFWOT0yOfLsbHQjxGQ
+                        analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                        label: label
+                        value: 0.6
+                        color: white
+                        displayType: SOLID
+                        translations: {}
+                      filtersType: FIXED
+                      groupBy:
+                      - WAITING_TIME_OUTCOME
+                      filters:
+                        $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                        startTimestamp: null
+                        endTimestamp: null
+                        conversationTemplateIds:
+                        - jvmIMmsASjOyUQYZd2QGyg
+                        - 69GUA3yMSsSFAxhP0YfIUw
+                        conversationLocales:
+                        - en
+                        - de
+                        initialEngagementTypes:
+                        - CHAT_REQUEST
+                        - CHAT_INVITE
+                        recipientAgentPersonIds: null
+                        recipientTeamIds: null
+                        recipientNamedAreaIds: null
+                        recipientAccountId: null
+                        waitingTimeOutcomes:
+                        - ACCEPTED
+                        - ABORTED
+                        waitingTimeTypes:
+                        - INITIALLY_QUEUED
+                        - REBOARDING_QUEUED
+                        invitationAgentPersonIds:
+                        - JIFIh_6bT6eoZUCZbEIbZQ
+                        - J10Sq-d6Rzaxr842E0jvkA
+                        invitationTeamIds: null
+                        invitationNamedAreaIds: null
+                        invitationAccountId: null
+                        invitationAcceptingAgentPersonIds: null
+                        invitationAcceptingAgentTeamIds: null
+                    - $_type: AvgWaitingTimeAnalyticsWidgetData
+                      id: D60Uit_ARVWSrAvBEm0q1g
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                      name: analytics-widget-5
+                      description: null
+                      kpiType: AVG_WAITING_TIME
+                      row: 3
+                      rowSpan: 1
+                      column: 1
+                      columnSpan: 1
+                      displaySingleValueAggregation: NONE
+                      displaySingleValuePreviousPeriodComparison: false
+                      displayChart: LINE
+                      initialTimeFrameType: TIME_SPAN
+                      initialTimeFrameSpan: MONTH_TO_DATE
+                      initialTimeFrameLastDays: null
+                      granularityType: FIXED
+                      fixedGranularity: DAY
+                      translations: {}
+                      referenceLines:
+                      - $_type: AnalyticsKpiReferenceLine
+                        id: 71awHFWOT0yOfLsbHQjxGQ
+                        analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                        label: label
+                        value: 0.6
+                        color: white
+                        displayType: SOLID
+                        translations: {}
+                      filtersType: FIXED
+                      groupBy:
+                      - WAITING_TIME_OUTCOME
+                      filters:
+                        $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                        startTimestamp: null
+                        endTimestamp: null
+                        conversationTemplateIds:
+                        - jvmIMmsASjOyUQYZd2QGyg
+                        - 69GUA3yMSsSFAxhP0YfIUw
+                        conversationLocales:
+                        - en
+                        - de
+                        initialEngagementTypes:
+                        - CHAT_REQUEST
+                        - CHAT_INVITE
+                        recipientAgentPersonIds: null
+                        recipientTeamIds: null
+                        recipientNamedAreaIds: null
+                        recipientAccountId: null
+                        waitingTimeOutcomes:
+                        - ACCEPTED
+                        - ABORTED
+                        waitingTimeTypes:
+                        - INITIALLY_QUEUED
+                        - REBOARDING_QUEUED
+                        invitationAgentPersonIds:
+                        - JIFIh_6bT6eoZUCZbEIbZQ
+                        - J10Sq-d6Rzaxr842E0jvkA
+                        invitationTeamIds: null
+                        invitationNamedAreaIds: null
+                        invitationAccountId: null
+                        invitationAcceptingAgentPersonIds: null
+                        invitationAcceptingAgentTeamIds: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /analytics/widgets/update:
+    post:
+      tags:
+      - AnalyticsWidgets
+      summary: update
+      description: <p>This endpoint is in preview mode.</p>Updates the analytics widget in the system with the provided entity. The update fails if no analytics widget exists with the specified ID.<br>
+      operationId: analyticsWidgetsUpdate
+      requestBody:
+        description: The details to update the analytics widget with.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsWidgetData"
+            examples:
+              request-body:
+                summary: request body
+                description: update analytics widget
+                value:
+                  $_type: AvgWaitingTimeAnalyticsWidgetData
+                  id: D60Uit_ARVWSrAvBEm0q1g
+                  accountId: A7d9E_0-c3cC4aoFDb85t6n
+                  creationTimestamp: 1546300800000
+                  modificationTimestamp: 1548979200000
+                  version: 1
+                  analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                  name: my-analytics-widget
+                  description: null
+                  kpiType: AVG_WAITING_TIME
+                  row: 1
+                  rowSpan: 1
+                  column: 1
+                  columnSpan: 1
+                  displaySingleValueAggregation: NONE
+                  displaySingleValuePreviousPeriodComparison: false
+                  displayChart: LINE
+                  initialTimeFrameType: TIME_SPAN
+                  initialTimeFrameSpan: MONTH_TO_DATE
+                  initialTimeFrameLastDays: null
+                  granularityType: FIXED
+                  fixedGranularity: DAY
+                  translations: {}
+                  referenceLines:
+                  - $_type: AnalyticsKpiReferenceLine
+                    id: 71awHFWOT0yOfLsbHQjxGQ
+                    analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                    label: label
+                    value: 0.6
+                    color: white
+                    displayType: SOLID
+                    translations: {}
+                  filtersType: FIXED
+                  groupBy:
+                  - WAITING_TIME_OUTCOME
+                  filters:
+                    $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                    startTimestamp: null
+                    endTimestamp: null
+                    conversationTemplateIds:
+                    - jvmIMmsASjOyUQYZd2QGyg
+                    - 69GUA3yMSsSFAxhP0YfIUw
+                    conversationLocales:
+                    - en
+                    - de
+                    initialEngagementTypes:
+                    - CHAT_REQUEST
+                    - CHAT_INVITE
+                    recipientAgentPersonIds: null
+                    recipientTeamIds: null
+                    recipientNamedAreaIds: null
+                    recipientAccountId: null
+                    waitingTimeOutcomes:
+                    - ACCEPTED
+                    - ABORTED
+                    waitingTimeTypes:
+                    - INITIALLY_QUEUED
+                    - REBOARDING_QUEUED
+                    invitationAgentPersonIds:
+                    - JIFIh_6bT6eoZUCZbEIbZQ
+                    - J10Sq-d6Rzaxr842E0jvkA
+                    invitationTeamIds: null
+                    invitationNamedAreaIds: null
+                    invitationAccountId: null
+                    invitationAcceptingAgentPersonIds: null
+                    invitationAcceptingAgentTeamIds: null
+        required: true
+      responses:
+        "200":
+          description: The updated analytics widget. Always use this instance for any further processing.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsWidgetData"
+              examples:
+                response-body:
+                  summary: response body
+                  description: update analytics widget
+                  value:
+                    $_type: AvgWaitingTimeAnalyticsWidgetData
+                    id: D60Uit_ARVWSrAvBEm0q1g
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    analyticsDashboardId: D60Uit_ARVWSrAvBEm0q1g
+                    name: my-analytics-widget
+                    description: null
+                    kpiType: AVG_WAITING_TIME
+                    row: 1
+                    rowSpan: 1
+                    column: 1
+                    columnSpan: 1
+                    displaySingleValueAggregation: NONE
+                    displaySingleValuePreviousPeriodComparison: false
+                    displayChart: LINE
+                    initialTimeFrameType: TIME_SPAN
+                    initialTimeFrameSpan: MONTH_TO_DATE
+                    initialTimeFrameLastDays: null
+                    granularityType: FIXED
+                    fixedGranularity: DAY
+                    translations: {}
+                    referenceLines:
+                    - $_type: AnalyticsKpiReferenceLine
+                      id: 71awHFWOT0yOfLsbHQjxGQ
+                      analyticsWidgetId: AIjjGLtOTJyvZjwxHb1DFw
+                      label: label
+                      value: 0.6
+                      color: white
+                      displayType: SOLID
+                      translations: {}
+                    filtersType: FIXED
+                    groupBy:
+                    - WAITING_TIME_OUTCOME
+                    filters:
+                      $_type: AvgWaitingTimeAnalyticsKpiFilterData
+                      startTimestamp: null
+                      endTimestamp: null
+                      conversationTemplateIds:
+                      - jvmIMmsASjOyUQYZd2QGyg
+                      - 69GUA3yMSsSFAxhP0YfIUw
+                      conversationLocales:
+                      - en
+                      - de
+                      initialEngagementTypes:
+                      - CHAT_REQUEST
+                      - CHAT_INVITE
+                      recipientAgentPersonIds: null
+                      recipientTeamIds: null
+                      recipientNamedAreaIds: null
+                      recipientAccountId: null
+                      waitingTimeOutcomes:
+                      - ACCEPTED
+                      - ABORTED
+                      waitingTimeTypes:
+                      - INITIALLY_QUEUED
+                      - REBOARDING_QUEUED
+                      invitationAgentPersonIds:
+                      - JIFIh_6bT6eoZUCZbEIbZQ
+                      - J10Sq-d6Rzaxr842E0jvkA
+                      invitationTeamIds: null
+                      invitationNamedAreaIds: null
+                      invitationAccountId: null
+                      invitationAcceptingAgentPersonIds: null
+                      invitationAcceptingAgentTeamIds: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
   /apikeys/create:
     post:
       tags:
@@ -6711,6 +7857,49 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /conversations/{conversationId}/setSourceUrl:
+    post:
+      tags:
+      - Conversations
+      summary: setSourceUrl
+      description: Sets the `sourceUrl` for the specified conversation. Passing `null` deletes the existing `sourceUrl`.<br>
+      operationId: conversationsSetSourceUrl
+      parameters:
+      - name: conversationId
+        in: path
+        description: the ID of the conversation to update
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationsSetSourceUrlBody"
+        required: true
+      responses:
+        "200":
+          description: the updated conversation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /conversations/{conversationId}/setStarred:
     post:
       tags:
@@ -17949,6 +19138,341 @@ components:
           type: array
           items:
             type: string
+    AnalyticsDashboard:
+      type: object
+      description: <p>This type is in preview mode.</p>Data model object for an analytics dashboard
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsDashboard
+          enum:
+          - AnalyticsDashboard
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the dashboard. Maximum length of 500 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the dashboard. Maximum length of 2000 characters. Optional.
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial timeframe number of last days. Used by widgets with the `GLOBALLY_SYNCED` timeframe type. Mandatory when the timeframe type is `LAST_DAYS`.
+        initialGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        enabledGlobalFilters:
+          type: array
+          description: Enabled global filters for filtering all widgets of the dashboard simultaneously.
+          items:
+            $ref: "#/components/schemas/EAnalyticsGlobalFilterType"
+        translations:
+          type: object
+          description: A map of localized versions of the dashboard's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsDashboardTranslation"
+      x-status: PREVIEW
+    AnalyticsDashboardFromTemplateRequest:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsDashboardFromTemplateRequest
+          enum:
+          - AnalyticsDashboardFromTemplateRequest
+        template:
+          $ref: "#/components/schemas/EAnalyticsDashboardTemplateType"
+        name:
+          type: string
+          description: "Name to use for the dashboard. If not provided, the template name will be used. Optional."
+    AnalyticsDashboardIdAnalyticsWidgetSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsDashboardIdAnalyticsWidgetSearchFilter
+          enum:
+          - AnalyticsDashboardIdAnalyticsWidgetSearchFilter
+        field:
+          $ref: "#/components/schemas/EAnalyticsWidgetSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
+    AnalyticsDashboardOrderBy:
+      type: object
+      description: AnalyticsDashboard orderBy item
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsDashboardOrderBy
+          enum:
+          - AnalyticsDashboardOrderBy
+        field:
+          $ref: "#/components/schemas/EAnalyticsDashboardOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    AnalyticsDashboardQuery:
+      type: object
+      description: Container to search analytics dashboards
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsDashboardQuery
+          enum:
+          - AnalyticsDashboardQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: "#/components/schemas/AnalyticsDashboardSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: "#/components/schemas/AnalyticsDashboardOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    AnalyticsDashboardResult:
+      type: object
+      description: Container to return list of analytics dashboards
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsDashboardResult
+          enum:
+          - AnalyticsDashboardResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/AnalyticsDashboard"
+    AnalyticsDashboardSearchFilter:
+      description: AnalyticsDashboard filter item
+      oneOf:
+      - $ref: "#/components/schemas/IdAnalyticsDashboardSearchFilter"
+      - $ref: "#/components/schemas/NameAnalyticsDashboardSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          ID: "#/components/schemas/IdAnalyticsDashboardSearchFilter"
+          NAME: "#/components/schemas/NameAnalyticsDashboardSearchFilter"
+    AnalyticsDashboardTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsDashboardTranslation
+          enum:
+          - AnalyticsDashboardTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
+    AnalyticsKpiReferenceLine:
+      type: object
+      description: <p>This type is in preview mode.</p>Data model object for analytics KPI reference line
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsKpiReferenceLine
+          enum:
+          - AnalyticsKpiReferenceLine
+        id:
+          type: string
+          description: Reference line ID.
+        analyticsWidgetId:
+          type: string
+          description: Widget ID the reference line belongs to.
+        label:
+          type: string
+          description: Reference line label.
+        value:
+          type: number
+          format: float
+          description: Reference line value determining the position of the line on the chart.
+        color:
+          type: string
+          description: Reference line color.
+        displayType:
+          $ref: "#/components/schemas/EAnalyticsKpiReferenceLineDisplayType"
+        translations:
+          type: object
+          description: A map of localized versions of the reference line's label.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLineTranslation"
+      x-status: PREVIEW
+    AnalyticsKpiReferenceLineTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsKpiReferenceLineTranslation
+          enum:
+          - AnalyticsKpiReferenceLineTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        label:
+          type: string
+          description: Translated label of the entity this translation entity belongs to.
+    AnalyticsWidgetData:
+      description: Base data model object for an analytics widget
+      oneOf:
+      - $ref: "#/components/schemas/AvgWaitingTimeAnalyticsWidgetData"
+      - $ref: "#/components/schemas/AvgHandlingTimeAnalyticsWidgetData"
+      - $ref: "#/components/schemas/ConversationsEndedCountAnalyticsWidgetData"
+      - $ref: "#/components/schemas/MessagesCountAnalyticsWidgetData"
+      - $ref: "#/components/schemas/CollaborationLayersCountAnalyticsWidgetData"
+      - $ref: "#/components/schemas/CallsCountAnalyticsWidgetData"
+      discriminator:
+        propertyName: kpiType
+        mapping:
+          AVG_HANDLING_TIME: "#/components/schemas/AvgHandlingTimeAnalyticsWidgetData"
+          AVG_WAITING_TIME: "#/components/schemas/AvgWaitingTimeAnalyticsWidgetData"
+          CALLS_COUNT: "#/components/schemas/CallsCountAnalyticsWidgetData"
+          COLLABORATION_LAYERS_COUNT: "#/components/schemas/CollaborationLayersCountAnalyticsWidgetData"
+          CONVERSATIONS_ENDED_COUNT: "#/components/schemas/ConversationsEndedCountAnalyticsWidgetData"
+          MESSAGES_COUNT: "#/components/schemas/MessagesCountAnalyticsWidgetData"
+    AnalyticsWidgetList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsWidgetList
+          enum:
+          - AnalyticsWidgetList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: "#/components/schemas/AnalyticsWidgetData"
+    AnalyticsWidgetOrderBy:
+      type: object
+      description: AnalyticsWidget orderBy item
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsWidgetOrderBy
+          enum:
+          - AnalyticsWidgetOrderBy
+        field:
+          $ref: "#/components/schemas/EAnalyticsWidgetOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    AnalyticsWidgetQuery:
+      type: object
+      description: Container to search analytics widgets
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsWidgetQuery
+          enum:
+          - AnalyticsWidgetQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: "#/components/schemas/AnalyticsWidgetSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: "#/components/schemas/AnalyticsWidgetOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    AnalyticsWidgetResult:
+      type: object
+      description: Container to return list of analytics widgets
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsWidgetResult
+          enum:
+          - AnalyticsWidgetResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/AnalyticsWidgetData"
+    AnalyticsWidgetSearchFilter:
+      description: Analytics widget filter item
+      oneOf:
+      - $ref: "#/components/schemas/NameAnalyticsWidgetSearchFilter"
+      - $ref: "#/components/schemas/AnalyticsDashboardIdAnalyticsWidgetSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          ANALYTICS_DASHBOARD_ID: "#/components/schemas/AnalyticsDashboardIdAnalyticsWidgetSearchFilter"
+          NAME: "#/components/schemas/NameAnalyticsWidgetSearchFilter"
+    AnalyticsWidgetTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsWidgetTranslation
+          enum:
+          - AnalyticsWidgetTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
     AndCompoundOperator:
       type: object
       required:
@@ -19056,6 +20580,352 @@ components:
         imageData:
           type: string
           description: "Image content as data URL scheme (RFC2397 - <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code>)"
+    AvgHandlingTimeAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of average handling time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>resolutionTypes AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds</li> </ul> <p>"
+      properties:
+        $_type:
+          type: string
+          default: AvgHandlingTimeAnalyticsKpiFilterData
+          enum:
+          - AvgHandlingTimeAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        resolutionTypes:
+          type: array
+          description: "A list of resolution types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EConversationResolutionType"
+        usedFeatures:
+          type: array
+          description: "A list of features used to filter the analytics data included in the KPI calculation. Records where any of the specified features were used at least once are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EFeatureType"
+        assignedAgentPersonIds:
+          type: array
+          description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        assignedAgentTeamIds:
+          type: array
+          description: "A list of assigned agent team IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+    AvgHandlingTimeAnalyticsWidgetData:
+      type: object
+      description: Data model representing the average handling time analytics widget
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: AvgHandlingTimeAnalyticsWidgetData
+          enum:
+          - AvgHandlingTimeAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the average handling time KPI. Currently only the first value of the list is used.
+          items:
+            $ref: "#/components/schemas/EAvgHandlingTimeGroupBy"
+        filters:
+          $ref: "#/components/schemas/AvgHandlingTimeAnalyticsKpiFilterData"
+    AvgWaitingTimeAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of average waiting time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>waitingTimeOutcomes AND</li> <li>waitingTimeTypes AND</li> <li>(invitationAgentIds OR invitationTeamIds OR invitationNamedAreaIds OR invitationAccountId) AND</li> <li>invitationAcceptingAgentPersonIds AND</li> <li>invitationAcceptingAgentTeamIds</li> </ul> <p>"
+      properties:
+        $_type:
+          type: string
+          default: AvgWaitingTimeAnalyticsKpiFilterData
+          enum:
+          - AvgWaitingTimeAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        waitingTimeOutcomes:
+          type: array
+          description: "A list of waiting time outcomes used to filter the analytics data included in the KPI calculation. Records matching any of the specified outcomes are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EWaitingTimeOutcome"
+        waitingTimeTypes:
+          type: array
+          description: "A list of waiting time types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EWaitingTimeType"
+        invitationAgentPersonIds:
+          type: array
+          description: "A list of invitation agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their invitation target ID matches any of the specified agent person IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        invitationTeamIds:
+          type: array
+          description: "A list of invitation team IDs used to filter the analytics data included in the KPI calculation. Records are included if their invitation target ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        invitationNamedAreaIds:
+          type: array
+          description: "A list of invitation named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their invitation target ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        invitationAccountId:
+          type: boolean
+          description: "If true, includes records where the invitation target ID matches the current user's account ID. If null, the filter is not applied."
+        invitationAcceptingAgentPersonIds:
+          type: array
+          description: "A list of person IDs of agents who accepted the conversation invitation. Records matching any of the specified IDs are included. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        invitationAcceptingAgentTeamIds:
+          type: array
+          description: "A list of team IDs of agents who accepted the conversation invitation. Records matching any of the specified IDs are included. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+    AvgWaitingTimeAnalyticsWidgetData:
+      type: object
+      description: Data model representing the average waiting time analytics widget
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: AvgWaitingTimeAnalyticsWidgetData
+          enum:
+          - AvgWaitingTimeAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the average waiting time KPI.
+          items:
+            $ref: "#/components/schemas/EAvgWaitingTimeGroupBy"
+        filters:
+          $ref: "#/components/schemas/AvgWaitingTimeAnalyticsKpiFilterData"
     AwaitedPersonTypeChangeTimestampConversationHistorySearchFilter:
       type: object
       required:
@@ -21809,6 +23679,196 @@ components:
         mapping:
           EQUALS: "#/components/schemas/EqualsCallServiceProviderOperator"
           NOT_EQUALS: "#/components/schemas/NotEqualsCallServiceProviderOperator"
+    CallsCountAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of the number of calls <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>callTypes AND</li> <li>endReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> <li>minOverallParticipants AND</li> <li>maxOverallParticipantsn</li> </ul> <p>"
+      properties:
+        $_type:
+          type: string
+          default: CallsCountAnalyticsKpiFilterData
+          enum:
+          - CallsCountAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        assignedAgentPersonIds:
+          type: array
+          description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not included in the calculation. Empty list is not allowed. Optional."
+          items:
+            type: string
+        assignedAgentTeamIds:
+          type: array
+          description: "A list of assigned agent team IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not included in the calculation. Empty list is not allowed. Optional."
+          items:
+            type: string
+        startingPersonIds:
+          type: array
+          description: "A list of starting person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        startingPersonTeamIds:
+          type: array
+          description: "A list of starting person team IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        callTypes:
+          type: array
+          description: "A list of call types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/ECallType"
+        callEndReasons:
+          type: array
+          description: "A list of call end reasons used to filter the analytics data included in the KPI calculation. Records matching any of the specified reasons are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/ECallEndReason"
+        minActiveDuration:
+          type: integer
+          format: int64
+          description: "A minimum active duration. Records with at least the specified duration are included. If null, the filter is not applied. An empty list is not allowed."
+        maxActiveDuration:
+          type: integer
+          format: int64
+          description: "A maximum active duration. Records with a duration up to the specified value are included. If null, the filter is not applied. An empty list is not allowed."
+        minOverallParticipants:
+          type: integer
+          format: int64
+          description: "A minimum number of overall participants. Records with at least the specified number of participants are included. If null, the filter is not applied."
+        maxOverallParticipants:
+          type: integer
+          format: int64
+          description: "A maximum number of overall participants. Records with up to the specified number of participants are included. If null, the filter is not applied."
+    CallsCountAnalyticsWidgetData:
+      type: object
+      description: Data model representing the calls analytics widget
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: CallsCountAnalyticsWidgetData
+          enum:
+          - CallsCountAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the calls KPI.
+          items:
+            $ref: "#/components/schemas/ECallsCountGroupBy"
+        filters:
+          $ref: "#/components/schemas/CallsCountAnalyticsKpiFilterData"
     CancelIndexingOperationRequest:
       type: object
       description: Request to cancel a search indexing operation
@@ -23127,6 +25187,188 @@ components:
           description: The timestamp when the layer was approved by all necessary participants
         layerStopReason:
           $ref: "#/components/schemas/ELayerStopReason"
+    CollaborationLayersCountAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of the number used layers <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>layerTypes AND</li> <li>stopReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> </ul> <p>"
+      properties:
+        $_type:
+          type: string
+          default: CollaborationLayersCountAnalyticsKpiFilterData
+          enum:
+          - CollaborationLayersCountAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        assignedAgentPersonIds:
+          type: array
+          description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not included in the calculation. Empty list is not allowed. Optional."
+          items:
+            type: string
+        assignedAgentTeamIds:
+          type: array
+          description: "A list of assigned agent team IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not included in the calculation. Empty list is not allowed. Optional."
+          items:
+            type: string
+        startingPersonIds:
+          type: array
+          description: "A list of starting person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        startingPersonTeamIds:
+          type: array
+          description: "A list of starting person team IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        layerTypes:
+          type: array
+          description: "A list of layer types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/ELayerType"
+        layerStopReasons:
+          type: array
+          description: "A list of stop reasons used to filter the analytics data included in the KPI calculation. Records matching any of the specified reasons are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/ELayerStopReason"
+        minActiveDuration:
+          type: integer
+          format: int64
+          description: "A minimum active duration. Records with at least the specified duration are included. If null, the filter is not applied."
+        maxActiveDuration:
+          type: integer
+          format: int64
+          description: "A maximum active duration. Records with a duration up to the specified value are included. If null, the filter is not applied."
+    CollaborationLayersCountAnalyticsWidgetData:
+      type: object
+      description: Data model representing the number of used layers analytics widget
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: CollaborationLayersCountAnalyticsWidgetData
+          enum:
+          - CollaborationLayersCountAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the layers used KPI.
+          items:
+            $ref: "#/components/schemas/ECollaborationLayersCountGroupBy"
+        filters:
+          $ref: "#/components/schemas/CollaborationLayersCountAnalyticsKpiFilterData"
     CollaborationUniversalCobrowsingNavigationEvent:
       type: object
       description: An event triggered every time a new URL is accessed in a universal co-browsing collaboration layer
@@ -26309,6 +28551,178 @@ components:
           $ref: "#/components/schemas/EConversationEndReason"
         comment:
           type: string
+    ConversationsEndedCountAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of the number of ended conversations <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>conversationEndReasons AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>contextPersonMinRating AND</li> <li>contextPersonMaxRating</li> </ul> <p>"
+      properties:
+        $_type:
+          type: string
+          default: ConversationsEndedCountAnalyticsKpiFilterData
+          enum:
+          - ConversationsEndedCountAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        conversationEndReasons:
+          type: array
+          description: "A list of conversation end reasons used to filter the analytics data included in the KPI calculation. Records matching any of the specified reasons are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EConversationEndReason"
+        usedFeatures:
+          type: array
+          description: "A list of features used to filter the analytics data included in the KPI calculation. Records where any of the specified features were used at least once are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EFeatureType"
+        assignedAgentPersonIds:
+          type: array
+          description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        assignedAgentTeamIds:
+          type: array
+          description: "A list of assigned agent team IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not included in the calculation. Empty list is not allowed. Optional."
+          items:
+            type: string
+        contextPersonMinRating:
+          type: number
+          format: float
+          description: "Context person minimum rating. Records with a rating greater than or equal to the specified rating are included. If null, the filter is not applied. Optional."
+        contextPersonMaxRating:
+          type: number
+          format: float
+          description: "Context person maximum rating. Records with a rating less than or equal to the specified rating are included. If null, the filter is not applied."
+    ConversationsEndedCountAnalyticsWidgetData:
+      type: object
+      description: Data model representing the conversations ended analytics widget
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: ConversationsEndedCountAnalyticsWidgetData
+          enum:
+          - ConversationsEndedCountAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the conversations ended KPI.
+          items:
+            $ref: "#/components/schemas/EConversationsEndedCountGroupBy"
+        filters:
+          $ref: "#/components/schemas/ConversationsEndedCountAnalyticsKpiFilterData"
     ConversationsOffboardParticipantBody:
       type: object
       description: Request body for the 'conversationsOffboardParticipant' operation
@@ -26359,6 +28773,13 @@ components:
           type: integer
           format: int64
           description: the new scheduledTimestamp rounded to nearest minute
+    ConversationsSetSourceUrlBody:
+      type: object
+      description: Request body for the 'conversationsSetSourceUrl' operation
+      properties:
+        sourceUrl:
+          type: string
+          description: "the URL to set, or `null` to remove it"
     ConversationsSetStarredBody:
       type: object
       description: Request body for the 'conversationsSetStarred' operation
@@ -28938,6 +31359,175 @@ components:
       - "PAUSE_NOTIFICATIONS_END_TIMESTAMP: Filter by the 'pauseNotificationsEndTimestamp' attribute"
       - "AUTO_PAUSE_NOTIFICATIONS_REASON_SOURCE_ID: Filter by the 'sourceId' attribute of the related AutoPauseNotificationsReason"
       - "AUTO_PAUSE_NOTIFICATIONS_REASON_EXPIRATION_TIMESTAMP: Filter by the 'expirationTimestamp' attribute of the related AutoPauseNotificationsReason"
+    EAnalyticsDashboardOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+    EAnalyticsDashboardSearchFilterField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      x-enum-descriptions:
+      - "ID: Filter by the 'id' attribute"
+      - "NAME: Filter by the 'name' attribute"
+    EAnalyticsDashboardTemplateType:
+      type: string
+      enum:
+      - SUPPORT
+      - GENERAL
+      - ADVISORY
+      - AGENT
+      x-enum-descriptions:
+      - "SUPPORT: Customer support KPIs related to the queue."
+      - "GENERAL: KPIs on the volume of conversations."
+      - "ADVISORY: KPIs related to the secure messenger."
+      - "AGENT: KPIs of agent personal conversations."
+    EAnalyticsGlobalFilterType:
+      type: string
+      description: "Defines the types of global filters that can be configured on an analytics dashboard. Global filters are added to the dashboard configuration and apply to all widgets within that dashboard simultaneously. When a user selects a filter value, all widgets on the dashboard are filtered accordingly, providing a consistent view across the entire dashboard. If the KPI of a widget doesn't support filtering by a configured filter type, the filter is ignored for that widget."
+      enum:
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - INITIAL_ENGAGEMENT_TYPE
+      - RECIPIENT_ID
+      - ASSIGNED_AGENT_PERSON_ID
+      - ASSIGNED_AGENT_TEAM_ID
+      x-enum-descriptions:
+      - "CONVERSATION_TEMPLATE_ID: Allows filtering the whole dashboard by conversation template IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "CONVERSATION_LOCALE: Allows filtering the whole dashboard by conversation locales. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "INITIAL_ENGAGEMENT_TYPE: Allows filtering the whole dashboard by initial engagement types. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "RECIPIENT_ID: Allows filtering the whole dashboard by recipient agent persons, recipient agent teams, named areas, account IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "ASSIGNED_AGENT_PERSON_ID: Allows filtering the whole dashboard by assigned agent person IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "ASSIGNED_AGENT_TEAM_ID: Allows filtering the whole dashboard by assigned agent team IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+    EAnalyticsKpiDisplayChart:
+      type: string
+      enum:
+      - LINE
+      - BAR_VERTICAL
+      - NONE
+      x-enum-descriptions:
+      - "LINE: Line chart."
+      - "BAR_VERTICAL: Vertical bar chart."
+      - "NONE: No chart."
+    EAnalyticsKpiDisplaySingleValueAggregation:
+      type: string
+      enum:
+      - SUM
+      - AVG
+      - NONE
+      x-enum-descriptions:
+      - "SUM: Summary."
+      - "AVG: Average value calculation. If the KPI is count-based, the result is the average per selected granularity (total count divided by the number of time units). If the KPI is value-based, the result is calculated over the entire selected time range."
+      - "NONE: No aggregation."
+    EAnalyticsKpiFiltersType:
+      type: string
+      enum:
+      - FIXED
+      - GLOBALLY_SYNCED
+      x-enum-descriptions:
+      - "FIXED: Only the filters configured for the widget are used for KPI calculation. Global dashboard filters are ignored."
+      - "GLOBALLY_SYNCED: Only filters present in both the widget and the global dashboard filters are used for the KPI calculation. Filters not in both sets are ignored."
+    EAnalyticsKpiFixedGranularity:
+      type: string
+      enum:
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+      - MONTH
+      - WHOLE_TIMEFRAME
+      x-enum-descriptions:
+      - "MINUTE: Minute."
+      - "HOUR: Hour."
+      - "DAY: Day."
+      - "WEEK: Week."
+      - "MONTH: Month."
+      - "WHOLE_TIMEFRAME: Whole timeframe."
+    EAnalyticsKpiFixedTimeFrameSpan:
+      type: string
+      enum:
+      - CURRENT_DAY
+      - WEEK_TO_DATE
+      - MONTH_TO_DATE
+      - QUARTER_TO_DATE
+      - YEAR_TO_DATE
+      x-enum-descriptions:
+      - "CURRENT_DAY: The current day, starting at 00:00, up to the present time."
+      - "WEEK_TO_DATE: The current week, starting at 00:00 on Monday, up to the present time."
+      - "MONTH_TO_DATE: The current month, starting at 00:00 on the first day of the month, up to the present time."
+      - "QUARTER_TO_DATE: The current quarter, starting at 00:00 on the first day of the quarter, up to the present time."
+      - "YEAR_TO_DATE: The current year, starting at 00:00 on the first day of the year, up to the present time."
+    EAnalyticsKpiGranularityType:
+      type: string
+      enum:
+      - GLOBALLY_SYNCED
+      - FIXED
+      x-enum-descriptions:
+      - "GLOBALLY_SYNCED: Granularity is calculated based on the dashboard configuration."
+      - "FIXED: Widget uses its own fixed granularity configuration."
+    EAnalyticsKpiReferenceLineDisplayType:
+      type: string
+      enum:
+      - SOLID
+      - DOTTED
+      - DASHED
+      x-enum-descriptions:
+      - "SOLID: Solid line."
+      - "DOTTED: Dotted line."
+      - "DASHED: Dashed line."
+    EAnalyticsKpiTimeFrameType:
+      type: string
+      enum:
+      - GLOBALLY_SYNCED
+      - TIME_SPAN
+      - LAST_DAYS
+      - CUSTOM
+      x-enum-descriptions:
+      - "GLOBALLY_SYNCED: The timeframe is calculated based on dashboard configuration. Available only on widgets."
+      - "TIME_SPAN: A fixed time span, ending at the present time."
+      - "LAST_DAYS: A fixed number of last days, ending at the present time."
+      - "CUSTOM: A custom timeframe specified by a start timestamp and an end timestamp. Available on widgets and data requests."
+    EAnalyticsKpiType:
+      type: string
+      enum:
+      - AVG_WAITING_TIME
+      - AVG_HANDLING_TIME
+      - CONVERSATIONS_ENDED_COUNT
+      - MESSAGES_COUNT
+      - COLLABORATION_LAYERS_COUNT
+      - CALLS_COUNT
+      x-enum-descriptions:
+      - "AVG_WAITING_TIME: KPI for the average waiting time of a visitor."
+      - "AVG_HANDLING_TIME: KPI for the average handling time of an agent."
+      - "CONVERSATIONS_ENDED_COUNT: KPI for the number of ended conversations."
+      - "MESSAGES_COUNT: KPI for the number of messages."
+      - "COLLABORATION_LAYERS_COUNT: KPI for the number of collaboration layers."
+      - "CALLS_COUNT: KPI for the number of calls."
+    EAnalyticsWidgetOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute."
+      - "NAME: Sort by the 'name' attribute."
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute."
+    EAnalyticsWidgetSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - ANALYTICS_DASHBOARD_ID
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute."
+      - "ANALYTICS_DASHBOARD_ID: Filter by the 'analyticsDashboardId' attribute."
     EAnswerStatus:
       type: string
       description: The state of a question message
@@ -29149,6 +31739,46 @@ components:
       - "AVAILABLE: There is at least one agent available for the specified named area and locale."
       - "BUSY: There is at least one agent watching the inbound queue for the specified named area and locale but the max capacity of parallel conversations is reached. It is very likely, that an agent will be available in a short time."
       - "UNAVAILABLE: There is currently no agent handling any inbound queue items. It is very unlikely, that an agent will be available in a short time."
+    EAvgHandlingTimeGroupBy:
+      type: string
+      enum:
+      - CONVERSATION_RECIPIENT_ID
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - INITIAL_ENGAGEMENT_TYPE
+      - ASSIGNED_AGENT_PERSON_ID
+      - ASSIGNED_AGENT_TEAM_ID
+      - RESOLUTION_TYPE
+      x-enum-descriptions:
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by conversation locale."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID."
+      - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID."
+      - "RESOLUTION_TYPE: Group by resolution type."
+    EAvgWaitingTimeGroupBy:
+      type: string
+      enum:
+      - CONVERSATION_RECIPIENT_ID
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - INITIAL_ENGAGEMENT_TYPE
+      - WAITING_TIME_OUTCOME
+      - WAITING_TIME_TYPE
+      - INVITATION_TARGET_ID
+      - INVITATION_ACCEPTING_AGENT_PERSON_ID
+      - INVITATION_ACCEPTING_AGENT_TEAM_ID
+      x-enum-descriptions:
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by conversation locale."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "WAITING_TIME_OUTCOME: Group by waiting time outcome."
+      - "WAITING_TIME_TYPE: Group by waiting time type."
+      - "INVITATION_TARGET_ID: Group by invitation target ID, which can be one of the following: person ID, team ID, or named area ID."
+      - "INVITATION_ACCEPTING_AGENT_PERSON_ID: Group by the person ID of the agent who accepted the invitation."
+      - "INVITATION_ACCEPTING_AGENT_TEAM_ID: Group by the team ID of the agent who accepted the invitation."
     EAwaitedPersonType:
       type: string
       description: Indicates which type of person the conversation is waiting for
@@ -29558,6 +32188,28 @@ components:
       x-enum-descriptions:
       - "AUDIO: The call was started as voice call"
       - "VIDEO: The call was started as video call"
+    ECallsCountGroupBy:
+      type: string
+      enum:
+      - CONVERSATION_RECIPIENT_ID
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - INITIAL_ENGAGEMENT_TYPE
+      - CALL_TYPE
+      - CALL_END_REASON
+      - NUMBER_OVERALL_CALL_PARTICIPANTS
+      - STARTING_PERSON_ID
+      - STARTING_PERSON_TEAM_ID
+      x-enum-descriptions:
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by language."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "CALL_TYPE: Group by call type."
+      - "CALL_END_REASON: Group by call end reason."
+      - "NUMBER_OVERALL_CALL_PARTICIPANTS: Group by number of overall call participants."
+      - "STARTING_PERSON_ID: Group by starting person ID."
+      - "STARTING_PERSON_TEAM_ID: Group by starting person team ID."
     ECannedResponseOrderByField:
       type: string
       enum:
@@ -29742,6 +32394,26 @@ components:
       - "LAYER_TYPE: Filter by the 'layerType' attribute"
       - "STARTING_PERSON_ID: Filter by the 'startingPersonId' attribute"
       - "STOPPING_PERSON_ID: Filter by the 'stoppingPersonId' attribute"
+    ECollaborationLayersCountGroupBy:
+      type: string
+      enum:
+      - CONVERSATION_RECIPIENT_ID
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - INITIAL_ENGAGEMENT_TYPE
+      - LAYER_TYPE
+      - LAYER_STOP_REASON
+      - STARTING_PERSON_ID
+      - STARTING_PERSON_TEAM_ID
+      x-enum-descriptions:
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by language."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "LAYER_TYPE: Group by layer type."
+      - "LAYER_STOP_REASON: Group by layer stop reason."
+      - "STARTING_PERSON_ID: Group by starting person ID."
+      - "STARTING_PERSON_TEAM_ID: Group by starting person team ID."
     ECompoundOperatorType:
       type: string
       enum:
@@ -30273,6 +32945,18 @@ components:
       - "STARTED: Conversation recording has started to record"
       - "STOPPED: Conversation recording has stopped recording"
       - "FAILED: Conversation recording has failed"
+    EConversationResolutionType:
+      type: string
+      enum:
+      - CONVERSATION_ENDED
+      - PARTICIPATION_ENDED
+      - PUSHED_TO_QUEUE
+      - FORWARDED
+      x-enum-descriptions:
+      - "CONVERSATION_ENDED: Conversation ended."
+      - "PARTICIPATION_ENDED: Conversation participation ended."
+      - "PUSHED_TO_QUEUE: Conversation was pushed to queue."
+      - "FORWARDED: Conversation was forwarded."
     EConversationSearchFilterField:
       type: string
       enum:
@@ -30504,6 +33188,26 @@ components:
       x-enum-descriptions:
       - "EQUALS: Check if the value is equal to the one provided in the operator"
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+    EConversationsEndedCountGroupBy:
+      type: string
+      enum:
+      - CONVERSATION_RECIPIENT_ID
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - INITIAL_ENGAGEMENT_TYPE
+      - ASSIGNED_AGENT_PERSON_ID
+      - ASSIGNED_AGENT_TEAM_ID
+      - CONTEXT_PERSON_RATING
+      - CONVERSATION_END_REASON
+      x-enum-descriptions:
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by conversation locale."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID."
+      - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID."
+      - "CONTEXT_PERSON_RATING: Group by context person rating."
+      - "CONVERSATION_END_REASON: Group by conversation end reason."
     ECurrencyCode:
       type: string
       description: List of <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency codes.
@@ -31275,6 +33979,28 @@ components:
       - "USE_EXISTING: The request was successfully executed and an existing conversation should be used."
       - "CREATE: The request was successfully executed and a new conversation should be created."
       - "ERROR: The request failed to execute"
+    EFeatureType:
+      type: string
+      enum:
+      - SCREEN_SHARING
+      - EMBEDDED_COBROWSING
+      - CONTEXT_MIGRATION_COBROWSING
+      - MOBILE_COBROWSING
+      - DOCUMENT_COBROWSING
+      - WHITEBOARD
+      - UNIVERSAL_COBROWSING
+      - DOCUMENT_CAMERA_SHARING
+      - CALLS
+      x-enum-descriptions:
+      - SCREEN_SHARING
+      - EMBEDDED_COBROWSING
+      - CONTEXT_MIGRATION_COBROWSING
+      - MOBILE_COBROWSING
+      - DOCUMENT_COBROWSING
+      - WHITEBOARD
+      - UNIVERSAL_COBROWSING
+      - DOCUMENT_CAMERA_SHARING
+      - CALLS
     EFileUploadInterceptorOrderByField:
       type: string
       enum:
@@ -31905,7 +34631,7 @@ components:
       - REPLY
       - QUESTION_ABORTED
       - RECORDING_AVAILABLE
-      - WHATSAPP_TEMPLATE
+      - WHATS_APP_TEMPLATE
       x-enum-descriptions:
       - TEXT
       - SYSTEM
@@ -31919,7 +34645,31 @@ components:
       - REPLY
       - QUESTION_ABORTED
       - RECORDING_AVAILABLE
-      - WHATSAPP_TEMPLATE
+      - WHATS_APP_TEMPLATE
+    EMessagesCountGroupBy:
+      type: string
+      enum:
+      - CONVERSATION_RECIPIENT_ID
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - INITIAL_ENGAGEMENT_TYPE
+      - ASSIGNED_AGENT_PERSON_ID
+      - ASSIGNED_AGENT_TEAM_ID
+      - SENDER_PERSON_TYPE
+      - SENDER_PERSON_ID
+      - SENDER_PERSON_TEAM_ID
+      - MESSAGE_TYPE
+      x-enum-descriptions:
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by conversation locale."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID."
+      - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID."
+      - "SENDER_PERSON_TYPE: Group by sender person type."
+      - "SENDER_PERSON_ID: Group by sender person ID."
+      - "SENDER_PERSON_TEAM_ID: Group by sender person team ID."
+      - "MESSAGE_TYPE: Group by message type."
     ENamedAreaOrderByField:
       type: string
       enum:
@@ -32843,6 +35593,28 @@ components:
       x-enum-descriptions:
       - "PERSON_ID: Filter by the 'personId' attribute"
       - "ONLINE_STATE: Filter by the 'onlineState' attribute"
+    EWaitingTimeOutcome:
+      type: string
+      enum:
+      - ACCEPTED
+      - ABORTED
+      x-enum-descriptions:
+      - "ACCEPTED: Accepted by agent."
+      - "ABORTED: Waiting aborted."
+    EWaitingTimeType:
+      type: string
+      enum:
+      - INITIALLY_QUEUED
+      - REBOARDING_QUEUED
+      - PUSH_TO_QUEUE
+      - AGENT_FORWARDING
+      - TEAM_FORWARDING
+      x-enum-descriptions:
+      - "INITIALLY_QUEUED: Queued at the start of the conversation."
+      - "REBOARDING_QUEUED: Queued after reboarding."
+      - "PUSH_TO_QUEUE: Conversation pushed back to queue by agent."
+      - "AGENT_FORWARDING: Queued after agent forwarding."
+      - "TEAM_FORWARDING: Queued after team forwarding."
     EWebApiVersion:
       type: string
       description: "Version of the Web-API. Version of API corresponds to a path element of the request URL. E.g.: /rest/v3/&lt;service&gt;/..."
@@ -35007,6 +37779,20 @@ components:
           $ref: "#/components/schemas/EConversationSearchFilterField"
         operator:
           $ref: "#/components/schemas/ParticipationTypeOperator"
+    IdAnalyticsDashboardSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: IdAnalyticsDashboardSearchFilter
+          enum:
+          - IdAnalyticsDashboardSearchFilter
+        field:
+          $ref: "#/components/schemas/EAnalyticsDashboardSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     IdExternalMessengerContactSearchFilter:
       type: object
       required:
@@ -36959,6 +39745,7 @@ components:
       - $ref: "#/components/schemas/SystemMessageData"
       - $ref: "#/components/schemas/TextQuestionMessageData"
       - $ref: "#/components/schemas/RecordingAvailableMessageData"
+      - $ref: "#/components/schemas/WhatsAppTemplateMessageData"
       discriminator:
         propertyName: type
         mapping:
@@ -36974,6 +39761,7 @@ components:
           SYSTEM: "#/components/schemas/SystemMessageData"
           TEXT: "#/components/schemas/TextMessageData"
           TEXT_QUESTION: "#/components/schemas/TextQuestionMessageData"
+          WHATS_APP_TEMPLATE: "#/components/schemas/WhatsAppTemplateMessageData"
     MessageDeletionForAllInfo:
       type: object
       description: Message deletion information for messages deleted for all participants
@@ -37287,6 +40075,193 @@ components:
         reason:
           type: string
           description: The reason the message was rejected. <p> Should be localized in the the language of the conversation the message belongs to.
+    MessagesCountAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of the number of messages <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>senderPersonTypes AND</li> <li>senderPersonIds AND</li> <li>senderPersonTeamIds AND</li> <li>messageLocales AND</li> <li>messageTypes AND</li> <li>minCharacterCount AND</li> <li>maxCharacterCount</li> </ul> <p>"
+      properties:
+        $_type:
+          type: string
+          default: MessagesCountAnalyticsKpiFilterData
+          enum:
+          - MessagesCountAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        assignedAgentPersonIds:
+          type: array
+          description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        assignedAgentTeamIds:
+          type: array
+          description: "A list of assigned agent team IDs used to filter results. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        senderPersonTypes:
+          type: array
+          description: "A list of sender person types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EPersonType"
+        senderPersonIds:
+          type: array
+          description: "A list of sender person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        senderPersonTeamIds:
+          type: array
+          description: "A list of sender person team IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        messageLocales:
+          type: array
+          description: "A list of message locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        messageTypes:
+          type: array
+          description: "A list of message types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EMessageType"
+        minCharacterCount:
+          type: integer
+          format: int64
+          description: "A minimum number of characters of the message. Records with at least the specified number are included. If null, the filter is not applied."
+        maxCharacterCount:
+          type: integer
+          format: int64
+          description: "A maximum number of characters of the message. Records with a number up to the specified value are included. If null, the filter is not applied."
+    MessagesCountAnalyticsWidgetData:
+      type: object
+      description: Data model representing the number of messages analytics widget
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: MessagesCountAnalyticsWidgetData
+          enum:
+          - MessagesCountAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the number of messages KPI.
+          items:
+            $ref: "#/components/schemas/EMessagesCountGroupBy"
+        filters:
+          $ref: "#/components/schemas/MessagesCountAnalyticsKpiFilterData"
     MissedCallPushNotificationEvent:
       type: object
       description: Push notification when a ringing call was missed
@@ -37830,6 +40805,34 @@ components:
           - NameAccountSearchFilter
         field:
           $ref: "#/components/schemas/EAccountSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
+    NameAnalyticsDashboardSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: NameAnalyticsDashboardSearchFilter
+          enum:
+          - NameAnalyticsDashboardSearchFilter
+        field:
+          $ref: "#/components/schemas/EAnalyticsDashboardSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
+    NameAnalyticsWidgetSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: NameAnalyticsWidgetSearchFilter
+          enum:
+          - NameAnalyticsWidgetSearchFilter
+        field:
+          $ref: "#/components/schemas/EAnalyticsWidgetSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
     NameApiKeySearchFilter:
@@ -44931,6 +47934,87 @@ components:
           description: "The name of the parameter for templates using named parameters (e.g., \"visitor_name\", \"agent_name\"). <p> Only used when the template uses named parameter format instead of positional format."
         location:
           $ref: "#/components/schemas/LocationParameterValue"
+    WhatsAppTemplateMessageData:
+      type: object
+      description: Text message
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: WhatsAppTemplateMessageData
+          enum:
+          - WhatsAppTemplateMessageData
+        id:
+          type: string
+          description: The ID of the message<br>
+        conversationId:
+          type: string
+          description: Conversation ID this message belongs to
+        externalMessengerChannelId:
+          type: string
+          description: ID of the external messenger channel connected to the conversation. Null if the conversation is not connected to an external messenger.
+        accountId:
+          type: string
+          description: ID of the account this message and conversation belong to
+        senderPerson:
+          $ref: "#/components/schemas/PersonData"
+        senderPersonPresenceId:
+          type: string
+          description: ID of the person presence who sent the message. <p> May be null if the message was sent by the system.
+        serverTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+        sendTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+        type:
+          $ref: "#/components/schemas/EMessageType"
+        recipientPersonIds:
+          type: array
+          description: "Person IDs of the recipients of the message. If null, all active participations are recipients."
+          items:
+            type: string
+        fallbackText:
+          type: string
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+        actionId:
+          type: string
+          description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
+        sourceId:
+          type: string
+          description: A custom ID which identifies where this message initially came from
+        botThreadId:
+          type: string
+          description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
+        locale:
+          type: string
+          description: "The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if it's in the conversation language."
+        conversationLocale:
+          type: string
+          description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        templateId:
+          type: string
+          description: ID of the template
+        components:
+          type: array
+          description: Component parameters used in the template
+          items:
+            $ref: "#/components/schemas/WhatsAppTemplateComponentParameters"
     WhatsAppTemplateParameter:
       oneOf:
       - $ref: "#/components/schemas/WhatsAppTemplateCurrencyParameter"

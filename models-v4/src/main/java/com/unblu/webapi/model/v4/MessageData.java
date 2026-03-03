@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = SystemMessageData.class, name = "SYSTEM"),
 	@JsonSubTypes.Type(value = TextMessageData.class, name = "TEXT"),
 	@JsonSubTypes.Type(value = TextQuestionMessageData.class, name = "TEXT_QUESTION"),
+	@JsonSubTypes.Type(value = WhatsAppTemplateMessageData.class, name = "WHATS_APP_TEMPLATE"),
 })
 public interface MessageData {
 	void setId(String id);
