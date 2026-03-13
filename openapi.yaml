@@ -3,13 +3,15 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.32.3
+  version: 8.33.3
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
 - basicAuth: []
 - bearerAuth: []
 tags:
+- name: AccountIngresses
+  description: API service to manage account ingresses
 - name: Accounts
   description: With this service the accounts of the unblu system can be managed. Most of the provided interface needs super admin permissions. Especially if the edited account is not the one of the current user.<br>
 - name: AnalyticsDashboards
@@ -107,6 +109,311 @@ tags:
 - name: WebhookRegistrations
   description: Service to manage all webhook registrations
 paths:
+  /accountingresses/create:
+    post:
+      tags:
+      - AccountIngresses
+      summary: create
+      description: Creates a new account ingress<br>
+      operationId: accountIngressesCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The account ingress to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountIngressCreateBody"
+        required: true
+      responses:
+        "200":
+          description: The created account ingress
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountIngressData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+  /accountingresses/{accountIngressId}/delete:
+    delete:
+      tags:
+      - AccountIngresses
+      summary: delete
+      description: Deletes the account ingress with the specified ID. The primary `EAccountIngressEntryPath.PUBLIC` ingress can't be deleted as long as other`EAccountIngressEntryPath.PUBLIC` ingresses exist.<br>
+      operationId: accountIngressesDelete
+      parameters:
+      - name: accountIngressId
+        in: path
+        description: The ID of the account ingress to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+  /accountingresses/{accountIngressId}/read:
+    get:
+      tags:
+      - AccountIngresses
+      summary: read
+      description: Reads an existing account ingress<br>
+      operationId: accountIngressesRead
+      parameters:
+      - name: accountIngressId
+        in: path
+        description: The ID of the account ingress to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: The requested account ingress or an error if the account ingress doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountIngressData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+  /accountingresses/search:
+    post:
+      tags:
+      - AccountIngresses
+      summary: search
+      description: Search for account ingresses in the current account<br>
+      operationId: accountIngressesSearch
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountIngressQuery"
+        required: true
+      responses:
+        "200":
+          description: A result container
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountIngressDataResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+  /accountingresses/{accountIngressId}/setAsPublicPrimaryIngress:
+    post:
+      tags:
+      - AccountIngresses
+      summary: setAsPublicPrimaryIngress
+      description: Sets the specified account ingress as the primary `EEntryPath.PUBLIC` ingress. This clears the existing primary `EEntryPath.PUBLIC` ingress.<br>
+      operationId: accountIngressesSetAsPublicPrimaryIngress
+      parameters:
+      - name: accountIngressId
+        in: path
+        description: The ID of the account ingress to set as the primary ingress
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: The updated account ingress
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountIngressData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+  /accountingresses/update:
+    post:
+      tags:
+      - AccountIngresses
+      summary: update
+      description: Updates an account ingress<br>
+      operationId: accountIngressesUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The account ingress with the updated values
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountIngressUpdateBody"
+        required: true
+      responses:
+        "200":
+          description: The updated account ingress
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountIngressData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+  /accountingresses/{accountIngressId}/updateConfiguration:
+    post:
+      tags:
+      - AccountIngresses
+      summary: updateConfiguration
+      description: Updates the configuration map for a specific account ingress<br>
+      operationId: accountIngressesUpdateConfiguration
+      parameters:
+      - name: accountIngressId
+        in: path
+        description: The ID of the account ingress to be updated
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The key-value map of settings to update. The source for this map has to be the <code>configuration</code> attribute when you read the account ingress using <code>configuration</code> in the <code>expand</code> query parameter.
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: The updated account ingress
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountIngressData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+  /accountingresses/{accountIngressId}/updateMetadata:
+    post:
+      tags:
+      - AccountIngresses
+      summary: updateMetadata
+      description: Updates the metadata map for a specific account ingress<br>
+      operationId: accountIngressesUpdateMetadata
+      parameters:
+      - name: accountIngressId
+        in: path
+        description: The ID of the account ingress to update
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The key-value map of metadata to update. The source for this map has to be the <code>metadata</code> attribute when you read the account ingress using <code>metadata</code> in the <code>expand</code> query parameter.
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: The updated account ingress
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountIngressData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
   /accounts/create:
     post:
       tags:
@@ -6065,6 +6372,25 @@ paths:
                     timeoutMillis: 5000
         default:
           $ref: "#/components/responses/ErrorResponse"
+      callbacks:
+        outbound.conversation_access_interceptor.new_access:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.conversation_access_interceptor.new_access
+              description: Sent to a conversation access interceptor to decide whether access to a conversation is allowed
+              operationId: outboundConversationAccessInterceptorNewAccessCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationAccessInterceptorRequest"
+              responses:
+                "200":
+                  description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/ConversationAccessInterceptorOutboundResponse"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -18374,6 +18700,173 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+    AccountIngressCreateBody:
+      type: object
+      description: Body for creating an account ingress
+      properties:
+        $_type:
+          type: string
+          default: AccountIngressCreateBody
+          enum:
+          - AccountIngressCreateBody
+        origin:
+          type: string
+          description: Origin of the account ingress. Must be unique.
+        entryPath:
+          $ref: "#/components/schemas/EAccountIngressEntryPath"
+        allowedIpRanges:
+          type: array
+          description: List of allowed IP ranges for the account ingress
+          items:
+            type: string
+        configuration:
+          type: object
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
+          additionalProperties:
+            type: string
+          x-expand-query-key: configuration
+          x-type: Map
+        metadata:
+          type: object
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
+          additionalProperties:
+            type: string
+          x-expand-query-key: metadata
+          x-type: Map
+    AccountIngressData:
+      type: object
+      description: Represents an account ingress with its configuration
+      properties:
+        $_type:
+          type: string
+          default: AccountIngressData
+          enum:
+          - AccountIngressData
+        id:
+          type: string
+          description: ID of the account ingress
+        accountId:
+          type: string
+          description: ID of the account the ingress belongs to
+        origin:
+          type: string
+          description: Origin of the account ingress
+        entryPath:
+          $ref: "#/components/schemas/EAccountIngressEntryPath"
+        allowedIpRanges:
+          type: array
+          description: List of allowed IP ranges for the account ingress
+          items:
+            type: string
+        primaryIngress:
+          type: boolean
+          description: Whether this is the primary ingress for the given entry path. Only applicable to the `EAccountIngressEntryPath.PUBLIC` entry path.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the entity was created. It is defined when the entity is stored the first time in the system.
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the entity was last modified
+        configuration:
+          type: object
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
+          additionalProperties:
+            type: string
+          x-expand-query-key: configuration
+          x-type: Map
+        metadata:
+          type: object
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
+          additionalProperties:
+            type: string
+          x-expand-query-key: metadata
+          x-type: Map
+    AccountIngressDataResult:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AccountIngressDataResult
+          enum:
+          - AccountIngressDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/AccountIngressData"
+    AccountIngressEntryPathOperator:
+      oneOf:
+      - $ref: "#/components/schemas/EqualsAccountIngressEntryPathOperator"
+      - $ref: "#/components/schemas/NotEqualsAccountIngressEntryPathOperator"
+      - $ref: "#/components/schemas/InAccountIngressEntryPathOperator"
+      - $ref: "#/components/schemas/NotInAccountIngressEntryPathOperator"
+      discriminator:
+        propertyName: type
+        mapping:
+          EQUALS: "#/components/schemas/EqualsAccountIngressEntryPathOperator"
+          IN: "#/components/schemas/InAccountIngressEntryPathOperator"
+          NOT_EQUALS: "#/components/schemas/NotEqualsAccountIngressEntryPathOperator"
+          NOT_IN: "#/components/schemas/NotInAccountIngressEntryPathOperator"
+    AccountIngressOrderBy:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AccountIngressOrderBy
+          enum:
+          - AccountIngressOrderBy
+        field:
+          $ref: "#/components/schemas/EAccountIngressOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    AccountIngressQuery:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AccountIngressQuery
+          enum:
+          - AccountIngressQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: "#/components/schemas/AccountIngressSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: "#/components/schemas/AccountIngressOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    AccountIngressSearchFilter:
+      oneOf:
+      - $ref: "#/components/schemas/OriginAccountIngressSearchFilter"
+      - $ref: "#/components/schemas/EntryPathAccountIngressSearchFilter"
+      - $ref: "#/components/schemas/CreationTimestampAccountIngressSearchFilter"
+      - $ref: "#/components/schemas/ModificationTimestampAccountIngressSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampAccountIngressSearchFilter"
+          ENTRY_PATH: "#/components/schemas/EntryPathAccountIngressSearchFilter"
+          MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampAccountIngressSearchFilter"
+          ORIGIN: "#/components/schemas/OriginAccountIngressSearchFilter"
     AccountIngressStatus:
       type: object
       properties:
@@ -18399,6 +18892,40 @@ components:
           description: Low severity ingress configuration and migration issues that arose during the last ingress activation or deactivation process. Ingress can still be successfully activated or deactivated if warnings are present.
           items:
             type: string
+    AccountIngressUpdateBody:
+      type: object
+      description: Body for updating an account ingress
+      properties:
+        $_type:
+          type: string
+          default: AccountIngressUpdateBody
+          enum:
+          - AccountIngressUpdateBody
+        id:
+          type: string
+          description: ID of the account ingress to update
+        origin:
+          type: string
+          description: Origin of the account ingress. Must be unique.
+        allowedIpRanges:
+          type: array
+          description: List of allowed IP ranges for the account ingress
+          items:
+            type: string
+        configuration:
+          type: object
+          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
+          additionalProperties:
+            type: string
+          x-expand-query-key: configuration
+          x-type: Map
+        metadata:
+          type: object
+          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
+          additionalProperties:
+            type: string
+          x-expand-query-key: metadata
+          x-type: Map
     AccountList:
       type: object
       properties:
@@ -25767,6 +26294,31 @@ components:
           type: integer
           format: int32
           description: Maximal amount of items returned
+    ConversationAccessInterceptorRequest:
+      type: object
+      description: Sent to a conversation access interceptor to decide whether access to a conversation is allowed
+      properties:
+        $_type:
+          type: string
+          default: ConversationAccessInterceptorRequest
+          enum:
+          - ConversationAccessInterceptorRequest
+        accountId:
+          type: string
+        serviceName:
+          type: string
+        conversation:
+          $ref: "#/components/schemas/ConversationData"
+        person:
+          $ref: "#/components/schemas/PersonData"
+        personPresence:
+          $ref: "#/components/schemas/PersonPresenceData"
+        conversationAccessType:
+          $ref: "#/components/schemas/EConversationAccessType"
+        conversationRealParticipationType:
+          $ref: "#/components/schemas/EConversationRealParticipationType"
+        integrationEnvironment:
+          $ref: "#/components/schemas/EIntegrationEnvironment"
     ConversationAccessInterceptorResult:
       type: object
       description: Container to return list of conversation access interceptors
@@ -28984,6 +29536,20 @@ components:
           type: integer
           format: int64
           description: Number of entities found
+    CreationTimestampAccountIngressSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampAccountIngressSearchFilter
+          enum:
+          - CreationTimestampAccountIngressSearchFilter
+        field:
+          $ref: "#/components/schemas/EAccountIngressSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampAccountSearchFilter:
       type: object
       required:
@@ -31278,6 +31844,56 @@ components:
         url:
           type: string
           description: The URL of the link
+    EAccountIngressEntryPath:
+      type: string
+      enum:
+      - PUBLIC
+      - INTERNAL
+      - SYSTEM
+      - WEBHOOK
+      x-enum-descriptions:
+      - "PUBLIC: Public ingress entry path"
+      - "INTERNAL: Internal ingress entry path"
+      - "SYSTEM: System ingress entry path"
+      - "WEBHOOK: Webhook ingress entry path"
+    EAccountIngressEntryPathOperatorType:
+      type: string
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      - IN
+      - NOT_IN
+      x-enum-descriptions:
+      - "EQUALS: Check if the value is equal to the one provided in the operator"
+      - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+      - "IN: Check if the value matches one of the values provided in the operator"
+      - "NOT_IN: Check if the value doesn't match one of the values provided in the operator"
+    EAccountIngressOrderByField:
+      type: string
+      enum:
+      - ID
+      - ORIGIN
+      - ENTRY_PATH
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Order by the 'ID' attribute"
+      - "ORIGIN: Order by the 'origin' attribute"
+      - "ENTRY_PATH: Order by the 'entryPath' attribute"
+      - "CREATION_TIMESTAMP: Order by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Order by the 'modificationTimestamp' attribute"
+    EAccountIngressSearchFilterField:
+      type: string
+      enum:
+      - ORIGIN
+      - ENTRY_PATH
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ORIGIN: Filter by the 'origin' attribute"
+      - "ENTRY_PATH: Filter by the 'entryPath' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
     EAccountOrderByField:
       type: string
       enum:
@@ -35143,6 +35759,7 @@ components:
       enum:
       - GLOBAL
       - ACCOUNT
+      - INGRESS
       - TEAM
       - USER
       - AREA
@@ -35155,6 +35772,7 @@ components:
       x-enum-descriptions:
       - "GLOBAL: Global system is owner"
       - "ACCOUNT: Account is owner"
+      - "INGRESS: Account ingress"
       - "TEAM: Team is owner"
       - "USER: User is owner"
       - "AREA: NamedArea is owner"
@@ -35901,6 +36519,34 @@ components:
           $ref: "#/components/schemas/EAuditChangeSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    EntryPathAccountIngressSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: EntryPathAccountIngressSearchFilter
+          enum:
+          - EntryPathAccountIngressSearchFilter
+        field:
+          $ref: "#/components/schemas/EAccountIngressSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/AccountIngressEntryPathOperator"
+    EqualsAccountIngressEntryPathOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: EqualsAccountIngressEntryPathOperator
+          enum:
+          - EqualsAccountIngressEntryPathOperator
+        type:
+          $ref: "#/components/schemas/EAccountIngressEntryPathOperatorType"
+        value:
+          $ref: "#/components/schemas/EAccountIngressEntryPath"
     EqualsAuditChangeInteractionTypeOperator:
       type: object
       required:
@@ -37892,6 +38538,22 @@ components:
           IN: "#/components/schemas/InImpersonationTypeOperator"
           NOT_EQUALS: "#/components/schemas/NotEqualsImpersonationTypeOperator"
           NOT_IN: "#/components/schemas/NotInImpersonationTypeOperator"
+    InAccountIngressEntryPathOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: InAccountIngressEntryPathOperator
+          enum:
+          - InAccountIngressEntryPathOperator
+        type:
+          $ref: "#/components/schemas/EAccountIngressEntryPathOperatorType"
+        values:
+          type: array
+          items:
+            $ref: "#/components/schemas/EAccountIngressEntryPath"
     InAuditChangeInteractionTypeOperator:
       type: object
       required:
@@ -40313,6 +40975,20 @@ components:
           description: Person ID of the person calling
         callEndReason:
           $ref: "#/components/schemas/ECallParticipationEndReason"
+    ModificationTimestampAccountIngressSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampAccountIngressSearchFilter
+          enum:
+          - ModificationTimestampAccountIngressSearchFilter
+        field:
+          $ref: "#/components/schemas/EAccountIngressSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampAccountSearchFilter:
       type: object
       required:
@@ -41446,6 +42122,20 @@ components:
           type: array
           items:
             type: string
+    NotEqualsAccountIngressEntryPathOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: NotEqualsAccountIngressEntryPathOperator
+          enum:
+          - NotEqualsAccountIngressEntryPathOperator
+        type:
+          $ref: "#/components/schemas/EAccountIngressEntryPathOperatorType"
+        value:
+          $ref: "#/components/schemas/EAccountIngressEntryPath"
     NotEqualsAuditChangeInteractionTypeOperator:
       type: object
       required:
@@ -41896,6 +42586,22 @@ components:
           $ref: "#/components/schemas/EVisibilityRuleLabelSelectionOperatorType"
         value:
           $ref: "#/components/schemas/EPersonVisibilityLabelSelection"
+    NotInAccountIngressEntryPathOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: NotInAccountIngressEntryPathOperator
+          enum:
+          - NotInAccountIngressEntryPathOperator
+        type:
+          $ref: "#/components/schemas/EAccountIngressEntryPathOperatorType"
+        values:
+          type: array
+          items:
+            $ref: "#/components/schemas/EAccountIngressEntryPath"
     NotInAuditChangeInteractionTypeOperator:
       type: object
       required:
@@ -42412,6 +43118,20 @@ components:
       x-enum-descriptions:
       - "ASCENDING: Sort in the ascending order (smallest to largest, 0 to 9, and/or A to Z)"
       - "DESCENDING: Sort in the descending order (largest to smallest, 9 to 0, and/or Z to A)"
+    OriginAccountIngressSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: OriginAccountIngressSearchFilter
+          enum:
+          - OriginAccountIngressSearchFilter
+        field:
+          $ref: "#/components/schemas/EAccountIngressSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     OwnerIdAuditChangeSearchFilter:
       type: object
       required:

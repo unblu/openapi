@@ -20,6 +20,11 @@ public enum EPropertyOwnerType {
 	ACCOUNT("ACCOUNT"),
 
 	/**
+	 * INGRESS: Account ingress
+	 */
+	INGRESS("INGRESS"),
+
+	/**
 	 * TEAM: Team is owner
 	 */
 	TEAM("TEAM"),
