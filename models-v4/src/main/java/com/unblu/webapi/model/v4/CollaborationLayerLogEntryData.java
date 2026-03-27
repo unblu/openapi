@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -31,6 +33,8 @@ import io.swagger.annotations.ApiModelProperty;
 	CollaborationLayerLogEntryData.JSON_PROPERTY_STOP_TIMESTAMP,
 	CollaborationLayerLogEntryData.JSON_PROPERTY_ABORT_TIMESTAMP,
 	CollaborationLayerLogEntryData.JSON_PROPERTY_LAYER_ABORT_REASON,
+	CollaborationLayerLogEntryData.JSON_PROPERTY_PARTICIPANT_PERSON_DATA,
+	CollaborationLayerLogEntryData.JSON_PROPERTY_CONVERSATION_RECORDING_IDS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class CollaborationLayerLogEntryData {
@@ -114,6 +118,14 @@ public class CollaborationLayerLogEntryData {
 	public static final String JSON_PROPERTY_LAYER_ABORT_REASON = "layerAbortReason";
 	@JsonProperty(JSON_PROPERTY_LAYER_ABORT_REASON)
 	private ELayerStopReason layerAbortReason;
+
+	public static final String JSON_PROPERTY_PARTICIPANT_PERSON_DATA = "participantPersonData";
+	@JsonProperty(JSON_PROPERTY_PARTICIPANT_PERSON_DATA)
+	private List<PersonData> participantPersonData = null;
+
+	public static final String JSON_PROPERTY_CONVERSATION_RECORDING_IDS = "conversationRecordingIds";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_RECORDING_IDS)
+	private List<String> conversationRecordingIds = null;
 
 	public CollaborationLayerLogEntryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -343,6 +355,60 @@ public class CollaborationLayerLogEntryData {
 		this.layerAbortReason = layerAbortReason;
 	}
 
+	public CollaborationLayerLogEntryData participantPersonData(List<PersonData> participantPersonData) {
+		this.participantPersonData = participantPersonData;
+		return this;
+	}
+
+	public CollaborationLayerLogEntryData addParticipantPersonDataItem(PersonData participantPersonDataItem) {
+		if (this.participantPersonData == null) {
+			this.participantPersonData = new ArrayList<>();
+		}
+		this.participantPersonData.add(participantPersonDataItem);
+		return this;
+	}
+
+	/**
+	 * The list of active participants of the collaboration layer
+	 * 
+	 * @return participantPersonData
+	 **/
+	@ApiModelProperty(value = "The list of active participants of the collaboration layer")
+	public List<PersonData> getParticipantPersonData() {
+		return participantPersonData;
+	}
+
+	public void setParticipantPersonData(List<PersonData> participantPersonData) {
+		this.participantPersonData = participantPersonData;
+	}
+
+	public CollaborationLayerLogEntryData conversationRecordingIds(List<String> conversationRecordingIds) {
+		this.conversationRecordingIds = conversationRecordingIds;
+		return this;
+	}
+
+	public CollaborationLayerLogEntryData addConversationRecordingIdsItem(String conversationRecordingIdsItem) {
+		if (this.conversationRecordingIds == null) {
+			this.conversationRecordingIds = new ArrayList<>();
+		}
+		this.conversationRecordingIds.add(conversationRecordingIdsItem);
+		return this;
+	}
+
+	/**
+	 * The IDs of the conversation recordings associated with this layer, null if no recording was active
+	 * 
+	 * @return conversationRecordingIds
+	 **/
+	@ApiModelProperty(value = "The IDs of the conversation recordings associated with this layer, null if no recording was active")
+	public List<String> getConversationRecordingIds() {
+		return conversationRecordingIds;
+	}
+
+	public void setConversationRecordingIds(List<String> conversationRecordingIds) {
+		this.conversationRecordingIds = conversationRecordingIds;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -363,12 +429,14 @@ public class CollaborationLayerLogEntryData {
 				Objects.equals(this.activationTimestamp, collaborationLayerLogEntryData.activationTimestamp) &&
 				Objects.equals(this.stopTimestamp, collaborationLayerLogEntryData.stopTimestamp) &&
 				Objects.equals(this.abortTimestamp, collaborationLayerLogEntryData.abortTimestamp) &&
-				Objects.equals(this.layerAbortReason, collaborationLayerLogEntryData.layerAbortReason);
+				Objects.equals(this.layerAbortReason, collaborationLayerLogEntryData.layerAbortReason) &&
+				Objects.equals(this.participantPersonData, collaborationLayerLogEntryData.participantPersonData) &&
+				Objects.equals(this.conversationRecordingIds, collaborationLayerLogEntryData.conversationRecordingIds);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, layerType, layerOwnerPersonData, startingPersonData, stoppingPersonData, startingTimestamp, approvalTimestamp, activationTimestamp, stopTimestamp, abortTimestamp, layerAbortReason);
+		return Objects.hash($type, conversationId, layerType, layerOwnerPersonData, startingPersonData, stoppingPersonData, startingTimestamp, approvalTimestamp, activationTimestamp, stopTimestamp, abortTimestamp, layerAbortReason, participantPersonData, conversationRecordingIds);
 	}
 
 	@Override
@@ -387,6 +455,8 @@ public class CollaborationLayerLogEntryData {
 		sb.append("    stopTimestamp: ").append(toIndentedString(stopTimestamp)).append("\n");
 		sb.append("    abortTimestamp: ").append(toIndentedString(abortTimestamp)).append("\n");
 		sb.append("    layerAbortReason: ").append(toIndentedString(layerAbortReason)).append("\n");
+		sb.append("    participantPersonData: ").append(toIndentedString(participantPersonData)).append("\n");
+		sb.append("    conversationRecordingIds: ").append(toIndentedString(conversationRecordingIds)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

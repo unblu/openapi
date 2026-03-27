@@ -47,7 +47,17 @@ public enum ECollaborationLayerLogEntrySearchFilterField {
 	/**
 	 * STOPPING_PERSON_ID: Filter by the &#39;stoppingPersonId&#39; attribute
 	 */
-	STOPPING_PERSON_ID("STOPPING_PERSON_ID");
+	STOPPING_PERSON_ID("STOPPING_PERSON_ID"),
+
+	/**
+	 * CONVERSATION_RECORDING_ID: Filter by the &#39;conversationRecordingId&#39; attribute
+	 */
+	CONVERSATION_RECORDING_ID("CONVERSATION_RECORDING_ID"),
+
+	/**
+	 * PARTICIPANT_PERSON_ID: Filter by the &#39;participantPersonId&#39; attribute
+	 */
+	PARTICIPANT_PERSON_ID("PARTICIPANT_PERSON_ID");
 
 	private String value;
 

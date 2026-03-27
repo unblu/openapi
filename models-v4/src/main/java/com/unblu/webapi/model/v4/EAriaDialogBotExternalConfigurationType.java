@@ -5,28 +5,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Type of a dialog bot
+ * Gets or Sets EAriaDialogBotExternalConfigurationType
  */
-public enum EBotType {
+public enum EAriaDialogBotExternalConfigurationType {
 
 	/**
-	 * COPILOT
+	 * MULTIFLOW
 	 */
-	COPILOT("COPILOT"),
-
-	/**
-	 * CUSTOM
-	 */
-	CUSTOM("CUSTOM"),
-
-	/**
-	 * ARIA
-	 */
-	ARIA("ARIA");
+	MULTIFLOW("MULTIFLOW");
 
 	private String value;
 
-	EBotType(String value) {
+	EAriaDialogBotExternalConfigurationType(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +31,8 @@ public enum EBotType {
 	}
 
 	@JsonCreator
-	public static EBotType fromValue(String value) {
-		for (EBotType b : EBotType.values()) {
+	public static EAriaDialogBotExternalConfigurationType fromValue(String value) {
+		for (EAriaDialogBotExternalConfigurationType b : EAriaDialogBotExternalConfigurationType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

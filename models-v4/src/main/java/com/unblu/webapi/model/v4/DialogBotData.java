@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
 	@JsonSubTypes.Type(value = CopilotDialogBotData.class, name = "COPILOT"),
 	@JsonSubTypes.Type(value = CustomDialogBotData.class, name = "CUSTOM"),
+	@JsonSubTypes.Type(value = AriaDialogBotData.class, name = "ARIA"),
 })
 public interface DialogBotData {
 	void setId(String id);

@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.33.3
+  version: 8.34.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -6151,6 +6151,12 @@ paths:
                 value:
                   $_type: CollaborationLayerLogEntryQuery
                   searchFilters:
+                  - $_type: ConversationIdCollaborationLayerLogEntrySearchFilter
+                    field: CONVERSATION_ID
+                    operator:
+                      $_type: EqualsStringOperator
+                      type: EQUALS
+                      value: "1000"
                   - $_type: StartingTimestampCollaborationLayerLogEntrySearchFilter
                     field: STARTING_TIMESTAMP
                     operator:
@@ -6165,12 +6171,6 @@ paths:
                       type: IN_RANGE
                       minimum: 1706745500
                       maximum: 1706745700
-                  - $_type: ConversationIdCollaborationLayerLogEntrySearchFilter
-                    field: CONVERSATION_ID
-                    operator:
-                      $_type: EqualsStringOperator
-                      type: EQUALS
-                      value: "1000"
                   - $_type: LayerTypeCollaborationLayerLogEntrySearchFilter
                     field: LAYER_TYPE
                     operator:
@@ -6183,6 +6183,13 @@ paths:
                       $_type: EqualsStringOperator
                       type: EQUALS
                       value: "1000"
+                  - $_type: ConversationRecordingIdCollaborationLayerLogEntrySearchFilter
+                    field: CONVERSATION_RECORDING_ID
+                    operator:
+                      $_type: InJsonArrayStringOperator
+                      type: IN
+                      values:
+                      - "1000"
                   orderBy:
                   - $_type: CollaborationLayerLogEntryOrderBy
                     field: STOP_TIMESTAMP
@@ -6200,93 +6207,18 @@ paths:
                   - $_type: CollaborationLayerLogEntryData
                     conversationId: AcviDb210C5BoFd6e_79oan
                     layerType: SCREEN_SHARING
-                    layerOwnerPersonData:
-                      $_type: PersonData
-                      id: nta30CBa-6d1a89cE57Db_F
-                      accountId: A7d9E_0-c3cC4aoFDb85t6n
-                      personSource: USER_DB
-                      sourceId: r1acbAidia_35-tB4o7FbWR
-                      sourceUrl: null
-                      sourceData: null
-                      firstName: null
-                      lastName: null
-                      username: user@unblu.ch
-                      nickname: null
-                      displayName: user@unblu.ch
-                      displayNameForAgent: user@unblu.ch
-                      displayNameForVisitor: user@unblu.ch
-                      personType: AGENT
-                      authorizationRole: REGISTERED_USER
-                      email: null
-                      phone: 061 666 66 66
-                      teamId: null
-                      labels: []
-                      note: ""
-                      noteLastEditedTimestamp: null
-                      noteLastEditedPersonId: null
-                      links: null
-                      avatar: null
-                      metadata: null
-                    startingPersonData:
-                      $_type: PersonData
-                      id: nta30CBa-6d1a89cE57Db_F
-                      accountId: A7d9E_0-c3cC4aoFDb85t6n
-                      personSource: USER_DB
-                      sourceId: r1acbAidia_35-tB4o7FbWR
-                      sourceUrl: null
-                      sourceData: null
-                      firstName: null
-                      lastName: null
-                      username: user@unblu.ch
-                      nickname: null
-                      displayName: user@unblu.ch
-                      displayNameForAgent: user@unblu.ch
-                      displayNameForVisitor: user@unblu.ch
-                      personType: AGENT
-                      authorizationRole: REGISTERED_USER
-                      email: null
-                      phone: 061 666 66 66
-                      teamId: null
-                      labels: []
-                      note: ""
-                      noteLastEditedTimestamp: null
-                      noteLastEditedPersonId: null
-                      links: null
-                      avatar: null
-                      metadata: null
-                    stoppingPersonData:
-                      $_type: PersonData
-                      id: nta30CBa-6d1a89cE57Db_F
-                      accountId: A7d9E_0-c3cC4aoFDb85t6n
-                      personSource: USER_DB
-                      sourceId: r1acbAidia_35-tB4o7FbWR
-                      sourceUrl: null
-                      sourceData: null
-                      firstName: null
-                      lastName: null
-                      username: user@unblu.ch
-                      nickname: null
-                      displayName: user@unblu.ch
-                      displayNameForAgent: user@unblu.ch
-                      displayNameForVisitor: user@unblu.ch
-                      personType: AGENT
-                      authorizationRole: REGISTERED_USER
-                      email: null
-                      phone: 061 666 66 66
-                      teamId: null
-                      labels: []
-                      note: ""
-                      noteLastEditedTimestamp: null
-                      noteLastEditedPersonId: null
-                      links: null
-                      avatar: null
-                      metadata: null
+                    layerOwnerPersonData: null
+                    startingPersonData: null
+                    stoppingPersonData: null
                     startingTimestamp: 1551398400000
                     approvalTimestamp: 1551398400000
                     activationTimestamp: 1551398400000
                     stopTimestamp: 1551398400000
                     abortTimestamp: 1551398400000
                     layerAbortReason: null
+                    participantPersonData: []
+                    conversationRecordingIds:
+                    - "1000"
         required: true
       responses:
         "200":
@@ -20388,6 +20320,161 @@ components:
           description: "Multichoice question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
           items:
             $ref: "#/components/schemas/MultichoiceQuestionMessageTranslation"
+    AriaDialogBotData:
+      type: object
+      description: Model representing an external aria dialog bot that can handle conversation onboarding and offboarding.
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AriaDialogBotData
+          enum:
+          - AriaDialogBotData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the dialog bot. Maximum length of 250 characters. Can not be omitted.
+        description:
+          type: string
+          description: Description of the dialog bot. Maximum length of 500 characters. Can be omitted.
+        botPersonId:
+          type: string
+          description: ID of the person representing the bot
+        onboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the onboarding order of this bot. <p> If more than one bots want to participate in an onboarding, the one with the lowest order value will go first."
+        reboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the reboarding order of this bot. <p> If more than one bots want to participate in an reboarding, the one with the lowest order value will go first."
+        offboardingOrder:
+          type: integer
+          format: int32
+          description: "Defines the offboarding priority of this bot. <p> If more than one bots want to participate in an offboarding, the one with the lowest order value will go first."
+        onboardingFilter:
+          $ref: "#/components/schemas/EBotDialogFilter"
+        reboardingEnabled:
+          type: boolean
+          description: "Defines if this bot can reboard. <p> A reboarding offer will be sent only if this flag is enabled, giving the bot the chance to be part of the reboarding."
+        offboardingFilter:
+          $ref: "#/components/schemas/EBotDialogFilter"
+        needsCounterpartPresence:
+          type: boolean
+          description: Defines if the counterpart has to be online for the onboarding to start. E.g. if questions have to be answered live.
+        onTimeoutBehavior:
+          $ref: "#/components/schemas/EBotDialogTimeoutBehavior"
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, the default is 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, the default is 0."
+        type:
+          $ref: "#/components/schemas/EBotType"
+        agenticFlowId:
+          type: string
+          description: "Aria agentic flow ID. Maximum length: 36 characters"
+        active:
+          type: boolean
+          description: Specifies whether the bot is active
+        outboundEndpoint:
+          type: string
+          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> Based on the configured filters/flags the following events will be sent to the endpoint: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a preaviously accepted bot dialog starts</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul>"
+        outboundTimeoutMillis:
+          type: integer
+          format: int64
+          description: The timeout for the requests sent to the outbound endpoint. Mandatory for webhookApiVersion greater than 3.
+        outboundApiVersion:
+          $ref: "#/components/schemas/EWebApiVersion"
+        ariaDialogBotType:
+          $ref: "#/components/schemas/EAriaDialogBotType"
+        externalConfiguration:
+          $ref: "#/components/schemas/AriaDialogBotExternalConfiguration"
+    AriaDialogBotExternalConfiguration:
+      oneOf:
+      - $ref: "#/components/schemas/MultiflowAriaDialogBotExternalConfiguration"
+      discriminator:
+        propertyName: type
+        mapping:
+          MULTIFLOW: "#/components/schemas/MultiflowAriaDialogBotExternalConfiguration"
+    AriaSuggestionSourceData:
+      type: object
+      description: API model that represents an Aria suggestion source
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AriaSuggestionSourceData
+          enum:
+          - AriaSuggestionSourceData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Name of the message interceptor. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the message interceptor. Maximum length of 500 characters. Optional.
+        outboundStatus:
+          $ref: "#/components/schemas/EOutboundEndpointStatus"
+        outboundEndpoint:
+          type: string
+          description: "The endpoint URL used for the outbound registration. Outbound requests are sent to this URL. Maximum length of 4000 characters. <br> Mandatory for `CustomSuggestionSourceData` and `CopilotSuggestionSourceData`. <br> Not used for `AriaSuggestionSourceData` as the endpoint is determined server-side via Aria configuration. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>"
+        outboundTimeoutMillis:
+          type: integer
+          format: int64
+          description: The timeout for the requests sent to the outbound endpoint. Mandatory.
+        retryCount:
+          type: integer
+          format: int64
+          description: "Defines the number of retries for failed outbound requests. If omitted, it defaults to 0."
+        retryDelay:
+          type: integer
+          format: int64
+          description: "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0."
+        type:
+          $ref: "#/components/schemas/ESuggestionSourceType"
+        agenticFlowId:
+          type: string
+          description: "Aria agentic flow ID. Maximum length: 36 characters"
     AssigneePersonIdConversationHistorySearchFilter:
       type: object
       description: Filters conversations history by their assigneePersonId field.
@@ -25551,6 +25638,16 @@ components:
           description: The timestamp when the layer was aborted
         layerAbortReason:
           $ref: "#/components/schemas/ELayerStopReason"
+        participantPersonData:
+          type: array
+          description: The list of active participants of the collaboration layer
+          items:
+            $ref: "#/components/schemas/PersonData"
+        conversationRecordingIds:
+          type: array
+          description: "The IDs of the conversation recordings associated with this layer, null if no recording was active"
+          items:
+            type: string
     CollaborationLayerLogEntryOrderBy:
       type: object
       description: CollaborationLayerLogEntry orderBy item.
@@ -25623,13 +25720,17 @@ components:
       - $ref: "#/components/schemas/LayerTypeCollaborationLayerLogEntrySearchFilter"
       - $ref: "#/components/schemas/LayerStopReasonCollaborationLayerLogEntrySearchFilter"
       - $ref: "#/components/schemas/AbortedTimestampCollaborationLayerLogEntrySearchFilter"
+      - $ref: "#/components/schemas/ConversationRecordingIdCollaborationLayerLogEntrySearchFilter"
+      - $ref: "#/components/schemas/ParticipantPersonIdCollaborationLayerLogEntrySearchFilter"
       discriminator:
         propertyName: field
         mapping:
           ABORTED_TIMESTAMP: "#/components/schemas/AbortedTimestampCollaborationLayerLogEntrySearchFilter"
           CONVERSATION_ID: "#/components/schemas/ConversationIdCollaborationLayerLogEntrySearchFilter"
+          CONVERSATION_RECORDING_ID: "#/components/schemas/ConversationRecordingIdCollaborationLayerLogEntrySearchFilter"
           LAYER_STOP_REASON: "#/components/schemas/LayerStopReasonCollaborationLayerLogEntrySearchFilter"
           LAYER_TYPE: "#/components/schemas/LayerTypeCollaborationLayerLogEntrySearchFilter"
+          PARTICIPANT_PERSON_ID: "#/components/schemas/ParticipantPersonIdCollaborationLayerLogEntrySearchFilter"
           STARTING_PERSON_ID: "#/components/schemas/StartingPersonIdCollaborationLayerLogEntrySearchFilter"
           STARTING_TIMESTAMP: "#/components/schemas/StartingTimestampCollaborationLayerLogEntrySearchFilter"
           STOPPING_PERSON_ID: "#/components/schemas/StoppingPersonIdCollaborationLayerLogEntrySearchFilter"
@@ -27726,6 +27827,9 @@ components:
           default: ConversationRecordingHistoryData
           enum:
           - ConversationRecordingHistoryData
+        recordingId:
+          type: string
+          description: The unique ID of the conversation recording entity
         conversationId:
           type: string
           description: ID of the conversation this recording belongs to
@@ -27780,6 +27884,20 @@ components:
           description: The list of mapped entities
           items:
             $ref: "#/components/schemas/ConversationRecordingHistoryData"
+    ConversationRecordingIdCollaborationLayerLogEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ConversationRecordingIdCollaborationLayerLogEntrySearchFilter
+          enum:
+          - ConversationRecordingIdCollaborationLayerLogEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/ECollaborationLayerLogEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/JsonArrayStringOperator"
     ConversationRecordingPostprocessingEvent:
       type: object
       description: An event emitted when the postprocessing of a conversation recording starts
@@ -29499,7 +29617,7 @@ components:
           $ref: "#/components/schemas/EOutboundEndpointStatus"
         outboundEndpoint:
           type: string
-          description: "The endpoint url of the outbound registration. To this url the requests for the outbound requests are done. Maximum length of 4000 characters. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>"
+          description: "The endpoint URL used for the outbound registration. Outbound requests are sent to this URL. Maximum length of 4000 characters. <br> Mandatory for `CustomSuggestionSourceData` and `CopilotSuggestionSourceData`. <br> Not used for `AriaSuggestionSourceData` as the endpoint is determined server-side via Aria configuration. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>"
         outboundTimeoutMillis:
           type: integer
           format: int64
@@ -30971,7 +31089,7 @@ components:
           $ref: "#/components/schemas/EOutboundEndpointStatus"
         outboundEndpoint:
           type: string
-          description: "The endpoint url of the outbound registration. To this url the requests for the outbound requests are done. Maximum length of 4000 characters. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>"
+          description: "The endpoint URL used for the outbound registration. Outbound requests are sent to this URL. Maximum length of 4000 characters. <br> Mandatory for `CustomSuggestionSourceData` and `CopilotSuggestionSourceData`. <br> Not used for `AriaSuggestionSourceData` as the endpoint is determined server-side via Aria configuration. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>"
         outboundTimeoutMillis:
           type: integer
           format: int64
@@ -31434,9 +31552,11 @@ components:
       oneOf:
       - $ref: "#/components/schemas/CustomDialogBotData"
       - $ref: "#/components/schemas/CopilotDialogBotData"
+      - $ref: "#/components/schemas/AriaDialogBotData"
       discriminator:
         propertyName: type
         mapping:
+          ARIA: "#/components/schemas/AriaDialogBotData"
           COPILOT: "#/components/schemas/CopilotDialogBotData"
           CUSTOM: "#/components/schemas/CustomDialogBotData"
     DialogBotOrderBy:
@@ -32187,6 +32307,21 @@ components:
       - "API_KEY: Filter by the 'apiKey' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EAriaDialogBotExternalConfigurationType:
+      type: string
+      enum:
+      - MULTIFLOW
+      x-enum-descriptions:
+      - MULTIFLOW
+    EAriaDialogBotType:
+      type: string
+      description: Type of an Aria Dialog Bot
+      enum:
+      - SINGLE_FLOW
+      - MULTI_FLOW
+      x-enum-descriptions:
+      - "SINGLE_FLOW: A single flow dialog bot with a simple structure containing only a start node and a text message node. This type is suitable for bot where an LLM is responsible to create final message or for simple bots that don't require intent routing."
+      - "MULTI_FLOW: A multi-flow dialog bot with an orchestrator that routes to greeting, fallback, and executable flows. This type supports intent-based routing and complex conversation flows."
     EAssignmentRequestType:
       type: string
       description: Provides conversation context related to the assignment request
@@ -32524,9 +32659,11 @@ components:
       enum:
       - COPILOT
       - CUSTOM
+      - ARIA
       x-enum-descriptions:
       - COPILOT
       - CUSTOM
+      - ARIA
     EBranchClientIssueType:
       type: string
       description: Type of issues a branch client can have
@@ -32976,6 +33113,7 @@ components:
       - STOP_TIMESTAMP
       - ABORTED_TIMESTAMP
       - LAYER_STOP_REASON
+      - CONVERSATION_RECORDING_ID
       x-enum-descriptions:
       - "ID: Sort by the 'id' attribute"
       - "CONVERSATION_ID: Sort by the 'conversationId' attribute"
@@ -32990,6 +33128,7 @@ components:
       - "STOP_TIMESTAMP: Sort by the 'stopTimestamp' attribute"
       - "ABORTED_TIMESTAMP: Sort by the 'abortedTimestamp' attribute"
       - "LAYER_STOP_REASON: Sort by the 'layerStopReason' attribute"
+      - "CONVERSATION_RECORDING_ID: Sort by the 'conversationRecordingId' attribute"
     ECollaborationLayerLogEntrySearchFilterField:
       type: string
       enum:
@@ -33001,6 +33140,8 @@ components:
       - LAYER_TYPE
       - STARTING_PERSON_ID
       - STOPPING_PERSON_ID
+      - CONVERSATION_RECORDING_ID
+      - PARTICIPANT_PERSON_ID
       x-enum-descriptions:
       - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
       - "STARTING_TIMESTAMP: Filter by the 'startingTimestamp' attribute"
@@ -33010,6 +33151,8 @@ components:
       - "LAYER_TYPE: Filter by the 'layerType' attribute"
       - "STARTING_PERSON_ID: Filter by the 'startingPersonId' attribute"
       - "STOPPING_PERSON_ID: Filter by the 'stoppingPersonId' attribute"
+      - "CONVERSATION_RECORDING_ID: Filter by the 'conversationRecordingId' attribute"
+      - "PARTICIPANT_PERSON_ID: Filter by the 'participantPersonId' attribute"
     ECollaborationLayersCountGroupBy:
       type: string
       enum:
@@ -34420,11 +34563,13 @@ components:
       - BOT_PERSON_ID
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
+      - TYPE
       x-enum-descriptions:
       - "NAME: Filter by the 'name' attribute"
       - "BOT_PERSON_ID: Filter by the 'botPersonId' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "TYPE: Filter by the 'type' attribute"
     EDictionaryType:
       type: string
       description: Type of dictionary
@@ -35022,6 +35167,14 @@ components:
       x-enum-descriptions:
       - "EQUALS: Check if the value is equal to the one provided in the operator"
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+      - "IN: Check if the value is one of the one provided in the operator"
+      - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EJsonArrayOperatorType:
+      type: string
+      enum:
+      - IN
+      - NOT_IN
+      x-enum-descriptions:
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
     ELayerStopReason:
@@ -35973,18 +36126,22 @@ components:
       - NAME
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
+      - TYPE
       x-enum-descriptions:
       - "NAME: Filter by the 'name' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
+      - "TYPE: Filter by the 'type' attribute"
     ESuggestionSourceType:
       type: string
       enum:
       - CUSTOM
       - COPILOT
+      - ARIA
       x-enum-descriptions:
       - "CUSTOM: Suggestion source that uses the Unblu web API"
       - "COPILOT: Suggestion source that uses Microsoft Copilot"
+      - "ARIA: Suggestion source that uses an Aria agentic flow"
     ESummarizationLanguageConfiguration:
       type: string
       enum:
@@ -38843,6 +39000,22 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/EInvitationType"
+    InJsonArrayStringOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: InJsonArrayStringOperator
+          enum:
+          - InJsonArrayStringOperator
+        type:
+          $ref: "#/components/schemas/EJsonArrayOperatorType"
+        values:
+          type: array
+          items:
+            type: string
     InLayerStopReasonOperator:
       type: object
       required:
@@ -39870,6 +40043,15 @@ components:
           $ref: "#/components/schemas/EPersonPresenceSearchFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
+    JsonArrayStringOperator:
+      oneOf:
+      - $ref: "#/components/schemas/InJsonArrayStringOperator"
+      - $ref: "#/components/schemas/NotInJsonArrayStringOperator"
+      discriminator:
+        propertyName: type
+        mapping:
+          IN: "#/components/schemas/InJsonArrayStringOperator"
+          NOT_IN: "#/components/schemas/NotInJsonArrayStringOperator"
     KeyCustomActionSearchFilter:
       type: object
       required:
@@ -41469,6 +41651,27 @@ components:
           description: "Response options for the question.<br> When replying to this question, the value of an option needs to be send in a `ReplyPostMessageData`"
           items:
             $ref: "#/components/schemas/MultichoiceQuestionOption"
+    MultiflowAriaDialogBotExternalConfiguration:
+      type: object
+      description: Model representing an aria multiflow dialog bot external configuration.
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: MultiflowAriaDialogBotExternalConfiguration
+          enum:
+          - MultiflowAriaDialogBotExternalConfiguration
+        type:
+          $ref: "#/components/schemas/EAriaDialogBotExternalConfigurationType"
+        conditionAgentLlmCredentialId:
+          type: string
+        conditionAgentLlmProvider:
+          type: string
+        conditionAgentLlmParameters:
+          type: object
+          additionalProperties:
+            type: string
     NameAccountSearchFilter:
       type: object
       required:
@@ -42891,6 +43094,22 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/EInvitationType"
+    NotInJsonArrayStringOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: NotInJsonArrayStringOperator
+          enum:
+          - NotInJsonArrayStringOperator
+        type:
+          $ref: "#/components/schemas/EJsonArrayOperatorType"
+        values:
+          type: array
+          items:
+            type: string
     NotInLayerStopReasonOperator:
       type: object
       required:
@@ -43310,6 +43529,20 @@ components:
         joinedAsAssistant:
           type: boolean
           description: Joined the conversation via automatic assistant synchronization
+    ParticipantPersonIdCollaborationLayerLogEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ParticipantPersonIdCollaborationLayerLogEntrySearchFilter
+          enum:
+          - ParticipantPersonIdCollaborationLayerLogEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/ECollaborationLayerLogEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/ContainsStringOperator"
     ParticipantPersonIdConversationHistorySearchFilter:
       type: object
       description: Filters by matching personIds of participants of conversations
@@ -46519,9 +46752,11 @@ components:
       oneOf:
       - $ref: "#/components/schemas/CustomSuggestionSourceData"
       - $ref: "#/components/schemas/CopilotSuggestionSourceData"
+      - $ref: "#/components/schemas/AriaSuggestionSourceData"
       discriminator:
         propertyName: type
         mapping:
+          ARIA: "#/components/schemas/AriaSuggestionSourceData"
           COPILOT: "#/components/schemas/CopilotSuggestionSourceData"
           CUSTOM: "#/components/schemas/CustomSuggestionSourceData"
     SuggestionSourceOrderBy:

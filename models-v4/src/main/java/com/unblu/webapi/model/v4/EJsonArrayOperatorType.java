@@ -5,28 +5,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Type of a dialog bot
+ * Gets or Sets EJsonArrayOperatorType
  */
-public enum EBotType {
+public enum EJsonArrayOperatorType {
 
 	/**
-	 * COPILOT
+	 * IN: Check if the value is one of the one provided in the operator
 	 */
-	COPILOT("COPILOT"),
+	IN("IN"),
 
 	/**
-	 * CUSTOM
+	 * NOT_IN: Check if the value is not one of the one provided in the operator
 	 */
-	CUSTOM("CUSTOM"),
-
-	/**
-	 * ARIA
-	 */
-	ARIA("ARIA");
+	NOT_IN("NOT_IN");
 
 	private String value;
 
-	EBotType(String value) {
+	EJsonArrayOperatorType(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +36,8 @@ public enum EBotType {
 	}
 
 	@JsonCreator
-	public static EBotType fromValue(String value) {
-		for (EBotType b : EBotType.values()) {
+	public static EJsonArrayOperatorType fromValue(String value) {
+		for (EJsonArrayOperatorType b : EJsonArrayOperatorType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

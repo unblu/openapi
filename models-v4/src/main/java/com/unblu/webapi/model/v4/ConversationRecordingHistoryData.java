@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonPropertyOrder({
 	ConversationRecordingHistoryData.JSON_PROPERTY_$_TYPE,
+	ConversationRecordingHistoryData.JSON_PROPERTY_RECORDING_ID,
 	ConversationRecordingHistoryData.JSON_PROPERTY_CONVERSATION_ID,
 	ConversationRecordingHistoryData.JSON_PROPERTY_BLOB_STORE_ID,
 	ConversationRecordingHistoryData.JSON_PROPERTY_FILE_NAME,
@@ -71,6 +72,10 @@ public class ConversationRecordingHistoryData {
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
 	private TypeEnum $type = TypeEnum.CONVERSATIONRECORDINGHISTORYDATA;
+
+	public static final String JSON_PROPERTY_RECORDING_ID = "recordingId";
+	@JsonProperty(JSON_PROPERTY_RECORDING_ID)
+	private String recordingId;
 
 	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
@@ -137,6 +142,25 @@ public class ConversationRecordingHistoryData {
 
 	public void set$Type(TypeEnum $type) {
 		this.$type = $type;
+	}
+
+	public ConversationRecordingHistoryData recordingId(String recordingId) {
+		this.recordingId = recordingId;
+		return this;
+	}
+
+	/**
+	 * The unique ID of the conversation recording entity
+	 * 
+	 * @return recordingId
+	 **/
+	@ApiModelProperty(value = "The unique ID of the conversation recording entity")
+	public String getRecordingId() {
+		return recordingId;
+	}
+
+	public void setRecordingId(String recordingId) {
+		this.recordingId = recordingId;
 	}
 
 	public ConversationRecordingHistoryData conversationId(String conversationId) {
@@ -394,6 +418,7 @@ public class ConversationRecordingHistoryData {
 		}
 		ConversationRecordingHistoryData conversationRecordingHistoryData = (ConversationRecordingHistoryData) o;
 		return Objects.equals(this.$type, conversationRecordingHistoryData.$type) &&
+				Objects.equals(this.recordingId, conversationRecordingHistoryData.recordingId) &&
 				Objects.equals(this.conversationId, conversationRecordingHistoryData.conversationId) &&
 				Objects.equals(this.blobStoreId, conversationRecordingHistoryData.blobStoreId) &&
 				Objects.equals(this.fileName, conversationRecordingHistoryData.fileName) &&
@@ -410,7 +435,7 @@ public class ConversationRecordingHistoryData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, blobStoreId, fileName, mimeType, totalSize, downloadLinks, recordingStartTimestamp, recordingEndTimestamp, status, endReason, recordingType, callIds);
+		return Objects.hash($type, recordingId, conversationId, blobStoreId, fileName, mimeType, totalSize, downloadLinks, recordingStartTimestamp, recordingEndTimestamp, status, endReason, recordingType, callIds);
 	}
 
 	@Override
@@ -418,6 +443,7 @@ public class ConversationRecordingHistoryData {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ConversationRecordingHistoryData {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
+		sb.append("    recordingId: ").append(toIndentedString(recordingId)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    blobStoreId: ").append(toIndentedString(blobStoreId)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");

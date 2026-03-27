@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
 	@JsonSubTypes.Type(value = CopilotSuggestionSourceData.class, name = "COPILOT"),
 	@JsonSubTypes.Type(value = CustomSuggestionSourceData.class, name = "CUSTOM"),
+	@JsonSubTypes.Type(value = AriaSuggestionSourceData.class, name = "ARIA"),
 })
 public interface SuggestionSourceData {
 	void setId(String id);

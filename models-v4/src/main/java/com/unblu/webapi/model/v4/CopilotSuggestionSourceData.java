@@ -322,14 +322,15 @@ public class CopilotSuggestionSourceData implements SuggestionSourceData {
 	}
 
 	/**
-	 * The endpoint url of the outbound registration. To this url the requests for the outbound requests are done. Maximum length of 4000 characters. &lt;p&gt; The
-	 * following requests will be sent to the endpoint: &lt;ul&gt; &lt;li&gt;&#x60; OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION&#x60;: When a
-	 * suggestion for one or more chat messages is requested.&lt;/li&gt; &lt;li&gt;&#x60; OutboundRequest#ServiceNameConstants#PING&#x60;: When pinging the
-	 * endpoint.&lt;/li&gt; &lt;/ul&gt;
+	 * The endpoint URL used for the outbound registration. Outbound requests are sent to this URL. Maximum length of 4000 characters. &lt;br&gt; Mandatory for
+	 * &#x60;CustomSuggestionSourceData&#x60; and &#x60;CopilotSuggestionSourceData&#x60;. &lt;br&gt; Not used for &#x60;AriaSuggestionSourceData&#x60; as the
+	 * endpoint is determined server-side via Aria configuration. &lt;p&gt; The following requests will be sent to the endpoint: &lt;ul&gt; &lt;li&gt;&#x60;
+	 * OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION&#x60;: When a suggestion for one or more chat messages is requested.&lt;/li&gt;
+	 * &lt;li&gt;&#x60; OutboundRequest#ServiceNameConstants#PING&#x60;: When pinging the endpoint.&lt;/li&gt; &lt;/ul&gt;
 	 * 
 	 * @return outboundEndpoint
 	 **/
-	@ApiModelProperty(value = "The endpoint url of the outbound registration. To this url the requests for the outbound requests are done. Maximum length of 4000 characters. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>")
+	@ApiModelProperty(value = "The endpoint URL used for the outbound registration. Outbound requests are sent to this URL. Maximum length of 4000 characters. <br> Mandatory for `CustomSuggestionSourceData` and `CopilotSuggestionSourceData`. <br> Not used for `AriaSuggestionSourceData` as the endpoint is determined server-side via Aria configuration. <p> The following requests will be sent to the endpoint: <ul> <li>` OutboundRequest#ServiceNameConstants#CONVERSATION_CHAT_SUGGESTION`: When a suggestion for one or more chat messages is requested.</li> <li>` OutboundRequest#ServiceNameConstants#PING`: When pinging the endpoint.</li> </ul>")
 	public String getOutboundEndpoint() {
 		return outboundEndpoint;
 	}

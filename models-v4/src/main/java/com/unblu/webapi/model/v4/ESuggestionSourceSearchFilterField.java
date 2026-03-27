@@ -22,7 +22,12 @@ public enum ESuggestionSourceSearchFilterField {
 	/**
 	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute
 	 */
-	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP");
+	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP"),
+
+	/**
+	 * TYPE: Filter by the &#39;type&#39; attribute
+	 */
+	TYPE("TYPE");
 
 	private String value;
 

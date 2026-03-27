@@ -72,7 +72,12 @@ public enum ECollaborationLayerLogEntryOrderByField {
 	/**
 	 * LAYER_STOP_REASON: Sort by the &#39;layerStopReason&#39; attribute
 	 */
-	LAYER_STOP_REASON("LAYER_STOP_REASON");
+	LAYER_STOP_REASON("LAYER_STOP_REASON"),
+
+	/**
+	 * CONVERSATION_RECORDING_ID: Sort by the &#39;conversationRecordingId&#39; attribute
+	 */
+	CONVERSATION_RECORDING_ID("CONVERSATION_RECORDING_ID");
 
 	private String value;
 

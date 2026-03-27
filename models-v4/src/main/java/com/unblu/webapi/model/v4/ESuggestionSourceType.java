@@ -17,7 +17,12 @@ public enum ESuggestionSourceType {
 	/**
 	 * COPILOT: Suggestion source that uses Microsoft Copilot
 	 */
-	COPILOT("COPILOT");
+	COPILOT("COPILOT"),
+
+	/**
+	 * ARIA: Suggestion source that uses an Aria agentic flow
+	 */
+	ARIA("ARIA");
 
 	private String value;
 

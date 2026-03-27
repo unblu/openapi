@@ -14,35 +14,34 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * API model that represents a custom suggestion source
+ * API model that represents an Aria suggestion source
  */
-@ApiModel(description = "API model that represents a custom suggestion source")
+@ApiModel(description = "API model that represents an Aria suggestion source")
 
 @JsonPropertyOrder({
-	CustomSuggestionSourceData.JSON_PROPERTY_$_TYPE,
-	CustomSuggestionSourceData.JSON_PROPERTY_ID,
-	CustomSuggestionSourceData.JSON_PROPERTY_CREATION_TIMESTAMP,
-	CustomSuggestionSourceData.JSON_PROPERTY_MODIFICATION_TIMESTAMP,
-	CustomSuggestionSourceData.JSON_PROPERTY_VERSION,
-	CustomSuggestionSourceData.JSON_PROPERTY_ACCOUNT_ID,
-	CustomSuggestionSourceData.JSON_PROPERTY_NAME,
-	CustomSuggestionSourceData.JSON_PROPERTY_DESCRIPTION,
-	CustomSuggestionSourceData.JSON_PROPERTY_OUTBOUND_STATUS,
-	CustomSuggestionSourceData.JSON_PROPERTY_OUTBOUND_ENDPOINT,
-	CustomSuggestionSourceData.JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS,
-	CustomSuggestionSourceData.JSON_PROPERTY_RETRY_COUNT,
-	CustomSuggestionSourceData.JSON_PROPERTY_RETRY_DELAY,
-	CustomSuggestionSourceData.JSON_PROPERTY_TYPE,
-	CustomSuggestionSourceData.JSON_PROPERTY_OUTBOUND_API_VERSION,
-	CustomSuggestionSourceData.JSON_PROPERTY_OUTBOUND_SECRET,
+	AriaSuggestionSourceData.JSON_PROPERTY_$_TYPE,
+	AriaSuggestionSourceData.JSON_PROPERTY_ID,
+	AriaSuggestionSourceData.JSON_PROPERTY_CREATION_TIMESTAMP,
+	AriaSuggestionSourceData.JSON_PROPERTY_MODIFICATION_TIMESTAMP,
+	AriaSuggestionSourceData.JSON_PROPERTY_VERSION,
+	AriaSuggestionSourceData.JSON_PROPERTY_ACCOUNT_ID,
+	AriaSuggestionSourceData.JSON_PROPERTY_NAME,
+	AriaSuggestionSourceData.JSON_PROPERTY_DESCRIPTION,
+	AriaSuggestionSourceData.JSON_PROPERTY_OUTBOUND_STATUS,
+	AriaSuggestionSourceData.JSON_PROPERTY_OUTBOUND_ENDPOINT,
+	AriaSuggestionSourceData.JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS,
+	AriaSuggestionSourceData.JSON_PROPERTY_RETRY_COUNT,
+	AriaSuggestionSourceData.JSON_PROPERTY_RETRY_DELAY,
+	AriaSuggestionSourceData.JSON_PROPERTY_TYPE,
+	AriaSuggestionSourceData.JSON_PROPERTY_AGENTIC_FLOW_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class CustomSuggestionSourceData implements SuggestionSourceData {
+public class AriaSuggestionSourceData implements SuggestionSourceData {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		CUSTOMSUGGESTIONSOURCEDATA("CustomSuggestionSourceData");
+		ARIASUGGESTIONSOURCEDATA("AriaSuggestionSourceData");
 
 		private String value;
 
@@ -67,13 +66,13 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 					return b;
 				}
 			}
-			return TypeEnum.CUSTOMSUGGESTIONSOURCEDATA;
+			return TypeEnum.ARIASUGGESTIONSOURCEDATA;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.CUSTOMSUGGESTIONSOURCEDATA;
+	private TypeEnum $type = TypeEnum.ARIASUGGESTIONSOURCEDATA;
 
 	public static final String JSON_PROPERTY_ID = "id";
 	@JsonProperty(JSON_PROPERTY_ID)
@@ -125,17 +124,13 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
-	private ESuggestionSourceType type = ESuggestionSourceType.CUSTOM;
+	private ESuggestionSourceType type = ESuggestionSourceType.ARIA;
 
-	public static final String JSON_PROPERTY_OUTBOUND_API_VERSION = "outboundApiVersion";
-	@JsonProperty(JSON_PROPERTY_OUTBOUND_API_VERSION)
-	private EWebApiVersion outboundApiVersion;
+	public static final String JSON_PROPERTY_AGENTIC_FLOW_ID = "agenticFlowId";
+	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_ID)
+	private String agenticFlowId;
 
-	public static final String JSON_PROPERTY_OUTBOUND_SECRET = "outboundSecret";
-	@JsonProperty(JSON_PROPERTY_OUTBOUND_SECRET)
-	private String outboundSecret;
-
-	public CustomSuggestionSourceData $type(TypeEnum $type) {
+	public AriaSuggestionSourceData $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -154,7 +149,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.$type = $type;
 	}
 
-	public CustomSuggestionSourceData id(String id) {
+	public AriaSuggestionSourceData id(String id) {
 		this.id = id;
 		return this;
 	}
@@ -173,7 +168,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.id = id;
 	}
 
-	public CustomSuggestionSourceData creationTimestamp(Long creationTimestamp) {
+	public AriaSuggestionSourceData creationTimestamp(Long creationTimestamp) {
 		this.creationTimestamp = creationTimestamp;
 		return this;
 	}
@@ -193,7 +188,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public CustomSuggestionSourceData modificationTimestamp(Long modificationTimestamp) {
+	public AriaSuggestionSourceData modificationTimestamp(Long modificationTimestamp) {
 		this.modificationTimestamp = modificationTimestamp;
 		return this;
 	}
@@ -214,7 +209,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.modificationTimestamp = modificationTimestamp;
 	}
 
-	public CustomSuggestionSourceData version(Long version) {
+	public AriaSuggestionSourceData version(Long version) {
 		this.version = version;
 		return this;
 	}
@@ -234,7 +229,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.version = version;
 	}
 
-	public CustomSuggestionSourceData accountId(String accountId) {
+	public AriaSuggestionSourceData accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -254,7 +249,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.accountId = accountId;
 	}
 
-	public CustomSuggestionSourceData name(String name) {
+	public AriaSuggestionSourceData name(String name) {
 		this.name = name;
 		return this;
 	}
@@ -273,7 +268,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.name = name;
 	}
 
-	public CustomSuggestionSourceData description(String description) {
+	public AriaSuggestionSourceData description(String description) {
 		this.description = description;
 		return this;
 	}
@@ -292,7 +287,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.description = description;
 	}
 
-	public CustomSuggestionSourceData outboundStatus(EOutboundEndpointStatus outboundStatus) {
+	public AriaSuggestionSourceData outboundStatus(EOutboundEndpointStatus outboundStatus) {
 		this.outboundStatus = outboundStatus;
 		return this;
 	}
@@ -311,7 +306,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.outboundStatus = outboundStatus;
 	}
 
-	public CustomSuggestionSourceData outboundEndpoint(String outboundEndpoint) {
+	public AriaSuggestionSourceData outboundEndpoint(String outboundEndpoint) {
 		this.outboundEndpoint = outboundEndpoint;
 		return this;
 	}
@@ -334,7 +329,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.outboundEndpoint = outboundEndpoint;
 	}
 
-	public CustomSuggestionSourceData outboundTimeoutMillis(Long outboundTimeoutMillis) {
+	public AriaSuggestionSourceData outboundTimeoutMillis(Long outboundTimeoutMillis) {
 		this.outboundTimeoutMillis = outboundTimeoutMillis;
 		return this;
 	}
@@ -353,7 +348,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.outboundTimeoutMillis = outboundTimeoutMillis;
 	}
 
-	public CustomSuggestionSourceData retryCount(Long retryCount) {
+	public AriaSuggestionSourceData retryCount(Long retryCount) {
 		this.retryCount = retryCount;
 		return this;
 	}
@@ -372,7 +367,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.retryCount = retryCount;
 	}
 
-	public CustomSuggestionSourceData retryDelay(Long retryDelay) {
+	public AriaSuggestionSourceData retryDelay(Long retryDelay) {
 		this.retryDelay = retryDelay;
 		return this;
 	}
@@ -391,7 +386,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.retryDelay = retryDelay;
 	}
 
-	public CustomSuggestionSourceData type(ESuggestionSourceType type) {
+	public AriaSuggestionSourceData type(ESuggestionSourceType type) {
 		this.type = type;
 		return this;
 	}
@@ -410,42 +405,23 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		this.type = type;
 	}
 
-	public CustomSuggestionSourceData outboundApiVersion(EWebApiVersion outboundApiVersion) {
-		this.outboundApiVersion = outboundApiVersion;
+	public AriaSuggestionSourceData agenticFlowId(String agenticFlowId) {
+		this.agenticFlowId = agenticFlowId;
 		return this;
 	}
 
 	/**
-	 * Get outboundApiVersion
+	 * Aria agentic flow ID. Maximum length: 36 characters
 	 * 
-	 * @return outboundApiVersion
+	 * @return agenticFlowId
 	 **/
-	@ApiModelProperty(value = "")
-	public EWebApiVersion getOutboundApiVersion() {
-		return outboundApiVersion;
+	@ApiModelProperty(value = "Aria agentic flow ID. Maximum length: 36 characters")
+	public String getAgenticFlowId() {
+		return agenticFlowId;
 	}
 
-	public void setOutboundApiVersion(EWebApiVersion outboundApiVersion) {
-		this.outboundApiVersion = outboundApiVersion;
-	}
-
-	public CustomSuggestionSourceData outboundSecret(String outboundSecret) {
-		this.outboundSecret = outboundSecret;
-		return this;
-	}
-
-	/**
-	 * Secret sent with each outbound request. Optional. &lt;p&gt; Maximum length of 4000 characters.
-	 * 
-	 * @return outboundSecret
-	 **/
-	@ApiModelProperty(value = "Secret sent with each outbound request. Optional. <p> Maximum length of 4000 characters.")
-	public String getOutboundSecret() {
-		return outboundSecret;
-	}
-
-	public void setOutboundSecret(String outboundSecret) {
-		this.outboundSecret = outboundSecret;
+	public void setAgenticFlowId(String agenticFlowId) {
+		this.agenticFlowId = agenticFlowId;
 	}
 
 	@Override
@@ -456,34 +432,33 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		CustomSuggestionSourceData customSuggestionSourceData = (CustomSuggestionSourceData) o;
-		return Objects.equals(this.$type, customSuggestionSourceData.$type) &&
-				Objects.equals(this.id, customSuggestionSourceData.id) &&
-				Objects.equals(this.creationTimestamp, customSuggestionSourceData.creationTimestamp) &&
-				Objects.equals(this.modificationTimestamp, customSuggestionSourceData.modificationTimestamp) &&
-				Objects.equals(this.version, customSuggestionSourceData.version) &&
-				Objects.equals(this.accountId, customSuggestionSourceData.accountId) &&
-				Objects.equals(this.name, customSuggestionSourceData.name) &&
-				Objects.equals(this.description, customSuggestionSourceData.description) &&
-				Objects.equals(this.outboundStatus, customSuggestionSourceData.outboundStatus) &&
-				Objects.equals(this.outboundEndpoint, customSuggestionSourceData.outboundEndpoint) &&
-				Objects.equals(this.outboundTimeoutMillis, customSuggestionSourceData.outboundTimeoutMillis) &&
-				Objects.equals(this.retryCount, customSuggestionSourceData.retryCount) &&
-				Objects.equals(this.retryDelay, customSuggestionSourceData.retryDelay) &&
-				Objects.equals(this.type, customSuggestionSourceData.type) &&
-				Objects.equals(this.outboundApiVersion, customSuggestionSourceData.outboundApiVersion) &&
-				Objects.equals(this.outboundSecret, customSuggestionSourceData.outboundSecret);
+		AriaSuggestionSourceData ariaSuggestionSourceData = (AriaSuggestionSourceData) o;
+		return Objects.equals(this.$type, ariaSuggestionSourceData.$type) &&
+				Objects.equals(this.id, ariaSuggestionSourceData.id) &&
+				Objects.equals(this.creationTimestamp, ariaSuggestionSourceData.creationTimestamp) &&
+				Objects.equals(this.modificationTimestamp, ariaSuggestionSourceData.modificationTimestamp) &&
+				Objects.equals(this.version, ariaSuggestionSourceData.version) &&
+				Objects.equals(this.accountId, ariaSuggestionSourceData.accountId) &&
+				Objects.equals(this.name, ariaSuggestionSourceData.name) &&
+				Objects.equals(this.description, ariaSuggestionSourceData.description) &&
+				Objects.equals(this.outboundStatus, ariaSuggestionSourceData.outboundStatus) &&
+				Objects.equals(this.outboundEndpoint, ariaSuggestionSourceData.outboundEndpoint) &&
+				Objects.equals(this.outboundTimeoutMillis, ariaSuggestionSourceData.outboundTimeoutMillis) &&
+				Objects.equals(this.retryCount, ariaSuggestionSourceData.retryCount) &&
+				Objects.equals(this.retryDelay, ariaSuggestionSourceData.retryDelay) &&
+				Objects.equals(this.type, ariaSuggestionSourceData.type) &&
+				Objects.equals(this.agenticFlowId, ariaSuggestionSourceData.agenticFlowId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, outboundStatus, outboundEndpoint, outboundTimeoutMillis, retryCount, retryDelay, type, outboundApiVersion, outboundSecret);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, outboundStatus, outboundEndpoint, outboundTimeoutMillis, retryCount, retryDelay, type, agenticFlowId);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class CustomSuggestionSourceData {\n");
+		sb.append("class AriaSuggestionSourceData {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
@@ -498,8 +473,7 @@ public class CustomSuggestionSourceData implements SuggestionSourceData {
 		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
 		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
-		sb.append("    outboundApiVersion: ").append(toIndentedString(outboundApiVersion)).append("\n");
-		sb.append("    outboundSecret: ").append(toIndentedString(outboundSecret)).append("\n");
+		sb.append("    agenticFlowId: ").append(toIndentedString(agenticFlowId)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

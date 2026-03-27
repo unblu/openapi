@@ -27,7 +27,12 @@ public enum EDialogBotSearchFilterField {
 	/**
 	 * MODIFICATION_TIMESTAMP: Filter by the &#39;modificationTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
-	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP");
+	MODIFICATION_TIMESTAMP("MODIFICATION_TIMESTAMP"),
+
+	/**
+	 * TYPE: Filter by the &#39;type&#39; attribute
+	 */
+	TYPE("TYPE");
 
 	private String value;
 
