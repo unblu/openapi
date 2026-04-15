@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.34.1
+  version: 8.35.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -6597,6 +6597,87 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /conversationhistory/{conversationId}/getMessage/{messageId}:
+    get:
+      tags:
+      - ConversationHistory
+      summary: getMessage
+      description: Returns a specific message from a conversation<br>
+      operationId: conversationHistoryGetMessage
+      parameters:
+      - name: conversationId
+        in: path
+        description: The ID of the conversation
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: messageId
+        in: path
+        description: The ID of the message
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The message data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationHistoryMessageData"
+              examples:
+                getmessage-file:
+                  summary: getMessage file
+                  description: Conversation history data for a file message
+                  value:
+                    $_type: ConversationHistoryMessageData
+                    id: soeaeEstrDo2-at_svyMH9r
+                    conversationId: AcviDb210C5BoFd6e_79oan
+                    sendTimestamp: 1551398400000
+                    serverTimestamp: 1551398400000
+                    senderPersonId: nta30CBa-6d1a89cE57Db_F
+                    type: FILE
+                    internal: false
+                    replyToMessageId: null
+                    externalMessageId: null
+                    recipientPersonIds:
+                    - PtwoVi1O-2G9FFCR_rZLKQ
+                    botThreadId: null
+                    rejectionSeverity: null
+                    rejectionReason: null
+                    text: ""
+                    deletedForAll: null
+                    deletedForSelf: []
+                getmessage-text:
+                  summary: getMessage text
+                  description: Conversation history data for a text message
+                  value:
+                    $_type: ConversationHistoryMessageData
+                    id: soeaeEstrDo2-at_svyMH9r
+                    conversationId: AcviDb210C5BoFd6e_79oan
+                    sendTimestamp: 1551398400000
+                    serverTimestamp: 1551398400000
+                    senderPersonId: nta30CBa-6d1a89cE57Db_F
+                    type: TEXT
+                    internal: false
+                    replyToMessageId: null
+                    externalMessageId: null
+                    recipientPersonIds:
+                    - PtwoVi1O-2G9FFCR_rZLKQ
+                    botThreadId: null
+                    rejectionSeverity: null
+                    rejectionReason: null
+                    text: Hello world!
+                    deletedForAll: null
+                    deletedForSelf: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /conversationhistory/{conversationId}/read:
     get:
       tags:
@@ -7628,6 +7709,175 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ConversationFileDataList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversations/{conversationId}/getMessage/{messageId}:
+    get:
+      tags:
+      - Conversations
+      summary: getMessage
+      description: Returns a specific message from a conversation.<br>
+      operationId: conversationsGetMessage
+      parameters:
+      - name: conversationId
+        in: path
+        description: The ID of the conversation that the message belongs to
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: messageId
+        in: path
+        description: The ID of the message to retrieve
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The message data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageData"
+              examples:
+                getmessage-file:
+                  summary: getMessage file
+                  description: File message data for a specific message in a conversation
+                  value:
+                    $_type: FileMessageData
+                    id: 1FgMeFiBDeD9a7ea-a6s2cE
+                    conversationId: AcviDb210C5BoFd6e_79oan
+                    externalMessengerChannelId: null
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    senderPerson:
+                      $_type: PersonData
+                      id: nta30CBa-6d1a89cE57Db_F
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      personSource: VIRTUAL
+                      sourceId: r1acbAidia_35-tB4o7FbWR
+                      sourceUrl: null
+                      sourceData: null
+                      firstName: visitor-default_firstName
+                      lastName: visitor-default_lastName
+                      username: visitor-default
+                      nickname: null
+                      displayName: visitor-default_firstName visitor-default_lastName
+                      displayNameForAgent: visitor-default_firstName visitor-default_lastName
+                      displayNameForVisitor: visitor-default_firstName visitor-default_lastName
+                      personType: VISITOR
+                      authorizationRole: WEBUSER
+                      email: visitor-default@unblu-test.com
+                      phone: null
+                      teamId: null
+                      labels: []
+                      note: ""
+                      noteLastEditedTimestamp: null
+                      noteLastEditedPersonId: null
+                      links:
+                      - $_type: PersonLink
+                        type: AGENT_DESK_VISITOR_DETAILS
+                        url: '...'
+                      avatar: null
+                      metadata: null
+                    senderPersonPresenceId: null
+                    serverTimestamp: 1551398400000
+                    sendTimestamp: 1551398400000
+                    type: FILE
+                    recipientPersonIds:
+                    - PtwoVi1O-2G9FFCR_rZLKQ
+                    fallbackText: "Uploaded a file: test-image.png (483.0 B)"
+                    actionId: AcT10n_1d0-aBcDeFgHiJkL
+                    sourceId: null
+                    botThreadId: null
+                    internal: false
+                    replyToMessageId: null
+                    externalMessageId: null
+                    replyToExternalMessageId: null
+                    locale: null
+                    conversationLocale: en
+                    fileName: test-image.png
+                    caption: A test image
+                    captionType: SIMPLE_TEXT
+                    mimeType: image/png
+                    source: file upload
+                    fileStoreId: AkCwO-wySGiC1cOdBU7ZxA
+                    fileStatus: COMPLETED
+                    totalSize: 483
+                    uploadedSize: 483
+                    downloadLinks:
+                    - $_type: DownloadLink
+                      type: WEB_API
+                      url: '...'
+                    - $_type: DownloadLink
+                      type: AGENT_DESK
+                      url: '...'
+                    quickReplies: []
+                    availableTranslations: []
+                getmessage-text:
+                  summary: getMessage text
+                  description: Text message data for a specific message in a conversation
+                  value:
+                    $_type: TextMessageData
+                    id: tsMDdb0632scBEDtgee8aa_
+                    conversationId: AcviDb210C5BoFd6e_79oan
+                    externalMessengerChannelId: null
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    senderPerson:
+                      $_type: PersonData
+                      id: nta30CBa-6d1a89cE57Db_F
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      personSource: VIRTUAL
+                      sourceId: r1acbAidia_35-tB4o7FbWR
+                      sourceUrl: null
+                      sourceData: null
+                      firstName: visitor-default_firstName
+                      lastName: visitor-default_lastName
+                      username: visitor-default
+                      nickname: null
+                      displayName: visitor-default_firstName visitor-default_lastName
+                      displayNameForAgent: visitor-default_firstName visitor-default_lastName
+                      displayNameForVisitor: visitor-default_firstName visitor-default_lastName
+                      personType: VISITOR
+                      authorizationRole: WEBUSER
+                      email: visitor-default@unblu-test.com
+                      phone: null
+                      teamId: null
+                      labels: []
+                      note: ""
+                      noteLastEditedTimestamp: null
+                      noteLastEditedPersonId: null
+                      links:
+                      - $_type: PersonLink
+                        type: AGENT_DESK_VISITOR_DETAILS
+                        url: '...'
+                      avatar: null
+                      metadata: null
+                    senderPersonPresenceId: xPr3s_1d0-aBcDeFgHiJkL
+                    serverTimestamp: 1551398400000
+                    sendTimestamp: 1551398400000
+                    type: TEXT
+                    recipientPersonIds:
+                    - PtwoVi1O-2G9FFCR_rZLKQ
+                    fallbackText: Hello world!
+                    actionId: AcT10n_1d0-aBcDeFgHiJkL
+                    sourceId: null
+                    botThreadId: null
+                    internal: false
+                    replyToMessageId: null
+                    externalMessageId: null
+                    replyToExternalMessageId: null
+                    locale: en
+                    conversationLocale: en
+                    text: Hello world!
+                    textType: SIMPLE_TEXT
+                    quickReplies: []
+                    availableTranslations: []
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -45175,6 +45425,7 @@ components:
           description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
         placeholderValues:
           type: array
+          description: Ordered list of placeholder values
           items:
             $ref: "#/components/schemas/PlaceholderValue"
         cannedResponseId:

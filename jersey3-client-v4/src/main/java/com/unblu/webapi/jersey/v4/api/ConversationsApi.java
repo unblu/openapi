@@ -34,6 +34,7 @@ import com.unblu.webapi.model.v4.ConversationsSetTopicBody;
 import com.unblu.webapi.model.v4.ConversationsSetVisibilityBody;
 import com.unblu.webapi.model.v4.ConversationsSetVisitorDataBody;
 import com.unblu.webapi.model.v4.ExpandFields;
+import com.unblu.webapi.model.v4.MessageData;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -544,6 +545,66 @@ public class ConversationsApi {
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationFileDataList> localVarReturnType = new GenericType<ConversationFileDataList>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * getMessage Returns a specific message from a conversation.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation that the message belongs to (required)
+	 * @param messageId The ID of the message to retrieve (required)
+	 * @return MessageData
+	 * @throws ApiException if fails to make API call
+	 */
+	public MessageData conversationsGetMessage(String conversationId, String messageId) throws ApiException {
+		return conversationsGetMessageWithHttpInfo(conversationId, messageId).getData();
+	}
+
+	/**
+	 * getMessage Returns a specific message from a conversation.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation that the message belongs to (required)
+	 * @param messageId The ID of the message to retrieve (required)
+	 * @return ApiResponse&lt;MessageData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<MessageData> conversationsGetMessageWithHttpInfo(String conversationId, String messageId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsGetMessage");
+		}
+
+		// verify the required parameter 'messageId' is set
+		if (messageId == null) {
+			throw new ApiException(400, "Missing the required parameter 'messageId' when calling conversationsGetMessage");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/getMessage/{messageId}"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()))
+				.replaceAll("\\{" + "messageId" + "\\}", apiClient.escapeString(messageId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<MessageData> localVarReturnType = new GenericType<MessageData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

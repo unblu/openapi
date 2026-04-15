@@ -243,11 +243,11 @@ public class Placeholder {
 	}
 
 	/**
-	 * Get placeholderValues
+	 * Ordered list of placeholder values
 	 * 
 	 * @return placeholderValues
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Ordered list of placeholder values")
 	public List<PlaceholderValue> getPlaceholderValues() {
 		return placeholderValues;
 	}
