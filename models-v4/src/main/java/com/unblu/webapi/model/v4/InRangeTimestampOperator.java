@@ -10,11 +10,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * InRangeTimestampOperator
+ * Timestamp operator that matches values within an inclusive range [minimum, maximum]. &lt;p&gt; Both {minimum} and {maximum} are UTC timestamps in
+ * milliseconds since epoch. A value matches if it is greater than or equal to {minimum} and less than or equal to {maximum}.
  */
+@ApiModel(description = "Timestamp operator that matches values within an inclusive range [minimum, maximum]. <p> Both {minimum} and {maximum} are UTC timestamps in milliseconds since epoch. A value matches if it is greater than or equal to {minimum} and less than or equal to {maximum}.")
 
 @JsonPropertyOrder({
 	InRangeTimestampOperator.JSON_PROPERTY_$_TYPE,
@@ -117,11 +120,11 @@ public class InRangeTimestampOperator implements TimestampOperator {
 	}
 
 	/**
-	 * Get minimum
+	 * Lower bound of the range (inclusive), as a UTC timestamp in milliseconds since epoch.
 	 * 
 	 * @return minimum
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Lower bound of the range (inclusive), as a UTC timestamp in milliseconds since epoch.")
 	public Long getMinimum() {
 		return minimum;
 	}
@@ -136,11 +139,11 @@ public class InRangeTimestampOperator implements TimestampOperator {
 	}
 
 	/**
-	 * Get maximum
+	 * Upper bound of the range (inclusive), as a UTC timestamp in milliseconds since epoch.
 	 * 
 	 * @return maximum
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Upper bound of the range (inclusive), as a UTC timestamp in milliseconds since epoch.")
 	public Long getMaximum() {
 		return maximum;
 	}

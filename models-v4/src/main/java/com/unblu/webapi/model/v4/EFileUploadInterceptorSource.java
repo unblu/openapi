@@ -37,7 +37,12 @@ public enum EFileUploadInterceptorSource {
 	/**
 	 * CO_BROWSING_DOWNLOAD: The file is being uploaded to the conversation from a website participants are co-browsing
 	 */
-	CO_BROWSING_DOWNLOAD("CO_BROWSING_DOWNLOAD");
+	CO_BROWSING_DOWNLOAD("CO_BROWSING_DOWNLOAD"),
+
+	/**
+	 * BROADCAST: The file is uploaded into a broadcast
+	 */
+	BROADCAST("BROADCAST");
 
 	private String value;
 

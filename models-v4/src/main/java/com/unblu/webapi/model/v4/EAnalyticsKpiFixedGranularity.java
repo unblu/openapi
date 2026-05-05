@@ -15,6 +15,16 @@ public enum EAnalyticsKpiFixedGranularity {
 	MINUTE("MINUTE"),
 
 	/**
+	 * QUARTER_HOUR: Quarter hour (15 minutes).
+	 */
+	QUARTER_HOUR("QUARTER_HOUR"),
+
+	/**
+	 * HALF_HOUR: Half hour (30 minutes).
+	 */
+	HALF_HOUR("HALF_HOUR"),
+
+	/**
 	 * HOUR: Hour.
 	 */
 	HOUR("HOUR"),

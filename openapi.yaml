@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.35.2
+  version: 8.36.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -16,6 +16,8 @@ tags:
   description: With this service the accounts of the unblu system can be managed. Most of the provided interface needs super admin permissions. Especially if the edited account is not the one of the current user.<br>
 - name: AnalyticsDashboards
   description: Service for managing analytics dashboards
+- name: AnalyticsData
+  description: "WebAPI service that provides access to individual analytics KPI data records. <p> This service exposes the underlying individual KPI records with support for pagination, filtering by time range, and ordering. <p> Each search method corresponds to one of the analytics KPIs and returns a paginated result of typed data entries sourced from the respective gold view in the analytics database. <p> All methods require the ADMIN role.<br>@see AnalyticsKpiDataQuery"
 - name: AnalyticsWidgets
   description: Service for managing analytics widgets
 - name: ApiKeys
@@ -1353,6 +1355,341 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/data/internal:
+    get:
+      tags:
+      - AnalyticsData
+      summary: internal
+      description: "<p>This endpoint is deprecated.</p>Internal dummy endpoint currently needed to make the WebAPI generation work as it breaks if all functions start with the same prefix, there is a bug."
+      operationId: analyticsDataInternal
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: DEPRECATED
+  /analytics/data/searchCalls:
+    post:
+      tags:
+      - AnalyticsData
+      summary: searchCalls
+      description: "<p>This endpoint is in preview mode.</p>Searches for individual call KPI records. <p> Returns data from the gold_calls view, with one entry per ended call. Each entry includes call timing, participants, service provider, end reason, and the parent conversation details.<br>"
+      operationId: analyticsDataSearchCalls
+      requestBody:
+        description: "the query defining time range filter, ordering, and pagination"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsKpiDataQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: query calls analytics data
+                value:
+                  $_type: AnalyticsKpiDataQuery
+                  searchFilters:
+                  - $_type: AnalyticsKpiDataQueryFilter
+                    field: null
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1672531200000
+                      maximum: 1672617600000
+                  orderBy: null
+                  offset: 0
+                  limit: 10
+        required: true
+      responses:
+        "200":
+          description: a paginated result of  `CallsAnalyticsKpiDataResult call KPI data entries`
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CallsAnalyticsKpiDataResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: query calls analytics data
+                  value:
+                    $_type: CallsAnalyticsKpiDataResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/data/searchCollaborationLayers:
+    post:
+      tags:
+      - AnalyticsData
+      summary: searchCollaborationLayers
+      description: "<p>This endpoint is in preview mode.</p>Searches for individual collaboration layer KPI records. <p> Returns data from the gold_collaboration_layers view, with one entry per stopped or aborted collaboration layer. Each entry includes layer type, duration, start/stop persons, and the parent conversation details.<br>"
+      operationId: analyticsDataSearchCollaborationLayers
+      requestBody:
+        description: "the query defining time range filter, ordering, and pagination"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsKpiDataQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: query collaboration layers analytics data
+                value:
+                  $_type: AnalyticsKpiDataQuery
+                  searchFilters:
+                  - $_type: AnalyticsKpiDataQueryFilter
+                    field: null
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1672531200000
+                      maximum: 1672617600000
+                  orderBy: null
+                  offset: 0
+                  limit: 10
+        required: true
+      responses:
+        "200":
+          description: a paginated result of  `CollaborationLayersAnalyticsKpiDataResult collaboration layer KPI data entries`
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollaborationLayersAnalyticsKpiDataResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: query collaboration layers analytics data
+                  value:
+                    $_type: CollaborationLayersAnalyticsKpiDataResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/data/searchConversationsEnded:
+    post:
+      tags:
+      - AnalyticsData
+      summary: searchConversationsEnded
+      description: "<p>This endpoint is in preview mode.</p>Searches for individual conversation-ended KPI records. <p> Returns data from the gold_conversations_ended view, with one entry per ended conversation. Each entry includes lifecycle timestamps (creation, onboarding, queued, active, offboarding, end), end reason, conversation details, and aggregate metrics (message counts, call counts, collaboration layer counts and durations).<br>"
+      operationId: analyticsDataSearchConversationsEnded
+      requestBody:
+        description: "the query defining time range filter, ordering, and pagination"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsKpiDataQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: query conversations ended analytics data
+                value:
+                  $_type: AnalyticsKpiDataQuery
+                  searchFilters:
+                  - $_type: AnalyticsKpiDataQueryFilter
+                    field: null
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1672531200000
+                      maximum: 1672617600000
+                  orderBy: null
+                  offset: 0
+                  limit: 10
+        required: true
+      responses:
+        "200":
+          description: a paginated result of  `ConversationsEndedAnalyticsKpiDataResult conversation-ended KPI data entries`
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationsEndedAnalyticsKpiDataResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: query conversations ended analytics data
+                  value:
+                    $_type: ConversationsEndedAnalyticsKpiDataResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/data/searchHandlingTime:
+    post:
+      tags:
+      - AnalyticsData
+      summary: searchHandlingTime
+      description: "<p>This endpoint is in preview mode.</p>Searches for individual handling time KPI records. <p> Returns data from the gold_handling_time view, with one entry per agent handling time period. Each entry includes the handling time duration, resolution type, and the parent conversation details with metrics collected during the handling period.<br>"
+      operationId: analyticsDataSearchHandlingTime
+      requestBody:
+        description: "the query defining time range filter, ordering, and pagination"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsKpiDataQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: query handling time analytics data
+                value:
+                  $_type: AnalyticsKpiDataQuery
+                  searchFilters:
+                  - $_type: AnalyticsKpiDataQueryFilter
+                    field: null
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1672531200000
+                      maximum: 1672617600000
+                  orderBy: null
+                  offset: 0
+                  limit: 10
+        required: true
+      responses:
+        "200":
+          description: a paginated result of  `HandlingTimeAnalyticsKpiDataResult handling time KPI data entries`
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HandlingTimeAnalyticsKpiDataResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: query handling time analytics data
+                  value:
+                    $_type: HandlingTimeAnalyticsKpiDataResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/data/searchMessages:
+    post:
+      tags:
+      - AnalyticsData
+      summary: searchMessages
+      description: "<p>This endpoint is in preview mode.</p>Searches for individual message KPI records. <p> Returns data from the gold_messages view, with one entry per message. Each entry includes the sender, message type, character count, timestamps, and the parent conversation details.<br>"
+      operationId: analyticsDataSearchMessages
+      requestBody:
+        description: "the query defining time range filter, ordering, and pagination"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsKpiDataQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: query messages analytics data
+                value:
+                  $_type: AnalyticsKpiDataQuery
+                  searchFilters:
+                  - $_type: AnalyticsKpiDataQueryFilter
+                    field: null
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1672531200000
+                      maximum: 1672617600000
+                  orderBy: null
+                  offset: 0
+                  limit: 10
+        required: true
+      responses:
+        "200":
+          description: a paginated result of  `MessagesAnalyticsKpiDataResult message KPI data entries`
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessagesAnalyticsKpiDataResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: query messages analytics data
+                  value:
+                    $_type: MessagesAnalyticsKpiDataResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /analytics/data/searchWaitingTime:
+    post:
+      tags:
+      - AnalyticsData
+      summary: searchWaitingTime
+      description: "<p>This endpoint is in preview mode.</p>Searches for individual waiting time KPI records. <p> Returns data from the gold_waiting_time view, with one entry per waiting time period (assignment request or agent forwarding). Each entry includes the waiting time duration, outcome, type, target recipient, and the parent conversation details.<br>"
+      operationId: analyticsDataSearchWaitingTime
+      requestBody:
+        description: "the query defining time range filter, ordering, and pagination"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsKpiDataQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: query waiting time analytics data
+                value:
+                  $_type: AnalyticsKpiDataQuery
+                  searchFilters:
+                  - $_type: AnalyticsKpiDataQueryFilter
+                    field: null
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1672531200000
+                      maximum: 1672617600000
+                  orderBy: null
+                  offset: 0
+                  limit: 10
+        required: true
+      responses:
+        "200":
+          description: a paginated result of  `WaitingTimeAnalyticsKpiDataResult waiting time KPI data entries`
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaitingTimeAnalyticsKpiDataResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: query waiting time analytics data
+                  value:
+                    $_type: WaitingTimeAnalyticsKpiDataResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
@@ -20016,6 +20353,59 @@ components:
         description:
           type: string
           description: Translated description of the corresponding description field of the main entity this translation belongs to
+    AnalyticsKpiDataQuery:
+      type: object
+      description: "Query object for searching analytics KPI data records via the data access web API. <p> Supports filtering by event timestamp range (via `AnalyticsKpiDataQueryFilter`), ordering by event timestamp (via`AnalyticsKpiDataQueryOrderBy`), and pagination through offset and limit inherited from `AbstractQuery`.<br>@see AnalyticsKpiDataQueryFilter<br>@see AnalyticsKpiDataQueryOrderBy<br>@see IAnalyticsDataApiService"
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsKpiDataQuery
+          enum:
+          - AnalyticsKpiDataQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search of entities
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiDataQueryFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the search result list
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiDataQueryOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximal amount of items returned
+    AnalyticsKpiDataQueryFilter:
+      type: object
+      description: Filter for analytics KPI data queries. <p> Filters KPI records by event timestamp using an `InRangeTimestampOperator` to define a time range (in milliseconds since epoch). The filter field is fixed to `EAnalyticsKpiDataQueryFilterField.EVENT_TIMESTAMP`.<br>@see AnalyticsKpiDataQuery<br>@see InRangeTimestampOperator
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsKpiDataQueryFilter
+          enum:
+          - AnalyticsKpiDataQueryFilter
+        field:
+          $ref: "#/components/schemas/EAnalyticsKpiDataQueryFilterField"
+        operator:
+          $ref: "#/components/schemas/InRangeTimestampOperator"
+    AnalyticsKpiDataQueryOrderBy:
+      type: object
+      description: Ordering criterion for analytics KPI data queries. <p> Defines the sort order of KPI data records. The order-by field is selected from `EAnalyticsKpiDataQueryOrderByField` and defaults to`EAnalyticsKpiDataQueryOrderByField.EVENT_TIMESTAMP EVENT_TIMESTAMP` in `AbstractOrderBy.Order#ASCENDING ASCENDING` order.<br>@see AnalyticsKpiDataQuery<br>@see EAnalyticsKpiDataQueryOrderByField
+      properties:
+        $_type:
+          type: string
+          default: AnalyticsKpiDataQueryOrderBy
+          enum:
+          - AnalyticsKpiDataQueryOrderBy
+        field:
+          $ref: "#/components/schemas/EAnalyticsKpiDataQueryOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
     AnalyticsKpiReferenceLine:
       type: object
       description: <p>This type is in preview mode.</p>Data model object for analytics KPI reference line
@@ -24543,6 +24933,77 @@ components:
         mapping:
           EQUALS: "#/components/schemas/EqualsCallServiceProviderOperator"
           NOT_EQUALS: "#/components/schemas/NotEqualsCallServiceProviderOperator"
+    CallsAnalyticsKpiData:
+      type: object
+      description: "Represents a completed call lifecycle within a conversation. Each entry is backed by a @code{ conversation.call.ended} event and records the details and metadata of audio or video calls."
+      properties:
+        $_type:
+          type: string
+          default: CallsAnalyticsKpiData
+          enum:
+          - CallsAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the data entry in the analytics KPI table
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        initiationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call was initiated.
+        acceptTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant's connection phase. Optional, may be @code{ null}if the call was never accepted."
+        establishedTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) when at least two participants successfully connected to the call service provider. Optional, may be @code{ null} if the call was never established."
+        endTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) when the call ended.
+        activeDurationMs:
+          type: integer
+          format: int64
+          description: The duration (ms) between the time the call was established and when it ended.
+        serviceProviderType:
+          $ref: "#/components/schemas/ECallServiceProvider"
+        endReason:
+          $ref: "#/components/schemas/ECallEndReason"
+        type:
+          $ref: "#/components/schemas/ECallType"
+        overallCallParticipantsCount:
+          type: integer
+          format: int32
+          description: The total number of unique participants in the call.
+        conversation:
+          $ref: "#/components/schemas/ConversationAnalyticsKpiData"
+        initiator:
+          $ref: "#/components/schemas/PersonAnalyticsKpiData"
+    CallsAnalyticsKpiDataResult:
+      type: object
+      description: "Paginated result containing `CallsAnalyticsKpiData` entries, returned by `searchCalls`."
+      properties:
+        $_type:
+          type: string
+          default: CallsAnalyticsKpiDataResult
+          enum:
+          - CallsAnalyticsKpiDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/CallsAnalyticsKpiData"
     CallsCountAnalyticsKpiFilterData:
       type: object
       description: "Data model object representing filters for the KPI calculation of the number of calls <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>callTypes AND</li> <li>endReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> <li>minOverallParticipants AND</li> <li>maxOverallParticipantsn</li> </ul> <p>"
@@ -26065,6 +26526,71 @@ components:
           description: The timestamp when the layer was approved by all necessary participants
         layerStopReason:
           $ref: "#/components/schemas/ELayerStopReason"
+    CollaborationLayersAnalyticsKpiData:
+      type: object
+      description: "Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a @code{ collaboration_layer.stopped} or@code{ collaboration_layer.aborted} event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing."
+      properties:
+        $_type:
+          type: string
+          default: CollaborationLayersAnalyticsKpiData
+          enum:
+          - CollaborationLayersAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the data entry in the analytics KPI table
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        startTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) of when the layer initialization was started.
+        activationTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) of activation of the layer. Optional, may be @code{ null} if the layer was never activated."
+        stopTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) of when the layer was stopped.
+        activeDurationMs:
+          type: integer
+          format: int64
+          description: The duration (ms) between the time the layer was activated and stopped.
+        type:
+          $ref: "#/components/schemas/ELayerType"
+        stopReason:
+          $ref: "#/components/schemas/ELayerStopReason"
+        conversation:
+          $ref: "#/components/schemas/ConversationAnalyticsKpiData"
+        startingPerson:
+          $ref: "#/components/schemas/PersonAnalyticsKpiData"
+        stoppingPerson:
+          $ref: "#/components/schemas/PersonAnalyticsKpiData"
+        ownerPerson:
+          $ref: "#/components/schemas/PersonAnalyticsKpiData"
+    CollaborationLayersAnalyticsKpiDataResult:
+      type: object
+      description: "Paginated result containing `CollaborationLayersAnalyticsKpiData` entries, returned by`searchCollaborationLayers`."
+      properties:
+        $_type:
+          type: string
+          default: CollaborationLayersAnalyticsKpiDataResult
+          enum:
+          - CollaborationLayersAnalyticsKpiDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/CollaborationLayersAnalyticsKpiData"
     CollaborationLayersCountAnalyticsKpiFilterData:
       type: object
       description: "Data model object representing filters for the KPI calculation of the number used layers <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>layerTypes AND</li> <li>stopReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> </ul> <p>"
@@ -26724,6 +27250,35 @@ components:
           description: The account ID the event originated from
         conversation:
           $ref: "#/components/schemas/ConversationData"
+    ConversationAnalyticsKpiData:
+      type: object
+      description: Holds conversation-related fields that are shared by all analytics KPI data access entries.
+      properties:
+        $_type:
+          type: string
+          default: ConversationAnalyticsKpiData
+          enum:
+          - ConversationAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the conversation.
+        templateId:
+          type: string
+          description: The identifier of the conversation template used.
+        locale:
+          type: string
+          description: "The locale of the conversation (e.g., \"en\", \"de\")."
+        recipient:
+          $ref: "#/components/schemas/RecipientAnalyticsKpiData"
+        initialEngagementType:
+          $ref: "#/components/schemas/EInitialEngagementType"
+        initialEngagementUrl:
+          type: string
+          description: The URL from which the conversation was initiated.
+        contextPerson:
+          $ref: "#/components/schemas/PersonAnalyticsKpiData"
+        assignedAgent:
+          $ref: "#/components/schemas/PersonAnalyticsKpiData"
     ConversationCreatedEvent:
       type: object
       description: "An event triggered every time a conversation is created <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
@@ -27756,6 +28311,103 @@ components:
           $ref: "#/components/schemas/PersonData"
         requestedByParticipationType:
           $ref: "#/components/schemas/EConversationParticipationType"
+    ConversationMetricsAnalyticsKpiData:
+      type: object
+      description: "Aggregate metrics for a conversation, including collaboration layer counts and durations, call counts and durations, and message counts by sender type."
+      properties:
+        $_type:
+          type: string
+          default: ConversationMetricsAnalyticsKpiData
+          enum:
+          - ConversationMetricsAnalyticsKpiData
+        screenSharingCount:
+          type: integer
+          format: int32
+          description: The number of screen sharing sessions in the conversation.
+        screenSharingDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of screen sharing sessions in the conversation.
+        embeddedCobrowsingCount:
+          type: integer
+          format: int32
+          description: The number of embedded co-browsing sessions in the conversation.
+        embeddedCobrowsingDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of embedded co-browsing sessions in the conversation.
+        contextMigrationCobrowsingCount:
+          type: integer
+          format: int32
+          description: The number of context migration co-browsing sessions in the conversation.
+        contextMigrationCobrowsingDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of context migration co-browsing sessions in the conversation.
+        mobileCobrowsingCount:
+          type: integer
+          format: int32
+          description: Number of mobile co-browsing sessions in the conversation.
+        mobileCobrowsingDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of mobile co-browsing sessions in the conversation.
+        documentCobrowsingCount:
+          type: integer
+          format: int32
+          description: The number of document co-browsing sessions in the conversation.
+        documentCobrowsingDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of document co-browsing sessions in the conversation.
+        whiteboardCount:
+          type: integer
+          format: int32
+          description: The number of whiteboard sessions in the conversation.
+        whiteboardDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of whiteboard sessions in the conversation.
+        universalCobrowsingCount:
+          type: integer
+          format: int32
+          description: The number of universal co-browsing sessions in the conversation.
+        universalCobrowsingDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of universal co-browsing sessions in the conversation.
+        documentCameraSharingCount:
+          type: integer
+          format: int32
+          description: The number of document camera sharing sessions in the conversation.
+        documentCameraSharingDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of document camera sharing sessions in the conversation.
+        callsCount:
+          type: integer
+          format: int32
+          description: The number of calls in the conversation.
+        callsDurationMs:
+          type: integer
+          format: int64
+          description: The total duration (ms) of calls in the conversation.
+        systemMessageCount:
+          type: integer
+          format: int32
+          description: The number of system messages in the conversation.
+        botMessageCount:
+          type: integer
+          format: int32
+          description: The number of bot messages in the conversation.
+        agentMessageCount:
+          type: integer
+          format: int32
+          description: The number of agent messages in the conversation.
+        visitorMessageCount:
+          type: integer
+          format: int32
+          description: The number of visitor messages in the conversation.
     ConversationNewMessageEvent:
       type: object
       description: "Event emitted when a new message is sent. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: sender person ID</li> </ul>"
@@ -29471,6 +30123,73 @@ components:
           $ref: "#/components/schemas/EConversationEndReason"
         comment:
           type: string
+    ConversationsEndedAnalyticsKpiData:
+      type: object
+      description: "Represents a comprehensive summary of a conversation's entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by a@code{ conversation.ended} event, so there is exactly one entry per conversation."
+      properties:
+        $_type:
+          type: string
+          default: ConversationsEndedAnalyticsKpiData
+          enum:
+          - ConversationsEndedAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the data entry in the analytics KPI table
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) of when the conversation was created
+        onboardingTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) of when the conversation was onboarded. Optional, may be @code{ null} if the conversation was never onboarded."
+        firstQueuedTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) of when the conversation was queued for the first time. Optional, may be @code{ null} if the conversation was never queued."
+        firstActiveTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) of when the conversation became active for the first time. Optional, may be @code{ null} if the conversation was never active."
+        offboardingTimestamp:
+          type: integer
+          format: int64
+          description: "UTC timestamp (ms) of when the conversation was offboarded. Optional, may be @code{ null} if the conversation was never offboarded."
+        endTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) of when the conversation ended.
+        endReason:
+          $ref: "#/components/schemas/EConversationEndReason"
+        conversation:
+          $ref: "#/components/schemas/ConversationAnalyticsKpiData"
+        metrics:
+          $ref: "#/components/schemas/ConversationMetricsAnalyticsKpiData"
+    ConversationsEndedAnalyticsKpiDataResult:
+      type: object
+      description: "Paginated result containing `ConversationsEndedAnalyticsKpiData` entries, returned by`searchConversationsEnded`."
+      properties:
+        $_type:
+          type: string
+          default: ConversationsEndedAnalyticsKpiDataResult
+          enum:
+          - ConversationsEndedAnalyticsKpiDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/ConversationsEndedAnalyticsKpiData"
     ConversationsEndedCountAnalyticsKpiFilterData:
       type: object
       description: "Data model object representing filters for the KPI calculation of the number of ended conversations <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>conversationEndReasons AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>contextPersonMinRating AND</li> <li>contextPersonMaxRating</li> </ul> <p>"
@@ -32392,6 +33111,20 @@ components:
       - "RECIPIENT_ID: Allows filtering the whole dashboard by recipient agent persons, recipient agent teams, named areas, account IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
       - "ASSIGNED_AGENT_PERSON_ID: Allows filtering the whole dashboard by assigned agent person IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
       - "ASSIGNED_AGENT_TEAM_ID: Allows filtering the whole dashboard by assigned agent team IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+    EAnalyticsKpiDataQueryFilterField:
+      type: string
+      description: Fields available for filtering in an `AnalyticsKpiDataQueryFilter`.
+      enum:
+      - EVENT_TIMESTAMP
+      x-enum-descriptions:
+      - "EVENT_TIMESTAMP: The UTC timestamp of the analytics event, in milliseconds since epoch. Used to restrict query results to a specific time range."
+    EAnalyticsKpiDataQueryOrderByField:
+      type: string
+      description: Fields available for ordering in an `AnalyticsKpiDataQueryOrderBy`.
+      enum:
+      - EVENT_TIMESTAMP
+      x-enum-descriptions:
+      - "EVENT_TIMESTAMP: The UTC timestamp of the analytics event, in milliseconds since epoch."
     EAnalyticsKpiDisplayChart:
       type: string
       enum:
@@ -32424,6 +33157,8 @@ components:
       type: string
       enum:
       - MINUTE
+      - QUARTER_HOUR
+      - HALF_HOUR
       - HOUR
       - DAY
       - WEEK
@@ -32431,6 +33166,8 @@ components:
       - WHOLE_TIMEFRAME
       x-enum-descriptions:
       - "MINUTE: Minute."
+      - "QUARTER_HOUR: Quarter hour (15 minutes)."
+      - "HALF_HOUR: Half hour (30 minutes)."
       - "HOUR: Hour."
       - "DAY: Day."
       - "WEEK: Week."
@@ -32496,6 +33233,32 @@ components:
       - "MESSAGES_COUNT: KPI for the number of messages."
       - "COLLABORATION_LAYERS_COUNT: KPI for the number of collaboration layers."
       - "CALLS_COUNT: KPI for the number of calls."
+    EAnalyticsWaitingTimeOutcome:
+      type: string
+      description: "Defines the outcome of a waiting time entry, indicating whether the invitation was accepted or aborted."
+      enum:
+      - ACCEPTED
+      - ABORTED
+      x-enum-descriptions:
+      - "ACCEPTED: The invitation was accepted by an agent."
+      - "ABORTED: The invitation was aborted (e.g., revoked, unanswered, or superseded)."
+    EAnalyticsWaitingTimeType:
+      type: string
+      description: "Defines the context in which a waiting time occurred, based on the conversation state and the type of assignment or forwarding action."
+      enum:
+      - INITIALLY_QUEUED
+      - REBOARDING_QUEUED
+      - REQUEUED
+      - RECIPIENT_CHANGED
+      - AGENT_FORWARDING
+      - TEAM_FORWARDING
+      x-enum-descriptions:
+      - "INITIALLY_QUEUED: The conversation transitioned from ONBOARDING to QUEUED."
+      - "REBOARDING_QUEUED: The conversation transitioned from REBOARDING to QUEUED."
+      - "REQUEUED: The conversation transitioned from ACTIVE or UNASSIGNED to QUEUED."
+      - "RECIPIENT_CHANGED: The recipient of the active invitation was changed."
+      - "AGENT_FORWARDING: The conversation was forwarded to a specific agent."
+      - "TEAM_FORWARDING: The conversation was forwarded to a specific team."
     EAnalyticsWidgetOrderByField:
       type: string
       enum:
@@ -35044,6 +35807,7 @@ components:
       - CALL_SNAPSHOT
       - CONVERSATION_RECORDING
       - CO_BROWSING_DOWNLOAD
+      - BROADCAST
       x-enum-descriptions:
       - BOT
       - "EXTERNAL_MESSENGER: The file is being upload as a file message via an external channel"
@@ -35051,6 +35815,7 @@ components:
       - "CALL_SNAPSHOT: The file is a snapshot from a call"
       - "CONVERSATION_RECORDING: The file is the recording of a conversation"
       - "CO_BROWSING_DOWNLOAD: The file is being uploaded to the conversation from a website participants are co-browsing"
+      - "BROADCAST: The file is uploaded into a broadcast"
     EFrontend:
       type: string
       description: All the different Unblu conversation frontends users can interact with
@@ -38807,6 +39572,61 @@ components:
         value:
           type: integer
           format: int64
+    HandlingTimeAnalyticsKpiData:
+      type: object
+      description: "Records the duration that an assigned agent spends handling a conversation. Each entry is backed by a {conversation.participation.handling_time} event. A conversation may have multiple handling time entries if it is forwarded, pushed back to a queue, or handled by multiple agents over its lifecycle."
+      properties:
+        $_type:
+          type: string
+          default: HandlingTimeAnalyticsKpiData
+          enum:
+          - HandlingTimeAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the data entry in the analytics KPI table
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the agent's invitation was resolved and handling started.
+        resolutionTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the handling period concluded.
+        handlingTimeDurationMs:
+          type: integer
+          format: int64
+          description: Duration (ms) of the handling time between start and resolution.
+        resolutionType:
+          $ref: "#/components/schemas/EHandlingTimeTrigger"
+        conversation:
+          $ref: "#/components/schemas/ConversationAnalyticsKpiData"
+        metrics:
+          $ref: "#/components/schemas/ConversationMetricsAnalyticsKpiData"
+    HandlingTimeAnalyticsKpiDataResult:
+      type: object
+      description: Paginated result containing `HandlingTimeAnalyticsKpiData` entries returned by`searchHandlingTime`.
+      properties:
+        $_type:
+          type: string
+          default: HandlingTimeAnalyticsKpiDataResult
+          enum:
+          - HandlingTimeAnalyticsKpiDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/HandlingTimeAnalyticsKpiData"
     HasPasswordData:
       type: object
       properties:
@@ -39348,6 +40168,7 @@ components:
             $ref: "#/components/schemas/EPropertyOwnerType"
     InRangeTimestampOperator:
       type: object
+      description: "Timestamp operator that matches values within an inclusive range [minimum, maximum]. <p> Both {minimum} and {maximum} are UTC timestamps in milliseconds since epoch. A value matches if it is greater than or equal to {minimum} and less than or equal to {maximum}."
       required:
       - type
       properties:
@@ -39361,9 +40182,11 @@ components:
         minimum:
           type: integer
           format: int64
+          description: "Lower bound of the range (inclusive), as a UTC timestamp in milliseconds since epoch."
         maximum:
           type: integer
           format: int64
+          description: "Upper bound of the range (inclusive), as a UTC timestamp in milliseconds since epoch."
     InStringOperator:
       type: object
       required:
@@ -41169,6 +41992,67 @@ components:
         reason:
           type: string
           description: The reason the message was rejected. <p> Should be localized in the the language of the conversation the message belongs to.
+    MessagesAnalyticsKpiData:
+      type: object
+      description: Records the details and metadata of a message sent within a conversation. Each entry corresponds to a distinct message event.
+      properties:
+        $_type:
+          type: string
+          default: MessagesAnalyticsKpiData
+          enum:
+          - MessagesAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the data entry in the analytics KPI table
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        sendTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the message was sent from the client.
+        serverTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the message was received on the server.
+        sender:
+          $ref: "#/components/schemas/PersonAnalyticsKpiData"
+        messageId:
+          type: string
+          description: The unique identifier of the message.
+        characterCount:
+          type: integer
+          format: int32
+          description: The number of characters in the message.
+        type:
+          $ref: "#/components/schemas/EMessageType"
+        locale:
+          type: string
+          description: The message language as a locale representation. Null if not specified or not possible to detect automatically.
+        conversation:
+          $ref: "#/components/schemas/ConversationAnalyticsKpiData"
+    MessagesAnalyticsKpiDataResult:
+      type: object
+      description: Paginated result containing `MessagesAnalyticsKpiData` entries returned by `searchMessages`.
+      properties:
+        $_type:
+          type: string
+          default: MessagesAnalyticsKpiDataResult
+          enum:
+          - MessagesAnalyticsKpiDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/MessagesAnalyticsKpiData"
     MessagesCountAnalyticsKpiFilterData:
       type: object
       description: "Data model object representing filters for the KPI calculation of the number of messages <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>senderPersonTypes AND</li> <li>senderPersonIds AND</li> <li>senderPersonTeamIds AND</li> <li>messageLocales AND</li> <li>messageTypes AND</li> <li>minCharacterCount AND</li> <li>maxCharacterCount</li> </ul> <p>"
@@ -44142,6 +45026,41 @@ components:
         mapping:
           EQUALS: "#/components/schemas/EqualsPauseNotificationsStateOperator"
           NOT_EQUALS: "#/components/schemas/NotEqualsPauseNotificationsStateOperator"
+    PersonAnalyticsKpiData:
+      type: object
+      description: "Represents a person involved in a conversation, such as an agent, visitor, bot, or system actor."
+      properties:
+        $_type:
+          type: string
+          default: PersonAnalyticsKpiData
+          enum:
+          - PersonAnalyticsKpiData
+        type:
+          $ref: "#/components/schemas/EPersonType"
+        id:
+          type: string
+          description: The unique identifier of the person.
+        name:
+          type: string
+          description: The display name of the person.
+        rating:
+          type: number
+          format: float
+          description: "The rating this person gave to the conversation. Optional. @code{ null} if no rating was given."
+        labels:
+          type: array
+          description: The labels associated with the person.
+          items:
+            type: string
+        teamId:
+          type: string
+          description: "The identifier of the team the person belongs to. Optional. @code{ null} if the person is not an agent."
+        username:
+          type: string
+          description: "The username of the person. Optional, may be @code{ null}."
+        sourceId:
+          type: string
+          description: The external source identifier of the person.
     PersonCompoundSearchFilter:
       type: object
       required:
@@ -45921,6 +46840,23 @@ components:
           type: integer
           format: int32
           description: Number of notifications (i.e. unread messages) the recipient person has in total
+    RecipientAnalyticsKpiData:
+      type: object
+      description: "Represents the recipient of a conversation or invitation, such as an account, team, or named area."
+      properties:
+        $_type:
+          type: string
+          default: RecipientAnalyticsKpiData
+          enum:
+          - RecipientAnalyticsKpiData
+        type:
+          $ref: "#/components/schemas/EConversationRecipientType"
+        id:
+          type: string
+          description: The unique identifier of the recipient.
+        name:
+          type: string
+          description: The display name of the recipient.
     RecipientIdConversationHistorySearchFilter:
       type: object
       required:
@@ -46009,6 +46945,10 @@ components:
           type: integer
           format: int64
           description: "Retention interval of audit logs represented as number of seconds. Audit logs are deleted after the time set below, counting from when they were created."
+        retentionIntervalBroadcastSeconds:
+          type: integer
+          format: int64
+          description: "Retention interval of broadcasts represented as number of seconds. Broadcasts are deleted after the time set below, counting from when they were created."
     RecordedMinutesData:
       type: object
       properties:
@@ -48706,6 +49646,63 @@ components:
         mapping:
           ONLINE_STATE: "#/components/schemas/OnlineStateVisitorStateSearchFilter"
           PERSON_ID: "#/components/schemas/PersonIdVisitorStateSearchFilter"
+    WaitingTimeAnalyticsKpiData:
+      type: object
+      description: Records the duration between the moment a conversation assignment or forwarding invitation is created and when it is resolved (accepted or aborted). A conversation may have multiple waiting time entries if it is forwarded and reassigned multiple times during its lifecycle.
+      properties:
+        $_type:
+          type: string
+          default: WaitingTimeAnalyticsKpiData
+          enum:
+          - WaitingTimeAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the data entry in the analytics KPI table
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        startTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the waiting time started.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the waiting time ended.
+        waitingTimeDurationMs:
+          type: integer
+          format: int64
+          description: The duration (ms) between the start and end of the waiting time.
+        outcome:
+          $ref: "#/components/schemas/EAnalyticsWaitingTimeOutcome"
+        type:
+          $ref: "#/components/schemas/EAnalyticsWaitingTimeType"
+        target:
+          $ref: "#/components/schemas/RecipientAnalyticsKpiData"
+        conversation:
+          $ref: "#/components/schemas/ConversationAnalyticsKpiData"
+    WaitingTimeAnalyticsKpiDataResult:
+      type: object
+      description: Paginated result containing `WaitingTimeAnalyticsKpiData` entries returned by`searchWaitingTime`.
+      properties:
+        $_type:
+          type: string
+          default: WaitingTimeAnalyticsKpiDataResult
+          enum:
+          - WaitingTimeAnalyticsKpiDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/WaitingTimeAnalyticsKpiData"
     WebhookAuditEvent:
       type: object
       description: Event sent when a new audit entry is created in `PersistenceAuditListener`.
