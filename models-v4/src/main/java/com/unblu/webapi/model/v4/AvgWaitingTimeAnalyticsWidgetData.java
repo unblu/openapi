@@ -453,11 +453,12 @@ public class AvgWaitingTimeAnalyticsWidgetData implements AnalyticsWidgetData {
 	}
 
 	/**
-	 * Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+	 * Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap
+	 * with another widget. Mandatory.
 	 * 
 	 * @return columnSpan
 	 **/
-	@ApiModelProperty(value = "Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.")
+	@ApiModelProperty(value = "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.")
 	public Integer getColumnSpan() {
 		return columnSpan;
 	}
@@ -708,11 +709,11 @@ public class AvgWaitingTimeAnalyticsWidgetData implements AnalyticsWidgetData {
 	}
 
 	/**
-	 * Specifies how results are grouped for the average waiting time KPI.
+	 * Specifies how results are grouped for the average waiting time KPI. Only the first value of the list is used.
 	 * 
 	 * @return groupBy
 	 **/
-	@ApiModelProperty(value = "Specifies how results are grouped for the average waiting time KPI.")
+	@ApiModelProperty(value = "Specifies how results are grouped for the average waiting time KPI. Only the first value of the list is used.")
 	public List<EAvgWaitingTimeGroupBy> getGroupBy() {
 		return groupBy;
 	}

@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AgentInvitationCreatedEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	AgentInvitationCreatedEvent.JSON_PROPERTY_CREATOR_TYPE,
 	AgentInvitationCreatedEvent.JSON_PROPERTY_CREATOR_PERSON,
+	AgentInvitationCreatedEvent.JSON_PROPERTY_RESERVATION,
 	AgentInvitationCreatedEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	AgentInvitationCreatedEvent.JSON_PROPERTY_TARGET,
 	AgentInvitationCreatedEvent.JSON_PROPERTY_COMMENT,
@@ -111,6 +112,10 @@ public class AgentInvitationCreatedEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_CONTEXT_PERSON_INFO = "contextPersonInfo";
 	@JsonProperty(JSON_PROPERTY_CONTEXT_PERSON_INFO)
@@ -322,6 +327,25 @@ public class AgentInvitationCreatedEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public AgentInvitationCreatedEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public AgentInvitationCreatedEvent contextPersonInfo(ContextPersonInfo contextPersonInfo) {
 		this.contextPersonInfo = contextPersonInfo;
 		return this;
@@ -444,6 +468,7 @@ public class AgentInvitationCreatedEvent {
 				Objects.equals(this.creationTimestamp, agentInvitationCreatedEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, agentInvitationCreatedEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, agentInvitationCreatedEvent.creatorPerson) &&
+				Objects.equals(this.reservation, agentInvitationCreatedEvent.reservation) &&
 				Objects.equals(this.contextPersonInfo, agentInvitationCreatedEvent.contextPersonInfo) &&
 				Objects.equals(this.target, agentInvitationCreatedEvent.target) &&
 				Objects.equals(this.comment, agentInvitationCreatedEvent.comment) &&
@@ -453,7 +478,7 @@ public class AgentInvitationCreatedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, comment, joinHidden, links);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, contextPersonInfo, target, comment, joinHidden, links);
 	}
 
 	@Override
@@ -470,6 +495,7 @@ public class AgentInvitationCreatedEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");

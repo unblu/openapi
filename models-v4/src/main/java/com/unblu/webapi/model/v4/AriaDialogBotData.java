@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -39,7 +41,14 @@ import io.swagger.annotations.ApiModelProperty;
 	AriaDialogBotData.JSON_PROPERTY_RETRY_COUNT,
 	AriaDialogBotData.JSON_PROPERTY_RETRY_DELAY,
 	AriaDialogBotData.JSON_PROPERTY_TYPE,
-	AriaDialogBotData.JSON_PROPERTY_AGENTIC_FLOW_ID,
+	AriaDialogBotData.JSON_PROPERTY_BOT_INDICATOR_TYPE,
+	AriaDialogBotData.JSON_PROPERTY_THINKING_TEXTS,
+	AriaDialogBotData.JSON_PROPERTY_THINKING_INPUT_MODE,
+	AriaDialogBotData.JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS,
+	AriaDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
+	AriaDialogBotData.JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY,
+	AriaDialogBotData.JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL,
+	AriaDialogBotData.JSON_PROPERTY_AGENTIC_FLOW_DATA,
 	AriaDialogBotData.JSON_PROPERTY_ACTIVE,
 	AriaDialogBotData.JSON_PROPERTY_OUTBOUND_ENDPOINT,
 	AriaDialogBotData.JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS,
@@ -162,9 +171,37 @@ public class AriaDialogBotData implements DialogBotData {
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private EBotType type = EBotType.ARIA;
 
-	public static final String JSON_PROPERTY_AGENTIC_FLOW_ID = "agenticFlowId";
-	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_ID)
-	private String agenticFlowId;
+	public static final String JSON_PROPERTY_BOT_INDICATOR_TYPE = "botIndicatorType";
+	@JsonProperty(JSON_PROPERTY_BOT_INDICATOR_TYPE)
+	private EBotIndicatorType botIndicatorType;
+
+	public static final String JSON_PROPERTY_THINKING_TEXTS = "thinkingTexts";
+	@JsonProperty(JSON_PROPERTY_THINKING_TEXTS)
+	private List<BotThinkingTextData> thinkingTexts = null;
+
+	public static final String JSON_PROPERTY_THINKING_INPUT_MODE = "thinkingInputMode";
+	@JsonProperty(JSON_PROPERTY_THINKING_INPUT_MODE)
+	private EThinkingInputMode thinkingInputMode;
+
+	public static final String JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS = "randomizeThinkingTexts";
+	@JsonProperty(JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS)
+	private Boolean randomizeThinkingTexts;
+
+	public static final String JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME = "maxThinkingIndicatorTime";
+	@JsonProperty(JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME)
+	private Integer maxThinkingIndicatorTime;
+
+	public static final String JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY = "autoStartThinkingIndicatorDelay";
+	@JsonProperty(JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY)
+	private Integer autoStartThinkingIndicatorDelay;
+
+	public static final String JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL = "thinkingIndicatorTextCycleInterval";
+	@JsonProperty(JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL)
+	private Integer thinkingIndicatorTextCycleInterval;
+
+	public static final String JSON_PROPERTY_AGENTIC_FLOW_DATA = "agenticFlowData";
+	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_DATA)
+	private ExpandableField<AriaAgenticFlowDataContent> agenticFlowData = null;
 
 	public static final String JSON_PROPERTY_ACTIVE = "active";
 	@JsonProperty(JSON_PROPERTY_ACTIVE)
@@ -579,23 +616,168 @@ public class AriaDialogBotData implements DialogBotData {
 		this.type = type;
 	}
 
-	public AriaDialogBotData agenticFlowId(String agenticFlowId) {
-		this.agenticFlowId = agenticFlowId;
+	public AriaDialogBotData botIndicatorType(EBotIndicatorType botIndicatorType) {
+		this.botIndicatorType = botIndicatorType;
 		return this;
 	}
 
 	/**
-	 * Aria agentic flow ID. Maximum length: 36 characters
+	 * Get botIndicatorType
 	 * 
-	 * @return agenticFlowId
+	 * @return botIndicatorType
 	 **/
-	@ApiModelProperty(value = "Aria agentic flow ID. Maximum length: 36 characters")
-	public String getAgenticFlowId() {
-		return agenticFlowId;
+	@ApiModelProperty(value = "")
+	public EBotIndicatorType getBotIndicatorType() {
+		return botIndicatorType;
 	}
 
-	public void setAgenticFlowId(String agenticFlowId) {
-		this.agenticFlowId = agenticFlowId;
+	public void setBotIndicatorType(EBotIndicatorType botIndicatorType) {
+		this.botIndicatorType = botIndicatorType;
+	}
+
+	public AriaDialogBotData thinkingTexts(List<BotThinkingTextData> thinkingTexts) {
+		this.thinkingTexts = thinkingTexts;
+		return this;
+	}
+
+	public AriaDialogBotData addThinkingTextsItem(BotThinkingTextData thinkingTextsItem) {
+		if (this.thinkingTexts == null) {
+			this.thinkingTexts = new ArrayList<>();
+		}
+		this.thinkingTexts.add(thinkingTextsItem);
+		return this;
+	}
+
+	/**
+	 * Configurable thinking indicator texts for the bot, ordered by display sequence.
+	 * 
+	 * @return thinkingTexts
+	 **/
+	@ApiModelProperty(value = "Configurable thinking indicator texts for the bot, ordered by display sequence.")
+	public List<BotThinkingTextData> getThinkingTexts() {
+		return thinkingTexts;
+	}
+
+	public void setThinkingTexts(List<BotThinkingTextData> thinkingTexts) {
+		this.thinkingTexts = thinkingTexts;
+	}
+
+	public AriaDialogBotData thinkingInputMode(EThinkingInputMode thinkingInputMode) {
+		this.thinkingInputMode = thinkingInputMode;
+		return this;
+	}
+
+	/**
+	 * Get thinkingInputMode
+	 * 
+	 * @return thinkingInputMode
+	 **/
+	@ApiModelProperty(value = "")
+	public EThinkingInputMode getThinkingInputMode() {
+		return thinkingInputMode;
+	}
+
+	public void setThinkingInputMode(EThinkingInputMode thinkingInputMode) {
+		this.thinkingInputMode = thinkingInputMode;
+	}
+
+	public AriaDialogBotData randomizeThinkingTexts(Boolean randomizeThinkingTexts) {
+		this.randomizeThinkingTexts = randomizeThinkingTexts;
+		return this;
+	}
+
+	/**
+	 * If true, the configured thinking texts are shown in random order. If false, they are shown in the order they were defined.
+	 * 
+	 * @return randomizeThinkingTexts
+	 **/
+	@ApiModelProperty(value = "If true, the configured thinking texts are shown in random order. If false, they are shown in the order they were defined.")
+	public Boolean isRandomizeThinkingTexts() {
+		return randomizeThinkingTexts;
+	}
+
+	public void setRandomizeThinkingTexts(Boolean randomizeThinkingTexts) {
+		this.randomizeThinkingTexts = randomizeThinkingTexts;
+	}
+
+	public AriaDialogBotData maxThinkingIndicatorTime(Integer maxThinkingIndicatorTime) {
+		this.maxThinkingIndicatorTime = maxThinkingIndicatorTime;
+		return this;
+	}
+
+	/**
+	 * The maximum delay, in milliseconds, before the thinking indicator is automatically hidden. The thinking indicator is also dismissed when the bot sends a
+	 * message. Optional; if omitted the system default is used.
+	 * 
+	 * @return maxThinkingIndicatorTime
+	 **/
+	@ApiModelProperty(value = "The maximum delay, in milliseconds, before the thinking indicator is automatically hidden. The thinking indicator is also dismissed when the bot sends a message. Optional; if omitted the system default is used.")
+	public Integer getMaxThinkingIndicatorTime() {
+		return maxThinkingIndicatorTime;
+	}
+
+	public void setMaxThinkingIndicatorTime(Integer maxThinkingIndicatorTime) {
+		this.maxThinkingIndicatorTime = maxThinkingIndicatorTime;
+	}
+
+	public AriaDialogBotData autoStartThinkingIndicatorDelay(Integer autoStartThinkingIndicatorDelay) {
+		this.autoStartThinkingIndicatorDelay = autoStartThinkingIndicatorDelay;
+		return this;
+	}
+
+	/**
+	 * The delay, in milliseconds, before the thinking indicator is automatically shown after a visitor message. If the bot responds before this delay, no thinking
+	 * indicator is displayed. Set to 0 to show the indicator immediately. Optional; if omitted the system default is used.
+	 * 
+	 * @return autoStartThinkingIndicatorDelay
+	 **/
+	@ApiModelProperty(value = "The delay, in milliseconds, before the thinking indicator is automatically shown after a visitor message. If the bot responds before this delay, no thinking indicator is displayed. Set to 0 to show the indicator immediately. Optional; if omitted the system default is used.")
+	public Integer getAutoStartThinkingIndicatorDelay() {
+		return autoStartThinkingIndicatorDelay;
+	}
+
+	public void setAutoStartThinkingIndicatorDelay(Integer autoStartThinkingIndicatorDelay) {
+		this.autoStartThinkingIndicatorDelay = autoStartThinkingIndicatorDelay;
+	}
+
+	public AriaDialogBotData thinkingIndicatorTextCycleInterval(Integer thinkingIndicatorTextCycleInterval) {
+		this.thinkingIndicatorTextCycleInterval = thinkingIndicatorTextCycleInterval;
+		return this;
+	}
+
+	/**
+	 * The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if
+	 * omitted the system default is used.
+	 * 
+	 * @return thinkingIndicatorTextCycleInterval
+	 **/
+	@ApiModelProperty(value = "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used.")
+	public Integer getThinkingIndicatorTextCycleInterval() {
+		return thinkingIndicatorTextCycleInterval;
+	}
+
+	public void setThinkingIndicatorTextCycleInterval(Integer thinkingIndicatorTextCycleInterval) {
+		this.thinkingIndicatorTextCycleInterval = thinkingIndicatorTextCycleInterval;
+	}
+
+	public AriaDialogBotData agenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
+		return this;
+	}
+
+	/**
+	 * Aria agentic flow ID. Add @code{ ?expand&#x3D;agenticFlowData} to the request to replace this ID with the full flow content in &#x60;agenticFlowData&#x60;.
+	 * Maximum length: 36 characters.
+	 * 
+	 * @return agenticFlowData
+	 **/
+	@ApiModelProperty(value = "Aria agentic flow ID. Add @code{ ?expand=agenticFlowData} to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters.")
+	public ExpandableField<AriaAgenticFlowDataContent> getAgenticFlowData() {
+		return agenticFlowData;
+	}
+
+	public void setAgenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
 	}
 
 	public AriaDialogBotData active(Boolean active) {
@@ -749,7 +931,14 @@ public class AriaDialogBotData implements DialogBotData {
 				Objects.equals(this.retryCount, ariaDialogBotData.retryCount) &&
 				Objects.equals(this.retryDelay, ariaDialogBotData.retryDelay) &&
 				Objects.equals(this.type, ariaDialogBotData.type) &&
-				Objects.equals(this.agenticFlowId, ariaDialogBotData.agenticFlowId) &&
+				Objects.equals(this.botIndicatorType, ariaDialogBotData.botIndicatorType) &&
+				Objects.equals(this.thinkingTexts, ariaDialogBotData.thinkingTexts) &&
+				Objects.equals(this.thinkingInputMode, ariaDialogBotData.thinkingInputMode) &&
+				Objects.equals(this.randomizeThinkingTexts, ariaDialogBotData.randomizeThinkingTexts) &&
+				Objects.equals(this.maxThinkingIndicatorTime, ariaDialogBotData.maxThinkingIndicatorTime) &&
+				Objects.equals(this.autoStartThinkingIndicatorDelay, ariaDialogBotData.autoStartThinkingIndicatorDelay) &&
+				Objects.equals(this.thinkingIndicatorTextCycleInterval, ariaDialogBotData.thinkingIndicatorTextCycleInterval) &&
+				Objects.equals(this.agenticFlowData, ariaDialogBotData.agenticFlowData) &&
 				Objects.equals(this.active, ariaDialogBotData.active) &&
 				Objects.equals(this.outboundEndpoint, ariaDialogBotData.outboundEndpoint) &&
 				Objects.equals(this.outboundTimeoutMillis, ariaDialogBotData.outboundTimeoutMillis) &&
@@ -760,7 +949,7 @@ public class AriaDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, agenticFlowId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion, ariaDialogBotType, externalConfiguration);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, agenticFlowData, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion, ariaDialogBotType, externalConfiguration);
 	}
 
 	@Override
@@ -787,7 +976,14 @@ public class AriaDialogBotData implements DialogBotData {
 		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
 		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
-		sb.append("    agenticFlowId: ").append(toIndentedString(agenticFlowId)).append("\n");
+		sb.append("    botIndicatorType: ").append(toIndentedString(botIndicatorType)).append("\n");
+		sb.append("    thinkingTexts: ").append(toIndentedString(thinkingTexts)).append("\n");
+		sb.append("    thinkingInputMode: ").append(toIndentedString(thinkingInputMode)).append("\n");
+		sb.append("    randomizeThinkingTexts: ").append(toIndentedString(randomizeThinkingTexts)).append("\n");
+		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");
+		sb.append("    autoStartThinkingIndicatorDelay: ").append(toIndentedString(autoStartThinkingIndicatorDelay)).append("\n");
+		sb.append("    thinkingIndicatorTextCycleInterval: ").append(toIndentedString(thinkingIndicatorTextCycleInterval)).append("\n");
+		sb.append("    agenticFlowData: ").append(toIndentedString(agenticFlowData)).append("\n");
 		sb.append("    active: ").append(toIndentedString(active)).append("\n");
 		sb.append("    outboundEndpoint: ").append(toIndentedString(outboundEndpoint)).append("\n");
 		sb.append("    outboundTimeoutMillis: ").append(toIndentedString(outboundTimeoutMillis)).append("\n");

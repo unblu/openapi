@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -39,6 +41,13 @@ import io.swagger.annotations.ApiModelProperty;
 	CopilotDialogBotData.JSON_PROPERTY_RETRY_COUNT,
 	CopilotDialogBotData.JSON_PROPERTY_RETRY_DELAY,
 	CopilotDialogBotData.JSON_PROPERTY_TYPE,
+	CopilotDialogBotData.JSON_PROPERTY_BOT_INDICATOR_TYPE,
+	CopilotDialogBotData.JSON_PROPERTY_THINKING_TEXTS,
+	CopilotDialogBotData.JSON_PROPERTY_THINKING_INPUT_MODE,
+	CopilotDialogBotData.JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS,
+	CopilotDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
+	CopilotDialogBotData.JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY,
+	CopilotDialogBotData.JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL,
 	CopilotDialogBotData.JSON_PROPERTY_AUTH_TOKEN,
 	CopilotDialogBotData.JSON_PROPERTY_COPILOT_ID,
 	CopilotDialogBotData.JSON_PROPERTY_COPILOT_ENVIRONMENT_ID,
@@ -161,6 +170,34 @@ public class CopilotDialogBotData implements DialogBotData {
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private EBotType type = EBotType.COPILOT;
+
+	public static final String JSON_PROPERTY_BOT_INDICATOR_TYPE = "botIndicatorType";
+	@JsonProperty(JSON_PROPERTY_BOT_INDICATOR_TYPE)
+	private EBotIndicatorType botIndicatorType;
+
+	public static final String JSON_PROPERTY_THINKING_TEXTS = "thinkingTexts";
+	@JsonProperty(JSON_PROPERTY_THINKING_TEXTS)
+	private List<BotThinkingTextData> thinkingTexts = null;
+
+	public static final String JSON_PROPERTY_THINKING_INPUT_MODE = "thinkingInputMode";
+	@JsonProperty(JSON_PROPERTY_THINKING_INPUT_MODE)
+	private EThinkingInputMode thinkingInputMode;
+
+	public static final String JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS = "randomizeThinkingTexts";
+	@JsonProperty(JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS)
+	private Boolean randomizeThinkingTexts;
+
+	public static final String JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME = "maxThinkingIndicatorTime";
+	@JsonProperty(JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME)
+	private Integer maxThinkingIndicatorTime;
+
+	public static final String JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY = "autoStartThinkingIndicatorDelay";
+	@JsonProperty(JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY)
+	private Integer autoStartThinkingIndicatorDelay;
+
+	public static final String JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL = "thinkingIndicatorTextCycleInterval";
+	@JsonProperty(JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL)
+	private Integer thinkingIndicatorTextCycleInterval;
 
 	public static final String JSON_PROPERTY_AUTH_TOKEN = "authToken";
 	@JsonProperty(JSON_PROPERTY_AUTH_TOKEN)
@@ -579,6 +616,150 @@ public class CopilotDialogBotData implements DialogBotData {
 		this.type = type;
 	}
 
+	public CopilotDialogBotData botIndicatorType(EBotIndicatorType botIndicatorType) {
+		this.botIndicatorType = botIndicatorType;
+		return this;
+	}
+
+	/**
+	 * Get botIndicatorType
+	 * 
+	 * @return botIndicatorType
+	 **/
+	@ApiModelProperty(value = "")
+	public EBotIndicatorType getBotIndicatorType() {
+		return botIndicatorType;
+	}
+
+	public void setBotIndicatorType(EBotIndicatorType botIndicatorType) {
+		this.botIndicatorType = botIndicatorType;
+	}
+
+	public CopilotDialogBotData thinkingTexts(List<BotThinkingTextData> thinkingTexts) {
+		this.thinkingTexts = thinkingTexts;
+		return this;
+	}
+
+	public CopilotDialogBotData addThinkingTextsItem(BotThinkingTextData thinkingTextsItem) {
+		if (this.thinkingTexts == null) {
+			this.thinkingTexts = new ArrayList<>();
+		}
+		this.thinkingTexts.add(thinkingTextsItem);
+		return this;
+	}
+
+	/**
+	 * Configurable thinking indicator texts for the bot, ordered by display sequence.
+	 * 
+	 * @return thinkingTexts
+	 **/
+	@ApiModelProperty(value = "Configurable thinking indicator texts for the bot, ordered by display sequence.")
+	public List<BotThinkingTextData> getThinkingTexts() {
+		return thinkingTexts;
+	}
+
+	public void setThinkingTexts(List<BotThinkingTextData> thinkingTexts) {
+		this.thinkingTexts = thinkingTexts;
+	}
+
+	public CopilotDialogBotData thinkingInputMode(EThinkingInputMode thinkingInputMode) {
+		this.thinkingInputMode = thinkingInputMode;
+		return this;
+	}
+
+	/**
+	 * Get thinkingInputMode
+	 * 
+	 * @return thinkingInputMode
+	 **/
+	@ApiModelProperty(value = "")
+	public EThinkingInputMode getThinkingInputMode() {
+		return thinkingInputMode;
+	}
+
+	public void setThinkingInputMode(EThinkingInputMode thinkingInputMode) {
+		this.thinkingInputMode = thinkingInputMode;
+	}
+
+	public CopilotDialogBotData randomizeThinkingTexts(Boolean randomizeThinkingTexts) {
+		this.randomizeThinkingTexts = randomizeThinkingTexts;
+		return this;
+	}
+
+	/**
+	 * If true, the configured thinking texts are shown in random order. If false, they are shown in the order they were defined.
+	 * 
+	 * @return randomizeThinkingTexts
+	 **/
+	@ApiModelProperty(value = "If true, the configured thinking texts are shown in random order. If false, they are shown in the order they were defined.")
+	public Boolean isRandomizeThinkingTexts() {
+		return randomizeThinkingTexts;
+	}
+
+	public void setRandomizeThinkingTexts(Boolean randomizeThinkingTexts) {
+		this.randomizeThinkingTexts = randomizeThinkingTexts;
+	}
+
+	public CopilotDialogBotData maxThinkingIndicatorTime(Integer maxThinkingIndicatorTime) {
+		this.maxThinkingIndicatorTime = maxThinkingIndicatorTime;
+		return this;
+	}
+
+	/**
+	 * The maximum delay, in milliseconds, before the thinking indicator is automatically hidden. The thinking indicator is also dismissed when the bot sends a
+	 * message. Optional; if omitted the system default is used.
+	 * 
+	 * @return maxThinkingIndicatorTime
+	 **/
+	@ApiModelProperty(value = "The maximum delay, in milliseconds, before the thinking indicator is automatically hidden. The thinking indicator is also dismissed when the bot sends a message. Optional; if omitted the system default is used.")
+	public Integer getMaxThinkingIndicatorTime() {
+		return maxThinkingIndicatorTime;
+	}
+
+	public void setMaxThinkingIndicatorTime(Integer maxThinkingIndicatorTime) {
+		this.maxThinkingIndicatorTime = maxThinkingIndicatorTime;
+	}
+
+	public CopilotDialogBotData autoStartThinkingIndicatorDelay(Integer autoStartThinkingIndicatorDelay) {
+		this.autoStartThinkingIndicatorDelay = autoStartThinkingIndicatorDelay;
+		return this;
+	}
+
+	/**
+	 * The delay, in milliseconds, before the thinking indicator is automatically shown after a visitor message. If the bot responds before this delay, no thinking
+	 * indicator is displayed. Set to 0 to show the indicator immediately. Optional; if omitted the system default is used.
+	 * 
+	 * @return autoStartThinkingIndicatorDelay
+	 **/
+	@ApiModelProperty(value = "The delay, in milliseconds, before the thinking indicator is automatically shown after a visitor message. If the bot responds before this delay, no thinking indicator is displayed. Set to 0 to show the indicator immediately. Optional; if omitted the system default is used.")
+	public Integer getAutoStartThinkingIndicatorDelay() {
+		return autoStartThinkingIndicatorDelay;
+	}
+
+	public void setAutoStartThinkingIndicatorDelay(Integer autoStartThinkingIndicatorDelay) {
+		this.autoStartThinkingIndicatorDelay = autoStartThinkingIndicatorDelay;
+	}
+
+	public CopilotDialogBotData thinkingIndicatorTextCycleInterval(Integer thinkingIndicatorTextCycleInterval) {
+		this.thinkingIndicatorTextCycleInterval = thinkingIndicatorTextCycleInterval;
+		return this;
+	}
+
+	/**
+	 * The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if
+	 * omitted the system default is used.
+	 * 
+	 * @return thinkingIndicatorTextCycleInterval
+	 **/
+	@ApiModelProperty(value = "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used.")
+	public Integer getThinkingIndicatorTextCycleInterval() {
+		return thinkingIndicatorTextCycleInterval;
+	}
+
+	public void setThinkingIndicatorTextCycleInterval(Integer thinkingIndicatorTextCycleInterval) {
+		this.thinkingIndicatorTextCycleInterval = thinkingIndicatorTextCycleInterval;
+	}
+
 	public CopilotDialogBotData authToken(String authToken) {
 		this.authToken = authToken;
 		return this;
@@ -749,6 +930,13 @@ public class CopilotDialogBotData implements DialogBotData {
 				Objects.equals(this.retryCount, copilotDialogBotData.retryCount) &&
 				Objects.equals(this.retryDelay, copilotDialogBotData.retryDelay) &&
 				Objects.equals(this.type, copilotDialogBotData.type) &&
+				Objects.equals(this.botIndicatorType, copilotDialogBotData.botIndicatorType) &&
+				Objects.equals(this.thinkingTexts, copilotDialogBotData.thinkingTexts) &&
+				Objects.equals(this.thinkingInputMode, copilotDialogBotData.thinkingInputMode) &&
+				Objects.equals(this.randomizeThinkingTexts, copilotDialogBotData.randomizeThinkingTexts) &&
+				Objects.equals(this.maxThinkingIndicatorTime, copilotDialogBotData.maxThinkingIndicatorTime) &&
+				Objects.equals(this.autoStartThinkingIndicatorDelay, copilotDialogBotData.autoStartThinkingIndicatorDelay) &&
+				Objects.equals(this.thinkingIndicatorTextCycleInterval, copilotDialogBotData.thinkingIndicatorTextCycleInterval) &&
 				Objects.equals(this.authToken, copilotDialogBotData.authToken) &&
 				Objects.equals(this.copilotId, copilotDialogBotData.copilotId) &&
 				Objects.equals(this.copilotEnvironmentId, copilotDialogBotData.copilotEnvironmentId) &&
@@ -760,7 +948,7 @@ public class CopilotDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
 	}
 
 	@Override
@@ -787,6 +975,13 @@ public class CopilotDialogBotData implements DialogBotData {
 		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
 		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    botIndicatorType: ").append(toIndentedString(botIndicatorType)).append("\n");
+		sb.append("    thinkingTexts: ").append(toIndentedString(thinkingTexts)).append("\n");
+		sb.append("    thinkingInputMode: ").append(toIndentedString(thinkingInputMode)).append("\n");
+		sb.append("    randomizeThinkingTexts: ").append(toIndentedString(randomizeThinkingTexts)).append("\n");
+		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");
+		sb.append("    autoStartThinkingIndicatorDelay: ").append(toIndentedString(autoStartThinkingIndicatorDelay)).append("\n");
+		sb.append("    thinkingIndicatorTextCycleInterval: ").append(toIndentedString(thinkingIndicatorTextCycleInterval)).append("\n");
 		sb.append("    authToken: ").append(toIndentedString(authToken)).append("\n");
 		sb.append("    copilotId: ").append(toIndentedString(copilotId)).append("\n");
 		sb.append("    copilotEnvironmentId: ").append(toIndentedString(copilotEnvironmentId)).append("\n");

@@ -40,6 +40,16 @@ public enum EBranchDeviceType {
 	EXTERNAL_APPLICATION("EXTERNAL_APPLICATION"),
 
 	/**
+	 * DOOR_OPENER
+	 */
+	DOOR_OPENER("DOOR_OPENER"),
+
+	/**
+	 * STATUS_LAMP
+	 */
+	STATUS_LAMP("STATUS_LAMP"),
+
+	/**
 	 * OTHER
 	 */
 	OTHER("OTHER");

@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_CREATOR_TYPE,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_CREATOR_PERSON,
+	AssignmentRequestUnansweredEvent.JSON_PROPERTY_RESERVATION,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_TARGET,
 	AssignmentRequestUnansweredEvent.JSON_PROPERTY_TARGET_CHANGE,
@@ -111,6 +112,10 @@ public class AssignmentRequestUnansweredEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_CONTEXT_PERSON_INFO = "contextPersonInfo";
 	@JsonProperty(JSON_PROPERTY_CONTEXT_PERSON_INFO)
@@ -322,6 +327,25 @@ public class AssignmentRequestUnansweredEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public AssignmentRequestUnansweredEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public AssignmentRequestUnansweredEvent contextPersonInfo(ContextPersonInfo contextPersonInfo) {
 		this.contextPersonInfo = contextPersonInfo;
 		return this;
@@ -445,6 +469,7 @@ public class AssignmentRequestUnansweredEvent {
 				Objects.equals(this.creationTimestamp, assignmentRequestUnansweredEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, assignmentRequestUnansweredEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, assignmentRequestUnansweredEvent.creatorPerson) &&
+				Objects.equals(this.reservation, assignmentRequestUnansweredEvent.reservation) &&
 				Objects.equals(this.contextPersonInfo, assignmentRequestUnansweredEvent.contextPersonInfo) &&
 				Objects.equals(this.target, assignmentRequestUnansweredEvent.target) &&
 				Objects.equals(this.targetChange, assignmentRequestUnansweredEvent.targetChange) &&
@@ -454,7 +479,7 @@ public class AssignmentRequestUnansweredEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, targetChange, assignmentRequestType, links);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, contextPersonInfo, target, targetChange, assignmentRequestType, links);
 	}
 
 	@Override
@@ -471,6 +496,7 @@ public class AssignmentRequestUnansweredEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
 		sb.append("    targetChange: ").append(toIndentedString(targetChange)).append("\n");

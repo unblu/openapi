@@ -22,9 +22,9 @@ import io.swagger.annotations.ApiModelProperty;
  * &lt;li&gt;assignedAgentPersonIds AND&lt;/li&gt; &lt;li&gt;assignedAgentTeamIds AND&lt;/li&gt; &lt;li&gt;startingPersonIds AND&lt;/li&gt;
  * &lt;li&gt;startingPersonTeamIds AND&lt;/li&gt; &lt;li&gt;callTypes AND&lt;/li&gt; &lt;li&gt;endReasons AND&lt;/li&gt; &lt;li&gt;minActiveDuration
  * AND&lt;/li&gt; &lt;li&gt;maxActiveDuration&lt;/li&gt; &lt;li&gt;minOverallParticipants AND&lt;/li&gt; &lt;li&gt;maxOverallParticipantsn&lt;/li&gt;
- * &lt;/ul&gt; &lt;p&gt;
+ * &lt;/ul&gt;
  */
-@ApiModel(description = "Data model object representing filters for the KPI calculation of the number of calls <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>callTypes AND</li> <li>endReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> <li>minOverallParticipants AND</li> <li>maxOverallParticipantsn</li> </ul> <p>")
+@ApiModel(description = "Data model object representing filters for the KPI calculation of the number of calls <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>callTypes AND</li> <li>endReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> <li>minOverallParticipants AND</li> <li>maxOverallParticipantsn</li> </ul>")
 
 @JsonPropertyOrder({
 	CallsCountAnalyticsKpiFilterData.JSON_PROPERTY_$_TYPE,

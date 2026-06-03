@@ -21,9 +21,9 @@ import io.swagger.annotations.ApiModelProperty;
  * &lt;li&gt;initialEngagementTypes AND&lt;/li&gt; &lt;li&gt;(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)
  * AND&lt;/li&gt; &lt;li&gt;waitingTimeOutcomes AND&lt;/li&gt; &lt;li&gt;waitingTimeTypes AND&lt;/li&gt; &lt;li&gt;(invitationAgentIds OR invitationTeamIds OR
  * invitationNamedAreaIds OR invitationAccountId) AND&lt;/li&gt; &lt;li&gt;invitationAcceptingAgentPersonIds AND&lt;/li&gt;
- * &lt;li&gt;invitationAcceptingAgentTeamIds&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;
+ * &lt;li&gt;invitationAcceptingAgentTeamIds&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Data model object representing filters for the KPI calculation of average waiting time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>waitingTimeOutcomes AND</li> <li>waitingTimeTypes AND</li> <li>(invitationAgentIds OR invitationTeamIds OR invitationNamedAreaIds OR invitationAccountId) AND</li> <li>invitationAcceptingAgentPersonIds AND</li> <li>invitationAcceptingAgentTeamIds</li> </ul> <p>")
+@ApiModel(description = "Data model object representing filters for the KPI calculation of average waiting time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>waitingTimeOutcomes AND</li> <li>waitingTimeTypes AND</li> <li>(invitationAgentIds OR invitationTeamIds OR invitationNamedAreaIds OR invitationAccountId) AND</li> <li>invitationAcceptingAgentPersonIds AND</li> <li>invitationAcceptingAgentTeamIds</li> </ul>")
 
 @JsonPropertyOrder({
 	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_$_TYPE,

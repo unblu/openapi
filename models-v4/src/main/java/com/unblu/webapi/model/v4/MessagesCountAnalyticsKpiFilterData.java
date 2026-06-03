@@ -21,9 +21,9 @@ import io.swagger.annotations.ApiModelProperty;
  * &lt;li&gt;initialEngagementTypes AND&lt;/li&gt; &lt;li&gt;(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)&lt;/li&gt;
  * &lt;li&gt;assignedAgentPersonIds AND&lt;/li&gt; &lt;li&gt;assignedAgentTeamIds AND&lt;/li&gt; &lt;li&gt;senderPersonTypes AND&lt;/li&gt;
  * &lt;li&gt;senderPersonIds AND&lt;/li&gt; &lt;li&gt;senderPersonTeamIds AND&lt;/li&gt; &lt;li&gt;messageLocales AND&lt;/li&gt; &lt;li&gt;messageTypes
- * AND&lt;/li&gt; &lt;li&gt;minCharacterCount AND&lt;/li&gt; &lt;li&gt;maxCharacterCount&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;
+ * AND&lt;/li&gt; &lt;li&gt;minCharacterCount AND&lt;/li&gt; &lt;li&gt;maxCharacterCount&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Data model object representing filters for the KPI calculation of the number of messages <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>senderPersonTypes AND</li> <li>senderPersonIds AND</li> <li>senderPersonTeamIds AND</li> <li>messageLocales AND</li> <li>messageTypes AND</li> <li>minCharacterCount AND</li> <li>maxCharacterCount</li> </ul> <p>")
+@ApiModel(description = "Data model object representing filters for the KPI calculation of the number of messages <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>senderPersonTypes AND</li> <li>senderPersonIds AND</li> <li>senderPersonTeamIds AND</li> <li>messageLocales AND</li> <li>messageTypes AND</li> <li>minCharacterCount AND</li> <li>maxCharacterCount</li> </ul>")
 
 @JsonPropertyOrder({
 	MessagesCountAnalyticsKpiFilterData.JSON_PROPERTY_$_TYPE,

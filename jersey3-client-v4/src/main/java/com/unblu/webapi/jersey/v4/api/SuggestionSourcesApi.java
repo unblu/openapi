@@ -10,6 +10,7 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.PingResponse;
 import com.unblu.webapi.model.v4.SuggestionSourceData;
 import com.unblu.webapi.model.v4.SuggestionSourceQuery;
@@ -40,21 +41,23 @@ public class SuggestionSourcesApi {
 	 * create Creates a new suggestion source&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData The suggestion source to create. (required)
+	 * @param expand (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
-	public SuggestionSourceData suggestionSourcesCreate(SuggestionSourceData suggestionSourceData) throws ApiException {
-		return suggestionSourcesCreateWithHttpInfo(suggestionSourceData).getData();
+	public SuggestionSourceData suggestionSourcesCreate(SuggestionSourceData suggestionSourceData, List<ExpandFields> expand) throws ApiException {
+		return suggestionSourcesCreateWithHttpInfo(suggestionSourceData, expand).getData();
 	}
 
 	/**
 	 * create Creates a new suggestion source&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData The suggestion source to create. (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<SuggestionSourceData> suggestionSourcesCreateWithHttpInfo(SuggestionSourceData suggestionSourceData) throws ApiException {
+	public ApiResponse<SuggestionSourceData> suggestionSourcesCreateWithHttpInfo(SuggestionSourceData suggestionSourceData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = suggestionSourceData;
 
 		// verify the required parameter 'suggestionSourceData' is set
@@ -69,6 +72,8 @@ public class SuggestionSourcesApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -140,21 +145,23 @@ public class SuggestionSourcesApi {
 	 * getByName Searches for an existing suggestion source with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the suggestion source. (optional)
+	 * @param expand (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
-	public SuggestionSourceData suggestionSourcesGetByName(String name) throws ApiException {
-		return suggestionSourcesGetByNameWithHttpInfo(name).getData();
+	public SuggestionSourceData suggestionSourcesGetByName(String name, List<ExpandFields> expand) throws ApiException {
+		return suggestionSourcesGetByNameWithHttpInfo(name, expand).getData();
 	}
 
 	/**
 	 * getByName Searches for an existing suggestion source with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the suggestion source. (optional)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<SuggestionSourceData> suggestionSourcesGetByNameWithHttpInfo(String name) throws ApiException {
+	public ApiResponse<SuggestionSourceData> suggestionSourcesGetByNameWithHttpInfo(String name, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -166,6 +173,7 @@ public class SuggestionSourcesApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "name", name));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -188,21 +196,23 @@ public class SuggestionSourcesApi {
 	 * read Reads an existing suggestion source.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceId The ID of the suggestion source. (required)
+	 * @param expand (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
-	public SuggestionSourceData suggestionSourcesRead(String suggestionSourceId) throws ApiException {
-		return suggestionSourcesReadWithHttpInfo(suggestionSourceId).getData();
+	public SuggestionSourceData suggestionSourcesRead(String suggestionSourceId, List<ExpandFields> expand) throws ApiException {
+		return suggestionSourcesReadWithHttpInfo(suggestionSourceId, expand).getData();
 	}
 
 	/**
 	 * read Reads an existing suggestion source.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceId The ID of the suggestion source. (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<SuggestionSourceData> suggestionSourcesReadWithHttpInfo(String suggestionSourceId) throws ApiException {
+	public ApiResponse<SuggestionSourceData> suggestionSourcesReadWithHttpInfo(String suggestionSourceId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'suggestionSourceId' is set
@@ -218,6 +228,8 @@ public class SuggestionSourcesApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -345,21 +357,23 @@ public class SuggestionSourcesApi {
 	 * update Updates an existing suggestion source.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData (required)
+	 * @param expand (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
-	public SuggestionSourceData suggestionSourcesUpdate(SuggestionSourceData suggestionSourceData) throws ApiException {
-		return suggestionSourcesUpdateWithHttpInfo(suggestionSourceData).getData();
+	public SuggestionSourceData suggestionSourcesUpdate(SuggestionSourceData suggestionSourceData, List<ExpandFields> expand) throws ApiException {
+		return suggestionSourcesUpdateWithHttpInfo(suggestionSourceData, expand).getData();
 	}
 
 	/**
 	 * update Updates an existing suggestion source.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<SuggestionSourceData> suggestionSourcesUpdateWithHttpInfo(SuggestionSourceData suggestionSourceData) throws ApiException {
+	public ApiResponse<SuggestionSourceData> suggestionSourcesUpdateWithHttpInfo(SuggestionSourceData suggestionSourceData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = suggestionSourceData;
 
 		// verify the required parameter 'suggestionSourceData' is set
@@ -374,6 +388,8 @@ public class SuggestionSourcesApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"

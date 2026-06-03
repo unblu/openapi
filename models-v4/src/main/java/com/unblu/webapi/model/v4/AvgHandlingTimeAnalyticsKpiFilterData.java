@@ -20,9 +20,9 @@ import io.swagger.annotations.ApiModelProperty;
  * AND&lt;/li&gt; &lt;li&gt;endTimestamp AND&lt;/li&gt; &lt;li&gt;conversationTemplateIds AND&lt;/li&gt; &lt;li&gt;conversationLocales AND&lt;/li&gt;
  * &lt;li&gt;initialEngagementTypes AND&lt;/li&gt; &lt;li&gt;(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)&lt;/li&gt;
  * &lt;li&gt;resolutionTypes AND&lt;/li&gt; &lt;li&gt;usedFeatures AND&lt;/li&gt; &lt;li&gt;assignedAgentPersonIds AND&lt;/li&gt;
- * &lt;li&gt;assignedAgentTeamIds&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;
+ * &lt;li&gt;assignedAgentTeamIds&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Data model object representing filters for the KPI calculation of average handling time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>resolutionTypes AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds</li> </ul> <p>")
+@ApiModel(description = "Data model object representing filters for the KPI calculation of average handling time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>resolutionTypes AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds</li> </ul>")
 
 @JsonPropertyOrder({
 	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_$_TYPE,

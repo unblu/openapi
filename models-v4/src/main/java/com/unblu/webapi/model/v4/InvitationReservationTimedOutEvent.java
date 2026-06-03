@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	InvitationReservationTimedOutEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	InvitationReservationTimedOutEvent.JSON_PROPERTY_CREATOR_TYPE,
 	InvitationReservationTimedOutEvent.JSON_PROPERTY_CREATOR_PERSON,
+	InvitationReservationTimedOutEvent.JSON_PROPERTY_RESERVATION,
 	InvitationReservationTimedOutEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	InvitationReservationTimedOutEvent.JSON_PROPERTY_TARGET,
 	InvitationReservationTimedOutEvent.JSON_PROPERTY_RESERVATION_PERSON,
@@ -107,6 +108,10 @@ public class InvitationReservationTimedOutEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_CONTEXT_PERSON_INFO = "contextPersonInfo";
 	@JsonProperty(JSON_PROPERTY_CONTEXT_PERSON_INFO)
@@ -310,6 +315,25 @@ public class InvitationReservationTimedOutEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public InvitationReservationTimedOutEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public InvitationReservationTimedOutEvent contextPersonInfo(ContextPersonInfo contextPersonInfo) {
 		this.contextPersonInfo = contextPersonInfo;
 		return this;
@@ -386,6 +410,7 @@ public class InvitationReservationTimedOutEvent {
 				Objects.equals(this.creationTimestamp, invitationReservationTimedOutEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, invitationReservationTimedOutEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, invitationReservationTimedOutEvent.creatorPerson) &&
+				Objects.equals(this.reservation, invitationReservationTimedOutEvent.reservation) &&
 				Objects.equals(this.contextPersonInfo, invitationReservationTimedOutEvent.contextPersonInfo) &&
 				Objects.equals(this.target, invitationReservationTimedOutEvent.target) &&
 				Objects.equals(this.reservationPerson, invitationReservationTimedOutEvent.reservationPerson);
@@ -393,7 +418,7 @@ public class InvitationReservationTimedOutEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, reservationPerson);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, contextPersonInfo, target, reservationPerson);
 	}
 
 	@Override
@@ -410,6 +435,7 @@ public class InvitationReservationTimedOutEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
 		sb.append("    reservationPerson: ").append(toIndentedString(reservationPerson)).append("\n");

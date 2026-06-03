@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 	VisitorInvitationRenewedEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	VisitorInvitationRenewedEvent.JSON_PROPERTY_CREATOR_TYPE,
 	VisitorInvitationRenewedEvent.JSON_PROPERTY_CREATOR_PERSON,
+	VisitorInvitationRenewedEvent.JSON_PROPERTY_RESERVATION,
 	VisitorInvitationRenewedEvent.JSON_PROPERTY_EMAIL,
 	VisitorInvitationRenewedEvent.JSON_PROPERTY_NICKNAME,
 	VisitorInvitationRenewedEvent.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
@@ -110,6 +111,10 @@ public class VisitorInvitationRenewedEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_EMAIL = "email";
 	@JsonProperty(JSON_PROPERTY_EMAIL)
@@ -317,6 +322,25 @@ public class VisitorInvitationRenewedEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public VisitorInvitationRenewedEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public VisitorInvitationRenewedEvent email(String email) {
 		this.email = email;
 		return this;
@@ -420,6 +444,7 @@ public class VisitorInvitationRenewedEvent {
 				Objects.equals(this.creationTimestamp, visitorInvitationRenewedEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, visitorInvitationRenewedEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, visitorInvitationRenewedEvent.creatorPerson) &&
+				Objects.equals(this.reservation, visitorInvitationRenewedEvent.reservation) &&
 				Objects.equals(this.email, visitorInvitationRenewedEvent.email) &&
 				Objects.equals(this.nickname, visitorInvitationRenewedEvent.nickname) &&
 				Objects.equals(this.expirationTimestamp, visitorInvitationRenewedEvent.expirationTimestamp) &&
@@ -428,7 +453,7 @@ public class VisitorInvitationRenewedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, email, nickname, expirationTimestamp, links);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, email, nickname, expirationTimestamp, links);
 	}
 
 	@Override
@@ -445,6 +470,7 @@ public class VisitorInvitationRenewedEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    email: ").append(toIndentedString(email)).append("\n");
 		sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
 		sb.append("    expirationTimestamp: ").append(toIndentedString(expirationTimestamp)).append("\n");

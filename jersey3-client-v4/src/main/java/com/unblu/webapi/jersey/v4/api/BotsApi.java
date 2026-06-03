@@ -12,6 +12,7 @@ import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
 import com.unblu.webapi.model.v4.BotDialogPostMessage;
 import com.unblu.webapi.model.v4.BotPostMessage;
+import com.unblu.webapi.model.v4.BotsCancelDialogBotThinkingIndicatorBody;
 import com.unblu.webapi.model.v4.BotsCancelDialogBotTypingIndicatorBody;
 import com.unblu.webapi.model.v4.BotsCancelPendingDialogQuestionsBody;
 import com.unblu.webapi.model.v4.BotsCancelPendingQuestionBody;
@@ -23,8 +24,10 @@ import com.unblu.webapi.model.v4.BotsStartDialogBotTypingIndicatorBody;
 import com.unblu.webapi.model.v4.DialogBotData;
 import com.unblu.webapi.model.v4.DialogBotQuery;
 import com.unblu.webapi.model.v4.DialogBotResult;
+import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.PingResponse;
 import com.unblu.webapi.model.v4.SendMessageResult;
+import com.unblu.webapi.model.v4.ThinkingIndicatorParams;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -45,6 +48,56 @@ public class BotsApi {
 
 	public void setApiClient(ApiClient apiClient) {
 		this.apiClient = apiClient;
+	}
+
+	/**
+	 * cancelDialogBotThinkingIndicator Hides the thinking indicator for the dialog bot.&lt;br&gt; If the thinking indicator wasn&#39;t displayed, calling the
+	 * endpoint has no effect.&lt;br&gt;
+	 * 
+	 * @param botsCancelDialogBotThinkingIndicatorBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsCancelDialogBotThinkingIndicator(BotsCancelDialogBotThinkingIndicatorBody botsCancelDialogBotThinkingIndicatorBody) throws ApiException {
+
+		botsCancelDialogBotThinkingIndicatorWithHttpInfo(botsCancelDialogBotThinkingIndicatorBody);
+	}
+
+	/**
+	 * cancelDialogBotThinkingIndicator Hides the thinking indicator for the dialog bot.&lt;br&gt; If the thinking indicator wasn&#39;t displayed, calling the
+	 * endpoint has no effect.&lt;br&gt;
+	 * 
+	 * @param botsCancelDialogBotThinkingIndicatorBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsCancelDialogBotThinkingIndicatorWithHttpInfo(BotsCancelDialogBotThinkingIndicatorBody botsCancelDialogBotThinkingIndicatorBody) throws ApiException {
+		Object localVarPostBody = botsCancelDialogBotThinkingIndicatorBody;
+
+		// verify the required parameter 'botsCancelDialogBotThinkingIndicatorBody' is set
+		if (botsCancelDialogBotThinkingIndicatorBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'botsCancelDialogBotThinkingIndicatorBody' when calling botsCancelDialogBotThinkingIndicator");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/cancelDialogBotThinkingIndicator";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**
@@ -197,21 +250,23 @@ public class BotsApi {
 	 * create Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding.&lt;br&gt;
 	 * 
 	 * @param dialogBotData The dialog bot to create. (required)
+	 * @param expand (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
-	public DialogBotData botsCreate(DialogBotData dialogBotData) throws ApiException {
-		return botsCreateWithHttpInfo(dialogBotData).getData();
+	public DialogBotData botsCreate(DialogBotData dialogBotData, List<ExpandFields> expand) throws ApiException {
+		return botsCreateWithHttpInfo(dialogBotData, expand).getData();
 	}
 
 	/**
 	 * create Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding.&lt;br&gt;
 	 * 
 	 * @param dialogBotData The dialog bot to create. (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<DialogBotData> botsCreateWithHttpInfo(DialogBotData dialogBotData) throws ApiException {
+	public ApiResponse<DialogBotData> botsCreateWithHttpInfo(DialogBotData dialogBotData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = dialogBotData;
 
 		// verify the required parameter 'dialogBotData' is set
@@ -226,6 +281,8 @@ public class BotsApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -485,21 +542,23 @@ public class BotsApi {
 	 * getByName Searches for an existing dialog bot with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the dialog bot. (optional)
+	 * @param expand (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
-	public DialogBotData botsGetByName(String name) throws ApiException {
-		return botsGetByNameWithHttpInfo(name).getData();
+	public DialogBotData botsGetByName(String name, List<ExpandFields> expand) throws ApiException {
+		return botsGetByNameWithHttpInfo(name, expand).getData();
 	}
 
 	/**
 	 * getByName Searches for an existing dialog bot with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the dialog bot. (optional)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<DialogBotData> botsGetByNameWithHttpInfo(String name) throws ApiException {
+	public ApiResponse<DialogBotData> botsGetByNameWithHttpInfo(String name, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -511,6 +570,7 @@ public class BotsApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "name", name));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -533,21 +593,23 @@ public class BotsApi {
 	 * read Reads an existing dialog bot.&lt;br&gt;
 	 * 
 	 * @param dialogBotId The ID of the dialog bot. (required)
+	 * @param expand (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
-	public DialogBotData botsRead(String dialogBotId) throws ApiException {
-		return botsReadWithHttpInfo(dialogBotId).getData();
+	public DialogBotData botsRead(String dialogBotId, List<ExpandFields> expand) throws ApiException {
+		return botsReadWithHttpInfo(dialogBotId, expand).getData();
 	}
 
 	/**
 	 * read Reads an existing dialog bot.&lt;br&gt;
 	 * 
 	 * @param dialogBotId The ID of the dialog bot. (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<DialogBotData> botsReadWithHttpInfo(String dialogBotId) throws ApiException {
+	public ApiResponse<DialogBotData> botsReadWithHttpInfo(String dialogBotId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'dialogBotId' is set
@@ -563,6 +625,8 @@ public class BotsApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -841,6 +905,64 @@ public class BotsApi {
 	}
 
 	/**
+	 * startDialogBotThinkingIndicator Displays a thinking indicator for the dialog bot, to show the counterpart person that something is happening.&lt;br&gt; The
+	 * thinking indicator replaces any existing typing indicator and is removed automatically after a configurable delay or when the bot sends a message, depending
+	 * on which occurs sooner. If the thinking indicator is already displayed, calling this endpoint resets the auto-hide timer and updates the thinking
+	 * parameters.&lt;br&gt;
+	 * 
+	 * @param thinkingIndicatorParams The thinking indicator parameters containing thinking text, animation, and input mode (required)
+	 * @param dialogToken The token that belongs to the bot&#39;s dialog (optional)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsStartDialogBotThinkingIndicator(ThinkingIndicatorParams thinkingIndicatorParams, String dialogToken) throws ApiException {
+
+		botsStartDialogBotThinkingIndicatorWithHttpInfo(thinkingIndicatorParams, dialogToken);
+	}
+
+	/**
+	 * startDialogBotThinkingIndicator Displays a thinking indicator for the dialog bot, to show the counterpart person that something is happening.&lt;br&gt; The
+	 * thinking indicator replaces any existing typing indicator and is removed automatically after a configurable delay or when the bot sends a message, depending
+	 * on which occurs sooner. If the thinking indicator is already displayed, calling this endpoint resets the auto-hide timer and updates the thinking
+	 * parameters.&lt;br&gt;
+	 * 
+	 * @param thinkingIndicatorParams The thinking indicator parameters containing thinking text, animation, and input mode (required)
+	 * @param dialogToken The token that belongs to the bot&#39;s dialog (optional)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsStartDialogBotThinkingIndicatorWithHttpInfo(ThinkingIndicatorParams thinkingIndicatorParams, String dialogToken) throws ApiException {
+		Object localVarPostBody = thinkingIndicatorParams;
+
+		// verify the required parameter 'thinkingIndicatorParams' is set
+		if (thinkingIndicatorParams == null) {
+			throw new ApiException(400, "Missing the required parameter 'thinkingIndicatorParams' when calling botsStartDialogBotThinkingIndicator");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/startDialogBotThinkingIndicator";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "dialogToken", dialogToken));
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
 	 * startDialogBotTypingIndicator Displays a typing indicator for the dialog bot, to show the counterpart person that something is happening.&lt;br&gt; The
 	 * typing indicator is removed automatically after four seconds or when the bot sends a message, whichever occurs sooner. If the typing indicator is already
 	 * displayed, calling this endpoint resets the four second timer.&lt;br&gt;
@@ -896,21 +1018,23 @@ public class BotsApi {
 	 * update Updates an existing dialog bot.&lt;br&gt;
 	 * 
 	 * @param dialogBotData (required)
+	 * @param expand (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
-	public DialogBotData botsUpdate(DialogBotData dialogBotData) throws ApiException {
-		return botsUpdateWithHttpInfo(dialogBotData).getData();
+	public DialogBotData botsUpdate(DialogBotData dialogBotData, List<ExpandFields> expand) throws ApiException {
+		return botsUpdateWithHttpInfo(dialogBotData, expand).getData();
 	}
 
 	/**
 	 * update Updates an existing dialog bot.&lt;br&gt;
 	 * 
 	 * @param dialogBotData (required)
+	 * @param expand (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<DialogBotData> botsUpdateWithHttpInfo(DialogBotData dialogBotData) throws ApiException {
+	public ApiResponse<DialogBotData> botsUpdateWithHttpInfo(DialogBotData dialogBotData, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = dialogBotData;
 
 		// verify the required parameter 'dialogBotData' is set
@@ -925,6 +1049,8 @@ public class BotsApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -941,5 +1067,65 @@ public class BotsApi {
 		GenericType<DialogBotData> localVarReturnType = new GenericType<DialogBotData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * updateDialogBotThinkingIndicator Updates the thinking indicator by appending the given text chunk and optionally replacing the custom thinking
+	 * animation.&lt;br&gt; Each call appends the text chunk from &#x60;getThinkingText&#x60; to the accumulated text and resets the auto-hide timer. The text
+	 * chunks are not trimmed: they&#39;re appended exactly as provided. If thinkingData includes a custom animation, that&#39;s what&#39;s used, otherwise the last
+	 * thinking animation used is applied. &lt;p&gt; If the thinking indicator is not currently displayed (e.g., it timed out or was cancelled), this call promotes
+	 * to &#x60;startDialogBotThinkingIndicator&#x60;with the provided parameters, treating them as a fresh start.&lt;br&gt;
+	 * 
+	 * @param thinkingIndicatorParams The thinking indicator parameters containing the text chunk to append and optionally a new custom animation (required)
+	 * @param dialogToken The token that belongs to the bot&#39;s dialog (optional)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsUpdateDialogBotThinkingIndicator(ThinkingIndicatorParams thinkingIndicatorParams, String dialogToken) throws ApiException {
+
+		botsUpdateDialogBotThinkingIndicatorWithHttpInfo(thinkingIndicatorParams, dialogToken);
+	}
+
+	/**
+	 * updateDialogBotThinkingIndicator Updates the thinking indicator by appending the given text chunk and optionally replacing the custom thinking
+	 * animation.&lt;br&gt; Each call appends the text chunk from &#x60;getThinkingText&#x60; to the accumulated text and resets the auto-hide timer. The text
+	 * chunks are not trimmed: they&#39;re appended exactly as provided. If thinkingData includes a custom animation, that&#39;s what&#39;s used, otherwise the last
+	 * thinking animation used is applied. &lt;p&gt; If the thinking indicator is not currently displayed (e.g., it timed out or was cancelled), this call promotes
+	 * to &#x60;startDialogBotThinkingIndicator&#x60;with the provided parameters, treating them as a fresh start.&lt;br&gt;
+	 * 
+	 * @param thinkingIndicatorParams The thinking indicator parameters containing the text chunk to append and optionally a new custom animation (required)
+	 * @param dialogToken The token that belongs to the bot&#39;s dialog (optional)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsUpdateDialogBotThinkingIndicatorWithHttpInfo(ThinkingIndicatorParams thinkingIndicatorParams, String dialogToken) throws ApiException {
+		Object localVarPostBody = thinkingIndicatorParams;
+
+		// verify the required parameter 'thinkingIndicatorParams' is set
+		if (thinkingIndicatorParams == null) {
+			throw new ApiException(400, "Missing the required parameter 'thinkingIndicatorParams' when calling botsUpdateDialogBotThinkingIndicator");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/updateDialogBotThinkingIndicator";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("", "dialogToken", dialogToken));
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 }

@@ -42,6 +42,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchData.JSON_PROPERTY_WIDTH,
 	BranchData.JSON_PROPERTY_HEIGHT,
 	BranchData.JSON_PROPERTY_DISPLAY_LABELS_ON_FLOOR_PLAN,
+	BranchData.JSON_PROPERTY_DEVICE_ENDPOINT_URL,
 	BranchData.JSON_PROPERTY_BRANCH_CLIENTS,
 	BranchData.JSON_PROPERTY_BRANCH_DEVICES,
 	BranchData.JSON_PROPERTY_BRANCH_TEXT_BOXES,
@@ -157,6 +158,10 @@ public class BranchData {
 	public static final String JSON_PROPERTY_DISPLAY_LABELS_ON_FLOOR_PLAN = "displayLabelsOnFloorPlan";
 	@JsonProperty(JSON_PROPERTY_DISPLAY_LABELS_ON_FLOOR_PLAN)
 	private Boolean displayLabelsOnFloorPlan;
+
+	public static final String JSON_PROPERTY_DEVICE_ENDPOINT_URL = "deviceEndpointUrl";
+	@JsonProperty(JSON_PROPERTY_DEVICE_ENDPOINT_URL)
+	private String deviceEndpointUrl;
 
 	public static final String JSON_PROPERTY_BRANCH_CLIENTS = "branchClients";
 	@JsonProperty(JSON_PROPERTY_BRANCH_CLIENTS)
@@ -547,6 +552,25 @@ public class BranchData {
 		this.displayLabelsOnFloorPlan = displayLabelsOnFloorPlan;
 	}
 
+	public BranchData deviceEndpointUrl(String deviceEndpointUrl) {
+		this.deviceEndpointUrl = deviceEndpointUrl;
+		return this;
+	}
+
+	/**
+	 * Base URL of the external device REST API (e.g. a WebIO relay) used to control door openers and status lamps on this branch. Optional.
+	 * 
+	 * @return deviceEndpointUrl
+	 **/
+	@ApiModelProperty(value = "Base URL of the external device REST API (e.g. a WebIO relay) used to control door openers and status lamps on this branch. Optional.")
+	public String getDeviceEndpointUrl() {
+		return deviceEndpointUrl;
+	}
+
+	public void setDeviceEndpointUrl(String deviceEndpointUrl) {
+		this.deviceEndpointUrl = deviceEndpointUrl;
+	}
+
 	public BranchData branchClients(List<BranchClientData> branchClients) {
 		this.branchClients = branchClients;
 		return this;
@@ -683,6 +707,7 @@ public class BranchData {
 				Objects.equals(this.width, branchData.width) &&
 				Objects.equals(this.height, branchData.height) &&
 				Objects.equals(this.displayLabelsOnFloorPlan, branchData.displayLabelsOnFloorPlan) &&
+				Objects.equals(this.deviceEndpointUrl, branchData.deviceEndpointUrl) &&
 				Objects.equals(this.branchClients, branchData.branchClients) &&
 				Objects.equals(this.branchDevices, branchData.branchDevices) &&
 				Objects.equals(this.branchTextBoxes, branchData.branchTextBoxes) &&
@@ -691,7 +716,7 @@ public class BranchData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, accountId, modificationTimestamp, version, name, description, streetAddress, zip, city, region, country, translations, state, floorPlanImage, width, height, displayLabelsOnFloorPlan, branchClients, branchDevices, branchTextBoxes, branchLinks);
+		return Objects.hash($type, id, creationTimestamp, accountId, modificationTimestamp, version, name, description, streetAddress, zip, city, region, country, translations, state, floorPlanImage, width, height, displayLabelsOnFloorPlan, deviceEndpointUrl, branchClients, branchDevices, branchTextBoxes, branchLinks);
 	}
 
 	@Override
@@ -717,6 +742,7 @@ public class BranchData {
 		sb.append("    width: ").append(toIndentedString(width)).append("\n");
 		sb.append("    height: ").append(toIndentedString(height)).append("\n");
 		sb.append("    displayLabelsOnFloorPlan: ").append(toIndentedString(displayLabelsOnFloorPlan)).append("\n");
+		sb.append("    deviceEndpointUrl: ").append(toIndentedString(deviceEndpointUrl)).append("\n");
 		sb.append("    branchClients: ").append(toIndentedString(branchClients)).append("\n");
 		sb.append("    branchDevices: ").append(toIndentedString(branchDevices)).append("\n");
 		sb.append("    branchTextBoxes: ").append(toIndentedString(branchTextBoxes)).append("\n");

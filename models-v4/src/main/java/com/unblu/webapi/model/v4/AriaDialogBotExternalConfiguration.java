@@ -22,6 +22,12 @@ public interface AriaDialogBotExternalConfiguration {
 
 	AriaDialogBotExternalConfiguration conditionAgentLlmCredentialId(String conditionAgentLlmCredentialId);
 
+	void setConditionAgentLlmCredentialName(String conditionAgentLlmCredentialName);
+
+	String getConditionAgentLlmCredentialName();
+
+	AriaDialogBotExternalConfiguration conditionAgentLlmCredentialName(String conditionAgentLlmCredentialName);
+
 	void setConditionAgentLlmProvider(String conditionAgentLlmProvider);
 
 	String getConditionAgentLlmProvider();

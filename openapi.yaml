@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.36.1
+  version: 8.37.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -1359,23 +1359,6 @@ paths:
       x-required-role:
       - ADMIN
       x-status: PREVIEW
-  /analytics/data/internal:
-    get:
-      tags:
-      - AnalyticsData
-      summary: internal
-      description: "<p>This endpoint is deprecated.</p>Internal dummy endpoint currently needed to make the WebAPI generation work as it breaks if all functions start with the same prefix, there is a bug."
-      operationId: analyticsDataInternal
-      responses:
-        "204":
-          description: Ok
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-      deprecated: true
-      x-required-entry-path: INTERNAL
-      x-required-role:
-      - ADMIN
-      x-status: DEPRECATED
   /analytics/data/searchCalls:
     post:
       tags:
@@ -1641,6 +1624,59 @@ paths:
       x-required-role:
       - ADMIN
       x-status: PREVIEW
+  /analytics/data/searchQueueInteraction:
+    post:
+      tags:
+      - AnalyticsData
+      summary: searchQueueInteraction
+      description: "<p>This endpoint is in preview mode.</p>Searches for individual queue interaction KPI records. <p> Returns data from the gold_queue_interaction view, with one entry per resolved invitation or reservation (redeemed, revoked, declined, or timed out). Each entry includes the reservation/invitation creation timestamps, the resolution timestamp, the response duration, the resolution type, the invitation target, and the parent conversation details.<br>"
+      operationId: analyticsDataSearchQueueInteraction
+      requestBody:
+        description: "the query defining time range filter, ordering, and pagination"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsKpiDataQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: query queue interaction analytics data
+                value:
+                  $_type: AnalyticsKpiDataQuery
+                  searchFilters:
+                  - $_type: AnalyticsKpiDataQueryFilter
+                    field: null
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1672531200000
+                      maximum: 1672617600000
+                  orderBy: null
+                  offset: 0
+                  limit: 10
+        required: true
+      responses:
+        "200":
+          description: a paginated result of  `QueueInteractionAnalyticsKpiDataResult queue interaction KPI data entries`
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueueInteractionAnalyticsKpiDataResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: query queue interaction analytics data
+                  value:
+                    $_type: QueueInteractionAnalyticsKpiDataResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items: []
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
   /analytics/data/searchWaitingTime:
     post:
       tags:
@@ -1725,7 +1761,7 @@ paths:
                   row: 1
                   rowSpan: 1
                   column: 1
-                  columnSpan: 1
+                  columnSpan: 2
                   displaySingleValueAggregation: NONE
                   displaySingleValuePreviousPeriodComparison: false
                   displayChart: LINE
@@ -1804,7 +1840,7 @@ paths:
                     row: 1
                     rowSpan: 1
                     column: 1
-                    columnSpan: 1
+                    columnSpan: 2
                     displaySingleValueAggregation: NONE
                     displaySingleValuePreviousPeriodComparison: false
                     displayChart: LINE
@@ -2006,7 +2042,7 @@ paths:
                       row: 1
                       rowSpan: 1
                       column: 1
-                      columnSpan: 1
+                      columnSpan: 2
                       displaySingleValueAggregation: NONE
                       displaySingleValuePreviousPeriodComparison: false
                       displayChart: LINE
@@ -2071,8 +2107,8 @@ paths:
                       kpiType: AVG_WAITING_TIME
                       row: 1
                       rowSpan: 1
-                      column: 2
-                      columnSpan: 1
+                      column: 3
+                      columnSpan: 2
                       displaySingleValueAggregation: NONE
                       displaySingleValuePreviousPeriodComparison: false
                       displayChart: LINE
@@ -2138,7 +2174,7 @@ paths:
                       row: 2
                       rowSpan: 1
                       column: 1
-                      columnSpan: 1
+                      columnSpan: 2
                       displaySingleValueAggregation: NONE
                       displaySingleValuePreviousPeriodComparison: false
                       displayChart: LINE
@@ -2203,8 +2239,8 @@ paths:
                       kpiType: AVG_WAITING_TIME
                       row: 2
                       rowSpan: 1
-                      column: 2
-                      columnSpan: 1
+                      column: 3
+                      columnSpan: 2
                       displaySingleValueAggregation: NONE
                       displaySingleValuePreviousPeriodComparison: false
                       displayChart: LINE
@@ -2270,7 +2306,7 @@ paths:
                       row: 3
                       rowSpan: 1
                       column: 1
-                      columnSpan: 1
+                      columnSpan: 2
                       displaySingleValueAggregation: NONE
                       displaySingleValuePreviousPeriodComparison: false
                       displayChart: LINE
@@ -2361,7 +2397,7 @@ paths:
                   row: 1
                   rowSpan: 1
                   column: 1
-                  columnSpan: 1
+                  columnSpan: 2
                   displaySingleValueAggregation: NONE
                   displaySingleValuePreviousPeriodComparison: false
                   displayChart: LINE
@@ -2440,7 +2476,7 @@ paths:
                     row: 1
                     rowSpan: 1
                     column: 1
-                    columnSpan: 1
+                    columnSpan: 2
                     displaySingleValueAggregation: NONE
                     displaySingleValuePreviousPeriodComparison: false
                     displayChart: LINE
@@ -3261,6 +3297,27 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /bots/cancelDialogBotThinkingIndicator:
+    post:
+      tags:
+      - Bots
+      summary: cancelDialogBotThinkingIndicator
+      description: "Hides the thinking indicator for the dialog bot.<br> If the thinking indicator wasn't displayed, calling the endpoint has no effect.<br>"
+      operationId: botsCancelDialogBotThinkingIndicator
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BotsCancelDialogBotThinkingIndicatorBody"
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /bots/cancelDialogBotTypingIndicator:
     post:
       tags:
@@ -3331,6 +3388,16 @@ paths:
       summary: create
       description: "Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding.<br>"
       operationId: botsCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       requestBody:
         description: The dialog bot to create.
         content:
@@ -3362,6 +3429,13 @@ paths:
                   retryCount: null
                   retryDelay: null
                   type: COPILOT
+                  botIndicatorType: TYPING
+                  thinkingTexts: null
+                  thinkingInputMode: null
+                  randomizeThinkingTexts: null
+                  maxThinkingIndicatorTime: null
+                  autoStartThinkingIndicatorDelay: null
+                  thinkingIndicatorTextCycleInterval: null
                   authToken: some auth token
                   copilotId: Some copilot id
                   copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -3393,6 +3467,13 @@ paths:
                   retryCount: null
                   retryDelay: null
                   type: CUSTOM
+                  botIndicatorType: null
+                  thinkingTexts: null
+                  thinkingInputMode: null
+                  randomizeThinkingTexts: null
+                  maxThinkingIndicatorTime: null
+                  autoStartThinkingIndicatorDelay: null
+                  thinkingIndicatorTextCycleInterval: null
                   webhookStatus: INACTIVE
                   webhookEndpoint: https://test.unblu.com
                   outboundTimeoutMillis: 3000
@@ -3433,6 +3514,13 @@ paths:
                     retryCount: 0
                     retryDelay: 0
                     type: COPILOT
+                    botIndicatorType: TYPING
+                    thinkingTexts: []
+                    thinkingInputMode: ALLOW_SEND
+                    randomizeThinkingTexts: false
+                    maxThinkingIndicatorTime: null
+                    autoStartThinkingIndicatorDelay: null
+                    thinkingIndicatorTextCycleInterval: null
                     authToken: some auth token
                     copilotId: Some copilot id
                     copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -3464,6 +3552,13 @@ paths:
                     retryCount: 0
                     retryDelay: 0
                     type: CUSTOM
+                    botIndicatorType: TYPING
+                    thinkingTexts: []
+                    thinkingInputMode: ALLOW_SEND
+                    randomizeThinkingTexts: false
+                    maxThinkingIndicatorTime: null
+                    autoStartThinkingIndicatorDelay: null
+                    thinkingIndicatorTextCycleInterval: null
                     webhookStatus: INACTIVE
                     webhookEndpoint: https://test.unblu.com
                     outboundTimeoutMillis: 3000
@@ -3474,118 +3569,24 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
       callbacks:
-        bot.dialog.closed:
+        outbound.bot.dialog.abort_answer:
           '{$request.body#/endpoint}':
             post:
-              summary: bot.dialog.closed
-              description: "Event emitted when a dialog between a person and a bot closes. <br> After this event has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources connected to this dialog. <p> <b>Note:</b> This event may be sent before the bot actively hands of the dialog if i.e. the conversation is ended beforehand or the counterpart leaves the conversation. <p> This event will only be delivered to the dialog bots that accepted dialog offer for this dialog beforehand."
-              operationId: botDialogClosedCallback
+              summary: outbound.bot.dialog.abort_answer
+              description: Request sent when a dialog counterpart asks the bot to abort the answer it is currently producing. <p> Triggered when a user clicks the stop button while the bot is generating its answer. The bot should abort its current answer and respond accordingly. <p> The request is only delivered to the dialog bot that is currently producing the answer.
+              operationId: outboundBotDialogAbortAnswerCallback
               requestBody:
                 content:
                   application/json:
                     schema:
-                      $ref: "#/components/schemas/BotDialogClosedEvent"
+                      $ref: "#/components/schemas/BotDialogAbortAnswerRequest"
               responses:
                 "200":
                   description: OK
-        bot.dialog.counterpart_changed:
-          '{$request.body#/endpoint}':
-            post:
-              summary: bot.dialog.counterpart_changed
-              description: "Event emitted when the counterpart person of dialog changes during a dialog.<br> This can only happen if a anonymous person that is in a dialog logs in / authenticates during the dialog and is changed to an authenticated person.<br> In this case the person ID and all details will switch to a authenticated person and all subsequent messages will be sent by that person, the dialog including the dialog token will stay the same and go on.<br> <p> This event will only be delivered to the dialog bots that accepted dialog offer for this dialog beforehand."
-              operationId: botDialogCounterpartChangedCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BotDialogCounterpartChanged"
-              responses:
-                "200":
-                  description: OK
-        bot.dialog.message:
-          '{$request.body#/endpoint}':
-            post:
-              summary: bot.dialog.message
-              description: Event emitted when a new message in a dialog between a person and a bot is sent. <p> This event will only be delivered to the dialog bots that accepted dialog offer for this dialog beforehand.
-              operationId: botDialogMessageCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BotDialogMessageEvent"
-              responses:
-                "200":
-                  description: OK
-        bot.dialog.message_state:
-          '{$request.body#/endpoint}':
-            post:
-              summary: bot.dialog.message_state
-              description: Event emitted when a message in a dialog between a person and a bot is marked as delivered/read. <p> The event is only delivered to the dialog bots that accepted the dialog offer for the dialog.
-              operationId: botDialogMessageStateCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BotDialogMessageStateEvent"
-              responses:
-                "200":
-                  description: OK
-        bot.dialog.opened:
-          '{$request.body#/endpoint}':
-            post:
-              summary: bot.dialog.opened
-              description: "Event emitted when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The event is only delivered to the dialog bots that accepted the dialog offer for the dialog."
-              operationId: botDialogOpenedCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BotDialogOpenEvent"
-              responses:
-                "200":
-                  description: OK
-        bot.offboarding_offer:
-          '{$request.body#/endpoint}':
-            post:
-              summary: bot.offboarding_offer
-              description: "Event sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
-              operationId: botOffboardingOfferCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BotOffboardingOfferEvent"
-              responses:
-                "200":
-                  description: OK
-        bot.onboarding_offer:
-          '{$request.body#/endpoint}':
-            post:
-              summary: bot.onboarding_offer
-              description: "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `CustomDialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>"
-              operationId: botOnboardingOfferCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BotOnboardingOfferEvent"
-              responses:
-                "200":
-                  description: OK
-        bot.reboarding_offer:
-          '{$request.body#/endpoint}':
-            post:
-              summary: bot.reboarding_offer
-              description: "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
-              operationId: botReboardingOfferCallback
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BotReboardingOfferEvent"
-              responses:
-                "200":
-                  description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/BotDialogAbortAnswerResponse"
         outbound.bot.dialog.closed:
           '{$request.body#/endpoint}':
             post:
@@ -3857,6 +3858,15 @@ paths:
           type: string
         style: form
         explode: true
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       responses:
         "200":
           description: The dialog bot with the given name or an error if none is found.
@@ -3889,6 +3899,13 @@ paths:
                     retryCount: 0
                     retryDelay: 0
                     type: CUSTOM
+                    botIndicatorType: TYPING
+                    thinkingTexts: []
+                    thinkingInputMode: ALLOW_SEND
+                    randomizeThinkingTexts: false
+                    maxThinkingIndicatorTime: null
+                    autoStartThinkingIndicatorDelay: null
+                    thinkingIndicatorTextCycleInterval: null
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
                     outboundTimeoutMillis: 3000
@@ -3920,6 +3937,13 @@ paths:
                     retryCount: 0
                     retryDelay: 0
                     type: COPILOT
+                    botIndicatorType: TYPING
+                    thinkingTexts: []
+                    thinkingInputMode: ALLOW_SEND
+                    randomizeThinkingTexts: false
+                    maxThinkingIndicatorTime: null
+                    autoStartThinkingIndicatorDelay: null
+                    thinkingIndicatorTextCycleInterval: null
                     authToken: some auth token
                     copilotId: Some copilot id
                     copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -3947,6 +3971,15 @@ paths:
         schema:
           type: string
         style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
         explode: false
       responses:
         "200":
@@ -3980,6 +4013,13 @@ paths:
                     retryCount: 0
                     retryDelay: 0
                     type: CUSTOM
+                    botIndicatorType: TYPING
+                    thinkingTexts: []
+                    thinkingInputMode: ALLOW_SEND
+                    randomizeThinkingTexts: false
+                    maxThinkingIndicatorTime: null
+                    autoStartThinkingIndicatorDelay: null
+                    thinkingIndicatorTextCycleInterval: null
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
                     outboundTimeoutMillis: 3000
@@ -4011,6 +4051,13 @@ paths:
                     retryCount: 0
                     retryDelay: 0
                     type: COPILOT
+                    botIndicatorType: TYPING
+                    thinkingTexts: []
+                    thinkingInputMode: ALLOW_SEND
+                    randomizeThinkingTexts: false
+                    maxThinkingIndicatorTime: null
+                    autoStartThinkingIndicatorDelay: null
+                    thinkingIndicatorTextCycleInterval: null
                     authToken: some auth token
                     copilotId: Some copilot id
                     copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -4491,6 +4538,37 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /bots/startDialogBotThinkingIndicator:
+    post:
+      tags:
+      - Bots
+      summary: startDialogBotThinkingIndicator
+      description: "Displays a thinking indicator for the dialog bot, to show the counterpart person that something is happening.<br> The thinking indicator replaces any existing typing indicator and is removed automatically after a configurable delay or when the bot sends a message, depending on which occurs sooner. If the thinking indicator is already displayed, calling this endpoint resets the auto-hide timer and updates the thinking parameters.<br>"
+      operationId: botsStartDialogBotThinkingIndicator
+      parameters:
+      - name: dialogToken
+        in: query
+        description: The token that belongs to the bot's dialog
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      requestBody:
+        description: "The thinking indicator parameters containing thinking text, animation, and input mode"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ThinkingIndicatorParams"
+        required: true
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /bots/startDialogBotTypingIndicator:
     post:
       tags:
@@ -4519,6 +4597,16 @@ paths:
       summary: update
       description: Updates an existing dialog bot.<br>
       operationId: botsUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       requestBody:
         content:
           application/json:
@@ -4532,6 +4620,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DialogBotData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /bots/updateDialogBotThinkingIndicator:
+    post:
+      tags:
+      - Bots
+      summary: updateDialogBotThinkingIndicator
+      description: "Updates the thinking indicator by appending the given text chunk and optionally replacing the custom thinking animation.<br> Each call appends the text chunk from `getThinkingText` to the accumulated text and resets the auto-hide timer. The text chunks are not trimmed: they're appended exactly as provided. If thinkingData includes a custom animation, that's what's used, otherwise the last thinking animation used is applied. <p> If the thinking indicator is not currently displayed (e.g., it timed out or was cancelled), this call promotes to `startDialogBotThinkingIndicator`with the provided parameters, treating them as a fresh start.<br>"
+      operationId: botsUpdateDialogBotThinkingIndicator
+      parameters:
+      - name: dialogToken
+        in: query
+        description: The token that belongs to the bot's dialog
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      requestBody:
+        description: The thinking indicator parameters containing the text chunk to append and optionally a new custom animation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ThinkingIndicatorParams"
+        required: true
+      responses:
+        "204":
+          description: Ok
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -5280,6 +5399,7 @@ paths:
                   width: 1000
                   height: 1000
                   displayLabelsOnFloorPlan: null
+                  deviceEndpointUrl: null
                   branchClients:
                   - $_type: BranchClientData
                     id: null
@@ -5387,6 +5507,9 @@ paths:
                     iconId: icon_id
                     url: null
                     linkTarget: null
+                    externalDeviceId: null
+                    onColor: null
+                    offColor: null
                   - $_type: BranchDeviceData
                     id: null
                     name: device2
@@ -5400,6 +5523,9 @@ paths:
                     iconId: icon_id
                     url: null
                     linkTarget: null
+                    externalDeviceId: null
+                    onColor: null
+                    offColor: null
                   branchTextBoxes:
                   - $_type: BranchTextBoxData
                     id: null
@@ -5457,6 +5583,7 @@ paths:
                     width: 1000
                     height: 1000
                     displayLabelsOnFloorPlan: false
+                    deviceEndpointUrl: null
                     branchClients:
                     - $_type: BranchClientData
                       id: ZRoWTG9nQAGTniY0eeeqcw
@@ -5564,6 +5691,9 @@ paths:
                       iconId: icon_id
                       url: null
                       linkTarget: _blank
+                      externalDeviceId: null
+                      onColor: null
+                      offColor: null
                     - $_type: BranchDeviceData
                       id: DpkS7DWeQeiDzGUN58Og_Q
                       name: device2
@@ -5577,6 +5707,9 @@ paths:
                       iconId: icon_id
                       url: null
                       linkTarget: _blank
+                      externalDeviceId: null
+                      onColor: null
+                      offColor: null
                     branchTextBoxes:
                     - $_type: BranchTextBoxData
                       id: JASZlVmHRyK_W-qA3eEA1Q
@@ -5773,6 +5906,7 @@ paths:
                   width: 1000
                   height: 1000
                   displayLabelsOnFloorPlan: null
+                  deviceEndpointUrl: null
                   branchClients:
                   - $_type: BranchClientData
                     id: null
@@ -5880,6 +6014,9 @@ paths:
                     iconId: icon_id
                     url: null
                     linkTarget: null
+                    externalDeviceId: null
+                    onColor: null
+                    offColor: null
                   - $_type: BranchDeviceData
                     id: null
                     name: device2
@@ -5893,6 +6030,9 @@ paths:
                     iconId: icon_id
                     url: null
                     linkTarget: null
+                    externalDeviceId: null
+                    onColor: null
+                    offColor: null
                   branchTextBoxes:
                   - $_type: BranchTextBoxData
                     id: null
@@ -5950,6 +6090,7 @@ paths:
                     width: 1000
                     height: 1000
                     displayLabelsOnFloorPlan: false
+                    deviceEndpointUrl: null
                     branchClients: []
                     branchDevices:
                     - $_type: BranchDeviceData
@@ -5965,6 +6106,9 @@ paths:
                       iconId: icon_id
                       url: null
                       linkTarget: _blank
+                      externalDeviceId: null
+                      onColor: null
+                      offColor: null
                     - $_type: BranchDeviceData
                       id: DpkS7DWeQeiDzGUN58Og_Q
                       name: device3
@@ -5978,6 +6122,9 @@ paths:
                       iconId: icon_id
                       url: null
                       linkTarget: _blank
+                      externalDeviceId: null
+                      onColor: null
+                      offColor: null
                     branchTextBoxes:
                     - $_type: BranchTextBoxData
                       id: JASZlVmHRyK_W-qA3eEA1Q
@@ -15927,6 +16074,16 @@ paths:
       summary: create
       description: Creates a new suggestion source<br>
       operationId: suggestionSourcesCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       requestBody:
         description: The suggestion source to create.
         content:
@@ -16047,6 +16204,15 @@ paths:
           type: string
         style: form
         explode: true
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       responses:
         "200":
           description: The suggestion source with the given name or an error if none is found.
@@ -16095,6 +16261,15 @@ paths:
         schema:
           type: string
         style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
         explode: false
       responses:
         "200":
@@ -16196,6 +16371,16 @@ paths:
       summary: update
       description: Updates an existing suggestion source.<br>
       operationId: suggestionSourcesUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       requestBody:
         content:
           application/json:
@@ -19713,6 +19898,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -19760,6 +19947,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -19804,6 +19993,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -19848,6 +20039,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -19898,6 +20091,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -19945,6 +20140,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -20462,15 +20659,19 @@ components:
       - $ref: "#/components/schemas/MessagesCountAnalyticsWidgetData"
       - $ref: "#/components/schemas/CollaborationLayersCountAnalyticsWidgetData"
       - $ref: "#/components/schemas/CallsCountAnalyticsWidgetData"
+      - $ref: "#/components/schemas/QueueInteractionCountAnalyticsWidgetData"
+      - $ref: "#/components/schemas/AvgReservationTimeAnalyticsWidgetData"
       discriminator:
         propertyName: kpiType
         mapping:
           AVG_HANDLING_TIME: "#/components/schemas/AvgHandlingTimeAnalyticsWidgetData"
+          AVG_RESERVATION_TIME: "#/components/schemas/AvgReservationTimeAnalyticsWidgetData"
           AVG_WAITING_TIME: "#/components/schemas/AvgWaitingTimeAnalyticsWidgetData"
           CALLS_COUNT: "#/components/schemas/CallsCountAnalyticsWidgetData"
           COLLABORATION_LAYERS_COUNT: "#/components/schemas/CollaborationLayersCountAnalyticsWidgetData"
           CONVERSATIONS_ENDED_COUNT: "#/components/schemas/ConversationsEndedCountAnalyticsWidgetData"
           MESSAGES_COUNT: "#/components/schemas/MessagesCountAnalyticsWidgetData"
+          QUEUE_INTERACTION_COUNT: "#/components/schemas/QueueInteractionCountAnalyticsWidgetData"
     AnalyticsWidgetList:
       type: object
       properties:
@@ -20960,6 +21161,50 @@ components:
           description: "Multichoice question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
           items:
             $ref: "#/components/schemas/MultichoiceQuestionMessageTranslation"
+    AriaAgenticFlowDataContent:
+      oneOf:
+      - $ref: "#/components/schemas/AriaMultiflowAgenticFlowDataContent"
+      - $ref: "#/components/schemas/AriaSingleFlowAgenticFlowDataContent"
+      - $ref: "#/components/schemas/AriaSuggestionSourceAgenticFlowDataContent"
+      discriminator:
+        propertyName: type
+        mapping:
+          MULTIFLOW: "#/components/schemas/AriaMultiflowAgenticFlowDataContent"
+          SINGLE_FLOW: "#/components/schemas/AriaSingleFlowAgenticFlowDataContent"
+          SUGGESTION_SOURCE: "#/components/schemas/AriaSuggestionSourceAgenticFlowDataContent"
+    AriaAgenticFlowScenarioTransferableData:
+      type: object
+      description: Model representing a simplified Aria Agentic Flow Scenario
+      properties:
+        $_type:
+          type: string
+          default: AriaAgenticFlowScenarioTransferableData
+          enum:
+          - AriaAgenticFlowScenarioTransferableData
+        agenticFlowId:
+          type: string
+        scenario:
+          type: string
+        index:
+          type: integer
+          format: int32
+    AriaAgenticFlowTransferableData:
+      type: object
+      description: Model representing a simplified Aria Agentic Flow
+      properties:
+        $_type:
+          type: string
+          default: AriaAgenticFlowTransferableData
+          enum:
+          - AriaAgenticFlowTransferableData
+        id:
+          type: string
+        name:
+          type: string
+        flowData:
+          type: string
+        flowType:
+          $ref: "#/components/schemas/EAriaAgenticFlowType"
     AriaDialogBotData:
       type: object
       description: Model representing an external aria dialog bot that can handle conversation onboarding and offboarding.
@@ -21032,9 +21277,37 @@ components:
           description: "Defines the delay between retries for failed outbound requests. If omitted, the default is 0."
         type:
           $ref: "#/components/schemas/EBotType"
-        agenticFlowId:
-          type: string
-          description: "Aria agentic flow ID. Maximum length: 36 characters"
+        botIndicatorType:
+          $ref: "#/components/schemas/EBotIndicatorType"
+        thinkingTexts:
+          type: array
+          description: "Configurable thinking indicator texts for the bot, ordered by display sequence."
+          items:
+            $ref: "#/components/schemas/BotThinkingTextData"
+        thinkingInputMode:
+          $ref: "#/components/schemas/EThinkingInputMode"
+        randomizeThinkingTexts:
+          type: boolean
+          description: "If true, the configured thinking texts are shown in random order. If false, they are shown in the order they were defined."
+        maxThinkingIndicatorTime:
+          type: integer
+          format: int32
+          description: "The maximum delay, in milliseconds, before the thinking indicator is automatically hidden. The thinking indicator is also dismissed when the bot sends a message. Optional; if omitted the system default is used."
+        autoStartThinkingIndicatorDelay:
+          type: integer
+          format: int32
+          description: "The delay, in milliseconds, before the thinking indicator is automatically shown after a visitor message. If the bot responds before this delay, no thinking indicator is displayed. Set to 0 to show the indicator immediately. Optional; if omitted the system default is used."
+        thinkingIndicatorTextCycleInterval:
+          type: integer
+          format: int32
+          description: "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used."
+        agenticFlowData:
+          description: "Aria agentic flow ID. Add @code{ ?expand=agenticFlowData} to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
+          x-expand-query-key: agenticFlowData
+          x-type: ExpandableField
         active:
           type: boolean
           description: Specifies whether the bot is active
@@ -21058,6 +21331,70 @@ components:
         propertyName: type
         mapping:
           MULTIFLOW: "#/components/schemas/MultiflowAriaDialogBotExternalConfiguration"
+    AriaMultiflowAgenticFlowDataContent:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AriaMultiflowAgenticFlowDataContent
+          enum:
+          - AriaMultiflowAgenticFlowDataContent
+        type:
+          $ref: "#/components/schemas/EAriaAgenticFlowDataContentType"
+        id:
+          type: string
+          description: The id of the main agentic flow of the entity
+        publishedAgenticFlows:
+          type: array
+          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
+        scenarios:
+          type: array
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowScenarioTransferableData"
+    AriaSingleFlowAgenticFlowDataContent:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AriaSingleFlowAgenticFlowDataContent
+          enum:
+          - AriaSingleFlowAgenticFlowDataContent
+        type:
+          $ref: "#/components/schemas/EAriaAgenticFlowDataContentType"
+        id:
+          type: string
+          description: The id of the main agentic flow of the entity
+        publishedAgenticFlows:
+          type: array
+          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
+    AriaSuggestionSourceAgenticFlowDataContent:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AriaSuggestionSourceAgenticFlowDataContent
+          enum:
+          - AriaSuggestionSourceAgenticFlowDataContent
+        type:
+          $ref: "#/components/schemas/EAriaAgenticFlowDataContentType"
+        id:
+          type: string
+          description: The id of the main agentic flow of the entity
+        publishedAgenticFlows:
+          type: array
+          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
     AriaSuggestionSourceData:
       type: object
       description: API model that represents an Aria suggestion source
@@ -21112,9 +21449,13 @@ components:
           description: "Defines the delay between retries for failed outbound requests. If omitted, it defaults to 0."
         type:
           $ref: "#/components/schemas/ESuggestionSourceType"
-        agenticFlowId:
-          type: string
-          description: "Aria agentic flow ID. Maximum length: 36 characters"
+        agenticFlowData:
+          description: "Aria agentic flow ID. Add @code{ ?expand=agenticFlowData} to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
+          x-expand-query-key: agenticFlowData
+          x-type: ExpandableField
     AssigneePersonIdConversationHistorySearchFilter:
       type: object
       description: Filters conversations history by their assigneePersonId field.
@@ -21180,6 +21521,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -21229,6 +21572,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -21275,6 +21620,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -21319,6 +21666,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -21836,7 +22185,7 @@ components:
           description: "Image content as data URL scheme (RFC2397 - <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code>)"
     AvgHandlingTimeAnalyticsKpiFilterData:
       type: object
-      description: "Data model object representing filters for the KPI calculation of average handling time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>resolutionTypes AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds</li> </ul> <p>"
+      description: "Data model object representing filters for the KPI calculation of average handling time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>resolutionTypes AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds</li> </ul>"
       properties:
         $_type:
           type: string
@@ -21959,7 +22308,7 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
@@ -21993,14 +22342,181 @@ components:
           $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
         groupBy:
           type: array
-          description: Specifies how results are grouped for the average handling time KPI. Currently only the first value of the list is used.
+          description: Specifies how results are grouped for the average handling time KPI. Only the first value of the list is used.
           items:
             $ref: "#/components/schemas/EAvgHandlingTimeGroupBy"
         filters:
           $ref: "#/components/schemas/AvgHandlingTimeAnalyticsKpiFilterData"
+    AvgReservationTimeAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of average reservation time. <p> Only reservation-based queue interactions are ever considered (the KPI hard-codes a @code{ queueInteractionType IN (RESERVATION_REDEEMED,RESERVATION_CANCELLED, RESERVATION_DECLINED, RESERVATION_TIMEDOUT)} filter). The `#getQueueInteractionTypes() queueInteractionTypes` field can be used to further restrict the set of reservation outcomes; non-reservation values are rejected during validation. <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>queueInteractionTypes AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>minReservationTimeDuration AND</li> <li>maxReservationTimeDuration</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: AvgReservationTimeAnalyticsKpiFilterData
+          enum:
+          - AvgReservationTimeAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        queueInteractionTypes:
+          type: array
+          description: "A list of queue interaction types used to restrict which reservation outcomes are considered in the KPI calculation. Records matching any of the specified outcomes are included. Only `RESERVATION_*` values are accepted; other values are rejected during validation. If null, all reservation outcomes are considered. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EQueueInteractionType"
+        assignedAgentPersonIds:
+          type: array
+          description: "A list of assigned agent person IDs (of agents who redeemed the invitation, or agents the invitation was reserved for) used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed. Optional."
+          items:
+            type: string
+        assignedAgentTeamIds:
+          type: array
+          description: "A list of assigned agent team IDs used to filter the analytics data included in the KPI calculation. The team is that of the agent who redeemed the invitation, or the agent the invitation was reserved for. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed. Optional."
+          items:
+            type: string
+        minReservationTimeDuration:
+          type: integer
+          format: int64
+          description: "Minimum reservation time duration (in milliseconds). Records with a duration greater than or equal to this value are included. If null, the filter is not applied."
+        maxReservationTimeDuration:
+          type: integer
+          format: int64
+          description: "Maximum reservation time duration (in milliseconds). Records with a duration less than or equal to this value are included. If null, the filter is not applied."
+    AvgReservationTimeAnalyticsWidgetData:
+      type: object
+      description: Data model representing the average reservation time analytics widget.
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: AvgReservationTimeAnalyticsWidgetData
+          enum:
+          - AvgReservationTimeAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the average reservation time KPI. Only the first value of the list is used.
+          items:
+            $ref: "#/components/schemas/EAvgReservationTimeGroupBy"
+        filters:
+          $ref: "#/components/schemas/AvgReservationTimeAnalyticsKpiFilterData"
     AvgWaitingTimeAnalyticsKpiFilterData:
       type: object
-      description: "Data model object representing filters for the KPI calculation of average waiting time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>waitingTimeOutcomes AND</li> <li>waitingTimeTypes AND</li> <li>(invitationAgentIds OR invitationTeamIds OR invitationNamedAreaIds OR invitationAccountId) AND</li> <li>invitationAcceptingAgentPersonIds AND</li> <li>invitationAcceptingAgentTeamIds</li> </ul> <p>"
+      description: "Data model object representing filters for the KPI calculation of average waiting time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>waitingTimeOutcomes AND</li> <li>waitingTimeTypes AND</li> <li>(invitationAgentIds OR invitationTeamIds OR invitationNamedAreaIds OR invitationAccountId) AND</li> <li>invitationAcceptingAgentPersonIds AND</li> <li>invitationAcceptingAgentTeamIds</li> </ul>"
       properties:
         $_type:
           type: string
@@ -22141,7 +22657,7 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
@@ -22175,7 +22691,7 @@ components:
           $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
         groupBy:
           type: array
-          description: Specifies how results are grouped for the average waiting time KPI.
+          description: Specifies how results are grouped for the average waiting time KPI. Only the first value of the list is used.
           items:
             $ref: "#/components/schemas/EAvgWaitingTimeGroupBy"
         filters:
@@ -22294,34 +22810,36 @@ components:
           - BotBoardingOfferResponse
         offerAccepted:
           type: boolean
-    BotDialogClosedEvent:
+    BotDialogAbortAnswerRequest:
       type: object
-      description: "Event emitted when a dialog between a person and a bot closes. <br> After this event has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources connected to this dialog. <p> <b>Note:</b> This event may be sent before the bot actively hands of the dialog if i.e. the conversation is ended beforehand or the counterpart leaves the conversation. <p> This event will only be delivered to the dialog bots that accepted dialog offer for this dialog beforehand."
+      description: Request sent when a dialog counterpart asks the bot to abort the answer it is currently producing. <p> Triggered when a user clicks the stop button while the bot is generating its answer. The bot should abort its current answer and respond accordingly. <p> The request is only delivered to the dialog bot that is currently producing the answer.
       properties:
         $_type:
           type: string
-          default: BotDialogClosedEvent
+          default: BotDialogAbortAnswerRequest
           enum:
-          - BotDialogClosedEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
+          - BotDialogAbortAnswerRequest
         accountId:
           type: string
-          description: The account ID the event originated from
+        serviceName:
+          type: string
         dialogToken:
           type: string
-          description: Token for this dialog. It is present in every dialog webhook and must be passed to all Bot Web-API service calls to identify the dialog.
+          description: Token for this dialog. It is present in every dialog webhook and must be passed to all bot web API service calls to identify the dialog.
         conversationId:
           type: string
           description: The ID of the conversation this dialog belongs to.
         counterpartPersonId:
           type: string
           description: The ID of the person the bot is talking to.
+    BotDialogAbortAnswerResponse:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BotDialogAbortAnswerResponse
+          enum:
+          - BotDialogAbortAnswerResponse
     BotDialogClosedRequest:
       type: object
       description: "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog."
@@ -22352,35 +22870,6 @@ components:
           default: BotDialogClosedResponse
           enum:
           - BotDialogClosedResponse
-    BotDialogCounterpartChanged:
-      type: object
-      description: "Event emitted when the counterpart person of dialog changes during a dialog.<br> This can only happen if a anonymous person that is in a dialog logs in / authenticates during the dialog and is changed to an authenticated person.<br> In this case the person ID and all details will switch to a authenticated person and all subsequent messages will be sent by that person, the dialog including the dialog token will stay the same and go on.<br> <p> This event will only be delivered to the dialog bots that accepted dialog offer for this dialog beforehand."
-      properties:
-        $_type:
-          type: string
-          default: BotDialogCounterpartChanged
-          enum:
-          - BotDialogCounterpartChanged
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        dialogToken:
-          type: string
-          description: Token for this dialog. It is present in every dialog webhook and must be passed to all Bot Web-API service calls to identify the dialog.
-        oldCounterpartPerson:
-          $ref: "#/components/schemas/PersonData"
-        newCounterpartPerson:
-          $ref: "#/components/schemas/PersonData"
-        conversationId:
-          type: string
-          description: ID of the conversation the request is sent to.
     BotDialogCounterpartChangedRequest:
       type: object
       description: Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
@@ -22412,33 +22901,6 @@ components:
           default: BotDialogCounterpartChangedResponse
           enum:
           - BotDialogCounterpartChangedResponse
-    BotDialogMessageEvent:
-      type: object
-      description: Event emitted when a new message in a dialog between a person and a bot is sent. <p> This event will only be delivered to the dialog bots that accepted dialog offer for this dialog beforehand.
-      properties:
-        $_type:
-          type: string
-          default: BotDialogMessageEvent
-          enum:
-          - BotDialogMessageEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        dialogToken:
-          type: string
-          description: Token for this dialog. It is present in every dialog webhook and must be passed to all Bot Web-API service calls to identify the dialog.
-        conversationMessage:
-          $ref: "#/components/schemas/MessageData"
-        conversationId:
-          type: string
-          description: ID of the conversation the request is sent to.
     BotDialogMessageRequest:
       type: object
       description: Request sent when a new message is sent in a dialog between a person and a bot. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
@@ -22468,39 +22930,6 @@ components:
           default: BotDialogMessageResponse
           enum:
           - BotDialogMessageResponse
-    BotDialogMessageStateEvent:
-      type: object
-      description: Event emitted when a message in a dialog between a person and a bot is marked as delivered/read. <p> The event is only delivered to the dialog bots that accepted the dialog offer for the dialog.
-      properties:
-        $_type:
-          type: string
-          default: BotDialogMessageStateEvent
-          enum:
-          - BotDialogMessageStateEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        dialogToken:
-          type: string
-          description: Token for this dialog. It is present in every dialog webhook and must be passed to all Bot Web-API service calls to identify the dialog.
-        messageId:
-          type: string
-          description: The ID of the message which state has changed
-        state:
-          $ref: "#/components/schemas/EMessageState"
-        botPersonId:
-          type: string
-          description: The ID of the bot that sent the message
-        conversationId:
-          type: string
-          description: The conversation the message belongs to
     BotDialogMessageStateRequest:
       type: object
       description: Request sent when a message in a dialog between a person and a bot is marked as delivered/read. <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog.
@@ -22536,34 +22965,6 @@ components:
           default: BotDialogMessageStateResponse
           enum:
           - BotDialogMessageStateResponse
-    BotDialogOpenEvent:
-      type: object
-      description: "Event emitted when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The event is only delivered to the dialog bots that accepted the dialog offer for the dialog."
-      properties:
-        $_type:
-          type: string
-          default: BotDialogOpenEvent
-          enum:
-          - BotDialogOpenEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        dialogToken:
-          type: string
-          description: Token for this dialog. It is present in every dialog webhook and must be passed to all Bot Web-API service calls to identify the dialog.
-        dialogType:
-          $ref: "#/components/schemas/EBotDialogType"
-        counterpartPerson:
-          $ref: "#/components/schemas/PersonData"
-        conversation:
-          $ref: "#/components/schemas/ConversationData"
     BotDialogOpenRequest:
       type: object
       description: "Request sent when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog."
@@ -22625,34 +23026,6 @@ components:
           description: Name of the bot
         state:
           $ref: "#/components/schemas/EBotDialogStatus"
-    BotOffboardingOfferEvent:
-      type: object
-      description: "Event sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
-      properties:
-        $_type:
-          type: string
-          default: BotOffboardingOfferEvent
-          enum:
-          - BotOffboardingOfferEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        dialogToken:
-          type: string
-          description: "The unique dialog token for this bot, used to identify this offboarding via the bot web API"
-        offboardingPerson:
-          $ref: "#/components/schemas/PersonData"
-        offboardingReason:
-          $ref: "#/components/schemas/EOffboardingReason"
-        conversation:
-          $ref: "#/components/schemas/ConversationData"
     BotOffboardingOfferRequest:
       type: object
       description: "Request sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
@@ -22673,32 +23046,6 @@ components:
           $ref: "#/components/schemas/PersonData"
         offboardingReason:
           $ref: "#/components/schemas/EOffboardingReason"
-        conversation:
-          $ref: "#/components/schemas/ConversationData"
-    BotOnboardingOfferEvent:
-      type: object
-      description: "Event sent when a person joins a conversation, giving the bot a chance to participate in the person's onboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>if the onboarding person does not fit the onboarding filter defined in the `CustomDialogBot` the webhook will not be sent to it's endpoint.</li> <li>the bot MUST respond to this webhook or else the onboarding person will have to wait for a timeout before it can proceed it's onboarding</li> </ul>"
-      properties:
-        $_type:
-          type: string
-          default: BotOnboardingOfferEvent
-          enum:
-          - BotOnboardingOfferEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        dialogToken:
-          type: string
-          description: "The unique dialog token for this bot, used to identify this onboarding via the bot web API"
-        onboardingPerson:
-          $ref: "#/components/schemas/PersonData"
         conversation:
           $ref: "#/components/schemas/ConversationData"
     BotOnboardingOfferRequest:
@@ -22814,32 +23161,6 @@ components:
           description: Optional ID that identifies the message that this message is replying to
         messageData:
           $ref: "#/components/schemas/PostMessageData"
-    BotReboardingOfferEvent:
-      type: object
-      description: "Event sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding via the bot web API with the given `dialogToken`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the webhook isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the webhook. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
-      properties:
-        $_type:
-          type: string
-          default: BotReboardingOfferEvent
-          enum:
-          - BotReboardingOfferEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The time (Unix time in ms) when the event was generated
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        dialogToken:
-          type: string
-          description: "The dialog token for this bot, used to identify this reboarding via the bot web API"
-        reboardingPerson:
-          $ref: "#/components/schemas/PersonData"
-        conversation:
-          $ref: "#/components/schemas/ConversationData"
     BotReboardingOfferRequest:
       type: object
       description: "Request sent when a person writes a message to an unassigned conversation, giving the bot a chance to participate in the person's reboarding. <p> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the reboardingEnabled flag is disabled in `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the person has to wait for a timeout before their reboarding can proceed.</li> </ul>"
@@ -22860,6 +23181,31 @@ components:
           $ref: "#/components/schemas/PersonData"
         conversation:
           $ref: "#/components/schemas/ConversationData"
+    BotThinkingTextData:
+      type: object
+      description: Data transfer object for a bot thinking text entry. Each entry represents one text for a specific language in the thinking text cycle.
+      properties:
+        $_type:
+          type: string
+          default: BotThinkingTextData
+          enum:
+          - BotThinkingTextData
+        id:
+          type: string
+          description: Unique identifier of this thinking text entry.
+        dialogBotId:
+          type: string
+          description: The ID of the dialog bot this text belongs to.
+        text:
+          type: string
+          description: The thinking text.
+        language:
+          type: string
+          description: Locale of the thinking text (as BCP 47 language tag form including region if available). Null for the default (fallback) text.
+        orderIndex:
+          type: integer
+          format: int32
+          description: Position in the thinking text cycle per language. Lower values are shown first.
     BotThreadOffboardingEndedEvent:
       type: object
       description: An event triggered every time a `BotThread` is ended during offboarding
@@ -23104,6 +23450,13 @@ components:
           description: The dialog bot state data of all bots belonging to the bot thread. Bots are displayed in order they were executed.
           items:
             $ref: "#/components/schemas/BotDialogStateData"
+    BotsCancelDialogBotThinkingIndicatorBody:
+      type: object
+      description: Request body for the 'botsCancelDialogBotThinkingIndicator' operation
+      properties:
+        dialogToken:
+          type: string
+          description: The token that belongs to the bot's dialog
     BotsCancelDialogBotTypingIndicatorBody:
       type: object
       description: Request body for the 'botsCancelDialogBotTypingIndicator' operation
@@ -23908,6 +24261,9 @@ components:
         displayLabelsOnFloorPlan:
           type: boolean
           description: Display the labels of branch elements inside the floor plan. False if not explicitly set.
+        deviceEndpointUrl:
+          type: string
+          description: Base URL of the external device REST API (e.g. a WebIO relay) used to control door openers and status lamps on this branch. Optional.
         branchClients:
           type: array
           description: List of all branch clients that are assigned to the branch
@@ -23991,6 +24347,15 @@ components:
         linkTarget:
           type: string
           description: Target when opening the link. Maximum of 250 characters. The default value is "_blank".
+        externalDeviceId:
+          type: string
+          description: Identifier that addresses this device on the branch's external device endpoint (e.g. a WebIO port number). Used for DOOR_OPENER and STATUS_LAMP device types. Optional.
+        onColor:
+          type: string
+          description: "Hex color displayed when the device is in the ON state. Format: @code{ #RRGGBB}. Optional."
+        offColor:
+          type: string
+          description: "Hex color displayed when the device is in the OFF state. Format: @code{ #RRGGBB}. Optional."
     BranchDeviceTranslation:
       type: object
       properties:
@@ -25006,7 +25371,7 @@ components:
             $ref: "#/components/schemas/CallsAnalyticsKpiData"
     CallsCountAnalyticsKpiFilterData:
       type: object
-      description: "Data model object representing filters for the KPI calculation of the number of calls <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>callTypes AND</li> <li>endReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> <li>minOverallParticipants AND</li> <li>maxOverallParticipantsn</li> </ul> <p>"
+      description: "Data model object representing filters for the KPI calculation of the number of calls <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>callTypes AND</li> <li>endReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> <li>minOverallParticipants AND</li> <li>maxOverallParticipantsn</li> </ul>"
       properties:
         $_type:
           type: string
@@ -25155,7 +25520,7 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
@@ -25189,7 +25554,7 @@ components:
           $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
         groupBy:
           type: array
-          description: Specifies how results are grouped for the calls KPI.
+          description: Specifies how results are grouped for the calls KPI. Only the first value of the list is used.
           items:
             $ref: "#/components/schemas/ECallsCountGroupBy"
         filters:
@@ -26593,7 +26958,7 @@ components:
             $ref: "#/components/schemas/CollaborationLayersAnalyticsKpiData"
     CollaborationLayersCountAnalyticsKpiFilterData:
       type: object
-      description: "Data model object representing filters for the KPI calculation of the number used layers <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>layerTypes AND</li> <li>stopReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> </ul> <p>"
+      description: "Data model object representing filters for the KPI calculation of the number used layers <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>layerTypes AND</li> <li>stopReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> </ul>"
       properties:
         $_type:
           type: string
@@ -26734,7 +27099,7 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
@@ -26768,7 +27133,7 @@ components:
           $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
         groupBy:
           type: array
-          description: Specifies how results are grouped for the layers used KPI.
+          description: Specifies how results are grouped for the layers used KPI. Only the first value of the list is used.
           items:
             $ref: "#/components/schemas/ECollaborationLayersCountGroupBy"
         filters:
@@ -30323,7 +30688,7 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
@@ -30357,7 +30722,7 @@ components:
           $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
         groupBy:
           type: array
-          description: Specifies how results are grouped for the conversations ended KPI.
+          description: Specifies how results are grouped for the conversations ended KPI. Only the first value of the list is used.
           items:
             $ref: "#/components/schemas/EConversationsEndedCountGroupBy"
         filters:
@@ -30526,6 +30891,30 @@ components:
           description: "Defines the delay between retries for failed outbound requests. If omitted, the default is 0."
         type:
           $ref: "#/components/schemas/EBotType"
+        botIndicatorType:
+          $ref: "#/components/schemas/EBotIndicatorType"
+        thinkingTexts:
+          type: array
+          description: "Configurable thinking indicator texts for the bot, ordered by display sequence."
+          items:
+            $ref: "#/components/schemas/BotThinkingTextData"
+        thinkingInputMode:
+          $ref: "#/components/schemas/EThinkingInputMode"
+        randomizeThinkingTexts:
+          type: boolean
+          description: "If true, the configured thinking texts are shown in random order. If false, they are shown in the order they were defined."
+        maxThinkingIndicatorTime:
+          type: integer
+          format: int32
+          description: "The maximum delay, in milliseconds, before the thinking indicator is automatically hidden. The thinking indicator is also dismissed when the bot sends a message. Optional; if omitted the system default is used."
+        autoStartThinkingIndicatorDelay:
+          type: integer
+          format: int32
+          description: "The delay, in milliseconds, before the thinking indicator is automatically shown after a visitor message. If the bot responds before this delay, no thinking indicator is displayed. Set to 0 to show the indicator immediately. Optional; if omitted the system default is used."
+        thinkingIndicatorTextCycleInterval:
+          type: integer
+          format: int32
+          description: "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used."
         authToken:
           type: string
           description: "The Authentication Token for the Microsoft Copilot Agent. Maximum length: 2000 characters"
@@ -31476,6 +31865,30 @@ components:
           description: "Defines the delay between retries for failed outbound requests. If omitted, the default is 0."
         type:
           $ref: "#/components/schemas/EBotType"
+        botIndicatorType:
+          $ref: "#/components/schemas/EBotIndicatorType"
+        thinkingTexts:
+          type: array
+          description: "Configurable thinking indicator texts for the bot, ordered by display sequence."
+          items:
+            $ref: "#/components/schemas/BotThinkingTextData"
+        thinkingInputMode:
+          $ref: "#/components/schemas/EThinkingInputMode"
+        randomizeThinkingTexts:
+          type: boolean
+          description: "If true, the configured thinking texts are shown in random order. If false, they are shown in the order they were defined."
+        maxThinkingIndicatorTime:
+          type: integer
+          format: int32
+          description: "The maximum delay, in milliseconds, before the thinking indicator is automatically hidden. The thinking indicator is also dismissed when the bot sends a message. Optional; if omitted the system default is used."
+        autoStartThinkingIndicatorDelay:
+          type: integer
+          format: int32
+          description: "The delay, in milliseconds, before the thinking indicator is automatically shown after a visitor message. If the bot responds before this delay, no thinking indicator is displayed. Set to 0 to show the indicator immediately. Optional; if omitted the system default is used."
+        thinkingIndicatorTextCycleInterval:
+          type: integer
+          format: int32
+          description: "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used."
         webhookStatus:
           $ref: "#/components/schemas/ERegistrationStatus"
         webhookEndpoint:
@@ -33226,6 +33639,8 @@ components:
       - MESSAGES_COUNT
       - COLLABORATION_LAYERS_COUNT
       - CALLS_COUNT
+      - QUEUE_INTERACTION_COUNT
+      - AVG_RESERVATION_TIME
       x-enum-descriptions:
       - "AVG_WAITING_TIME: KPI for the average waiting time of a visitor."
       - "AVG_HANDLING_TIME: KPI for the average handling time of an agent."
@@ -33233,6 +33648,8 @@ components:
       - "MESSAGES_COUNT: KPI for the number of messages."
       - "COLLABORATION_LAYERS_COUNT: KPI for the number of collaboration layers."
       - "CALLS_COUNT: KPI for the number of calls."
+      - "QUEUE_INTERACTION_COUNT: KPI for the number of queue interactions."
+      - "AVG_RESERVATION_TIME: KPI for the average reservation time of a queue interaction."
     EAnalyticsWaitingTimeOutcome:
       type: string
       description: "Defines the outcome of a waiting time entry, indicating whether the invitation was accepted or aborted."
@@ -33320,6 +33737,37 @@ components:
       - "API_KEY: Filter by the 'apiKey' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EAriaAgenticFlowDataContentType:
+      type: string
+      enum:
+      - MULTIFLOW
+      - SINGLE_FLOW
+      - SUGGESTION_SOURCE
+      x-enum-descriptions:
+      - MULTIFLOW
+      - SINGLE_FLOW
+      - SUGGESTION_SOURCE
+    EAriaAgenticFlowType:
+      type: string
+      description: Type of an Aria Agentic Flow
+      enum:
+      - NONE
+      - DIALOG_BOT_ORCHESTRATOR
+      - DIALOG_BOT_GREETING
+      - DIALOG_BOT_FALLBACK
+      - DIALOG_BOT_EXECUTABLE
+      - DIALOG_BOT_SINGLE_FLOW
+      - SUGGESTION_SOURCE_MAIN
+      - SUGGESTION_SOURCE_EXECUTABLE
+      x-enum-descriptions:
+      - "NONE: A generic agentic flow"
+      - "DIALOG_BOT_ORCHESTRATOR: The orchestrator agentic flow representing the starting point of a Multi-flow Dialog bot, that routes to other agentic flows"
+      - "DIALOG_BOT_GREETING: The greeting agentic flow shown when a conversation with a Dialog bot starts"
+      - "DIALOG_BOT_FALLBACK: The fallback agentic flow when no intent is found during a conversation with a Dialog bot"
+      - "DIALOG_BOT_EXECUTABLE: A custom agentic flow for specific scenarios in a dialog bot"
+      - "DIALOG_BOT_SINGLE_FLOW: An agentic flow used for a single flow dialog bot"
+      - "SUGGESTION_SOURCE_MAIN: An agentic flow used for a suggestion source"
+      - "SUGGESTION_SOURCE_EXECUTABLE: A custom agentic flow for specific scenarios in a suggestion source"
     EAriaDialogBotExternalConfigurationType:
       type: string
       enum:
@@ -33521,6 +33969,24 @@ components:
       - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID."
       - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID."
       - "RESOLUTION_TYPE: Group by resolution type."
+    EAvgReservationTimeGroupBy:
+      type: string
+      enum:
+      - QUEUE_INTERACTION_TYPE
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - CONVERSATION_RECIPIENT_ID
+      - INITIAL_ENGAGEMENT_TYPE
+      - ASSIGNED_AGENT_PERSON_ID
+      - ASSIGNED_AGENT_TEAM_ID
+      x-enum-descriptions:
+      - "QUEUE_INTERACTION_TYPE: Group by queue interaction type. See `EQueueInteractionType` for the full set of values."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by conversation locale."
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
+      - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
     EAvgWaitingTimeGroupBy:
       type: string
       enum:
@@ -33632,6 +34098,17 @@ components:
       - ONBOARDING
       - REBOARDING
       - OFFBOARDING
+    EBotIndicatorType:
+      type: string
+      description: Defines the type of indicator shown while the bot is processing.
+      enum:
+      - NONE
+      - TYPING
+      - THINKING
+      x-enum-descriptions:
+      - "NONE: No indicator is shown."
+      - "TYPING: A typing indicator is shown."
+      - "THINKING: A thinking indicator with configurable texts is shown."
     EBotThreadEndTrigger:
       type: string
       description: The trigger for a bot thread end
@@ -33757,6 +34234,8 @@ components:
       - LOCK
       - INFO
       - EXTERNAL_APPLICATION
+      - DOOR_OPENER
+      - STATUS_LAMP
       - OTHER
       x-enum-descriptions:
       - SIGN_PAD
@@ -33765,6 +34244,8 @@ components:
       - LOCK
       - INFO
       - EXTERNAL_APPLICATION
+      - DOOR_OPENER
+      - STATUS_LAMP
       - OTHER
     EBranchLinkType:
       type: string
@@ -36971,6 +37452,43 @@ components:
       x-enum-descriptions:
       - "TIMEDOUT: A person was to slow to answer a message"
       - "CANCELED: The question was canceled explicitly by the system, a bot or an external messenger channel"
+    EQueueInteractionGroupBy:
+      type: string
+      enum:
+      - QUEUE_INTERACTION_TYPE
+      - CONVERSATION_TEMPLATE_ID
+      - CONVERSATION_LOCALE
+      - CONVERSATION_RECIPIENT_ID
+      - INITIAL_ENGAGEMENT_TYPE
+      - ASSIGNED_AGENT_PERSON_ID
+      - ASSIGNED_AGENT_TEAM_ID
+      x-enum-descriptions:
+      - "QUEUE_INTERACTION_TYPE: Group by queue interaction type. See `EQueueInteractionType` for the full set of values."
+      - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
+      - "CONVERSATION_LOCALE: Group by conversation locale."
+      - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
+      - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
+      - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
+      - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
+    EQueueInteractionType:
+      type: string
+      description: Represents the outcome of a queue interaction (the way an invitation/reservation was resolved).
+      enum:
+      - VISITOR_LEFT
+      - INVITATION_REDEEMED
+      - INVITATION_REVOKED
+      - RESERVATION_REDEEMED
+      - RESERVATION_CANCELLED
+      - RESERVATION_DECLINED
+      - RESERVATION_TIMEDOUT
+      x-enum-descriptions:
+      - "VISITOR_LEFT: The visitor left the conversation."
+      - "INVITATION_REDEEMED: The invitation (without reservation) was redeemed."
+      - "INVITATION_REVOKED: The invitation (without reservation) was revoked."
+      - "RESERVATION_REDEEMED: The invitation (with reservation) was redeemed."
+      - "RESERVATION_CANCELLED: The invitation (with reservation) was cancelled."
+      - "RESERVATION_DECLINED: The invitation (with reservation) was declined."
+      - "RESERVATION_TIMEDOUT: The reservation timed out without being accepted, declined or cancelled."
     ERecordingEndReason:
       type: string
       enum:
@@ -37282,6 +37800,17 @@ components:
       - "TIME: Reply has to be a time"
       - "DATETIME: Reply has to be a date and a time"
       - "NUMBER: Reply has to be a number"
+    EThinkingInputMode:
+      type: string
+      description: Defines how the chat input field behaves while the bot is in thinking mode.
+      enum:
+      - ALLOW_STOP
+      - ALLOW_SEND
+      - ALLOW_TYPE
+      x-enum-descriptions:
+      - "ALLOW_STOP: Input stays editable, send button becomes a stop button that aborts the bot's response generation."
+      - "ALLOW_SEND: No changes to input behavior — input and send button remain fully functional."
+      - "ALLOW_TYPE: Input is accessible for typing, but the send button is disabled."
     ETimestampOperatorType:
       type: string
       enum:
@@ -38262,6 +38791,7 @@ components:
       enum:
       - actionIcon
       - affFile
+      - agenticFlowData
       - avatar
       - channelIcon
       - configuration
@@ -40685,6 +41215,24 @@ components:
           IN: "#/components/schemas/InInvitationCreatorTypeOperator"
           NOT_EQUALS: "#/components/schemas/NotEqualsInvitationCreatorTypeOperator"
           NOT_IN: "#/components/schemas/NotInInvitationCreatorTypeOperator"
+    InvitationReservationData:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: InvitationReservationData
+          enum:
+          - InvitationReservationData
+        person:
+          $ref: "#/components/schemas/PersonData"
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) at which the invitation was reserved for the `person`.
+        expirationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) at which the invitation's reservation for the `person` expires.
     InvitationReservationDeclinedEvent:
       type: object
       description: Invitation reservation declined event
@@ -40720,6 +41268,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -40761,6 +41311,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -40802,6 +41354,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         contextPersonInfo:
           $ref: "#/components/schemas/ContextPersonInfo"
         target:
@@ -42055,7 +42609,7 @@ components:
             $ref: "#/components/schemas/MessagesAnalyticsKpiData"
     MessagesCountAnalyticsKpiFilterData:
       type: object
-      description: "Data model object representing filters for the KPI calculation of the number of messages <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>senderPersonTypes AND</li> <li>senderPersonIds AND</li> <li>senderPersonTeamIds AND</li> <li>messageLocales AND</li> <li>messageTypes AND</li> <li>minCharacterCount AND</li> <li>maxCharacterCount</li> </ul> <p>"
+      description: "Data model object representing filters for the KPI calculation of the number of messages <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>senderPersonTypes AND</li> <li>senderPersonIds AND</li> <li>senderPersonTeamIds AND</li> <li>messageLocales AND</li> <li>messageTypes AND</li> <li>minCharacterCount AND</li> <li>maxCharacterCount</li> </ul>"
       properties:
         $_type:
           type: string
@@ -42201,7 +42755,7 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: Displayed column span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
@@ -42235,7 +42789,7 @@ components:
           $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
         groupBy:
           type: array
-          description: Specifies how results are grouped for the number of messages KPI.
+          description: Specifies how results are grouped for the number of messages KPI. Only the first value of the list is used.
           items:
             $ref: "#/components/schemas/EMessagesCountGroupBy"
         filters:
@@ -42799,6 +43353,8 @@ components:
         type:
           $ref: "#/components/schemas/EAriaDialogBotExternalConfigurationType"
         conditionAgentLlmCredentialId:
+          type: string
+        conditionAgentLlmCredentialName:
           type: string
         conditionAgentLlmProvider:
           type: string
@@ -46156,6 +46712,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         expirationTimestamp:
           type: integer
           format: int64
@@ -46200,6 +46758,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         expirationTimestamp:
           type: integer
           format: int64
@@ -46241,6 +46801,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         expirationTimestamp:
           type: integer
           format: int64
@@ -46285,6 +46847,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         expirationTimestamp:
           type: integer
           format: int64
@@ -46552,6 +47116,232 @@ components:
             $ref: "#/components/schemas/ReplyMessageTranslation"
         reason:
           $ref: "#/components/schemas/EQuestionMessageAbortReason"
+    QueueInteractionAnalyticsKpiData:
+      type: object
+      description: "Records a single queue interaction event: an invitation or reservation that was created and subsequently resolved (redeemed, revoked, declined, or timed out). A conversation may produce multiple queue interaction entries if it goes through several invitation/reservation cycles during its lifecycle."
+      properties:
+        $_type:
+          type: string
+          default: QueueInteractionAnalyticsKpiData
+          enum:
+          - QueueInteractionAnalyticsKpiData
+        id:
+          type: string
+          description: The unique identifier of the data entry in the analytics KPI table
+        eventTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        reservationCreationTimestamp:
+          type: integer
+          format: int64
+          description: "The UTC timestamp (ms) when the reservation was created. @code{ null} when the interaction was not reserved."
+        invitationCreationTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the invitation was created.
+        responseEndTimestamp:
+          type: integer
+          format: int64
+          description: The UTC timestamp (ms) when the invitation/reservation was resolved.
+        reservationTimeDuration:
+          type: integer
+          format: int64
+          description: "The duration (ms) between the reservation creation and the resolution of the reservation. @code{ null} when the interaction was not reserved."
+        queueInteractionType:
+          $ref: "#/components/schemas/EQueueInteractionType"
+        target:
+          $ref: "#/components/schemas/RecipientAnalyticsKpiData"
+        conversation:
+          $ref: "#/components/schemas/ConversationAnalyticsKpiData"
+    QueueInteractionAnalyticsKpiDataResult:
+      type: object
+      description: Paginated result containing `QueueInteractionAnalyticsKpiData` entries returned by`searchQueueInteraction`.
+      properties:
+        $_type:
+          type: string
+          default: QueueInteractionAnalyticsKpiDataResult
+          enum:
+          - QueueInteractionAnalyticsKpiDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/QueueInteractionAnalyticsKpiData"
+    QueueInteractionCountAnalyticsKpiFilterData:
+      type: object
+      description: "Data model object representing filters for the KPI calculation of queue interaction. <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>responseTypeResults AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>minResponseTimeDuration AND</li> <li>maxResponseTimeDuration</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: QueueInteractionCountAnalyticsKpiFilterData
+          enum:
+          - QueueInteractionCountAnalyticsKpiFilterData
+        startTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe start timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        endTimestamp:
+          type: integer
+          format: int64
+          description: KPI timeframe end timestamp. Mandatory for `CUSTOM` timeframe type and must be null for all other timeframe types.
+        conversationTemplateIds:
+          type: array
+          description: "A list of conversation template IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        conversationLocales:
+          type: array
+          description: "A list of conversation locales used to filter the analytics data included in the KPI calculation. Records matching any of the specified locales are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        initialEngagementTypes:
+          type: array
+          description: "A list of initial engagement types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EInitialEngagementType"
+        recipientAgentPersonIds:
+          type: array
+          description: "A list of recipient agent person IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified agent IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientTeamIds:
+          type: array
+          description: "A list of recipient team IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified team IDs. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientNamedAreaIds:
+          type: array
+          description: "A list of recipient named area IDs used to filter the analytics data included in the KPI calculation. Records are included if their conversation recipient ID matches any of the specified named area IDs. The specified IDs must exist in the Unblu database and be accessible to the user. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            type: string
+        recipientAccountId:
+          type: boolean
+          description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        queueInteractionTypes:
+          type: array
+          description: "A list of queue interaction types used to filter the analytics data included in the KPI calculation. Records matching any of the specified outcomes are included. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/EQueueInteractionType"
+        assignedAgentPersonIds:
+          type: array
+          description: "A list of assigned agent person IDs (of agents who redeemed the invitation, or agents the invitation was reserved for) used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed. Optional."
+          items:
+            type: string
+        assignedAgentTeamIds:
+          type: array
+          description: "A list of assigned agent team IDs (the team of the agent who redeemed the invitation, or the team of the agent the invitation was reserved for) used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_TEAM` variable. If null, the filter is not applied. An empty list is not allowed. Optional."
+          items:
+            type: string
+        minReservationTimeDuration:
+          type: integer
+          format: int64
+          description: "Minimum reservation time duration (in milliseconds). Records with a duration greater than or equal to this value are included. If null, the filter is not applied."
+        maxReservationTimeDuration:
+          type: integer
+          format: int64
+          description: "Maximum reservation time duration (in milliseconds). Records with a duration less than or equal to this value are included. If null, the filter is not applied."
+    QueueInteractionCountAnalyticsWidgetData:
+      type: object
+      description: Data model representing the queue interaction analytics widget.
+      required:
+      - kpiType
+      properties:
+        $_type:
+          type: string
+          default: QueueInteractionCountAnalyticsWidgetData
+          enum:
+          - QueueInteractionCountAnalyticsWidgetData
+        id:
+          type: string
+          description: Widget ID.
+        accountId:
+          type: string
+          description: Account ID the widget belongs to.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        analyticsDashboardId:
+          type: string
+          description: Dashboard ID the widget belongs to.
+        name:
+          type: string
+          description: Name of the widget. Maximum length of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the widget. Maximum length of 500 characters. Optional.
+        kpiType:
+          $ref: "#/components/schemas/EAnalyticsKpiType"
+        row:
+          type: integer
+          format: int32
+          description: Row number where the widget is displayed. Integer value from 1 to 100 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        rowSpan:
+          type: integer
+          format: int32
+          description: Displayed row span of the widget. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        column:
+          type: integer
+          format: int32
+          description: Column number where the widget is displayed. Integer value from 1 to 6 (inclusive). Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
+        columnSpan:
+          type: integer
+          format: int32
+          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+        displaySingleValueAggregation:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
+        displaySingleValuePreviousPeriodComparison:
+          type: boolean
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+        displayChart:
+          $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
+        initialTimeFrameType:
+          $ref: "#/components/schemas/EAnalyticsKpiTimeFrameType"
+        initialTimeFrameSpan:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedTimeFrameSpan"
+        initialTimeFrameLastDays:
+          type: integer
+          format: int32
+          description: Initial number of last days for the timeframe. Mandatory if the timeframe type is set to `LAST_DAYS`.
+        granularityType:
+          $ref: "#/components/schemas/EAnalyticsKpiGranularityType"
+        fixedGranularity:
+          $ref: "#/components/schemas/EAnalyticsKpiFixedGranularity"
+        translations:
+          type: object
+          description: A map of localized versions of the widget's name and description.
+          additionalProperties:
+            $ref: "#/components/schemas/AnalyticsWidgetTranslation"
+        referenceLines:
+          type: array
+          description: A list of reference lines displayed on the chart. Must be null if display chart is set to `NONE`.
+          items:
+            $ref: "#/components/schemas/AnalyticsKpiReferenceLine"
+        filtersType:
+          $ref: "#/components/schemas/EAnalyticsKpiFiltersType"
+        groupBy:
+          type: array
+          description: Specifies how results are grouped for the queue interaction KPI. Only the first value of the list is used.
+          items:
+            $ref: "#/components/schemas/EQueueInteractionGroupBy"
+        filters:
+          $ref: "#/components/schemas/QueueInteractionCountAnalyticsKpiFilterData"
     QuickReply:
       type: object
       description: "Represents a Quick reply option, which can be optionally added to a certain `PostMessageData`"
@@ -48757,6 +49547,26 @@ components:
         declineValue:
           type: string
           description: Value which will be propagated as reply value if the question is declined
+    ThinkingIndicatorParams:
+      type: object
+      description: Parameter object for thinking indicator configuration. Encapsulates the optional display parameters for a bot's thinking state.
+      properties:
+        $_type:
+          type: string
+          default: ThinkingIndicatorParams
+          enum:
+          - ThinkingIndicatorParams
+        thinkingText:
+          type: string
+          description: "The text to display alongside the thinking indicator (e.g. \"Analyzing...\"). Required when starting, used as appended chunk when updating."
+        thinkingAnimation:
+          type: string
+          description: "Animation as a base64-encoded @code{ image/*} data URL (e.g. SVG, GIF, PNG). Optional."
+        thinkingInputMode:
+          $ref: "#/components/schemas/EThinkingInputMode"
+        internal:
+          type: boolean
+          description: "When true, the indicator is an internal (agent-only) activity and is hidden from visitors. Mirrors @code{ BotPostMessage.internal}. Applies for the whole thinking session — callers set it on @code{ startThinking} only. Optional; @code{ null} is treated as @code{ false} by consumers."
     TimestampOperator:
       oneOf:
       - $ref: "#/components/schemas/EqualsTimestampOperator"
@@ -49365,6 +50175,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         email:
           type: string
           description: Visitor email
@@ -49415,6 +50227,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         email:
           type: string
           description: Visitor email
@@ -49462,6 +50276,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         email:
           type: string
           description: Visitor email
@@ -49512,6 +50328,8 @@ components:
           $ref: "#/components/schemas/EInvitationCreatorType"
         creatorPerson:
           $ref: "#/components/schemas/PersonData"
+        reservation:
+          $ref: "#/components/schemas/InvitationReservationData"
         email:
           type: string
           description: Visitor email

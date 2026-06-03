@@ -9,11 +9,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "kpiType", visible = true)
 @JsonSubTypes({
 	@JsonSubTypes.Type(value = AvgHandlingTimeAnalyticsWidgetData.class, name = "AVG_HANDLING_TIME"),
+	@JsonSubTypes.Type(value = AvgReservationTimeAnalyticsWidgetData.class, name = "AVG_RESERVATION_TIME"),
 	@JsonSubTypes.Type(value = AvgWaitingTimeAnalyticsWidgetData.class, name = "AVG_WAITING_TIME"),
 	@JsonSubTypes.Type(value = CallsCountAnalyticsWidgetData.class, name = "CALLS_COUNT"),
 	@JsonSubTypes.Type(value = CollaborationLayersCountAnalyticsWidgetData.class, name = "COLLABORATION_LAYERS_COUNT"),
 	@JsonSubTypes.Type(value = ConversationsEndedCountAnalyticsWidgetData.class, name = "CONVERSATIONS_ENDED_COUNT"),
 	@JsonSubTypes.Type(value = MessagesCountAnalyticsWidgetData.class, name = "MESSAGES_COUNT"),
+	@JsonSubTypes.Type(value = QueueInteractionCountAnalyticsWidgetData.class, name = "QUEUE_INTERACTION_COUNT"),
 })
 public interface AnalyticsWidgetData {
 	void setId(String id);

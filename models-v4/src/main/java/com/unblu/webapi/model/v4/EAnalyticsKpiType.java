@@ -37,7 +37,17 @@ public enum EAnalyticsKpiType {
 	/**
 	 * CALLS_COUNT: KPI for the number of calls.
 	 */
-	CALLS_COUNT("CALLS_COUNT");
+	CALLS_COUNT("CALLS_COUNT"),
+
+	/**
+	 * QUEUE_INTERACTION_COUNT: KPI for the number of queue interactions.
+	 */
+	QUEUE_INTERACTION_COUNT("QUEUE_INTERACTION_COUNT"),
+
+	/**
+	 * AVG_RESERVATION_TIME: KPI for the average reservation time of a queue interaction.
+	 */
+	AVG_RESERVATION_TIME("AVG_RESERVATION_TIME");
 
 	private String value;
 

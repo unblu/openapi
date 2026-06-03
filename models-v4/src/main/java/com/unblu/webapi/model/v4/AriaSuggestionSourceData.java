@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AriaSuggestionSourceData.JSON_PROPERTY_RETRY_COUNT,
 	AriaSuggestionSourceData.JSON_PROPERTY_RETRY_DELAY,
 	AriaSuggestionSourceData.JSON_PROPERTY_TYPE,
-	AriaSuggestionSourceData.JSON_PROPERTY_AGENTIC_FLOW_ID,
+	AriaSuggestionSourceData.JSON_PROPERTY_AGENTIC_FLOW_DATA,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AriaSuggestionSourceData implements SuggestionSourceData {
@@ -126,9 +126,9 @@ public class AriaSuggestionSourceData implements SuggestionSourceData {
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private ESuggestionSourceType type = ESuggestionSourceType.ARIA;
 
-	public static final String JSON_PROPERTY_AGENTIC_FLOW_ID = "agenticFlowId";
-	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_ID)
-	private String agenticFlowId;
+	public static final String JSON_PROPERTY_AGENTIC_FLOW_DATA = "agenticFlowData";
+	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_DATA)
+	private ExpandableField<AriaAgenticFlowDataContent> agenticFlowData = null;
 
 	public AriaSuggestionSourceData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -405,23 +405,24 @@ public class AriaSuggestionSourceData implements SuggestionSourceData {
 		this.type = type;
 	}
 
-	public AriaSuggestionSourceData agenticFlowId(String agenticFlowId) {
-		this.agenticFlowId = agenticFlowId;
+	public AriaSuggestionSourceData agenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
 		return this;
 	}
 
 	/**
-	 * Aria agentic flow ID. Maximum length: 36 characters
+	 * Aria agentic flow ID. Add @code{ ?expand&#x3D;agenticFlowData} to the request to replace this ID with the full flow content in &#x60;agenticFlowData&#x60;.
+	 * Maximum length: 36 characters.
 	 * 
-	 * @return agenticFlowId
+	 * @return agenticFlowData
 	 **/
-	@ApiModelProperty(value = "Aria agentic flow ID. Maximum length: 36 characters")
-	public String getAgenticFlowId() {
-		return agenticFlowId;
+	@ApiModelProperty(value = "Aria agentic flow ID. Add @code{ ?expand=agenticFlowData} to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters.")
+	public ExpandableField<AriaAgenticFlowDataContent> getAgenticFlowData() {
+		return agenticFlowData;
 	}
 
-	public void setAgenticFlowId(String agenticFlowId) {
-		this.agenticFlowId = agenticFlowId;
+	public void setAgenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
 	}
 
 	@Override
@@ -447,12 +448,12 @@ public class AriaSuggestionSourceData implements SuggestionSourceData {
 				Objects.equals(this.retryCount, ariaSuggestionSourceData.retryCount) &&
 				Objects.equals(this.retryDelay, ariaSuggestionSourceData.retryDelay) &&
 				Objects.equals(this.type, ariaSuggestionSourceData.type) &&
-				Objects.equals(this.agenticFlowId, ariaSuggestionSourceData.agenticFlowId);
+				Objects.equals(this.agenticFlowData, ariaSuggestionSourceData.agenticFlowData);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, outboundStatus, outboundEndpoint, outboundTimeoutMillis, retryCount, retryDelay, type, agenticFlowId);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, outboundStatus, outboundEndpoint, outboundTimeoutMillis, retryCount, retryDelay, type, agenticFlowData);
 	}
 
 	@Override
@@ -473,7 +474,7 @@ public class AriaSuggestionSourceData implements SuggestionSourceData {
 		sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
 		sb.append("    retryDelay: ").append(toIndentedString(retryDelay)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
-		sb.append("    agenticFlowId: ").append(toIndentedString(agenticFlowId)).append("\n");
+		sb.append("    agenticFlowData: ").append(toIndentedString(agenticFlowData)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_CREATOR_TYPE,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_CREATOR_PERSON,
+	AssignmentRequestRedeemedEvent.JSON_PROPERTY_RESERVATION,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_CONTEXT_PERSON_INFO,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_TARGET,
 	AssignmentRequestRedeemedEvent.JSON_PROPERTY_TARGET_CHANGE,
@@ -109,6 +110,10 @@ public class AssignmentRequestRedeemedEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_CONTEXT_PERSON_INFO = "contextPersonInfo";
 	@JsonProperty(JSON_PROPERTY_CONTEXT_PERSON_INFO)
@@ -320,6 +325,25 @@ public class AssignmentRequestRedeemedEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public AssignmentRequestRedeemedEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public AssignmentRequestRedeemedEvent contextPersonInfo(ContextPersonInfo contextPersonInfo) {
 		this.contextPersonInfo = contextPersonInfo;
 		return this;
@@ -435,6 +459,7 @@ public class AssignmentRequestRedeemedEvent {
 				Objects.equals(this.creationTimestamp, assignmentRequestRedeemedEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, assignmentRequestRedeemedEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, assignmentRequestRedeemedEvent.creatorPerson) &&
+				Objects.equals(this.reservation, assignmentRequestRedeemedEvent.reservation) &&
 				Objects.equals(this.contextPersonInfo, assignmentRequestRedeemedEvent.contextPersonInfo) &&
 				Objects.equals(this.target, assignmentRequestRedeemedEvent.target) &&
 				Objects.equals(this.targetChange, assignmentRequestRedeemedEvent.targetChange) &&
@@ -444,7 +469,7 @@ public class AssignmentRequestRedeemedEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, contextPersonInfo, target, targetChange, assignmentRequestType, redeemingPerson);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, contextPersonInfo, target, targetChange, assignmentRequestType, redeemingPerson);
 	}
 
 	@Override
@@ -461,6 +486,7 @@ public class AssignmentRequestRedeemedEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    contextPersonInfo: ").append(toIndentedString(contextPersonInfo)).append("\n");
 		sb.append("    target: ").append(toIndentedString(target)).append("\n");
 		sb.append("    targetChange: ").append(toIndentedString(targetChange)).append("\n");

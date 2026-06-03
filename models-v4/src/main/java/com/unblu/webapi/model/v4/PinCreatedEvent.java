@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PinCreatedEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	PinCreatedEvent.JSON_PROPERTY_CREATOR_TYPE,
 	PinCreatedEvent.JSON_PROPERTY_CREATOR_PERSON,
+	PinCreatedEvent.JSON_PROPERTY_RESERVATION,
 	PinCreatedEvent.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
 	PinCreatedEvent.JSON_PROPERTY_LINKS,
 })
@@ -108,6 +109,10 @@ public class PinCreatedEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_EXPIRATION_TIMESTAMP = "expirationTimestamp";
 	@JsonProperty(JSON_PROPERTY_EXPIRATION_TIMESTAMP)
@@ -307,6 +312,25 @@ public class PinCreatedEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public PinCreatedEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public PinCreatedEvent expirationTimestamp(Long expirationTimestamp) {
 		this.expirationTimestamp = expirationTimestamp;
 		return this;
@@ -372,13 +396,14 @@ public class PinCreatedEvent {
 				Objects.equals(this.creationTimestamp, pinCreatedEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, pinCreatedEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, pinCreatedEvent.creatorPerson) &&
+				Objects.equals(this.reservation, pinCreatedEvent.reservation) &&
 				Objects.equals(this.expirationTimestamp, pinCreatedEvent.expirationTimestamp) &&
 				Objects.equals(this.links, pinCreatedEvent.links);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, expirationTimestamp, links);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, expirationTimestamp, links);
 	}
 
 	@Override
@@ -395,6 +420,7 @@ public class PinCreatedEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    expirationTimestamp: ").append(toIndentedString(expirationTimestamp)).append("\n");
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("}");

@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PinRedeemedEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	PinRedeemedEvent.JSON_PROPERTY_CREATOR_TYPE,
 	PinRedeemedEvent.JSON_PROPERTY_CREATOR_PERSON,
+	PinRedeemedEvent.JSON_PROPERTY_RESERVATION,
 	PinRedeemedEvent.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
 	PinRedeemedEvent.JSON_PROPERTY_REDEEMING_PERSON,
 })
@@ -106,6 +107,10 @@ public class PinRedeemedEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_EXPIRATION_TIMESTAMP = "expirationTimestamp";
 	@JsonProperty(JSON_PROPERTY_EXPIRATION_TIMESTAMP)
@@ -305,6 +310,25 @@ public class PinRedeemedEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public PinRedeemedEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public PinRedeemedEvent expirationTimestamp(Long expirationTimestamp) {
 		this.expirationTimestamp = expirationTimestamp;
 		return this;
@@ -362,13 +386,14 @@ public class PinRedeemedEvent {
 				Objects.equals(this.creationTimestamp, pinRedeemedEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, pinRedeemedEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, pinRedeemedEvent.creatorPerson) &&
+				Objects.equals(this.reservation, pinRedeemedEvent.reservation) &&
 				Objects.equals(this.expirationTimestamp, pinRedeemedEvent.expirationTimestamp) &&
 				Objects.equals(this.redeemingPerson, pinRedeemedEvent.redeemingPerson);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, expirationTimestamp, redeemingPerson);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, expirationTimestamp, redeemingPerson);
 	}
 
 	@Override
@@ -385,6 +410,7 @@ public class PinRedeemedEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    expirationTimestamp: ").append(toIndentedString(expirationTimestamp)).append("\n");
 		sb.append("    redeemingPerson: ").append(toIndentedString(redeemingPerson)).append("\n");
 		sb.append("}");

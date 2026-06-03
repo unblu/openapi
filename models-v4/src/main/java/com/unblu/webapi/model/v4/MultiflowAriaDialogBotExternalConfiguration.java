@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 	MultiflowAriaDialogBotExternalConfiguration.JSON_PROPERTY_$_TYPE,
 	MultiflowAriaDialogBotExternalConfiguration.JSON_PROPERTY_TYPE,
 	MultiflowAriaDialogBotExternalConfiguration.JSON_PROPERTY_CONDITION_AGENT_LLM_CREDENTIAL_ID,
+	MultiflowAriaDialogBotExternalConfiguration.JSON_PROPERTY_CONDITION_AGENT_LLM_CREDENTIAL_NAME,
 	MultiflowAriaDialogBotExternalConfiguration.JSON_PROPERTY_CONDITION_AGENT_LLM_PROVIDER,
 	MultiflowAriaDialogBotExternalConfiguration.JSON_PROPERTY_CONDITION_AGENT_LLM_PARAMETERS,
 })
@@ -73,6 +74,10 @@ public class MultiflowAriaDialogBotExternalConfiguration implements AriaDialogBo
 	public static final String JSON_PROPERTY_CONDITION_AGENT_LLM_CREDENTIAL_ID = "conditionAgentLlmCredentialId";
 	@JsonProperty(JSON_PROPERTY_CONDITION_AGENT_LLM_CREDENTIAL_ID)
 	private String conditionAgentLlmCredentialId;
+
+	public static final String JSON_PROPERTY_CONDITION_AGENT_LLM_CREDENTIAL_NAME = "conditionAgentLlmCredentialName";
+	@JsonProperty(JSON_PROPERTY_CONDITION_AGENT_LLM_CREDENTIAL_NAME)
+	private String conditionAgentLlmCredentialName;
 
 	public static final String JSON_PROPERTY_CONDITION_AGENT_LLM_PROVIDER = "conditionAgentLlmProvider";
 	@JsonProperty(JSON_PROPERTY_CONDITION_AGENT_LLM_PROVIDER)
@@ -139,6 +144,25 @@ public class MultiflowAriaDialogBotExternalConfiguration implements AriaDialogBo
 		this.conditionAgentLlmCredentialId = conditionAgentLlmCredentialId;
 	}
 
+	public MultiflowAriaDialogBotExternalConfiguration conditionAgentLlmCredentialName(String conditionAgentLlmCredentialName) {
+		this.conditionAgentLlmCredentialName = conditionAgentLlmCredentialName;
+		return this;
+	}
+
+	/**
+	 * Get conditionAgentLlmCredentialName
+	 * 
+	 * @return conditionAgentLlmCredentialName
+	 **/
+	@ApiModelProperty(value = "")
+	public String getConditionAgentLlmCredentialName() {
+		return conditionAgentLlmCredentialName;
+	}
+
+	public void setConditionAgentLlmCredentialName(String conditionAgentLlmCredentialName) {
+		this.conditionAgentLlmCredentialName = conditionAgentLlmCredentialName;
+	}
+
 	public MultiflowAriaDialogBotExternalConfiguration conditionAgentLlmProvider(String conditionAgentLlmProvider) {
 		this.conditionAgentLlmProvider = conditionAgentLlmProvider;
 		return this;
@@ -197,13 +221,14 @@ public class MultiflowAriaDialogBotExternalConfiguration implements AriaDialogBo
 		return Objects.equals(this.$type, multiflowAriaDialogBotExternalConfiguration.$type) &&
 				Objects.equals(this.type, multiflowAriaDialogBotExternalConfiguration.type) &&
 				Objects.equals(this.conditionAgentLlmCredentialId, multiflowAriaDialogBotExternalConfiguration.conditionAgentLlmCredentialId) &&
+				Objects.equals(this.conditionAgentLlmCredentialName, multiflowAriaDialogBotExternalConfiguration.conditionAgentLlmCredentialName) &&
 				Objects.equals(this.conditionAgentLlmProvider, multiflowAriaDialogBotExternalConfiguration.conditionAgentLlmProvider) &&
 				Objects.equals(this.conditionAgentLlmParameters, multiflowAriaDialogBotExternalConfiguration.conditionAgentLlmParameters);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, conditionAgentLlmCredentialId, conditionAgentLlmProvider, conditionAgentLlmParameters);
+		return Objects.hash($type, type, conditionAgentLlmCredentialId, conditionAgentLlmCredentialName, conditionAgentLlmProvider, conditionAgentLlmParameters);
 	}
 
 	@Override
@@ -213,6 +238,7 @@ public class MultiflowAriaDialogBotExternalConfiguration implements AriaDialogBo
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    conditionAgentLlmCredentialId: ").append(toIndentedString(conditionAgentLlmCredentialId)).append("\n");
+		sb.append("    conditionAgentLlmCredentialName: ").append(toIndentedString(conditionAgentLlmCredentialName)).append("\n");
 		sb.append("    conditionAgentLlmProvider: ").append(toIndentedString(conditionAgentLlmProvider)).append("\n");
 		sb.append("    conditionAgentLlmParameters: ").append(toIndentedString(conditionAgentLlmParameters)).append("\n");
 		sb.append("}");

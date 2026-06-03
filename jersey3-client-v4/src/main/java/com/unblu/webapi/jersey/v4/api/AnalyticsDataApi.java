@@ -16,6 +16,7 @@ import com.unblu.webapi.model.v4.CollaborationLayersAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.ConversationsEndedAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.HandlingTimeAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.MessagesAnalyticsKpiDataResult;
+import com.unblu.webapi.model.v4.QueueInteractionAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.WaitingTimeAnalyticsKpiDataResult;
 
 import jakarta.ws.rs.core.GenericType;
@@ -37,53 +38,6 @@ public class AnalyticsDataApi {
 
 	public void setApiClient(ApiClient apiClient) {
 		this.apiClient = apiClient;
-	}
-
-	/**
-	 * internal &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Internal dummy endpoint currently needed to make the WebAPI generation work as it breaks if all
-	 * functions start with the same prefix, there is a bug.
-	 * 
-	 * @throws ApiException if fails to make API call
-	 * @deprecated
-	 */
-	@Deprecated
-	public void analyticsDataInternal() throws ApiException {
-
-		analyticsDataInternalWithHttpInfo();
-	}
-
-	/**
-	 * internal &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Internal dummy endpoint currently needed to make the WebAPI generation work as it breaks if all
-	 * functions start with the same prefix, there is a bug.
-	 * 
-	 * @throws ApiException if fails to make API call
-	 * @deprecated
-	 */
-	@Deprecated
-	public ApiResponse<Void> analyticsDataInternalWithHttpInfo() throws ApiException {
-		Object localVarPostBody = new HashMap<>();
-
-		// create path and map variables
-		String localVarPath = "/analytics/data/internal";
-
-		// query params
-		List<Pair> localVarQueryParams = new ArrayList<Pair>();
-		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-		final String[] localVarAccepts = {
-
-		};
-		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-
-		final String[] localVarContentTypes = {
-
-		};
-		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-
-		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
-
-		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**
@@ -355,6 +309,63 @@ public class AnalyticsDataApi {
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessagesAnalyticsKpiDataResult> localVarReturnType = new GenericType<MessagesAnalyticsKpiDataResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * searchQueueInteraction &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual queue interaction KPI records. &lt;p&gt; Returns data from
+	 * the gold_queue_interaction view, with one entry per resolved invitation or reservation (redeemed, revoked, declined, or timed out). Each entry includes the
+	 * reservation/invitation creation timestamps, the resolution timestamp, the response duration, the resolution type, the invitation target, and the parent
+	 * conversation details.&lt;br&gt;
+	 * 
+	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @return QueueInteractionAnalyticsKpiDataResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public QueueInteractionAnalyticsKpiDataResult analyticsDataSearchQueueInteraction(AnalyticsKpiDataQuery analyticsKpiDataQuery) throws ApiException {
+		return analyticsDataSearchQueueInteractionWithHttpInfo(analyticsKpiDataQuery).getData();
+	}
+
+	/**
+	 * searchQueueInteraction &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual queue interaction KPI records. &lt;p&gt; Returns data from
+	 * the gold_queue_interaction view, with one entry per resolved invitation or reservation (redeemed, revoked, declined, or timed out). Each entry includes the
+	 * reservation/invitation creation timestamps, the resolution timestamp, the response duration, the resolution type, the invitation target, and the parent
+	 * conversation details.&lt;br&gt;
+	 * 
+	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @return ApiResponse&lt;QueueInteractionAnalyticsKpiDataResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<QueueInteractionAnalyticsKpiDataResult> analyticsDataSearchQueueInteractionWithHttpInfo(AnalyticsKpiDataQuery analyticsKpiDataQuery) throws ApiException {
+		Object localVarPostBody = analyticsKpiDataQuery;
+
+		// verify the required parameter 'analyticsKpiDataQuery' is set
+		if (analyticsKpiDataQuery == null) {
+			throw new ApiException(400, "Missing the required parameter 'analyticsKpiDataQuery' when calling analyticsDataSearchQueueInteraction");
+		}
+
+		// create path and map variables
+		String localVarPath = "/analytics/data/searchQueueInteraction";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<QueueInteractionAnalyticsKpiDataResult> localVarReturnType = new GenericType<QueueInteractionAnalyticsKpiDataResult>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

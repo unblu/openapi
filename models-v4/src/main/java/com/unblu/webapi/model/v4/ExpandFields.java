@@ -13,6 +13,8 @@ public enum ExpandFields {
 
 	AFFFILE("affFile"),
 
+	AGENTICFLOWDATA("agenticFlowData"),
+
 	AVATAR("avatar"),
 
 	CHANNELICON("channelIcon"),

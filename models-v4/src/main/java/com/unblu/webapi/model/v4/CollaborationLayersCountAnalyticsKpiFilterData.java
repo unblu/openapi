@@ -21,9 +21,9 @@ import io.swagger.annotations.ApiModelProperty;
  * &lt;li&gt;initialEngagementTypes AND&lt;/li&gt; &lt;li&gt;(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)&lt;/li&gt;
  * &lt;li&gt;assignedAgentPersonIds AND&lt;/li&gt; &lt;li&gt;assignedAgentTeamIds AND&lt;/li&gt; &lt;li&gt;startingPersonIds AND&lt;/li&gt;
  * &lt;li&gt;startingPersonTeamIds AND&lt;/li&gt; &lt;li&gt;layerTypes AND&lt;/li&gt; &lt;li&gt;stopReasons AND&lt;/li&gt; &lt;li&gt;minActiveDuration
- * AND&lt;/li&gt; &lt;li&gt;maxActiveDuration&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;
+ * AND&lt;/li&gt; &lt;li&gt;maxActiveDuration&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Data model object representing filters for the KPI calculation of the number used layers <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>layerTypes AND</li> <li>stopReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> </ul> <p>")
+@ApiModel(description = "Data model object representing filters for the KPI calculation of the number used layers <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>startingPersonIds AND</li> <li>startingPersonTeamIds AND</li> <li>layerTypes AND</li> <li>stopReasons AND</li> <li>minActiveDuration AND</li> <li>maxActiveDuration</li> </ul>")
 
 @JsonPropertyOrder({
 	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_$_TYPE,

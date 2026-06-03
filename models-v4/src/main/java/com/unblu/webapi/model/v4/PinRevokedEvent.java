@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PinRevokedEvent.JSON_PROPERTY_CREATION_TIMESTAMP,
 	PinRevokedEvent.JSON_PROPERTY_CREATOR_TYPE,
 	PinRevokedEvent.JSON_PROPERTY_CREATOR_PERSON,
+	PinRevokedEvent.JSON_PROPERTY_RESERVATION,
 	PinRevokedEvent.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -105,6 +106,10 @@ public class PinRevokedEvent {
 	public static final String JSON_PROPERTY_CREATOR_PERSON = "creatorPerson";
 	@JsonProperty(JSON_PROPERTY_CREATOR_PERSON)
 	private PersonData creatorPerson = null;
+
+	public static final String JSON_PROPERTY_RESERVATION = "reservation";
+	@JsonProperty(JSON_PROPERTY_RESERVATION)
+	private InvitationReservationData reservation = null;
 
 	public static final String JSON_PROPERTY_EXPIRATION_TIMESTAMP = "expirationTimestamp";
 	@JsonProperty(JSON_PROPERTY_EXPIRATION_TIMESTAMP)
@@ -300,6 +305,25 @@ public class PinRevokedEvent {
 		this.creatorPerson = creatorPerson;
 	}
 
+	public PinRevokedEvent reservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+		return this;
+	}
+
+	/**
+	 * Get reservation
+	 * 
+	 * @return reservation
+	 **/
+	@ApiModelProperty(value = "")
+	public InvitationReservationData getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(InvitationReservationData reservation) {
+		this.reservation = reservation;
+	}
+
 	public PinRevokedEvent expirationTimestamp(Long expirationTimestamp) {
 		this.expirationTimestamp = expirationTimestamp;
 		return this;
@@ -338,12 +362,13 @@ public class PinRevokedEvent {
 				Objects.equals(this.creationTimestamp, pinRevokedEvent.creationTimestamp) &&
 				Objects.equals(this.creatorType, pinRevokedEvent.creatorType) &&
 				Objects.equals(this.creatorPerson, pinRevokedEvent.creatorPerson) &&
+				Objects.equals(this.reservation, pinRevokedEvent.reservation) &&
 				Objects.equals(this.expirationTimestamp, pinRevokedEvent.expirationTimestamp);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, expirationTimestamp);
+		return Objects.hash($type, timestamp, eventType, accountId, invitationId, conversation, token, creationTimestamp, creatorType, creatorPerson, reservation, expirationTimestamp);
 	}
 
 	@Override
@@ -360,6 +385,7 @@ public class PinRevokedEvent {
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    creatorType: ").append(toIndentedString(creatorType)).append("\n");
 		sb.append("    creatorPerson: ").append(toIndentedString(creatorPerson)).append("\n");
+		sb.append("    reservation: ").append(toIndentedString(reservation)).append("\n");
 		sb.append("    expirationTimestamp: ").append(toIndentedString(expirationTimestamp)).append("\n");
 		sb.append("}");
 		return sb.toString();

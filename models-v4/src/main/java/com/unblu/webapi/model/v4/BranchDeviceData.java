@@ -34,6 +34,9 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchDeviceData.JSON_PROPERTY_ICON_ID,
 	BranchDeviceData.JSON_PROPERTY_URL,
 	BranchDeviceData.JSON_PROPERTY_LINK_TARGET,
+	BranchDeviceData.JSON_PROPERTY_EXTERNAL_DEVICE_ID,
+	BranchDeviceData.JSON_PROPERTY_ON_COLOR,
+	BranchDeviceData.JSON_PROPERTY_OFF_COLOR,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BranchDeviceData {
@@ -121,6 +124,18 @@ public class BranchDeviceData {
 	public static final String JSON_PROPERTY_LINK_TARGET = "linkTarget";
 	@JsonProperty(JSON_PROPERTY_LINK_TARGET)
 	private String linkTarget;
+
+	public static final String JSON_PROPERTY_EXTERNAL_DEVICE_ID = "externalDeviceId";
+	@JsonProperty(JSON_PROPERTY_EXTERNAL_DEVICE_ID)
+	private String externalDeviceId;
+
+	public static final String JSON_PROPERTY_ON_COLOR = "onColor";
+	@JsonProperty(JSON_PROPERTY_ON_COLOR)
+	private String onColor;
+
+	public static final String JSON_PROPERTY_OFF_COLOR = "offColor";
+	@JsonProperty(JSON_PROPERTY_OFF_COLOR)
+	private String offColor;
 
 	public BranchDeviceData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -377,6 +392,64 @@ public class BranchDeviceData {
 		this.linkTarget = linkTarget;
 	}
 
+	public BranchDeviceData externalDeviceId(String externalDeviceId) {
+		this.externalDeviceId = externalDeviceId;
+		return this;
+	}
+
+	/**
+	 * Identifier that addresses this device on the branch&#39;s external device endpoint (e.g. a WebIO port number). Used for DOOR_OPENER and STATUS_LAMP device
+	 * types. Optional.
+	 * 
+	 * @return externalDeviceId
+	 **/
+	@ApiModelProperty(value = "Identifier that addresses this device on the branch's external device endpoint (e.g. a WebIO port number). Used for DOOR_OPENER and STATUS_LAMP device types. Optional.")
+	public String getExternalDeviceId() {
+		return externalDeviceId;
+	}
+
+	public void setExternalDeviceId(String externalDeviceId) {
+		this.externalDeviceId = externalDeviceId;
+	}
+
+	public BranchDeviceData onColor(String onColor) {
+		this.onColor = onColor;
+		return this;
+	}
+
+	/**
+	 * Hex color displayed when the device is in the ON state. Format: @code{ #RRGGBB}. Optional.
+	 * 
+	 * @return onColor
+	 **/
+	@ApiModelProperty(value = "Hex color displayed when the device is in the ON state. Format: @code{ #RRGGBB}. Optional.")
+	public String getOnColor() {
+		return onColor;
+	}
+
+	public void setOnColor(String onColor) {
+		this.onColor = onColor;
+	}
+
+	public BranchDeviceData offColor(String offColor) {
+		this.offColor = offColor;
+		return this;
+	}
+
+	/**
+	 * Hex color displayed when the device is in the OFF state. Format: @code{ #RRGGBB}. Optional.
+	 * 
+	 * @return offColor
+	 **/
+	@ApiModelProperty(value = "Hex color displayed when the device is in the OFF state. Format: @code{ #RRGGBB}. Optional.")
+	public String getOffColor() {
+		return offColor;
+	}
+
+	public void setOffColor(String offColor) {
+		this.offColor = offColor;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -398,12 +471,15 @@ public class BranchDeviceData {
 				Objects.equals(this.rotation, branchDeviceData.rotation) &&
 				Objects.equals(this.iconId, branchDeviceData.iconId) &&
 				Objects.equals(this.url, branchDeviceData.url) &&
-				Objects.equals(this.linkTarget, branchDeviceData.linkTarget);
+				Objects.equals(this.linkTarget, branchDeviceData.linkTarget) &&
+				Objects.equals(this.externalDeviceId, branchDeviceData.externalDeviceId) &&
+				Objects.equals(this.onColor, branchDeviceData.onColor) &&
+				Objects.equals(this.offColor, branchDeviceData.offColor);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, name, description, translations, type, x, y, size, rotation, iconId, url, linkTarget);
+		return Objects.hash($type, id, name, description, translations, type, x, y, size, rotation, iconId, url, linkTarget, externalDeviceId, onColor, offColor);
 	}
 
 	@Override
@@ -423,6 +499,9 @@ public class BranchDeviceData {
 		sb.append("    iconId: ").append(toIndentedString(iconId)).append("\n");
 		sb.append("    url: ").append(toIndentedString(url)).append("\n");
 		sb.append("    linkTarget: ").append(toIndentedString(linkTarget)).append("\n");
+		sb.append("    externalDeviceId: ").append(toIndentedString(externalDeviceId)).append("\n");
+		sb.append("    onColor: ").append(toIndentedString(onColor)).append("\n");
+		sb.append("    offColor: ").append(toIndentedString(offColor)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
