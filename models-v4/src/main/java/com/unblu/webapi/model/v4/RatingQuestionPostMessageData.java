@@ -33,6 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RatingQuestionPostMessageData.JSON_PROPERTY_DECLINABLE,
 	RatingQuestionPostMessageData.JSON_PROPERTY_DECLINE_LABEL,
 	RatingQuestionPostMessageData.JSON_PROPERTY_DECLINE_VALUE,
+	RatingQuestionPostMessageData.JSON_PROPERTY_CONVERSATION_RATING_MODE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class RatingQuestionPostMessageData implements PostMessageData {
@@ -108,6 +109,10 @@ public class RatingQuestionPostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_DECLINE_VALUE = "declineValue";
 	@JsonProperty(JSON_PROPERTY_DECLINE_VALUE)
 	private String declineValue;
+
+	public static final String JSON_PROPERTY_CONVERSATION_RATING_MODE = "conversationRatingMode";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_RATING_MODE)
+	private EConversationRatingMode conversationRatingMode;
 
 	public RatingQuestionPostMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -312,6 +317,25 @@ public class RatingQuestionPostMessageData implements PostMessageData {
 		this.declineValue = declineValue;
 	}
 
+	public RatingQuestionPostMessageData conversationRatingMode(EConversationRatingMode conversationRatingMode) {
+		this.conversationRatingMode = conversationRatingMode;
+		return this;
+	}
+
+	/**
+	 * Get conversationRatingMode
+	 * 
+	 * @return conversationRatingMode
+	 **/
+	@ApiModelProperty(value = "")
+	public EConversationRatingMode getConversationRatingMode() {
+		return conversationRatingMode;
+	}
+
+	public void setConversationRatingMode(EConversationRatingMode conversationRatingMode) {
+		this.conversationRatingMode = conversationRatingMode;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -330,12 +354,13 @@ public class RatingQuestionPostMessageData implements PostMessageData {
 				Objects.equals(this.options, ratingQuestionPostMessageData.options) &&
 				Objects.equals(this.declinable, ratingQuestionPostMessageData.declinable) &&
 				Objects.equals(this.declineLabel, ratingQuestionPostMessageData.declineLabel) &&
-				Objects.equals(this.declineValue, ratingQuestionPostMessageData.declineValue);
+				Objects.equals(this.declineValue, ratingQuestionPostMessageData.declineValue) &&
+				Objects.equals(this.conversationRatingMode, ratingQuestionPostMessageData.conversationRatingMode);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, text, textType, options, declinable, declineLabel, declineValue);
+		return Objects.hash($type, type, fallbackText, locale, text, textType, options, declinable, declineLabel, declineValue, conversationRatingMode);
 	}
 
 	@Override
@@ -352,6 +377,7 @@ public class RatingQuestionPostMessageData implements PostMessageData {
 		sb.append("    declinable: ").append(toIndentedString(declinable)).append("\n");
 		sb.append("    declineLabel: ").append(toIndentedString(declineLabel)).append("\n");
 		sb.append("    declineValue: ").append(toIndentedString(declineValue)).append("\n");
+		sb.append("    conversationRatingMode: ").append(toIndentedString(conversationRatingMode)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -40,7 +40,7 @@ public enum ETemplateComponentParameterType {
 	VIDEO("VIDEO"),
 
 	/**
-	 * PAYLOAD: Only allowed for components of type &#x60;ETemplateComponentParemetersType.BUTTON&#x60;
+	 * PAYLOAD: Only allowed for components of type &#x60;ETemplateComponentParametersType.BUTTON&#x60;
 	 */
 	PAYLOAD("PAYLOAD"),
 
