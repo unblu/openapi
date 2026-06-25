@@ -326,11 +326,11 @@ public class RecordingAvailableMessageData implements MessageData {
 	}
 
 	/**
-	 * UTC timestamp when the message was received by the server&lt;br&gt; Empty when sending a new message to the collaboration server
+	 * UTC timestamp when the message was received by the server.
 	 * 
 	 * @return serverTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server")
+	@ApiModelProperty(value = "UTC timestamp when the message was received by the server.")
 	public Long getServerTimestamp() {
 		return serverTimestamp;
 	}
@@ -345,11 +345,11 @@ public class RecordingAvailableMessageData implements MessageData {
 	}
 
 	/**
-	 * UTC timestamp when the message was sent by the client.&lt;br&gt; Empty when sending a new message to the collaboration server
+	 * UTC timestamp when the message was sent by the client.
 	 * 
 	 * @return sendTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server")
+	@ApiModelProperty(value = "UTC timestamp when the message was sent by the client.")
 	public Long getSendTimestamp() {
 		return sendTimestamp;
 	}

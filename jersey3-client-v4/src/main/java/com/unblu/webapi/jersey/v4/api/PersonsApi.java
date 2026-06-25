@@ -13,6 +13,7 @@ import com.unblu.webapi.jersey.v4.invoker.Pair;
 import com.unblu.webapi.model.v4.AgentPersonStateData;
 import com.unblu.webapi.model.v4.AgentPersonStateResult;
 import com.unblu.webapi.model.v4.AgentStateQuery;
+import com.unblu.webapi.model.v4.ArchivePersonResult;
 import com.unblu.webapi.model.v4.EPersonSource;
 import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.NotificationCountData;
@@ -24,6 +25,8 @@ import com.unblu.webapi.model.v4.PersonResult;
 import com.unblu.webapi.model.v4.PersonStateData;
 import com.unblu.webapi.model.v4.PersonTypedQuery;
 import com.unblu.webapi.model.v4.PersonsAddAutoPauseNotificationsReasonBody;
+import com.unblu.webapi.model.v4.PersonsArchiveBotBody;
+import com.unblu.webapi.model.v4.PersonsArchiveVirtualBody;
 import com.unblu.webapi.model.v4.PersonsPauseNotificationsBody;
 import com.unblu.webapi.model.v4.PersonsRemoveAutoPauseNotificationsReasonBody;
 import com.unblu.webapi.model.v4.PersonsSetAwayBody;
@@ -181,6 +184,114 @@ public class PersonsApi {
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<PersonData> localVarReturnType = new GenericType<PersonData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * archiveBot Archives the bot person identified by @code{ sourceId}. A bot person referenced by an existing dialog bot configuration can still be archived.
+	 * Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and
+	 * prevents it from being set as a conversation recipient or assigned to a new bot.&lt;br&gt;
+	 * 
+	 * @param personsArchiveBotBody (required)
+	 * @return ArchivePersonResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public ArchivePersonResult personsArchiveBot(PersonsArchiveBotBody personsArchiveBotBody) throws ApiException {
+		return personsArchiveBotWithHttpInfo(personsArchiveBotBody).getData();
+	}
+
+	/**
+	 * archiveBot Archives the bot person identified by @code{ sourceId}. A bot person referenced by an existing dialog bot configuration can still be archived.
+	 * Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and
+	 * prevents it from being set as a conversation recipient or assigned to a new bot.&lt;br&gt;
+	 * 
+	 * @param personsArchiveBotBody (required)
+	 * @return ApiResponse&lt;ArchivePersonResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ArchivePersonResult> personsArchiveBotWithHttpInfo(PersonsArchiveBotBody personsArchiveBotBody) throws ApiException {
+		Object localVarPostBody = personsArchiveBotBody;
+
+		// verify the required parameter 'personsArchiveBotBody' is set
+		if (personsArchiveBotBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'personsArchiveBotBody' when calling personsArchiveBot");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/archiveBot";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ArchivePersonResult> localVarReturnType = new GenericType<ArchivePersonResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * archiveVirtual Archives the virtual person identified by @code{ sourceId} and deletes the underlying virtual user. Archiving makes the person eligible for
+	 * collection by the retention policies.&lt;br&gt;
+	 * 
+	 * @param personsArchiveVirtualBody (required)
+	 * @return ArchivePersonResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public ArchivePersonResult personsArchiveVirtual(PersonsArchiveVirtualBody personsArchiveVirtualBody) throws ApiException {
+		return personsArchiveVirtualWithHttpInfo(personsArchiveVirtualBody).getData();
+	}
+
+	/**
+	 * archiveVirtual Archives the virtual person identified by @code{ sourceId} and deletes the underlying virtual user. Archiving makes the person eligible for
+	 * collection by the retention policies.&lt;br&gt;
+	 * 
+	 * @param personsArchiveVirtualBody (required)
+	 * @return ApiResponse&lt;ArchivePersonResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ArchivePersonResult> personsArchiveVirtualWithHttpInfo(PersonsArchiveVirtualBody personsArchiveVirtualBody) throws ApiException {
+		Object localVarPostBody = personsArchiveVirtualBody;
+
+		// verify the required parameter 'personsArchiveVirtualBody' is set
+		if (personsArchiveVirtualBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'personsArchiveVirtualBody' when calling personsArchiveVirtual");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/archiveVirtual";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ArchivePersonResult> localVarReturnType = new GenericType<ArchivePersonResult>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

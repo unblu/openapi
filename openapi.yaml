@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.37.2
+  version: 8.38.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -565,6 +565,7 @@ paths:
                     nickname: null
                     externallyManaged: null
                     virtualUser: null
+                    functionTitle: null
                     configuration: null
                     metadata: null
         required: true
@@ -4428,6 +4429,7 @@ paths:
                     declinable: true
                     declineLabel: Decline
                     declineValue: DECLINE
+                    conversationRatingMode: NONE
               send-text-message:
                 summary: send text message
                 description: Send text message from the bot
@@ -8249,6 +8251,7 @@ paths:
                       sourceData: null
                       firstName: visitor-default_firstName
                       lastName: visitor-default_lastName
+                      functionTitle: null
                       username: visitor-default
                       nickname: null
                       displayName: visitor-default_firstName visitor-default_lastName
@@ -8322,6 +8325,7 @@ paths:
                       sourceData: null
                       firstName: visitor-default_firstName
                       lastName: visitor-default_lastName
+                      functionTitle: null
                       username: visitor-default
                       nickname: null
                       displayName: visitor-default_firstName visitor-default_lastName
@@ -11825,6 +11829,7 @@ paths:
                     declinable: false
                     declineLabel: null
                     declineValue: null
+                    conversationRatingMode: NONE
               send-text-message:
                 summary: send text message
                 description: Send text message to external messenger channel
@@ -14885,6 +14890,56 @@ paths:
       x-required-role:
       - REGISTERED_USER
       x-status: PREVIEW
+  /persons/archiveBot:
+    post:
+      tags:
+      - Persons
+      summary: archiveBot
+      description: "Archives the bot person identified by @code{ sourceId}. A bot person referenced by an existing dialog bot configuration can still be archived. Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and prevents it from being set as a conversation recipient or assigned to a new bot.<br>"
+      operationId: personsArchiveBot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonsArchiveBotBody"
+        required: true
+      responses:
+        "200":
+          description: "result of the archive operation;  @code{ newlyArchived=true}  only on the first successful call"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchivePersonResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /persons/archiveVirtual:
+    post:
+      tags:
+      - Persons
+      summary: archiveVirtual
+      description: "Archives the virtual person identified by @code{ sourceId} and deletes the underlying virtual user. Archiving makes the person eligible for collection by the retention policies.<br>"
+      operationId: personsArchiveVirtual
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonsArchiveVirtualBody"
+        required: true
+      responses:
+        "200":
+          description: "result of the archive operation;  @code{ newlyArchived=true}  only on the first successful call"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchivePersonResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /persons/{personId}/autoPauseNotifications:
     post:
       tags:
@@ -16856,6 +16911,7 @@ paths:
                     nickname: null
                     externallyManaged: null
                     virtualUser: null
+                    functionTitle: null
                     configuration: null
                     metadata: null
                   password: L0remPf18!
@@ -17391,6 +17447,7 @@ paths:
                   nickname: null
                   externallyManaged: false
                   virtualUser: false
+                  functionTitle: null
                   configuration: null
                   metadata: null
         required: true
@@ -19655,7 +19712,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -19875,7 +19932,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -19924,7 +19981,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -19970,7 +20027,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -20016,7 +20073,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -20068,7 +20125,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -20117,7 +20174,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -20180,7 +20237,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -20217,7 +20274,7 @@ components:
         pauseNotificationsEndTimestamp:
           type: integer
           format: int64
-          description: The Unix timestamp (ms) when pausing notifications should end
+          description: "The Unix timestamp (ms) when pausing notifications should end. <p> When the agent has multiple auto-pause reasons, this is the farthest-in-the-future of their expiration timestamps."
         autoPauseNotificationsReasons:
           type: array
           description: A list of reasons based on which the agent's notifications should be auto-paused
@@ -20917,7 +20974,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -21102,11 +21159,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -21161,6 +21218,18 @@ components:
           description: "Multichoice question message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
           items:
             $ref: "#/components/schemas/MultichoiceQuestionMessageTranslation"
+    ArchivePersonResult:
+      type: object
+      description: "Result of archiving a person via the Persons API, such as @code{ /persons/archiveVirtual}."
+      properties:
+        $_type:
+          type: string
+          default: ArchivePersonResult
+          enum:
+          - ArchivePersonResult
+        newlyArchived:
+          type: boolean
+          description: "@code{ true} if this call archived the person; @code{ false} if the person was already archived (idempotent re-archive)."
     AriaAgenticFlowDataContent:
       oneOf:
       - $ref: "#/components/schemas/AriaMultiflowAgenticFlowDataContent"
@@ -21498,7 +21567,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -21549,7 +21618,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -21597,7 +21666,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -21643,7 +21712,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -22736,7 +22805,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -23218,7 +23287,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -23264,7 +23333,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -23302,7 +23371,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -23346,7 +23415,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -23382,7 +23451,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -23426,7 +23495,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -23927,7 +23996,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24025,7 +24094,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24450,7 +24519,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24687,7 +24756,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24770,7 +24839,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24821,7 +24890,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24868,7 +24937,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24918,7 +24987,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -24962,7 +25031,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -25018,7 +25087,7 @@ components:
         publicationTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp (ms) when the media publication started
+          description: "UTC timestamp (ms) when the media publication started. <p> A new entity is created with a new timestamp each time the published media (audio, video, or both) is changed."
     CallOrderBy:
       type: object
       description: Call orderBy item.
@@ -25044,7 +25113,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -25087,7 +25156,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -25126,7 +25195,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -25859,7 +25928,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -25904,11 +25973,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -26065,7 +26134,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26115,7 +26184,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26158,7 +26227,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26205,7 +26274,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26300,7 +26369,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26354,7 +26423,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26415,7 +26484,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26464,7 +26533,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26508,7 +26577,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26548,7 +26617,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26823,7 +26892,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -26855,7 +26924,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -27150,7 +27219,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -27317,6 +27386,9 @@ components:
         lastName:
           type: string
           description: the last name of the person. Maximum length of 250 characters. Can be omitted.
+        functionTitle:
+          type: string
+          description: The agent's function or job title. Maximum length of 250 characters. Can be omitted.
         username:
           type: string
           description: "The username of the person. When firstName and lastName are unknown, it is recommended to use this value to change the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted."
@@ -27606,7 +27678,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -27656,7 +27728,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -27940,7 +28012,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -27974,7 +28046,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28094,7 +28166,7 @@ components:
         lastCompletedRecordingTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the last recording was completed. Null if there hasn't been any yet.
+          description: Unix timestamp (ms) when the last recording was completed. Null if there hasn't been any yet. <p> Only set for Unblu recordings; recordings made via the Vonage Video API are not tracked by this timestamp.
         state:
           $ref: "#/components/schemas/EConversationState"
         initialEngagementType:
@@ -28131,7 +28203,7 @@ components:
         dueDeletionTimestamp:
           type: integer
           format: int64
-          description: '* Unix timestamp (ms) when this conversation will be automatically deleted. See `getRetentionIntervalConversationSeconds` for details.'
+          description: "Unix timestamp (ms) when this conversation will be deleted, taking into account the retention period defined for the entity. Calculated from `endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details."
         initialEngagementUrl:
           type: string
           description: "The URL where the conversation originated. The following conversations always have an initial engagement URL: <ul> <li>Conversations initiated by a visitor on a customer's website where Unblu is integrated</li> <li>PIN-based conversations, provided a visitor redeems the PIN on a customer's website where Unblu is integrated</li> <li>Conversations created using the Web API, provided an initial engagement URL was included when the conversation was created</li> </ul> Conversations initiated from the mobile SDK don't have an initial engagement URL."
@@ -28597,7 +28669,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28629,7 +28701,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28656,7 +28728,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28785,7 +28857,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28806,7 +28878,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28834,7 +28906,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28952,7 +29024,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -28973,7 +29045,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29021,7 +29093,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29068,7 +29140,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29177,7 +29249,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29217,7 +29289,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29264,7 +29336,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29383,7 +29455,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29637,7 +29709,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29727,7 +29799,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -29871,7 +29943,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -30413,7 +30485,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -30434,7 +30506,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -31741,7 +31813,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -32202,7 +32274,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -32376,7 +32448,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -32555,7 +32627,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -32666,7 +32738,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -33232,7 +33304,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -35133,6 +35205,15 @@ components:
       - SECONDARY_VISITOR
       - GHOST
       - RECORDER
+    EConversationRatingMode:
+      type: string
+      description: How the result of a rating question message affects the conversation rating.
+      enum:
+      - NONE
+      - OVERRIDE
+      x-enum-descriptions:
+      - "NONE: The rating result does not affect the conversation rating."
+      - "OVERRIDE: The rating result overrides the conversation rating."
     EConversationRealParticipationType:
       type: string
       description: "This enum contains all \"real\" participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`ENonVisitorParticipationType`</b> All types excluding visitors <li><b>`EConversationImpactingParticipationType`</b> All human participation types (No recorder) <li><b>EConversationRealParticipationType}</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
@@ -37743,9 +37824,9 @@ components:
       - IMAGE
       - TEXT
       - VIDEO
-      - "PAYLOAD: Only allowed for components of type `ETemplateComponentParemetersType.BUTTON`"
+      - "PAYLOAD: Only allowed for components of type `ETemplateComponentParametersType.BUTTON`"
       - LOCATION
-    ETemplateComponentParemetersSubType:
+    ETemplateComponentParametersSubType:
       type: string
       enum:
       - QUICK_REPLY
@@ -37755,7 +37836,7 @@ components:
       - QUICK_REPLY
       - URL
       - CATALOG
-    ETemplateComponentParemetersType:
+    ETemplateComponentParametersType:
       type: string
       enum:
       - HEADER
@@ -39359,7 +39440,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -39428,7 +39509,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -39669,11 +39750,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -40762,7 +40843,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -40807,7 +40888,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41009,7 +41090,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41052,7 +41133,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41094,7 +41175,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41245,7 +41326,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41288,7 +41369,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41331,7 +41412,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41831,7 +41912,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -41986,11 +42067,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -42532,7 +42613,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -42806,7 +42887,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -43198,11 +43279,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -43800,7 +43881,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -43919,7 +44000,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45275,7 +45356,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45296,7 +45377,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45317,7 +45398,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45338,7 +45419,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45359,7 +45440,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45398,7 +45479,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45419,7 +45500,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45440,7 +45521,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45461,7 +45542,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45492,7 +45573,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45513,7 +45594,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -45670,6 +45751,9 @@ components:
         lastName:
           type: string
           description: the last name of the person. Maximum length of 250 characters. Can be omitted.
+        functionTitle:
+          type: string
+          description: The agent's function or job title. Maximum length of 250 characters. Can be omitted.
         username:
           type: string
           description: "The username of the person. When firstName and lastName are unknown, it is recommended to use this value to change the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted."
@@ -45883,7 +45967,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -46036,7 +46120,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -46492,7 +46576,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -46599,6 +46683,20 @@ components:
           type: integer
           format: int32
           description: "The duration, in seconds, for which notifications should be paused automatically"
+    PersonsArchiveBotBody:
+      type: object
+      description: Request body for the 'personsArchiveBot' operation
+      properties:
+        sourceId:
+          type: string
+          description: source ID of the bot person to archive; must not be empty
+    PersonsArchiveVirtualBody:
+      type: object
+      description: Request body for the 'personsArchiveVirtual' operation
+      properties:
+        sourceId:
+          type: string
+          description: source ID of the virtual person to archive; must not be empty
     PersonsPauseNotificationsBody:
       type: object
       description: Request body for the 'personsPauseNotifications' operation
@@ -46689,7 +46787,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -46735,7 +46833,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -46778,7 +46876,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -46824,7 +46922,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -47061,11 +47159,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -47421,11 +47519,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -47580,6 +47678,8 @@ components:
         declineValue:
           type: string
           description: Value which will be propagated as reply value if the question is declined
+        conversationRatingMode:
+          $ref: "#/components/schemas/EConversationRatingMode"
     ReadMessagePushNotificationEvent:
       type: object
       description: Push notification when some unread messages were read
@@ -47592,7 +47692,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -47782,11 +47882,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -47887,11 +47987,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -47992,7 +48092,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -48029,7 +48129,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -48076,7 +48176,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -48858,11 +48958,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -49098,7 +49198,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -49269,11 +49369,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -49401,11 +49501,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -49814,6 +49914,9 @@ components:
         virtualUser:
           type: boolean
           description: "True if the user is purely virtual (they weren't created as the result of an LDAP sync, for instance) and thus can't be edited in the Unblu UI. If omitted, the property is set to false, and the user is considered to be a physical user."
+        functionTitle:
+          type: string
+          description: The agent's function or job title. Maximum length of 250 characters. Can be omitted.
         configuration:
           type: object
           description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
@@ -49891,7 +49994,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50152,7 +50255,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50204,7 +50307,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50253,7 +50356,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50305,7 +50408,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50366,7 +50469,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50533,7 +50636,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50560,7 +50663,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50581,7 +50684,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: The time (Unix time in ms) when the event was generated
+          description: The server time (Unix timestamp in ms) when the event occurred.
         eventType:
           type: string
           description: The name of the event
@@ -50853,21 +50956,21 @@ components:
           enum:
           - WhatsAppTemplateComponentParameters
         type:
-          $ref: "#/components/schemas/ETemplateComponentParemetersType"
+          $ref: "#/components/schemas/ETemplateComponentParametersType"
         subType:
-          $ref: "#/components/schemas/ETemplateComponentParemetersSubType"
+          $ref: "#/components/schemas/ETemplateComponentParametersSubType"
         index:
           type: integer
           format: int32
-          description: Only used for `ETemplateComponentParemetersType.BUTTON`
+          description: "Only used for `ETemplateComponentParametersType.BUTTON`. @code{ null} for all other component types, in which case it is omitted from the serialized payload."
         parameters:
           type: array
-          description: The parameters used in that component. Not used for `ETemplateComponentParemetersType.CAROUSEL`
+          description: The parameters used in that component. Not used for `ETemplateComponentParametersType.CAROUSEL`
           items:
             $ref: "#/components/schemas/WhatsAppTemplateParameter"
         cards:
           type: array
-          description: The card component parameters used in that carousel component. Only used for `ETemplateComponentParemetersType.CAROUSEL`
+          description: The card component parameters used in that carousel component. Only used for `ETemplateComponentParametersType.CAROUSEL`
           items:
             $ref: "#/components/schemas/WhatsAppTemplateCardParameter"
     WhatsAppTemplateCurrencyParameter:
@@ -50986,11 +51089,11 @@ components:
         serverTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was received by the server<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was received by the server.
         sendTimestamp:
           type: integer
           format: int64
-          description: UTC timestamp when the message was sent by the client.<br> Empty when sending a new message to the collaboration server
+          description: UTC timestamp when the message was sent by the client.
         type:
           $ref: "#/components/schemas/EMessageType"
         recipientPersonIds:
@@ -51097,6 +51200,9 @@ components:
         templateId:
           type: string
           description: ID of the message template
+        templateName:
+          type: string
+          description: "Name of the message template as displayed in the Unblu UI. <p> Alternative to `templateId`: specify either `templateId` (Meta technical ID), but not both. If multiple templates share the same name on the channel, the request fails — use `templateId` to disambiguate."
         components:
           type: array
           description: The parameters for the template components

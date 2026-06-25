@@ -5,33 +5,28 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ETemplateComponentParemetersType
+ * Gets or Sets ETemplateComponentParametersSubType
  */
-public enum ETemplateComponentParemetersType {
+public enum ETemplateComponentParametersSubType {
 
 	/**
-	 * HEADER
+	 * QUICK_REPLY
 	 */
-	HEADER("HEADER"),
+	QUICK_REPLY("QUICK_REPLY"),
 
 	/**
-	 * BODY
+	 * URL
 	 */
-	BODY("BODY"),
+	URL("URL"),
 
 	/**
-	 * BUTTON
+	 * CATALOG
 	 */
-	BUTTON("BUTTON"),
-
-	/**
-	 * CAROUSEL
-	 */
-	CAROUSEL("CAROUSEL");
+	CATALOG("CATALOG");
 
 	private String value;
 
-	ETemplateComponentParemetersType(String value) {
+	ETemplateComponentParametersSubType(String value) {
 		this.value = value;
 	}
 
@@ -46,8 +41,8 @@ public enum ETemplateComponentParemetersType {
 	}
 
 	@JsonCreator
-	public static ETemplateComponentParemetersType fromValue(String value) {
-		for (ETemplateComponentParemetersType b : ETemplateComponentParemetersType.values()) {
+	public static ETemplateComponentParametersSubType fromValue(String value) {
+		for (ETemplateComponentParametersSubType b : ETemplateComponentParametersSubType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

@@ -39,6 +39,7 @@ import io.swagger.annotations.ApiModelProperty;
 	User.JSON_PROPERTY_NICKNAME,
 	User.JSON_PROPERTY_EXTERNALLY_MANAGED,
 	User.JSON_PROPERTY_VIRTUAL_USER,
+	User.JSON_PROPERTY_FUNCTION_TITLE,
 	User.JSON_PROPERTY_CONFIGURATION,
 	User.JSON_PROPERTY_METADATA,
 })
@@ -148,6 +149,10 @@ public class User {
 	public static final String JSON_PROPERTY_VIRTUAL_USER = "virtualUser";
 	@JsonProperty(JSON_PROPERTY_VIRTUAL_USER)
 	private Boolean virtualUser;
+
+	public static final String JSON_PROPERTY_FUNCTION_TITLE = "functionTitle";
+	@JsonProperty(JSON_PROPERTY_FUNCTION_TITLE)
+	private String functionTitle;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -509,6 +514,25 @@ public class User {
 		this.virtualUser = virtualUser;
 	}
 
+	public User functionTitle(String functionTitle) {
+		this.functionTitle = functionTitle;
+		return this;
+	}
+
+	/**
+	 * The agent&#39;s function or job title. Maximum length of 250 characters. Can be omitted.
+	 * 
+	 * @return functionTitle
+	 **/
+	@ApiModelProperty(value = "The agent's function or job title. Maximum length of 250 characters. Can be omitted.")
+	public String getFunctionTitle() {
+		return functionTitle;
+	}
+
+	public void setFunctionTitle(String functionTitle) {
+		this.functionTitle = functionTitle;
+	}
+
 	public User _configuration(Map<String, String> _configuration) {
 		this._configuration = _configuration;
 		return this;
@@ -592,13 +616,14 @@ public class User {
 				Objects.equals(this.nickname, user.nickname) &&
 				Objects.equals(this.externallyManaged, user.externallyManaged) &&
 				Objects.equals(this.virtualUser, user.virtualUser) &&
+				Objects.equals(this.functionTitle, user.functionTitle) &&
 				Objects.equals(this._configuration, user._configuration) &&
 				Objects.equals(this.metadata, user.metadata);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, username, email, phone, teamId, authorizationRole, displayName, firstName, lastName, nickname, externallyManaged, virtualUser, _configuration, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, username, email, phone, teamId, authorizationRole, displayName, firstName, lastName, nickname, externallyManaged, virtualUser, functionTitle, _configuration, metadata);
 	}
 
 	@Override
@@ -623,6 +648,7 @@ public class User {
 		sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
 		sb.append("    externallyManaged: ").append(toIndentedString(externallyManaged)).append("\n");
 		sb.append("    virtualUser: ").append(toIndentedString(virtualUser)).append("\n");
+		sb.append("    functionTitle: ").append(toIndentedString(functionTitle)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("}");

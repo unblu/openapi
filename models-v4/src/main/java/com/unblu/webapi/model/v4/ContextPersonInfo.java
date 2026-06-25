@@ -30,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ContextPersonInfo.JSON_PROPERTY_SOURCE_DATA,
 	ContextPersonInfo.JSON_PROPERTY_FIRST_NAME,
 	ContextPersonInfo.JSON_PROPERTY_LAST_NAME,
+	ContextPersonInfo.JSON_PROPERTY_FUNCTION_TITLE,
 	ContextPersonInfo.JSON_PROPERTY_USERNAME,
 	ContextPersonInfo.JSON_PROPERTY_NICKNAME,
 	ContextPersonInfo.JSON_PROPERTY_DISPLAY_NAME,
@@ -124,6 +125,10 @@ public class ContextPersonInfo {
 	public static final String JSON_PROPERTY_LAST_NAME = "lastName";
 	@JsonProperty(JSON_PROPERTY_LAST_NAME)
 	private String lastName;
+
+	public static final String JSON_PROPERTY_FUNCTION_TITLE = "functionTitle";
+	@JsonProperty(JSON_PROPERTY_FUNCTION_TITLE)
+	private String functionTitle;
 
 	public static final String JSON_PROPERTY_USERNAME = "username";
 	@JsonProperty(JSON_PROPERTY_USERNAME)
@@ -390,6 +395,25 @@ public class ContextPersonInfo {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public ContextPersonInfo functionTitle(String functionTitle) {
+		this.functionTitle = functionTitle;
+		return this;
+	}
+
+	/**
+	 * The agent&#39;s function or job title. Maximum length of 250 characters. Can be omitted.
+	 * 
+	 * @return functionTitle
+	 **/
+	@ApiModelProperty(value = "The agent's function or job title. Maximum length of 250 characters. Can be omitted.")
+	public String getFunctionTitle() {
+		return functionTitle;
+	}
+
+	public void setFunctionTitle(String functionTitle) {
+		this.functionTitle = functionTitle;
 	}
 
 	public ContextPersonInfo username(String username) {
@@ -864,6 +888,7 @@ public class ContextPersonInfo {
 				Objects.equals(this.sourceData, contextPersonInfo.sourceData) &&
 				Objects.equals(this.firstName, contextPersonInfo.firstName) &&
 				Objects.equals(this.lastName, contextPersonInfo.lastName) &&
+				Objects.equals(this.functionTitle, contextPersonInfo.functionTitle) &&
 				Objects.equals(this.username, contextPersonInfo.username) &&
 				Objects.equals(this.nickname, contextPersonInfo.nickname) &&
 				Objects.equals(this.displayName, contextPersonInfo.displayName) &&
@@ -891,7 +916,7 @@ public class ContextPersonInfo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, links, avatar, osName, osVersion, browserName, browserVersion, locale, city, country);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, links, avatar, osName, osVersion, browserName, browserVersion, locale, city, country);
 	}
 
 	@Override
@@ -907,6 +932,7 @@ public class ContextPersonInfo {
 		sb.append("    sourceData: ").append(toIndentedString(sourceData)).append("\n");
 		sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
 		sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+		sb.append("    functionTitle: ").append(toIndentedString(functionTitle)).append("\n");
 		sb.append("    username: ").append(toIndentedString(username)).append("\n");
 		sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
 		sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");

@@ -5,28 +5,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ETemplateComponentParemetersSubType
+ * How the result of a rating question message affects the conversation rating.
  */
-public enum ETemplateComponentParemetersSubType {
+public enum EConversationRatingMode {
 
 	/**
-	 * QUICK_REPLY
+	 * NONE: The rating result does not affect the conversation rating.
 	 */
-	QUICK_REPLY("QUICK_REPLY"),
+	NONE("NONE"),
 
 	/**
-	 * URL
+	 * OVERRIDE: The rating result overrides the conversation rating.
 	 */
-	URL("URL"),
-
-	/**
-	 * CATALOG
-	 */
-	CATALOG("CATALOG");
+	OVERRIDE("OVERRIDE");
 
 	private String value;
 
-	ETemplateComponentParemetersSubType(String value) {
+	EConversationRatingMode(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +36,8 @@ public enum ETemplateComponentParemetersSubType {
 	}
 
 	@JsonCreator
-	public static ETemplateComponentParemetersSubType fromValue(String value) {
-		for (ETemplateComponentParemetersSubType b : ETemplateComponentParemetersSubType.values()) {
+	public static EConversationRatingMode fromValue(String value) {
+		for (EConversationRatingMode b : EConversationRatingMode.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

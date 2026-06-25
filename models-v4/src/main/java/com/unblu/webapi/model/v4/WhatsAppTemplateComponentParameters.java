@@ -67,11 +67,11 @@ public class WhatsAppTemplateComponentParameters {
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
-	private ETemplateComponentParemetersType type;
+	private ETemplateComponentParametersType type;
 
 	public static final String JSON_PROPERTY_SUB_TYPE = "subType";
 	@JsonProperty(JSON_PROPERTY_SUB_TYPE)
-	private ETemplateComponentParemetersSubType subType;
+	private ETemplateComponentParametersSubType subType;
 
 	public static final String JSON_PROPERTY_INDEX = "index";
 	@JsonProperty(JSON_PROPERTY_INDEX)
@@ -104,7 +104,7 @@ public class WhatsAppTemplateComponentParameters {
 		this.$type = $type;
 	}
 
-	public WhatsAppTemplateComponentParameters type(ETemplateComponentParemetersType type) {
+	public WhatsAppTemplateComponentParameters type(ETemplateComponentParametersType type) {
 		this.type = type;
 		return this;
 	}
@@ -115,15 +115,15 @@ public class WhatsAppTemplateComponentParameters {
 	 * @return type
 	 **/
 	@ApiModelProperty(value = "")
-	public ETemplateComponentParemetersType getType() {
+	public ETemplateComponentParametersType getType() {
 		return type;
 	}
 
-	public void setType(ETemplateComponentParemetersType type) {
+	public void setType(ETemplateComponentParametersType type) {
 		this.type = type;
 	}
 
-	public WhatsAppTemplateComponentParameters subType(ETemplateComponentParemetersSubType subType) {
+	public WhatsAppTemplateComponentParameters subType(ETemplateComponentParametersSubType subType) {
 		this.subType = subType;
 		return this;
 	}
@@ -134,11 +134,11 @@ public class WhatsAppTemplateComponentParameters {
 	 * @return subType
 	 **/
 	@ApiModelProperty(value = "")
-	public ETemplateComponentParemetersSubType getSubType() {
+	public ETemplateComponentParametersSubType getSubType() {
 		return subType;
 	}
 
-	public void setSubType(ETemplateComponentParemetersSubType subType) {
+	public void setSubType(ETemplateComponentParametersSubType subType) {
 		this.subType = subType;
 	}
 
@@ -148,11 +148,12 @@ public class WhatsAppTemplateComponentParameters {
 	}
 
 	/**
-	 * Only used for &#x60;ETemplateComponentParemetersType.BUTTON&#x60;
+	 * Only used for &#x60;ETemplateComponentParametersType.BUTTON&#x60;. @code{ null} for all other component types, in which case it is omitted from the
+	 * serialized payload.
 	 * 
 	 * @return index
 	 **/
-	@ApiModelProperty(value = "Only used for `ETemplateComponentParemetersType.BUTTON`")
+	@ApiModelProperty(value = "Only used for `ETemplateComponentParametersType.BUTTON`. @code{ null} for all other component types, in which case it is omitted from the serialized payload.")
 	public Integer getIndex() {
 		return index;
 	}
@@ -175,11 +176,11 @@ public class WhatsAppTemplateComponentParameters {
 	}
 
 	/**
-	 * The parameters used in that component. Not used for &#x60;ETemplateComponentParemetersType.CAROUSEL&#x60;
+	 * The parameters used in that component. Not used for &#x60;ETemplateComponentParametersType.CAROUSEL&#x60;
 	 * 
 	 * @return parameters
 	 **/
-	@ApiModelProperty(value = "The parameters used in that component. Not used for `ETemplateComponentParemetersType.CAROUSEL`")
+	@ApiModelProperty(value = "The parameters used in that component. Not used for `ETemplateComponentParametersType.CAROUSEL`")
 	public List<WhatsAppTemplateParameter> getParameters() {
 		return parameters;
 	}
@@ -202,11 +203,11 @@ public class WhatsAppTemplateComponentParameters {
 	}
 
 	/**
-	 * The card component parameters used in that carousel component. Only used for &#x60;ETemplateComponentParemetersType.CAROUSEL&#x60;
+	 * The card component parameters used in that carousel component. Only used for &#x60;ETemplateComponentParametersType.CAROUSEL&#x60;
 	 * 
 	 * @return cards
 	 **/
-	@ApiModelProperty(value = "The card component parameters used in that carousel component. Only used for `ETemplateComponentParemetersType.CAROUSEL`")
+	@ApiModelProperty(value = "The card component parameters used in that carousel component. Only used for `ETemplateComponentParametersType.CAROUSEL`")
 	public List<WhatsAppTemplateCardParameter> getCards() {
 		return cards;
 	}

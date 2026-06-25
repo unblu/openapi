@@ -238,11 +238,12 @@ public class CallMediaPublication implements CallPublication {
 	}
 
 	/**
-	 * UTC timestamp (ms) when the media publication started
+	 * UTC timestamp (ms) when the media publication started. &lt;p&gt; A new entity is created with a new timestamp each time the published media (audio, video, or
+	 * both) is changed.
 	 * 
 	 * @return publicationTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) when the media publication started")
+	@ApiModelProperty(value = "UTC timestamp (ms) when the media publication started. <p> A new entity is created with a new timestamp each time the published media (audio, video, or both) is changed.")
 	public Long getPublicationTimestamp() {
 		return publicationTimestamp;
 	}

@@ -241,11 +241,12 @@ public class AgentPersonStateData implements PersonStateData {
 	}
 
 	/**
-	 * The Unix timestamp (ms) when pausing notifications should end
+	 * The Unix timestamp (ms) when pausing notifications should end. &lt;p&gt; When the agent has multiple auto-pause reasons, this is the farthest-in-the-future
+	 * of their expiration timestamps.
 	 * 
 	 * @return pauseNotificationsEndTimestamp
 	 **/
-	@ApiModelProperty(value = "The Unix timestamp (ms) when pausing notifications should end")
+	@ApiModelProperty(value = "The Unix timestamp (ms) when pausing notifications should end. <p> When the agent has multiple auto-pause reasons, this is the farthest-in-the-future of their expiration timestamps.")
 	public Long getPauseNotificationsEndTimestamp() {
 		return pauseNotificationsEndTimestamp;
 	}

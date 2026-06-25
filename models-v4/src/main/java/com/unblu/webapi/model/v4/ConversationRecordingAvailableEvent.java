@@ -143,11 +143,11 @@ public class ConversationRecordingAvailableEvent {
 	}
 
 	/**
-	 * The time (Unix time in ms) when the event was generated
+	 * The server time (Unix timestamp in ms) when the event occurred.
 	 * 
 	 * @return timestamp
 	 **/
-	@ApiModelProperty(value = "The time (Unix time in ms) when the event was generated")
+	@ApiModelProperty(value = "The server time (Unix timestamp in ms) when the event occurred.")
 	public Long getTimestamp() {
 		return timestamp;
 	}

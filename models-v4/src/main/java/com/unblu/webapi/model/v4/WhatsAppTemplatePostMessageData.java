@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_LOCALE,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_TEMPLATE_ID,
+	WhatsAppTemplatePostMessageData.JSON_PROPERTY_TEMPLATE_NAME,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_COMPONENTS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -82,6 +83,10 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_TEMPLATE_ID = "templateId";
 	@JsonProperty(JSON_PROPERTY_TEMPLATE_ID)
 	private String templateId;
+
+	public static final String JSON_PROPERTY_TEMPLATE_NAME = "templateName";
+	@JsonProperty(JSON_PROPERTY_TEMPLATE_NAME)
+	private String templateName;
 
 	public static final String JSON_PROPERTY_COMPONENTS = "components";
 	@JsonProperty(JSON_PROPERTY_COMPONENTS)
@@ -187,6 +192,26 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 		this.templateId = templateId;
 	}
 
+	public WhatsAppTemplatePostMessageData templateName(String templateName) {
+		this.templateName = templateName;
+		return this;
+	}
+
+	/**
+	 * Name of the message template as displayed in the Unblu UI. &lt;p&gt; Alternative to &#x60;templateId&#x60;: specify either &#x60;templateId&#x60; (Meta
+	 * technical ID), but not both. If multiple templates share the same name on the channel, the request fails — use &#x60;templateId&#x60; to disambiguate.
+	 * 
+	 * @return templateName
+	 **/
+	@ApiModelProperty(value = "Name of the message template as displayed in the Unblu UI. <p> Alternative to `templateId`: specify either `templateId` (Meta technical ID), but not both. If multiple templates share the same name on the channel, the request fails — use `templateId` to disambiguate.")
+	public String getTemplateName() {
+		return templateName;
+	}
+
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
+	}
+
 	public WhatsAppTemplatePostMessageData components(List<WhatsAppTemplateComponentParameters> components) {
 		this.components = components;
 		return this;
@@ -228,12 +253,13 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 				Objects.equals(this.fallbackText, whatsAppTemplatePostMessageData.fallbackText) &&
 				Objects.equals(this.locale, whatsAppTemplatePostMessageData.locale) &&
 				Objects.equals(this.templateId, whatsAppTemplatePostMessageData.templateId) &&
+				Objects.equals(this.templateName, whatsAppTemplatePostMessageData.templateName) &&
 				Objects.equals(this.components, whatsAppTemplatePostMessageData.components);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, templateId, components);
+		return Objects.hash($type, type, fallbackText, locale, templateId, templateName, components);
 	}
 
 	@Override
@@ -245,6 +271,7 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
+		sb.append("    templateName: ").append(toIndentedString(templateName)).append("\n");
 		sb.append("    components: ").append(toIndentedString(components)).append("\n");
 		sb.append("}");
 		return sb.toString();

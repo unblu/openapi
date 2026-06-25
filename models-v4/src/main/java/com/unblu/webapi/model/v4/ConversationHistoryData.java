@@ -448,11 +448,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the last recording was completed. Null if there hasn&#39;t been any yet.
+	 * Unix timestamp (ms) when the last recording was completed. Null if there hasn&#39;t been any yet. &lt;p&gt; Only set for Unblu recordings; recordings made
+	 * via the Vonage Video API are not tracked by this timestamp.
 	 * 
 	 * @return lastCompletedRecordingTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the last recording was completed. Null if there hasn't been any yet.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the last recording was completed. Null if there hasn't been any yet. <p> Only set for Unblu recordings; recordings made via the Vonage Video API are not tracked by this timestamp.")
 	public Long getLastCompletedRecordingTimestamp() {
 		return lastCompletedRecordingTimestamp;
 	}
@@ -696,11 +697,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * * Unix timestamp (ms) when this conversation will be automatically deleted. See &#x60;getRetentionIntervalConversationSeconds&#x60; for details.
+	 * Unix timestamp (ms) when this conversation will be deleted, taking into account the retention period defined for the entity. Calculated from
+	 * &#x60;endTimestamp&#x60;. Null if no record retention interval is configured. See &#x60;getRetentionIntervalConversationSeconds&#x60; for details.
 	 * 
 	 * @return dueDeletionTimestamp
 	 **/
-	@ApiModelProperty(value = "* Unix timestamp (ms) when this conversation will be automatically deleted. See `getRetentionIntervalConversationSeconds` for details.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when this conversation will be deleted, taking into account the retention period defined for the entity. Calculated from `endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details.")
 	public Long getDueDeletionTimestamp() {
 		return dueDeletionTimestamp;
 	}

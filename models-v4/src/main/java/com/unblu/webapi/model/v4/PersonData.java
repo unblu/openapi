@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PersonData.JSON_PROPERTY_SOURCE_DATA,
 	PersonData.JSON_PROPERTY_FIRST_NAME,
 	PersonData.JSON_PROPERTY_LAST_NAME,
+	PersonData.JSON_PROPERTY_FUNCTION_TITLE,
 	PersonData.JSON_PROPERTY_USERNAME,
 	PersonData.JSON_PROPERTY_NICKNAME,
 	PersonData.JSON_PROPERTY_DISPLAY_NAME,
@@ -120,6 +121,10 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_LAST_NAME = "lastName";
 	@JsonProperty(JSON_PROPERTY_LAST_NAME)
 	private String lastName;
+
+	public static final String JSON_PROPERTY_FUNCTION_TITLE = "functionTitle";
+	@JsonProperty(JSON_PROPERTY_FUNCTION_TITLE)
+	private String functionTitle;
 
 	public static final String JSON_PROPERTY_USERNAME = "username";
 	@JsonProperty(JSON_PROPERTY_USERNAME)
@@ -362,6 +367,25 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public PersonData functionTitle(String functionTitle) {
+		this.functionTitle = functionTitle;
+		return this;
+	}
+
+	/**
+	 * The agent&#39;s function or job title. Maximum length of 250 characters. Can be omitted.
+	 * 
+	 * @return functionTitle
+	 **/
+	@ApiModelProperty(value = "The agent's function or job title. Maximum length of 250 characters. Can be omitted.")
+	public String getFunctionTitle() {
+		return functionTitle;
+	}
+
+	public void setFunctionTitle(String functionTitle) {
+		this.functionTitle = functionTitle;
 	}
 
 	public PersonData username(String username) {
@@ -731,6 +755,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.sourceData, personData.sourceData) &&
 				Objects.equals(this.firstName, personData.firstName) &&
 				Objects.equals(this.lastName, personData.lastName) &&
+				Objects.equals(this.functionTitle, personData.functionTitle) &&
 				Objects.equals(this.username, personData.username) &&
 				Objects.equals(this.nickname, personData.nickname) &&
 				Objects.equals(this.displayName, personData.displayName) &&
@@ -752,7 +777,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, links, avatar, metadata);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, links, avatar, metadata);
 	}
 
 	@Override
@@ -768,6 +793,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    sourceData: ").append(toIndentedString(sourceData)).append("\n");
 		sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
 		sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+		sb.append("    functionTitle: ").append(toIndentedString(functionTitle)).append("\n");
 		sb.append("    username: ").append(toIndentedString(username)).append("\n");
 		sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
 		sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
