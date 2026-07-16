@@ -453,12 +453,12 @@ public class AvgReservationTimeAnalyticsWidgetData implements AnalyticsWidgetDat
 	}
 
 	/**
-	 * Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap
-	 * with another widget. Mandatory.
+	 * Column span of the widget. Must be at least 2 if &#x60;displayChart&#x60; is not &#x60;NONE&#x60;. Widget placement must be within a 100x6 grid and must not
+	 * overlap with another widget. Mandatory.
 	 * 
 	 * @return columnSpan
 	 **/
-	@ApiModelProperty(value = "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.")
+	@ApiModelProperty(value = "Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.")
 	public Integer getColumnSpan() {
 		return columnSpan;
 	}
@@ -493,13 +493,13 @@ public class AvgReservationTimeAnalyticsWidgetData implements AnalyticsWidgetDat
 
 	/**
 	 * Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. &lt;p&gt; The timeframe used for the
-	 * previous period depends on the aggregation type: &lt;ul&gt; &lt;li&gt;If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe
-	 * is proportional to the elapsed portion of the current timeframe. &lt;li&gt;If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous
-	 * period timeframe is used. &lt;/ul&gt; &lt;p&gt; The same filters used for chart data calculation are applied. Grouping is not applied.
+	 * previous period depends on the aggregation type: &lt;ul&gt; &lt;li&gt;If &#x60;displaySingleValueAggregation&#x60; is &#x60;SUM&#x60;, the previous period
+	 * timeframe is proportional to the elapsed portion of the current timeframe. &lt;li&gt;If &#x60;displaySingleValueAggregation&#x60; is &#x60;AVG&#x60;, the
+	 * entire previous period timeframe is used. &lt;/ul&gt; &lt;p&gt; The same filters used for chart data calculation are applied. Grouping is not applied.
 	 * 
 	 * @return displaySingleValuePreviousPeriodComparison
 	 **/
-	@ApiModelProperty(value = "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied.")
+	@ApiModelProperty(value = "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied.")
 	public Boolean isDisplaySingleValuePreviousPeriodComparison() {
 		return displaySingleValuePreviousPeriodComparison;
 	}

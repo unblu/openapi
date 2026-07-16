@@ -113,11 +113,11 @@ public class AuditChangeQuery {
 	}
 
 	/**
-	 * List of filters to narrow the search of entities
+	 * List of filters to narrow the search
 	 * 
 	 * @return searchFilters
 	 **/
-	@ApiModelProperty(value = "List of filters to narrow the search of entities")
+	@ApiModelProperty(value = "List of filters to narrow the search")
 	public List<AuditChangeSearchFilter> getSearchFilters() {
 		return searchFilters;
 	}
@@ -140,11 +140,11 @@ public class AuditChangeQuery {
 	}
 
 	/**
-	 * List of criteria to order the search result list
+	 * List of criteria to order the list of search results
 	 * 
 	 * @return orderBy
 	 **/
-	@ApiModelProperty(value = "List of criteria to order the search result list")
+	@ApiModelProperty(value = "List of criteria to order the list of search results")
 	public List<AuditChangeOrderBy> getOrderBy() {
 		return orderBy;
 	}
@@ -178,11 +178,11 @@ public class AuditChangeQuery {
 	}
 
 	/**
-	 * Maximal amount of items returned
+	 * Maximum number of items returned
 	 * 
 	 * @return limit
 	 **/
-	@ApiModelProperty(value = "Maximal amount of items returned")
+	@ApiModelProperty(value = "Maximum number of items returned")
 	public Integer getLimit() {
 		return limit;
 	}

@@ -364,12 +364,12 @@ public class ConversationCreationData {
 	}
 
 	/**
-	 * The locale of the conversation language as a BCP 47 language tag, including the region if available. Optional, if not provided, the account default locale
-	 * will be used.
+	 * The language of the conversation as a BCP 47 language tag, including the region if available. Optional, if not provided, the account default locale will be
+	 * used.
 	 * 
 	 * @return locale
 	 **/
-	@ApiModelProperty(value = "The locale of the conversation language as a BCP 47 language tag, including the region if available. Optional, if not provided, the account default locale will be used.")
+	@ApiModelProperty(value = "The language of the conversation as a BCP 47 language tag, including the region if available. Optional, if not provided, the account default locale will be used.")
 	public String getLocale() {
 		return locale;
 	}
@@ -443,12 +443,12 @@ public class ConversationCreationData {
 	}
 
 	/**
-	 * ID of the external messenger channel the conversation should be linked to. If this property is null the conversation is an Unblu conversation and not linked
-	 * to an external messenger channel.
+	 * The ID of the external messenger channel to link the conversation to. If this property is null the conversation is an Unblu conversation and not linked to an
+	 * external messenger channel.
 	 * 
 	 * @return externalMessengerChannelId
 	 **/
-	@ApiModelProperty(value = "ID of the external messenger channel the conversation should be linked to. If this property is null the conversation is an Unblu conversation and not linked to an external messenger channel.")
+	@ApiModelProperty(value = "The ID of the external messenger channel to link the conversation to. If this property is null the conversation is an Unblu conversation and not linked to an external messenger channel.")
 	public String getExternalMessengerChannelId() {
 		return externalMessengerChannelId;
 	}

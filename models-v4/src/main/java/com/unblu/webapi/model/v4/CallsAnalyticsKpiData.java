@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Represents a completed call lifecycle within a conversation. Each entry is backed by a @code{ conversation.call.ended} event and records the details and
+ * Represents a completed call lifecycle within a conversation. Each entry is backed by a &#x60;conversation.call.ended&#x60; event and records the details and
  * metadata of audio or video calls.
  */
-@ApiModel(description = "Represents a completed call lifecycle within a conversation. Each entry is backed by a @code{ conversation.call.ended} event and records the details and metadata of audio or video calls.")
+@ApiModel(description = "Represents a completed call lifecycle within a conversation. Each entry is backed by a `conversation.call.ended` event and records the details and metadata of audio or video calls.")
 
 @JsonPropertyOrder({
 	CallsAnalyticsKpiData.JSON_PROPERTY_$_TYPE,
@@ -208,12 +208,12 @@ public class CallsAnalyticsKpiData {
 	}
 
 	/**
-	 * UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant&#39;s connection phase. Optional, may be @code{
-	 * null}if the call was never accepted.
+	 * UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant&#39;s connection phase. Optional, may be
+	 * &#x60;null&#x60;if the call was never accepted.
 	 * 
 	 * @return acceptTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant's connection phase. Optional, may be @code{ null}if the call was never accepted.")
+	@ApiModelProperty(value = "UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant's connection phase. Optional, may be `null`if the call was never accepted.")
 	public Long getAcceptTimestamp() {
 		return acceptTimestamp;
 	}
@@ -228,12 +228,12 @@ public class CallsAnalyticsKpiData {
 	}
 
 	/**
-	 * UTC timestamp (ms) when at least two participants successfully connected to the call service provider. Optional, may be @code{ null} if the call was never
-	 * established.
+	 * UTC timestamp (ms) when at least two participants successfully connected to the call service provider. Optional, may be &#x60;null&#x60; if the call was
+	 * never established.
 	 * 
 	 * @return establishedTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) when at least two participants successfully connected to the call service provider. Optional, may be @code{ null} if the call was never established.")
+	@ApiModelProperty(value = "UTC timestamp (ms) when at least two participants successfully connected to the call service provider. Optional, may be `null` if the call was never established.")
 	public Long getEstablishedTimestamp() {
 		return establishedTimestamp;
 	}

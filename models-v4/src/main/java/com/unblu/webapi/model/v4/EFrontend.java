@@ -50,6 +50,11 @@ public enum EFrontend {
 	AGENT_SINGLE_CONVERSATION_DESK("AGENT_SINGLE_CONVERSATION_DESK"),
 
 	/**
+	 * AGENT_SITE_EMBEDDED: Sites that integrate Unblu using the Agent Embedded JS API
+	 */
+	AGENT_SITE_EMBEDDED("AGENT_SITE_EMBEDDED"),
+
+	/**
 	 * AGENT_MOBILE: Sites for the mobile agent frontend that display the agent inbox and the conversation UI
 	 */
 	AGENT_MOBILE("AGENT_MOBILE"),

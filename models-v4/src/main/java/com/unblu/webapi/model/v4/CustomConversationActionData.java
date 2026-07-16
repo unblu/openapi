@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomConversationActionData.JSON_PROPERTY_TRIGGER_VISITOR_EMBEDDED_API_EVENT,
 	CustomConversationActionData.JSON_PROPERTY_TRIGGER_VISITOR_FLOATING_API_EVENT,
 	CustomConversationActionData.JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT,
+	CustomConversationActionData.JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT,
 	CustomConversationActionData.JSON_PROPERTY_SORTING_ORDER,
 	CustomConversationActionData.JSON_PROPERTY_TYPE,
 	CustomConversationActionData.JSON_PROPERTY_ACTION_BAR_POSITION,
@@ -170,6 +171,10 @@ public class CustomConversationActionData implements CustomActionData {
 	public static final String JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT = "triggerAgentMobileSdkEvent";
 	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT)
 	private Boolean triggerAgentMobileSdkEvent;
+
+	public static final String JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT = "triggerAgentEmbeddedApiEvent";
+	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT)
+	private Boolean triggerAgentEmbeddedApiEvent;
 
 	public static final String JSON_PROPERTY_SORTING_ORDER = "sortingOrder";
 	@JsonProperty(JSON_PROPERTY_SORTING_ORDER)
@@ -650,6 +655,25 @@ public class CustomConversationActionData implements CustomActionData {
 		this.triggerAgentMobileSdkEvent = triggerAgentMobileSdkEvent;
 	}
 
+	public CustomConversationActionData triggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent) {
+		this.triggerAgentEmbeddedApiEvent = triggerAgentEmbeddedApiEvent;
+		return this;
+	}
+
+	/**
+	 * A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.
+	 * 
+	 * @return triggerAgentEmbeddedApiEvent
+	 **/
+	@ApiModelProperty(value = "A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.")
+	public Boolean isTriggerAgentEmbeddedApiEvent() {
+		return triggerAgentEmbeddedApiEvent;
+	}
+
+	public void setTriggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent) {
+		this.triggerAgentEmbeddedApiEvent = triggerAgentEmbeddedApiEvent;
+	}
+
 	public CustomConversationActionData sortingOrder(Integer sortingOrder) {
 		this.sortingOrder = sortingOrder;
 		return this;
@@ -757,6 +781,7 @@ public class CustomConversationActionData implements CustomActionData {
 				Objects.equals(this.triggerVisitorEmbeddedApiEvent, customConversationActionData.triggerVisitorEmbeddedApiEvent) &&
 				Objects.equals(this.triggerVisitorFloatingApiEvent, customConversationActionData.triggerVisitorFloatingApiEvent) &&
 				Objects.equals(this.triggerAgentMobileSdkEvent, customConversationActionData.triggerAgentMobileSdkEvent) &&
+				Objects.equals(this.triggerAgentEmbeddedApiEvent, customConversationActionData.triggerAgentEmbeddedApiEvent) &&
 				Objects.equals(this.sortingOrder, customConversationActionData.sortingOrder) &&
 				Objects.equals(this.type, customConversationActionData.type) &&
 				Objects.equals(this.actionBarPosition, customConversationActionData.actionBarPosition) &&
@@ -765,7 +790,7 @@ public class CustomConversationActionData implements CustomActionData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerAgentMobileSdkEvent, sortingOrder, type, actionBarPosition, apiEventTriggerFilter);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerAgentMobileSdkEvent, triggerAgentEmbeddedApiEvent, sortingOrder, type, actionBarPosition, apiEventTriggerFilter);
 	}
 
 	@Override
@@ -794,6 +819,7 @@ public class CustomConversationActionData implements CustomActionData {
 		sb.append("    triggerVisitorEmbeddedApiEvent: ").append(toIndentedString(triggerVisitorEmbeddedApiEvent)).append("\n");
 		sb.append("    triggerVisitorFloatingApiEvent: ").append(toIndentedString(triggerVisitorFloatingApiEvent)).append("\n");
 		sb.append("    triggerAgentMobileSdkEvent: ").append(toIndentedString(triggerAgentMobileSdkEvent)).append("\n");
+		sb.append("    triggerAgentEmbeddedApiEvent: ").append(toIndentedString(triggerAgentEmbeddedApiEvent)).append("\n");
 		sb.append("    sortingOrder: ").append(toIndentedString(sortingOrder)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    actionBarPosition: ").append(toIndentedString(actionBarPosition)).append("\n");

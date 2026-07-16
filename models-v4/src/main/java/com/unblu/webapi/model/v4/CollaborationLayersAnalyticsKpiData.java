@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a @code{ collaboration_layer.stopped} or@code{
- * collaboration_layer.aborted} event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.
+ * Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a &#x60;collaboration_layer.stopped&#x60;
+ * or&#x60;collaboration_layer.aborted&#x60; event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.
  */
-@ApiModel(description = "Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a @code{ collaboration_layer.stopped} or@code{ collaboration_layer.aborted} event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.")
+@ApiModel(description = "Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a `collaboration_layer.stopped` or`collaboration_layer.aborted` event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.")
 
 @JsonPropertyOrder({
 	CollaborationLayersAnalyticsKpiData.JSON_PROPERTY_$_TYPE,
@@ -203,11 +203,11 @@ public class CollaborationLayersAnalyticsKpiData {
 	}
 
 	/**
-	 * UTC timestamp (ms) of activation of the layer. Optional, may be @code{ null} if the layer was never activated.
+	 * UTC timestamp (ms) of activation of the layer. Optional, may be &#x60;null&#x60; if the layer was never activated.
 	 * 
 	 * @return activationTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) of activation of the layer. Optional, may be @code{ null} if the layer was never activated.")
+	@ApiModelProperty(value = "UTC timestamp (ms) of activation of the layer. Optional, may be `null` if the layer was never activated.")
 	public Long getActivationTimestamp() {
 		return activationTimestamp;
 	}

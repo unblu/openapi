@@ -169,11 +169,11 @@ public class QueueInteractionAnalyticsKpiData {
 	}
 
 	/**
-	 * The UTC timestamp (ms) when the reservation was created. @code{ null} when the interaction was not reserved.
+	 * The UTC timestamp (ms) when the reservation was created. &#x60;null&#x60; when the interaction was not reserved.
 	 * 
 	 * @return reservationCreationTimestamp
 	 **/
-	@ApiModelProperty(value = "The UTC timestamp (ms) when the reservation was created. @code{ null} when the interaction was not reserved.")
+	@ApiModelProperty(value = "The UTC timestamp (ms) when the reservation was created. `null` when the interaction was not reserved.")
 	public Long getReservationCreationTimestamp() {
 		return reservationCreationTimestamp;
 	}
@@ -226,11 +226,11 @@ public class QueueInteractionAnalyticsKpiData {
 	}
 
 	/**
-	 * The duration (ms) between the reservation creation and the resolution of the reservation. @code{ null} when the interaction was not reserved.
+	 * The duration (ms) between the reservation creation and the resolution of the reservation. &#x60;null&#x60; when the interaction was not reserved.
 	 * 
 	 * @return reservationTimeDuration
 	 **/
-	@ApiModelProperty(value = "The duration (ms) between the reservation creation and the resolution of the reservation. @code{ null} when the interaction was not reserved.")
+	@ApiModelProperty(value = "The duration (ms) between the reservation creation and the resolution of the reservation. `null` when the interaction was not reserved.")
 	public Long getReservationTimeDuration() {
 		return reservationTimeDuration;
 	}

@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Data model object representing filters for the KPI calculation of average reservation time. &lt;p&gt; Only reservation-based queue interactions are ever
- * considered (the KPI hard-codes a @code{ queueInteractionType IN (RESERVATION_REDEEMED,RESERVATION_CANCELLED, RESERVATION_DECLINED, RESERVATION_TIMEDOUT)}
+ * considered (the KPI hard-codes a &#x60;queueInteractionType IN (RESERVATION_REDEEMED,RESERVATION_CANCELLED, RESERVATION_DECLINED, RESERVATION_TIMEDOUT)&#x60;
  * filter). The &#x60;#getQueueInteractionTypes() queueInteractionTypes&#x60; field can be used to further restrict the set of reservation outcomes;
  * non-reservation values are rejected during validation. &lt;p&gt; Filter logic: &lt;ul&gt; &lt;li&gt;startTimestamp AND&lt;/li&gt; &lt;li&gt;endTimestamp
  * AND&lt;/li&gt; &lt;li&gt;conversationTemplateIds AND&lt;/li&gt; &lt;li&gt;conversationLocales AND&lt;/li&gt; &lt;li&gt;initialEngagementTypes AND&lt;/li&gt;
@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  * AND&lt;/li&gt; &lt;li&gt;assignedAgentPersonIds AND&lt;/li&gt; &lt;li&gt;assignedAgentTeamIds AND&lt;/li&gt; &lt;li&gt;minReservationTimeDuration
  * AND&lt;/li&gt; &lt;li&gt;maxReservationTimeDuration&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Data model object representing filters for the KPI calculation of average reservation time. <p> Only reservation-based queue interactions are ever considered (the KPI hard-codes a @code{ queueInteractionType IN (RESERVATION_REDEEMED,RESERVATION_CANCELLED, RESERVATION_DECLINED, RESERVATION_TIMEDOUT)} filter). The `#getQueueInteractionTypes() queueInteractionTypes` field can be used to further restrict the set of reservation outcomes; non-reservation values are rejected during validation. <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>queueInteractionTypes AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>minReservationTimeDuration AND</li> <li>maxReservationTimeDuration</li> </ul>")
+@ApiModel(description = "Data model object representing filters for the KPI calculation of average reservation time. <p> Only reservation-based queue interactions are ever considered (the KPI hard-codes a `queueInteractionType IN (RESERVATION_REDEEMED,RESERVATION_CANCELLED, RESERVATION_DECLINED, RESERVATION_TIMEDOUT)` filter). The `#getQueueInteractionTypes() queueInteractionTypes` field can be used to further restrict the set of reservation outcomes; non-reservation values are rejected during validation. <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>queueInteractionTypes AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>minReservationTimeDuration AND</li> <li>maxReservationTimeDuration</li> </ul>")
 
 @JsonPropertyOrder({
 	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_$_TYPE,

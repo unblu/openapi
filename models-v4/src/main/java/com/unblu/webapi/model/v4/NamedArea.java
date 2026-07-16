@@ -333,12 +333,13 @@ public class NamedArea {
 	}
 
 	/**
-	 * Meta tag name if the type is META_TAG or domain name if the type is DOMAIN. If the type is META_TAG, it can be omitted during creation and a random ID will
-	 * generated for it. Modification of this attribute is not allowed. Maximum of 250 characters.
+	 * Meta tag name if the type is &#x60;ENamedAreaType.META_TAG&#x60; or the domain name if the type is &#x60;ENamedAreaType.DOMAIN&#x60;. If the type
+	 * is&#x60;ENamedAreaType.META_TAG&#x60;, it can be omitted during creation and a random ID is generated for it. Modification of this attribute is not allowed.
+	 * Maximum of 250 characters.
 	 * 
 	 * @return siteId
 	 **/
-	@ApiModelProperty(value = "Meta tag name if the type is META_TAG or domain name if the type is DOMAIN. If the type is META_TAG, it can be omitted during creation and a random ID will generated for it. Modification of this attribute is not allowed. Maximum of 250 characters.")
+	@ApiModelProperty(value = "Meta tag name if the type is `ENamedAreaType.META_TAG` or the domain name if the type is `ENamedAreaType.DOMAIN`. If the type is`ENamedAreaType.META_TAG`, it can be omitted during creation and a random ID is generated for it. Modification of this attribute is not allowed. Maximum of 250 characters.")
 	public String getSiteId() {
 		return siteId;
 	}

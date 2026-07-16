@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Information about the bot participant of a conversation (with historical information)
+ * Information about a bot participant in a conversation (with historical information)
  */
-@ApiModel(description = "Information about the bot participant of a conversation (with historical information)")
+@ApiModel(description = "Information about a bot participant in a conversation (with historical information)")
 
 @JsonPropertyOrder({
 	BotParticipantHistoryData.JSON_PROPERTY_$_TYPE,

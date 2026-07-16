@@ -124,11 +124,11 @@ public class ThinkingIndicatorParams {
 	}
 
 	/**
-	 * Animation as a base64-encoded @code{ image/_*} data URL (e.g. SVG, GIF, PNG). Optional.
+	 * Animation as a base64-encoded &#x60;image/_*&#x60; data URL (e.g. SVG, GIF, PNG). Optional.
 	 * 
 	 * @return thinkingAnimation
 	 **/
-	@ApiModelProperty(value = "Animation as a base64-encoded @code{ image/_*} data URL (e.g. SVG, GIF, PNG). Optional.")
+	@ApiModelProperty(value = "Animation as a base64-encoded `image/_*` data URL (e.g. SVG, GIF, PNG). Optional.")
 	public String getThinkingAnimation() {
 		return thinkingAnimation;
 	}
@@ -162,12 +162,12 @@ public class ThinkingIndicatorParams {
 	}
 
 	/**
-	 * When true, the indicator is an internal (agent-only) activity and is hidden from visitors. Mirrors @code{ BotPostMessage.internal}. Applies for the whole
-	 * thinking session — callers set it on @code{ startThinking} only. Optional; @code{ null} is treated as @code{ false} by consumers.
+	 * When true, the indicator is an internal (agent-only) activity and is hidden from visitors. Mirrors &#x60;BotPostMessage.internal&#x60;. Applies for the whole
+	 * thinking session — callers set it on &#x60;startThinking&#x60; only. Optional; &#x60;null&#x60; is treated as &#x60;false&#x60; by consumers.
 	 * 
 	 * @return internal
 	 **/
-	@ApiModelProperty(value = "When true, the indicator is an internal (agent-only) activity and is hidden from visitors. Mirrors @code{ BotPostMessage.internal}. Applies for the whole thinking session — callers set it on @code{ startThinking} only. Optional; @code{ null} is treated as @code{ false} by consumers.")
+	@ApiModelProperty(value = "When true, the indicator is an internal (agent-only) activity and is hidden from visitors. Mirrors `BotPostMessage.internal`. Applies for the whole thinking session — callers set it on `startThinking` only. Optional; `null` is treated as `false` by consumers.")
 	public Boolean isInternal() {
 		return internal;
 	}

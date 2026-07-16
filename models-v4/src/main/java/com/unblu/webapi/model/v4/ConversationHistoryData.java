@@ -297,11 +297,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * The (current and earlier) participants of the conversation
+	 * The conversation&#39;s participants, past and present
 	 * 
 	 * @return participants
 	 **/
-	@ApiModelProperty(value = "The (current and earlier) participants of the conversation")
+	@ApiModelProperty(value = "The conversation's participants, past and present")
 	public List<ParticipantHistoryData> getParticipants() {
 		return participants;
 	}
@@ -324,11 +324,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * The (current and earlier) participants of the conversation who are connected through an external messenger
+	 * The past and present participants in the conversation connected through an external messenger
 	 * 
 	 * @return externalParticipants
 	 **/
-	@ApiModelProperty(value = "The (current and earlier) participants of the conversation who are connected through an external messenger")
+	@ApiModelProperty(value = "The past and present participants in the conversation connected through an external messenger")
 	public List<ExternalParticipantHistoryData> getExternalParticipants() {
 		return externalParticipants;
 	}
@@ -351,11 +351,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * The (current and earlier) bots of the conversation
+	 * The past and present bot participants in the conversation
 	 * 
 	 * @return botParticipants
 	 **/
-	@ApiModelProperty(value = "The (current and earlier) bots of the conversation")
+	@ApiModelProperty(value = "The past and present bot participants in the conversation")
 	public List<BotParticipantHistoryData> getBotParticipants() {
 		return botParticipants;
 	}
@@ -409,12 +409,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the conversation has ended (all active participants have finished their offboarding; timestamp when the state was set
-	 * to&#x60;EConversationState.ENDED&#x60;)
+	 * Unix timestamp (ms) when the conversation ended (all active participants have finished their offboarding; timestamp when the state was set
+	 * to&#x60;EConversationState.ENDED&#x60;) Otherwise, the value is null.
 	 * 
 	 * @return endTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation has ended (all active participants have finished their offboarding; timestamp when the state was set to`EConversationState.ENDED`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation ended (all active participants have finished their offboarding; timestamp when the state was set to`EConversationState.ENDED`) Otherwise, the value is null.")
 	public Long getEndTimestamp() {
 		return endTimestamp;
 	}
@@ -429,11 +429,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the last conversation message was sent. Null if there hasn&#39;t been any yet.
+	 * Unix timestamp (ms) when the last message was sent to the conversation. Null if there hasn&#39;t been any yet.
 	 * 
 	 * @return lastMessageTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the last conversation message was sent. Null if there hasn't been any yet.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the last message was sent to the conversation. Null if there hasn't been any yet.")
 	public Long getLastMessageTimestamp() {
 		return lastMessageTimestamp;
 	}
@@ -506,11 +506,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Locale of the conversation language (as BCP 47 language tag form including region if available)
+	 * Locale of the conversation language formatted as BCP 47 language tag form including region if available
 	 * 
 	 * @return locale
 	 **/
-	@ApiModelProperty(value = "Locale of the conversation language (as BCP 47 language tag form including region if available)")
+	@ApiModelProperty(value = "Locale of the conversation language formatted as BCP 47 language tag form including region if available")
 	public String getLocale() {
 		return locale;
 	}
@@ -544,11 +544,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Get endComment
+	 * Comment provided when ending the conversation. &#x60;null&#x60; if it isn&#39;t ended yet or there wasn&#39;t one provided.
 	 * 
 	 * @return endComment
 	 **/
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Comment provided when ending the conversation. `null` if it isn't ended yet or there wasn't one provided.")
 	public String getEndComment() {
 		return endComment;
 	}
@@ -563,11 +563,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Tokbox sessionId.
+	 * Tokbox sessionId
 	 * 
 	 * @return tokboxSessionId
 	 **/
-	@ApiModelProperty(value = "Tokbox sessionId.")
+	@ApiModelProperty(value = "Tokbox sessionId")
 	public String getTokboxSessionId() {
 		return tokboxSessionId;
 	}
@@ -582,11 +582,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Template ID of the conversation.
+	 * Template ID of the conversation
 	 * 
 	 * @return conversationTemplateId
 	 **/
-	@ApiModelProperty(value = "Template ID of the conversation.")
+	@ApiModelProperty(value = "Template ID of the conversation")
 	public String getConversationTemplateId() {
 		return conversationTemplateId;
 	}
@@ -601,11 +601,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * External messenger channel id.
+	 * ID of the external messenger channel icon
 	 * 
 	 * @return externalMessengerChannelIconId
 	 **/
-	@ApiModelProperty(value = "External messenger channel id.")
+	@ApiModelProperty(value = "ID of the external messenger channel icon")
 	public String getExternalMessengerChannelIconId() {
 		return externalMessengerChannelIconId;
 	}
@@ -620,11 +620,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * External messenger name.
+	 * Name of the external messenger channel
 	 * 
 	 * @return externalMessengerChannelName
 	 **/
-	@ApiModelProperty(value = "External messenger name.")
+	@ApiModelProperty(value = "Name of the external messenger channel")
 	public String getExternalMessengerChannelName() {
 		return externalMessengerChannelName;
 	}
@@ -639,11 +639,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Topic of the conversation.
+	 * Topic of the conversation
 	 * 
 	 * @return topic
 	 **/
-	@ApiModelProperty(value = "Topic of the conversation.")
+	@ApiModelProperty(value = "Topic of the conversation")
 	public String getTopic() {
 		return topic;
 	}
@@ -658,11 +658,11 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Source URL of the conversation.
+	 * Source URL of the conversation
 	 * 
 	 * @return sourceUrl
 	 **/
-	@ApiModelProperty(value = "Source URL of the conversation.")
+	@ApiModelProperty(value = "Source URL of the conversation")
 	public String getSourceUrl() {
 		return sourceUrl;
 	}
@@ -697,12 +697,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when this conversation will be deleted, taking into account the retention period defined for the entity. Calculated from
-	 * &#x60;endTimestamp&#x60;. Null if no record retention interval is configured. See &#x60;getRetentionIntervalConversationSeconds&#x60; for details.
+	 * Unix timestamp (ms) when the conversation will be deleted automatically, taking into account the retention period defined for the entity. Calculated
+	 * from&#x60;endTimestamp&#x60;. Null if no record retention interval is configured. See &#x60;getRetentionIntervalConversationSeconds&#x60; for details.
 	 * 
 	 * @return dueDeletionTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when this conversation will be deleted, taking into account the retention period defined for the entity. Calculated from `endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation will be deleted automatically, taking into account the retention period defined for the entity. Calculated from`endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details.")
 	public Long getDueDeletionTimestamp() {
 		return dueDeletionTimestamp;
 	}

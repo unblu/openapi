@@ -100,11 +100,11 @@ public class CannedResponseUsageCountQuery {
 	}
 
 	/**
-	 * List of filters to narrow the search of entities
+	 * List of filters to narrow the search
 	 * 
 	 * @return searchFilters
 	 **/
-	@ApiModelProperty(value = "List of filters to narrow the search of entities")
+	@ApiModelProperty(value = "List of filters to narrow the search")
 	public List<CannedResponseUsageSearchFilter> getSearchFilters() {
 		return searchFilters;
 	}

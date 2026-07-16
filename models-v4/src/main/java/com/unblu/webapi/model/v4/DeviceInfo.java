@@ -41,6 +41,7 @@ import io.swagger.annotations.ApiModelProperty;
 	DeviceInfo.JSON_PROPERTY_MOBILE_PUSH_NOTIFICATION_VERSION,
 	DeviceInfo.JSON_PROPERTY_OWNER_PERSON_ID,
 	DeviceInfo.JSON_PROPERTY_LAST_SUCCESSFUL2_F_A_TIMESTAMP,
+	DeviceInfo.JSON_PROPERTY_PUSH_NOTIFICATIONS_ENABLED,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class DeviceInfo {
@@ -160,6 +161,10 @@ public class DeviceInfo {
 	public static final String JSON_PROPERTY_LAST_SUCCESSFUL2_F_A_TIMESTAMP = "lastSuccessful2FATimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_SUCCESSFUL2_F_A_TIMESTAMP)
 	private Long lastSuccessful2FATimestamp;
+
+	public static final String JSON_PROPERTY_PUSH_NOTIFICATIONS_ENABLED = "pushNotificationsEnabled";
+	@JsonProperty(JSON_PROPERTY_PUSH_NOTIFICATIONS_ENABLED)
+	private Boolean pushNotificationsEnabled;
 
 	public DeviceInfo $type(TypeEnum $type) {
 		this.$type = $type;
@@ -564,6 +569,27 @@ public class DeviceInfo {
 		this.lastSuccessful2FATimestamp = lastSuccessful2FATimestamp;
 	}
 
+	public DeviceInfo pushNotificationsEnabled(Boolean pushNotificationsEnabled) {
+		this.pushNotificationsEnabled = pushNotificationsEnabled;
+		return this;
+	}
+
+	/**
+	 * Whether the user has enabled push notifications for this device. Defaults to the value
+	 * of&#x60;com.unblu.core.push_notification.PushNotificationConfiguration.defaultDevicePushNotificationsEnabled&#x60; when the device is created and is then
+	 * preserved across re-logins.
+	 * 
+	 * @return pushNotificationsEnabled
+	 **/
+	@ApiModelProperty(value = "Whether the user has enabled push notifications for this device. Defaults to the value of`com.unblu.core.push_notification.PushNotificationConfiguration.defaultDevicePushNotificationsEnabled` when the device is created and is then preserved across re-logins.")
+	public Boolean isPushNotificationsEnabled() {
+		return pushNotificationsEnabled;
+	}
+
+	public void setPushNotificationsEnabled(Boolean pushNotificationsEnabled) {
+		this.pushNotificationsEnabled = pushNotificationsEnabled;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -593,12 +619,13 @@ public class DeviceInfo {
 				Objects.equals(this.pushKitToken, deviceInfo.pushKitToken) &&
 				Objects.equals(this.mobilePushNotificationVersion, deviceInfo.mobilePushNotificationVersion) &&
 				Objects.equals(this.ownerPersonId, deviceInfo.ownerPersonId) &&
-				Objects.equals(this.lastSuccessful2FATimestamp, deviceInfo.lastSuccessful2FATimestamp);
+				Objects.equals(this.lastSuccessful2FATimestamp, deviceInfo.lastSuccessful2FATimestamp) &&
+				Objects.equals(this.pushNotificationsEnabled, deviceInfo.pushNotificationsEnabled);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, accountId, osName, osVersion, browserName, browserVersion, userAgent, screenWidth, screenHeight, screenPixelRatio, type, identifier, identifierSource, pushToken, pushKitToken, mobilePushNotificationVersion, ownerPersonId, lastSuccessful2FATimestamp);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, accountId, osName, osVersion, browserName, browserVersion, userAgent, screenWidth, screenHeight, screenPixelRatio, type, identifier, identifierSource, pushToken, pushKitToken, mobilePushNotificationVersion, ownerPersonId, lastSuccessful2FATimestamp, pushNotificationsEnabled);
 	}
 
 	@Override
@@ -626,6 +653,7 @@ public class DeviceInfo {
 		sb.append("    mobilePushNotificationVersion: ").append(toIndentedString(mobilePushNotificationVersion)).append("\n");
 		sb.append("    ownerPersonId: ").append(toIndentedString(ownerPersonId)).append("\n");
 		sb.append("    lastSuccessful2FATimestamp: ").append(toIndentedString(lastSuccessful2FATimestamp)).append("\n");
+		sb.append("    pushNotificationsEnabled: ").append(toIndentedString(pushNotificationsEnabled)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

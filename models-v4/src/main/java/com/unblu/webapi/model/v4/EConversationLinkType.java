@@ -10,51 +10,51 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationLinkType {
 
 	/**
-	 * ACCEPT_IN_AGENT_DESK: Link that accepts the invitation and loads the agent desk to display the conversation
+	 * ACCEPT_IN_AGENT_DESK: Link that accepts the invitation and loads the Agent Desk to display the conversation
 	 */
 	ACCEPT_IN_AGENT_DESK("ACCEPT_IN_AGENT_DESK"),
 
 	/**
-	 * ACCEPT_IN_AGENT_SINGLE_VIEW: Link that accepts the invitation and display the conversation in a single view &lt;p&gt; The single view only displays the
-	 * conversation without any navigation and other agent desk features and can be used for integration into third party applications.
+	 * ACCEPT_IN_AGENT_SINGLE_VIEW: Link that accepts the invitation and display the conversation in the Single Conversation Desk. &lt;p&gt; The Single Conversation
+	 * Desk displays a conversation without any other Agent Desk features. It can be used for integrating Unblu into third-party applications.
 	 */
 	ACCEPT_IN_AGENT_SINGLE_VIEW("ACCEPT_IN_AGENT_SINGLE_VIEW"),
 
 	/**
-	 * ACCEPT_IN_VISITOR_DESK: Link that accepts the invitation and display the conversation in a visitor desk
+	 * ACCEPT_IN_VISITOR_DESK: Link that accepts the invitation and displays the conversation in the Visitor Desk
 	 */
 	ACCEPT_IN_VISITOR_DESK("ACCEPT_IN_VISITOR_DESK"),
 
 	/**
-	 * OPEN_IN_AGENT_DESK: Link to open an existing conversation in the agent desk to display the conversation
+	 * OPEN_IN_AGENT_DESK: Link that opens the Agent Desk to display an existing conversation
 	 */
 	OPEN_IN_AGENT_DESK("OPEN_IN_AGENT_DESK"),
 
 	/**
-	 * OPEN_AS_GHOST_IN_AGENT_DESK: Link to open an existing conversation as a ghost in the agent desk to display the conversation
+	 * OPEN_AS_GHOST_IN_AGENT_DESK: Link that opens the Agent Desk to display an existing conversation as a ghost
 	 */
 	OPEN_AS_GHOST_IN_AGENT_DESK("OPEN_AS_GHOST_IN_AGENT_DESK"),
 
 	/**
-	 * OPEN_IN_AGENT_SINGLE_VIEW: Link to open an existing conversation in a single view &lt;p&gt; The single view only displays the conversation, with no
-	 * navigation or other Agent Desk features. It can be used for integration into third-party applications.
+	 * OPEN_IN_AGENT_SINGLE_VIEW: Link that opens an existing conversation in the Single Conversation Desk. &lt;p&gt; The Single Conversation Desk displays a
+	 * conversation without any other Agent Desk features. It can be used for integrating Unblu into third-party applications.
 	 */
 	OPEN_IN_AGENT_SINGLE_VIEW("OPEN_IN_AGENT_SINGLE_VIEW"),
 
 	/**
-	 * OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW: Link to open an existing conversation in a single view as a ghost &lt;p&gt; The single view only displays the
-	 * conversation, with no navigation or other Agent Desk features. It can be used for integration into third-party applications.
+	 * OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW: Link that opens an existing conversation in the Single Conversation Desk as a ghost. &lt;p&gt; The Single Conversation
+	 * Desk displays a conversation without any other Agent Desk features. It can be used for integrating Unblu into third-party applications.
 	 */
 	OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW("OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW"),
 
 	/**
-	 * OPEN_IN_VISITOR_DESK: Link to open an existing conversation in a visitor desk
+	 * OPEN_IN_VISITOR_DESK: Link to open an existing conversation in the Visitor Desk
 	 */
 	OPEN_IN_VISITOR_DESK("OPEN_IN_VISITOR_DESK"),
 
 	/**
-	 * OPEN_PUBLIC_LINK: Link to open an existing conversation. It will first go to the visitor desk, it it can be detected, that the user is an agent, it will
-	 * redirect to the single view for the agent.
+	 * OPEN_PUBLIC_LINK: Public link to open an existing conversation. The link first goes to the Visitor Desk. If Unblu detects that the user is an agent,
+	 * they&#39;re redirected to the Single Conversation Desk.
 	 */
 	OPEN_PUBLIC_LINK("OPEN_PUBLIC_LINK");
 

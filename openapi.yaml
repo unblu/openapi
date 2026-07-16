@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.38.2
+  version: 8.39.3
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -62,6 +62,10 @@ tags:
   description: Service for Custom Actions
 - name: DeputyRelationships
   description: Service to manage deputy relationships. A deputy relationship is needed if deputy delegation should be executed for unhandled conversation requests.
+- name: DeviceBindingService
+  description: "Service for device-binding <p> Enrollment is a cross-device flow: an authenticated session issues a single-use registration token that the mobile device later presents (typically via QR scan) together with a signed challenge to enroll itself. Subsequent challenge/verify calls are scoped to the caller's own bindings. <p> Cryptographic orchestration lives in the native host app, not on the backend layer: the device generates its own keypair locally (keystore/keychain), then this server pre-stores the public key at challenge-issuance time so it can verify the signature at `register(...)` without trusting the client to re-send a matching key."
+- name: DeviceInfoService
+  description: API service to manage device information.
 - name: Dictionaries
   description: Service to manage dictionaries.
 - name: DictionaryEntryService
@@ -78,6 +82,8 @@ tags:
   description: Service to manage file upload interceptors. File upload interceptors also use this service to interact with Unblu.
 - name: Global
   description: With this service the global Unblu system can be managed.<br> <br> For super-admin the Global object can be expanded to set configuration or translations.
+- name: GlobalAria
+  description: Service to retrieve global information about Aria
 - name: GlobalServicePrincipals
   description: "The global API service for the service principal. To create service principals on normal account, use`com.unblu.core.server.collaboration.serviceprincipal.webapi.IServicePrincipalApiService`"
 - name: Images
@@ -2886,6 +2892,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
+      x-required-for-authentication: "true"
       x-required-role:
       - ANONYMOUS_USER
   /authenticator/createAuthenticationToken:
@@ -2920,6 +2927,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
+      x-required-for-authentication: "true"
       x-required-role:
       - ANONYMOUS_USER
   /authenticator/createAuthenticationTokenForCurrentUser:
@@ -2969,6 +2977,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
+      x-required-for-authentication: "true"
       x-required-role:
       - ANONYMOUS_USER
   /authenticator/impersonate:
@@ -3040,6 +3049,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
+      x-required-for-authentication: "true"
       x-required-role:
       - ANONYMOUS_USER
   /authenticator/loginWithSecureToken:
@@ -3062,6 +3072,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
+      x-required-for-authentication: "true"
       x-required-role:
       - ANONYMOUS_USER
   /authenticator/logout:
@@ -3090,6 +3101,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
+      x-required-for-authentication: "true"
       x-required-role:
       - ANONYMOUS_USER
   /authenticator/logoutWithSecureToken:
@@ -3112,6 +3124,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       x-allow-impersonated-access: "true"
       x-required-entry-path: PUBLIC
+      x-required-for-authentication: "true"
       x-required-role:
       - ANONYMOUS_USER
   /authenticator/resetImpersonation:
@@ -9584,6 +9597,7 @@ paths:
                   triggerVisitorEmbeddedApiEvent: true
                   triggerVisitorFloatingApiEvent: true
                   triggerAgentMobileSdkEvent: false
+                  triggerAgentEmbeddedApiEvent: false
                   sortingOrder: 3
                   type: CONVERSATION
                   actionBarPosition: ALWAYS_VISIBLE
@@ -9658,6 +9672,7 @@ paths:
                     triggerVisitorEmbeddedApiEvent: true
                     triggerVisitorFloatingApiEvent: true
                     triggerAgentMobileSdkEvent: false
+                    triggerAgentEmbeddedApiEvent: false
                     sortingOrder: 3
                     type: CONVERSATION
                     actionBarPosition: ALWAYS_VISIBLE
@@ -9865,6 +9880,7 @@ paths:
                     triggerVisitorEmbeddedApiEvent: true
                     triggerVisitorFloatingApiEvent: true
                     triggerAgentMobileSdkEvent: false
+                    triggerAgentEmbeddedApiEvent: false
                     sortingOrder: 5
                     type: PERSON
                     availableForTargetPersonTypes:
@@ -10013,6 +10029,7 @@ paths:
                   triggerVisitorEmbeddedApiEvent: false
                   triggerVisitorFloatingApiEvent: false
                   triggerAgentMobileSdkEvent: false
+                  triggerAgentEmbeddedApiEvent: false
                   sortingOrder: 5
                   type: MESSAGE
                   messageTypes:
@@ -10079,6 +10096,7 @@ paths:
                     triggerVisitorEmbeddedApiEvent: false
                     triggerVisitorFloatingApiEvent: false
                     triggerAgentMobileSdkEvent: false
+                    triggerAgentEmbeddedApiEvent: false
                     sortingOrder: 5
                     type: MESSAGE
                     messageTypes:
@@ -10274,6 +10292,342 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /devicebindingservice/issueEnrollmentChallenge:
+    post:
+      tags:
+      - DeviceBindingService
+      summary: issueEnrollmentChallenge
+      description: "Proof-of-possession step 1 (enrollment): mobile presents the token plus the locally-generated public key; server validates the token and the key, generates a fresh challenge, stores `(registrationTokenId, publicKeyEncoded, challenge, expiresAt)` on a `DeviceBindingChallenge` row, and returns the challenge. If a non-expired enrollment challenge already exists for that token, a new row is created — `register`reads the most recent one."
+      operationId: deviceBindingServiceIssueEnrollmentChallenge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceBindingIssueEnrollmentChallengeRequest"
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceBindingIssueEnrollmentChallengeResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /devicebindingservice/issueRegistrationToken:
+    post:
+      tags:
+      - DeviceBindingService
+      summary: issueRegistrationToken
+      description: Authenticated user issues a single-use enrollment token bound to themselves. The token is the bearer credential that someone else (typically the same user on their mobile device) can later present to `register` to enroll a device for THIS user.
+      operationId: deviceBindingServiceIssueRegistrationToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceBindingIssueTokenRequest"
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceBindingIssueTokenResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /devicebindingservice/issueVerifyChallenge:
+    post:
+      tags:
+      - DeviceBindingService
+      summary: issueVerifyChallenge
+      description: "Verify step 1: requests a one-time challenge for an existing binding. Caller's session must own the binding (account + person match), else BINDING_OWNERSHIP_MISMATCH. The challenge is persisted as a `DeviceBindingChallenge` row keyed by `bindingId` so`verify` can read it back."
+      operationId: deviceBindingServiceIssueVerifyChallenge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceBindingChallengeRequest"
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceBindingChallengeResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /devicebindingservice/register:
+    post:
+      tags:
+      - DeviceBindingService
+      summary: register
+      description: "Proof-of-possession step 2 (enrollment): mobile submits `(token, signature)`. Server loads the most recent non-expired `DeviceBindingChallenge`for that token, verifies the signature against the stored public key and stored challenge, then creates the`com.unblu.core.shared.storage.authentication.model.devicebinding.DeviceBinding` for the token's owner and physically deletes the consumed challenge and the registration token. The public key is NOT taken from the request — it is taken from the challenge row stored at step 1, so a client cannot swap keys between the two calls."
+      operationId: deviceBindingServiceRegister
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceBindingRegistrationRequest"
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceBindingRegistrationResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /devicebindingservice/{bindingId}/revokeBinding:
+    post:
+      tags:
+      - DeviceBindingService
+      summary: revokeBinding
+      description: Soft-revokes a binding owned by the current user.
+      operationId: deviceBindingServiceRevokeBinding
+      parameters:
+      - name: bindingId
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /devicebindingservice/verify:
+    post:
+      tags:
+      - DeviceBindingService
+      summary: verify
+      description: "Verify step 2: verifies the signature against the binding's stored public key and the most recent non-expired server-issued challenge for that binding. The client does not send the challenge — it is read from storage so a replay across two devices cannot succeed. Same ownership requirement as`issueVerifyChallenge`."
+      operationId: deviceBindingServiceVerify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceBindingVerifyRequest"
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceBindingVerifyResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /deviceinfoservice/{deviceInfoId}/delete:
+    delete:
+      tags:
+      - DeviceInfoService
+      summary: delete
+      description: "Deletes a device info. <p> Access depends on the caller's role: a registered user can only manage their own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams, including themselves), and an admin those of all users in the account.<br>"
+      operationId: deviceInfoServiceDelete
+      parameters:
+      - name: deviceInfoId
+        in: path
+        description: The ID of the device info to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /deviceinfoservice/{deviceInfoId}/logout:
+    post:
+      tags:
+      - DeviceInfoService
+      summary: logout
+      description: "Invalidates all active authentication sessions for the given device. <p> The device info itself remains; the user is forced to re-authenticate when using this device again. <p> Access depends on the caller's role: a registered user can only manage their own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams, including themselves), and an admin those of all users in the account.<br>"
+      operationId: deviceInfoServiceLogout
+      parameters:
+      - name: deviceInfoId
+        in: path
+        description: The ID of the device whose sessions should be invalidated
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /deviceinfoservice/{deviceInfoId}/read:
+    get:
+      tags:
+      - DeviceInfoService
+      summary: read
+      description: Returns the device info for the device with the given ID<br>
+      operationId: deviceInfoServiceRead
+      parameters:
+      - name: deviceInfoId
+        in: path
+        description: ID of the device info
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The device info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfoData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /deviceinfoservice/{deviceInfoId}/restore:
+    post:
+      tags:
+      - DeviceInfoService
+      summary: restore
+      description: "Restores a previously deleted device info. <p> <b>Note:</b> This is only possible for the period specified in the configuration property `com.unblu.gc.collectionDelay` after the device info has been deleted. <p> Access depends on the caller's role: a registered user can only manage their own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams, including themselves), and an admin those of all users in the account.<br>"
+      operationId: deviceInfoServiceRestore
+      parameters:
+      - name: deviceInfoId
+        in: path
+        description: The ID of the device info to restore
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The restored device info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfoData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /deviceinfoservice/search:
+    post:
+      tags:
+      - DeviceInfoService
+      summary: search
+      description: "Search for device infos in the current account. <p> The devices a caller may access depend on their role: a registered user can only see their own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams), and an admin those of all users in the account. A registered user must not set an `OwnerPersonId`filter; supervisors may only filter by persons they can manage, while admins may filter by any owner within the account.<br>"
+      operationId: deviceInfoServiceSearch
+      requestBody:
+        description: The search query
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceInfoQuery"
+        required: true
+      responses:
+        "200":
+          description: The search result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfoResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /deviceinfoservice/{deviceInfoId}/setPushNotificationsEnabled:
+    post:
+      tags:
+      - DeviceInfoService
+      summary: setPushNotificationsEnabled
+      description: "Enables or disables push notifications for the given device. <p> Access depends on the caller's role: a registered user can only manage their own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams, including themselves), and an admin those of all users in the account.<br>"
+      operationId: deviceInfoServiceSetPushNotificationsEnabled
+      parameters:
+      - name: deviceInfoId
+        in: path
+        description: The ID of the device
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceInfoServiceSetPushNotificationsEnabledBody"
+        required: true
+      responses:
+        "200":
+          description: The updated device info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfoData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /deviceinfoservice/{deviceInfoId}/unbind:
+    post:
+      tags:
+      - DeviceInfoService
+      summary: unbind
+      description: "Revokes the active device binding of the given device (unbinds it). Only mobile devices can be bound. <p> Access depends on the caller's role: a registered user can only manage their own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams, including themselves), and an admin those of all users in the account.<br>"
+      operationId: deviceInfoServiceUnbind
+      parameters:
+      - name: deviceInfoId
+        in: path
+        description: The ID of the device to unbind
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /dictionaries/create:
     post:
       tags:
@@ -12824,6 +13178,26 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
+  /global/aria/productVersion:
+    get:
+      tags:
+      - GlobalAria
+      summary: productVersion
+      description: Returns the Aria product information
+      operationId: globalAriaProductVersion
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductVersion"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /globalserviceprincipals/create:
     post:
       tags:
@@ -14869,7 +15243,7 @@ paths:
         style: form
         explode: false
       requestBody:
-        description: List of the labels to be added to the person
+        description: List of the label names to be added to the person
         content:
           application/json:
             schema:
@@ -14895,7 +15269,7 @@ paths:
       tags:
       - Persons
       summary: archiveBot
-      description: "Archives the bot person identified by @code{ sourceId}. A bot person referenced by an existing dialog bot configuration can still be archived. Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and prevents it from being set as a conversation recipient or assigned to a new bot.<br>"
+      description: "Archives the bot person identified by `sourceId`. A bot person referenced by an existing dialog bot configuration can still be archived. Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and prevents it from being set as a conversation recipient or assigned to a new bot.<br>"
       operationId: personsArchiveBot
       requestBody:
         content:
@@ -14905,7 +15279,7 @@ paths:
         required: true
       responses:
         "200":
-          description: "result of the archive operation;  @code{ newlyArchived=true}  only on the first successful call"
+          description: result of the archive operation;  `newlyArchived=true`  only on the first successful call
           content:
             application/json:
               schema:
@@ -14920,7 +15294,7 @@ paths:
       tags:
       - Persons
       summary: archiveVirtual
-      description: "Archives the virtual person identified by @code{ sourceId} and deletes the underlying virtual user. Archiving makes the person eligible for collection by the retention policies.<br>"
+      description: Archives the virtual person identified by `sourceId` and deletes the underlying virtual user. Archiving makes the person eligible for collection by the retention policies.<br>
       operationId: personsArchiveVirtual
       requestBody:
         content:
@@ -14930,7 +15304,7 @@ paths:
         required: true
       responses:
         "200":
-          description: "result of the archive operation;  @code{ newlyArchived=true}  only on the first successful call"
+          description: result of the archive operation;  `newlyArchived=true`  only on the first successful call
           content:
             application/json:
               schema:
@@ -15191,6 +15565,26 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /persons/getNotificationCountForCurrentPerson:
+    get:
+      tags:
+      - Persons
+      summary: getNotificationCountForCurrentPerson
+      description: Returns `NotificationCountData` for the current person in the request context.<br>
+      operationId: personsGetNotificationCountForCurrentPerson
+      responses:
+        "200":
+          description: A  `NotificationCountData`  object for the person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationCountData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: PUBLIC
+      x-required-role:
+      - ANONYMOUS_USER
+      - REGISTERED_USER
   /persons/{personId}/pauseNotifications:
     post:
       tags:
@@ -15348,7 +15742,7 @@ paths:
         style: form
         explode: false
       requestBody:
-        description: List of the labels to remove from the person
+        description: List of the label names to remove from the person
         content:
           application/json:
             schema:
@@ -15666,7 +16060,7 @@ paths:
         style: form
         explode: false
       requestBody:
-        description: List of the labels to set on the person
+        description: List of the label names to set on the person
         content:
           application/json:
             schema:
@@ -18538,6 +18932,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.restored:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.restored
+              description: "An event triggered every time a previously deleted conversation is restored <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
+              operationId: conversationRestoredCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationRestoredEvent"
+              responses:
+                "200":
+                  description: OK
         conversation.unassigned:
           '{$request.body#/endpoint}':
             post:
@@ -19599,12 +20007,12 @@ components:
           - AccountIngressQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/AccountIngressSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/AccountIngressOrderBy"
         offset:
@@ -19614,7 +20022,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     AccountIngressSearchFilter:
       oneOf:
       - $ref: "#/components/schemas/OriginAccountIngressSearchFilter"
@@ -19749,12 +20157,12 @@ components:
           - AccountQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/AccountSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/AccountOrderBy"
         offset:
@@ -19764,7 +20172,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     AccountQuotaUsageData:
       type: object
       description: "Quota information for API keys, domains, teams, and users"
@@ -20325,12 +20733,12 @@ components:
           - AgentStateQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/AgentStateSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/AgentStateOrderBy"
         offset:
@@ -20340,7 +20748,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     AgentStateSearchFilter:
       description: Person state filter item.
       oneOf:
@@ -20543,12 +20951,12 @@ components:
           - AnalyticsDashboardQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/AnalyticsDashboardSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/AnalyticsDashboardOrderBy"
         offset:
@@ -20558,7 +20966,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     AnalyticsDashboardResult:
       type: object
       description: Container to return list of analytics dashboards
@@ -20618,12 +21026,12 @@ components:
           - AnalyticsKpiDataQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/AnalyticsKpiDataQueryFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/AnalyticsKpiDataQueryOrderBy"
         offset:
@@ -20633,7 +21041,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     AnalyticsKpiDataQueryFilter:
       type: object
       description: Filter for analytics KPI data queries. <p> Filters KPI records by event timestamp using an `InRangeTimestampOperator` to define a time range (in milliseconds since epoch). The filter field is fixed to `EAnalyticsKpiDataQueryFilterField.EVENT_TIMESTAMP`.<br>@see AnalyticsKpiDataQuery<br>@see InRangeTimestampOperator
@@ -20766,12 +21174,12 @@ components:
           - AnalyticsWidgetQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/AnalyticsWidgetSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/AnalyticsWidgetOrderBy"
         offset:
@@ -20781,7 +21189,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     AnalyticsWidgetResult:
       type: object
       description: Container to return list of analytics widgets
@@ -21011,12 +21419,12 @@ components:
           - ApiKeyQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ApiKeySearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ApiKeyOrderBy"
         offset:
@@ -21026,7 +21434,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ApiKeyResult:
       type: object
       description: Container to return list of apikeys
@@ -21173,7 +21581,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -21220,7 +21628,7 @@ components:
             $ref: "#/components/schemas/MultichoiceQuestionMessageTranslation"
     ArchivePersonResult:
       type: object
-      description: "Result of archiving a person via the Persons API, such as @code{ /persons/archiveVirtual}."
+      description: "Result of archiving a person via the Persons API, such as `/persons/archiveVirtual`."
       properties:
         $_type:
           type: string
@@ -21229,7 +21637,7 @@ components:
           - ArchivePersonResult
         newlyArchived:
           type: boolean
-          description: <code>true</code> if this call archived the person; <code>false</code> if the person was already archived (idempotent re-archive).
+          description: '`true` if this call archived the person; `false` if the person was already archived (idempotent re-archive).'
     AriaAgenticFlowDataContent:
       oneOf:
       - $ref: "#/components/schemas/AriaMultiflowAgenticFlowDataContent"
@@ -21371,7 +21779,7 @@ components:
           format: int32
           description: "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used."
         agenticFlowData:
-          description: "Aria agentic flow ID. Add @code{ ?expand=agenticFlowData} to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters."
+          description: "Aria agentic flow ID. Add `?expand=agenticFlowData` to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters."
           oneOf:
           - type: string
           - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
@@ -21519,7 +21927,7 @@ components:
         type:
           $ref: "#/components/schemas/ESuggestionSourceType"
         agenticFlowData:
-          description: "Aria agentic flow ID. Add @code{ ?expand=agenticFlowData} to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters."
+          description: "Aria agentic flow ID. Add `?expand=agenticFlowData` to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters."
           oneOf:
           - type: string
           - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
@@ -21860,12 +22268,12 @@ components:
           - AuditChangeQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/AuditChangeSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/AuditChangeOrderBy"
         offset:
@@ -21875,7 +22283,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     AuditChangeResult:
       type: object
       properties:
@@ -22377,12 +22785,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -22418,7 +22826,7 @@ components:
           $ref: "#/components/schemas/AvgHandlingTimeAnalyticsKpiFilterData"
     AvgReservationTimeAnalyticsKpiFilterData:
       type: object
-      description: "Data model object representing filters for the KPI calculation of average reservation time. <p> Only reservation-based queue interactions are ever considered (the KPI hard-codes a @code{ queueInteractionType IN (RESERVATION_REDEEMED,RESERVATION_CANCELLED, RESERVATION_DECLINED, RESERVATION_TIMEDOUT)} filter). The `#getQueueInteractionTypes() queueInteractionTypes` field can be used to further restrict the set of reservation outcomes; non-reservation values are rejected during validation. <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>queueInteractionTypes AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>minReservationTimeDuration AND</li> <li>maxReservationTimeDuration</li> </ul>"
+      description: "Data model object representing filters for the KPI calculation of average reservation time. <p> Only reservation-based queue interactions are ever considered (the KPI hard-codes a `queueInteractionType IN (RESERVATION_REDEEMED,RESERVATION_CANCELLED, RESERVATION_DECLINED, RESERVATION_TIMEDOUT)` filter). The `#getQueueInteractionTypes() queueInteractionTypes` field can be used to further restrict the set of reservation outcomes; non-reservation values are rejected during validation. <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId) AND</li> <li>queueInteractionTypes AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds AND</li> <li>minReservationTimeDuration AND</li> <li>maxReservationTimeDuration</li> </ul>"
       properties:
         $_type:
           type: string
@@ -22544,12 +22952,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -22726,12 +23134,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -23154,7 +23562,7 @@ components:
           description: Indicates if the bot is a hidden participant
     BotParticipantHistoryData:
       type: object
-      description: Information about the bot participant of a conversation (with historical information)
+      description: Information about a bot participant in a conversation (with historical information)
       properties:
         $_type:
           type: string
@@ -24033,12 +24441,12 @@ components:
           - BranchClientQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/BranchClientSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/BranchClientOrderBy"
         offset:
@@ -24048,7 +24456,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     BranchClientResult:
       type: object
       description: Container to return list of branches
@@ -24162,12 +24570,12 @@ components:
           - BranchClientStateDataQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/BranchClientStateDataSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/BranchClientStateDataOrderBy"
         offset:
@@ -24177,7 +24585,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     BranchClientStateDataResult:
       type: object
       description: Container to return list of branch client states
@@ -24421,10 +24829,10 @@ components:
           description: Identifier that addresses this device on the branch's external device endpoint (e.g. a WebIO port number). Used for DOOR_OPENER and STATUS_LAMP device types. Optional.
         onColor:
           type: string
-          description: "Hex color displayed when the device is in the ON state. Format: @code{ #RRGGBB}. Optional."
+          description: "Hex color displayed when the device is in the ON state. Format: `#RRGGBB`. Optional."
         offColor:
           type: string
-          description: "Hex color displayed when the device is in the OFF state. Format: @code{ #RRGGBB}. Optional."
+          description: "Hex color displayed when the device is in the OFF state. Format: `#RRGGBB`. Optional."
     BranchDeviceTranslation:
       type: object
       properties:
@@ -24556,12 +24964,12 @@ components:
           - BranchQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/BranchSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/BranchOrderBy"
         offset:
@@ -24571,7 +24979,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     BranchResult:
       type: object
       description: Container to return list of branches
@@ -24686,6 +25094,20 @@ components:
         description:
           type: string
           description: Translated description of the corresponding description field of the main entity this translation belongs to
+    BrowserNameDeviceInfoSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: BrowserNameDeviceInfoSearchFilter
+          enum:
+          - BrowserNameDeviceInfoSearchFilter
+        field:
+          $ref: "#/components/schemas/EDeviceInfoSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     Call:
       type: object
       description: Call metadata class
@@ -25299,12 +25721,12 @@ components:
           - CallQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CallSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/CallOrderBy"
         offset:
@@ -25314,7 +25736,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     CallResult:
       type: object
       description: Container to return list of call log(s)
@@ -25369,7 +25791,7 @@ components:
           NOT_EQUALS: "#/components/schemas/NotEqualsCallServiceProviderOperator"
     CallsAnalyticsKpiData:
       type: object
-      description: "Represents a completed call lifecycle within a conversation. Each entry is backed by a @code{ conversation.call.ended} event and records the details and metadata of audio or video calls."
+      description: Represents a completed call lifecycle within a conversation. Each entry is backed by a `conversation.call.ended` event and records the details and metadata of audio or video calls.
       properties:
         $_type:
           type: string
@@ -25390,11 +25812,11 @@ components:
         acceptTimestamp:
           type: integer
           format: int64
-          description: "UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant's connection phase. Optional, may be @code{ null}if the call was never accepted."
+          description: "UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant's connection phase. Optional, may be `null`if the call was never accepted."
         establishedTimestamp:
           type: integer
           format: int64
-          description: "UTC timestamp (ms) when at least two participants successfully connected to the call service provider. Optional, may be @code{ null} if the call was never established."
+          description: "UTC timestamp (ms) when at least two participants successfully connected to the call service provider. Optional, may be `null` if the call was never established."
         endTimestamp:
           type: integer
           format: int64
@@ -25589,12 +26011,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -25735,12 +26157,12 @@ components:
           - CannedResponseQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CannedResponseSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/CannedResponseOrderBy"
         offset:
@@ -25750,7 +26172,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     CannedResponseResult:
       type: object
       description: Container to return list of canned responses
@@ -25836,7 +26258,7 @@ components:
           - CannedResponseUsageCountQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CannedResponseUsageSearchFilter"
     CannedResponseUsageOrderBy:
@@ -25863,12 +26285,12 @@ components:
           - CannedResponseUsageQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CannedResponseUsageSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/CannedResponseUsageOrderBy"
         offset:
@@ -25878,7 +26300,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     CannedResponseUsageResult:
       type: object
       description: Container to return list of canned response usages
@@ -25987,7 +26409,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -26677,12 +27099,12 @@ components:
           - CollaborationLayerEventQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CollaborationLayerEventSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/CollaborationLayerEventOrderBy"
         offset:
@@ -26692,7 +27114,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     CollaborationLayerEventResult:
       type: object
       description: Container to return a list of collaboration layer events
@@ -26817,12 +27239,12 @@ components:
           - CollaborationLayerLogEntryQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CollaborationLayerLogEntrySearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/CollaborationLayerLogEntryOrderBy"
         offset:
@@ -26832,7 +27254,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     CollaborationLayerLogEntryResult:
       type: object
       description: Container to return list of CollaborationLayerLogEntries
@@ -26962,7 +27384,7 @@ components:
           $ref: "#/components/schemas/ELayerStopReason"
     CollaborationLayersAnalyticsKpiData:
       type: object
-      description: "Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a @code{ collaboration_layer.stopped} or@code{ collaboration_layer.aborted} event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing."
+      description: Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a `collaboration_layer.stopped` or`collaboration_layer.aborted` event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.
       properties:
         $_type:
           type: string
@@ -26983,7 +27405,7 @@ components:
         activationTimestamp:
           type: integer
           format: int64
-          description: "UTC timestamp (ms) of activation of the layer. Optional, may be @code{ null} if the layer was never activated."
+          description: "UTC timestamp (ms) of activation of the layer. Optional, may be `null` if the layer was never activated."
         stopTimestamp:
           type: integer
           format: int64
@@ -27168,12 +27590,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -27368,7 +27790,7 @@ components:
           description: "Unique id of the person, when creating a person this property can be omitted as it will be generated by the server anyway."
         accountId:
           type: string
-          description: "Account id to which a Person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID."
+          description: "ID of the account the person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID."
         personSource:
           $ref: "#/components/schemas/EPersonSource"
         sourceId:
@@ -27379,25 +27801,25 @@ components:
           description: URL identifying the source of the person. Maximum length of 2000 characters. Only available for virtual persons in conversations that were created outside Unblu.
         sourceData:
           type: string
-          description: Vendor specific data.
+          description: Vendor specific custom data unknown to Unblu. It can be passed in by the vendor on person creation/update to store additional information for a person.
         firstName:
           type: string
-          description: The first name of the person. Maximum length of 250 characters. Can be omitted.
+          description: The person's first name. Maximum length of 250 characters. Can be omitted.
         lastName:
           type: string
-          description: the last name of the person. Maximum length of 250 characters. Can be omitted.
+          description: The person's last name. Maximum length of 250 characters. Can be omitted.
         functionTitle:
           type: string
           description: The agent's function or job title. Maximum length of 250 characters. Can be omitted.
         username:
           type: string
-          description: "The username of the person. When firstName and lastName are unknown, it is recommended to use this value to change the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted."
+          description: "The person's username. When a person's firstName and lastName are unknown, it is recommended that you use this value for the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted."
         nickname:
           type: string
-          description: A name that an anonymous person has given itself. Maximum length of 250 characters. Can be omitted.
+          description: A name that an anonymous person has given themselves. Maximum length of 250 characters. Can be omitted.
         displayName:
           type: string
-          description: Display name of the person. This is read-only information that is set by the Collaboration Server.
+          description: The person's name as displayed in UIs. This is read-only information set by Unblu.
         displayNameForAgent:
           type: string
           description: The person's display name as displayed to agents. This is read-only information set by the Collaboration Server.
@@ -27410,13 +27832,13 @@ components:
           $ref: "#/components/schemas/EAuthorizationRole"
         email:
           type: string
-          description: The email of the person. Optional.
+          description: The person's email address. Optional.
         phone:
           type: string
-          description: The phone of the person. Optional.
+          description: The person's phone number. Optional.
         teamId:
           type: string
-          description: Team id of the person. Optional.
+          description: The ID of the team the person belongs to. Optional.
         labels:
           type: array
           description: List of labels set for this person
@@ -27592,12 +28014,12 @@ components:
           - ConversationAccessInterceptorQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ConversationAccessInterceptorSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ConversationAccessInterceptorOrderBy"
         offset:
@@ -27607,7 +28029,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ConversationAccessInterceptorRequest:
       type: object
       description: Sent to a conversation access interceptor to decide whether access to a conversation is allowed
@@ -27791,7 +28213,7 @@ components:
           $ref: "#/components/schemas/EConversationVisibility"
         locale:
           type: string
-          description: "The locale of the conversation language as a BCP 47 language tag, including the region if available. Optional, if not provided, the account default locale will be used."
+          description: "The language of the conversation as a BCP 47 language tag, including the region if available. Optional, if not provided, the account default locale will be used."
         visitorData:
           type: string
           description: Custom data for the visitor. This has no specific format. Optional.
@@ -27803,7 +28225,7 @@ components:
           description: "True if the conversation inherits all configuration and text properties from its conversation template. If omitted, the value`ConversationTemplate.inheritConfigurationAndTexts` from its conversation template is used."
         externalMessengerChannelId:
           type: string
-          description: ID of the external messenger channel the conversation should be linked to. If this property is null the conversation is an Unblu conversation and not linked to an external messenger channel.
+          description: The ID of the external messenger channel to link the conversation to. If this property is null the conversation is an Unblu conversation and not linked to an external messenger channel.
         sourceId:
           type: string
           description: "Custom ID to identify the source of the conversation. Typically used in connection with an external messenger to create a link to the external conversation.<br> If this ID is specified, it has to be unique for each external channel. Even if the external channel is not used (null), the custom ID must be unique for this \"null\"."
@@ -28134,17 +28556,17 @@ components:
           $ref: "#/components/schemas/PersonData"
         participants:
           type: array
-          description: The (current and earlier) participants of the conversation
+          description: "The conversation's participants, past and present"
           items:
             $ref: "#/components/schemas/ParticipantHistoryData"
         externalParticipants:
           type: array
-          description: The (current and earlier) participants of the conversation who are connected through an external messenger
+          description: The past and present participants in the conversation connected through an external messenger
           items:
             $ref: "#/components/schemas/ExternalParticipantHistoryData"
         botParticipants:
           type: array
-          description: The (current and earlier) bots of the conversation
+          description: The past and present bot participants in the conversation
           items:
             $ref: "#/components/schemas/BotParticipantHistoryData"
         createdTimestamp:
@@ -28158,11 +28580,11 @@ components:
         endTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the conversation has ended (all active participants have finished their offboarding; timestamp when the state was set to`EConversationState.ENDED`)
+          description: "Unix timestamp (ms) when the conversation ended (all active participants have finished their offboarding; timestamp when the state was set to`EConversationState.ENDED`) Otherwise, the value is null."
         lastMessageTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the last conversation message was sent. Null if there hasn't been any yet.
+          description: Unix timestamp (ms) when the last message was sent to the conversation. Null if there hasn't been any yet.
         lastCompletedRecordingTimestamp:
           type: integer
           format: int64
@@ -28173,29 +28595,30 @@ components:
           $ref: "#/components/schemas/EInitialEngagementType"
         locale:
           type: string
-          description: Locale of the conversation language (as BCP 47 language tag form including region if available)
+          description: Locale of the conversation language formatted as BCP 47 language tag form including region if available
         endReason:
           $ref: "#/components/schemas/EConversationEndReason"
         endComment:
           type: string
+          description: Comment provided when ending the conversation. `null` if it isn't ended yet or there wasn't one provided.
         tokboxSessionId:
           type: string
-          description: Tokbox sessionId.
+          description: Tokbox sessionId
         conversationTemplateId:
           type: string
-          description: Template ID of the conversation.
+          description: Template ID of the conversation
         externalMessengerChannelIconId:
           type: string
-          description: External messenger channel id.
+          description: ID of the external messenger channel icon
         externalMessengerChannelName:
           type: string
-          description: External messenger name.
+          description: Name of the external messenger channel
         topic:
           type: string
-          description: Topic of the conversation.
+          description: Topic of the conversation
         sourceUrl:
           type: string
-          description: Source URL of the conversation.
+          description: Source URL of the conversation
         scheduledTimestamp:
           type: integer
           format: int64
@@ -28203,7 +28626,7 @@ components:
         dueDeletionTimestamp:
           type: integer
           format: int64
-          description: "Unix timestamp (ms) when this conversation will be deleted, taking into account the retention period defined for the entity. Calculated from `endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details."
+          description: "Unix timestamp (ms) when the conversation will be deleted automatically, taking into account the retention period defined for the entity. Calculated from`endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details."
         initialEngagementUrl:
           type: string
           description: "The URL where the conversation originated. The following conversations always have an initial engagement URL: <ul> <li>Conversations initiated by a visitor on a customer's website where Unblu is integrated</li> <li>PIN-based conversations, provided a visitor redeems the PIN on a customer's website where Unblu is integrated</li> <li>Conversations created using the Web API, provided an initial engagement URL was included when the conversation was created</li> </ul> Conversations initiated from the mobile SDK don't have an initial engagement URL."
@@ -28325,12 +28748,12 @@ components:
           - ConversationHistoryQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ConversationHistorySearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ConversationHistoryOrderBy"
         offset:
@@ -28340,7 +28763,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ConversationHistorySearchFilter:
       description: Conversation history filter item.
       oneOf:
@@ -28566,12 +28989,12 @@ components:
           - ConversationInvitationQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ConversationInvitationSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ConversationInvitationOrderBy"
         offset:
@@ -28581,7 +29004,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ConversationInvitationResult:
       type: object
       description: Container to return list of conversation invitations
@@ -28996,12 +29419,12 @@ components:
           - ConversationQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ConversationSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ConversationOrderBy"
         offset:
@@ -29011,7 +29434,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ConversationQueuedEvent:
       type: object
       description: "An event triggered every time a conversation's state changes from ONBOARDING to QUEUED <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
@@ -29333,6 +29756,27 @@ components:
           default: ConversationRequeuedEvent
           enum:
           - ConversationRequeuedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: "#/components/schemas/ConversationData"
+    ConversationRestoredEvent:
+      type: object
+      description: "An event triggered every time a previously deleted conversation is restored <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: ConversationRestoredEvent
+          enum:
+          - ConversationRestoredEvent
         timestamp:
           type: integer
           format: int64
@@ -29915,12 +30359,12 @@ components:
           - ConversationSummaryQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ConversationSummarySearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ConversationSummaryOrderBy"
         offset:
@@ -29930,7 +30374,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ConversationSummaryRejectedEvent:
       type: object
       description: An event triggered every time a conversation summary is rejected during review.
@@ -30197,12 +30641,12 @@ components:
           - ConversationSummaryTemplateQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ConversationSummaryTemplateSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ConversationSummaryTemplateOrderBy"
         offset:
@@ -30212,7 +30656,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ConversationSummaryTemplateResult:
       type: object
       description: Container to return list of conversation summary template
@@ -30399,12 +30843,12 @@ components:
           - ConversationTemplateQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ConversationTemplateSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ConversationTemplateOrderBy"
         offset:
@@ -30414,7 +30858,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ConversationTemplateResult:
       type: object
       description: Container to return list of conversationtemplates
@@ -30562,7 +31006,7 @@ components:
           type: string
     ConversationsEndedAnalyticsKpiData:
       type: object
-      description: "Represents a comprehensive summary of a conversation's entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by a@code{ conversation.ended} event, so there is exactly one entry per conversation."
+      description: "Represents a comprehensive summary of a conversation's entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by a`conversation.ended` event, so there is exactly one entry per conversation."
       properties:
         $_type:
           type: string
@@ -30583,19 +31027,19 @@ components:
         onboardingTimestamp:
           type: integer
           format: int64
-          description: "UTC timestamp (ms) of when the conversation was onboarded. Optional, may be @code{ null} if the conversation was never onboarded."
+          description: "UTC timestamp (ms) of when the conversation was onboarded. Optional, may be `null` if the conversation was never onboarded."
         firstQueuedTimestamp:
           type: integer
           format: int64
-          description: "UTC timestamp (ms) of when the conversation was queued for the first time. Optional, may be @code{ null} if the conversation was never queued."
+          description: "UTC timestamp (ms) of when the conversation was queued for the first time. Optional, may be `null` if the conversation was never queued."
         firstActiveTimestamp:
           type: integer
           format: int64
-          description: "UTC timestamp (ms) of when the conversation became active for the first time. Optional, may be @code{ null} if the conversation was never active."
+          description: "UTC timestamp (ms) of when the conversation became active for the first time. Optional, may be `null` if the conversation was never active."
         offboardingTimestamp:
           type: integer
           format: int64
-          description: "UTC timestamp (ms) of when the conversation was offboarded. Optional, may be @code{ null} if the conversation was never offboarded."
+          description: "UTC timestamp (ms) of when the conversation was offboarded. Optional, may be `null` if the conversation was never offboarded."
         endTimestamp:
           type: integer
           format: int64
@@ -30760,12 +31204,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -31598,12 +32042,12 @@ components:
           - CustomActionQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CustomActionSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/CustomActionOrderBy"
         offset:
@@ -31613,7 +32057,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     CustomActionResult:
       type: object
       description: Container to return a list of custom actions
@@ -31791,6 +32235,9 @@ components:
         triggerAgentMobileSdkEvent:
           type: boolean
           description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
+        triggerAgentEmbeddedApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.
         sortingOrder:
           type: integer
           format: int32
@@ -32100,12 +32547,12 @@ components:
           - CustomExternalMessengerChannelQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/CustomExternalMessengerChannelSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/CustomExternalMessengerChannelOrderBy"
         offset:
@@ -32115,7 +32562,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     CustomExternalMessengerChannelResult:
       type: object
       description: Container to return list of `CustomExternalMessengerChannel`s
@@ -32241,6 +32688,9 @@ components:
         triggerAgentMobileSdkEvent:
           type: boolean
           description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
+        triggerAgentEmbeddedApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.
         sortingOrder:
           type: integer
           format: int32
@@ -32418,6 +32868,9 @@ components:
         triggerAgentMobileSdkEvent:
           type: boolean
           description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
+        triggerAgentEmbeddedApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.
         sortingOrder:
           type: integer
           format: int32
@@ -32775,12 +33228,12 @@ components:
           - DeputyRelationshipQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/DeputyRelationshipSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/DeputyRelationshipOrderBy"
         offset:
@@ -32790,7 +33243,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     DeputyRelationshipResult:
       type: object
       description: Container to return list of deputy relationships
@@ -32927,6 +33380,154 @@ components:
           $ref: "#/components/schemas/EWebhookRegistrationSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    DeviceBindingChallengeRequest:
+      type: object
+      description: Request for a one-time challenge used to verify an existing device binding (`IDeviceBindingService.issueVerifyChallenge`).
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingChallengeRequest
+          enum:
+          - DeviceBindingChallengeRequest
+        bindingId:
+          type: string
+          description: ID of the device binding to verify; the caller's session must own it.
+    DeviceBindingChallengeResponse:
+      type: object
+      description: A server-issued one-time challenge that the device must sign to verify an existing binding.
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingChallengeResponse
+          enum:
+          - DeviceBindingChallengeResponse
+        challenge:
+          type: string
+          description: Base64-encoded random challenge the device signs with its bound private key.
+        expiresAt:
+          type: integer
+          format: int64
+          description: Epoch-millis timestamp after which the challenge is no longer valid.
+    DeviceBindingIssueEnrollmentChallengeRequest:
+      type: object
+      description: "Enrollment step 1 request: the scanned registration token plus the device's freshly generated public key (`IDeviceBindingService.issueEnrollmentChallenge`)."
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingIssueEnrollmentChallengeRequest
+          enum:
+          - DeviceBindingIssueEnrollmentChallengeRequest
+        token:
+          type: string
+          description: Single-use registration token scanned from the enrollment QR code.
+        publicKey:
+          type: string
+          description: Base64-encoded SPKI public key generated and held by the device.
+    DeviceBindingIssueEnrollmentChallengeResponse:
+      type: object
+      description: "Enrollment step 1 response: the challenge the device must sign to prove possession of its private key."
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingIssueEnrollmentChallengeResponse
+          enum:
+          - DeviceBindingIssueEnrollmentChallengeResponse
+        challenge:
+          type: string
+          description: Base64-encoded random challenge to sign with the newly generated private key.
+        expiresAt:
+          type: integer
+          format: int64
+          description: Epoch-millis timestamp after which the enrollment challenge expires.
+    DeviceBindingIssueTokenRequest:
+      type: object
+      description: Request payload for `IDeviceBindingService.issueRegistrationToken`. Currently has no fields — kept as a typed DTO so future per-issuance options can be added without breaking the API signature.
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingIssueTokenRequest
+          enum:
+          - DeviceBindingIssueTokenRequest
+    DeviceBindingIssueTokenResponse:
+      type: object
+      description: Response containing the freshly minted single-use device-binding registration token and its QR representation.
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingIssueTokenResponse
+          enum:
+          - DeviceBindingIssueTokenResponse
+        token:
+          type: string
+          description: Single-use bearer token used to enrol a device for the issuing user.
+        qrUri:
+          type: string
+          description: "The `unblu-bind://` URI encoding the token, for rendering as an enrolment QR code."
+        qrImage:
+          type: string
+          description: "The `qrUri` rendered as a QR code, as a base64 PNG data URI (`data:image/png;base64,...`), ready to show in an `<img>`."
+        expiresAt:
+          type: integer
+          format: int64
+          description: Epoch-millis timestamp after which the registration token expires.
+    DeviceBindingRegistrationRequest:
+      type: object
+      description: "Enrollment step 2 request: proof-of-possession that completes device registration (`IDeviceBindingService.register`)."
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingRegistrationRequest
+          enum:
+          - DeviceBindingRegistrationRequest
+        registrationToken:
+          type: string
+          description: Registration token previously presented when issuing the enrollment challenge.
+        signature:
+          type: string
+          description: "Base64-encoded signature over the server-stored challenge, produced with the device's private key."
+    DeviceBindingRegistrationResponse:
+      type: object
+      description: Result of a successful device enrollment.
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingRegistrationResponse
+          enum:
+          - DeviceBindingRegistrationResponse
+        bindingId:
+          type: string
+          description: ID of the newly created device binding.
+    DeviceBindingVerifyRequest:
+      type: object
+      description: "Verify step 2 request: proof-of-possession for an existing device binding (`IDeviceBindingService.verify`)."
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingVerifyRequest
+          enum:
+          - DeviceBindingVerifyRequest
+        bindingId:
+          type: string
+          description: ID of the device binding being verified; the caller's session must own it.
+        signature:
+          type: string
+          description: "Base64-encoded signature over the server-issued challenge, produced with the bound private key."
+    DeviceBindingVerifyResponse:
+      type: object
+      description: Result of a device-binding verification.
+      properties:
+        $_type:
+          type: string
+          default: DeviceBindingVerifyResponse
+          enum:
+          - DeviceBindingVerifyResponse
+        verified:
+          type: boolean
+          description: Whether the signature was accepted and the device verified.
+        verifiedAt:
+          type: integer
+          format: int64
+          description: "Epoch-millis timestamp of the verification, or `null` if not verified."
     DeviceInfo:
       type: object
       description: "Model of a device (os, browser, etc) This is the representation of a physical device which may browsers (desktop and mobile) if accessed via the website or actual devices if accessed via the unblu MobileSDK"
@@ -33001,6 +33602,183 @@ components:
           type: integer
           format: int64
           description: Timestamp for the last successful two-factor authentication (2FA). Used to check if the current 2FA is still valid.
+        pushNotificationsEnabled:
+          type: boolean
+          description: Whether the user has enabled push notifications for this device. Defaults to the value of`com.unblu.core.push_notification.PushNotificationConfiguration.defaultDevicePushNotificationsEnabled` when the device is created and is then preserved across re-logins.
+    DeviceInfoData:
+      type: object
+      description: "Data transfer object for device info, associated with a specific person. A device represents either a browser or an app that uses the Unblu mobile SDK."
+      properties:
+        $_type:
+          type: string
+          default: DeviceInfoData
+          enum:
+          - DeviceInfoData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted, when sending data to the server. It is only of informational character. It is ignored, when sending it to the server and therefore can be omitted. Note: If you set this property it will return the same value but it will not be written to the storage and will not effect the data consistency."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It is filled by the Unblu server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        osName:
+          type: string
+          description: Name of the operating system the device runs on.
+        osVersion:
+          type: string
+          description: "Version of the operating system, null if it is unknown."
+        browserName:
+          type: string
+          description: "Name of the browser running on the device, for example \"Chrome\". \"Mobile SDK\" for Mobile SDK"
+        browserVersion:
+          type: string
+          description: Version of the browser or mobile SDK.
+        type:
+          $ref: "#/components/schemas/EDeviceType"
+        ownerPersonId:
+          type: string
+          description: ID of the person that owns this device.
+        lastSeen:
+          type: integer
+          format: int64
+          description: Unix timestamp in milliseconds of when the device was last seen.
+        pushNotificationsEnabled:
+          type: boolean
+          description: Whether push notifications are enabled in Unblu for this device.
+        hasActiveAuthSession:
+          type: boolean
+          description: "Whether the device currently has an active authentication session, that is, whether the owner is signed in to Unblu on the device."
+        online:
+          type: boolean
+          description: "Whether the device currently has an active person presence, that is, whether the person is online in Unblu."
+        hasPushNotificationTokens:
+          type: boolean
+          description: "Whether the device has at least one push notification token registered (mobile push, PushKit, or web push)."
+        currentDevice:
+          type: boolean
+          description: Whether this device is the one the current request is being made from.
+        bound:
+          type: boolean
+          description: Whether this device has an active device binding. Only mobile devices can be bound; `false`/null for desktop and browser devices.
+        boundTimestamp:
+          type: integer
+          format: int64
+          description: "Unix timestamp in milliseconds of when the device's active binding was created, null if the device is not bound."
+        bindingId:
+          type: string
+          description: "ID of the device's active binding, null if the device is not bound. Used to revoke (unbind) the binding."
+    DeviceInfoOrderBy:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: DeviceInfoOrderBy
+          enum:
+          - DeviceInfoOrderBy
+        field:
+          $ref: "#/components/schemas/EDeviceInfoOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    DeviceInfoQuery:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: DeviceInfoQuery
+          enum:
+          - DeviceInfoQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search
+          items:
+            $ref: "#/components/schemas/DeviceInfoSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the list of search results
+          items:
+            $ref: "#/components/schemas/DeviceInfoOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of items returned
+    DeviceInfoResult:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: DeviceInfoResult
+          enum:
+          - DeviceInfoResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/DeviceInfoData"
+    DeviceInfoSearchFilter:
+      oneOf:
+      - $ref: "#/components/schemas/DeviceTypeDeviceInfoSearchFilter"
+      - $ref: "#/components/schemas/OsNameDeviceInfoSearchFilter"
+      - $ref: "#/components/schemas/BrowserNameDeviceInfoSearchFilter"
+      - $ref: "#/components/schemas/OwnerPersonIdDeviceInfoSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          BROWSER_NAME: "#/components/schemas/BrowserNameDeviceInfoSearchFilter"
+          DEVICE_TYPE: "#/components/schemas/DeviceTypeDeviceInfoSearchFilter"
+          OS_NAME: "#/components/schemas/OsNameDeviceInfoSearchFilter"
+          OWNER_PERSON_ID: "#/components/schemas/OwnerPersonIdDeviceInfoSearchFilter"
+    DeviceInfoServiceSetPushNotificationsEnabledBody:
+      type: object
+      description: Request body for the 'deviceInfoServiceSetPushNotificationsEnabled' operation
+      properties:
+        enabled:
+          type: boolean
+          description: "`true`  to enable,  `false`  to disable push notifications on this device"
+    DeviceTypeDeviceInfoSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: DeviceTypeDeviceInfoSearchFilter
+          enum:
+          - DeviceTypeDeviceInfoSearchFilter
+        field:
+          $ref: "#/components/schemas/EDeviceInfoSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/DeviceTypeOperator"
+    DeviceTypeOperator:
+      oneOf:
+      - $ref: "#/components/schemas/EqualsDeviceTypeOperator"
+      - $ref: "#/components/schemas/NotEqualsDeviceTypeOperator"
+      - $ref: "#/components/schemas/InDeviceTypeOperator"
+      - $ref: "#/components/schemas/NotInDeviceTypeOperator"
+      discriminator:
+        propertyName: type
+        mapping:
+          EQUALS: "#/components/schemas/EqualsDeviceTypeOperator"
+          IN: "#/components/schemas/InDeviceTypeOperator"
+          NOT_EQUALS: "#/components/schemas/NotEqualsDeviceTypeOperator"
+          NOT_IN: "#/components/schemas/NotInDeviceTypeOperator"
     DialogBotData:
       description: Model representing an external dialog bot that can handle conversation onboarding and offboarding.
       oneOf:
@@ -33037,12 +33815,12 @@ components:
           - DialogBotQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/DialogBotSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/DialogBotOrderBy"
         offset:
@@ -33052,7 +33830,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     DialogBotResult:
       type: object
       description: Container to return list of dialogbots
@@ -33355,12 +34133,12 @@ components:
           - DomainQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/DomainSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/DomainOrderBy"
         offset:
@@ -33370,7 +34148,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     DomainResult:
       type: object
       description: Container to return list of domains
@@ -35098,15 +35876,15 @@ components:
       - OPEN_IN_VISITOR_DESK
       - OPEN_PUBLIC_LINK
       x-enum-descriptions:
-      - "ACCEPT_IN_AGENT_DESK: Link that accepts the invitation and loads the agent desk to display the conversation"
-      - "ACCEPT_IN_AGENT_SINGLE_VIEW: Link that accepts the invitation and display the conversation in a single view <p> The single view only displays the conversation without any navigation and other agent desk features and can be used for integration into third party applications."
-      - "ACCEPT_IN_VISITOR_DESK: Link that accepts the invitation and display the conversation in a visitor desk"
-      - "OPEN_IN_AGENT_DESK: Link to open an existing conversation in the agent desk to display the conversation"
-      - "OPEN_AS_GHOST_IN_AGENT_DESK: Link to open an existing conversation as a ghost in the agent desk to display the conversation"
-      - "OPEN_IN_AGENT_SINGLE_VIEW: Link to open an existing conversation in a single view <p> The single view only displays the conversation, with no navigation or other Agent Desk features. It can be used for integration into third-party applications."
-      - "OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW: Link to open an existing conversation in a single view as a ghost <p> The single view only displays the conversation, with no navigation or other Agent Desk features. It can be used for integration into third-party applications."
-      - "OPEN_IN_VISITOR_DESK: Link to open an existing conversation in a visitor desk"
-      - "OPEN_PUBLIC_LINK: Link to open an existing conversation. It will first go to the visitor desk, it it can be detected, that the user is an agent, it will redirect to the single view for the agent."
+      - "ACCEPT_IN_AGENT_DESK: Link that accepts the invitation and loads the Agent Desk to display the conversation"
+      - "ACCEPT_IN_AGENT_SINGLE_VIEW: Link that accepts the invitation and display the conversation in the Single Conversation Desk. <p> The Single Conversation Desk displays a conversation without any other Agent Desk features. It can be used for integrating Unblu into third-party applications."
+      - "ACCEPT_IN_VISITOR_DESK: Link that accepts the invitation and displays the conversation in the Visitor Desk"
+      - "OPEN_IN_AGENT_DESK: Link that opens the Agent Desk to display an existing conversation"
+      - "OPEN_AS_GHOST_IN_AGENT_DESK: Link that opens the Agent Desk to display an existing conversation as a ghost"
+      - "OPEN_IN_AGENT_SINGLE_VIEW: Link that opens an existing conversation in the Single Conversation Desk. <p> The Single Conversation Desk displays a conversation without any other Agent Desk features. It can be used for integrating Unblu into third-party applications."
+      - "OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW: Link that opens an existing conversation in the Single Conversation Desk as a ghost. <p> The Single Conversation Desk displays a conversation without any other Agent Desk features. It can be used for integrating Unblu into third-party applications."
+      - "OPEN_IN_VISITOR_DESK: Link to open an existing conversation in the Visitor Desk"
+      - "OPEN_PUBLIC_LINK: Public link to open an existing conversation. The link first goes to the Visitor Desk. If Unblu detects that the user is an agent, they're redirected to the Single Conversation Desk."
     EConversationMessageActionType:
       type: string
       description: Type of message action used in Card and List messages.
@@ -35183,7 +35961,7 @@ components:
       - OFFBOARDING
       - ENDED
       x-enum-descriptions:
-      - "CREATED: Participant has been created"
+      - "CREATED: Participation has been created but person hasn't joined the conversation yet"
       - "ONBOARDING: Participant is doing the onboarding to join the conversation"
       - "ACTIVE: Participant has joined the conversation and is an active member"
       - "OFFBOARDING: Participant is doing the offboarding to leave the conversation"
@@ -36104,6 +36882,34 @@ components:
       - "NOT_EQUALS: Check if the value not is equals to the one provided in the operator"
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EDeviceInfoOrderByField:
+      type: string
+      enum:
+      - ID
+      - DEVICE_TYPE
+      - OS_NAME
+      - BROWSER_NAME
+      - CREATION_TIMESTAMP
+      - LAST_SEEN
+      x-enum-descriptions:
+      - ID
+      - DEVICE_TYPE
+      - OS_NAME
+      - BROWSER_NAME
+      - CREATION_TIMESTAMP
+      - LAST_SEEN
+    EDeviceInfoSearchFilterField:
+      type: string
+      enum:
+      - DEVICE_TYPE
+      - OS_NAME
+      - BROWSER_NAME
+      - OWNER_PERSON_ID
+      x-enum-descriptions:
+      - DEVICE_TYPE
+      - OS_NAME
+      - BROWSER_NAME
+      - OWNER_PERSON_ID
     EDeviceType:
       type: string
       description: The device type of the physical device
@@ -36113,6 +36919,18 @@ components:
       x-enum-descriptions:
       - "MOBILE: Mobile phone / tablet / etc"
       - "DESKTOP: Desktop computer"
+    EDeviceTypeOperatorType:
+      type: string
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      - IN
+      - NOT_IN
+      x-enum-descriptions:
+      - EQUALS
+      - NOT_EQUALS
+      - IN
+      - NOT_IN
     EDialInServiceProvider:
       type: string
       enum:
@@ -36390,6 +37208,7 @@ components:
       - AGENT_DESK
       - TEAMS_AGENT_DESK
       - AGENT_SINGLE_CONVERSATION_DESK
+      - AGENT_SITE_EMBEDDED
       - AGENT_MOBILE
       - BRANCH_CLIENT
       x-enum-descriptions:
@@ -36401,6 +37220,7 @@ components:
       - "AGENT_DESK: The Agent Desk"
       - "TEAMS_AGENT_DESK: The MS Teams Agent Desk"
       - "AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent"
+      - "AGENT_SITE_EMBEDDED: Sites that integrate Unblu using the Agent Embedded JS API"
       - "AGENT_MOBILE: Sites for the mobile agent frontend that display the agent inbox and the conversation UI"
       - "BRANCH_CLIENT: Sites that integrate Unblu inside a branch client device using an embedded UI"
     EHandlingTimeTrigger:
@@ -36595,6 +37415,7 @@ components:
       - AGENT_DESK
       - TEAMS_AGENT_DESK
       - AGENT_SINGLE_CONVERSATION_DESK
+      - AGENT_SITE_EMBEDDED
       - ACCOUNT_CONFIGURATION
       - GLOBAL_CONFIGURATION
       - VISITOR_MOBILE
@@ -36612,6 +37433,7 @@ components:
       - "AGENT_DESK: Site for the agent"
       - "TEAMS_AGENT_DESK: Site for the MS Teams agent"
       - "AGENT_SINGLE_CONVERSATION_DESK: Single conversation page for the agent"
+      - "AGENT_SITE_EMBEDDED: Sites that integrate Unblu using the Agent Embedded JS API"
       - "ACCOUNT_CONFIGURATION: Account configuration page"
       - "GLOBAL_CONFIGURATION: Global configuration page"
       - "VISITOR_MOBILE: Site for mobile visitor front end and pop-out. It contains the Individual UI of the visitor site integration."
@@ -38525,6 +39347,20 @@ components:
           $ref: "#/components/schemas/EDeputyTypeOperatorType"
         value:
           $ref: "#/components/schemas/EDeputyType"
+    EqualsDeviceTypeOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: EqualsDeviceTypeOperator
+          enum:
+          - EqualsDeviceTypeOperator
+        type:
+          $ref: "#/components/schemas/EDeviceTypeOperatorType"
+        value:
+          $ref: "#/components/schemas/EDeviceType"
     EqualsExternalMessengerChannelTypeOperator:
       type: object
       required:
@@ -39017,12 +39853,12 @@ components:
           - ExternalMessengerChannelQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ExternalMessengerChannelSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ExternalMessengerChannelOrderBy"
         offset:
@@ -39032,7 +39868,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ExternalMessengerChannelResult:
       type: object
       description: Container to return list of `ExternalMessengerChannel`s
@@ -39157,12 +39993,12 @@ components:
           - ExternalMessengerContactQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/ExternalMessengerContactSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/ExternalMessengerContactOrderBy"
         offset:
@@ -39172,7 +40008,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     ExternalMessengerContactResult:
       type: object
       description: Container to return list of `ExternalMessengerContact`s
@@ -39658,7 +40494,7 @@ components:
           $ref: "#/components/schemas/EConversationRealVisitorParticipationType"
     ExternalParticipantHistoryData:
       type: object
-      description: Information about the external participant of a conversation (with historical information)
+      description: Information about an external participant in a conversation (with historical information).
       properties:
         $_type:
           type: string
@@ -39670,23 +40506,23 @@ components:
         createdTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the person participation was created (timestamp when the state was set to `EConversationParticipationState.CREATED`)
+          description: Unix timestamp (ms) when the person participation was created and their participation state was set to `EConversationParticipationState.CREATED`
         joinedTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the person joined (timestamp when the state was set to `EConversationParticipationState.ONBOARDING`)
+          description: "Unix timestamp (ms) when the person joined, that is, when their participation state was set to `EConversationParticipationState.ONBOARDING`. `null` if the participation never joined."
         activationTimestamp:
           type: integer
           format: int64
-          description: "Unix timestamp (ms) when the participation was activated, may be null (timestamp when the state was set to `EConversationParticipationState.ACTIVE`)"
+          description: "Unix timestamp (ms) when the participation was activated, that is, when their participation state was set to `EConversationParticipationState.ACTIVE`. `null` if the participation was never activated."
         offboardingTimestamp:
           type: integer
           format: int64
-          description: "Unix timestamp (ms) when the person started offboarding, may be null (timestamp when the state was set to`EConversationParticipationState.OFFBOARDING`)"
+          description: "Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set to`EConversationParticipationState.OFFBOARDING`. `null` if the participation never started its offboarding."
         leftTimestamp:
           type: integer
           format: int64
-          description: "Unix timestamp (ms) when the person left, may be null (timestamp when the state was set to `EConversationParticipationState.ENDED`)"
+          description: "Unix timestamp (ms) when the person left, that is, when their participation state was set to `EConversationParticipationState.ENDED`). `null` if the participation didn't finish its offboarding."
         leftReason:
           $ref: "#/components/schemas/EConversationLeftReason"
         leftComment:
@@ -39695,7 +40531,7 @@ components:
         conversationRating:
           type: number
           format: float
-          description: Participant's rating of the conversation (between 0 and 1)
+          description: "Participant's rating of the conversation, expressed as a value between 0 and 1"
         conversationFeedback:
           type: string
           description: Participant's feedback on the conversation
@@ -39764,7 +40600,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -39975,12 +40811,12 @@ components:
           - FileUploadInterceptorQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/FileUploadInterceptorSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/FileUploadInterceptorOrderBy"
         offset:
@@ -39990,7 +40826,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     FileUploadInterceptorResult:
       type: object
       description: Container to return list of file upload interceptors
@@ -40568,6 +41404,22 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/EDeputyType"
+    InDeviceTypeOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: InDeviceTypeOperator
+          enum:
+          - InDeviceTypeOperator
+        type:
+          $ref: "#/components/schemas/EDeviceTypeOperatorType"
+        values:
+          type: array
+          items:
+            $ref: "#/components/schemas/EDeviceType"
     InExternalMessengerChannelTypeOperator:
       type: object
       required:
@@ -42081,7 +42933,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -42378,12 +43230,12 @@ components:
           - MessageExportQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/MessageExportFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/MessageExportOrderBy"
         offset:
@@ -42393,7 +43245,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     MessageExportResult:
       type: object
       description: Container to return list of messages
@@ -42552,12 +43404,12 @@ components:
           - MessageInterceptorQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/MessageInterceptorSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/MessageInterceptorOrderBy"
         offset:
@@ -42567,7 +43419,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     MessageInterceptorResult:
       type: object
       description: Container to return list of message interceptors
@@ -42836,12 +43688,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -43293,7 +44145,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -43795,7 +44647,7 @@ components:
           $ref: "#/components/schemas/ENamedAreaType"
         siteId:
           type: string
-          description: "Meta tag name if the type is META_TAG or domain name if the type is DOMAIN. If the type is META_TAG, it can be omitted during creation and a random ID will generated for it. Modification of this attribute is not allowed. Maximum of 250 characters."
+          description: "Meta tag name if the type is `ENamedAreaType.META_TAG` or the domain name if the type is `ENamedAreaType.DOMAIN`. If the type is`ENamedAreaType.META_TAG`, it can be omitted during creation and a random ID is generated for it. Modification of this attribute is not allowed. Maximum of 250 characters."
         translations:
           type: object
           description: A map of localized versions of the name and description of this entity
@@ -43918,12 +44770,12 @@ components:
           - NamedAreaQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/NamedAreaSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/NamedAreaOrderBy"
         offset:
@@ -43933,7 +44785,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     NamedAreaResult:
       type: object
       description: Container to return list of namedareas
@@ -44306,6 +45158,20 @@ components:
           $ref: "#/components/schemas/EDeputyTypeOperatorType"
         value:
           $ref: "#/components/schemas/EDeputyType"
+    NotEqualsDeviceTypeOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: NotEqualsDeviceTypeOperator
+          enum:
+          - NotEqualsDeviceTypeOperator
+        type:
+          $ref: "#/components/schemas/EDeviceTypeOperatorType"
+        value:
+          $ref: "#/components/schemas/EDeviceType"
     NotEqualsExternalMessengerChannelTypeOperator:
       type: object
       required:
@@ -44752,6 +45618,22 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/EDeputyType"
+    NotInDeviceTypeOperator:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: NotInDeviceTypeOperator
+          enum:
+          - NotInDeviceTypeOperator
+        type:
+          $ref: "#/components/schemas/EDeviceTypeOperatorType"
+        values:
+          type: array
+          items:
+            $ref: "#/components/schemas/EDeviceType"
     NotInExternalMessengerChannelTypeOperator:
       type: object
       required:
@@ -45122,6 +46004,20 @@ components:
           $ref: "#/components/schemas/EAccountIngressSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    OsNameDeviceInfoSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: OsNameDeviceInfoSearchFilter
+          enum:
+          - OsNameDeviceInfoSearchFilter
+        field:
+          $ref: "#/components/schemas/EDeviceInfoSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     OwnerIdAuditChangeSearchFilter:
       type: object
       required:
@@ -45150,6 +46046,20 @@ components:
           $ref: "#/components/schemas/ECannedResponseSearchFilterField"
         operator:
           $ref: "#/components/schemas/IdOperator"
+    OwnerPersonIdDeviceInfoSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: OwnerPersonIdDeviceInfoSearchFilter
+          enum:
+          - OwnerPersonIdDeviceInfoSearchFilter
+        field:
+          $ref: "#/components/schemas/EDeviceInfoSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     OwnerTypeAuditChangeSearchFilter:
       type: object
       required:
@@ -45246,7 +46156,7 @@ components:
           $ref: "#/components/schemas/IdListOperator"
     ParticipantHistoryData:
       type: object
-      description: Information about the participant of a conversation (with historical information)
+      description: Information about a participant in a conversation (with historical information)
       properties:
         $_type:
           type: string
@@ -45258,23 +46168,23 @@ components:
         createdTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the person participation was created (timestamp when the state was set to `EConversationParticipationState.CREATED`)
+          description: Unix timestamp (ms) when the person participation was created and their participation state was set to `EConversationParticipationState.CREATED`
         joinedTimestamp:
           type: integer
           format: int64
-          description: Unix timestamp (ms) when the person joined (timestamp when the state was set to `EConversationParticipationState.ONBOARDING`)
+          description: "Unix timestamp (ms) when the person joined, that is, when their participation state was set to `EConversationParticipationState.ONBOARDING`. `null` if the participation never joined."
         activationTimestamp:
           type: integer
           format: int64
-          description: "Unix timestamp (ms) when the participation was activated, may be null (timestamp when the state was set to `EConversationParticipationState.ACTIVE`)"
+          description: "Unix timestamp (ms) when the participation was activated, that is, when their participation state was set to `EConversationParticipationState.ACTIVE`. `null` if the participation was never activated."
         offboardingTimestamp:
           type: integer
           format: int64
-          description: "Unix timestamp (ms) when the person started offboarding, may be null (timestamp when the state was set to`EConversationParticipationState.OFFBOARDING`)"
+          description: "Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set to`EConversationParticipationState.OFFBOARDING`. `null` if the participation never started its offboarding."
         leftTimestamp:
           type: integer
           format: int64
-          description: "Unix timestamp (ms) when the person left, may be null (timestamp when the state was set to `EConversationParticipationState.ENDED`)"
+          description: "Unix timestamp (ms) when the person left, that is, when their participation state was set to `EConversationParticipationState.ENDED`). `null` if the participation didn't finish its offboarding."
         leftReason:
           $ref: "#/components/schemas/EConversationLeftReason"
         leftComment:
@@ -45283,7 +46193,7 @@ components:
         conversationRating:
           type: number
           format: float
-          description: Participant's rating of the conversation (between 0 and 1)
+          description: "Participant's rating of the conversation, expressed as a value between 0 and 1"
         conversationFeedback:
           type: string
           description: Participant's feedback of the conversation
@@ -45683,7 +46593,7 @@ components:
         rating:
           type: number
           format: float
-          description: "The rating this person gave to the conversation. Optional. @code{ null} if no rating was given."
+          description: The rating this person gave to the conversation. Optional. `null` if no rating was given.
         labels:
           type: array
           description: The labels associated with the person.
@@ -45691,10 +46601,10 @@ components:
             type: string
         teamId:
           type: string
-          description: "The identifier of the team the person belongs to. Optional. @code{ null} if the person is not an agent."
+          description: The identifier of the team the person belongs to. Optional. `null` if the person is not an agent.
         username:
           type: string
-          description: "The username of the person. Optional, may be @code{ null}."
+          description: "The username of the person. Optional, may be `null`."
         sourceId:
           type: string
           description: The external source identifier of the person.
@@ -45733,7 +46643,7 @@ components:
           description: "Unique id of the person, when creating a person this property can be omitted as it will be generated by the server anyway."
         accountId:
           type: string
-          description: "Account id to which a Person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID."
+          description: "ID of the account the person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID."
         personSource:
           $ref: "#/components/schemas/EPersonSource"
         sourceId:
@@ -45744,25 +46654,25 @@ components:
           description: URL identifying the source of the person. Maximum length of 2000 characters. Only available for virtual persons in conversations that were created outside Unblu.
         sourceData:
           type: string
-          description: Vendor specific data.
+          description: Vendor specific custom data unknown to Unblu. It can be passed in by the vendor on person creation/update to store additional information for a person.
         firstName:
           type: string
-          description: The first name of the person. Maximum length of 250 characters. Can be omitted.
+          description: The person's first name. Maximum length of 250 characters. Can be omitted.
         lastName:
           type: string
-          description: the last name of the person. Maximum length of 250 characters. Can be omitted.
+          description: The person's last name. Maximum length of 250 characters. Can be omitted.
         functionTitle:
           type: string
           description: The agent's function or job title. Maximum length of 250 characters. Can be omitted.
         username:
           type: string
-          description: "The username of the person. When firstName and lastName are unknown, it is recommended to use this value to change the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted."
+          description: "The person's username. When a person's firstName and lastName are unknown, it is recommended that you use this value for the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted."
         nickname:
           type: string
-          description: A name that an anonymous person has given itself. Maximum length of 250 characters. Can be omitted.
+          description: A name that an anonymous person has given themselves. Maximum length of 250 characters. Can be omitted.
         displayName:
           type: string
-          description: Display name of the person. This is read-only information that is set by the Collaboration Server.
+          description: The person's name as displayed in UIs. This is read-only information set by Unblu.
         displayNameForAgent:
           type: string
           description: The person's display name as displayed to agents. This is read-only information set by the Collaboration Server.
@@ -45775,13 +46685,13 @@ components:
           $ref: "#/components/schemas/EAuthorizationRole"
         email:
           type: string
-          description: The email of the person. Optional.
+          description: The person's email address. Optional.
         phone:
           type: string
-          description: The phone of the person. Optional.
+          description: The person's phone number. Optional.
         teamId:
           type: string
-          description: Team id of the person. Optional.
+          description: The ID of the team the person belongs to. Optional.
         labels:
           type: array
           description: List of labels set for this person
@@ -46004,12 +46914,12 @@ components:
           - PersonLabelQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/PersonLabelSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/PersonLabelOrderBy"
         offset:
@@ -46019,7 +46929,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     PersonLabelResult:
       type: object
       description: Container to return list of person labels
@@ -46218,12 +47128,12 @@ components:
           - PersonPresenceQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/PersonPresenceSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/PersonPresenceOrderBy"
         offset:
@@ -46233,7 +47143,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     PersonPresenceResult:
       type: object
       description: Container to return list of personpresences
@@ -46278,12 +47188,12 @@ components:
           - PersonQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/PersonSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/PersonOrderBy"
         offset:
@@ -46293,7 +47203,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     PersonResult:
       type: object
       description: Container to return list of persons
@@ -46456,12 +47366,12 @@ components:
           - PersonTypedQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/PersonTypedSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/PersonTypedOrderBy"
         offset:
@@ -46471,7 +47381,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     PersonTypedSearchFilter:
       description: Person filter item.
       oneOf:
@@ -46613,12 +47523,12 @@ components:
           - PersonVisibilityRuleQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/PersonVisibilityRuleSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/PersonVisibilityRuleOrderBy"
         offset:
@@ -46628,7 +47538,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     PersonVisibilityRuleResult:
       type: object
       description: Container to return list of person visibility rules
@@ -47173,7 +48083,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -47233,7 +48143,7 @@ components:
         reservationCreationTimestamp:
           type: integer
           format: int64
-          description: "The UTC timestamp (ms) when the reservation was created. @code{ null} when the interaction was not reserved."
+          description: The UTC timestamp (ms) when the reservation was created. `null` when the interaction was not reserved.
         invitationCreationTimestamp:
           type: integer
           format: int64
@@ -47245,7 +48155,7 @@ components:
         reservationTimeDuration:
           type: integer
           format: int64
-          description: "The duration (ms) between the reservation creation and the resolution of the reservation. @code{ null} when the interaction was not reserved."
+          description: The duration (ms) between the reservation creation and the resolution of the reservation. `null` when the interaction was not reserved.
         queueInteractionType:
           $ref: "#/components/schemas/EQueueInteractionType"
         target:
@@ -47401,12 +48311,12 @@ components:
         columnSpan:
           type: integer
           format: int32
-          description: "Column span of the widget. Must be at least 2 if @code{ displayChart} is not @code{ NONE}. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory."
+          description: Column span of the widget. Must be at least 2 if `displayChart` is not `NONE`. Widget placement must be within a 100x6 grid and must not overlap with another widget. Mandatory.
         displaySingleValueAggregation:
           $ref: "#/components/schemas/EAnalyticsKpiDisplaySingleValueAggregation"
         displaySingleValuePreviousPeriodComparison:
           type: boolean
-          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If @code{ displaySingleValueAggregation} is @code{ SUM}, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If @code{ displaySingleValueAggregation} is @code{ AVG}, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
+          description: "Flag indicating whether a single KPI value for the previous period is displayed for comparison with the current period. <p> The timeframe used for the previous period depends on the aggregation type: <ul> <li>If `displaySingleValueAggregation` is `SUM`, the previous period timeframe is proportional to the elapsed portion of the current timeframe. <li>If `displaySingleValueAggregation` is `AVG`, the entire previous period timeframe is used. </ul> <p> The same filters used for chart data calculation are applied. Grouping is not applied."
         displayChart:
           $ref: "#/components/schemas/EAnalyticsKpiDisplayChart"
         initialTimeFrameType:
@@ -47533,7 +48443,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -47896,7 +48806,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -48001,7 +48911,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -48574,12 +49484,12 @@ components:
           - SmsExternalMessengerChannelQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/SmsExternalMessengerChannelSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/SmsExternalMessengerChannelOrderBy"
         offset:
@@ -48589,7 +49499,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     SmsExternalMessengerChannelResult:
       type: object
       description: Container to return list of `SmsExternalMessengerChannel`s
@@ -48864,12 +49774,12 @@ components:
           - SuggestionSourceQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/SuggestionSourceSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/SuggestionSourceOrderBy"
         offset:
@@ -48879,7 +49789,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     SuggestionSourceResult:
       type: object
       description: Container to return list of suggestion sources
@@ -48972,7 +49882,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -49235,12 +50145,12 @@ components:
           - TeamQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/TeamSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/TeamOrderBy"
         offset:
@@ -49250,7 +50160,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     TeamResult:
       type: object
       description: Container to return list of teams
@@ -49383,7 +50293,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -49515,7 +50425,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
@@ -49661,12 +50571,12 @@ components:
           description: "The text to display alongside the thinking indicator (e.g. \"Analyzing...\"). Required when starting, used as appended chunk when updating."
         thinkingAnimation:
           type: string
-          description: "Animation as a base64-encoded @code{ image/*} data URL (e.g. SVG, GIF, PNG). Optional."
+          description: "Animation as a base64-encoded `image/*` data URL (e.g. SVG, GIF, PNG). Optional."
         thinkingInputMode:
           $ref: "#/components/schemas/EThinkingInputMode"
         internal:
           type: boolean
-          description: "When true, the indicator is an internal (agent-only) activity and is hidden from visitors. Mirrors @code{ BotPostMessage.internal}. Applies for the whole thinking session — callers set it on @code{ startThinking} only. Optional; @code{ null} is treated as @code{ false} by consumers."
+          description: "When true, the indicator is an internal (agent-only) activity and is hidden from visitors. Mirrors `BotPostMessage.internal`. Applies for the whole thinking session — callers set it on `startThinking` only. Optional; `null` is treated as `false` by consumers."
     TimestampOperator:
       oneOf:
       - $ref: "#/components/schemas/EqualsTimestampOperator"
@@ -50045,12 +50955,12 @@ components:
           - UserQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/UserSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/UserOrderBy"
         offset:
@@ -50060,7 +50970,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     UserResult:
       type: object
       description: Container to return list of users
@@ -50541,12 +51451,12 @@ components:
           - VisitorStateQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/VisitorStateSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/VisitorStateOrderBy"
         offset:
@@ -50556,7 +51466,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     VisitorStateSearchFilter:
       description: Visitor state filter item.
       oneOf:
@@ -50801,12 +51711,12 @@ components:
           - WebhookRegistrationQuery
         searchFilters:
           type: array
-          description: List of filters to narrow the search of entities
+          description: List of filters to narrow the search
           items:
             $ref: "#/components/schemas/WebhookRegistrationSearchFilter"
         orderBy:
           type: array
-          description: List of criteria to order the search result list
+          description: List of criteria to order the list of search results
           items:
             $ref: "#/components/schemas/WebhookRegistrationOrderBy"
         offset:
@@ -50816,7 +51726,7 @@ components:
         limit:
           type: integer
           format: int32
-          description: Maximal amount of items returned
+          description: Maximum number of items returned
     WebhookRegistrationResult:
       type: object
       description: Container to return list of webhook registrations
@@ -50962,7 +51872,7 @@ components:
         index:
           type: integer
           format: int32
-          description: "Only used for `ETemplateComponentParametersType.BUTTON`. @code{ null} for all other component types, in which case it is omitted from the serialized payload."
+          description: "Only used for `ETemplateComponentParametersType.BUTTON`. `null` for all other component types, in which case it is omitted from the serialized payload."
         parameters:
           type: array
           description: The parameters used in that component. Not used for `ETemplateComponentParametersType.CAROUSEL`
@@ -51103,7 +52013,7 @@ components:
             type: string
         fallbackText:
           type: string
-          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The text doesn't contain markdown.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
         actionId:
           type: string
           description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."

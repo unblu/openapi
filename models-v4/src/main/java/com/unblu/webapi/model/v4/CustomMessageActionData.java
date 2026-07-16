@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomMessageActionData.JSON_PROPERTY_TRIGGER_VISITOR_EMBEDDED_API_EVENT,
 	CustomMessageActionData.JSON_PROPERTY_TRIGGER_VISITOR_FLOATING_API_EVENT,
 	CustomMessageActionData.JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT,
+	CustomMessageActionData.JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT,
 	CustomMessageActionData.JSON_PROPERTY_SORTING_ORDER,
 	CustomMessageActionData.JSON_PROPERTY_TYPE,
 	CustomMessageActionData.JSON_PROPERTY_MESSAGE_TYPES,
@@ -172,6 +173,10 @@ public class CustomMessageActionData implements CustomActionData {
 	public static final String JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT = "triggerAgentMobileSdkEvent";
 	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT)
 	private Boolean triggerAgentMobileSdkEvent;
+
+	public static final String JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT = "triggerAgentEmbeddedApiEvent";
+	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT)
+	private Boolean triggerAgentEmbeddedApiEvent;
 
 	public static final String JSON_PROPERTY_SORTING_ORDER = "sortingOrder";
 	@JsonProperty(JSON_PROPERTY_SORTING_ORDER)
@@ -660,6 +665,25 @@ public class CustomMessageActionData implements CustomActionData {
 		this.triggerAgentMobileSdkEvent = triggerAgentMobileSdkEvent;
 	}
 
+	public CustomMessageActionData triggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent) {
+		this.triggerAgentEmbeddedApiEvent = triggerAgentEmbeddedApiEvent;
+		return this;
+	}
+
+	/**
+	 * A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.
+	 * 
+	 * @return triggerAgentEmbeddedApiEvent
+	 **/
+	@ApiModelProperty(value = "A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.")
+	public Boolean isTriggerAgentEmbeddedApiEvent() {
+		return triggerAgentEmbeddedApiEvent;
+	}
+
+	public void setTriggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent) {
+		this.triggerAgentEmbeddedApiEvent = triggerAgentEmbeddedApiEvent;
+	}
+
 	public CustomMessageActionData sortingOrder(Integer sortingOrder) {
 		this.sortingOrder = sortingOrder;
 		return this;
@@ -822,6 +846,7 @@ public class CustomMessageActionData implements CustomActionData {
 				Objects.equals(this.triggerVisitorEmbeddedApiEvent, customMessageActionData.triggerVisitorEmbeddedApiEvent) &&
 				Objects.equals(this.triggerVisitorFloatingApiEvent, customMessageActionData.triggerVisitorFloatingApiEvent) &&
 				Objects.equals(this.triggerAgentMobileSdkEvent, customMessageActionData.triggerAgentMobileSdkEvent) &&
+				Objects.equals(this.triggerAgentEmbeddedApiEvent, customMessageActionData.triggerAgentEmbeddedApiEvent) &&
 				Objects.equals(this.sortingOrder, customMessageActionData.sortingOrder) &&
 				Objects.equals(this.type, customMessageActionData.type) &&
 				Objects.equals(this.messageTypes, customMessageActionData.messageTypes) &&
@@ -832,7 +857,7 @@ public class CustomMessageActionData implements CustomActionData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerAgentMobileSdkEvent, sortingOrder, type, messageTypes, fileMessageMimeTypeRegex, invocableForMessagesSentBy, apiEventTriggerFilter);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerAgentMobileSdkEvent, triggerAgentEmbeddedApiEvent, sortingOrder, type, messageTypes, fileMessageMimeTypeRegex, invocableForMessagesSentBy, apiEventTriggerFilter);
 	}
 
 	@Override
@@ -861,6 +886,7 @@ public class CustomMessageActionData implements CustomActionData {
 		sb.append("    triggerVisitorEmbeddedApiEvent: ").append(toIndentedString(triggerVisitorEmbeddedApiEvent)).append("\n");
 		sb.append("    triggerVisitorFloatingApiEvent: ").append(toIndentedString(triggerVisitorFloatingApiEvent)).append("\n");
 		sb.append("    triggerAgentMobileSdkEvent: ").append(toIndentedString(triggerAgentMobileSdkEvent)).append("\n");
+		sb.append("    triggerAgentEmbeddedApiEvent: ").append(toIndentedString(triggerAgentEmbeddedApiEvent)).append("\n");
 		sb.append("    sortingOrder: ").append(toIndentedString(sortingOrder)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    messageTypes: ").append(toIndentedString(messageTypes)).append("\n");

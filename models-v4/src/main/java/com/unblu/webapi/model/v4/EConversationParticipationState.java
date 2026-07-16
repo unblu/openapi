@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationParticipationState {
 
 	/**
-	 * CREATED: Participant has been created
+	 * CREATED: Participation has been created but person hasn&#39;t joined the conversation yet
 	 */
 	CREATED("CREATED"),
 

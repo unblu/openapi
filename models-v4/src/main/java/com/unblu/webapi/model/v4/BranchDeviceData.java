@@ -418,11 +418,11 @@ public class BranchDeviceData {
 	}
 
 	/**
-	 * Hex color displayed when the device is in the ON state. Format: @code{ #RRGGBB}. Optional.
+	 * Hex color displayed when the device is in the ON state. Format: &#x60;#RRGGBB&#x60;. Optional.
 	 * 
 	 * @return onColor
 	 **/
-	@ApiModelProperty(value = "Hex color displayed when the device is in the ON state. Format: @code{ #RRGGBB}. Optional.")
+	@ApiModelProperty(value = "Hex color displayed when the device is in the ON state. Format: `#RRGGBB`. Optional.")
 	public String getOnColor() {
 		return onColor;
 	}
@@ -437,11 +437,11 @@ public class BranchDeviceData {
 	}
 
 	/**
-	 * Hex color displayed when the device is in the OFF state. Format: @code{ #RRGGBB}. Optional.
+	 * Hex color displayed when the device is in the OFF state. Format: &#x60;#RRGGBB&#x60;. Optional.
 	 * 
 	 * @return offColor
 	 **/
-	@ApiModelProperty(value = "Hex color displayed when the device is in the OFF state. Format: @code{ #RRGGBB}. Optional.")
+	@ApiModelProperty(value = "Hex color displayed when the device is in the OFF state. Format: `#RRGGBB`. Optional.")
 	public String getOffColor() {
 		return offColor;
 	}

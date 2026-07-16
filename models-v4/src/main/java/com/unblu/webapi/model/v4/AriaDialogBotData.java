@@ -766,12 +766,12 @@ public class AriaDialogBotData implements DialogBotData {
 	}
 
 	/**
-	 * Aria agentic flow ID. Add @code{ ?expand&#x3D;agenticFlowData} to the request to replace this ID with the full flow content in &#x60;agenticFlowData&#x60;.
-	 * Maximum length: 36 characters.
+	 * Aria agentic flow ID. Add &#x60;?expand&#x3D;agenticFlowData&#x60; to the request to replace this ID with the full flow content in
+	 * &#x60;agenticFlowData&#x60;. Maximum length: 36 characters.
 	 * 
 	 * @return agenticFlowData
 	 **/
-	@ApiModelProperty(value = "Aria agentic flow ID. Add @code{ ?expand=agenticFlowData} to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters.")
+	@ApiModelProperty(value = "Aria agentic flow ID. Add `?expand=agenticFlowData` to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters.")
 	public ExpandableField<AriaAgenticFlowDataContent> getAgenticFlowData() {
 		return agenticFlowData;
 	}

@@ -139,6 +139,12 @@ public interface CustomActionData {
 
 	CustomActionData triggerAgentMobileSdkEvent(Boolean triggerAgentMobileSdkEvent);
 
+	void setTriggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent);
+
+	Boolean isTriggerAgentEmbeddedApiEvent();
+
+	CustomActionData triggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent);
+
 	void setSortingOrder(Integer sortingOrder);
 
 	Integer getSortingOrder();

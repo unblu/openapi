@@ -148,12 +148,12 @@ public class WhatsAppTemplateComponentParameters {
 	}
 
 	/**
-	 * Only used for &#x60;ETemplateComponentParametersType.BUTTON&#x60;. @code{ null} for all other component types, in which case it is omitted from the
+	 * Only used for &#x60;ETemplateComponentParametersType.BUTTON&#x60;. &#x60;null&#x60; for all other component types, in which case it is omitted from the
 	 * serialized payload.
 	 * 
 	 * @return index
 	 **/
-	@ApiModelProperty(value = "Only used for `ETemplateComponentParametersType.BUTTON`. @code{ null} for all other component types, in which case it is omitted from the serialized payload.")
+	@ApiModelProperty(value = "Only used for `ETemplateComponentParametersType.BUTTON`. `null` for all other component types, in which case it is omitted from the serialized payload.")
 	public Integer getIndex() {
 		return index;
 	}

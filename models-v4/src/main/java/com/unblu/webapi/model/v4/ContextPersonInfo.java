@@ -266,12 +266,12 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * Account id to which a Person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
+	 * ID of the account the person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the
 	 * account of the currently logged in user. When editing an entity, you must include the account ID.
 	 * 
 	 * @return accountId
 	 **/
-	@ApiModelProperty(value = "Account id to which a Person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID.")
+	@ApiModelProperty(value = "ID of the account the person belongs to. When creating an entity, the accountId can be omitted, as it will be filled by the server automatically with the account of the currently logged in user. When editing an entity, you must include the account ID.")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -346,11 +346,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * Vendor specific data.
+	 * Vendor specific custom data unknown to Unblu. It can be passed in by the vendor on person creation/update to store additional information for a person.
 	 * 
 	 * @return sourceData
 	 **/
-	@ApiModelProperty(value = "Vendor specific data.")
+	@ApiModelProperty(value = "Vendor specific custom data unknown to Unblu. It can be passed in by the vendor on person creation/update to store additional information for a person.")
 	public String getSourceData() {
 		return sourceData;
 	}
@@ -365,11 +365,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * The first name of the person. Maximum length of 250 characters. Can be omitted.
+	 * The person&#39;s first name. Maximum length of 250 characters. Can be omitted.
 	 * 
 	 * @return firstName
 	 **/
-	@ApiModelProperty(value = "The first name of the person. Maximum length of 250 characters. Can be omitted.")
+	@ApiModelProperty(value = "The person's first name. Maximum length of 250 characters. Can be omitted.")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -384,11 +384,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * the last name of the person. Maximum length of 250 characters. Can be omitted.
+	 * The person&#39;s last name. Maximum length of 250 characters. Can be omitted.
 	 * 
 	 * @return lastName
 	 **/
-	@ApiModelProperty(value = "the last name of the person. Maximum length of 250 characters. Can be omitted.")
+	@ApiModelProperty(value = "The person's last name. Maximum length of 250 characters. Can be omitted.")
 	public String getLastName() {
 		return lastName;
 	}
@@ -422,12 +422,12 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * The username of the person. When firstName and lastName are unknown, it is recommended to use this value to change the displayName. Depending on the
-	 * configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted.
+	 * The person&#39;s username. When a person&#39;s firstName and lastName are unknown, it is recommended that you use this value for the displayName. Depending
+	 * on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted.
 	 * 
 	 * @return username
 	 **/
-	@ApiModelProperty(value = "The username of the person. When firstName and lastName are unknown, it is recommended to use this value to change the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted.")
+	@ApiModelProperty(value = "The person's username. When a person's firstName and lastName are unknown, it is recommended that you use this value for the displayName. Depending on the configuration, this is may also be the email of the corresponding user. Maximum length of 250 characters. Can be omitted.")
 	public String getUsername() {
 		return username;
 	}
@@ -442,11 +442,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * A name that an anonymous person has given itself. Maximum length of 250 characters. Can be omitted.
+	 * A name that an anonymous person has given themselves. Maximum length of 250 characters. Can be omitted.
 	 * 
 	 * @return nickname
 	 **/
-	@ApiModelProperty(value = "A name that an anonymous person has given itself. Maximum length of 250 characters. Can be omitted.")
+	@ApiModelProperty(value = "A name that an anonymous person has given themselves. Maximum length of 250 characters. Can be omitted.")
 	public String getNickname() {
 		return nickname;
 	}
@@ -461,11 +461,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * Display name of the person. This is read-only information that is set by the Collaboration Server.
+	 * The person&#39;s name as displayed in UIs. This is read-only information set by Unblu.
 	 * 
 	 * @return displayName
 	 **/
-	@ApiModelProperty(value = "Display name of the person. This is read-only information that is set by the Collaboration Server.")
+	@ApiModelProperty(value = "The person's name as displayed in UIs. This is read-only information set by Unblu.")
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -556,11 +556,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * The email of the person. Optional.
+	 * The person&#39;s email address. Optional.
 	 * 
 	 * @return email
 	 **/
-	@ApiModelProperty(value = "The email of the person. Optional.")
+	@ApiModelProperty(value = "The person's email address. Optional.")
 	public String getEmail() {
 		return email;
 	}
@@ -575,11 +575,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * The phone of the person. Optional.
+	 * The person&#39;s phone number. Optional.
 	 * 
 	 * @return phone
 	 **/
-	@ApiModelProperty(value = "The phone of the person. Optional.")
+	@ApiModelProperty(value = "The person's phone number. Optional.")
 	public String getPhone() {
 		return phone;
 	}
@@ -594,11 +594,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * Team id of the person. Optional.
+	 * The ID of the team the person belongs to. Optional.
 	 * 
 	 * @return teamId
 	 **/
-	@ApiModelProperty(value = "Team id of the person. Optional.")
+	@ApiModelProperty(value = "The ID of the team the person belongs to. Optional.")
 	public String getTeamId() {
 		return teamId;
 	}

@@ -115,11 +115,11 @@ public class BranchClientQuery {
 	}
 
 	/**
-	 * List of filters to narrow the search of entities
+	 * List of filters to narrow the search
 	 * 
 	 * @return searchFilters
 	 **/
-	@ApiModelProperty(value = "List of filters to narrow the search of entities")
+	@ApiModelProperty(value = "List of filters to narrow the search")
 	public List<BranchClientSearchFilter> getSearchFilters() {
 		return searchFilters;
 	}
@@ -142,11 +142,11 @@ public class BranchClientQuery {
 	}
 
 	/**
-	 * List of criteria to order the search result list
+	 * List of criteria to order the list of search results
 	 * 
 	 * @return orderBy
 	 **/
-	@ApiModelProperty(value = "List of criteria to order the search result list")
+	@ApiModelProperty(value = "List of criteria to order the list of search results")
 	public List<BranchClientOrderBy> getOrderBy() {
 		return orderBy;
 	}
@@ -180,11 +180,11 @@ public class BranchClientQuery {
 	}
 
 	/**
-	 * Maximal amount of items returned
+	 * Maximum number of items returned
 	 * 
 	 * @return limit
 	 **/
-	@ApiModelProperty(value = "Maximal amount of items returned")
+	@ApiModelProperty(value = "Maximum number of items returned")
 	public Integer getLimit() {
 		return limit;
 	}

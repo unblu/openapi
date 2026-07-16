@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Result of archiving a person via the Persons API, such as @code{ /persons/archiveVirtual}.
+ * Result of archiving a person via the Persons API, such as &#x60;/persons/archiveVirtual&#x60;.
  */
-@ApiModel(description = "Result of archiving a person via the Persons API, such as @code{ /persons/archiveVirtual}.")
+@ApiModel(description = "Result of archiving a person via the Persons API, such as `/persons/archiveVirtual`.")
 
 @JsonPropertyOrder({
 	ArchivePersonResult.JSON_PROPERTY_$_TYPE,
@@ -90,11 +90,11 @@ public class ArchivePersonResult {
 	}
 
 	/**
-	 * &lt;code&gt;true&lt;/code&gt; if this call archived the person; &lt;code&gt;false&lt;/code&gt; if the person was already archived (idempotent re-archive).
+	 * &#x60;true&#x60; if this call archived the person; &#x60;false&#x60; if the person was already archived (idempotent re-archive).
 	 * 
 	 * @return newlyArchived
 	 **/
-	@ApiModelProperty(value = "<code>true</code> if this call archived the person; <code>false</code> if the person was already archived (idempotent re-archive).")
+	@ApiModelProperty(value = "`true` if this call archived the person; `false` if the person was already archived (idempotent re-archive).")
 	public Boolean isNewlyArchived() {
 		return newlyArchived;
 	}

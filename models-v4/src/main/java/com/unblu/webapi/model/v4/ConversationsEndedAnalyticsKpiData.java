@@ -15,9 +15,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Represents a comprehensive summary of a conversation&#39;s entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by
- * a@code{ conversation.ended} event, so there is exactly one entry per conversation.
+ * a&#x60;conversation.ended&#x60; event, so there is exactly one entry per conversation.
  */
-@ApiModel(description = "Represents a comprehensive summary of a conversation's entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by a@code{ conversation.ended} event, so there is exactly one entry per conversation.")
+@ApiModel(description = "Represents a comprehensive summary of a conversation's entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by a`conversation.ended` event, so there is exactly one entry per conversation.")
 
 @JsonPropertyOrder({
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_$_TYPE,
@@ -198,11 +198,11 @@ public class ConversationsEndedAnalyticsKpiData {
 	}
 
 	/**
-	 * UTC timestamp (ms) of when the conversation was onboarded. Optional, may be @code{ null} if the conversation was never onboarded.
+	 * UTC timestamp (ms) of when the conversation was onboarded. Optional, may be &#x60;null&#x60; if the conversation was never onboarded.
 	 * 
 	 * @return onboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation was onboarded. Optional, may be @code{ null} if the conversation was never onboarded.")
+	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation was onboarded. Optional, may be `null` if the conversation was never onboarded.")
 	public Long getOnboardingTimestamp() {
 		return onboardingTimestamp;
 	}
@@ -217,11 +217,11 @@ public class ConversationsEndedAnalyticsKpiData {
 	}
 
 	/**
-	 * UTC timestamp (ms) of when the conversation was queued for the first time. Optional, may be @code{ null} if the conversation was never queued.
+	 * UTC timestamp (ms) of when the conversation was queued for the first time. Optional, may be &#x60;null&#x60; if the conversation was never queued.
 	 * 
 	 * @return firstQueuedTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation was queued for the first time. Optional, may be @code{ null} if the conversation was never queued.")
+	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation was queued for the first time. Optional, may be `null` if the conversation was never queued.")
 	public Long getFirstQueuedTimestamp() {
 		return firstQueuedTimestamp;
 	}
@@ -236,11 +236,11 @@ public class ConversationsEndedAnalyticsKpiData {
 	}
 
 	/**
-	 * UTC timestamp (ms) of when the conversation became active for the first time. Optional, may be @code{ null} if the conversation was never active.
+	 * UTC timestamp (ms) of when the conversation became active for the first time. Optional, may be &#x60;null&#x60; if the conversation was never active.
 	 * 
 	 * @return firstActiveTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation became active for the first time. Optional, may be @code{ null} if the conversation was never active.")
+	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation became active for the first time. Optional, may be `null` if the conversation was never active.")
 	public Long getFirstActiveTimestamp() {
 		return firstActiveTimestamp;
 	}
@@ -255,11 +255,11 @@ public class ConversationsEndedAnalyticsKpiData {
 	}
 
 	/**
-	 * UTC timestamp (ms) of when the conversation was offboarded. Optional, may be @code{ null} if the conversation was never offboarded.
+	 * UTC timestamp (ms) of when the conversation was offboarded. Optional, may be &#x60;null&#x60; if the conversation was never offboarded.
 	 * 
 	 * @return offboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation was offboarded. Optional, may be @code{ null} if the conversation was never offboarded.")
+	@ApiModelProperty(value = "UTC timestamp (ms) of when the conversation was offboarded. Optional, may be `null` if the conversation was never offboarded.")
 	public Long getOffboardingTimestamp() {
 		return offboardingTimestamp;
 	}

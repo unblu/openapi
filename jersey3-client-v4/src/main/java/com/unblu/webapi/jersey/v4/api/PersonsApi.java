@@ -127,7 +127,7 @@ public class PersonsApi {
 	 * subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
-	 * @param requestBody List of the labels to be added to the person (required)
+	 * @param requestBody List of the label names to be added to the person (required)
 	 * @param expand (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
@@ -142,7 +142,7 @@ public class PersonsApi {
 	 * subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
-	 * @param requestBody List of the labels to be added to the person (required)
+	 * @param requestBody List of the label names to be added to the person (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
@@ -189,7 +189,7 @@ public class PersonsApi {
 	}
 
 	/**
-	 * archiveBot Archives the bot person identified by @code{ sourceId}. A bot person referenced by an existing dialog bot configuration can still be archived.
+	 * archiveBot Archives the bot person identified by &#x60;sourceId&#x60;. A bot person referenced by an existing dialog bot configuration can still be archived.
 	 * Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and
 	 * prevents it from being set as a conversation recipient or assigned to a new bot.&lt;br&gt;
 	 * 
@@ -202,7 +202,7 @@ public class PersonsApi {
 	}
 
 	/**
-	 * archiveBot Archives the bot person identified by @code{ sourceId}. A bot person referenced by an existing dialog bot configuration can still be archived.
+	 * archiveBot Archives the bot person identified by &#x60;sourceId&#x60;. A bot person referenced by an existing dialog bot configuration can still be archived.
 	 * Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and
 	 * prevents it from being set as a conversation recipient or assigned to a new bot.&lt;br&gt;
 	 * 
@@ -244,8 +244,8 @@ public class PersonsApi {
 	}
 
 	/**
-	 * archiveVirtual Archives the virtual person identified by @code{ sourceId} and deletes the underlying virtual user. Archiving makes the person eligible for
-	 * collection by the retention policies.&lt;br&gt;
+	 * archiveVirtual Archives the virtual person identified by &#x60;sourceId&#x60; and deletes the underlying virtual user. Archiving makes the person eligible
+	 * for collection by the retention policies.&lt;br&gt;
 	 * 
 	 * @param personsArchiveVirtualBody (required)
 	 * @return ArchivePersonResult
@@ -256,8 +256,8 @@ public class PersonsApi {
 	}
 
 	/**
-	 * archiveVirtual Archives the virtual person identified by @code{ sourceId} and deletes the underlying virtual user. Archiving makes the person eligible for
-	 * collection by the retention policies.&lt;br&gt;
+	 * archiveVirtual Archives the virtual person identified by &#x60;sourceId&#x60; and deletes the underlying virtual user. Archiving makes the person eligible
+	 * for collection by the retention policies.&lt;br&gt;
 	 * 
 	 * @param personsArchiveVirtualBody (required)
 	 * @return ApiResponse&lt;ArchivePersonResult&gt;
@@ -638,6 +638,50 @@ public class PersonsApi {
 	}
 
 	/**
+	 * getNotificationCountForCurrentPerson Returns &#x60;NotificationCountData&#x60; for the current person in the request context.&lt;br&gt;
+	 * 
+	 * @return NotificationCountData
+	 * @throws ApiException if fails to make API call
+	 */
+	public NotificationCountData personsGetNotificationCountForCurrentPerson() throws ApiException {
+		return personsGetNotificationCountForCurrentPersonWithHttpInfo().getData();
+	}
+
+	/**
+	 * getNotificationCountForCurrentPerson Returns &#x60;NotificationCountData&#x60; for the current person in the request context.&lt;br&gt;
+	 * 
+	 * @return ApiResponse&lt;NotificationCountData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<NotificationCountData> personsGetNotificationCountForCurrentPersonWithHttpInfo() throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// create path and map variables
+		String localVarPath = "/persons/getNotificationCountForCurrentPerson";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<NotificationCountData> localVarReturnType = new GenericType<NotificationCountData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * pauseNotifications Pause notifications for a person. This changes the person&#39;s pauseNotificationsMode and pauseNotificationsState to ON for the specified
 	 * period. &lt;p&gt; Note: This overrides any automatic pause of notifications in place. Notification auto-pausing resumes once the period specified is
 	 * over.&lt;br&gt;
@@ -875,7 +919,7 @@ public class PersonsApi {
 	 * remove the labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
-	 * @param requestBody List of the labels to remove from the person (required)
+	 * @param requestBody List of the label names to remove from the person (required)
 	 * @param expand (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
@@ -890,7 +934,7 @@ public class PersonsApi {
 	 * remove the labels in a subsequent step.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
-	 * @param requestBody List of the labels to remove from the person (required)
+	 * @param requestBody List of the label names to remove from the person (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
@@ -1385,7 +1429,7 @@ public class PersonsApi {
 	 * the executing user doesn&#39;t have permission to set are not affected by the call.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
-	 * @param requestBody List of the labels to set on the person (required)
+	 * @param requestBody List of the label names to set on the person (required)
 	 * @param expand (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
@@ -1402,7 +1446,7 @@ public class PersonsApi {
 	 * the executing user doesn&#39;t have permission to set are not affected by the call.&lt;br&gt;
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
-	 * @param requestBody List of the labels to set on the person (required)
+	 * @param requestBody List of the label names to set on the person (required)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call

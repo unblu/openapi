@@ -50,6 +50,11 @@ public enum EIntegrationEnvironment {
 	AGENT_SINGLE_CONVERSATION_DESK("AGENT_SINGLE_CONVERSATION_DESK"),
 
 	/**
+	 * AGENT_SITE_EMBEDDED: Sites that integrate Unblu using the Agent Embedded JS API
+	 */
+	AGENT_SITE_EMBEDDED("AGENT_SITE_EMBEDDED"),
+
+	/**
 	 * ACCOUNT_CONFIGURATION: Account configuration page
 	 */
 	ACCOUNT_CONFIGURATION("ACCOUNT_CONFIGURATION"),

@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Information about the participant of a conversation (with historical information)
+ * Information about a participant in a conversation (with historical information)
  */
-@ApiModel(description = "Information about the participant of a conversation (with historical information)")
+@ApiModel(description = "Information about a participant in a conversation (with historical information)")
 
 @JsonPropertyOrder({
 	ParticipantHistoryData.JSON_PROPERTY_$_TYPE,
@@ -179,11 +179,11 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the person participation was created (timestamp when the state was set to &#x60;EConversationParticipationState.CREATED&#x60;)
+	 * Unix timestamp (ms) when the person participation was created and their participation state was set to &#x60;EConversationParticipationState.CREATED&#x60;
 	 * 
 	 * @return createdTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the person participation was created (timestamp when the state was set to `EConversationParticipationState.CREATED`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person participation was created and their participation state was set to `EConversationParticipationState.CREATED`")
 	public Long getCreatedTimestamp() {
 		return createdTimestamp;
 	}
@@ -198,11 +198,12 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the person joined (timestamp when the state was set to &#x60;EConversationParticipationState.ONBOARDING&#x60;)
+	 * Unix timestamp (ms) when the person joined, that is, when their participation state was set to &#x60;EConversationParticipationState.ONBOARDING&#x60;.
+	 * &#x60;null&#x60; if the participation never joined.
 	 * 
 	 * @return joinedTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the person joined (timestamp when the state was set to `EConversationParticipationState.ONBOARDING`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person joined, that is, when their participation state was set to `EConversationParticipationState.ONBOARDING`. `null` if the participation never joined.")
 	public Long getJoinedTimestamp() {
 		return joinedTimestamp;
 	}
@@ -217,12 +218,12 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the participation was activated, may be null (timestamp when the state was set to
-	 * &#x60;EConversationParticipationState.ACTIVE&#x60;)
+	 * Unix timestamp (ms) when the participation was activated, that is, when their participation state was set to
+	 * &#x60;EConversationParticipationState.ACTIVE&#x60;. &#x60;null&#x60; if the participation was never activated.
 	 * 
 	 * @return activationTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the participation was activated, may be null (timestamp when the state was set to `EConversationParticipationState.ACTIVE`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the participation was activated, that is, when their participation state was set to `EConversationParticipationState.ACTIVE`. `null` if the participation was never activated.")
 	public Long getActivationTimestamp() {
 		return activationTimestamp;
 	}
@@ -237,12 +238,12 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the person started offboarding, may be null (timestamp when the state was set
-	 * to&#x60;EConversationParticipationState.OFFBOARDING&#x60;)
+	 * Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set
+	 * to&#x60;EConversationParticipationState.OFFBOARDING&#x60;. &#x60;null&#x60; if the participation never started its offboarding.
 	 * 
 	 * @return offboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the person started offboarding, may be null (timestamp when the state was set to`EConversationParticipationState.OFFBOARDING`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set to`EConversationParticipationState.OFFBOARDING`. `null` if the participation never started its offboarding.")
 	public Long getOffboardingTimestamp() {
 		return offboardingTimestamp;
 	}
@@ -257,11 +258,12 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the person left, may be null (timestamp when the state was set to &#x60;EConversationParticipationState.ENDED&#x60;)
+	 * Unix timestamp (ms) when the person left, that is, when their participation state was set to &#x60;EConversationParticipationState.ENDED&#x60;).
+	 * &#x60;null&#x60; if the participation didn&#39;t finish its offboarding.
 	 * 
 	 * @return leftTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the person left, may be null (timestamp when the state was set to `EConversationParticipationState.ENDED`)")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person left, that is, when their participation state was set to `EConversationParticipationState.ENDED`). `null` if the participation didn't finish its offboarding.")
 	public Long getLeftTimestamp() {
 		return leftTimestamp;
 	}
@@ -315,11 +317,11 @@ public class ParticipantHistoryData {
 	}
 
 	/**
-	 * Participant&#39;s rating of the conversation (between 0 and 1)
+	 * Participant&#39;s rating of the conversation, expressed as a value between 0 and 1
 	 * 
 	 * @return conversationRating
 	 **/
-	@ApiModelProperty(value = "Participant's rating of the conversation (between 0 and 1)")
+	@ApiModelProperty(value = "Participant's rating of the conversation, expressed as a value between 0 and 1")
 	public Float getConversationRating() {
 		return conversationRating;
 	}

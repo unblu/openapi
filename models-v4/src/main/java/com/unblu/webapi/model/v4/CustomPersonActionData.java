@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_VISITOR_EMBEDDED_API_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_VISITOR_FLOATING_API_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT,
+	CustomPersonActionData.JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_SORTING_ORDER,
 	CustomPersonActionData.JSON_PROPERTY_TYPE,
 	CustomPersonActionData.JSON_PROPERTY_AVAILABLE_FOR_TARGET_PERSON_TYPES,
@@ -171,6 +172,10 @@ public class CustomPersonActionData implements CustomActionData {
 	public static final String JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT = "triggerAgentMobileSdkEvent";
 	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT)
 	private Boolean triggerAgentMobileSdkEvent;
+
+	public static final String JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT = "triggerAgentEmbeddedApiEvent";
+	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT)
+	private Boolean triggerAgentEmbeddedApiEvent;
 
 	public static final String JSON_PROPERTY_SORTING_ORDER = "sortingOrder";
 	@JsonProperty(JSON_PROPERTY_SORTING_ORDER)
@@ -655,6 +660,25 @@ public class CustomPersonActionData implements CustomActionData {
 		this.triggerAgentMobileSdkEvent = triggerAgentMobileSdkEvent;
 	}
 
+	public CustomPersonActionData triggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent) {
+		this.triggerAgentEmbeddedApiEvent = triggerAgentEmbeddedApiEvent;
+		return this;
+	}
+
+	/**
+	 * A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.
+	 * 
+	 * @return triggerAgentEmbeddedApiEvent
+	 **/
+	@ApiModelProperty(value = "A flag indicating whether the action should trigger an agent embedded JS API event. The default value is false.")
+	public Boolean isTriggerAgentEmbeddedApiEvent() {
+		return triggerAgentEmbeddedApiEvent;
+	}
+
+	public void setTriggerAgentEmbeddedApiEvent(Boolean triggerAgentEmbeddedApiEvent) {
+		this.triggerAgentEmbeddedApiEvent = triggerAgentEmbeddedApiEvent;
+	}
+
 	public CustomPersonActionData sortingOrder(Integer sortingOrder) {
 		this.sortingOrder = sortingOrder;
 		return this;
@@ -798,6 +822,7 @@ public class CustomPersonActionData implements CustomActionData {
 				Objects.equals(this.triggerVisitorEmbeddedApiEvent, customPersonActionData.triggerVisitorEmbeddedApiEvent) &&
 				Objects.equals(this.triggerVisitorFloatingApiEvent, customPersonActionData.triggerVisitorFloatingApiEvent) &&
 				Objects.equals(this.triggerAgentMobileSdkEvent, customPersonActionData.triggerAgentMobileSdkEvent) &&
+				Objects.equals(this.triggerAgentEmbeddedApiEvent, customPersonActionData.triggerAgentEmbeddedApiEvent) &&
 				Objects.equals(this.sortingOrder, customPersonActionData.sortingOrder) &&
 				Objects.equals(this.type, customPersonActionData.type) &&
 				Objects.equals(this.availableForTargetPersonTypes, customPersonActionData.availableForTargetPersonTypes) &&
@@ -807,7 +832,7 @@ public class CustomPersonActionData implements CustomActionData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerAgentMobileSdkEvent, sortingOrder, type, availableForTargetPersonTypes, availableForTargetFrontends, apiEventTriggerFilter);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerAgentMobileSdkEvent, triggerAgentEmbeddedApiEvent, sortingOrder, type, availableForTargetPersonTypes, availableForTargetFrontends, apiEventTriggerFilter);
 	}
 
 	@Override
@@ -836,6 +861,7 @@ public class CustomPersonActionData implements CustomActionData {
 		sb.append("    triggerVisitorEmbeddedApiEvent: ").append(toIndentedString(triggerVisitorEmbeddedApiEvent)).append("\n");
 		sb.append("    triggerVisitorFloatingApiEvent: ").append(toIndentedString(triggerVisitorFloatingApiEvent)).append("\n");
 		sb.append("    triggerAgentMobileSdkEvent: ").append(toIndentedString(triggerAgentMobileSdkEvent)).append("\n");
+		sb.append("    triggerAgentEmbeddedApiEvent: ").append(toIndentedString(triggerAgentEmbeddedApiEvent)).append("\n");
 		sb.append("    sortingOrder: ").append(toIndentedString(sortingOrder)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    availableForTargetPersonTypes: ").append(toIndentedString(availableForTargetPersonTypes)).append("\n");

@@ -184,11 +184,11 @@ public class PersonAnalyticsKpiData {
 	}
 
 	/**
-	 * The rating this person gave to the conversation. Optional. @code{ null} if no rating was given.
+	 * The rating this person gave to the conversation. Optional. &#x60;null&#x60; if no rating was given.
 	 * 
 	 * @return rating
 	 **/
-	@ApiModelProperty(value = "The rating this person gave to the conversation. Optional. @code{ null} if no rating was given.")
+	@ApiModelProperty(value = "The rating this person gave to the conversation. Optional. `null` if no rating was given.")
 	public Float getRating() {
 		return rating;
 	}
@@ -230,11 +230,11 @@ public class PersonAnalyticsKpiData {
 	}
 
 	/**
-	 * The identifier of the team the person belongs to. Optional. @code{ null} if the person is not an agent.
+	 * The identifier of the team the person belongs to. Optional. &#x60;null&#x60; if the person is not an agent.
 	 * 
 	 * @return teamId
 	 **/
-	@ApiModelProperty(value = "The identifier of the team the person belongs to. Optional. @code{ null} if the person is not an agent.")
+	@ApiModelProperty(value = "The identifier of the team the person belongs to. Optional. `null` if the person is not an agent.")
 	public String getTeamId() {
 		return teamId;
 	}
@@ -249,11 +249,11 @@ public class PersonAnalyticsKpiData {
 	}
 
 	/**
-	 * The username of the person. Optional, may be @code{ null}.
+	 * The username of the person. Optional, may be &#x60;null&#x60;.
 	 * 
 	 * @return username
 	 **/
-	@ApiModelProperty(value = "The username of the person. Optional, may be @code{ null}.")
+	@ApiModelProperty(value = "The username of the person. Optional, may be `null`.")
 	public String getUsername() {
 		return username;
 	}
