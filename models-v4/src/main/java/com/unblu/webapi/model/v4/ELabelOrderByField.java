@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EPersonLabelOrderByField
+ * Gets or Sets ELabelOrderByField
  */
-public enum EPersonLabelOrderByField {
+public enum ELabelOrderByField {
 
 	/**
 	 * ID: Sort by the &#39;ID&#39; attribute
@@ -26,7 +26,7 @@ public enum EPersonLabelOrderByField {
 
 	private String value;
 
-	EPersonLabelOrderByField(String value) {
+	ELabelOrderByField(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +41,8 @@ public enum EPersonLabelOrderByField {
 	}
 
 	@JsonCreator
-	public static EPersonLabelOrderByField fromValue(String value) {
-		for (EPersonLabelOrderByField b : EPersonLabelOrderByField.values()) {
+	public static ELabelOrderByField fromValue(String value) {
+		for (ELabelOrderByField b : ELabelOrderByField.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

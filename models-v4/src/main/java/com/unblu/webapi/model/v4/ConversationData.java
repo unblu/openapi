@@ -34,6 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationData.JSON_PROPERTY_PARTICIPANTS,
 	ConversationData.JSON_PROPERTY_EXTERNAL_PARTICIPANTS,
 	ConversationData.JSON_PROPERTY_BOT_PARTICIPANTS,
+	ConversationData.JSON_PROPERTY_LABELS,
 	ConversationData.JSON_PROPERTY_STATE,
 	ConversationData.JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE,
 	ConversationData.JSON_PROPERTY_CONVERSATION_VISIBILITY,
@@ -132,6 +133,10 @@ public class ConversationData {
 	public static final String JSON_PROPERTY_BOT_PARTICIPANTS = "botParticipants";
 	@JsonProperty(JSON_PROPERTY_BOT_PARTICIPANTS)
 	private List<BotParticipantData> botParticipants = null;
+
+	public static final String JSON_PROPERTY_LABELS = "labels";
+	@JsonProperty(JSON_PROPERTY_LABELS)
+	private List<LabelData> labels = null;
 
 	public static final String JSON_PROPERTY_STATE = "state";
 	@JsonProperty(JSON_PROPERTY_STATE)
@@ -441,6 +446,33 @@ public class ConversationData {
 
 	public void setBotParticipants(List<BotParticipantData> botParticipants) {
 		this.botParticipants = botParticipants;
+	}
+
+	public ConversationData labels(List<LabelData> labels) {
+		this.labels = labels;
+		return this;
+	}
+
+	public ConversationData addLabelsItem(LabelData labelsItem) {
+		if (this.labels == null) {
+			this.labels = new ArrayList<>();
+		}
+		this.labels.add(labelsItem);
+		return this;
+	}
+
+	/**
+	 * List of labels set on this conversation
+	 * 
+	 * @return labels
+	 **/
+	@ApiModelProperty(value = "List of labels set on this conversation")
+	public List<LabelData> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<LabelData> labels) {
+		this.labels = labels;
 	}
 
 	public ConversationData state(EConversationState state) {
@@ -864,6 +896,7 @@ public class ConversationData {
 				Objects.equals(this.participants, conversationData.participants) &&
 				Objects.equals(this.externalParticipants, conversationData.externalParticipants) &&
 				Objects.equals(this.botParticipants, conversationData.botParticipants) &&
+				Objects.equals(this.labels, conversationData.labels) &&
 				Objects.equals(this.state, conversationData.state) &&
 				Objects.equals(this.initialEngagementType, conversationData.initialEngagementType) &&
 				Objects.equals(this.conversationVisibility, conversationData.conversationVisibility) &&
@@ -887,7 +920,7 @@ public class ConversationData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, creationTimestamp, endTimestamp, id, accountId, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, state, initialEngagementType, conversationVisibility, locale, tokboxSessionId, visitorData, conversationTemplateId, inheritConfigurationAndTexts, links, externalMessengerChannelId, sourceId, sourceUrl, endReason, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, metadata, _configuration, text);
+		return Objects.hash($type, creationTimestamp, endTimestamp, id, accountId, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, labels, state, initialEngagementType, conversationVisibility, locale, tokboxSessionId, visitorData, conversationTemplateId, inheritConfigurationAndTexts, links, externalMessengerChannelId, sourceId, sourceUrl, endReason, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, metadata, _configuration, text);
 	}
 
 	@Override
@@ -905,6 +938,7 @@ public class ConversationData {
 		sb.append("    participants: ").append(toIndentedString(participants)).append("\n");
 		sb.append("    externalParticipants: ").append(toIndentedString(externalParticipants)).append("\n");
 		sb.append("    botParticipants: ").append(toIndentedString(botParticipants)).append("\n");
+		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    state: ").append(toIndentedString(state)).append("\n");
 		sb.append("    initialEngagementType: ").append(toIndentedString(initialEngagementType)).append("\n");
 		sb.append("    conversationVisibility: ").append(toIndentedString(conversationVisibility)).append("\n");

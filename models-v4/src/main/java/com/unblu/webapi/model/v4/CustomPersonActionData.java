@@ -34,6 +34,8 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomPersonActionData.JSON_PROPERTY_ACTION_ICON,
 	CustomPersonActionData.JSON_PROPERTY_STATE,
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_WEBHOOK,
+	CustomPersonActionData.JSON_PROPERTY_AGENTIC_FLOW_DATA,
+	CustomPersonActionData.JSON_PROPERTY_TRIGGER_AGENTIC_FLOW,
 	CustomPersonActionData.JSON_PROPERTY_INVOCABLE_FROM_FRONTENDS,
 	CustomPersonActionData.JSON_PROPERTY_INVOCABLE_FOR_CONVERSATION_STATES,
 	CustomPersonActionData.JSON_PROPERTY_INVOCABLE_FOR_PARTICIPATION_STATES,
@@ -42,6 +44,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_VISITOR_MOBILE_SDK_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_VISITOR_EMBEDDED_API_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_VISITOR_FLOATING_API_EVENT,
+	CustomPersonActionData.JSON_PROPERTY_TRIGGER_BRANCH_CLIENT_API_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_TRIGGER_AGENT_EMBEDDED_API_EVENT,
 	CustomPersonActionData.JSON_PROPERTY_SORTING_ORDER,
@@ -137,6 +140,14 @@ public class CustomPersonActionData implements CustomActionData {
 	@JsonProperty(JSON_PROPERTY_TRIGGER_WEBHOOK)
 	private CustomActionWebhookRegistration triggerWebhook = null;
 
+	public static final String JSON_PROPERTY_AGENTIC_FLOW_DATA = "agenticFlowData";
+	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_DATA)
+	private ExpandableField<AriaAgenticFlowDataContent> agenticFlowData = null;
+
+	public static final String JSON_PROPERTY_TRIGGER_AGENTIC_FLOW = "triggerAgenticFlow";
+	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENTIC_FLOW)
+	private Boolean triggerAgenticFlow;
+
 	public static final String JSON_PROPERTY_INVOCABLE_FROM_FRONTENDS = "invocableFromFrontends";
 	@JsonProperty(JSON_PROPERTY_INVOCABLE_FROM_FRONTENDS)
 	private List<EFrontend> invocableFromFrontends = null;
@@ -168,6 +179,10 @@ public class CustomPersonActionData implements CustomActionData {
 	public static final String JSON_PROPERTY_TRIGGER_VISITOR_FLOATING_API_EVENT = "triggerVisitorFloatingApiEvent";
 	@JsonProperty(JSON_PROPERTY_TRIGGER_VISITOR_FLOATING_API_EVENT)
 	private Boolean triggerVisitorFloatingApiEvent;
+
+	public static final String JSON_PROPERTY_TRIGGER_BRANCH_CLIENT_API_EVENT = "triggerBranchClientApiEvent";
+	@JsonProperty(JSON_PROPERTY_TRIGGER_BRANCH_CLIENT_API_EVENT)
+	private Boolean triggerBranchClientApiEvent;
 
 	public static final String JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT = "triggerAgentMobileSdkEvent";
 	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENT_MOBILE_SDK_EVENT)
@@ -457,6 +472,49 @@ public class CustomPersonActionData implements CustomActionData {
 		this.triggerWebhook = triggerWebhook;
 	}
 
+	public CustomPersonActionData agenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
+		return this;
+	}
+
+	/**
+	 * The ID of the Aria agentic flow linked to this custom action, expandable to the full agentic flow data. It is never provided by the caller on create: the
+	 * flow is created automatically when &#39;triggerAgenticFlow&#39; is true (or from imported &#39;agenticFlowData&#39;) and its ID is set on the custom action
+	 * afterwards. On update and read the ID is present whenever a flow is currently linked, and null otherwise.
+	 * 
+	 * @return agenticFlowData
+	 **/
+	@ApiModelProperty(value = "The ID of the Aria agentic flow linked to this custom action, expandable to the full agentic flow data. It is never provided by the caller on create: the flow is created automatically when 'triggerAgenticFlow' is true (or from imported 'agenticFlowData') and its ID is set on the custom action afterwards. On update and read the ID is present whenever a flow is currently linked, and null otherwise.")
+	public ExpandableField<AriaAgenticFlowDataContent> getAgenticFlowData() {
+		return agenticFlowData;
+	}
+
+	public void setAgenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
+	}
+
+	public CustomPersonActionData triggerAgenticFlow(Boolean triggerAgenticFlow) {
+		this.triggerAgenticFlow = triggerAgenticFlow;
+		return this;
+	}
+
+	/**
+	 * Whether this custom action should trigger an Aria agentic flow. On create and update this expresses the caller&#39;s wish. When set to true and no agentic
+	 * flow data is imported, a new agentic flow is created automatically from the default template. When set to false during an update, and an agentic flow was
+	 * already linked, the existing agentic flow is deleted and the linked ID is removed. The agentic flow ID is never provided by the caller. On read this reflects
+	 * whether an agentic flow is currently linked.
+	 * 
+	 * @return triggerAgenticFlow
+	 **/
+	@ApiModelProperty(value = "Whether this custom action should trigger an Aria agentic flow. On create and update this expresses the caller's wish. When set to true and no agentic flow data is imported, a new agentic flow is created automatically from the default template. When set to false during an update, and an agentic flow was already linked, the existing agentic flow is deleted and the linked ID is removed. The agentic flow ID is never provided by the caller. On read this reflects whether an agentic flow is currently linked.")
+	public Boolean isTriggerAgenticFlow() {
+		return triggerAgenticFlow;
+	}
+
+	public void setTriggerAgenticFlow(Boolean triggerAgenticFlow) {
+		this.triggerAgenticFlow = triggerAgenticFlow;
+	}
+
 	public CustomPersonActionData invocableFromFrontends(List<EFrontend> invocableFromFrontends) {
 		this.invocableFromFrontends = invocableFromFrontends;
 		return this;
@@ -641,6 +699,25 @@ public class CustomPersonActionData implements CustomActionData {
 		this.triggerVisitorFloatingApiEvent = triggerVisitorFloatingApiEvent;
 	}
 
+	public CustomPersonActionData triggerBranchClientApiEvent(Boolean triggerBranchClientApiEvent) {
+		this.triggerBranchClientApiEvent = triggerBranchClientApiEvent;
+		return this;
+	}
+
+	/**
+	 * A flag indicating whether the action should trigger a Branch client JS API event. The default value is false.
+	 * 
+	 * @return triggerBranchClientApiEvent
+	 **/
+	@ApiModelProperty(value = "A flag indicating whether the action should trigger a Branch client JS API event. The default value is false.")
+	public Boolean isTriggerBranchClientApiEvent() {
+		return triggerBranchClientApiEvent;
+	}
+
+	public void setTriggerBranchClientApiEvent(Boolean triggerBranchClientApiEvent) {
+		this.triggerBranchClientApiEvent = triggerBranchClientApiEvent;
+	}
+
 	public CustomPersonActionData triggerAgentMobileSdkEvent(Boolean triggerAgentMobileSdkEvent) {
 		this.triggerAgentMobileSdkEvent = triggerAgentMobileSdkEvent;
 		return this;
@@ -813,6 +890,8 @@ public class CustomPersonActionData implements CustomActionData {
 				Objects.equals(this.actionIcon, customPersonActionData.actionIcon) &&
 				Objects.equals(this.state, customPersonActionData.state) &&
 				Objects.equals(this.triggerWebhook, customPersonActionData.triggerWebhook) &&
+				Objects.equals(this.agenticFlowData, customPersonActionData.agenticFlowData) &&
+				Objects.equals(this.triggerAgenticFlow, customPersonActionData.triggerAgenticFlow) &&
 				Objects.equals(this.invocableFromFrontends, customPersonActionData.invocableFromFrontends) &&
 				Objects.equals(this.invocableForConversationStates, customPersonActionData.invocableForConversationStates) &&
 				Objects.equals(this.invocableForParticipationStates, customPersonActionData.invocableForParticipationStates) &&
@@ -821,6 +900,7 @@ public class CustomPersonActionData implements CustomActionData {
 				Objects.equals(this.triggerVisitorMobileSdkEvent, customPersonActionData.triggerVisitorMobileSdkEvent) &&
 				Objects.equals(this.triggerVisitorEmbeddedApiEvent, customPersonActionData.triggerVisitorEmbeddedApiEvent) &&
 				Objects.equals(this.triggerVisitorFloatingApiEvent, customPersonActionData.triggerVisitorFloatingApiEvent) &&
+				Objects.equals(this.triggerBranchClientApiEvent, customPersonActionData.triggerBranchClientApiEvent) &&
 				Objects.equals(this.triggerAgentMobileSdkEvent, customPersonActionData.triggerAgentMobileSdkEvent) &&
 				Objects.equals(this.triggerAgentEmbeddedApiEvent, customPersonActionData.triggerAgentEmbeddedApiEvent) &&
 				Objects.equals(this.sortingOrder, customPersonActionData.sortingOrder) &&
@@ -832,7 +912,7 @@ public class CustomPersonActionData implements CustomActionData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerAgentMobileSdkEvent, triggerAgentEmbeddedApiEvent, sortingOrder, type, availableForTargetPersonTypes, availableForTargetFrontends, apiEventTriggerFilter);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, key, name, description, translations, actionIcon, state, triggerWebhook, agenticFlowData, triggerAgenticFlow, invocableFromFrontends, invocableForConversationStates, invocableForParticipationStates, invocableBy, triggerSystemMessage, triggerVisitorMobileSdkEvent, triggerVisitorEmbeddedApiEvent, triggerVisitorFloatingApiEvent, triggerBranchClientApiEvent, triggerAgentMobileSdkEvent, triggerAgentEmbeddedApiEvent, sortingOrder, type, availableForTargetPersonTypes, availableForTargetFrontends, apiEventTriggerFilter);
 	}
 
 	@Override
@@ -852,6 +932,8 @@ public class CustomPersonActionData implements CustomActionData {
 		sb.append("    actionIcon: ").append(toIndentedString(actionIcon)).append("\n");
 		sb.append("    state: ").append(toIndentedString(state)).append("\n");
 		sb.append("    triggerWebhook: ").append(toIndentedString(triggerWebhook)).append("\n");
+		sb.append("    agenticFlowData: ").append(toIndentedString(agenticFlowData)).append("\n");
+		sb.append("    triggerAgenticFlow: ").append(toIndentedString(triggerAgenticFlow)).append("\n");
 		sb.append("    invocableFromFrontends: ").append(toIndentedString(invocableFromFrontends)).append("\n");
 		sb.append("    invocableForConversationStates: ").append(toIndentedString(invocableForConversationStates)).append("\n");
 		sb.append("    invocableForParticipationStates: ").append(toIndentedString(invocableForParticipationStates)).append("\n");
@@ -860,6 +942,7 @@ public class CustomPersonActionData implements CustomActionData {
 		sb.append("    triggerVisitorMobileSdkEvent: ").append(toIndentedString(triggerVisitorMobileSdkEvent)).append("\n");
 		sb.append("    triggerVisitorEmbeddedApiEvent: ").append(toIndentedString(triggerVisitorEmbeddedApiEvent)).append("\n");
 		sb.append("    triggerVisitorFloatingApiEvent: ").append(toIndentedString(triggerVisitorFloatingApiEvent)).append("\n");
+		sb.append("    triggerBranchClientApiEvent: ").append(toIndentedString(triggerBranchClientApiEvent)).append("\n");
 		sb.append("    triggerAgentMobileSdkEvent: ").append(toIndentedString(triggerAgentMobileSdkEvent)).append("\n");
 		sb.append("    triggerAgentEmbeddedApiEvent: ").append(toIndentedString(triggerAgentEmbeddedApiEvent)).append("\n");
 		sb.append("    sortingOrder: ").append(toIndentedString(sortingOrder)).append("\n");

@@ -1,15 +1,13 @@
 package com.unblu.webapi.jersey.v4.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiException;
+import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+
+import jakarta.ws.rs.core.GenericType;
+
 import com.unblu.webapi.model.v4.AnalyticsKpiDataQuery;
 import com.unblu.webapi.model.v4.CallsAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.CollaborationLayersAnalyticsKpiDataResult;
@@ -19,7 +17,10 @@ import com.unblu.webapi.model.v4.MessagesAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.QueueInteractionAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.WaitingTimeAnalyticsKpiDataResult;
 
-import jakarta.ws.rs.core.GenericType;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AnalyticsDataApi {
 	private ApiClient apiClient;
@@ -41,10 +42,10 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchCalls &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual call KPI records. &lt;p&gt; Returns data from the gold_calls view,
-	 * with one entry per ended call. Each entry includes call timing, participants, service provider, end reason, and the parent conversation details.&lt;br&gt;
+	 * searchCalls &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the audio and video calls that have ended, one entry per call. &lt;p&gt; Each entry
+	 * describes a single call: its timing, type, participants, who started it, why it ended, and the conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return CallsAnalyticsKpiDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -53,10 +54,10 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchCalls &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual call KPI records. &lt;p&gt; Returns data from the gold_calls view,
-	 * with one entry per ended call. Each entry includes call timing, participants, service provider, end reason, and the parent conversation details.&lt;br&gt;
+	 * searchCalls &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the audio and video calls that have ended, one entry per call. &lt;p&gt; Each entry
+	 * describes a single call: its timing, type, participants, who started it, why it ended, and the conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ApiResponse&lt;CallsAnalyticsKpiDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -94,11 +95,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchCollaborationLayers &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual collaboration layer KPI records. &lt;p&gt; Returns data
-	 * from the gold_collaboration_layers view, with one entry per stopped or aborted collaboration layer. Each entry includes layer type, duration, start/stop
-	 * persons, and the parent conversation details.&lt;br&gt;
+	 * searchCollaborationLayers &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the collaboration sessions (such as co-browsing or screen sharing) that
+	 * have finished, one entry per session. &lt;p&gt; Each entry describes a single session: its type, how long it was active, who started and stopped it, and the
+	 * conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return CollaborationLayersAnalyticsKpiDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -107,11 +108,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchCollaborationLayers &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual collaboration layer KPI records. &lt;p&gt; Returns data
-	 * from the gold_collaboration_layers view, with one entry per stopped or aborted collaboration layer. Each entry includes layer type, duration, start/stop
-	 * persons, and the parent conversation details.&lt;br&gt;
+	 * searchCollaborationLayers &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the collaboration sessions (such as co-browsing or screen sharing) that
+	 * have finished, one entry per session. &lt;p&gt; Each entry describes a single session: its type, how long it was active, who started and stopped it, and the
+	 * conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ApiResponse&lt;CollaborationLayersAnalyticsKpiDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -149,12 +150,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchConversationsEnded &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual conversation-ended KPI records. &lt;p&gt; Returns data
-	 * from the gold_conversations_ended view, with one entry per ended conversation. Each entry includes lifecycle timestamps (creation, onboarding, queued,
-	 * active, offboarding, end), end reason, conversation details, and aggregate metrics (message counts, call counts, collaboration layer counts and
-	 * durations).&lt;br&gt;
+	 * searchConversationsEnded &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the conversations that have ended, one entry per conversation. &lt;p&gt;
+	 * Each entry summarizes the whole conversation: its lifecycle timestamps (creation, onboarding, queued, active, offboarding, end), why it ended, and totals
+	 * such as message, call, and collaboration session counts and durations.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ConversationsEndedAnalyticsKpiDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -163,12 +163,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchConversationsEnded &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual conversation-ended KPI records. &lt;p&gt; Returns data
-	 * from the gold_conversations_ended view, with one entry per ended conversation. Each entry includes lifecycle timestamps (creation, onboarding, queued,
-	 * active, offboarding, end), end reason, conversation details, and aggregate metrics (message counts, call counts, collaboration layer counts and
-	 * durations).&lt;br&gt;
+	 * searchConversationsEnded &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the conversations that have ended, one entry per conversation. &lt;p&gt;
+	 * Each entry summarizes the whole conversation: its lifecycle timestamps (creation, onboarding, queued, active, offboarding, end), why it ended, and totals
+	 * such as message, call, and collaboration session counts and durations.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ApiResponse&lt;ConversationsEndedAnalyticsKpiDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -206,11 +205,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchHandlingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual handling time KPI records. &lt;p&gt; Returns data from the
-	 * gold_handling_time view, with one entry per agent handling time period. Each entry includes the handling time duration, resolution type, and the parent
-	 * conversation details with metrics collected during the handling period.&lt;br&gt;
+	 * searchHandlingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns how long agents spent handling conversations, one entry per handling period.
+	 * &lt;p&gt; Each entry covers a single handling period: its duration, how it ended (for example forwarded, pushed back to a queue, or conversation ended), and
+	 * the conversation it belonged to. A conversation handled by several agents produces several entries.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return HandlingTimeAnalyticsKpiDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -219,11 +218,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchHandlingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual handling time KPI records. &lt;p&gt; Returns data from the
-	 * gold_handling_time view, with one entry per agent handling time period. Each entry includes the handling time duration, resolution type, and the parent
-	 * conversation details with metrics collected during the handling period.&lt;br&gt;
+	 * searchHandlingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns how long agents spent handling conversations, one entry per handling period.
+	 * &lt;p&gt; Each entry covers a single handling period: its duration, how it ended (for example forwarded, pushed back to a queue, or conversation ended), and
+	 * the conversation it belonged to. A conversation handled by several agents produces several entries.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ApiResponse&lt;HandlingTimeAnalyticsKpiDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -261,10 +260,10 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchMessages &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual message KPI records. &lt;p&gt; Returns data from the gold_messages
-	 * view, with one entry per message. Each entry includes the sender, message type, character count, timestamps, and the parent conversation details.&lt;br&gt;
+	 * searchMessages &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the messages exchanged in conversations, one entry per message. &lt;p&gt; Each
+	 * entry describes a single message: its sender, type, length, timestamps, and the conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return MessagesAnalyticsKpiDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -273,10 +272,10 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchMessages &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual message KPI records. &lt;p&gt; Returns data from the gold_messages
-	 * view, with one entry per message. Each entry includes the sender, message type, character count, timestamps, and the parent conversation details.&lt;br&gt;
+	 * searchMessages &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the messages exchanged in conversations, one entry per message. &lt;p&gt; Each
+	 * entry describes a single message: its sender, type, length, timestamps, and the conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ApiResponse&lt;MessagesAnalyticsKpiDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -314,12 +313,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchQueueInteraction &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual queue interaction KPI records. &lt;p&gt; Returns data from
-	 * the gold_queue_interaction view, with one entry per resolved invitation or reservation (redeemed, revoked, declined, or timed out). Each entry includes the
-	 * reservation/invitation creation timestamps, the resolution timestamp, the response duration, the resolution type, the invitation target, and the parent
-	 * conversation details.&lt;br&gt;
+	 * searchQueueInteraction &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the outcomes of queued invitations and reservations, one entry per
+	 * resolved interaction. &lt;p&gt; Each entry describes a single interaction and how it ended (redeemed, revoked, cancelled, declined, timed out, or visitor
+	 * left), how long it took to resolve, who it was offered to, and the conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return QueueInteractionAnalyticsKpiDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -328,12 +326,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchQueueInteraction &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual queue interaction KPI records. &lt;p&gt; Returns data from
-	 * the gold_queue_interaction view, with one entry per resolved invitation or reservation (redeemed, revoked, declined, or timed out). Each entry includes the
-	 * reservation/invitation creation timestamps, the resolution timestamp, the response duration, the resolution type, the invitation target, and the parent
-	 * conversation details.&lt;br&gt;
+	 * searchQueueInteraction &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the outcomes of queued invitations and reservations, one entry per
+	 * resolved interaction. &lt;p&gt; Each entry describes a single interaction and how it ended (redeemed, revoked, cancelled, declined, timed out, or visitor
+	 * left), how long it took to resolve, who it was offered to, and the conversation it belonged to.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ApiResponse&lt;QueueInteractionAnalyticsKpiDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -371,11 +368,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchWaitingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual waiting time KPI records. &lt;p&gt; Returns data from the
-	 * gold_waiting_time view, with one entry per waiting time period (assignment request or agent forwarding). Each entry includes the waiting time duration,
-	 * outcome, type, target recipient, and the parent conversation details.&lt;br&gt;
+	 * searchWaitingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns how long visitors waited for an agent, one entry per waiting period. &lt;p&gt;
+	 * Each entry covers a single waiting period (while queued or while being forwarded): its duration, outcome, who the visitor was waiting for, and the
+	 * conversation it belonged to. A conversation that waited several times produces several entries.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return WaitingTimeAnalyticsKpiDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -384,11 +381,11 @@ public class AnalyticsDataApi {
 	}
 
 	/**
-	 * searchWaitingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Searches for individual waiting time KPI records. &lt;p&gt; Returns data from the
-	 * gold_waiting_time view, with one entry per waiting time period (assignment request or agent forwarding). Each entry includes the waiting time duration,
-	 * outcome, type, target recipient, and the parent conversation details.&lt;br&gt;
+	 * searchWaitingTime &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns how long visitors waited for an agent, one entry per waiting period. &lt;p&gt;
+	 * Each entry covers a single waiting period (while queued or while being forwarded): its duration, outcome, who the visitor was waiting for, and the
+	 * conversation it belonged to. A conversation that waited several times produces several entries.&lt;br&gt;
 	 * 
-	 * @param analyticsKpiDataQuery the query defining time range filter, ordering, and pagination (required)
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
 	 * @return ApiResponse&lt;WaitingTimeAnalyticsKpiDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */

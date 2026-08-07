@@ -47,7 +47,12 @@ public enum EAriaAgenticFlowType {
 	/**
 	 * SUGGESTION_SOURCE_EXECUTABLE: A custom agentic flow for specific scenarios in a suggestion source
 	 */
-	SUGGESTION_SOURCE_EXECUTABLE("SUGGESTION_SOURCE_EXECUTABLE");
+	SUGGESTION_SOURCE_EXECUTABLE("SUGGESTION_SOURCE_EXECUTABLE"),
+
+	/**
+	 * CUSTOM_ACTION_MAIN: An agentic flow used for a custom action
+	 */
+	CUSTOM_ACTION_MAIN("CUSTOM_ACTION_MAIN");
 
 	private String value;
 

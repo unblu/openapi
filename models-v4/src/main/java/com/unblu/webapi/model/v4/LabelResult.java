@@ -21,18 +21,18 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Container to return list of person labels")
 
 @JsonPropertyOrder({
-	PersonLabelResult.JSON_PROPERTY_$_TYPE,
-	PersonLabelResult.JSON_PROPERTY_HAS_MORE_ITEMS,
-	PersonLabelResult.JSON_PROPERTY_NEXT_OFFSET,
-	PersonLabelResult.JSON_PROPERTY_ITEMS,
+	LabelResult.JSON_PROPERTY_$_TYPE,
+	LabelResult.JSON_PROPERTY_HAS_MORE_ITEMS,
+	LabelResult.JSON_PROPERTY_NEXT_OFFSET,
+	LabelResult.JSON_PROPERTY_ITEMS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class PersonLabelResult {
+public class LabelResult {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PERSONLABELRESULT("PersonLabelResult");
+		LABELRESULT("LabelResult");
 
 		private String value;
 
@@ -57,13 +57,13 @@ public class PersonLabelResult {
 					return b;
 				}
 			}
-			return TypeEnum.PERSONLABELRESULT;
+			return TypeEnum.LABELRESULT;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PERSONLABELRESULT;
+	private TypeEnum $type = TypeEnum.LABELRESULT;
 
 	public static final String JSON_PROPERTY_HAS_MORE_ITEMS = "hasMoreItems";
 	@JsonProperty(JSON_PROPERTY_HAS_MORE_ITEMS)
@@ -75,9 +75,9 @@ public class PersonLabelResult {
 
 	public static final String JSON_PROPERTY_ITEMS = "items";
 	@JsonProperty(JSON_PROPERTY_ITEMS)
-	private List<PersonLabel> items = null;
+	private List<Label> items = null;
 
-	public PersonLabelResult $type(TypeEnum $type) {
+	public LabelResult $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -96,7 +96,7 @@ public class PersonLabelResult {
 		this.$type = $type;
 	}
 
-	public PersonLabelResult hasMoreItems(Boolean hasMoreItems) {
+	public LabelResult hasMoreItems(Boolean hasMoreItems) {
 		this.hasMoreItems = hasMoreItems;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class PersonLabelResult {
 		this.hasMoreItems = hasMoreItems;
 	}
 
-	public PersonLabelResult nextOffset(Integer nextOffset) {
+	public LabelResult nextOffset(Integer nextOffset) {
 		this.nextOffset = nextOffset;
 		return this;
 	}
@@ -134,12 +134,12 @@ public class PersonLabelResult {
 		this.nextOffset = nextOffset;
 	}
 
-	public PersonLabelResult items(List<PersonLabel> items) {
+	public LabelResult items(List<Label> items) {
 		this.items = items;
 		return this;
 	}
 
-	public PersonLabelResult addItemsItem(PersonLabel itemsItem) {
+	public LabelResult addItemsItem(Label itemsItem) {
 		if (this.items == null) {
 			this.items = new ArrayList<>();
 		}
@@ -153,11 +153,11 @@ public class PersonLabelResult {
 	 * @return items
 	 **/
 	@ApiModelProperty(value = "The returned list of entities")
-	public List<PersonLabel> getItems() {
+	public List<Label> getItems() {
 		return items;
 	}
 
-	public void setItems(List<PersonLabel> items) {
+	public void setItems(List<Label> items) {
 		this.items = items;
 	}
 
@@ -169,11 +169,11 @@ public class PersonLabelResult {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PersonLabelResult personLabelResult = (PersonLabelResult) o;
-		return Objects.equals(this.$type, personLabelResult.$type) &&
-				Objects.equals(this.hasMoreItems, personLabelResult.hasMoreItems) &&
-				Objects.equals(this.nextOffset, personLabelResult.nextOffset) &&
-				Objects.equals(this.items, personLabelResult.items);
+		LabelResult labelResult = (LabelResult) o;
+		return Objects.equals(this.$type, labelResult.$type) &&
+				Objects.equals(this.hasMoreItems, labelResult.hasMoreItems) &&
+				Objects.equals(this.nextOffset, labelResult.nextOffset) &&
+				Objects.equals(this.items, labelResult.items);
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class PersonLabelResult {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class PersonLabelResult {\n");
+		sb.append("class LabelResult {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    hasMoreItems: ").append(toIndentedString(hasMoreItems)).append("\n");
 		sb.append("    nextOffset: ").append(toIndentedString(nextOffset)).append("\n");

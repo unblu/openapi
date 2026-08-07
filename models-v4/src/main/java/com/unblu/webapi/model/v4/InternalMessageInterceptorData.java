@@ -1,7 +1,9 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	InternalMessageInterceptorData.JSON_PROPERTY_NAME,
 	InternalMessageInterceptorData.JSON_PROPERTY_DESCRIPTION,
 	InternalMessageInterceptorData.JSON_PROPERTY_MESSAGE_FILTER,
+	InternalMessageInterceptorData.JSON_PROPERTY_MESSAGE_SCOPES,
 	InternalMessageInterceptorData.JSON_PROPERTY_TIMEOUT_BEHAVIOR,
 	InternalMessageInterceptorData.JSON_PROPERTY_TYPE,
 	InternalMessageInterceptorData.JSON_PROPERTY_POINT_OF_INTERCEPTION,
@@ -110,6 +113,10 @@ public class InternalMessageInterceptorData implements MessageInterceptorData {
 	public static final String JSON_PROPERTY_MESSAGE_FILTER = "messageFilter";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_FILTER)
 	private EMessageInterceptorMessageFilter messageFilter;
+
+	public static final String JSON_PROPERTY_MESSAGE_SCOPES = "messageScopes";
+	@JsonProperty(JSON_PROPERTY_MESSAGE_SCOPES)
+	private List<EMessageInterceptorMessageScope> messageScopes = null;
 
 	public static final String JSON_PROPERTY_TIMEOUT_BEHAVIOR = "timeoutBehavior";
 	@JsonProperty(JSON_PROPERTY_TIMEOUT_BEHAVIOR)
@@ -323,6 +330,35 @@ public class InternalMessageInterceptorData implements MessageInterceptorData {
 		this.messageFilter = messageFilter;
 	}
 
+	public InternalMessageInterceptorData messageScopes(List<EMessageInterceptorMessageScope> messageScopes) {
+		this.messageScopes = messageScopes;
+		return this;
+	}
+
+	public InternalMessageInterceptorData addMessageScopesItem(EMessageInterceptorMessageScope messageScopesItem) {
+		if (this.messageScopes == null) {
+			this.messageScopes = new ArrayList<>();
+		}
+		this.messageScopes.add(messageScopesItem);
+		return this;
+	}
+
+	/**
+	 * Defines which kinds of messages the interceptor processes: boarding process messages, public messages, and/or internal messages. Optional: if unset or empty,
+	 * the interceptor processes every message (the same as selecting all values). If the interceptor only applies to visitor messages (messageFilter VISITOR),
+	 * \&quot;INTERNAL\&quot; cannot be the only selected scope, since visitors don&#39;t send internal messages.
+	 * 
+	 * @return messageScopes
+	 **/
+	@ApiModelProperty(value = "Defines which kinds of messages the interceptor processes: boarding process messages, public messages, and/or internal messages. Optional: if unset or empty, the interceptor processes every message (the same as selecting all values). If the interceptor only applies to visitor messages (messageFilter VISITOR), \"INTERNAL\" cannot be the only selected scope, since visitors don't send internal messages.")
+	public List<EMessageInterceptorMessageScope> getMessageScopes() {
+		return messageScopes;
+	}
+
+	public void setMessageScopes(List<EMessageInterceptorMessageScope> messageScopes) {
+		this.messageScopes = messageScopes;
+	}
+
 	public InternalMessageInterceptorData timeoutBehavior(EMessageInterceptorTimeoutBehavior timeoutBehavior) {
 		this.timeoutBehavior = timeoutBehavior;
 		return this;
@@ -526,6 +562,7 @@ public class InternalMessageInterceptorData implements MessageInterceptorData {
 				Objects.equals(this.name, internalMessageInterceptorData.name) &&
 				Objects.equals(this.description, internalMessageInterceptorData.description) &&
 				Objects.equals(this.messageFilter, internalMessageInterceptorData.messageFilter) &&
+				Objects.equals(this.messageScopes, internalMessageInterceptorData.messageScopes) &&
 				Objects.equals(this.timeoutBehavior, internalMessageInterceptorData.timeoutBehavior) &&
 				Objects.equals(this.type, internalMessageInterceptorData.type) &&
 				Objects.equals(this.pointOfInterception, internalMessageInterceptorData.pointOfInterception) &&
@@ -539,7 +576,7 @@ public class InternalMessageInterceptorData implements MessageInterceptorData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, messageFilter, timeoutBehavior, type, pointOfInterception, language, regex, reason, severity, status, translations);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, messageFilter, messageScopes, timeoutBehavior, type, pointOfInterception, language, regex, reason, severity, status, translations);
 	}
 
 	@Override
@@ -555,6 +592,7 @@ public class InternalMessageInterceptorData implements MessageInterceptorData {
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    messageFilter: ").append(toIndentedString(messageFilter)).append("\n");
+		sb.append("    messageScopes: ").append(toIndentedString(messageScopes)).append("\n");
 		sb.append("    timeoutBehavior: ").append(toIndentedString(timeoutBehavior)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    pointOfInterception: ").append(toIndentedString(pointOfInterception)).append("\n");

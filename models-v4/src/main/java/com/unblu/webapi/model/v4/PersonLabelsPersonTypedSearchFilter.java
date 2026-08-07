@@ -66,7 +66,7 @@ public class PersonLabelsPersonTypedSearchFilter implements PersonTypedSearchFil
 
 	public static final String JSON_PROPERTY_OPERATOR = "operator";
 	@JsonProperty(JSON_PROPERTY_OPERATOR)
-	private PersonLabelsOperator operator = null;
+	private LabelsOperator operator = null;
 
 	public PersonLabelsPersonTypedSearchFilter $type(TypeEnum $type) {
 		this.$type = $type;
@@ -106,7 +106,7 @@ public class PersonLabelsPersonTypedSearchFilter implements PersonTypedSearchFil
 		this.field = field;
 	}
 
-	public PersonLabelsPersonTypedSearchFilter operator(PersonLabelsOperator operator) {
+	public PersonLabelsPersonTypedSearchFilter operator(LabelsOperator operator) {
 		this.operator = operator;
 		return this;
 	}
@@ -117,11 +117,11 @@ public class PersonLabelsPersonTypedSearchFilter implements PersonTypedSearchFil
 	 * @return operator
 	 **/
 	@ApiModelProperty(value = "")
-	public PersonLabelsOperator getOperator() {
+	public LabelsOperator getOperator() {
 		return operator;
 	}
 
-	public void setOperator(PersonLabelsOperator operator) {
+	public void setOperator(LabelsOperator operator) {
 		this.operator = operator;
 	}
 

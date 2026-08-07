@@ -172,7 +172,7 @@ public class ContextPersonInfo {
 
 	public static final String JSON_PROPERTY_LABELS = "labels";
 	@JsonProperty(JSON_PROPERTY_LABELS)
-	private List<PersonLabel> labels = null;
+	private List<Label> labels = null;
 
 	public static final String JSON_PROPERTY_NOTE = "note";
 	@JsonProperty(JSON_PROPERTY_NOTE)
@@ -607,12 +607,12 @@ public class ContextPersonInfo {
 		this.teamId = teamId;
 	}
 
-	public ContextPersonInfo labels(List<PersonLabel> labels) {
+	public ContextPersonInfo labels(List<Label> labels) {
 		this.labels = labels;
 		return this;
 	}
 
-	public ContextPersonInfo addLabelsItem(PersonLabel labelsItem) {
+	public ContextPersonInfo addLabelsItem(Label labelsItem) {
 		if (this.labels == null) {
 			this.labels = new ArrayList<>();
 		}
@@ -626,11 +626,11 @@ public class ContextPersonInfo {
 	 * @return labels
 	 **/
 	@ApiModelProperty(value = "List of labels set for this person")
-	public List<PersonLabel> getLabels() {
+	public List<Label> getLabels() {
 		return labels;
 	}
 
-	public void setLabels(List<PersonLabel> labels) {
+	public void setLabels(List<Label> labels) {
 		this.labels = labels;
 	}
 

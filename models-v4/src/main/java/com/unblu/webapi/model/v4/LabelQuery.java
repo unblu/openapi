@@ -21,19 +21,19 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Container to search person labels")
 
 @JsonPropertyOrder({
-	PersonLabelQuery.JSON_PROPERTY_$_TYPE,
-	PersonLabelQuery.JSON_PROPERTY_SEARCH_FILTERS,
-	PersonLabelQuery.JSON_PROPERTY_ORDER_BY,
-	PersonLabelQuery.JSON_PROPERTY_OFFSET,
-	PersonLabelQuery.JSON_PROPERTY_LIMIT,
+	LabelQuery.JSON_PROPERTY_$_TYPE,
+	LabelQuery.JSON_PROPERTY_SEARCH_FILTERS,
+	LabelQuery.JSON_PROPERTY_ORDER_BY,
+	LabelQuery.JSON_PROPERTY_OFFSET,
+	LabelQuery.JSON_PROPERTY_LIMIT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class PersonLabelQuery {
+public class LabelQuery {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PERSONLABELQUERY("PersonLabelQuery");
+		LABELQUERY("LabelQuery");
 
 		private String value;
 
@@ -58,21 +58,21 @@ public class PersonLabelQuery {
 					return b;
 				}
 			}
-			return TypeEnum.PERSONLABELQUERY;
+			return TypeEnum.LABELQUERY;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PERSONLABELQUERY;
+	private TypeEnum $type = TypeEnum.LABELQUERY;
 
 	public static final String JSON_PROPERTY_SEARCH_FILTERS = "searchFilters";
 	@JsonProperty(JSON_PROPERTY_SEARCH_FILTERS)
-	private List<PersonLabelSearchFilter> searchFilters = null;
+	private List<LabelSearchFilter> searchFilters = null;
 
 	public static final String JSON_PROPERTY_ORDER_BY = "orderBy";
 	@JsonProperty(JSON_PROPERTY_ORDER_BY)
-	private List<PersonLabelOrderBy> orderBy = null;
+	private List<LabelOrderBy> orderBy = null;
 
 	public static final String JSON_PROPERTY_OFFSET = "offset";
 	@JsonProperty(JSON_PROPERTY_OFFSET)
@@ -82,7 +82,7 @@ public class PersonLabelQuery {
 	@JsonProperty(JSON_PROPERTY_LIMIT)
 	private Integer limit;
 
-	public PersonLabelQuery $type(TypeEnum $type) {
+	public LabelQuery $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -101,12 +101,12 @@ public class PersonLabelQuery {
 		this.$type = $type;
 	}
 
-	public PersonLabelQuery searchFilters(List<PersonLabelSearchFilter> searchFilters) {
+	public LabelQuery searchFilters(List<LabelSearchFilter> searchFilters) {
 		this.searchFilters = searchFilters;
 		return this;
 	}
 
-	public PersonLabelQuery addSearchFiltersItem(PersonLabelSearchFilter searchFiltersItem) {
+	public LabelQuery addSearchFiltersItem(LabelSearchFilter searchFiltersItem) {
 		if (this.searchFilters == null) {
 			this.searchFilters = new ArrayList<>();
 		}
@@ -120,20 +120,20 @@ public class PersonLabelQuery {
 	 * @return searchFilters
 	 **/
 	@ApiModelProperty(value = "List of filters to narrow the search")
-	public List<PersonLabelSearchFilter> getSearchFilters() {
+	public List<LabelSearchFilter> getSearchFilters() {
 		return searchFilters;
 	}
 
-	public void setSearchFilters(List<PersonLabelSearchFilter> searchFilters) {
+	public void setSearchFilters(List<LabelSearchFilter> searchFilters) {
 		this.searchFilters = searchFilters;
 	}
 
-	public PersonLabelQuery orderBy(List<PersonLabelOrderBy> orderBy) {
+	public LabelQuery orderBy(List<LabelOrderBy> orderBy) {
 		this.orderBy = orderBy;
 		return this;
 	}
 
-	public PersonLabelQuery addOrderByItem(PersonLabelOrderBy orderByItem) {
+	public LabelQuery addOrderByItem(LabelOrderBy orderByItem) {
 		if (this.orderBy == null) {
 			this.orderBy = new ArrayList<>();
 		}
@@ -147,15 +147,15 @@ public class PersonLabelQuery {
 	 * @return orderBy
 	 **/
 	@ApiModelProperty(value = "List of criteria to order the list of search results")
-	public List<PersonLabelOrderBy> getOrderBy() {
+	public List<LabelOrderBy> getOrderBy() {
 		return orderBy;
 	}
 
-	public void setOrderBy(List<PersonLabelOrderBy> orderBy) {
+	public void setOrderBy(List<LabelOrderBy> orderBy) {
 		this.orderBy = orderBy;
 	}
 
-	public PersonLabelQuery offset(Integer offset) {
+	public LabelQuery offset(Integer offset) {
 		this.offset = offset;
 		return this;
 	}
@@ -174,7 +174,7 @@ public class PersonLabelQuery {
 		this.offset = offset;
 	}
 
-	public PersonLabelQuery limit(Integer limit) {
+	public LabelQuery limit(Integer limit) {
 		this.limit = limit;
 		return this;
 	}
@@ -201,12 +201,12 @@ public class PersonLabelQuery {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PersonLabelQuery personLabelQuery = (PersonLabelQuery) o;
-		return Objects.equals(this.$type, personLabelQuery.$type) &&
-				Objects.equals(this.searchFilters, personLabelQuery.searchFilters) &&
-				Objects.equals(this.orderBy, personLabelQuery.orderBy) &&
-				Objects.equals(this.offset, personLabelQuery.offset) &&
-				Objects.equals(this.limit, personLabelQuery.limit);
+		LabelQuery labelQuery = (LabelQuery) o;
+		return Objects.equals(this.$type, labelQuery.$type) &&
+				Objects.equals(this.searchFilters, labelQuery.searchFilters) &&
+				Objects.equals(this.orderBy, labelQuery.orderBy) &&
+				Objects.equals(this.offset, labelQuery.offset) &&
+				Objects.equals(this.limit, labelQuery.limit);
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public class PersonLabelQuery {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class PersonLabelQuery {\n");
+		sb.append("class LabelQuery {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    searchFilters: ").append(toIndentedString(searchFilters)).append("\n");
 		sb.append("    orderBy: ").append(toIndentedString(orderBy)).append("\n");

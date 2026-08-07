@@ -14,26 +14,26 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time a &#x60;PersonLabel&#x60; is created, deleted or changed.
+ * An event triggered every time a &#x60;Label&#x60; is created, deleted or changed.
  */
-@ApiModel(description = "An event triggered every time a `PersonLabel` is created, deleted or changed.")
+@ApiModel(description = "An event triggered every time a `Label` is created, deleted or changed.")
 
 @JsonPropertyOrder({
-	PersonLabelModificationEvent.JSON_PROPERTY_$_TYPE,
-	PersonLabelModificationEvent.JSON_PROPERTY_TIMESTAMP,
-	PersonLabelModificationEvent.JSON_PROPERTY_EVENT_TYPE,
-	PersonLabelModificationEvent.JSON_PROPERTY_ACCOUNT_ID,
-	PersonLabelModificationEvent.JSON_PROPERTY_ACTION,
-	PersonLabelModificationEvent.JSON_PROPERTY_ENTITY,
-	PersonLabelModificationEvent.JSON_PROPERTY_EDITING_USER,
+	LabelModificationEvent.JSON_PROPERTY_$_TYPE,
+	LabelModificationEvent.JSON_PROPERTY_TIMESTAMP,
+	LabelModificationEvent.JSON_PROPERTY_EVENT_TYPE,
+	LabelModificationEvent.JSON_PROPERTY_ACCOUNT_ID,
+	LabelModificationEvent.JSON_PROPERTY_ACTION,
+	LabelModificationEvent.JSON_PROPERTY_ENTITY,
+	LabelModificationEvent.JSON_PROPERTY_EDITING_USER,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class PersonLabelModificationEvent {
+public class LabelModificationEvent {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PERSONLABELMODIFICATIONEVENT("PersonLabelModificationEvent");
+		LABELMODIFICATIONEVENT("LabelModificationEvent");
 
 		private String value;
 
@@ -58,13 +58,13 @@ public class PersonLabelModificationEvent {
 					return b;
 				}
 			}
-			return TypeEnum.PERSONLABELMODIFICATIONEVENT;
+			return TypeEnum.LABELMODIFICATIONEVENT;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PERSONLABELMODIFICATIONEVENT;
+	private TypeEnum $type = TypeEnum.LABELMODIFICATIONEVENT;
 
 	public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
 	@JsonProperty(JSON_PROPERTY_TIMESTAMP)
@@ -84,13 +84,13 @@ public class PersonLabelModificationEvent {
 
 	public static final String JSON_PROPERTY_ENTITY = "entity";
 	@JsonProperty(JSON_PROPERTY_ENTITY)
-	private PersonLabel entity = null;
+	private Label entity = null;
 
 	public static final String JSON_PROPERTY_EDITING_USER = "editingUser";
 	@JsonProperty(JSON_PROPERTY_EDITING_USER)
 	private UserInfo editingUser = null;
 
-	public PersonLabelModificationEvent $type(TypeEnum $type) {
+	public LabelModificationEvent $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -109,7 +109,7 @@ public class PersonLabelModificationEvent {
 		this.$type = $type;
 	}
 
-	public PersonLabelModificationEvent timestamp(Long timestamp) {
+	public LabelModificationEvent timestamp(Long timestamp) {
 		this.timestamp = timestamp;
 		return this;
 	}
@@ -128,7 +128,7 @@ public class PersonLabelModificationEvent {
 		this.timestamp = timestamp;
 	}
 
-	public PersonLabelModificationEvent eventType(String eventType) {
+	public LabelModificationEvent eventType(String eventType) {
 		this.eventType = eventType;
 		return this;
 	}
@@ -147,7 +147,7 @@ public class PersonLabelModificationEvent {
 		this.eventType = eventType;
 	}
 
-	public PersonLabelModificationEvent accountId(String accountId) {
+	public LabelModificationEvent accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -166,7 +166,7 @@ public class PersonLabelModificationEvent {
 		this.accountId = accountId;
 	}
 
-	public PersonLabelModificationEvent action(EntityModificationAction action) {
+	public LabelModificationEvent action(EntityModificationAction action) {
 		this.action = action;
 		return this;
 	}
@@ -185,7 +185,7 @@ public class PersonLabelModificationEvent {
 		this.action = action;
 	}
 
-	public PersonLabelModificationEvent entity(PersonLabel entity) {
+	public LabelModificationEvent entity(Label entity) {
 		this.entity = entity;
 		return this;
 	}
@@ -196,15 +196,15 @@ public class PersonLabelModificationEvent {
 	 * @return entity
 	 **/
 	@ApiModelProperty(value = "")
-	public PersonLabel getEntity() {
+	public Label getEntity() {
 		return entity;
 	}
 
-	public void setEntity(PersonLabel entity) {
+	public void setEntity(Label entity) {
 		this.entity = entity;
 	}
 
-	public PersonLabelModificationEvent editingUser(UserInfo editingUser) {
+	public LabelModificationEvent editingUser(UserInfo editingUser) {
 		this.editingUser = editingUser;
 		return this;
 	}
@@ -231,14 +231,14 @@ public class PersonLabelModificationEvent {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PersonLabelModificationEvent personLabelModificationEvent = (PersonLabelModificationEvent) o;
-		return Objects.equals(this.$type, personLabelModificationEvent.$type) &&
-				Objects.equals(this.timestamp, personLabelModificationEvent.timestamp) &&
-				Objects.equals(this.eventType, personLabelModificationEvent.eventType) &&
-				Objects.equals(this.accountId, personLabelModificationEvent.accountId) &&
-				Objects.equals(this.action, personLabelModificationEvent.action) &&
-				Objects.equals(this.entity, personLabelModificationEvent.entity) &&
-				Objects.equals(this.editingUser, personLabelModificationEvent.editingUser);
+		LabelModificationEvent labelModificationEvent = (LabelModificationEvent) o;
+		return Objects.equals(this.$type, labelModificationEvent.$type) &&
+				Objects.equals(this.timestamp, labelModificationEvent.timestamp) &&
+				Objects.equals(this.eventType, labelModificationEvent.eventType) &&
+				Objects.equals(this.accountId, labelModificationEvent.accountId) &&
+				Objects.equals(this.action, labelModificationEvent.action) &&
+				Objects.equals(this.entity, labelModificationEvent.entity) &&
+				Objects.equals(this.editingUser, labelModificationEvent.editingUser);
 	}
 
 	@Override
@@ -249,7 +249,7 @@ public class PersonLabelModificationEvent {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class PersonLabelModificationEvent {\n");
+		sb.append("class LabelModificationEvent {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");

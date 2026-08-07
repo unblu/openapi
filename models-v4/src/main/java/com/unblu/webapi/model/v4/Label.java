@@ -16,32 +16,33 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * &lt;p&gt;This type is in preview mode.&lt;/p&gt;Model of a person label.
+ * &lt;p&gt;This type is in preview mode.&lt;/p&gt;Model of a label. A label can be set on the target types listed in its &#x60;settableOn&#x60; property (e.g.
+ * persons and/or conversations).
  */
-@ApiModel(description = "<p>This type is in preview mode.</p>Model of a person label.")
+@ApiModel(description = "<p>This type is in preview mode.</p>Model of a label. A label can be set on the target types listed in its `settableOn` property (e.g. persons and/or conversations).")
 
 @JsonPropertyOrder({
-	PersonLabel.JSON_PROPERTY_$_TYPE,
-	PersonLabel.JSON_PROPERTY_ID,
-	PersonLabel.JSON_PROPERTY_CREATION_TIMESTAMP,
-	PersonLabel.JSON_PROPERTY_MODIFICATION_TIMESTAMP,
-	PersonLabel.JSON_PROPERTY_VERSION,
-	PersonLabel.JSON_PROPERTY_ACCOUNT_ID,
-	PersonLabel.JSON_PROPERTY_NAME,
-	PersonLabel.JSON_PROPERTY_DESCRIPTION,
-	PersonLabel.JSON_PROPERTY_COLOR,
-	PersonLabel.JSON_PROPERTY_SETTABLE_ON,
-	PersonLabel.JSON_PROPERTY_READABLE_BY_ROLES,
-	PersonLabel.JSON_PROPERTY_SETTABLE_BY_ROLES,
-	PersonLabel.JSON_PROPERTY_DISPLAYED_TO_ROLES,
+	Label.JSON_PROPERTY_$_TYPE,
+	Label.JSON_PROPERTY_ID,
+	Label.JSON_PROPERTY_CREATION_TIMESTAMP,
+	Label.JSON_PROPERTY_MODIFICATION_TIMESTAMP,
+	Label.JSON_PROPERTY_VERSION,
+	Label.JSON_PROPERTY_ACCOUNT_ID,
+	Label.JSON_PROPERTY_NAME,
+	Label.JSON_PROPERTY_DESCRIPTION,
+	Label.JSON_PROPERTY_COLOR,
+	Label.JSON_PROPERTY_SETTABLE_ON,
+	Label.JSON_PROPERTY_READABLE_BY_ROLES,
+	Label.JSON_PROPERTY_SETTABLE_BY_ROLES,
+	Label.JSON_PROPERTY_DISPLAYED_TO_ROLES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class PersonLabel {
+public class Label {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PERSONLABEL("PersonLabel");
+		LABEL("Label");
 
 		private String value;
 
@@ -66,13 +67,13 @@ public class PersonLabel {
 					return b;
 				}
 			}
-			return TypeEnum.PERSONLABEL;
+			return TypeEnum.LABEL;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PERSONLABEL;
+	private TypeEnum $type = TypeEnum.LABEL;
 
 	public static final String JSON_PROPERTY_ID = "id";
 	@JsonProperty(JSON_PROPERTY_ID)
@@ -108,21 +109,21 @@ public class PersonLabel {
 
 	public static final String JSON_PROPERTY_SETTABLE_ON = "settableOn";
 	@JsonProperty(JSON_PROPERTY_SETTABLE_ON)
-	private List<EPersonLabelTargetType> settableOn = null;
+	private List<ELabelTargetType> settableOn = null;
 
 	public static final String JSON_PROPERTY_READABLE_BY_ROLES = "readableByRoles";
 	@JsonProperty(JSON_PROPERTY_READABLE_BY_ROLES)
-	private List<EPersonLabelManagementRole> readableByRoles = null;
+	private List<ELabelManagementRole> readableByRoles = null;
 
 	public static final String JSON_PROPERTY_SETTABLE_BY_ROLES = "settableByRoles";
 	@JsonProperty(JSON_PROPERTY_SETTABLE_BY_ROLES)
-	private List<EPersonLabelManagementRole> settableByRoles = null;
+	private List<ELabelManagementRole> settableByRoles = null;
 
 	public static final String JSON_PROPERTY_DISPLAYED_TO_ROLES = "displayedToRoles";
 	@JsonProperty(JSON_PROPERTY_DISPLAYED_TO_ROLES)
-	private List<EPersonLabelManagementRole> displayedToRoles = null;
+	private List<ELabelManagementRole> displayedToRoles = null;
 
-	public PersonLabel $type(TypeEnum $type) {
+	public Label $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -141,7 +142,7 @@ public class PersonLabel {
 		this.$type = $type;
 	}
 
-	public PersonLabel id(String id) {
+	public Label id(String id) {
 		this.id = id;
 		return this;
 	}
@@ -160,7 +161,7 @@ public class PersonLabel {
 		this.id = id;
 	}
 
-	public PersonLabel creationTimestamp(Long creationTimestamp) {
+	public Label creationTimestamp(Long creationTimestamp) {
 		this.creationTimestamp = creationTimestamp;
 		return this;
 	}
@@ -180,7 +181,7 @@ public class PersonLabel {
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public PersonLabel modificationTimestamp(Long modificationTimestamp) {
+	public Label modificationTimestamp(Long modificationTimestamp) {
 		this.modificationTimestamp = modificationTimestamp;
 		return this;
 	}
@@ -201,7 +202,7 @@ public class PersonLabel {
 		this.modificationTimestamp = modificationTimestamp;
 	}
 
-	public PersonLabel version(Long version) {
+	public Label version(Long version) {
 		this.version = version;
 		return this;
 	}
@@ -221,7 +222,7 @@ public class PersonLabel {
 		this.version = version;
 	}
 
-	public PersonLabel accountId(String accountId) {
+	public Label accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -241,18 +242,18 @@ public class PersonLabel {
 		this.accountId = accountId;
 	}
 
-	public PersonLabel name(String name) {
+	public Label name(String name) {
 		this.name = name;
 		return this;
 	}
 
 	/**
-	 * Name of the person label. Maximum length of 250 characters. Mandatory. &lt;br&gt; If the label is a scoped label, the name consists of the scope name and the
-	 * value of this particular label, separated by \&quot;::\&quot;, for example \&quot;upsell potential::high\&quot;.
+	 * Name of the label. Maximum length of 250 characters. Mandatory. &lt;br&gt; If the label is a scoped label, the name consists of the scope name and the value
+	 * of this particular label, separated by \&quot;::\&quot;, for example \&quot;upsell potential::high\&quot;.
 	 * 
 	 * @return name
 	 **/
-	@ApiModelProperty(value = "Name of the person label. Maximum length of 250 characters. Mandatory. <br> If the label is a scoped label, the name consists of the scope name and the value of this particular label, separated by \"::\", for example \"upsell potential::high\".")
+	@ApiModelProperty(value = "Name of the label. Maximum length of 250 characters. Mandatory. <br> If the label is a scoped label, the name consists of the scope name and the value of this particular label, separated by \"::\", for example \"upsell potential::high\".")
 	public String getName() {
 		return name;
 	}
@@ -261,17 +262,17 @@ public class PersonLabel {
 		this.name = name;
 	}
 
-	public PersonLabel description(String description) {
+	public Label description(String description) {
 		this.description = description;
 		return this;
 	}
 
 	/**
-	 * Description of the person label. Maximum length of 500 characters. Can be omitted.
+	 * Description of the label. Maximum length of 500 characters. Can be omitted.
 	 * 
 	 * @return description
 	 **/
-	@ApiModelProperty(value = "Description of the person label. Maximum length of 500 characters. Can be omitted.")
+	@ApiModelProperty(value = "Description of the label. Maximum length of 500 characters. Can be omitted.")
 	public String getDescription() {
 		return description;
 	}
@@ -280,17 +281,17 @@ public class PersonLabel {
 		this.description = description;
 	}
 
-	public PersonLabel color(String color) {
+	public Label color(String color) {
 		this.color = color;
 		return this;
 	}
 
 	/**
-	 * Color of the person label, specified in a format compatible with CSS. Maximum length of 50 characters. Mandatory.
+	 * Color of the label, specified in a format compatible with CSS. Maximum length of 50 characters. Mandatory.
 	 * 
 	 * @return color
 	 **/
-	@ApiModelProperty(value = "Color of the person label, specified in a format compatible with CSS. Maximum length of 50 characters. Mandatory.")
+	@ApiModelProperty(value = "Color of the label, specified in a format compatible with CSS. Maximum length of 50 characters. Mandatory.")
 	public String getColor() {
 		return color;
 	}
@@ -299,12 +300,12 @@ public class PersonLabel {
 		this.color = color;
 	}
 
-	public PersonLabel settableOn(List<EPersonLabelTargetType> settableOn) {
+	public Label settableOn(List<ELabelTargetType> settableOn) {
 		this.settableOn = settableOn;
 		return this;
 	}
 
-	public PersonLabel addSettableOnItem(EPersonLabelTargetType settableOnItem) {
+	public Label addSettableOnItem(ELabelTargetType settableOnItem) {
 		if (this.settableOn == null) {
 			this.settableOn = new ArrayList<>();
 		}
@@ -313,25 +314,25 @@ public class PersonLabel {
 	}
 
 	/**
-	 * The person types the label may be set on
+	 * The target types the label may be set on
 	 * 
 	 * @return settableOn
 	 **/
-	@ApiModelProperty(value = "The person types the label may be set on")
-	public List<EPersonLabelTargetType> getSettableOn() {
+	@ApiModelProperty(value = "The target types the label may be set on")
+	public List<ELabelTargetType> getSettableOn() {
 		return settableOn;
 	}
 
-	public void setSettableOn(List<EPersonLabelTargetType> settableOn) {
+	public void setSettableOn(List<ELabelTargetType> settableOn) {
 		this.settableOn = settableOn;
 	}
 
-	public PersonLabel readableByRoles(List<EPersonLabelManagementRole> readableByRoles) {
+	public Label readableByRoles(List<ELabelManagementRole> readableByRoles) {
 		this.readableByRoles = readableByRoles;
 		return this;
 	}
 
-	public PersonLabel addReadableByRolesItem(EPersonLabelManagementRole readableByRolesItem) {
+	public Label addReadableByRolesItem(ELabelManagementRole readableByRolesItem) {
 		if (this.readableByRoles == null) {
 			this.readableByRoles = new ArrayList<>();
 		}
@@ -345,20 +346,20 @@ public class PersonLabel {
 	 * @return readableByRoles
 	 **/
 	@ApiModelProperty(value = "The roles that can read the label on a person via API. If this is not set only admins are able to read this label.")
-	public List<EPersonLabelManagementRole> getReadableByRoles() {
+	public List<ELabelManagementRole> getReadableByRoles() {
 		return readableByRoles;
 	}
 
-	public void setReadableByRoles(List<EPersonLabelManagementRole> readableByRoles) {
+	public void setReadableByRoles(List<ELabelManagementRole> readableByRoles) {
 		this.readableByRoles = readableByRoles;
 	}
 
-	public PersonLabel settableByRoles(List<EPersonLabelManagementRole> settableByRoles) {
+	public Label settableByRoles(List<ELabelManagementRole> settableByRoles) {
 		this.settableByRoles = settableByRoles;
 		return this;
 	}
 
-	public PersonLabel addSettableByRolesItem(EPersonLabelManagementRole settableByRolesItem) {
+	public Label addSettableByRolesItem(ELabelManagementRole settableByRolesItem) {
 		if (this.settableByRoles == null) {
 			this.settableByRoles = new ArrayList<>();
 		}
@@ -372,20 +373,20 @@ public class PersonLabel {
 	 * @return settableByRoles
 	 **/
 	@ApiModelProperty(value = "The roles that can set the label on a person. If this is not set only admins are able to set this label.")
-	public List<EPersonLabelManagementRole> getSettableByRoles() {
+	public List<ELabelManagementRole> getSettableByRoles() {
 		return settableByRoles;
 	}
 
-	public void setSettableByRoles(List<EPersonLabelManagementRole> settableByRoles) {
+	public void setSettableByRoles(List<ELabelManagementRole> settableByRoles) {
 		this.settableByRoles = settableByRoles;
 	}
 
-	public PersonLabel displayedToRoles(List<EPersonLabelManagementRole> displayedToRoles) {
+	public Label displayedToRoles(List<ELabelManagementRole> displayedToRoles) {
 		this.displayedToRoles = displayedToRoles;
 		return this;
 	}
 
-	public PersonLabel addDisplayedToRolesItem(EPersonLabelManagementRole displayedToRolesItem) {
+	public Label addDisplayedToRolesItem(ELabelManagementRole displayedToRolesItem) {
 		if (this.displayedToRoles == null) {
 			this.displayedToRoles = new ArrayList<>();
 		}
@@ -399,11 +400,11 @@ public class PersonLabel {
 	 * @return displayedToRoles
 	 **/
 	@ApiModelProperty(value = "The roles for which the label is displayed to in the UIs. If this is not set only admins are able to see this label in the UI.")
-	public List<EPersonLabelManagementRole> getDisplayedToRoles() {
+	public List<ELabelManagementRole> getDisplayedToRoles() {
 		return displayedToRoles;
 	}
 
-	public void setDisplayedToRoles(List<EPersonLabelManagementRole> displayedToRoles) {
+	public void setDisplayedToRoles(List<ELabelManagementRole> displayedToRoles) {
 		this.displayedToRoles = displayedToRoles;
 	}
 
@@ -415,20 +416,20 @@ public class PersonLabel {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PersonLabel personLabel = (PersonLabel) o;
-		return Objects.equals(this.$type, personLabel.$type) &&
-				Objects.equals(this.id, personLabel.id) &&
-				Objects.equals(this.creationTimestamp, personLabel.creationTimestamp) &&
-				Objects.equals(this.modificationTimestamp, personLabel.modificationTimestamp) &&
-				Objects.equals(this.version, personLabel.version) &&
-				Objects.equals(this.accountId, personLabel.accountId) &&
-				Objects.equals(this.name, personLabel.name) &&
-				Objects.equals(this.description, personLabel.description) &&
-				Objects.equals(this.color, personLabel.color) &&
-				Objects.equals(this.settableOn, personLabel.settableOn) &&
-				Objects.equals(this.readableByRoles, personLabel.readableByRoles) &&
-				Objects.equals(this.settableByRoles, personLabel.settableByRoles) &&
-				Objects.equals(this.displayedToRoles, personLabel.displayedToRoles);
+		Label label = (Label) o;
+		return Objects.equals(this.$type, label.$type) &&
+				Objects.equals(this.id, label.id) &&
+				Objects.equals(this.creationTimestamp, label.creationTimestamp) &&
+				Objects.equals(this.modificationTimestamp, label.modificationTimestamp) &&
+				Objects.equals(this.version, label.version) &&
+				Objects.equals(this.accountId, label.accountId) &&
+				Objects.equals(this.name, label.name) &&
+				Objects.equals(this.description, label.description) &&
+				Objects.equals(this.color, label.color) &&
+				Objects.equals(this.settableOn, label.settableOn) &&
+				Objects.equals(this.readableByRoles, label.readableByRoles) &&
+				Objects.equals(this.settableByRoles, label.settableByRoles) &&
+				Objects.equals(this.displayedToRoles, label.displayedToRoles);
 	}
 
 	@Override
@@ -439,7 +440,7 @@ public class PersonLabel {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class PersonLabel {\n");
+		sb.append("class Label {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");

@@ -12,26 +12,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Checks if any of the provided label names are present.
+ * LabelList
  */
-@ApiModel(description = "Checks if any of the provided label names are present.")
 
 @JsonPropertyOrder({
-	AnyOfPersonLabelsOperator.JSON_PROPERTY_$_TYPE,
-	AnyOfPersonLabelsOperator.JSON_PROPERTY_TYPE,
-	AnyOfPersonLabelsOperator.JSON_PROPERTY_VALUES,
+	LabelList.JSON_PROPERTY_$_TYPE,
+	LabelList.JSON_PROPERTY_ITEMS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class AnyOfPersonLabelsOperator implements PersonLabelsOperator {
+public class LabelList {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		ANYOFPERSONLABELSOPERATOR("AnyOfPersonLabelsOperator");
+		LABELLIST("LabelList");
 
 		private String value;
 
@@ -56,23 +53,19 @@ public class AnyOfPersonLabelsOperator implements PersonLabelsOperator {
 					return b;
 				}
 			}
-			return TypeEnum.ANYOFPERSONLABELSOPERATOR;
+			return TypeEnum.LABELLIST;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.ANYOFPERSONLABELSOPERATOR;
+	private TypeEnum $type = TypeEnum.LABELLIST;
 
-	public static final String JSON_PROPERTY_TYPE = "type";
-	@JsonProperty(JSON_PROPERTY_TYPE)
-	private EPersonLabelsOperatorType type = EPersonLabelsOperatorType.ANY_OF;
+	public static final String JSON_PROPERTY_ITEMS = "items";
+	@JsonProperty(JSON_PROPERTY_ITEMS)
+	private List<Label> items = null;
 
-	public static final String JSON_PROPERTY_VALUES = "values";
-	@JsonProperty(JSON_PROPERTY_VALUES)
-	private List<String> values = null;
-
-	public AnyOfPersonLabelsOperator $type(TypeEnum $type) {
+	public LabelList $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -91,50 +84,31 @@ public class AnyOfPersonLabelsOperator implements PersonLabelsOperator {
 		this.$type = $type;
 	}
 
-	public AnyOfPersonLabelsOperator type(EPersonLabelsOperatorType type) {
-		this.type = type;
+	public LabelList items(List<Label> items) {
+		this.items = items;
 		return this;
 	}
 
-	/**
-	 * Get type
-	 * 
-	 * @return type
-	 **/
-	@ApiModelProperty(required = true, value = "")
-	public EPersonLabelsOperatorType getType() {
-		return type;
-	}
-
-	public void setType(EPersonLabelsOperatorType type) {
-		this.type = type;
-	}
-
-	public AnyOfPersonLabelsOperator values(List<String> values) {
-		this.values = values;
-		return this;
-	}
-
-	public AnyOfPersonLabelsOperator addValuesItem(String valuesItem) {
-		if (this.values == null) {
-			this.values = new ArrayList<>();
+	public LabelList addItemsItem(Label itemsItem) {
+		if (this.items == null) {
+			this.items = new ArrayList<>();
 		}
-		this.values.add(valuesItem);
+		this.items.add(itemsItem);
 		return this;
 	}
 
 	/**
-	 * Get values
+	 * The list of mapped entities
 	 * 
-	 * @return values
+	 * @return items
 	 **/
-	@ApiModelProperty(value = "")
-	public List<String> getValues() {
-		return values;
+	@ApiModelProperty(value = "The list of mapped entities")
+	public List<Label> getItems() {
+		return items;
 	}
 
-	public void setValues(List<String> values) {
-		this.values = values;
+	public void setItems(List<Label> items) {
+		this.items = items;
 	}
 
 	@Override
@@ -145,24 +119,22 @@ public class AnyOfPersonLabelsOperator implements PersonLabelsOperator {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		AnyOfPersonLabelsOperator anyOfPersonLabelsOperator = (AnyOfPersonLabelsOperator) o;
-		return Objects.equals(this.$type, anyOfPersonLabelsOperator.$type) &&
-				Objects.equals(this.type, anyOfPersonLabelsOperator.type) &&
-				Objects.equals(this.values, anyOfPersonLabelsOperator.values);
+		LabelList labelList = (LabelList) o;
+		return Objects.equals(this.$type, labelList.$type) &&
+				Objects.equals(this.items, labelList.items);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, values);
+		return Objects.hash($type, items);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class AnyOfPersonLabelsOperator {\n");
+		sb.append("class LabelList {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
-		sb.append("    type: ").append(toIndentedString(type)).append("\n");
-		sb.append("    values: ").append(toIndentedString(values)).append("\n");
+		sb.append("    items: ").append(toIndentedString(items)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

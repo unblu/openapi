@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.39.3
+  version: 8.40.4
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -17,7 +17,7 @@ tags:
 - name: AnalyticsDashboards
   description: Service for managing analytics dashboards
 - name: AnalyticsData
-  description: "WebAPI service that provides access to individual analytics KPI data records. <p> This service exposes the underlying individual KPI records with support for pagination, filtering by time range, and ordering. <p> Each search method corresponds to one of the analytics KPIs and returns a paginated result of typed data entries sourced from the respective gold view in the analytics database. <p> All methods require the ADMIN role.<br>@see AnalyticsKpiDataQuery"
+  description: "Exports the raw data behind Unblu's analytics metrics. <p> Each method returns the individual records for one metric (for example, one entry per ended conversation, per message, or per call), rather than the aggregated figures shown on the analytics dashboard. <p> Results are returned page by page and can be limited to a time range and ordered; see `AnalyticsKpiDataQuery`. All methods require the ADMIN role."
 - name: AnalyticsWidgets
   description: Service for managing analytics widgets
 - name: ApiKeys
@@ -90,12 +90,16 @@ tags:
   description: A service for managing images.
 - name: Invitations
   description: Service to manage conversation invitations
+- name: Labels
+  description: Storage service for `Label`. Labels can be applied to persons and conversations.
 - name: MessageInterceptors
   description: "Service to manage message interceptors. Some operations are only valid for some types of message interceptor. Where that is the case, the operation's documentation states which types it applies to."
 - name: NamedAreas
   description: Service to manage named areas.
+- name: OidcIdentityProviders
+  description: API service for managing OIDC identity providers.
 - name: PersonLabels
-  description: Storage service for `PersonLabel`
+  description: Storage service for `Label`
 - name: PersonPresences
   description: Service to access person presences
 - name: PersonVisibilityRules
@@ -572,6 +576,8 @@ paths:
                     externallyManaged: null
                     virtualUser: null
                     functionTitle: null
+                    oidcIdentityProviderId: null
+                    oidcSubject: null
                     configuration: null
                     metadata: null
         required: true
@@ -1371,10 +1377,10 @@ paths:
       tags:
       - AnalyticsData
       summary: searchCalls
-      description: "<p>This endpoint is in preview mode.</p>Searches for individual call KPI records. <p> Returns data from the gold_calls view, with one entry per ended call. Each entry includes call timing, participants, service provider, end reason, and the parent conversation details.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns the audio and video calls that have ended, one entry per call. <p> Each entry describes a single call: its timing, type, participants, who started it, why it ended, and the conversation it belonged to.<br>"
       operationId: analyticsDataSearchCalls
       requestBody:
-        description: "the query defining time range filter, ordering, and pagination"
+        description: "the time range, ordering, and paging options for the search"
         content:
           application/json:
             schema:
@@ -1399,7 +1405,7 @@ paths:
         required: true
       responses:
         "200":
-          description: a paginated result of  `CallsAnalyticsKpiDataResult call KPI data entries`
+          description: a page of call records
           content:
             application/json:
               schema:
@@ -1424,10 +1430,10 @@ paths:
       tags:
       - AnalyticsData
       summary: searchCollaborationLayers
-      description: "<p>This endpoint is in preview mode.</p>Searches for individual collaboration layer KPI records. <p> Returns data from the gold_collaboration_layers view, with one entry per stopped or aborted collaboration layer. Each entry includes layer type, duration, start/stop persons, and the parent conversation details.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns the collaboration sessions (such as co-browsing or screen sharing) that have finished, one entry per session. <p> Each entry describes a single session: its type, how long it was active, who started and stopped it, and the conversation it belonged to.<br>"
       operationId: analyticsDataSearchCollaborationLayers
       requestBody:
-        description: "the query defining time range filter, ordering, and pagination"
+        description: "the time range, ordering, and paging options for the search"
         content:
           application/json:
             schema:
@@ -1452,7 +1458,7 @@ paths:
         required: true
       responses:
         "200":
-          description: a paginated result of  `CollaborationLayersAnalyticsKpiDataResult collaboration layer KPI data entries`
+          description: a page of collaboration session records
           content:
             application/json:
               schema:
@@ -1477,10 +1483,10 @@ paths:
       tags:
       - AnalyticsData
       summary: searchConversationsEnded
-      description: "<p>This endpoint is in preview mode.</p>Searches for individual conversation-ended KPI records. <p> Returns data from the gold_conversations_ended view, with one entry per ended conversation. Each entry includes lifecycle timestamps (creation, onboarding, queued, active, offboarding, end), end reason, conversation details, and aggregate metrics (message counts, call counts, collaboration layer counts and durations).<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns the conversations that have ended, one entry per conversation. <p> Each entry summarizes the whole conversation: its lifecycle timestamps (creation, onboarding, queued, active, offboarding, end), why it ended, and totals such as message, call, and collaboration session counts and durations.<br>"
       operationId: analyticsDataSearchConversationsEnded
       requestBody:
-        description: "the query defining time range filter, ordering, and pagination"
+        description: "the time range, ordering, and paging options for the search"
         content:
           application/json:
             schema:
@@ -1505,7 +1511,7 @@ paths:
         required: true
       responses:
         "200":
-          description: a paginated result of  `ConversationsEndedAnalyticsKpiDataResult conversation-ended KPI data entries`
+          description: a page of ended-conversation records
           content:
             application/json:
               schema:
@@ -1530,10 +1536,10 @@ paths:
       tags:
       - AnalyticsData
       summary: searchHandlingTime
-      description: "<p>This endpoint is in preview mode.</p>Searches for individual handling time KPI records. <p> Returns data from the gold_handling_time view, with one entry per agent handling time period. Each entry includes the handling time duration, resolution type, and the parent conversation details with metrics collected during the handling period.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns how long agents spent handling conversations, one entry per handling period. <p> Each entry covers a single handling period: its duration, how it ended (for example forwarded, pushed back to a queue, or conversation ended), and the conversation it belonged to. A conversation handled by several agents produces several entries.<br>"
       operationId: analyticsDataSearchHandlingTime
       requestBody:
-        description: "the query defining time range filter, ordering, and pagination"
+        description: "the time range, ordering, and paging options for the search"
         content:
           application/json:
             schema:
@@ -1558,7 +1564,7 @@ paths:
         required: true
       responses:
         "200":
-          description: a paginated result of  `HandlingTimeAnalyticsKpiDataResult handling time KPI data entries`
+          description: a page of handling-time records
           content:
             application/json:
               schema:
@@ -1583,10 +1589,10 @@ paths:
       tags:
       - AnalyticsData
       summary: searchMessages
-      description: "<p>This endpoint is in preview mode.</p>Searches for individual message KPI records. <p> Returns data from the gold_messages view, with one entry per message. Each entry includes the sender, message type, character count, timestamps, and the parent conversation details.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns the messages exchanged in conversations, one entry per message. <p> Each entry describes a single message: its sender, type, length, timestamps, and the conversation it belonged to.<br>"
       operationId: analyticsDataSearchMessages
       requestBody:
-        description: "the query defining time range filter, ordering, and pagination"
+        description: "the time range, ordering, and paging options for the search"
         content:
           application/json:
             schema:
@@ -1611,7 +1617,7 @@ paths:
         required: true
       responses:
         "200":
-          description: a paginated result of  `MessagesAnalyticsKpiDataResult message KPI data entries`
+          description: a page of message records
           content:
             application/json:
               schema:
@@ -1636,10 +1642,10 @@ paths:
       tags:
       - AnalyticsData
       summary: searchQueueInteraction
-      description: "<p>This endpoint is in preview mode.</p>Searches for individual queue interaction KPI records. <p> Returns data from the gold_queue_interaction view, with one entry per resolved invitation or reservation (redeemed, revoked, declined, or timed out). Each entry includes the reservation/invitation creation timestamps, the resolution timestamp, the response duration, the resolution type, the invitation target, and the parent conversation details.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns the outcomes of queued invitations and reservations, one entry per resolved interaction. <p> Each entry describes a single interaction and how it ended (redeemed, revoked, cancelled, declined, timed out, or visitor left), how long it took to resolve, who it was offered to, and the conversation it belonged to.<br>"
       operationId: analyticsDataSearchQueueInteraction
       requestBody:
-        description: "the query defining time range filter, ordering, and pagination"
+        description: "the time range, ordering, and paging options for the search"
         content:
           application/json:
             schema:
@@ -1664,7 +1670,7 @@ paths:
         required: true
       responses:
         "200":
-          description: a paginated result of  `QueueInteractionAnalyticsKpiDataResult queue interaction KPI data entries`
+          description: a page of queue-interaction records
           content:
             application/json:
               schema:
@@ -1689,10 +1695,10 @@ paths:
       tags:
       - AnalyticsData
       summary: searchWaitingTime
-      description: "<p>This endpoint is in preview mode.</p>Searches for individual waiting time KPI records. <p> Returns data from the gold_waiting_time view, with one entry per waiting time period (assignment request or agent forwarding). Each entry includes the waiting time duration, outcome, type, target recipient, and the parent conversation details.<br>"
+      description: "<p>This endpoint is in preview mode.</p>Returns how long visitors waited for an agent, one entry per waiting period. <p> Each entry covers a single waiting period (while queued or while being forwarded): its duration, outcome, who the visitor was waiting for, and the conversation it belonged to. A conversation that waited several times produces several entries.<br>"
       operationId: analyticsDataSearchWaitingTime
       requestBody:
-        description: "the query defining time range filter, ordering, and pagination"
+        description: "the time range, ordering, and paging options for the search"
         content:
           application/json:
             schema:
@@ -1717,7 +1723,7 @@ paths:
         required: true
       responses:
         "200":
-          description: a paginated result of  `WaitingTimeAnalyticsKpiDataResult waiting time KPI data entries`
+          description: a page of waiting-time records
           content:
             application/json:
               schema:
@@ -7870,6 +7876,116 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversations/{conversationId}/addLabels:
+    post:
+      tags:
+      - Conversations
+      summary: addLabels
+      description: <p>This endpoint is in preview mode.</p>Adds the labels provided to those already set on the conversation specified. A label within the same scope as an existing conversation label replaces the current scoped label.<br>
+      operationId: conversationsAddLabels
+      parameters:
+      - name: conversationId
+        in: path
+        description: The ID of the conversation to add the labels to
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The names of the labels to be added to the conversation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationLabelsBody"
+        required: true
+      responses:
+        "200":
+          description: The updated conversation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationData"
+              examples:
+                addlabels:
+                  summary: addLabels
+                  description: Label added to a conversation
+                  value:
+                    $_type: ConversationData
+                    creationTimestamp: 1546300800000
+                    endTimestamp: null
+                    id: AcviDb210C5BoFd6e_79oan
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    topic: null
+                    scheduledTimestamp: null
+                    recipient:
+                      $_type: AccountData
+                      id: A7d9E_0-c3cC4aoFDb85t6n
+                      displayName: Main Account
+                      displayNameTranslations: {}
+                      avatar: null
+                    participants:
+                    - $_type: ParticipantData
+                      state: ACTIVE
+                      personId: nta30CBa-6d1a89cE57Db_F
+                      hidden: false
+                      conversationStarred: false
+                      participationType: CONTEXT_PERSON
+                    externalParticipants: []
+                    botParticipants: []
+                    labels:
+                    - $_type: LabelData
+                      name: conv-label-a
+                      color: white
+                    state: QUEUED
+                    initialEngagementType: CHAT_REQUEST
+                    conversationVisibility: PRIVATE
+                    locale: en
+                    tokboxSessionId: null
+                    visitorData: null
+                    conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
+                    inheritConfigurationAndTexts: true
+                    links:
+                    - $_type: ConversationLink
+                      type: OPEN_IN_VISITOR_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_IN_AGENT_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_AS_GHOST_IN_AGENT_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_IN_AGENT_SINGLE_VIEW
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW
+                      url: '...'
+                    externalMessengerChannelId: null
+                    sourceId: null
+                    sourceUrl: null
+                    endReason: null
+                    initialEngagementUrl: null
+                    awaitedPersonType: NONE
+                    awaitedPersonTypeChangeTimestamp: null
+                    metadata: null
+                    configuration: null
+                    text: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
   /conversations/{conversationId}/addParticipant:
     post:
       tags:
@@ -8027,6 +8143,7 @@ paths:
                       participationType: CONTEXT_PERSON
                     externalParticipants: []
                     botParticipants: []
+                    labels: []
                     state: QUEUED
                     initialEngagementType: CHAT_REQUEST
                     conversationVisibility: PRIVATE
@@ -8500,6 +8617,113 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /conversations/{conversationId}/removeLabels:
+    post:
+      tags:
+      - Conversations
+      summary: removeLabels
+      description: <p>This endpoint is in preview mode.</p>Removes the labels with the given names from the conversation specified.<br>
+      operationId: conversationsRemoveLabels
+      parameters:
+      - name: conversationId
+        in: path
+        description: The ID of the conversation to remove the labels from
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The names of the labels to remove from the conversation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationLabelsBody"
+        required: true
+      responses:
+        "200":
+          description: The updated conversation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationData"
+              examples:
+                removelabels:
+                  summary: removeLabels
+                  description: Label removed from a conversation
+                  value:
+                    $_type: ConversationData
+                    creationTimestamp: 1546300800000
+                    endTimestamp: null
+                    id: AcviDb210C5BoFd6e_79oan
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    topic: null
+                    scheduledTimestamp: null
+                    recipient:
+                      $_type: AccountData
+                      id: A7d9E_0-c3cC4aoFDb85t6n
+                      displayName: Main Account
+                      displayNameTranslations: {}
+                      avatar: null
+                    participants:
+                    - $_type: ParticipantData
+                      state: ACTIVE
+                      personId: nta30CBa-6d1a89cE57Db_F
+                      hidden: false
+                      conversationStarred: false
+                      participationType: CONTEXT_PERSON
+                    externalParticipants: []
+                    botParticipants: []
+                    labels: []
+                    state: QUEUED
+                    initialEngagementType: CHAT_REQUEST
+                    conversationVisibility: PRIVATE
+                    locale: en
+                    tokboxSessionId: null
+                    visitorData: null
+                    conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
+                    inheritConfigurationAndTexts: true
+                    links:
+                    - $_type: ConversationLink
+                      type: OPEN_IN_VISITOR_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_IN_AGENT_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_AS_GHOST_IN_AGENT_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_IN_AGENT_SINGLE_VIEW
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW
+                      url: '...'
+                    externalMessengerChannelId: null
+                    sourceId: null
+                    sourceUrl: null
+                    endReason: null
+                    initialEngagementUrl: null
+                    awaitedPersonType: NONE
+                    awaitedPersonTypeChangeTimestamp: null
+                    metadata: null
+                    configuration: null
+                    text: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
   /conversations/search:
     post:
       tags:
@@ -8725,6 +8949,116 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversations/{conversationId}/setLabels:
+    post:
+      tags:
+      - Conversations
+      summary: setLabels
+      description: <p>This endpoint is in preview mode.</p>Sets labels with the given names on the conversation specified. Labels already set on the conversation but missing from the list provided are removed. Labels already set and present in the list provided remain unchanged. Labels not set on the conversation but present in the list provided are added. Attempts to set a label that doesn't exist or that you don't have permission to set result in an error. Labels already set on the conversation that you don't have permission to set aren't affected by the call.<br>
+      operationId: conversationsSetLabels
+      parameters:
+      - name: conversationId
+        in: path
+        description: The ID of the conversation to set the labels on
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The names of the labels to set on the conversation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationLabelsBody"
+        required: true
+      responses:
+        "200":
+          description: The updated conversation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationData"
+              examples:
+                setlabels:
+                  summary: setLabels
+                  description: Labels set on a conversation
+                  value:
+                    $_type: ConversationData
+                    creationTimestamp: 1546300800000
+                    endTimestamp: null
+                    id: AcviDb210C5BoFd6e_79oan
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    topic: null
+                    scheduledTimestamp: null
+                    recipient:
+                      $_type: AccountData
+                      id: A7d9E_0-c3cC4aoFDb85t6n
+                      displayName: Main Account
+                      displayNameTranslations: {}
+                      avatar: null
+                    participants:
+                    - $_type: ParticipantData
+                      state: ACTIVE
+                      personId: nta30CBa-6d1a89cE57Db_F
+                      hidden: false
+                      conversationStarred: false
+                      participationType: CONTEXT_PERSON
+                    externalParticipants: []
+                    botParticipants: []
+                    labels:
+                    - $_type: LabelData
+                      name: conv-label-b
+                      color: white
+                    state: QUEUED
+                    initialEngagementType: CHAT_REQUEST
+                    conversationVisibility: PRIVATE
+                    locale: en
+                    tokboxSessionId: null
+                    visitorData: null
+                    conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
+                    inheritConfigurationAndTexts: true
+                    links:
+                    - $_type: ConversationLink
+                      type: OPEN_IN_VISITOR_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_IN_AGENT_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_AS_GHOST_IN_AGENT_DESK
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_IN_AGENT_SINGLE_VIEW
+                      url: '...'
+                    - $_type: ConversationLink
+                      type: OPEN_AS_GHOST_IN_AGENT_SINGLE_VIEW
+                      url: '...'
+                    externalMessengerChannelId: null
+                    sourceId: null
+                    sourceUrl: null
+                    endReason: null
+                    initialEngagementUrl: null
+                    awaitedPersonType: NONE
+                    awaitedPersonTypeChangeTimestamp: null
+                    metadata: null
+                    configuration: null
+                    text: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
   /conversations/{conversationId}/setLocale:
     post:
       tags:
@@ -9221,6 +9555,7 @@ paths:
                       participationType: CONTEXT_PERSON
                     externalParticipants: []
                     botParticipants: []
+                    labels: []
                     state: QUEUED
                     initialEngagementType: CHAT_REQUEST
                     conversationVisibility: PRIVATE
@@ -9342,6 +9677,7 @@ paths:
                       participationType: CONTEXT_PERSON
                     externalParticipants: []
                     botParticipants: []
+                    labels: []
                     state: QUEUED
                     initialEngagementType: CHAT_REQUEST
                     conversationVisibility: PRIVATE
@@ -9466,6 +9802,7 @@ paths:
                       participationType: CONTEXT_PERSON
                     externalParticipants: []
                     botParticipants: []
+                    labels: []
                     state: QUEUED
                     initialEngagementType: CHAT_REQUEST
                     conversationVisibility: PRIVATE
@@ -9580,6 +9917,8 @@ paths:
                     outboundTimeout: 5000
                     retryCount: null
                     retryDelay: null
+                  agenticFlowData: null
+                  triggerAgenticFlow: null
                   invocableFromFrontends:
                   - AGENT_DESK
                   - AGENT_SINGLE_CONVERSATION_DESK
@@ -9596,6 +9935,7 @@ paths:
                   triggerVisitorMobileSdkEvent: true
                   triggerVisitorEmbeddedApiEvent: true
                   triggerVisitorFloatingApiEvent: true
+                  triggerBranchClientApiEvent: true
                   triggerAgentMobileSdkEvent: false
                   triggerAgentEmbeddedApiEvent: false
                   sortingOrder: 3
@@ -9655,6 +9995,8 @@ paths:
                       outboundTimeout: 5000
                       retryCount: 0
                       retryDelay: 0
+                    agenticFlowData: null
+                    triggerAgenticFlow: false
                     invocableFromFrontends:
                     - AGENT_DESK
                     - AGENT_SINGLE_CONVERSATION_DESK
@@ -9671,6 +10013,7 @@ paths:
                     triggerVisitorMobileSdkEvent: true
                     triggerVisitorEmbeddedApiEvent: true
                     triggerVisitorFloatingApiEvent: true
+                    triggerBranchClientApiEvent: true
                     triggerAgentMobileSdkEvent: false
                     triggerAgentEmbeddedApiEvent: false
                     sortingOrder: 3
@@ -9733,6 +10076,24 @@ paths:
                   application/json:
                     schema:
                       $ref: "#/components/schemas/CustomConversationActionInvocationRequest"
+              responses:
+                "200":
+                  description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/CustomActionInvocationResponse"
+        outbound.custom_message_action.batch_invoked:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.custom_message_action.batch_invoked
+              description: A request triggered when a custom message action is invoked on multiple messages at once.
+              operationId: outboundCustomMessageActionBatchInvokedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/CustomMessageActionBatchInvocationRequest"
               responses:
                 "200":
                   description: OK
@@ -9863,6 +10224,8 @@ paths:
                       outboundTimeout: 5000
                       retryCount: 0
                       retryDelay: 0
+                    agenticFlowData: null
+                    triggerAgenticFlow: false
                     invocableFromFrontends:
                     - AGENT_DESK
                     - AGENT_SINGLE_CONVERSATION_DESK
@@ -9879,8 +10242,9 @@ paths:
                     triggerVisitorMobileSdkEvent: false
                     triggerVisitorEmbeddedApiEvent: true
                     triggerVisitorFloatingApiEvent: true
+                    triggerBranchClientApiEvent: true
                     triggerAgentMobileSdkEvent: false
-                    triggerAgentEmbeddedApiEvent: false
+                    triggerAgentEmbeddedApiEvent: true
                     sortingOrder: 5
                     type: PERSON
                     availableForTargetPersonTypes:
@@ -10012,6 +10376,8 @@ paths:
                     outboundTimeout: 5000
                     retryCount: 0
                     retryDelay: 0
+                  agenticFlowData: null
+                  triggerAgenticFlow: false
                   invocableFromFrontends:
                   - AGENT_DESK
                   - AGENT_SINGLE_CONVERSATION_DESK
@@ -10028,6 +10394,7 @@ paths:
                   triggerVisitorMobileSdkEvent: false
                   triggerVisitorEmbeddedApiEvent: false
                   triggerVisitorFloatingApiEvent: false
+                  triggerBranchClientApiEvent: false
                   triggerAgentMobileSdkEvent: false
                   triggerAgentEmbeddedApiEvent: false
                   sortingOrder: 5
@@ -10041,6 +10408,7 @@ paths:
                   - SELF
                   - OTHER_AGENT
                   apiEventTriggerFilter: SENDER
+                  supportsMultiSelect: false
         required: true
       responses:
         "200":
@@ -10079,6 +10447,8 @@ paths:
                       outboundTimeout: 5000
                       retryCount: 0
                       retryDelay: 0
+                    agenticFlowData: null
+                    triggerAgenticFlow: false
                     invocableFromFrontends:
                     - AGENT_DESK
                     - AGENT_SINGLE_CONVERSATION_DESK
@@ -10095,6 +10465,7 @@ paths:
                     triggerVisitorMobileSdkEvent: false
                     triggerVisitorEmbeddedApiEvent: false
                     triggerVisitorFloatingApiEvent: false
+                    triggerBranchClientApiEvent: false
                     triggerAgentMobileSdkEvent: false
                     triggerAgentEmbeddedApiEvent: false
                     sortingOrder: 5
@@ -10108,6 +10479,7 @@ paths:
                     - SELF
                     - OTHER_AGENT
                     apiEventTriggerFilter: SENDER
+                    supportsMultiSelect: false
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -13831,6 +14203,233 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /labels/create:
+    post:
+      tags:
+      - Labels
+      summary: create
+      description: <p>This endpoint is in preview mode.</p>Creates the given label. The ID of the label is generated automatically. Any ID provided in the label entity is ignored.<br>
+      operationId: labelsCreate
+      requestBody:
+        description: The label to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Label"
+        required: true
+      responses:
+        "200":
+          description: The label as created in the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Label"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /labels/{labelId}/delete:
+    delete:
+      tags:
+      - Labels
+      summary: delete
+      description: <p>This endpoint is in preview mode.</p>Deletes the label with the given ID<br>
+      operationId: labelsDelete
+      parameters:
+      - name: labelId
+        in: path
+        description: The ID of the label to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /labels/getByNames:
+    post:
+      tags:
+      - Labels
+      summary: getByNames
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of the labels with the names provided. Names that don't match any labels are ignored.<br>
+      operationId: labelsGetByNames
+      requestBody:
+        description: The names of the labels to fetch
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: A list of the labels that match the names provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabelList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /labels/getByScope:
+    post:
+      tags:
+      - Labels
+      summary: getByScope
+      description: "<p>This endpoint is in preview mode.</p>Retrieves the labels found for the given scope, or an empty list if none are found<br>"
+      operationId: labelsGetByScope
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LabelsGetByScopeBody"
+        required: true
+      responses:
+        "200":
+          description: A list of the labels found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabelList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /labels/{labelId}/read:
+    get:
+      tags:
+      - Labels
+      summary: read
+      description: <p>This endpoint is in preview mode.</p>Returns the label with the given ID<br>
+      operationId: labelsRead
+      parameters:
+      - name: labelId
+        in: path
+        description: The ID of the label to return
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The label entity with the ID provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Label"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /labels/readMultiple:
+    post:
+      tags:
+      - Labels
+      summary: readMultiple
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of labels for the given IDs. IDs that don't match any labels are ignored.<br>
+      operationId: labelsReadMultiple
+      requestBody:
+        description: The IDs for which to fetch the labels
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: A list of labels matching the given IDs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabelList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /labels/search:
+    post:
+      tags:
+      - Labels
+      summary: search
+      description: <p>This endpoint is in preview mode.</p>Searches for labels<br>
+      operationId: labelsSearch
+      requestBody:
+        description: The query to use for the search
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LabelQuery"
+        required: true
+      responses:
+        "200":
+          description: A container of labels that match the query provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabelResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+      x-status: PREVIEW
+  /labels/update:
+    post:
+      tags:
+      - Labels
+      summary: update
+      description: <p>This endpoint is in preview mode.</p>Updates the label in the system with the given entity. The update fails if no label exists with the ID provided.<br>
+      operationId: labelsUpdate
+      requestBody:
+        description: The details to update the label with
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Label"
+        required: true
+      responses:
+        "200":
+          description: The updated version of the label. Always use this instance for any further processing.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Label"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
   /messageinterceptors/create:
     post:
       tags:
@@ -13858,6 +14457,7 @@ paths:
                   name: Test external message interceptor
                   description: Test description
                   messageFilter: VISITOR
+                  messageScopes: null
                   timeoutBehavior: REJECT
                   type: EXTERNAL
                   webhookStatus: INACTIVE
@@ -13879,6 +14479,32 @@ paths:
                   name: Test internal message interceptor
                   description: Test description
                   messageFilter: VISITOR
+                  messageScopes: null
+                  timeoutBehavior: REJECT
+                  type: INTERNAL
+                  pointOfInterception: AFTER_PERSISTING
+                  language: null
+                  regex: .*
+                  reason: message reason
+                  severity: HIGH
+                  status: INACTIVE
+                  translations: null
+              create-internal-scoped:
+                summary: create internal scoped
+                description: create an internal message interceptor restricted to specific message scopes
+                value:
+                  $_type: InternalMessageInterceptorData
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  accountId: null
+                  name: Test internal message interceptor
+                  description: Test description
+                  messageFilter: VISITOR
+                  messageScopes:
+                  - BOARDING_PROCESS
+                  - PUBLIC
                   timeoutBehavior: REJECT
                   type: INTERNAL
                   pointOfInterception: AFTER_PERSISTING
@@ -13910,6 +14536,10 @@ paths:
                     name: Test external message interceptor
                     description: Test description
                     messageFilter: VISITOR
+                    messageScopes:
+                    - BOARDING_PROCESS
+                    - PUBLIC
+                    - INTERNAL
                     timeoutBehavior: REJECT
                     type: EXTERNAL
                     webhookStatus: INACTIVE
@@ -13931,6 +14561,35 @@ paths:
                     name: Test internal message interceptor
                     description: Test description
                     messageFilter: VISITOR
+                    messageScopes:
+                    - BOARDING_PROCESS
+                    - PUBLIC
+                    - INTERNAL
+                    timeoutBehavior: REJECT
+                    type: INTERNAL
+                    pointOfInterception: AFTER_PERSISTING
+                    language: null
+                    regex: .*
+                    reason: message reason
+                    severity: HIGH
+                    status: INACTIVE
+                    translations: {}
+                read-internal-scoped:
+                  summary: read internal scoped
+                  description: create an internal message interceptor restricted to specific message scopes
+                  value:
+                    $_type: InternalMessageInterceptorData
+                    id: 4F6NRewHSWap5P8I8PHrnQ
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: Test internal message interceptor
+                    description: Test description
+                    messageFilter: VISITOR
+                    messageScopes:
+                    - BOARDING_PROCESS
+                    - PUBLIC
                     timeoutBehavior: REJECT
                     type: INTERNAL
                     pointOfInterception: AFTER_PERSISTING
@@ -14138,6 +14797,10 @@ paths:
                   name: Test external message interceptor
                   description: New description
                   messageFilter: VISITOR
+                  messageScopes:
+                  - BOARDING_PROCESS
+                  - PUBLIC
+                  - INTERNAL
                   timeoutBehavior: REJECT
                   type: EXTERNAL
                   webhookStatus: INACTIVE
@@ -14159,6 +14822,10 @@ paths:
                   name: Test internal message interceptor
                   description: New description
                   messageFilter: VISITOR
+                  messageScopes:
+                  - BOARDING_PROCESS
+                  - PUBLIC
+                  - INTERNAL
                   timeoutBehavior: REJECT
                   type: INTERNAL
                   pointOfInterception: AFTER_PERSISTING
@@ -14190,6 +14857,10 @@ paths:
                     name: Test external message interceptor
                     description: New description
                     messageFilter: VISITOR
+                    messageScopes:
+                    - BOARDING_PROCESS
+                    - PUBLIC
+                    - INTERNAL
                     timeoutBehavior: REJECT
                     type: EXTERNAL
                     webhookStatus: INACTIVE
@@ -14211,6 +14882,10 @@ paths:
                     name: Test internal message interceptor
                     description: New description
                     messageFilter: VISITOR
+                    messageScopes:
+                    - BOARDING_PROCESS
+                    - PUBLIC
+                    - INTERNAL
                     timeoutBehavior: REJECT
                     type: INTERNAL
                     pointOfInterception: AFTER_PERSISTING
@@ -14497,25 +15172,605 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /oidcidentityproviders/create:
+    post:
+      tags:
+      - OidcIdentityProviders
+      summary: create
+      description: "<p>This endpoint is in preview mode.</p>Creates the specified OIDC identity provider. The provider's ID is generated automatically, therefore any ID provided in the entity is ignored.<br>"
+      operationId: oidcIdentityProvidersCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The OIDC identity provider data to create.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OidcIdentityProviderData"
+            examples:
+              create-oidc-provider:
+                summary: Create OIDC provider
+                description: Create a new OIDC identity provider
+                value:
+                  $_type: OidcIdentityProviderData
+                  id: null
+                  accountId: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  name: Example OIDC provider
+                  logoImage: null
+                  path: example-oidc-provider
+                  clientId: unblu-oidc-client
+                  issuerUrl: https://idp.example.com
+                  useAutoDiscovery: false
+                  authorizationEndpoint: https://idp.example.com/authorize
+                  tokenEndpoint: https://idp.example.com/token
+                  jwksUri: https://idp.example.com/jwks
+                  enableSsoLogout: null
+                  postLogoutRedirectUrl: null
+                  userNotFoundStrategy: REJECT
+                  userUpdateStrategy: IGNORE
+                  userMigrationStrategy: NO_MIGRATION
+                  allowUnverifiedEmail: null
+                  scope: null
+                  authorizationUrlParameters: null
+                  disablePkce: null
+                  claimsSource: ID_TOKEN
+                  algorithms:
+                  - RS256
+                  refreshInterval: 60
+                  endSessionEndpoint: null
+                  logClaims: null
+                  claimMappings:
+                  - $_type: OidcClaimMapping
+                    id: null
+                    oidcIdentityProviderId: null
+                    targetField: USERNAME
+                    claimName: sub
+                    regex: null
+                    regexGroupSelector: null
+                    regexCaseInsensitive: null
+        required: true
+      responses:
+        "200":
+          description: The OIDC identity provider data as created in the system.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OidcIdentityProviderData"
+              examples:
+                create-oidc-provider:
+                  summary: Create OIDC provider
+                  description: New OIDC identity provider
+                  value:
+                    $_type: OidcIdentityProviderData
+                    id: cdquoCFGSJ6GK5W19XakbQ
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: Example OIDC provider
+                    logoImage: null
+                    path: example-oidc-provider
+                    clientId: unblu-oidc-client
+                    issuerUrl: https://idp.example.com
+                    useAutoDiscovery: false
+                    authorizationEndpoint: https://idp.example.com/authorize
+                    tokenEndpoint: https://idp.example.com/token
+                    jwksUri: https://idp.example.com/jwks
+                    enableSsoLogout: null
+                    postLogoutRedirectUrl: null
+                    userNotFoundStrategy: REJECT
+                    userUpdateStrategy: IGNORE
+                    userMigrationStrategy: NO_MIGRATION
+                    allowUnverifiedEmail: null
+                    scope: []
+                    authorizationUrlParameters: []
+                    disablePkce: null
+                    claimsSource: ID_TOKEN
+                    algorithms:
+                    - RS256
+                    refreshInterval: 60
+                    endSessionEndpoint: null
+                    logClaims: null
+                    claimMappings:
+                    - $_type: OidcClaimMapping
+                      id: 2-MrWDTUSeGchnnVmZhZUw
+                      oidcIdentityProviderId: cdquoCFGSJ6GK5W19XakbQ
+                      targetField: USERNAME
+                      claimName: sub
+                      regex: null
+                      regexGroupSelector: null
+                      regexCaseInsensitive: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /oidcidentityproviders/createWithSecret:
+    post:
+      tags:
+      - OidcIdentityProviders
+      summary: createWithSecret
+      description: <p>This endpoint is in preview mode.</p>Creates a new OIDC identity provider with the specified client secret. Use this instead of `create` when the provider needs a client secret from the start.<br>
+      operationId: oidcIdentityProvidersCreateWithSecret
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The OIDC identity provider data and its client secret.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OidcIdentityProviderSecretContainer"
+            examples:
+              create-oidc-with-secret:
+                summary: Create OIDC with secret
+                description: Create a new OIDC identity provider with a client secret
+                value:
+                  $_type: OidcIdentityProviderSecretContainer
+                  oidcIdentityProvider:
+                    $_type: OidcIdentityProviderData
+                    id: null
+                    accountId: null
+                    creationTimestamp: null
+                    modificationTimestamp: null
+                    version: null
+                    name: Example OIDC provider
+                    logoImage: null
+                    path: example-oidc-provider
+                    clientId: unblu-oidc-client
+                    issuerUrl: https://idp.example.com
+                    useAutoDiscovery: false
+                    authorizationEndpoint: https://idp.example.com/authorize
+                    tokenEndpoint: https://idp.example.com/token
+                    jwksUri: https://idp.example.com/jwks
+                    enableSsoLogout: null
+                    postLogoutRedirectUrl: null
+                    userNotFoundStrategy: REJECT
+                    userUpdateStrategy: IGNORE
+                    userMigrationStrategy: NO_MIGRATION
+                    allowUnverifiedEmail: null
+                    scope: null
+                    authorizationUrlParameters: null
+                    disablePkce: null
+                    claimsSource: ID_TOKEN
+                    algorithms:
+                    - RS256
+                    refreshInterval: 60
+                    endSessionEndpoint: null
+                    logClaims: null
+                    claimMappings:
+                    - $_type: OidcClaimMapping
+                      id: null
+                      oidcIdentityProviderId: null
+                      targetField: USERNAME
+                      claimName: sub
+                      regex: null
+                      regexGroupSelector: null
+                      regexCaseInsensitive: null
+                  secret: super-secret-value
+        required: true
+      responses:
+        "200":
+          description: The created OIDC identity provider data.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OidcIdentityProviderData"
+              examples:
+                create-oidc-with-secret:
+                  summary: Create OIDC with secret
+                  description: New OIDC identity provider
+                  value:
+                    $_type: OidcIdentityProviderData
+                    id: cdquoCFGSJ6GK5W19XakbQ
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: Example OIDC provider
+                    logoImage: null
+                    path: example-oidc-provider
+                    clientId: unblu-oidc-client
+                    issuerUrl: https://idp.example.com
+                    useAutoDiscovery: false
+                    authorizationEndpoint: https://idp.example.com/authorize
+                    tokenEndpoint: https://idp.example.com/token
+                    jwksUri: https://idp.example.com/jwks
+                    enableSsoLogout: null
+                    postLogoutRedirectUrl: null
+                    userNotFoundStrategy: REJECT
+                    userUpdateStrategy: IGNORE
+                    userMigrationStrategy: NO_MIGRATION
+                    allowUnverifiedEmail: null
+                    scope: []
+                    authorizationUrlParameters: []
+                    disablePkce: null
+                    claimsSource: ID_TOKEN
+                    algorithms:
+                    - RS256
+                    refreshInterval: 60
+                    endSessionEndpoint: null
+                    logClaims: null
+                    claimMappings:
+                    - $_type: OidcClaimMapping
+                      id: 2-MrWDTUSeGchnnVmZhZUw
+                      oidcIdentityProviderId: cdquoCFGSJ6GK5W19XakbQ
+                      targetField: USERNAME
+                      claimName: sub
+                      regex: null
+                      regexGroupSelector: null
+                      regexCaseInsensitive: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /oidcidentityproviders/{oidcIdentityProviderId}/delete:
+    delete:
+      tags:
+      - OidcIdentityProviders
+      summary: delete
+      description: <p>This endpoint is in preview mode.</p>Deletes the OIDC identity provider with the specified ID.<br>
+      operationId: oidcIdentityProvidersDelete
+      parameters:
+      - name: oidcIdentityProviderId
+        in: path
+        description: The ID of the OIDC identity provider to delete.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /oidcidentityproviders/{oidcIdentityProviderId}/read:
+    get:
+      tags:
+      - OidcIdentityProviders
+      summary: read
+      description: <p>This endpoint is in preview mode.</p>Returns the OIDC identity provider with the specified ID.<br>
+      operationId: oidcIdentityProvidersRead
+      parameters:
+      - name: oidcIdentityProviderId
+        in: path
+        description: The ID of the OIDC identity provider to return.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: The OIDC identity provider data with the ID provided.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OidcIdentityProviderData"
+              examples:
+                read-oidc-provider:
+                  summary: Read OIDC provider
+                  description: The OIDC identity provider
+                  value:
+                    $_type: OidcIdentityProviderData
+                    id: cdquoCFGSJ6GK5W19XakbQ
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: Example OIDC provider
+                    logoImage: null
+                    path: example-oidc-provider
+                    clientId: unblu-oidc-client
+                    issuerUrl: https://idp.example.com
+                    useAutoDiscovery: false
+                    authorizationEndpoint: https://idp.example.com/authorize
+                    tokenEndpoint: https://idp.example.com/token
+                    jwksUri: https://idp.example.com/jwks
+                    enableSsoLogout: false
+                    postLogoutRedirectUrl: null
+                    userNotFoundStrategy: REJECT
+                    userUpdateStrategy: IGNORE
+                    userMigrationStrategy: NO_MIGRATION
+                    allowUnverifiedEmail: false
+                    scope: []
+                    authorizationUrlParameters: []
+                    disablePkce: false
+                    claimsSource: ID_TOKEN
+                    algorithms:
+                    - RS256
+                    refreshInterval: 60
+                    endSessionEndpoint: null
+                    logClaims: false
+                    claimMappings:
+                    - $_type: OidcClaimMapping
+                      id: 2-MrWDTUSeGchnnVmZhZUw
+                      oidcIdentityProviderId: cdquoCFGSJ6GK5W19XakbQ
+                      targetField: USERNAME
+                      claimName: sub
+                      regex: null
+                      regexGroupSelector: null
+                      regexCaseInsensitive: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /oidcidentityproviders/{oidcIdentityProviderId}/removeSecret:
+    post:
+      tags:
+      - OidcIdentityProviders
+      summary: removeSecret
+      description: <p>This endpoint is in preview mode.</p>Removes the client secret from the OIDC identity provider with the specified ID.<br>
+      operationId: oidcIdentityProvidersRemoveSecret
+      parameters:
+      - name: oidcIdentityProviderId
+        in: path
+        description: The ID of the OIDC identity provider.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: The updated OIDC identity provider data.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OidcIdentityProviderData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /oidcidentityproviders/{oidcIdentityProviderId}/setSecret:
+    post:
+      tags:
+      - OidcIdentityProviders
+      summary: setSecret
+      description: <p>This endpoint is in preview mode.</p>Sets the client secret on the OIDC identity provider with the specified ID.<br>
+      operationId: oidcIdentityProvidersSetSecret
+      parameters:
+      - name: oidcIdentityProviderId
+        in: path
+        description: The ID of the OIDC identity provider.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OidcIdentityProvidersSetSecretBody"
+            examples:
+              set-oidc-client-secret:
+                summary: Set OIDC client secret
+                description: Set the client secret
+                value:
+                  secret: new-secret-value
+        required: true
+      responses:
+        "200":
+          description: The updated OIDC identity provider data.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OidcIdentityProviderData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /oidcidentityproviders/update:
+    post:
+      tags:
+      - OidcIdentityProviders
+      summary: update
+      description: <p>This endpoint is in preview mode.</p>Updates the OIDC identity provider in the system with the provided data. The update fails if no OIDC identity provider exists with the specified ID.<br>
+      operationId: oidcIdentityProvidersUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The details to update the OIDC identity provider with.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OidcIdentityProviderData"
+            examples:
+              update-oidc-provider:
+                summary: Update OIDC provider
+                description: Update an OIDC identity provider
+                value:
+                  $_type: OidcIdentityProviderData
+                  id: cdquoCFGSJ6GK5W19XakbQ
+                  accountId: A7d9E_0-c3cC4aoFDb85t6n
+                  creationTimestamp: 1546300800000
+                  modificationTimestamp: 1548979200000
+                  version: 1
+                  name: Example OIDC provider (updated)
+                  logoImage: null
+                  path: example-oidc-provider
+                  clientId: unblu-oidc-client
+                  issuerUrl: https://idp.example.com
+                  useAutoDiscovery: false
+                  authorizationEndpoint: https://idp.example.com/authorize
+                  tokenEndpoint: https://idp.example.com/token
+                  jwksUri: https://idp.example.com/jwks
+                  enableSsoLogout: null
+                  postLogoutRedirectUrl: null
+                  userNotFoundStrategy: REJECT
+                  userUpdateStrategy: IGNORE
+                  userMigrationStrategy: NO_MIGRATION
+                  allowUnverifiedEmail: null
+                  scope: []
+                  authorizationUrlParameters: []
+                  disablePkce: null
+                  claimsSource: ID_TOKEN
+                  algorithms:
+                  - RS256
+                  refreshInterval: 60
+                  endSessionEndpoint: null
+                  logClaims: null
+                  claimMappings:
+                  - $_type: OidcClaimMapping
+                    id: 2-MrWDTUSeGchnnVmZhZUw
+                    oidcIdentityProviderId: cdquoCFGSJ6GK5W19XakbQ
+                    targetField: USERNAME
+                    claimName: sub
+                    regex: null
+                    regexGroupSelector: null
+                    regexCaseInsensitive: null
+        required: true
+      responses:
+        "200":
+          description: The updated OIDC identity provider data. Always use this instance for any further processing.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OidcIdentityProviderData"
+              examples:
+                update-oidc-provider:
+                  summary: Update OIDC provider
+                  description: Updated OIDC identity provider
+                  value:
+                    $_type: OidcIdentityProviderData
+                    id: cdquoCFGSJ6GK5W19XakbQ
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 2
+                    name: Example OIDC provider (updated)
+                    logoImage: null
+                    path: example-oidc-provider
+                    clientId: unblu-oidc-client
+                    issuerUrl: https://idp.example.com
+                    useAutoDiscovery: false
+                    authorizationEndpoint: https://idp.example.com/authorize
+                    tokenEndpoint: https://idp.example.com/token
+                    jwksUri: https://idp.example.com/jwks
+                    enableSsoLogout: null
+                    postLogoutRedirectUrl: null
+                    userNotFoundStrategy: REJECT
+                    userUpdateStrategy: IGNORE
+                    userMigrationStrategy: NO_MIGRATION
+                    allowUnverifiedEmail: null
+                    scope: []
+                    authorizationUrlParameters: []
+                    disablePkce: null
+                    claimsSource: ID_TOKEN
+                    algorithms:
+                    - RS256
+                    refreshInterval: 60
+                    endSessionEndpoint: null
+                    logClaims: null
+                    claimMappings:
+                    - $_type: OidcClaimMapping
+                      id: 2-MrWDTUSeGchnnVmZhZUw
+                      oidcIdentityProviderId: cdquoCFGSJ6GK5W19XakbQ
+                      targetField: USERNAME
+                      claimName: sub
+                      regex: null
+                      regexGroupSelector: null
+                      regexCaseInsensitive: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
   /personlabels/create:
     post:
       tags:
       - PersonLabels
       summary: create
-      description: <p>This endpoint is in preview mode.</p>Creates the given person label. The ID of the person label is generated automatically. Any ID provided in the person label entity is ignored.<br>
+      description: <p>This endpoint is deprecated.</p>Creates the given person label. The ID of the person label is generated automatically. Any ID provided in the person label entity is ignored.<br>
       operationId: personLabelsCreate
       requestBody:
         description: The person label to create
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PersonLabel"
+              $ref: "#/components/schemas/Label"
             examples:
               create-for-person-label:
                 summary: create for person label
                 description: Create a new person label
                 value:
-                  $_type: PersonLabel
+                  $_type: Label
                   id: null
                   creationTimestamp: null
                   modificationTimestamp: null
@@ -14544,13 +15799,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PersonLabel"
+                $ref: "#/components/schemas/Label"
               examples:
                 create-for-person-label:
                   summary: create for person label
                   description: New person label
                   value:
-                    $_type: PersonLabel
+                    $_type: Label
                     id: e1ld4sPpSRGJHGREsc--PQ
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
@@ -14574,17 +15829,18 @@ paths:
                     - AGENT
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personlabels/{personLabelId}/delete:
     delete:
       tags:
       - PersonLabels
       summary: delete
-      description: <p>This endpoint is in preview mode.</p>Deletes the person label with the given ID<br>
+      description: <p>This endpoint is deprecated.</p>Deletes the person label with the given ID<br>
       operationId: personLabelsDelete
       parameters:
       - name: personLabelId
@@ -14600,17 +15856,18 @@ paths:
           description: Ok
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personlabels/getByNames:
     post:
       tags:
       - PersonLabels
       summary: getByNames
-      description: <p>This endpoint is in preview mode.</p>Retrieves a list of the person labels with the names provided. Names that don't match any person labels are ignored.<br>
+      description: <p>This endpoint is deprecated.</p>Retrieves a list of the person labels with the names provided. Names that don't match any person labels are ignored.<br>
       operationId: personLabelsGetByNames
       requestBody:
         description: The names of the person labels to fetch
@@ -14627,20 +15884,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PersonLabelList"
+                $ref: "#/components/schemas/LabelList"
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personlabels/getByScope:
     post:
       tags:
       - PersonLabels
       summary: getByScope
-      description: "<p>This endpoint is in preview mode.</p>Retrieves the person labels found for the given scope, or an empty list if none are found<br>"
+      description: "<p>This endpoint is deprecated.</p>Retrieves the person labels found for the given scope, or an empty list if none are found<br>"
       operationId: personLabelsGetByScope
       requestBody:
         content:
@@ -14654,20 +15912,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PersonLabelList"
+                $ref: "#/components/schemas/LabelList"
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personlabels/{personLabelId}/read:
     get:
       tags:
       - PersonLabels
       summary: read
-      description: <p>This endpoint is in preview mode.</p>Returns the person label with the given ID<br>
+      description: <p>This endpoint is deprecated.</p>Returns the person label with the given ID<br>
       operationId: personLabelsRead
       parameters:
       - name: personLabelId
@@ -14684,20 +15943,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PersonLabel"
+                $ref: "#/components/schemas/Label"
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personlabels/readMultiple:
     post:
       tags:
       - PersonLabels
       summary: readMultiple
-      description: <p>This endpoint is in preview mode.</p>Retrieves a list of person labels for the given IDs. IDs that don't match any person labels are ignored.<br>
+      description: <p>This endpoint is deprecated.</p>Retrieves a list of person labels for the given IDs. IDs that don't match any person labels are ignored.<br>
       operationId: personLabelsReadMultiple
       requestBody:
         description: The IDs for which to fetch the person labels
@@ -14714,27 +15974,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PersonLabelList"
+                $ref: "#/components/schemas/LabelList"
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personlabels/search:
     post:
       tags:
       - PersonLabels
       summary: search
-      description: <p>This endpoint is in preview mode.</p>Searches for person labels<br>
+      description: <p>This endpoint is deprecated.</p>Searches for person labels<br>
       operationId: personLabelsSearch
       requestBody:
         description: The query to use for the search
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PersonLabelQuery"
+              $ref: "#/components/schemas/LabelQuery"
         required: true
       responses:
         "200":
@@ -14742,33 +16003,34 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PersonLabelResult"
+                $ref: "#/components/schemas/LabelResult"
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personlabels/update:
     post:
       tags:
       - PersonLabels
       summary: update
-      description: <p>This endpoint is in preview mode.</p>Updates the person label in the system with the given entity. The update fails if no person label exists with the ID provided.<br>
+      description: <p>This endpoint is deprecated.</p>Updates the person label in the system with the given entity. The update fails if no person label exists with the ID provided.<br>
       operationId: personLabelsUpdate
       requestBody:
         description: The details to update the person label with
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PersonLabel"
+              $ref: "#/components/schemas/Label"
             examples:
               update-for-person-label:
                 summary: update for person label
                 description: Update a person label
                 value:
-                  $_type: PersonLabel
+                  $_type: Label
                   id: e1ld4sPpSRGJHGREsc--PQ
                   creationTimestamp: 1546300800000
                   modificationTimestamp: 1548979200000
@@ -14797,13 +16059,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PersonLabel"
+                $ref: "#/components/schemas/Label"
               examples:
                 update-for-person-label:
                   summary: update for person label
                   description: Updated person label
                   value:
-                    $_type: PersonLabel
+                    $_type: Label
                     id: e1ld4sPpSRGJHGREsc--PQ
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
@@ -14827,11 +16089,12 @@ paths:
                     - AGENT
         default:
           $ref: "#/components/responses/ErrorResponse"
+      deprecated: true
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
-      x-status: PREVIEW
+      x-status: DEPRECATED
   /personpresences/{presenceId}/read:
     get:
       tags:
@@ -15584,7 +16847,6 @@ paths:
       x-required-entry-path: PUBLIC
       x-required-role:
       - ANONYMOUS_USER
-      - REGISTERED_USER
   /persons/{personId}/pauseNotifications:
     post:
       tags:
@@ -17306,6 +18568,8 @@ paths:
                     externallyManaged: null
                     virtualUser: null
                     functionTitle: null
+                    oidcIdentityProviderId: null
+                    oidcSubject: null
                     configuration: null
                     metadata: null
                   password: L0remPf18!
@@ -17842,6 +19106,8 @@ paths:
                   externallyManaged: false
                   virtualUser: false
                   functionTitle: null
+                  oidcIdentityProviderId: null
+                  oidcSubject: null
                   configuration: null
                   metadata: null
         required: true
@@ -19192,13 +20458,13 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: person_label
-              description: "An event triggered every time a `PersonLabel` is created, deleted or changed."
+              description: "An event triggered every time a `Label` is created, deleted or changed."
               operationId: personLabelCallback
               requestBody:
                 content:
                   application/json:
                     schema:
-                      $ref: "#/components/schemas/PersonLabelModificationEvent"
+                      $ref: "#/components/schemas/LabelModificationEvent"
               responses:
                 "200":
                   description: OK
@@ -20829,7 +22095,7 @@ components:
           type: array
           items:
             type: string
-    AllOfPersonLabelsOperator:
+    AllOfLabelsOperator:
       type: object
       description: Checks if all of the provided label names are present.
       required:
@@ -20837,11 +22103,11 @@ components:
       properties:
         $_type:
           type: string
-          default: AllOfPersonLabelsOperator
+          default: AllOfLabelsOperator
           enum:
-          - AllOfPersonLabelsOperator
+          - AllOfLabelsOperator
         type:
-          $ref: "#/components/schemas/EPersonLabelsOperatorType"
+          $ref: "#/components/schemas/ELabelsOperatorType"
         values:
           type: array
           items:
@@ -21267,7 +22533,7 @@ components:
           type: array
           items:
             type: string
-    AnyOfPersonLabelsOperator:
+    AnyOfLabelsOperator:
       type: object
       description: Checks if any of the provided label names are present.
       required:
@@ -21275,11 +22541,11 @@ components:
       properties:
         $_type:
           type: string
-          default: AnyOfPersonLabelsOperator
+          default: AnyOfLabelsOperator
           enum:
-          - AnyOfPersonLabelsOperator
+          - AnyOfLabelsOperator
         type:
-          $ref: "#/components/schemas/EPersonLabelsOperatorType"
+          $ref: "#/components/schemas/ELabelsOperatorType"
         values:
           type: array
           items:
@@ -21643,9 +22909,11 @@ components:
       - $ref: "#/components/schemas/AriaMultiflowAgenticFlowDataContent"
       - $ref: "#/components/schemas/AriaSingleFlowAgenticFlowDataContent"
       - $ref: "#/components/schemas/AriaSuggestionSourceAgenticFlowDataContent"
+      - $ref: "#/components/schemas/AriaCustomActionAgenticFlowDataContent"
       discriminator:
         propertyName: type
         mapping:
+          CUSTOM_ACTION: "#/components/schemas/AriaCustomActionAgenticFlowDataContent"
           MULTIFLOW: "#/components/schemas/AriaMultiflowAgenticFlowDataContent"
           SINGLE_FLOW: "#/components/schemas/AriaSingleFlowAgenticFlowDataContent"
           SUGGESTION_SOURCE: "#/components/schemas/AriaSuggestionSourceAgenticFlowDataContent"
@@ -21682,6 +22950,26 @@ components:
           type: string
         flowType:
           $ref: "#/components/schemas/EAriaAgenticFlowType"
+    AriaCustomActionAgenticFlowDataContent:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AriaCustomActionAgenticFlowDataContent
+          enum:
+          - AriaCustomActionAgenticFlowDataContent
+        type:
+          $ref: "#/components/schemas/EAriaAgenticFlowDataContentType"
+        id:
+          type: string
+          description: The id of the main agentic flow of the entity
+        publishedAgenticFlows:
+          type: array
+          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
     AriaDialogBotData:
       type: object
       description: Model representing an external aria dialog bot that can handle conversation onboarding and offboarding.
@@ -25791,7 +27079,7 @@ components:
           NOT_EQUALS: "#/components/schemas/NotEqualsCallServiceProviderOperator"
     CallsAnalyticsKpiData:
       type: object
-      description: Represents a completed call lifecycle within a conversation. Each entry is backed by a `conversation.call.ended` event and records the details and metadata of audio or video calls.
+      description: "Records a completed audio or video call within a conversation, with one entry per ended call."
       properties:
         $_type:
           type: string
@@ -27384,7 +28672,7 @@ components:
           $ref: "#/components/schemas/ELayerStopReason"
     CollaborationLayersAnalyticsKpiData:
       type: object
-      description: Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a `collaboration_layer.stopped` or`collaboration_layer.aborted` event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.
+      description: "Records a collaboration session (such as co-browsing or screen sharing) within a conversation, with one entry per session that has stopped or been aborted."
       properties:
         $_type:
           type: string
@@ -27843,7 +29131,7 @@ components:
           type: array
           description: List of labels set for this person
           items:
-            $ref: "#/components/schemas/PersonLabel"
+            $ref: "#/components/schemas/Label"
         note:
           type: string
           description: Note maintained on this person
@@ -28258,6 +29546,11 @@ components:
               type: string
           x-expand-query-key: text
           x-type: Map
+        labels:
+          type: array
+          description: Names of the labels to assign to the conversation on creation. Each label must be settable on conversations; otherwise creation fails with an invalid-labels error.
+          items:
+            type: string
     ConversationCreationExternalParticipantData:
       type: object
       description: Participant of a new conversation who is connected through an external messenger
@@ -28353,6 +29646,11 @@ components:
           description: The current bots of the conversation
           items:
             $ref: "#/components/schemas/BotParticipantData"
+        labels:
+          type: array
+          description: List of labels set on this conversation
+          items:
+            $ref: "#/components/schemas/LabelData"
         state:
           $ref: "#/components/schemas/EConversationState"
         initialEngagementType:
@@ -28524,6 +29822,13 @@ components:
           type: integer
           format: int64
           description: "Creation timestamp, when the file was shared/sent in the conversation"
+        deletedForAll:
+          $ref: "#/components/schemas/MessageDeletionForAllInfo"
+        deletedForSelf:
+          type: array
+          description: Message deletion information of participants who marked the file's message as deleted for themselves.
+          items:
+            $ref: "#/components/schemas/MessageDeletionForSelfInfo"
     ConversationFileDataList:
       type: object
       description: List of files in the conversation
@@ -29066,6 +30371,20 @@ components:
           description: The id of the person to who this secondary invitation target belongs to
         responseState:
           $ref: "#/components/schemas/EInvitationResponseState"
+    ConversationLabelsBody:
+      type: object
+      description: "Request body carrying the label names to add to, remove from, or set on a conversation."
+      properties:
+        $_type:
+          type: string
+          default: ConversationLabelsBody
+          enum:
+          - ConversationLabelsBody
+        labelNames:
+          type: array
+          description: The names of the labels to apply to the conversation.
+          items:
+            type: string
     ConversationLink:
       type: object
       description: Link can be used to open or join a conversation<br> <b>Note:</b> <ul> <li>If the user isn't logged in this must be done manually.</li> <li>Login can also be done via Web API call or JS API.</li> </ul>
@@ -29835,6 +31154,7 @@ components:
       - $ref: "#/components/schemas/VisibilityConversationSearchFilter"
       - $ref: "#/components/schemas/InheritConfigurationAndTextsConversationSearchFilter"
       - $ref: "#/components/schemas/HasUnreadMessagesConversationSearchFilter"
+      - $ref: "#/components/schemas/LabelsConversationSearchFilter"
       discriminator:
         propertyName: field
         mapping:
@@ -29850,6 +31170,7 @@ components:
           HAS_UNREAD_MESSAGES: "#/components/schemas/HasUnreadMessagesConversationSearchFilter"
           INHERIT_CONFIGURATION_AND_TEXTS: "#/components/schemas/InheritConfigurationAndTextsConversationSearchFilter"
           INITIAL_ENGAGEMENT_TYPE: "#/components/schemas/InitialEngagementTypeConversationSearchFilter"
+          LABELS: "#/components/schemas/LabelsConversationSearchFilter"
           PARTICIPANT_EXTERNAL_MESSENGER_CONTACT_ID: "#/components/schemas/ParticipantExternalMessengerContactIdConversationSearchFilter"
           PARTICIPANT_PERSON_ID: "#/components/schemas/ParticipantPersonIdConversationSearchFilter"
           RECIPIENT_ID: "#/components/schemas/RecipientIdConversationSearchFilter"
@@ -31006,7 +32327,7 @@ components:
           type: string
     ConversationsEndedAnalyticsKpiData:
       type: object
-      description: "Represents a comprehensive summary of a conversation's entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by a`conversation.ended` event, so there is exactly one entry per conversation."
+      description: Summarizes a conversation's entire lifecycle and aggregate metrics once it has ended. There is exactly one entry per conversation.
       properties:
         $_type:
           type: string
@@ -32200,6 +33521,16 @@ components:
           $ref: "#/components/schemas/ECustomActionState"
         triggerWebhook:
           $ref: "#/components/schemas/CustomActionWebhookRegistration"
+        agenticFlowData:
+          description: "The ID of the Aria agentic flow linked to this custom action, expandable to the full agentic flow data. It is never provided by the caller on create: the flow is created automatically when 'triggerAgenticFlow' is true (or from imported 'agenticFlowData') and its ID is set on the custom action afterwards. On update and read the ID is present whenever a flow is currently linked, and null otherwise."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
+          x-expand-query-key: agenticFlowData
+          x-type: ExpandableField
+        triggerAgenticFlow:
+          type: boolean
+          description: "Whether this custom action should trigger an Aria agentic flow. On create and update this expresses the caller's wish. When set to true and no agentic flow data is imported, a new agentic flow is created automatically from the default template. When set to false during an update, and an agentic flow was already linked, the existing agentic flow is deleted and the linked ID is removed. The agentic flow ID is never provided by the caller. On read this reflects whether an agentic flow is currently linked."
         invocableFromFrontends:
           type: array
           description: The frontends that the action may be invoked from
@@ -32232,6 +33563,9 @@ components:
         triggerVisitorFloatingApiEvent:
           type: boolean
           description: A flag indicating whether the action should trigger a Visitor JS API event. The default value is false.
+        triggerBranchClientApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a Branch client JS API event. The default value is false.
         triggerAgentMobileSdkEvent:
           type: boolean
           description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
@@ -32600,6 +33934,40 @@ components:
           CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampCustomExternalMessengerChannelSearchFilter"
           MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampCustomExternalMessengerChannelSearchFilter"
           NAME: "#/components/schemas/NameCustomExternalMessengerChannelSearchFilter"
+    CustomMessageActionBatchInvocationRequest:
+      type: object
+      description: A request triggered when a custom message action is invoked on multiple messages at once.
+      properties:
+        $_type:
+          type: string
+          default: CustomMessageActionBatchInvocationRequest
+          enum:
+          - CustomMessageActionBatchInvocationRequest
+        accountId:
+          type: string
+        serviceName:
+          type: string
+        actionType:
+          $ref: "#/components/schemas/ECustomActionType"
+        actionKey:
+          type: string
+          description: The unique key of the invoked `CustomActionData`
+        actionInvocationId:
+          type: string
+          description: The unique invocation ID of the action
+        actionInvocationTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp of the action invocation
+        executedBy:
+          $ref: "#/components/schemas/PersonData"
+        conversation:
+          $ref: "#/components/schemas/ConversationData"
+        messages:
+          type: array
+          description: The conversation messages the custom action was invoked on
+          items:
+            $ref: "#/components/schemas/MessageData"
     CustomMessageActionData:
       type: object
       required:
@@ -32653,6 +34021,16 @@ components:
           $ref: "#/components/schemas/ECustomActionState"
         triggerWebhook:
           $ref: "#/components/schemas/CustomActionWebhookRegistration"
+        agenticFlowData:
+          description: "The ID of the Aria agentic flow linked to this custom action, expandable to the full agentic flow data. It is never provided by the caller on create: the flow is created automatically when 'triggerAgenticFlow' is true (or from imported 'agenticFlowData') and its ID is set on the custom action afterwards. On update and read the ID is present whenever a flow is currently linked, and null otherwise."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
+          x-expand-query-key: agenticFlowData
+          x-type: ExpandableField
+        triggerAgenticFlow:
+          type: boolean
+          description: "Whether this custom action should trigger an Aria agentic flow. On create and update this expresses the caller's wish. When set to true and no agentic flow data is imported, a new agentic flow is created automatically from the default template. When set to false during an update, and an agentic flow was already linked, the existing agentic flow is deleted and the linked ID is removed. The agentic flow ID is never provided by the caller. On read this reflects whether an agentic flow is currently linked."
         invocableFromFrontends:
           type: array
           description: The frontends that the action may be invoked from
@@ -32685,6 +34063,9 @@ components:
         triggerVisitorFloatingApiEvent:
           type: boolean
           description: A flag indicating whether the action should trigger a Visitor JS API event. The default value is false.
+        triggerBranchClientApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a Branch client JS API event. The default value is false.
         triggerAgentMobileSdkEvent:
           type: boolean
           description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
@@ -32699,7 +34080,7 @@ components:
           $ref: "#/components/schemas/ECustomActionType"
         messageTypes:
           type: array
-          description: The message types the action will be available for
+          description: The message types the action will be available for.
           items:
             $ref: "#/components/schemas/EMessageType"
         fileMessageMimeTypeRegex:
@@ -32707,11 +34088,14 @@ components:
           description: A regular expression that matches all MIME types of file messages the action can be carried out on. The regular expression must conform to both Java and JavaScript syntax as it is validated on both the server and the client.
         invocableForMessagesSentBy:
           type: array
-          description: A list of types of sender of the messages the action will be available for
+          description: A list of types of sender of the messages the action will be available for.
           items:
             $ref: "#/components/schemas/EMessageSenderType"
         apiEventTriggerFilter:
           $ref: "#/components/schemas/ECustomMessageActionEventTriggerFilter"
+        supportsMultiSelect:
+          type: boolean
+          description: Whether this action can be triggered on multiple selected messages at once.
     CustomMessageActionInvocationEvent:
       type: object
       description: An event triggered every time a custom message action is invoked
@@ -32833,6 +34217,16 @@ components:
           $ref: "#/components/schemas/ECustomActionState"
         triggerWebhook:
           $ref: "#/components/schemas/CustomActionWebhookRegistration"
+        agenticFlowData:
+          description: "The ID of the Aria agentic flow linked to this custom action, expandable to the full agentic flow data. It is never provided by the caller on create: the flow is created automatically when 'triggerAgenticFlow' is true (or from imported 'agenticFlowData') and its ID is set on the custom action afterwards. On update and read the ID is present whenever a flow is currently linked, and null otherwise."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
+          x-expand-query-key: agenticFlowData
+          x-type: ExpandableField
+        triggerAgenticFlow:
+          type: boolean
+          description: "Whether this custom action should trigger an Aria agentic flow. On create and update this expresses the caller's wish. When set to true and no agentic flow data is imported, a new agentic flow is created automatically from the default template. When set to false during an update, and an agentic flow was already linked, the existing agentic flow is deleted and the linked ID is removed. The agentic flow ID is never provided by the caller. On read this reflects whether an agentic flow is currently linked."
         invocableFromFrontends:
           type: array
           description: The frontends that the action may be invoked from
@@ -32865,6 +34259,9 @@ components:
         triggerVisitorFloatingApiEvent:
           type: boolean
           description: A flag indicating whether the action should trigger a Visitor JS API event. The default value is false.
+        triggerBranchClientApiEvent:
+          type: boolean
+          description: A flag indicating whether the action should trigger a Branch client JS API event. The default value is false.
         triggerAgentMobileSdkEvent:
           type: boolean
           description: A flag indicating whether the action should trigger an agent mobile SDK event. The default value is false.
@@ -34593,10 +35990,12 @@ components:
       - MULTIFLOW
       - SINGLE_FLOW
       - SUGGESTION_SOURCE
+      - CUSTOM_ACTION
       x-enum-descriptions:
       - MULTIFLOW
       - SINGLE_FLOW
       - SUGGESTION_SOURCE
+      - CUSTOM_ACTION
     EAriaAgenticFlowType:
       type: string
       description: Type of an Aria Agentic Flow
@@ -34609,6 +36008,7 @@ components:
       - DIALOG_BOT_SINGLE_FLOW
       - SUGGESTION_SOURCE_MAIN
       - SUGGESTION_SOURCE_EXECUTABLE
+      - CUSTOM_ACTION_MAIN
       x-enum-descriptions:
       - "NONE: A generic agentic flow"
       - "DIALOG_BOT_ORCHESTRATOR: The orchestrator agentic flow representing the starting point of a Multi-flow Dialog bot, that routes to other agentic flows"
@@ -34618,6 +36018,7 @@ components:
       - "DIALOG_BOT_SINGLE_FLOW: An agentic flow used for a single flow dialog bot"
       - "SUGGESTION_SOURCE_MAIN: An agentic flow used for a suggestion source"
       - "SUGGESTION_SOURCE_EXECUTABLE: A custom agentic flow for specific scenarios in a suggestion source"
+      - "CUSTOM_ACTION_MAIN: An agentic flow used for a custom action"
     EAriaDialogBotExternalConfigurationType:
       type: string
       enum:
@@ -36094,6 +37495,7 @@ components:
       - VISIBILITY
       - HAS_UNREAD_MESSAGES
       - INHERIT_CONFIGURATION_AND_TEXTS
+      - LABELS
       - COMPOUND
       x-enum-descriptions:
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
@@ -36118,6 +37520,7 @@ components:
       - "VISIBILITY: Filter by the 'conversationVisibility' attribute"
       - "HAS_UNREAD_MESSAGES: Filter by the existence of 'notificationCount' attribute in 'ConversationParticipation' for the assignee or context person"
       - "INHERIT_CONFIGURATION_AND_TEXTS: Filter by the 'inheritConfigurationAndTexts' attribute"
+      - "LABELS: Filter by the labels set on the conversation"
       - "COMPOUND: Filter for linking other filters with logical AND/OR"
     EConversationState:
       type: string
@@ -37576,6 +38979,61 @@ components:
       x-enum-descriptions:
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    ELabelManagementRole:
+      type: string
+      description: The person type a label can be managed by
+      enum:
+      - SUPERVISOR
+      - AGENT
+      - AUTHENTICATED_VISITOR
+      - ANONYMOUS_VISITOR
+      x-enum-descriptions:
+      - "SUPERVISOR: Supervisor"
+      - "AGENT: Agent"
+      - "AUTHENTICATED_VISITOR: Authenticated visitor"
+      - "ANONYMOUS_VISITOR: Anonymous visitor"
+    ELabelOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'ID' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+    ELabelSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+    ELabelTargetType:
+      type: string
+      description: "The target a label can be set on: a person (by type) or a conversation."
+      enum:
+      - AGENT
+      - ANONYMOUS_VISITOR
+      - AUTHENTICATED_VISITOR
+      - BOT
+      - CONVERSATION
+      x-enum-descriptions:
+      - "AGENT: Agent"
+      - "ANONYMOUS_VISITOR: Anonymous visitor"
+      - "AUTHENTICATED_VISITOR: Authenticated visitor"
+      - "BOT: Bot"
+      - "CONVERSATION: Conversation"
+    ELabelsOperatorType:
+      type: string
+      description: Operator types corresponding to operators defined by `LabelsOperator`
+      enum:
+      - ALL_OF
+      - ANY_OF
+      - NONE_OF
+      x-enum-descriptions:
+      - "ALL_OF: Checks if all of the label names provided by the operator are present on the persons returned."
+      - "ANY_OF: Checks if any of the label names provided by the operator are present on the persons returned."
+      - "NONE_OF: Check if none of the label names provided by the operator are present on the persons returned."
     ELayerStopReason:
       type: string
       enum:
@@ -37714,6 +39172,17 @@ components:
       - AGENT
       - VISITOR
       - ALL
+    EMessageInterceptorMessageScope:
+      type: string
+      description: The kinds of messages a message interceptor processes.
+      enum:
+      - BOARDING_PROCESS
+      - PUBLIC
+      - INTERNAL
+      x-enum-descriptions:
+      - "BOARDING_PROCESS: Messages exchanged during a boarding process (onboarding, reboarding or offboarding), that is, messages that belong to a bot thread."
+      - "PUBLIC: Public messages outside a boarding process."
+      - "INTERNAL: Internal messages"
     EMessageInterceptorOrderByField:
       type: string
       enum:
@@ -37929,6 +39398,104 @@ components:
       - "DEPUTY_REMOVAL: Due to automatic deputy removal the person was removed from the conversation"
       - "CALL_NOT_ANSWERED: The incoming audio or video call was not answered in time for the conversation"
       - "OTHER: Some other unspecified reason"
+    EOidcClaimMappingTargetField:
+      type: string
+      description: Target fields for OIDC claim mappings. Each value represents a user attribute that can be populated from an OIDC claim.
+      enum:
+      - USERNAME
+      - MIGRATION_USERNAME
+      - NICKNAME
+      - TEAM_ID
+      - ROLES
+      - ADDITIONAL_INFORMATION
+      - AUTH_INFO
+      - FIRST_NAME
+      - LAST_NAME
+      - EMAIL
+      - PHONE
+      - FUNCTION_TITLE
+      x-enum-descriptions:
+      - "USERNAME: User's username."
+      - "MIGRATION_USERNAME: Claim whose value is matched against an existing Unblu user's username to migrate that user to this identity provider."
+      - "NICKNAME: User's nickname."
+      - "TEAM_ID: ID of the user's team. If absent, the account's default team is used."
+      - "ROLES: Comma-separated list of authorization role names."
+      - "ADDITIONAL_INFORMATION: Free-form additional information about the user."
+      - "AUTH_INFO: Free-form authentication information about the user."
+      - "FIRST_NAME: User's first name."
+      - "LAST_NAME: User's last name."
+      - "EMAIL: User's email address."
+      - "PHONE: User's phone number."
+      - "FUNCTION_TITLE: User's function title."
+    EOidcClaimsSource:
+      type: string
+      description: Defines the OIDC token from which user claims are extracted.
+      enum:
+      - ID_TOKEN
+      - ACCESS_TOKEN
+      x-enum-descriptions:
+      - "ID_TOKEN: Reads claims from the ID token (default)."
+      - "ACCESS_TOKEN: Reads claims from the access token, useful for opaque or JWT access tokens that carry the claims."
+    EOidcSignatureAlgorithm:
+      type: string
+      description: The JSON Web Signature (JWS) algorithm used to verify the signatures of the tokens issued by an OIDC identity provider. The enum values match the JWS algorithm names defined in RFC 7518.
+      enum:
+      - RS256
+      - RS384
+      - RS512
+      - ES256
+      - ES384
+      - ES512
+      - PS256
+      - PS384
+      - PS512
+      x-enum-descriptions:
+      - "RS256: RSASSA-PKCS1-v1_5 using SHA-256."
+      - "RS384: RSASSA-PKCS1-v1_5 using SHA-384."
+      - "RS512: RSASSA-PKCS1-v1_5 using SHA-512."
+      - "ES256: ECDSA using the P-256 curve and SHA-256."
+      - "ES384: ECDSA using the P-384 curve and SHA-384."
+      - "ES512: ECDSA using the P-521 curve and SHA-512."
+      - "PS256: RSASSA-PSS using SHA-256 and MGF1 with SHA-256."
+      - "PS384: RSASSA-PSS using SHA-384 and MGF1 with SHA-384."
+      - "PS512: RSASSA-PSS using SHA-512 and MGF1 with SHA-512."
+    EOidcUserMigrationStrategy:
+      type: string
+      description: "Defines whether an existing Unblu user found by matching the migration username claim against their Unblu username is migrated (linked) to this OIDC provider, when no user already matches the OIDC subject. The migration username claim must be mapped for every value except `NO_MIGRATION`. For the `ACCEPT_*` values, a matched user that doesn't satisfy the constraint causes the login to be rejected; this strategy doesn't govern what happens when no user is matched at all; that's decided by `EOidcUserNotFoundStrategy`. <p> When a user is migrated, their local authentication is removed: the password, two-factor authentication (2FA) secret, and recovery codes are cleared. From then on the user authenticates through the OIDC provider and can no longer log in with local credentials."
+      enum:
+      - NO_MIGRATION
+      - ACCEPT_VIRTUAL
+      - ACCEPT_EXTERNALLY_MANAGED
+      - ACCEPT_ALL
+      x-enum-descriptions:
+      - "NO_MIGRATION: Don't match existing users by the migration username claim, so no user is migrated to this provider (the migration username claim must not be mapped). When no user matches the OIDC subject, the outcome is decided by `EOidcUserNotFoundStrategy`."
+      - "ACCEPT_VIRTUAL: Migrate a user matched by the migration username claim only if it's a virtual user; a matched non-virtual user causes the login to be rejected."
+      - "ACCEPT_EXTERNALLY_MANAGED: Migrate a user matched by the migration username claim only if it's an externally-managed user; a matched user that isn't externally managed causes the login to be rejected."
+      - "ACCEPT_ALL: Migrate any user matched by the migration username claim, including locally managed ones."
+    EOidcUserNotFoundStrategy:
+      type: string
+      description: "Defines what happens when no existing Unblu user can be matched to the OIDC login, either by the OIDC subject or by the migration username claim (see `EOidcUserMigrationStrategy`)."
+      enum:
+      - REJECT
+      - CREATE_VIRTUAL
+      - CREATE_EXTERNALLY_MANAGED
+      x-enum-descriptions:
+      - "REJECT: Deny the login."
+      - "CREATE_VIRTUAL: Create a virtual user."
+      - "CREATE_EXTERNALLY_MANAGED: Create a regular externally managed user."
+    EOidcUserUpdateStrategy:
+      type: string
+      description: Defines whether mapped claims overwrite the existing user's attributes on each login.
+      enum:
+      - IGNORE
+      - OVERWRITE_VIRTUAL
+      - OVERWRITE_EXTERNALLY_MANAGED
+      - OVERWRITE_ALL
+      x-enum-descriptions:
+      - "IGNORE: Stored attributes are never updated."
+      - "OVERWRITE_VIRTUAL: Only virtual users are updated."
+      - "OVERWRITE_EXTERNALLY_MANAGED: Only externally managed users are updated."
+      - "OVERWRITE_ALL: Every matching user has their mapped attributes updated."
     EOnlineState:
       type: string
       description: The state of a person/system
@@ -38000,59 +39567,6 @@ components:
       x-enum-descriptions:
       - "EQUALS: Check if the value is equal to the one provided in the operator"
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
-    EPersonLabelManagementRole:
-      type: string
-      description: The person type a person label can be managed by
-      enum:
-      - SUPERVISOR
-      - AGENT
-      - AUTHENTICATED_VISITOR
-      - ANONYMOUS_VISITOR
-      x-enum-descriptions:
-      - "SUPERVISOR: Supervisor"
-      - "AGENT: Agent"
-      - "AUTHENTICATED_VISITOR: Authenticated visitor"
-      - "ANONYMOUS_VISITOR: Anonymous visitor"
-    EPersonLabelOrderByField:
-      type: string
-      enum:
-      - ID
-      - NAME
-      - CREATION_TIMESTAMP
-      x-enum-descriptions:
-      - "ID: Sort by the 'ID' attribute"
-      - "NAME: Sort by the 'name' attribute"
-      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
-    EPersonLabelSearchFilterField:
-      type: string
-      enum:
-      - NAME
-      x-enum-descriptions:
-      - "NAME: Filter by the 'name' attribute"
-    EPersonLabelTargetType:
-      type: string
-      description: The person type a person label can be set on
-      enum:
-      - AGENT
-      - ANONYMOUS_VISITOR
-      - AUTHENTICATED_VISITOR
-      - BOT
-      x-enum-descriptions:
-      - "AGENT: Agent"
-      - "ANONYMOUS_VISITOR: Anonymous visitor"
-      - "AUTHENTICATED_VISITOR: Authenticated visitor"
-      - "BOT: Bot"
-    EPersonLabelsOperatorType:
-      type: string
-      description: Operator types corresponding to operators defined by `PersonLabelsOperator`
-      enum:
-      - ALL_OF
-      - ANY_OF
-      - NONE_OF
-      x-enum-descriptions:
-      - "ALL_OF: Checks if all of the label names provided by the operator are present on the persons returned."
-      - "ANY_OF: Checks if any of the label names provided by the operator are present on the persons returned."
-      - "NONE_OF: Check if none of the label names provided by the operator are present on the persons returned."
     EPersonLinkType:
       type: string
       description: Type of link used to navigate to the customer view of a person.
@@ -39714,6 +41228,7 @@ components:
       - configuration
       - dicFile
       - floorPlanImage
+      - logoImage
       - metadata
       - text
     ExpirationTimestampConversationInvitationSearchFilter:
@@ -39767,6 +41282,11 @@ components:
           description: Description of the message interceptor. Maximum length of 500 characters. Optional.
         messageFilter:
           $ref: "#/components/schemas/EMessageInterceptorMessageFilter"
+        messageScopes:
+          type: array
+          description: "Defines which kinds of messages the interceptor processes: boarding process messages, public messages, and/or internal messages. Optional: if unset or empty, the interceptor processes every message (the same as selecting all values). If the interceptor only applies to visitor messages (messageFilter VISITOR), \"INTERNAL\" cannot be the only selected scope, since visitors don't send internal messages."
+          items:
+            $ref: "#/components/schemas/EMessageInterceptorMessageScope"
         timeoutBehavior:
           $ref: "#/components/schemas/EMessageInterceptorTimeoutBehavior"
         type:
@@ -41021,7 +42541,7 @@ components:
           format: int64
     HandlingTimeAnalyticsKpiData:
       type: object
-      description: "Records the duration that an assigned agent spends handling a conversation. Each entry is backed by a {conversation.participation.handling_time} event. A conversation may have multiple handling time entries if it is forwarded, pushed back to a queue, or handled by multiple agents over its lifecycle."
+      description: "Records how long an assigned agent spent handling a conversation. A conversation may have multiple handling time entries if it is forwarded, pushed back to a queue, or handled by several agents over its lifecycle."
       properties:
         $_type:
           type: string
@@ -42097,6 +43617,11 @@ components:
           description: Description of the message interceptor. Maximum length of 500 characters. Optional.
         messageFilter:
           $ref: "#/components/schemas/EMessageInterceptorMessageFilter"
+        messageScopes:
+          type: array
+          description: "Defines which kinds of messages the interceptor processes: boarding process messages, public messages, and/or internal messages. Optional: if unset or empty, the interceptor processes every message (the same as selecting all values). If the interceptor only applies to visitor messages (messageFilter VISITOR), \"INTERNAL\" cannot be the only selected scope, since visitors don't send internal messages."
+          items:
+            $ref: "#/components/schemas/EMessageInterceptorMessageScope"
         timeoutBehavior:
           $ref: "#/components/schemas/EMessageInterceptorTimeoutBehavior"
         type:
@@ -42626,6 +44151,217 @@ components:
           $ref: "#/components/schemas/ECustomActionSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    Label:
+      type: object
+      description: <p>This type is in preview mode.</p>Model of a label. A label can be set on the target types listed in its `settableOn` property (e.g. persons and/or conversations).
+      properties:
+        $_type:
+          type: string
+          default: Label
+          enum:
+          - Label
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: "Name of the label. Maximum length of 250 characters. Mandatory. <br> If the label is a scoped label, the name consists of the scope name and the value of this particular label, separated by \"::\", for example \"upsell potential::high\"."
+        description:
+          type: string
+          description: Description of the label. Maximum length of 500 characters. Can be omitted.
+        color:
+          type: string
+          description: "Color of the label, specified in a format compatible with CSS. Maximum length of 50 characters. Mandatory."
+        settableOn:
+          type: array
+          description: The target types the label may be set on
+          items:
+            $ref: "#/components/schemas/ELabelTargetType"
+        readableByRoles:
+          type: array
+          description: The roles that can read the label on a person via API. If this is not set only admins are able to read this label.
+          items:
+            $ref: "#/components/schemas/ELabelManagementRole"
+        settableByRoles:
+          type: array
+          description: The roles that can set the label on a person. If this is not set only admins are able to set this label.
+          items:
+            $ref: "#/components/schemas/ELabelManagementRole"
+        displayedToRoles:
+          type: array
+          description: The roles for which the label is displayed to in the UIs. If this is not set only admins are able to see this label in the UI.
+          items:
+            $ref: "#/components/schemas/ELabelManagementRole"
+      x-status: PREVIEW
+    LabelData:
+      type: object
+      description: "A lightweight view of a label as exposed on an entity such as a conversation: the label's name (the reference used by the label-assignment endpoints) and its color for display. The full label definition is available via the labels endpoints."
+      properties:
+        $_type:
+          type: string
+          default: LabelData
+          enum:
+          - LabelData
+        name:
+          type: string
+          description: The name of the label.
+        color:
+          type: string
+          description: "The color of the label, in a format compatible with CSS."
+    LabelList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: LabelList
+          enum:
+          - LabelList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: "#/components/schemas/Label"
+    LabelModificationEvent:
+      type: object
+      description: "An event triggered every time a `Label` is created, deleted or changed."
+      properties:
+        $_type:
+          type: string
+          default: LabelModificationEvent
+          enum:
+          - LabelModificationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        action:
+          $ref: "#/components/schemas/EntityModificationAction"
+        entity:
+          $ref: "#/components/schemas/Label"
+        editingUser:
+          $ref: "#/components/schemas/UserInfo"
+    LabelOrderBy:
+      type: object
+      description: PersonLabel orderBy item
+      properties:
+        $_type:
+          type: string
+          default: LabelOrderBy
+          enum:
+          - LabelOrderBy
+        field:
+          $ref: "#/components/schemas/ELabelOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    LabelQuery:
+      type: object
+      description: Container to search person labels
+      properties:
+        $_type:
+          type: string
+          default: LabelQuery
+          enum:
+          - LabelQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search
+          items:
+            $ref: "#/components/schemas/LabelSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the list of search results
+          items:
+            $ref: "#/components/schemas/LabelOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of items returned
+    LabelResult:
+      type: object
+      description: Container to return list of person labels
+      properties:
+        $_type:
+          type: string
+          default: LabelResult
+          enum:
+          - LabelResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/Label"
+    LabelSearchFilter:
+      description: PersonLabel filter item
+      oneOf:
+      - $ref: "#/components/schemas/NameLabelSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          NAME: "#/components/schemas/NameLabelSearchFilter"
+    LabelsConversationSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: LabelsConversationSearchFilter
+          enum:
+          - LabelsConversationSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/LabelsOperator"
+    LabelsGetByScopeBody:
+      type: object
+      description: Request body for the 'labelsGetByScope' operation
+      properties:
+        scope:
+          type: string
+          description: The scope to search for labels in
+    LabelsOperator:
+      oneOf:
+      - $ref: "#/components/schemas/AllOfLabelsOperator"
+      - $ref: "#/components/schemas/AnyOfLabelsOperator"
+      - $ref: "#/components/schemas/NoneOfLabelsOperator"
+      discriminator:
+        propertyName: type
+        mapping:
+          ALL_OF: "#/components/schemas/AllOfLabelsOperator"
+          ANY_OF: "#/components/schemas/AnyOfLabelsOperator"
+          NONE_OF: "#/components/schemas/NoneOfLabelsOperator"
     LastCompletedRecordingTimestampConversationHistorySearchFilter:
       type: object
       description: Filters by last completed recording timestamp made for a conversation.
@@ -43481,7 +45217,7 @@ components:
           description: The reason the message was rejected. <p> Should be localized in the the language of the conversation the message belongs to.
     MessagesAnalyticsKpiData:
       type: object
-      description: Records the details and metadata of a message sent within a conversation. Each entry corresponds to a distinct message event.
+      description: "Records a single message sent within a conversation, with one entry per message."
       properties:
         $_type:
           type: string
@@ -44491,6 +46227,20 @@ components:
           $ref: "#/components/schemas/EFileUploadInterceptorSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    NameLabelSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: NameLabelSearchFilter
+          enum:
+          - NameLabelSearchFilter
+        field:
+          $ref: "#/components/schemas/ELabelSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     NameMessageInterceptorSearchFilter:
       type: object
       required:
@@ -44517,20 +46267,6 @@ components:
           - NameNamedAreaSearchFilter
         field:
           $ref: "#/components/schemas/ENamedAreaSearchFilterField"
-        operator:
-          $ref: "#/components/schemas/StringOperator"
-    NamePersonLabelSearchFilter:
-      type: object
-      required:
-      - field
-      properties:
-        $_type:
-          type: string
-          default: NamePersonLabelSearchFilter
-          enum:
-          - NamePersonLabelSearchFilter
-        field:
-          $ref: "#/components/schemas/EPersonLabelSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
     NamePersonVisibilityRuleSearchFilter:
@@ -44931,7 +46667,7 @@ components:
           $ref: "#/components/schemas/EPersonTypedSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
-    NoneOfPersonLabelsOperator:
+    NoneOfLabelsOperator:
       type: object
       description: Checks if none of the provided label names are present.
       required:
@@ -44939,11 +46675,11 @@ components:
       properties:
         $_type:
           type: string
-          default: NoneOfPersonLabelsOperator
+          default: NoneOfLabelsOperator
           enum:
-          - NoneOfPersonLabelsOperator
+          - NoneOfLabelsOperator
         type:
-          $ref: "#/components/schemas/EPersonLabelsOperatorType"
+          $ref: "#/components/schemas/ELabelsOperatorType"
         values:
           type: array
           items:
@@ -45935,6 +47671,173 @@ components:
           description: List of the conversation IDs to use when determining the number of notifications for a person
           items:
             type: string
+    OidcAuthorizationUrlParameter:
+      type: object
+      description: "A single additional query parameter appended to the OIDC authorization request URL of an `OidcIdentityProvider`. Key and value are the raw, non-URL-encoded strings; Unblu URL-encodes them when building the authorization request. <p> Some keys are reserved (see `RESERVED_KEYS`): they are the standard OIDC authorization parameters that Unblu sets itself when building the authorization request, so they must not be configured as additional parameters, otherwise they would be sent twice. <p> Example: a parameter with key `prompt` and value `login` produces an authorization URL such as `https://idp.example.com/authorize?response_type=code&client_id=...&scope=openid&state=...&prompt=login`, where `prompt=login` is the appended parameter."
+      properties:
+        $_type:
+          type: string
+          default: OidcAuthorizationUrlParameter
+          enum:
+          - OidcAuthorizationUrlParameter
+        key:
+          type: string
+          description: The raw (non-URL-encoded) parameter name
+        value:
+          type: string
+          description: The raw (non-URL-encoded) parameter value
+    OidcClaimMapping:
+      type: object
+      description: Maps an OIDC claim to a target user attribute for an `OidcIdentityProvider`.
+      properties:
+        $_type:
+          type: string
+          default: OidcClaimMapping
+          enum:
+          - OidcClaimMapping
+        id:
+          type: string
+        oidcIdentityProviderId:
+          type: string
+          description: The ID of the OIDC identity provider this mapping belongs to
+        targetField:
+          $ref: "#/components/schemas/EOidcClaimMappingTargetField"
+        claimName:
+          type: string
+          description: The name of the OIDC claim to read the value from
+        regex:
+          type: string
+          description: Optional regex applied to the raw claim value to extract the final mapped value
+        regexGroupSelector:
+          type: integer
+          format: int32
+          description: Capture group index of `regex` to return as the mapped value (0 = full match)
+        regexCaseInsensitive:
+          type: boolean
+          description: "If true, the regex is matched case-insensitively"
+    OidcIdentityProviderData:
+      type: object
+      description: "Data transfer object for `OidcIdentityProvider`. Contains all provider fields except the client secret, which is managed separately via`OidcIdentityProviderSecretContainer`."
+      properties:
+        $_type:
+          type: string
+          default: OidcIdentityProviderData
+          enum:
+          - OidcIdentityProviderData
+        id:
+          type: string
+        accountId:
+          type: string
+        creationTimestamp:
+          type: integer
+          format: int64
+        modificationTimestamp:
+          type: integer
+          format: int64
+        version:
+          type: integer
+          format: int64
+        name:
+          type: string
+          description: The display name of the OIDC identity provider
+        logoImage:
+          description: "Image of the entity: ID that can be expanded."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/Image"
+          x-expand-query-key: logoImage
+          x-type: ExpandableField
+        path:
+          type: string
+          description: The path of the OIDC identity provider
+        clientId:
+          type: string
+          description: The OIDC client ID
+        issuerUrl:
+          type: string
+          description: The OIDC issuer URL
+        useAutoDiscovery:
+          type: boolean
+          description: "Whether to use OIDC auto-discovery to resolve endpoints. Optional, defaults to `false` when `null`."
+        authorizationEndpoint:
+          type: string
+          description: "The authorization endpoint URL. Filled by the user when auto-discovery is disabled, or populated via auto-discovery before persisting."
+        tokenEndpoint:
+          type: string
+          description: "The token endpoint URL. Filled by the user when auto-discovery is disabled, or populated via auto-discovery before persisting."
+        jwksUri:
+          type: string
+          description: "The JWKS URI for token verification. Filled by the user when auto-discovery is disabled, or populated via auto-discovery before persisting."
+        enableSsoLogout:
+          type: boolean
+          description: "Whether SSO logout via the identity provider is enabled. Optional, defaults to `false` when `null`."
+        postLogoutRedirectUrl:
+          type: string
+          description: The post-logout redirect URL. Required when SSO logout is enabled; must not be set otherwise.
+        userNotFoundStrategy:
+          $ref: "#/components/schemas/EOidcUserNotFoundStrategy"
+        userUpdateStrategy:
+          $ref: "#/components/schemas/EOidcUserUpdateStrategy"
+        userMigrationStrategy:
+          $ref: "#/components/schemas/EOidcUserMigrationStrategy"
+        allowUnverifiedEmail:
+          type: boolean
+          description: "Whether to accept logins when the OIDC token's `email_verified` claim is missing or `false`. Has no effect when the `email` claim is not mapped. Optional, defaults to `false` when `null`."
+        scope:
+          type: array
+          description: The OIDC scopes to request during authentication
+          items:
+            type: string
+        authorizationUrlParameters:
+          type: array
+          description: "Additional parameters appended to the OIDC authorization request URL, after any parameters already present on the configured authorization endpoint. Key and value are provided unencoded; Unblu URL-encodes them when building the authorization request."
+          items:
+            $ref: "#/components/schemas/OidcAuthorizationUrlParameter"
+        disablePkce:
+          type: boolean
+          description: "Whether PKCE (Proof Key for Code Exchange) is disabled for the authorization code flow. PKCE is on by default and should only be disabled for legacy identity providers that do not tolerate the `code_challenge`/`code_verifier` parameters. Optional, defaults to `false` when `null`."
+        claimsSource:
+          $ref: "#/components/schemas/EOidcClaimsSource"
+        algorithms:
+          type: array
+          description: The JWS algorithms accepted when verifying the signatures of the tokens issued by the identity provider
+          items:
+            $ref: "#/components/schemas/EOidcSignatureAlgorithm"
+        refreshInterval:
+          type: integer
+          format: int32
+          description: The interval in minutes at which OIDC tokens are refreshed
+        endSessionEndpoint:
+          type: string
+          description: The end session endpoint URL for OIDC logout
+        logClaims:
+          type: boolean
+          description: "Whether OIDC claims received from the identity provider should be logged. Optional, defaults to `false` when `null`."
+        claimMappings:
+          type: array
+          items:
+            $ref: "#/components/schemas/OidcClaimMapping"
+    OidcIdentityProviderSecretContainer:
+      type: object
+      description: A container for an OIDC identity provider and its client secret. This is needed because the provider object never contains the client secret. This container is used when creating or updating a provider with a specific secret.
+      properties:
+        $_type:
+          type: string
+          default: OidcIdentityProviderSecretContainer
+          enum:
+          - OidcIdentityProviderSecretContainer
+        oidcIdentityProvider:
+          $ref: "#/components/schemas/OidcIdentityProviderData"
+        secret:
+          type: string
+          description: "The client secret. <p> NOTE: This can only be used to set a secret. The server always returns null."
+    OidcIdentityProvidersSetSecretBody:
+      type: object
+      description: Request body for the 'oidcIdentityProvidersSetSecret' operation
+      properties:
+        secret:
+          type: string
+          description: The new client secret.
     OnlineStateAgentStateSearchFilter:
       type: object
       required:
@@ -46696,7 +48599,7 @@ components:
           type: array
           description: List of labels set for this person
           items:
-            $ref: "#/components/schemas/PersonLabel"
+            $ref: "#/components/schemas/Label"
         note:
           type: string
           description: Note maintained on this person
@@ -46795,170 +48698,6 @@ components:
           $ref: "#/components/schemas/EVisitorStateSearchFilterField"
         operator:
           $ref: "#/components/schemas/IdOperator"
-    PersonLabel:
-      type: object
-      description: <p>This type is in preview mode.</p>Model of a person label.
-      properties:
-        $_type:
-          type: string
-          default: PersonLabel
-          enum:
-          - PersonLabel
-        id:
-          type: string
-          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
-        creationTimestamp:
-          type: integer
-          format: int64
-          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
-        modificationTimestamp:
-          type: integer
-          format: int64
-          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
-        version:
-          type: integer
-          format: int64
-          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
-        accountId:
-          type: string
-          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
-        name:
-          type: string
-          description: "Name of the person label. Maximum length of 250 characters. Mandatory. <br> If the label is a scoped label, the name consists of the scope name and the value of this particular label, separated by \"::\", for example \"upsell potential::high\"."
-        description:
-          type: string
-          description: Description of the person label. Maximum length of 500 characters. Can be omitted.
-        color:
-          type: string
-          description: "Color of the person label, specified in a format compatible with CSS. Maximum length of 50 characters. Mandatory."
-        settableOn:
-          type: array
-          description: The person types the label may be set on
-          items:
-            $ref: "#/components/schemas/EPersonLabelTargetType"
-        readableByRoles:
-          type: array
-          description: The roles that can read the label on a person via API. If this is not set only admins are able to read this label.
-          items:
-            $ref: "#/components/schemas/EPersonLabelManagementRole"
-        settableByRoles:
-          type: array
-          description: The roles that can set the label on a person. If this is not set only admins are able to set this label.
-          items:
-            $ref: "#/components/schemas/EPersonLabelManagementRole"
-        displayedToRoles:
-          type: array
-          description: The roles for which the label is displayed to in the UIs. If this is not set only admins are able to see this label in the UI.
-          items:
-            $ref: "#/components/schemas/EPersonLabelManagementRole"
-      x-status: PREVIEW
-    PersonLabelList:
-      type: object
-      properties:
-        $_type:
-          type: string
-          default: PersonLabelList
-          enum:
-          - PersonLabelList
-        items:
-          type: array
-          description: The list of mapped entities
-          items:
-            $ref: "#/components/schemas/PersonLabel"
-    PersonLabelModificationEvent:
-      type: object
-      description: "An event triggered every time a `PersonLabel` is created, deleted or changed."
-      properties:
-        $_type:
-          type: string
-          default: PersonLabelModificationEvent
-          enum:
-          - PersonLabelModificationEvent
-        timestamp:
-          type: integer
-          format: int64
-          description: The server time (Unix timestamp in ms) when the event occurred.
-        eventType:
-          type: string
-          description: The name of the event
-        accountId:
-          type: string
-          description: The account ID the event originated from
-        action:
-          $ref: "#/components/schemas/EntityModificationAction"
-        entity:
-          $ref: "#/components/schemas/PersonLabel"
-        editingUser:
-          $ref: "#/components/schemas/UserInfo"
-    PersonLabelOrderBy:
-      type: object
-      description: PersonLabel orderBy item
-      properties:
-        $_type:
-          type: string
-          default: PersonLabelOrderBy
-          enum:
-          - PersonLabelOrderBy
-        field:
-          $ref: "#/components/schemas/EPersonLabelOrderByField"
-        order:
-          $ref: "#/components/schemas/Order"
-    PersonLabelQuery:
-      type: object
-      description: Container to search person labels
-      properties:
-        $_type:
-          type: string
-          default: PersonLabelQuery
-          enum:
-          - PersonLabelQuery
-        searchFilters:
-          type: array
-          description: List of filters to narrow the search
-          items:
-            $ref: "#/components/schemas/PersonLabelSearchFilter"
-        orderBy:
-          type: array
-          description: List of criteria to order the list of search results
-          items:
-            $ref: "#/components/schemas/PersonLabelOrderBy"
-        offset:
-          type: integer
-          format: int32
-          description: Offset position in the result set to start pagination
-        limit:
-          type: integer
-          format: int32
-          description: Maximum number of items returned
-    PersonLabelResult:
-      type: object
-      description: Container to return list of person labels
-      properties:
-        $_type:
-          type: string
-          default: PersonLabelResult
-          enum:
-          - PersonLabelResult
-        hasMoreItems:
-          type: boolean
-          description: Flag to indicate if there are more items on the server
-        nextOffset:
-          type: integer
-          format: int32
-          description: "If there are more items present on the server, this value can be used as the offset in the next query"
-        items:
-          type: array
-          description: The returned list of entities
-          items:
-            $ref: "#/components/schemas/PersonLabel"
-    PersonLabelSearchFilter:
-      description: PersonLabel filter item
-      oneOf:
-      - $ref: "#/components/schemas/NamePersonLabelSearchFilter"
-      discriminator:
-        propertyName: field
-        mapping:
-          NAME: "#/components/schemas/NamePersonLabelSearchFilter"
     PersonLabelsGetByScopeBody:
       type: object
       description: Request body for the 'personLabelsGetByScope' operation
@@ -46966,17 +48705,6 @@ components:
         scope:
           type: string
           description: The scope to search for labels in
-    PersonLabelsOperator:
-      oneOf:
-      - $ref: "#/components/schemas/AllOfPersonLabelsOperator"
-      - $ref: "#/components/schemas/AnyOfPersonLabelsOperator"
-      - $ref: "#/components/schemas/NoneOfPersonLabelsOperator"
-      discriminator:
-        propertyName: type
-        mapping:
-          ALL_OF: "#/components/schemas/AllOfPersonLabelsOperator"
-          ANY_OF: "#/components/schemas/AnyOfPersonLabelsOperator"
-          NONE_OF: "#/components/schemas/NoneOfPersonLabelsOperator"
     PersonLabelsPersonSearchFilter:
       type: object
       required:
@@ -46990,7 +48718,7 @@ components:
         field:
           $ref: "#/components/schemas/EPersonSearchFilterField"
         operator:
-          $ref: "#/components/schemas/PersonLabelsOperator"
+          $ref: "#/components/schemas/LabelsOperator"
     PersonLabelsPersonTypedSearchFilter:
       type: object
       required:
@@ -47004,7 +48732,7 @@ components:
         field:
           $ref: "#/components/schemas/EPersonTypedSearchFilterField"
         operator:
-          $ref: "#/components/schemas/PersonLabelsOperator"
+          $ref: "#/components/schemas/LabelsOperator"
     PersonLink:
       type: object
       properties:
@@ -48126,7 +49854,7 @@ components:
           $ref: "#/components/schemas/EQuestionMessageAbortReason"
     QueueInteractionAnalyticsKpiData:
       type: object
-      description: "Records a single queue interaction event: an invitation or reservation that was created and subsequently resolved (redeemed, revoked, declined, or timed out). A conversation may produce multiple queue interaction entries if it goes through several invitation/reservation cycles during its lifecycle."
+      description: "Records a single queued invitation or reservation and how it was resolved (redeemed, revoked, cancelled, declined, timed out, or visitor left). A conversation may produce multiple queue interaction entries if it goes through several invitation or reservation cycles during its lifecycle."
       properties:
         $_type:
           type: string
@@ -50827,6 +52555,10 @@ components:
         functionTitle:
           type: string
           description: The agent's function or job title. Maximum length of 250 characters. Can be omitted.
+        oidcIdentityProviderId:
+          type: string
+        oidcSubject:
+          type: string
         configuration:
           type: object
           description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.

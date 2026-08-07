@@ -1,39 +1,5 @@
 package com.unblu.webapi.jersey.v4.invoker;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientProperties;
-import org.glassfish.jersey.client.HttpUrlConnectorProvider;
-import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.logging.LoggingFeature;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.MultiPart;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
-
-import com.unblu.webapi.jersey.v4.invoker.auth.ApiKeyAuth;
-import com.unblu.webapi.jersey.v4.invoker.auth.Authentication;
-import com.unblu.webapi.jersey.v4.invoker.auth.HttpBasicAuth;
-import com.unblu.webapi.jersey.v4.invoker.auth.HttpBearerAuth;
-
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -44,6 +10,45 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.client.HttpUrlConnectorProvider;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.MultiPart;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import org.glassfish.jersey.logging.LoggingFeature;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
+
+import java.net.URLEncoder;
+
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+
+import java.text.DateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.unblu.webapi.jersey.v4.invoker.auth.Authentication;
+import com.unblu.webapi.jersey.v4.invoker.auth.HttpBasicAuth;
+import com.unblu.webapi.jersey.v4.invoker.auth.HttpBearerAuth;
+import com.unblu.webapi.jersey.v4.invoker.auth.ApiKeyAuth;
 
 public class ApiClient {
 	protected Map<String, String> defaultHeaderMap = new HashMap<String, String>();

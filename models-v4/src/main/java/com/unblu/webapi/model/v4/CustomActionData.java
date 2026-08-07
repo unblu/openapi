@@ -85,6 +85,18 @@ public interface CustomActionData {
 
 	CustomActionData triggerWebhook(CustomActionWebhookRegistration triggerWebhook);
 
+	void setAgenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData);
+
+	ExpandableField<AriaAgenticFlowDataContent> getAgenticFlowData();
+
+	CustomActionData agenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData);
+
+	void setTriggerAgenticFlow(Boolean triggerAgenticFlow);
+
+	Boolean isTriggerAgenticFlow();
+
+	CustomActionData triggerAgenticFlow(Boolean triggerAgenticFlow);
+
 	void setInvocableFromFrontends(List<EFrontend> invocableFromFrontends);
 
 	List<EFrontend> getInvocableFromFrontends();
@@ -132,6 +144,12 @@ public interface CustomActionData {
 	Boolean isTriggerVisitorFloatingApiEvent();
 
 	CustomActionData triggerVisitorFloatingApiEvent(Boolean triggerVisitorFloatingApiEvent);
+
+	void setTriggerBranchClientApiEvent(Boolean triggerBranchClientApiEvent);
+
+	Boolean isTriggerBranchClientApiEvent();
+
+	CustomActionData triggerBranchClientApiEvent(Boolean triggerBranchClientApiEvent);
 
 	void setTriggerAgentMobileSdkEvent(Boolean triggerAgentMobileSdkEvent);
 

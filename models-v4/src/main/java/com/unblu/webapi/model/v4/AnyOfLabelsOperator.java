@@ -16,22 +16,22 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Checks if none of the provided label names are present.
+ * Checks if any of the provided label names are present.
  */
-@ApiModel(description = "Checks if none of the provided label names are present.")
+@ApiModel(description = "Checks if any of the provided label names are present.")
 
 @JsonPropertyOrder({
-	NoneOfPersonLabelsOperator.JSON_PROPERTY_$_TYPE,
-	NoneOfPersonLabelsOperator.JSON_PROPERTY_TYPE,
-	NoneOfPersonLabelsOperator.JSON_PROPERTY_VALUES,
+	AnyOfLabelsOperator.JSON_PROPERTY_$_TYPE,
+	AnyOfLabelsOperator.JSON_PROPERTY_TYPE,
+	AnyOfLabelsOperator.JSON_PROPERTY_VALUES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class NoneOfPersonLabelsOperator implements PersonLabelsOperator {
+public class AnyOfLabelsOperator implements LabelsOperator {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		NONEOFPERSONLABELSOPERATOR("NoneOfPersonLabelsOperator");
+		ANYOFLABELSOPERATOR("AnyOfLabelsOperator");
 
 		private String value;
 
@@ -56,23 +56,23 @@ public class NoneOfPersonLabelsOperator implements PersonLabelsOperator {
 					return b;
 				}
 			}
-			return TypeEnum.NONEOFPERSONLABELSOPERATOR;
+			return TypeEnum.ANYOFLABELSOPERATOR;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.NONEOFPERSONLABELSOPERATOR;
+	private TypeEnum $type = TypeEnum.ANYOFLABELSOPERATOR;
 
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
-	private EPersonLabelsOperatorType type = EPersonLabelsOperatorType.NONE_OF;
+	private ELabelsOperatorType type = ELabelsOperatorType.ANY_OF;
 
 	public static final String JSON_PROPERTY_VALUES = "values";
 	@JsonProperty(JSON_PROPERTY_VALUES)
 	private List<String> values = null;
 
-	public NoneOfPersonLabelsOperator $type(TypeEnum $type) {
+	public AnyOfLabelsOperator $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -91,7 +91,7 @@ public class NoneOfPersonLabelsOperator implements PersonLabelsOperator {
 		this.$type = $type;
 	}
 
-	public NoneOfPersonLabelsOperator type(EPersonLabelsOperatorType type) {
+	public AnyOfLabelsOperator type(ELabelsOperatorType type) {
 		this.type = type;
 		return this;
 	}
@@ -102,20 +102,20 @@ public class NoneOfPersonLabelsOperator implements PersonLabelsOperator {
 	 * @return type
 	 **/
 	@ApiModelProperty(required = true, value = "")
-	public EPersonLabelsOperatorType getType() {
+	public ELabelsOperatorType getType() {
 		return type;
 	}
 
-	public void setType(EPersonLabelsOperatorType type) {
+	public void setType(ELabelsOperatorType type) {
 		this.type = type;
 	}
 
-	public NoneOfPersonLabelsOperator values(List<String> values) {
+	public AnyOfLabelsOperator values(List<String> values) {
 		this.values = values;
 		return this;
 	}
 
-	public NoneOfPersonLabelsOperator addValuesItem(String valuesItem) {
+	public AnyOfLabelsOperator addValuesItem(String valuesItem) {
 		if (this.values == null) {
 			this.values = new ArrayList<>();
 		}
@@ -145,10 +145,10 @@ public class NoneOfPersonLabelsOperator implements PersonLabelsOperator {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		NoneOfPersonLabelsOperator noneOfPersonLabelsOperator = (NoneOfPersonLabelsOperator) o;
-		return Objects.equals(this.$type, noneOfPersonLabelsOperator.$type) &&
-				Objects.equals(this.type, noneOfPersonLabelsOperator.type) &&
-				Objects.equals(this.values, noneOfPersonLabelsOperator.values);
+		AnyOfLabelsOperator anyOfLabelsOperator = (AnyOfLabelsOperator) o;
+		return Objects.equals(this.$type, anyOfLabelsOperator.$type) &&
+				Objects.equals(this.type, anyOfLabelsOperator.type) &&
+				Objects.equals(this.values, anyOfLabelsOperator.values);
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class NoneOfPersonLabelsOperator implements PersonLabelsOperator {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class NoneOfPersonLabelsOperator {\n");
+		sb.append("class AnyOfLabelsOperator {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    values: ").append(toIndentedString(values)).append("\n");

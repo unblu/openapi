@@ -22,7 +22,12 @@ public enum EAriaAgenticFlowDataContentType {
 	/**
 	 * SUGGESTION_SOURCE
 	 */
-	SUGGESTION_SOURCE("SUGGESTION_SOURCE");
+	SUGGESTION_SOURCE("SUGGESTION_SOURCE"),
+
+	/**
+	 * CUSTOM_ACTION
+	 */
+	CUSTOM_ACTION("CUSTOM_ACTION");
 
 	private String value;
 

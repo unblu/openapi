@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EPersonLabelSearchFilterField
+ * Gets or Sets ELabelSearchFilterField
  */
-public enum EPersonLabelSearchFilterField {
+public enum ELabelSearchFilterField {
 
 	/**
 	 * NAME: Filter by the &#39;name&#39; attribute
@@ -16,7 +16,7 @@ public enum EPersonLabelSearchFilterField {
 
 	private String value;
 
-	EPersonLabelSearchFilterField(String value) {
+	ELabelSearchFilterField(String value) {
 		this.value = value;
 	}
 
@@ -31,8 +31,8 @@ public enum EPersonLabelSearchFilterField {
 	}
 
 	@JsonCreator
-	public static EPersonLabelSearchFilterField fromValue(String value) {
-		for (EPersonLabelSearchFilterField b : EPersonLabelSearchFilterField.values()) {
+	public static ELabelSearchFilterField fromValue(String value) {
+		for (ELabelSearchFilterField b : ELabelSearchFilterField.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

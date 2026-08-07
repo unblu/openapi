@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Records the duration that an assigned agent spends handling a conversation. Each entry is backed by a {conversation.participation.handling_time} event. A
- * conversation may have multiple handling time entries if it is forwarded, pushed back to a queue, or handled by multiple agents over its lifecycle.
+ * Records how long an assigned agent spent handling a conversation. A conversation may have multiple handling time entries if it is forwarded, pushed back to a
+ * queue, or handled by several agents over its lifecycle.
  */
-@ApiModel(description = "Records the duration that an assigned agent spends handling a conversation. Each entry is backed by a {conversation.participation.handling_time} event. A conversation may have multiple handling time entries if it is forwarded, pushed back to a queue, or handled by multiple agents over its lifecycle.")
+@ApiModel(description = "Records how long an assigned agent spent handling a conversation. A conversation may have multiple handling time entries if it is forwarded, pushed back to a queue, or handled by several agents over its lifecycle.")
 
 @JsonPropertyOrder({
 	HandlingTimeAnalyticsKpiData.JSON_PROPERTY_$_TYPE,

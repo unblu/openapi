@@ -10,26 +10,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * PersonLabel orderBy item
+ * NameLabelSearchFilter
  */
-@ApiModel(description = "PersonLabel orderBy item")
 
 @JsonPropertyOrder({
-	PersonLabelOrderBy.JSON_PROPERTY_$_TYPE,
-	PersonLabelOrderBy.JSON_PROPERTY_FIELD,
-	PersonLabelOrderBy.JSON_PROPERTY_ORDER,
+	NameLabelSearchFilter.JSON_PROPERTY_$_TYPE,
+	NameLabelSearchFilter.JSON_PROPERTY_FIELD,
+	NameLabelSearchFilter.JSON_PROPERTY_OPERATOR,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class PersonLabelOrderBy {
+public class NameLabelSearchFilter implements LabelSearchFilter {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		PERSONLABELORDERBY("PersonLabelOrderBy");
+		NAMELABELSEARCHFILTER("NameLabelSearchFilter");
 
 		private String value;
 
@@ -54,23 +52,23 @@ public class PersonLabelOrderBy {
 					return b;
 				}
 			}
-			return TypeEnum.PERSONLABELORDERBY;
+			return TypeEnum.NAMELABELSEARCHFILTER;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.PERSONLABELORDERBY;
+	private TypeEnum $type = TypeEnum.NAMELABELSEARCHFILTER;
 
 	public static final String JSON_PROPERTY_FIELD = "field";
 	@JsonProperty(JSON_PROPERTY_FIELD)
-	private EPersonLabelOrderByField field;
+	private ELabelSearchFilterField field = ELabelSearchFilterField.NAME;
 
-	public static final String JSON_PROPERTY_ORDER = "order";
-	@JsonProperty(JSON_PROPERTY_ORDER)
-	private Order order;
+	public static final String JSON_PROPERTY_OPERATOR = "operator";
+	@JsonProperty(JSON_PROPERTY_OPERATOR)
+	private StringOperator operator = null;
 
-	public PersonLabelOrderBy $type(TypeEnum $type) {
+	public NameLabelSearchFilter $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -89,7 +87,7 @@ public class PersonLabelOrderBy {
 		this.$type = $type;
 	}
 
-	public PersonLabelOrderBy field(EPersonLabelOrderByField field) {
+	public NameLabelSearchFilter field(ELabelSearchFilterField field) {
 		this.field = field;
 		return this;
 	}
@@ -99,32 +97,32 @@ public class PersonLabelOrderBy {
 	 * 
 	 * @return field
 	 **/
-	@ApiModelProperty(value = "")
-	public EPersonLabelOrderByField getField() {
+	@ApiModelProperty(required = true, value = "")
+	public ELabelSearchFilterField getField() {
 		return field;
 	}
 
-	public void setField(EPersonLabelOrderByField field) {
+	public void setField(ELabelSearchFilterField field) {
 		this.field = field;
 	}
 
-	public PersonLabelOrderBy order(Order order) {
-		this.order = order;
+	public NameLabelSearchFilter operator(StringOperator operator) {
+		this.operator = operator;
 		return this;
 	}
 
 	/**
-	 * Get order
+	 * Get operator
 	 * 
-	 * @return order
+	 * @return operator
 	 **/
 	@ApiModelProperty(value = "")
-	public Order getOrder() {
-		return order;
+	public StringOperator getOperator() {
+		return operator;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOperator(StringOperator operator) {
+		this.operator = operator;
 	}
 
 	@Override
@@ -135,24 +133,24 @@ public class PersonLabelOrderBy {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PersonLabelOrderBy personLabelOrderBy = (PersonLabelOrderBy) o;
-		return Objects.equals(this.$type, personLabelOrderBy.$type) &&
-				Objects.equals(this.field, personLabelOrderBy.field) &&
-				Objects.equals(this.order, personLabelOrderBy.order);
+		NameLabelSearchFilter nameLabelSearchFilter = (NameLabelSearchFilter) o;
+		return Objects.equals(this.$type, nameLabelSearchFilter.$type) &&
+				Objects.equals(this.field, nameLabelSearchFilter.field) &&
+				Objects.equals(this.operator, nameLabelSearchFilter.operator);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, field, order);
+		return Objects.hash($type, field, operator);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class PersonLabelOrderBy {\n");
+		sb.append("class NameLabelSearchFilter {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    field: ").append(toIndentedString(field)).append("\n");
-		sb.append("    order: ").append(toIndentedString(order)).append("\n");
+		sb.append("    operator: ").append(toIndentedString(operator)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

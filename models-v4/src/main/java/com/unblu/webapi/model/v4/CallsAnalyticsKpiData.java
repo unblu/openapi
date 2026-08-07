@@ -14,10 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Represents a completed call lifecycle within a conversation. Each entry is backed by a &#x60;conversation.call.ended&#x60; event and records the details and
- * metadata of audio or video calls.
+ * Records a completed audio or video call within a conversation, with one entry per ended call.
  */
-@ApiModel(description = "Represents a completed call lifecycle within a conversation. Each entry is backed by a `conversation.call.ended` event and records the details and metadata of audio or video calls.")
+@ApiModel(description = "Records a completed audio or video call within a conversation, with one entry per ended call.")
 
 @JsonPropertyOrder({
 	CallsAnalyticsKpiData.JSON_PROPERTY_$_TYPE,

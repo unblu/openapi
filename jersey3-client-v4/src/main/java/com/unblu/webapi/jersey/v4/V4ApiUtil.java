@@ -60,6 +60,20 @@ public class V4ApiUtil {
 		return apiClient;
 	}
 
+	/**
+	 * Create the {@link ApiClient} object with bearer token authentication.
+	 *
+	 * @param baseUrl URL of the server. Example value: <code>https://testing.unblu.com/unblu</code>
+	 * @param bearerToken bearer token value
+	 * @return api client
+	 */
+	public static ApiClient getWithApiSecretAuth(final String baseUrl, final String bearerToken) {
+		final ApiClient apiClient = new ApiClient();
+		apiClient.setBasePath(normalizeBasePath(baseUrl));
+		apiClient.setBearerToken(bearerToken);
+		return apiClient;
+	}
+
 	private static String normalizeBasePath(final String baseUrl) {
 		final StringBuilder sb = new StringBuilder();
 		sb.append(baseUrl);

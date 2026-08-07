@@ -122,6 +122,11 @@ public enum EConversationSearchFilterField {
 	INHERIT_CONFIGURATION_AND_TEXTS("INHERIT_CONFIGURATION_AND_TEXTS"),
 
 	/**
+	 * LABELS: Filter by the labels set on the conversation
+	 */
+	LABELS("LABELS"),
+
+	/**
 	 * COMPOUND: Filter for linking other filters with logical AND/OR
 	 */
 	COMPOUND("COMPOUND");

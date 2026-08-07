@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Records a single queue interaction event: an invitation or reservation that was created and subsequently resolved (redeemed, revoked, declined, or timed
- * out). A conversation may produce multiple queue interaction entries if it goes through several invitation/reservation cycles during its lifecycle.
+ * Records a single queued invitation or reservation and how it was resolved (redeemed, revoked, cancelled, declined, timed out, or visitor left). A
+ * conversation may produce multiple queue interaction entries if it goes through several invitation or reservation cycles during its lifecycle.
  */
-@ApiModel(description = "Records a single queue interaction event: an invitation or reservation that was created and subsequently resolved (redeemed, revoked, declined, or timed out). A conversation may produce multiple queue interaction entries if it goes through several invitation/reservation cycles during its lifecycle.")
+@ApiModel(description = "Records a single queued invitation or reservation and how it was resolved (redeemed, revoked, cancelled, declined, timed out, or visitor left). A conversation may produce multiple queue interaction entries if it goes through several invitation or reservation cycles during its lifecycle.")
 
 @JsonPropertyOrder({
 	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_$_TYPE,

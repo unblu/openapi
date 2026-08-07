@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -164,7 +165,7 @@ public class LicenseData {
 		return this;
 	}
 
-	public LicenseData putFeaturesItem(String key, Object featuresItem) {
+	public LicenseData putFeaturesItem(String key, JsonNode featuresItem) {
 		if (this.features == null) {
 			this.features = new HashMap<>();
 		}

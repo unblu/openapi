@@ -5,19 +5,19 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "field", visible = true)
 @JsonSubTypes({
-	@JsonSubTypes.Type(value = NamePersonLabelSearchFilter.class, name = "NAME"),
+	@JsonSubTypes.Type(value = NameLabelSearchFilter.class, name = "NAME"),
 })
-public interface PersonLabelSearchFilter {
-	void setField(EPersonLabelSearchFilterField field);
+public interface LabelSearchFilter {
+	void setField(ELabelSearchFilterField field);
 
-	EPersonLabelSearchFilterField getField();
+	ELabelSearchFilterField getField();
 
-	PersonLabelSearchFilter field(EPersonLabelSearchFilterField field);
+	LabelSearchFilter field(ELabelSearchFilterField field);
 
 	void setOperator(StringOperator operator);
 
 	StringOperator getOperator();
 
-	PersonLabelSearchFilter operator(StringOperator operator);
+	LabelSearchFilter operator(StringOperator operator);
 
 }

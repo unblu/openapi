@@ -52,6 +52,8 @@ public class ExpandableFieldDeserializer extends JsonDeserializer<ExpandableFiel
 				return AriaSingleFlowAgenticFlowDataContent.class;
 			case "ariasuggestionsourceagenticflowdatacontent":
 				return AriaSuggestionSourceAgenticFlowDataContent.class;
+			case "ariacustomactionagenticflowdatacontent":
+				return AriaCustomActionAgenticFlowDataContent.class;
 			default:
 				throw new JsonParseException(p, "Can not deserialize expandable value, unxpected '$_type' value:" + type);
 			}

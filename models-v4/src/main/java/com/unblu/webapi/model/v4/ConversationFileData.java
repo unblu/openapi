@@ -31,6 +31,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationFileData.JSON_PROPERTY_TOTAL_SIZE,
 	ConversationFileData.JSON_PROPERTY_DOWNLOAD_LINKS,
 	ConversationFileData.JSON_PROPERTY_CREATION_TIMESTAMP,
+	ConversationFileData.JSON_PROPERTY_DELETED_FOR_ALL,
+	ConversationFileData.JSON_PROPERTY_DELETED_FOR_SELF,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationFileData {
@@ -106,6 +108,14 @@ public class ConversationFileData {
 	public static final String JSON_PROPERTY_CREATION_TIMESTAMP = "creationTimestamp";
 	@JsonProperty(JSON_PROPERTY_CREATION_TIMESTAMP)
 	private Long creationTimestamp;
+
+	public static final String JSON_PROPERTY_DELETED_FOR_ALL = "deletedForAll";
+	@JsonProperty(JSON_PROPERTY_DELETED_FOR_ALL)
+	private MessageDeletionForAllInfo deletedForAll = null;
+
+	public static final String JSON_PROPERTY_DELETED_FOR_SELF = "deletedForSelf";
+	@JsonProperty(JSON_PROPERTY_DELETED_FOR_SELF)
+	private List<MessageDeletionForSelfInfo> deletedForSelf = null;
 
 	public ConversationFileData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -308,6 +318,52 @@ public class ConversationFileData {
 		this.creationTimestamp = creationTimestamp;
 	}
 
+	public ConversationFileData deletedForAll(MessageDeletionForAllInfo deletedForAll) {
+		this.deletedForAll = deletedForAll;
+		return this;
+	}
+
+	/**
+	 * Get deletedForAll
+	 * 
+	 * @return deletedForAll
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageDeletionForAllInfo getDeletedForAll() {
+		return deletedForAll;
+	}
+
+	public void setDeletedForAll(MessageDeletionForAllInfo deletedForAll) {
+		this.deletedForAll = deletedForAll;
+	}
+
+	public ConversationFileData deletedForSelf(List<MessageDeletionForSelfInfo> deletedForSelf) {
+		this.deletedForSelf = deletedForSelf;
+		return this;
+	}
+
+	public ConversationFileData addDeletedForSelfItem(MessageDeletionForSelfInfo deletedForSelfItem) {
+		if (this.deletedForSelf == null) {
+			this.deletedForSelf = new ArrayList<>();
+		}
+		this.deletedForSelf.add(deletedForSelfItem);
+		return this;
+	}
+
+	/**
+	 * Message deletion information of participants who marked the file&#39;s message as deleted for themselves.
+	 * 
+	 * @return deletedForSelf
+	 **/
+	@ApiModelProperty(value = "Message deletion information of participants who marked the file's message as deleted for themselves.")
+	public List<MessageDeletionForSelfInfo> getDeletedForSelf() {
+		return deletedForSelf;
+	}
+
+	public void setDeletedForSelf(List<MessageDeletionForSelfInfo> deletedForSelf) {
+		this.deletedForSelf = deletedForSelf;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -326,12 +382,14 @@ public class ConversationFileData {
 				Objects.equals(this.fileStoreId, conversationFileData.fileStoreId) &&
 				Objects.equals(this.totalSize, conversationFileData.totalSize) &&
 				Objects.equals(this.downloadLinks, conversationFileData.downloadLinks) &&
-				Objects.equals(this.creationTimestamp, conversationFileData.creationTimestamp);
+				Objects.equals(this.creationTimestamp, conversationFileData.creationTimestamp) &&
+				Objects.equals(this.deletedForAll, conversationFileData.deletedForAll) &&
+				Objects.equals(this.deletedForSelf, conversationFileData.deletedForSelf);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, ownerPersonId, name, mimeType, source, fileStoreId, totalSize, downloadLinks, creationTimestamp);
+		return Objects.hash($type, conversationId, ownerPersonId, name, mimeType, source, fileStoreId, totalSize, downloadLinks, creationTimestamp, deletedForAll, deletedForSelf);
 	}
 
 	@Override
@@ -348,6 +406,8 @@ public class ConversationFileData {
 		sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
 		sb.append("    downloadLinks: ").append(toIndentedString(downloadLinks)).append("\n");
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
+		sb.append("    deletedForAll: ").append(toIndentedString(deletedForAll)).append("\n");
+		sb.append("    deletedForSelf: ").append(toIndentedString(deletedForSelf)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

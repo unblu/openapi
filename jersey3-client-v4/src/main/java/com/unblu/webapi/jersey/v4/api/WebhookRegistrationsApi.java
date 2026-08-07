@@ -1,21 +1,22 @@
 package com.unblu.webapi.jersey.v4.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiException;
+import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+
+import jakarta.ws.rs.core.GenericType;
+
 import com.unblu.webapi.model.v4.WebhookRegistration;
 import com.unblu.webapi.model.v4.WebhookRegistrationList;
 import com.unblu.webapi.model.v4.WebhookRegistrationQuery;
 import com.unblu.webapi.model.v4.WebhookRegistrationResult;
 
-import jakarta.ws.rs.core.GenericType;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WebhookRegistrationsApi {
 	private ApiClient apiClient;

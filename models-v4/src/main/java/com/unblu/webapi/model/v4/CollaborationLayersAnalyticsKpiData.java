@@ -14,10 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a &#x60;collaboration_layer.stopped&#x60;
- * or&#x60;collaboration_layer.aborted&#x60; event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.
+ * Records a collaboration session (such as co-browsing or screen sharing) within a conversation, with one entry per session that has stopped or been aborted.
  */
-@ApiModel(description = "Represents a completed or aborted collaboration layer lifecycle within a conversation. Each entry is backed by a `collaboration_layer.stopped` or`collaboration_layer.aborted` event and records the details and metadata of collaborative sessions such as co-browsing or screen sharing.")
+@ApiModel(description = "Records a collaboration session (such as co-browsing or screen sharing) within a conversation, with one entry per session that has stopped or been aborted.")
 
 @JsonPropertyOrder({
 	CollaborationLayersAnalyticsKpiData.JSON_PROPERTY_$_TYPE,

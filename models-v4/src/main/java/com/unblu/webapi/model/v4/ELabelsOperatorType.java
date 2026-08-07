@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Operator types corresponding to operators defined by &#x60;PersonLabelsOperator&#x60;
+ * Operator types corresponding to operators defined by &#x60;LabelsOperator&#x60;
  */
-public enum EPersonLabelsOperatorType {
+public enum ELabelsOperatorType {
 
 	/**
 	 * ALL_OF: Checks if all of the label names provided by the operator are present on the persons returned.
@@ -26,7 +26,7 @@ public enum EPersonLabelsOperatorType {
 
 	private String value;
 
-	EPersonLabelsOperatorType(String value) {
+	ELabelsOperatorType(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +41,8 @@ public enum EPersonLabelsOperatorType {
 	}
 
 	@JsonCreator
-	public static EPersonLabelsOperatorType fromValue(String value) {
-		for (EPersonLabelsOperatorType b : EPersonLabelsOperatorType.values()) {
+	public static ELabelsOperatorType fromValue(String value) {
+		for (ELabelsOperatorType b : ELabelsOperatorType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

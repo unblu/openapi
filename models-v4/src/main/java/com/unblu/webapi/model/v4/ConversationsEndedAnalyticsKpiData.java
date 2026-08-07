@@ -14,10 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Represents a comprehensive summary of a conversation&#39;s entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by
- * a&#x60;conversation.ended&#x60; event, so there is exactly one entry per conversation.
+ * Summarizes a conversation&#39;s entire lifecycle and aggregate metrics once it has ended. There is exactly one entry per conversation.
  */
-@ApiModel(description = "Represents a comprehensive summary of a conversation's entire lifecycle and aggregate metrics once it reaches its end state. Each entry is backed by a`conversation.ended` event, so there is exactly one entry per conversation.")
+@ApiModel(description = "Summarizes a conversation's entire lifecycle and aggregate metrics once it has ended. There is exactly one entry per conversation.")
 
 @JsonPropertyOrder({
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_$_TYPE,

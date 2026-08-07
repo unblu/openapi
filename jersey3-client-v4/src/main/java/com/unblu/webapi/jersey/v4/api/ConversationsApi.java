@@ -1,18 +1,17 @@
 package com.unblu.webapi.jersey.v4.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiException;
+import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+
+import jakarta.ws.rs.core.GenericType;
+
 import com.unblu.webapi.model.v4.ConversationCreationData;
 import com.unblu.webapi.model.v4.ConversationData;
 import com.unblu.webapi.model.v4.ConversationFileDataList;
+import com.unblu.webapi.model.v4.ConversationLabelsBody;
 import com.unblu.webapi.model.v4.ConversationQuery;
 import com.unblu.webapi.model.v4.ConversationRecipientData;
 import com.unblu.webapi.model.v4.ConversationRecordingState;
@@ -36,7 +35,10 @@ import com.unblu.webapi.model.v4.ConversationsSetVisitorDataBody;
 import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.MessageData;
 
-import jakarta.ws.rs.core.GenericType;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ConversationsApi {
 	private ApiClient apiClient;
@@ -96,6 +98,71 @@ public class ConversationsApi {
 
 		// create path and map variables
 		String localVarPath = "/conversations/{conversationId}/addExternalParticipant"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * addLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Adds the labels provided to those already set on the conversation specified. A label within the
+	 * same scope as an existing conversation label replaces the current scoped label.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation to add the labels to (required)
+	 * @param conversationLabelsBody The names of the labels to be added to the conversation (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsAddLabels(String conversationId, ConversationLabelsBody conversationLabelsBody, List<ExpandFields> expand) throws ApiException {
+		return conversationsAddLabelsWithHttpInfo(conversationId, conversationLabelsBody, expand).getData();
+	}
+
+	/**
+	 * addLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Adds the labels provided to those already set on the conversation specified. A label within the
+	 * same scope as an existing conversation label replaces the current scoped label.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation to add the labels to (required)
+	 * @param conversationLabelsBody The names of the labels to be added to the conversation (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsAddLabelsWithHttpInfo(String conversationId, ConversationLabelsBody conversationLabelsBody, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = conversationLabelsBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsAddLabels");
+		}
+
+		// verify the required parameter 'conversationLabelsBody' is set
+		if (conversationLabelsBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationLabelsBody' when calling conversationsAddLabels");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/addLabels"
 				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
 
 		// query params
@@ -783,6 +850,69 @@ public class ConversationsApi {
 	}
 
 	/**
+	 * removeLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Removes the labels with the given names from the conversation specified.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation to remove the labels from (required)
+	 * @param conversationLabelsBody The names of the labels to remove from the conversation (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsRemoveLabels(String conversationId, ConversationLabelsBody conversationLabelsBody, List<ExpandFields> expand) throws ApiException {
+		return conversationsRemoveLabelsWithHttpInfo(conversationId, conversationLabelsBody, expand).getData();
+	}
+
+	/**
+	 * removeLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Removes the labels with the given names from the conversation specified.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation to remove the labels from (required)
+	 * @param conversationLabelsBody The names of the labels to remove from the conversation (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsRemoveLabelsWithHttpInfo(String conversationId, ConversationLabelsBody conversationLabelsBody, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = conversationLabelsBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsRemoveLabels");
+		}
+
+		// verify the required parameter 'conversationLabelsBody' is set
+		if (conversationLabelsBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationLabelsBody' when calling conversationsRemoveLabels");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/removeLabels"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * search Search for conversations in the current account. If called with the authorization role &#x60;REGISTERED_USER&#x60;, the call only returns
 	 * conversations matching the search criteria where the agent making a call is the participant. If the agent making the call has the user role
 	 * &#x60;SUPERVISOR&#x60;, the results only include conversations of the agents in their team or teams.&lt;br&gt;
@@ -1079,6 +1209,75 @@ public class ConversationsApi {
 
 		// create path and map variables
 		String localVarPath = "/conversations/{conversationId}/setInheritConfigurationAndTexts"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ConversationData> localVarReturnType = new GenericType<ConversationData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * setLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Sets labels with the given names on the conversation specified. Labels already set on the
+	 * conversation but missing from the list provided are removed. Labels already set and present in the list provided remain unchanged. Labels not set on the
+	 * conversation but present in the list provided are added. Attempts to set a label that doesn&#39;t exist or that you don&#39;t have permission to set result
+	 * in an error. Labels already set on the conversation that you don&#39;t have permission to set aren&#39;t affected by the call.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation to set the labels on (required)
+	 * @param conversationLabelsBody The names of the labels to set on the conversation (required)
+	 * @param expand (optional)
+	 * @return ConversationData
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationData conversationsSetLabels(String conversationId, ConversationLabelsBody conversationLabelsBody, List<ExpandFields> expand) throws ApiException {
+		return conversationsSetLabelsWithHttpInfo(conversationId, conversationLabelsBody, expand).getData();
+	}
+
+	/**
+	 * setLabels &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Sets labels with the given names on the conversation specified. Labels already set on the
+	 * conversation but missing from the list provided are removed. Labels already set and present in the list provided remain unchanged. Labels not set on the
+	 * conversation but present in the list provided are added. Attempts to set a label that doesn&#39;t exist or that you don&#39;t have permission to set result
+	 * in an error. Labels already set on the conversation that you don&#39;t have permission to set aren&#39;t affected by the call.&lt;br&gt;
+	 * 
+	 * @param conversationId The ID of the conversation to set the labels on (required)
+	 * @param conversationLabelsBody The names of the labels to set on the conversation (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;ConversationData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationData> conversationsSetLabelsWithHttpInfo(String conversationId, ConversationLabelsBody conversationLabelsBody, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = conversationLabelsBody;
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsSetLabels");
+		}
+
+		// verify the required parameter 'conversationLabelsBody' is set
+		if (conversationLabelsBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationLabelsBody' when calling conversationsSetLabels");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/setLabels"
 				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()));
 
 		// query params

@@ -168,7 +168,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	public static final String JSON_PROPERTY_LABELS = "labels";
 	@JsonProperty(JSON_PROPERTY_LABELS)
-	private List<PersonLabel> labels = null;
+	private List<Label> labels = null;
 
 	public static final String JSON_PROPERTY_NOTE = "note";
 	@JsonProperty(JSON_PROPERTY_NOTE)
@@ -579,12 +579,12 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		this.teamId = teamId;
 	}
 
-	public PersonData labels(List<PersonLabel> labels) {
+	public PersonData labels(List<Label> labels) {
 		this.labels = labels;
 		return this;
 	}
 
-	public PersonData addLabelsItem(PersonLabel labelsItem) {
+	public PersonData addLabelsItem(Label labelsItem) {
 		if (this.labels == null) {
 			this.labels = new ArrayList<>();
 		}
@@ -598,11 +598,11 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	 * @return labels
 	 **/
 	@ApiModelProperty(value = "List of labels set for this person")
-	public List<PersonLabel> getLabels() {
+	public List<Label> getLabels() {
 		return labels;
 	}
 
-	public void setLabels(List<PersonLabel> labels) {
+	public void setLabels(List<Label> labels) {
 		this.labels = labels;
 	}
 

@@ -1,5 +1,7 @@
 package com.unblu.webapi.model.v4;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -56,6 +58,12 @@ public interface MessageInterceptorData {
 	EMessageInterceptorMessageFilter getMessageFilter();
 
 	MessageInterceptorData messageFilter(EMessageInterceptorMessageFilter messageFilter);
+
+	void setMessageScopes(List<EMessageInterceptorMessageScope> messageScopes);
+
+	List<EMessageInterceptorMessageScope> getMessageScopes();
+
+	MessageInterceptorData messageScopes(List<EMessageInterceptorMessageScope> messageScopes);
 
 	void setTimeoutBehavior(EMessageInterceptorTimeoutBehavior timeoutBehavior);
 

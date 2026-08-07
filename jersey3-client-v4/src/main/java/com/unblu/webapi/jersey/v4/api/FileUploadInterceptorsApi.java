@@ -1,22 +1,23 @@
 package com.unblu.webapi.jersey.v4.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiException;
+import com.unblu.webapi.jersey.v4.invoker.ApiClient;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+
+import jakarta.ws.rs.core.GenericType;
+
 import com.unblu.webapi.model.v4.FileUploadInterceptorData;
 import com.unblu.webapi.model.v4.FileUploadInterceptorQuery;
 import com.unblu.webapi.model.v4.FileUploadInterceptorResult;
 import com.unblu.webapi.model.v4.FileUploadInterceptorsApproveFileUploadBody;
 import com.unblu.webapi.model.v4.FileUploadInterceptorsRejectFileUploadBody;
 
-import jakarta.ws.rs.core.GenericType;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FileUploadInterceptorsApi {
 	private ApiClient apiClient;

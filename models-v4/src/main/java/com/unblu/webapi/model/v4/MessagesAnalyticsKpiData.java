@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Records the details and metadata of a message sent within a conversation. Each entry corresponds to a distinct message event.
+ * Records a single message sent within a conversation, with one entry per message.
  */
-@ApiModel(description = "Records the details and metadata of a message sent within a conversation. Each entry corresponds to a distinct message event.")
+@ApiModel(description = "Records a single message sent within a conversation, with one entry per message.")
 
 @JsonPropertyOrder({
 	MessagesAnalyticsKpiData.JSON_PROPERTY_$_TYPE,

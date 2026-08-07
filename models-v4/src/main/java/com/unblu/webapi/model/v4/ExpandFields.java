@@ -25,6 +25,8 @@ public enum ExpandFields {
 
 	FLOORPLANIMAGE("floorPlanImage"),
 
+	LOGOIMAGE("logoImage"),
+
 	METADATA("metadata"),
 
 	TEXT("text");

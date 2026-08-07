@@ -40,6 +40,8 @@ import io.swagger.annotations.ApiModelProperty;
 	User.JSON_PROPERTY_EXTERNALLY_MANAGED,
 	User.JSON_PROPERTY_VIRTUAL_USER,
 	User.JSON_PROPERTY_FUNCTION_TITLE,
+	User.JSON_PROPERTY_OIDC_IDENTITY_PROVIDER_ID,
+	User.JSON_PROPERTY_OIDC_SUBJECT,
 	User.JSON_PROPERTY_CONFIGURATION,
 	User.JSON_PROPERTY_METADATA,
 })
@@ -153,6 +155,14 @@ public class User {
 	public static final String JSON_PROPERTY_FUNCTION_TITLE = "functionTitle";
 	@JsonProperty(JSON_PROPERTY_FUNCTION_TITLE)
 	private String functionTitle;
+
+	public static final String JSON_PROPERTY_OIDC_IDENTITY_PROVIDER_ID = "oidcIdentityProviderId";
+	@JsonProperty(JSON_PROPERTY_OIDC_IDENTITY_PROVIDER_ID)
+	private String oidcIdentityProviderId;
+
+	public static final String JSON_PROPERTY_OIDC_SUBJECT = "oidcSubject";
+	@JsonProperty(JSON_PROPERTY_OIDC_SUBJECT)
+	private String oidcSubject;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -533,6 +543,44 @@ public class User {
 		this.functionTitle = functionTitle;
 	}
 
+	public User oidcIdentityProviderId(String oidcIdentityProviderId) {
+		this.oidcIdentityProviderId = oidcIdentityProviderId;
+		return this;
+	}
+
+	/**
+	 * Get oidcIdentityProviderId
+	 * 
+	 * @return oidcIdentityProviderId
+	 **/
+	@ApiModelProperty(value = "")
+	public String getOidcIdentityProviderId() {
+		return oidcIdentityProviderId;
+	}
+
+	public void setOidcIdentityProviderId(String oidcIdentityProviderId) {
+		this.oidcIdentityProviderId = oidcIdentityProviderId;
+	}
+
+	public User oidcSubject(String oidcSubject) {
+		this.oidcSubject = oidcSubject;
+		return this;
+	}
+
+	/**
+	 * Get oidcSubject
+	 * 
+	 * @return oidcSubject
+	 **/
+	@ApiModelProperty(value = "")
+	public String getOidcSubject() {
+		return oidcSubject;
+	}
+
+	public void setOidcSubject(String oidcSubject) {
+		this.oidcSubject = oidcSubject;
+	}
+
 	public User _configuration(Map<String, String> _configuration) {
 		this._configuration = _configuration;
 		return this;
@@ -617,13 +665,15 @@ public class User {
 				Objects.equals(this.externallyManaged, user.externallyManaged) &&
 				Objects.equals(this.virtualUser, user.virtualUser) &&
 				Objects.equals(this.functionTitle, user.functionTitle) &&
+				Objects.equals(this.oidcIdentityProviderId, user.oidcIdentityProviderId) &&
+				Objects.equals(this.oidcSubject, user.oidcSubject) &&
 				Objects.equals(this._configuration, user._configuration) &&
 				Objects.equals(this.metadata, user.metadata);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, username, email, phone, teamId, authorizationRole, displayName, firstName, lastName, nickname, externallyManaged, virtualUser, functionTitle, _configuration, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, avatar, username, email, phone, teamId, authorizationRole, displayName, firstName, lastName, nickname, externallyManaged, virtualUser, functionTitle, oidcIdentityProviderId, oidcSubject, _configuration, metadata);
 	}
 
 	@Override
@@ -649,6 +699,8 @@ public class User {
 		sb.append("    externallyManaged: ").append(toIndentedString(externallyManaged)).append("\n");
 		sb.append("    virtualUser: ").append(toIndentedString(virtualUser)).append("\n");
 		sb.append("    functionTitle: ").append(toIndentedString(functionTitle)).append("\n");
+		sb.append("    oidcIdentityProviderId: ").append(toIndentedString(oidcIdentityProviderId)).append("\n");
+		sb.append("    oidcSubject: ").append(toIndentedString(oidcSubject)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("}");

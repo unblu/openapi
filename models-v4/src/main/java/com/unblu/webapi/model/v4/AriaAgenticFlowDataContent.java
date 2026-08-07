@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = AriaCustomActionAgenticFlowDataContent.class, name = "CUSTOM_ACTION"),
 	@JsonSubTypes.Type(value = AriaMultiflowAgenticFlowDataContent.class, name = "MULTIFLOW"),
 	@JsonSubTypes.Type(value = AriaSingleFlowAgenticFlowDataContent.class, name = "SINGLE_FLOW"),
 	@JsonSubTypes.Type(value = AriaSuggestionSourceAgenticFlowDataContent.class, name = "SUGGESTION_SOURCE"),

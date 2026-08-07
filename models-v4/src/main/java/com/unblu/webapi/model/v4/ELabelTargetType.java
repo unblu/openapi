@@ -5,14 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * The person type a person label can be managed by
+ * The target a label can be set on: a person (by type) or a conversation.
  */
-public enum EPersonLabelManagementRole {
-
-	/**
-	 * SUPERVISOR: Supervisor
-	 */
-	SUPERVISOR("SUPERVISOR"),
+public enum ELabelTargetType {
 
 	/**
 	 * AGENT: Agent
@@ -20,18 +15,28 @@ public enum EPersonLabelManagementRole {
 	AGENT("AGENT"),
 
 	/**
+	 * ANONYMOUS_VISITOR: Anonymous visitor
+	 */
+	ANONYMOUS_VISITOR("ANONYMOUS_VISITOR"),
+
+	/**
 	 * AUTHENTICATED_VISITOR: Authenticated visitor
 	 */
 	AUTHENTICATED_VISITOR("AUTHENTICATED_VISITOR"),
 
 	/**
-	 * ANONYMOUS_VISITOR: Anonymous visitor
+	 * BOT: Bot
 	 */
-	ANONYMOUS_VISITOR("ANONYMOUS_VISITOR");
+	BOT("BOT"),
+
+	/**
+	 * CONVERSATION: Conversation
+	 */
+	CONVERSATION("CONVERSATION");
 
 	private String value;
 
-	EPersonLabelManagementRole(String value) {
+	ELabelTargetType(String value) {
 		this.value = value;
 	}
 
@@ -46,8 +51,8 @@ public enum EPersonLabelManagementRole {
 	}
 
 	@JsonCreator
-	public static EPersonLabelManagementRole fromValue(String value) {
-		for (EPersonLabelManagementRole b : EPersonLabelManagementRole.values()) {
+	public static ELabelTargetType fromValue(String value) {
+		for (ELabelTargetType b : ELabelTargetType.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

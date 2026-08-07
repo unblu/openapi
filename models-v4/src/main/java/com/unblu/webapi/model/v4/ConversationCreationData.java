@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationCreationData.JSON_PROPERTY_METADATA,
 	ConversationCreationData.JSON_PROPERTY_CONFIGURATION,
 	ConversationCreationData.JSON_PROPERTY_TEXT,
+	ConversationCreationData.JSON_PROPERTY_LABELS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationCreationData {
@@ -158,6 +159,10 @@ public class ConversationCreationData {
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private Map<String, Map<String, String>> text = null;
+
+	public static final String JSON_PROPERTY_LABELS = "labels";
+	@JsonProperty(JSON_PROPERTY_LABELS)
+	private List<String> labels = null;
 
 	public ConversationCreationData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -600,6 +605,34 @@ public class ConversationCreationData {
 		this.text = text;
 	}
 
+	public ConversationCreationData labels(List<String> labels) {
+		this.labels = labels;
+		return this;
+	}
+
+	public ConversationCreationData addLabelsItem(String labelsItem) {
+		if (this.labels == null) {
+			this.labels = new ArrayList<>();
+		}
+		this.labels.add(labelsItem);
+		return this;
+	}
+
+	/**
+	 * Names of the labels to assign to the conversation on creation. Each label must be settable on conversations; otherwise creation fails with an invalid-labels
+	 * error.
+	 * 
+	 * @return labels
+	 **/
+	@ApiModelProperty(value = "Names of the labels to assign to the conversation on creation. Each label must be settable on conversations; otherwise creation fails with an invalid-labels error.")
+	public List<String> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -628,12 +661,13 @@ public class ConversationCreationData {
 				Objects.equals(this.initialEngagementUrl, conversationCreationData.initialEngagementUrl) &&
 				Objects.equals(this.metadata, conversationCreationData.metadata) &&
 				Objects.equals(this._configuration, conversationCreationData._configuration) &&
-				Objects.equals(this.text, conversationCreationData.text);
+				Objects.equals(this.text, conversationCreationData.text) &&
+				Objects.equals(this.labels, conversationCreationData.labels);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, initialEngagementType, conversationVisibility, locale, visitorData, conversationTemplateId, inheritConfigurationAndTexts, externalMessengerChannelId, sourceId, sourceUrl, initialEngagementUrl, metadata, _configuration, text);
+		return Objects.hash($type, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, initialEngagementType, conversationVisibility, locale, visitorData, conversationTemplateId, inheritConfigurationAndTexts, externalMessengerChannelId, sourceId, sourceUrl, initialEngagementUrl, metadata, _configuration, text, labels);
 	}
 
 	@Override
@@ -660,6 +694,7 @@ public class ConversationCreationData {
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
+		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

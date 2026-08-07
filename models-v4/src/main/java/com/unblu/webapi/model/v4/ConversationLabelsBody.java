@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -10,24 +12,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * NamePersonLabelSearchFilter
+ * Request body carrying the label names to add to, remove from, or set on a conversation.
  */
+@ApiModel(description = "Request body carrying the label names to add to, remove from, or set on a conversation.")
 
 @JsonPropertyOrder({
-	NamePersonLabelSearchFilter.JSON_PROPERTY_$_TYPE,
-	NamePersonLabelSearchFilter.JSON_PROPERTY_FIELD,
-	NamePersonLabelSearchFilter.JSON_PROPERTY_OPERATOR,
+	ConversationLabelsBody.JSON_PROPERTY_$_TYPE,
+	ConversationLabelsBody.JSON_PROPERTY_LABEL_NAMES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class NamePersonLabelSearchFilter implements PersonLabelSearchFilter {
+public class ConversationLabelsBody {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		NAMEPERSONLABELSEARCHFILTER("NamePersonLabelSearchFilter");
+		CONVERSATIONLABELSBODY("ConversationLabelsBody");
 
 		private String value;
 
@@ -52,23 +55,19 @@ public class NamePersonLabelSearchFilter implements PersonLabelSearchFilter {
 					return b;
 				}
 			}
-			return TypeEnum.NAMEPERSONLABELSEARCHFILTER;
+			return TypeEnum.CONVERSATIONLABELSBODY;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.NAMEPERSONLABELSEARCHFILTER;
+	private TypeEnum $type = TypeEnum.CONVERSATIONLABELSBODY;
 
-	public static final String JSON_PROPERTY_FIELD = "field";
-	@JsonProperty(JSON_PROPERTY_FIELD)
-	private EPersonLabelSearchFilterField field = EPersonLabelSearchFilterField.NAME;
+	public static final String JSON_PROPERTY_LABEL_NAMES = "labelNames";
+	@JsonProperty(JSON_PROPERTY_LABEL_NAMES)
+	private List<String> labelNames = null;
 
-	public static final String JSON_PROPERTY_OPERATOR = "operator";
-	@JsonProperty(JSON_PROPERTY_OPERATOR)
-	private StringOperator operator = null;
-
-	public NamePersonLabelSearchFilter $type(TypeEnum $type) {
+	public ConversationLabelsBody $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -87,42 +86,31 @@ public class NamePersonLabelSearchFilter implements PersonLabelSearchFilter {
 		this.$type = $type;
 	}
 
-	public NamePersonLabelSearchFilter field(EPersonLabelSearchFilterField field) {
-		this.field = field;
+	public ConversationLabelsBody labelNames(List<String> labelNames) {
+		this.labelNames = labelNames;
+		return this;
+	}
+
+	public ConversationLabelsBody addLabelNamesItem(String labelNamesItem) {
+		if (this.labelNames == null) {
+			this.labelNames = new ArrayList<>();
+		}
+		this.labelNames.add(labelNamesItem);
 		return this;
 	}
 
 	/**
-	 * Get field
+	 * The names of the labels to apply to the conversation.
 	 * 
-	 * @return field
+	 * @return labelNames
 	 **/
-	@ApiModelProperty(required = true, value = "")
-	public EPersonLabelSearchFilterField getField() {
-		return field;
+	@ApiModelProperty(value = "The names of the labels to apply to the conversation.")
+	public List<String> getLabelNames() {
+		return labelNames;
 	}
 
-	public void setField(EPersonLabelSearchFilterField field) {
-		this.field = field;
-	}
-
-	public NamePersonLabelSearchFilter operator(StringOperator operator) {
-		this.operator = operator;
-		return this;
-	}
-
-	/**
-	 * Get operator
-	 * 
-	 * @return operator
-	 **/
-	@ApiModelProperty(value = "")
-	public StringOperator getOperator() {
-		return operator;
-	}
-
-	public void setOperator(StringOperator operator) {
-		this.operator = operator;
+	public void setLabelNames(List<String> labelNames) {
+		this.labelNames = labelNames;
 	}
 
 	@Override
@@ -133,24 +121,22 @@ public class NamePersonLabelSearchFilter implements PersonLabelSearchFilter {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		NamePersonLabelSearchFilter namePersonLabelSearchFilter = (NamePersonLabelSearchFilter) o;
-		return Objects.equals(this.$type, namePersonLabelSearchFilter.$type) &&
-				Objects.equals(this.field, namePersonLabelSearchFilter.field) &&
-				Objects.equals(this.operator, namePersonLabelSearchFilter.operator);
+		ConversationLabelsBody conversationLabelsBody = (ConversationLabelsBody) o;
+		return Objects.equals(this.$type, conversationLabelsBody.$type) &&
+				Objects.equals(this.labelNames, conversationLabelsBody.labelNames);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, field, operator);
+		return Objects.hash($type, labelNames);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class NamePersonLabelSearchFilter {\n");
+		sb.append("class ConversationLabelsBody {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
-		sb.append("    field: ").append(toIndentedString(field)).append("\n");
-		sb.append("    operator: ").append(toIndentedString(operator)).append("\n");
+		sb.append("    labelNames: ").append(toIndentedString(labelNames)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
