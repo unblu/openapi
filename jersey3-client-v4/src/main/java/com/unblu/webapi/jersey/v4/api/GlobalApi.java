@@ -1,23 +1,22 @@
 package com.unblu.webapi.jersey.v4.api;
 
-import com.unblu.webapi.jersey.v4.invoker.ApiException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.unblu.webapi.jersey.v4.invoker.ApiClient;
+import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
-
-import jakarta.ws.rs.core.GenericType;
-
 import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.GlobalData;
 import com.unblu.webapi.model.v4.GlobalPingResponse;
 import com.unblu.webapi.model.v4.ProductVersion;
 import com.unblu.webapi.model.v4.RecordedMinutesData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import jakarta.ws.rs.core.GenericType;
 
 public class GlobalApi {
 	private ApiClient apiClient;

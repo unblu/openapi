@@ -47,6 +47,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PersonData.JSON_PROPERTY_NOTE,
 	PersonData.JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP,
 	PersonData.JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID,
+	PersonData.JSON_PROPERTY_ARCHIVED,
 	PersonData.JSON_PROPERTY_LINKS,
 	PersonData.JSON_PROPERTY_AVATAR,
 	PersonData.JSON_PROPERTY_METADATA,
@@ -181,6 +182,10 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID = "noteLastEditedPersonId";
 	@JsonProperty(JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID)
 	private String noteLastEditedPersonId;
+
+	public static final String JSON_PROPERTY_ARCHIVED = "archived";
+	@JsonProperty(JSON_PROPERTY_ARCHIVED)
+	private Boolean archived;
 
 	public static final String JSON_PROPERTY_LINKS = "links";
 	@JsonProperty(JSON_PROPERTY_LINKS)
@@ -663,6 +668,25 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		this.noteLastEditedPersonId = noteLastEditedPersonId;
 	}
 
+	public PersonData archived(Boolean archived) {
+		this.archived = archived;
+		return this;
+	}
+
+	/**
+	 * Whether this person has been archived.
+	 * 
+	 * @return archived
+	 **/
+	@ApiModelProperty(value = "Whether this person has been archived.")
+	public Boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(Boolean archived) {
+		this.archived = archived;
+	}
+
 	public PersonData links(List<PersonLink> links) {
 		this.links = links;
 		return this;
@@ -770,6 +794,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.note, personData.note) &&
 				Objects.equals(this.noteLastEditedTimestamp, personData.noteLastEditedTimestamp) &&
 				Objects.equals(this.noteLastEditedPersonId, personData.noteLastEditedPersonId) &&
+				Objects.equals(this.archived, personData.archived) &&
 				Objects.equals(this.links, personData.links) &&
 				Objects.equals(this.avatar, personData.avatar) &&
 				Objects.equals(this.metadata, personData.metadata);
@@ -777,7 +802,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, links, avatar, metadata);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, archived, links, avatar, metadata);
 	}
 
 	@Override
@@ -808,6 +833,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    note: ").append(toIndentedString(note)).append("\n");
 		sb.append("    noteLastEditedTimestamp: ").append(toIndentedString(noteLastEditedTimestamp)).append("\n");
 		sb.append("    noteLastEditedPersonId: ").append(toIndentedString(noteLastEditedPersonId)).append("\n");
+		sb.append("    archived: ").append(toIndentedString(archived)).append("\n");
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");

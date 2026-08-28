@@ -15,10 +15,10 @@ public interface VisibilityRuleLabelSelectionOperator {
 
 	VisibilityRuleLabelSelectionOperator type(EVisibilityRuleLabelSelectionOperatorType type);
 
-	void setValue(EPersonVisibilityLabelSelection value);
+	void setValue(EVisibilityLabelSelection value);
 
-	EPersonVisibilityLabelSelection getValue();
+	EVisibilityLabelSelection getValue();
 
-	VisibilityRuleLabelSelectionOperator value(EPersonVisibilityLabelSelection value);
+	VisibilityRuleLabelSelectionOperator value(EVisibilityLabelSelection value);
 
 }

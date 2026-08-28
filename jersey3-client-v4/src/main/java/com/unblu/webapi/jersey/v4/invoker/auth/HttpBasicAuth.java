@@ -2,12 +2,11 @@
 package com.unblu.webapi.jersey.v4.invoker.auth;
 
 import java.nio.charset.StandardCharsets;
-import com.unblu.webapi.jersey.v4.invoker.Pair;
-
 import java.util.Base64;
-
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import com.unblu.webapi.jersey.v4.invoker.Pair;
 
 public class HttpBasicAuth implements Authentication {
 	private String username;

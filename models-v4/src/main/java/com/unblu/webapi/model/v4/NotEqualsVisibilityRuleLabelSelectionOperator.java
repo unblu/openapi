@@ -66,7 +66,7 @@ public class NotEqualsVisibilityRuleLabelSelectionOperator implements Visibility
 
 	public static final String JSON_PROPERTY_VALUE = "value";
 	@JsonProperty(JSON_PROPERTY_VALUE)
-	private EPersonVisibilityLabelSelection value;
+	private EVisibilityLabelSelection value;
 
 	public NotEqualsVisibilityRuleLabelSelectionOperator $type(TypeEnum $type) {
 		this.$type = $type;
@@ -106,7 +106,7 @@ public class NotEqualsVisibilityRuleLabelSelectionOperator implements Visibility
 		this.type = type;
 	}
 
-	public NotEqualsVisibilityRuleLabelSelectionOperator value(EPersonVisibilityLabelSelection value) {
+	public NotEqualsVisibilityRuleLabelSelectionOperator value(EVisibilityLabelSelection value) {
 		this.value = value;
 		return this;
 	}
@@ -117,11 +117,11 @@ public class NotEqualsVisibilityRuleLabelSelectionOperator implements Visibility
 	 * @return value
 	 **/
 	@ApiModelProperty(value = "")
-	public EPersonVisibilityLabelSelection getValue() {
+	public EVisibilityLabelSelection getValue() {
 		return value;
 	}
 
-	public void setValue(EPersonVisibilityLabelSelection value) {
+	public void setValue(EVisibilityLabelSelection value) {
 		this.value = value;
 	}
 

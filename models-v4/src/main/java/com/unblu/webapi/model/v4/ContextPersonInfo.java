@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ContextPersonInfo.JSON_PROPERTY_NOTE,
 	ContextPersonInfo.JSON_PROPERTY_NOTE_LAST_EDITED_TIMESTAMP,
 	ContextPersonInfo.JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID,
+	ContextPersonInfo.JSON_PROPERTY_ARCHIVED,
 	ContextPersonInfo.JSON_PROPERTY_LINKS,
 	ContextPersonInfo.JSON_PROPERTY_AVATAR,
 	ContextPersonInfo.JSON_PROPERTY_OS_NAME,
@@ -185,6 +186,10 @@ public class ContextPersonInfo {
 	public static final String JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID = "noteLastEditedPersonId";
 	@JsonProperty(JSON_PROPERTY_NOTE_LAST_EDITED_PERSON_ID)
 	private String noteLastEditedPersonId;
+
+	public static final String JSON_PROPERTY_ARCHIVED = "archived";
+	@JsonProperty(JSON_PROPERTY_ARCHIVED)
+	private Boolean archived;
 
 	public static final String JSON_PROPERTY_LINKS = "links";
 	@JsonProperty(JSON_PROPERTY_LINKS)
@@ -691,6 +696,25 @@ public class ContextPersonInfo {
 		this.noteLastEditedPersonId = noteLastEditedPersonId;
 	}
 
+	public ContextPersonInfo archived(Boolean archived) {
+		this.archived = archived;
+		return this;
+	}
+
+	/**
+	 * Whether this person has been archived.
+	 * 
+	 * @return archived
+	 **/
+	@ApiModelProperty(value = "Whether this person has been archived.")
+	public Boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(Boolean archived) {
+		this.archived = archived;
+	}
+
 	public ContextPersonInfo links(List<PersonLink> links) {
 		this.links = links;
 		return this;
@@ -903,6 +927,7 @@ public class ContextPersonInfo {
 				Objects.equals(this.note, contextPersonInfo.note) &&
 				Objects.equals(this.noteLastEditedTimestamp, contextPersonInfo.noteLastEditedTimestamp) &&
 				Objects.equals(this.noteLastEditedPersonId, contextPersonInfo.noteLastEditedPersonId) &&
+				Objects.equals(this.archived, contextPersonInfo.archived) &&
 				Objects.equals(this.links, contextPersonInfo.links) &&
 				Objects.equals(this.avatar, contextPersonInfo.avatar) &&
 				Objects.equals(this.osName, contextPersonInfo.osName) &&
@@ -916,7 +941,7 @@ public class ContextPersonInfo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, links, avatar, osName, osVersion, browserName, browserVersion, locale, city, country);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, archived, links, avatar, osName, osVersion, browserName, browserVersion, locale, city, country);
 	}
 
 	@Override
@@ -947,6 +972,7 @@ public class ContextPersonInfo {
 		sb.append("    note: ").append(toIndentedString(note)).append("\n");
 		sb.append("    noteLastEditedTimestamp: ").append(toIndentedString(noteLastEditedTimestamp)).append("\n");
 		sb.append("    noteLastEditedPersonId: ").append(toIndentedString(noteLastEditedPersonId)).append("\n");
+		sb.append("    archived: ").append(toIndentedString(archived)).append("\n");
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("    osName: ").append(toIndentedString(osName)).append("\n");

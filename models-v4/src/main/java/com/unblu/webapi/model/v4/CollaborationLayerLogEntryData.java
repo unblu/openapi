@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonPropertyOrder({
 	CollaborationLayerLogEntryData.JSON_PROPERTY_$_TYPE,
+	CollaborationLayerLogEntryData.JSON_PROPERTY_ID,
 	CollaborationLayerLogEntryData.JSON_PROPERTY_CONVERSATION_ID,
 	CollaborationLayerLogEntryData.JSON_PROPERTY_LAYER_TYPE,
 	CollaborationLayerLogEntryData.JSON_PROPERTY_LAYER_OWNER_PERSON_DATA,
@@ -35,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CollaborationLayerLogEntryData.JSON_PROPERTY_LAYER_ABORT_REASON,
 	CollaborationLayerLogEntryData.JSON_PROPERTY_PARTICIPANT_PERSON_DATA,
 	CollaborationLayerLogEntryData.JSON_PROPERTY_CONVERSATION_RECORDING_IDS,
+	CollaborationLayerLogEntryData.JSON_PROPERTY_ACTIVE_CONVERSATION_PRESENCE_IDS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class CollaborationLayerLogEntryData {
@@ -74,6 +76,10 @@ public class CollaborationLayerLogEntryData {
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
 	private TypeEnum $type = TypeEnum.COLLABORATIONLAYERLOGENTRYDATA;
+
+	public static final String JSON_PROPERTY_ID = "id";
+	@JsonProperty(JSON_PROPERTY_ID)
+	private String id;
 
 	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
@@ -127,6 +133,10 @@ public class CollaborationLayerLogEntryData {
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_RECORDING_IDS)
 	private List<String> conversationRecordingIds = null;
 
+	public static final String JSON_PROPERTY_ACTIVE_CONVERSATION_PRESENCE_IDS = "activeConversationPresenceIds";
+	@JsonProperty(JSON_PROPERTY_ACTIVE_CONVERSATION_PRESENCE_IDS)
+	private List<String> activeConversationPresenceIds = null;
+
 	public CollaborationLayerLogEntryData $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
@@ -144,6 +154,25 @@ public class CollaborationLayerLogEntryData {
 
 	public void set$Type(TypeEnum $type) {
 		this.$type = $type;
+	}
+
+	public CollaborationLayerLogEntryData id(String id) {
+		this.id = id;
+		return this;
+	}
+
+	/**
+	 * The unique ID of the collaboration layer log entry
+	 * 
+	 * @return id
+	 **/
+	@ApiModelProperty(value = "The unique ID of the collaboration layer log entry")
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public CollaborationLayerLogEntryData conversationId(String conversationId) {
@@ -369,11 +398,12 @@ public class CollaborationLayerLogEntryData {
 	}
 
 	/**
-	 * The list of active participants of the collaboration layer
+	 * The persons who had an active conversation presence at any point while the collaboration layer was displayed. This is the per-person view
+	 * of&#x60;activeConversationPresenceIds&#x60;: it lists the distinct persons behind those conversation presences.
 	 * 
 	 * @return participantPersonData
 	 **/
-	@ApiModelProperty(value = "The list of active participants of the collaboration layer")
+	@ApiModelProperty(value = "The persons who had an active conversation presence at any point while the collaboration layer was displayed. This is the per-person view of`activeConversationPresenceIds`: it lists the distinct persons behind those conversation presences.")
 	public List<PersonData> getParticipantPersonData() {
 		return participantPersonData;
 	}
@@ -409,6 +439,36 @@ public class CollaborationLayerLogEntryData {
 		this.conversationRecordingIds = conversationRecordingIds;
 	}
 
+	public CollaborationLayerLogEntryData activeConversationPresenceIds(List<String> activeConversationPresenceIds) {
+		this.activeConversationPresenceIds = activeConversationPresenceIds;
+		return this;
+	}
+
+	public CollaborationLayerLogEntryData addActiveConversationPresenceIdsItem(String activeConversationPresenceIdsItem) {
+		if (this.activeConversationPresenceIds == null) {
+			this.activeConversationPresenceIds = new ArrayList<>();
+		}
+		this.activeConversationPresenceIds.add(activeConversationPresenceIdsItem);
+		return this;
+	}
+
+	/**
+	 * The IDs of the conversation presences that were active at least once while this layer was displayed. A conversation presence indicates that a person was
+	 * connected to the conversation (through a person presence) while the layer was active; it does not prove that the person actually saw the layer. A single
+	 * person can have multiple parallel conversation presences if they are connected with multiple devices. The persons behind these presences are exposed
+	 * as&#x60;participantPersonData&#x60;.
+	 * 
+	 * @return activeConversationPresenceIds
+	 **/
+	@ApiModelProperty(value = "The IDs of the conversation presences that were active at least once while this layer was displayed. A conversation presence indicates that a person was connected to the conversation (through a person presence) while the layer was active; it does not prove that the person actually saw the layer. A single person can have multiple parallel conversation presences if they are connected with multiple devices. The persons behind these presences are exposed as`participantPersonData`.")
+	public List<String> getActiveConversationPresenceIds() {
+		return activeConversationPresenceIds;
+	}
+
+	public void setActiveConversationPresenceIds(List<String> activeConversationPresenceIds) {
+		this.activeConversationPresenceIds = activeConversationPresenceIds;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -419,6 +479,7 @@ public class CollaborationLayerLogEntryData {
 		}
 		CollaborationLayerLogEntryData collaborationLayerLogEntryData = (CollaborationLayerLogEntryData) o;
 		return Objects.equals(this.$type, collaborationLayerLogEntryData.$type) &&
+				Objects.equals(this.id, collaborationLayerLogEntryData.id) &&
 				Objects.equals(this.conversationId, collaborationLayerLogEntryData.conversationId) &&
 				Objects.equals(this.layerType, collaborationLayerLogEntryData.layerType) &&
 				Objects.equals(this.layerOwnerPersonData, collaborationLayerLogEntryData.layerOwnerPersonData) &&
@@ -431,12 +492,13 @@ public class CollaborationLayerLogEntryData {
 				Objects.equals(this.abortTimestamp, collaborationLayerLogEntryData.abortTimestamp) &&
 				Objects.equals(this.layerAbortReason, collaborationLayerLogEntryData.layerAbortReason) &&
 				Objects.equals(this.participantPersonData, collaborationLayerLogEntryData.participantPersonData) &&
-				Objects.equals(this.conversationRecordingIds, collaborationLayerLogEntryData.conversationRecordingIds);
+				Objects.equals(this.conversationRecordingIds, collaborationLayerLogEntryData.conversationRecordingIds) &&
+				Objects.equals(this.activeConversationPresenceIds, collaborationLayerLogEntryData.activeConversationPresenceIds);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, conversationId, layerType, layerOwnerPersonData, startingPersonData, stoppingPersonData, startingTimestamp, approvalTimestamp, activationTimestamp, stopTimestamp, abortTimestamp, layerAbortReason, participantPersonData, conversationRecordingIds);
+		return Objects.hash($type, id, conversationId, layerType, layerOwnerPersonData, startingPersonData, stoppingPersonData, startingTimestamp, approvalTimestamp, activationTimestamp, stopTimestamp, abortTimestamp, layerAbortReason, participantPersonData, conversationRecordingIds, activeConversationPresenceIds);
 	}
 
 	@Override
@@ -444,6 +506,7 @@ public class CollaborationLayerLogEntryData {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class CollaborationLayerLogEntryData {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
+		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    layerType: ").append(toIndentedString(layerType)).append("\n");
 		sb.append("    layerOwnerPersonData: ").append(toIndentedString(layerOwnerPersonData)).append("\n");
@@ -457,6 +520,7 @@ public class CollaborationLayerLogEntryData {
 		sb.append("    layerAbortReason: ").append(toIndentedString(layerAbortReason)).append("\n");
 		sb.append("    participantPersonData: ").append(toIndentedString(participantPersonData)).append("\n");
 		sb.append("    conversationRecordingIds: ").append(toIndentedString(conversationRecordingIds)).append("\n");
+		sb.append("    activeConversationPresenceIds: ").append(toIndentedString(activeConversationPresenceIds)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

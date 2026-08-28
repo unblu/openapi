@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.40.4
+  version: 8.41.4
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -50,12 +50,16 @@ tags:
   description: Service to manage conversation access interceptors
 - name: ConversationHistory
   description: Service to get the history of conversations
+- name: ConversationPresences
+  description: Service to access conversation presences. A conversation presence represents the time span during which a person was actively connected to a conversation.
 - name: ConversationSummaries
   description: Service to manage conversation summary.
 - name: ConversationSummaryTemplates
   description: Service to manage conversation summary template.
 - name: ConversationTemplates
   description: Service to manage all conversation templates.
+- name: ConversationVisibilityRules
+  description: Service to access conversation visibility rules
 - name: Conversations
   description: Service to manage conversations
 - name: CustomActions
@@ -6710,6 +6714,7 @@ paths:
                   nextOffset: null
                   items:
                   - $_type: CollaborationLayerLogEntryData
+                    id: CoLaLogEntryDataSta0001
                     conversationId: AcviDb210C5BoFd6e_79oan
                     layerType: SCREEN_SHARING
                     layerOwnerPersonData: null
@@ -6724,6 +6729,7 @@ paths:
                     participantPersonData: []
                     conversationRecordingIds:
                     - "1000"
+                    activeConversationPresenceIds: null
         required: true
       responses:
         "200":
@@ -7256,6 +7262,152 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
+  /conversationpresences/{conversationPresenceId}/read:
+    get:
+      tags:
+      - ConversationPresences
+      summary: read
+      description: Read a `ConversationPresenceData` by its ID.<br>
+      operationId: conversationPresencesRead
+      parameters:
+      - name: conversationPresenceId
+        in: path
+        description: the ID of the conversation presence to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: the conversation presence
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationPresenceData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /conversationpresences/search:
+    post:
+      tags:
+      - ConversationPresences
+      summary: search
+      description: Search for conversation presences in the current account.<br>
+      operationId: conversationPresencesSearch
+      requestBody:
+        description: "the search query, supporting filters by conversationId, personId, joinedTimestamp and leftTimestamp"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationPresenceQuery"
+            examples:
+              request-body:
+                summary: request body
+                description: Search for conversation presences with all possible filters
+                value:
+                  $_type: ConversationPresenceQuery
+                  searchFilters:
+                  - $_type: ConversationIdConversationPresenceSearchFilter
+                    field: CONVERSATION_ID
+                    operator:
+                      $_type: EqualsIdOperator
+                      type: EQUALS
+                      value: "1000"
+                  - $_type: PersonIdConversationPresenceSearchFilter
+                    field: PERSON_ID
+                    operator:
+                      $_type: EqualsIdOperator
+                      type: EQUALS
+                      value: "1000"
+                  - $_type: JoinedTimestampConversationPresenceSearchFilter
+                    field: JOINED_TIMESTAMP
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1704063600000
+                      maximum: 1704070800000
+                  - $_type: LeftTimestampConversationPresenceSearchFilter
+                    field: LEFT_TIMESTAMP
+                    operator:
+                      $_type: InRangeTimestampOperator
+                      type: IN_RANGE
+                      minimum: 1704067200000
+                      maximum: 1704074400000
+                  orderBy:
+                  - $_type: ConversationPresenceOrderBy
+                    field: CREATION_TIMESTAMP
+                    order: ASCENDING
+                  offset: 0
+                  limit: 1
+        required: true
+      responses:
+        "200":
+          description: a result container with the matching conversation presences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationPresenceResult"
+              examples:
+                response-body:
+                  summary: response body
+                  description: Conversation presences matching the search
+                  value:
+                    $_type: ConversationPresenceResult
+                    hasMoreItems: false
+                    nextOffset: null
+                    items:
+                    - $_type: ConversationPresenceData
+                      id: CoPr3senceD1a2b3c4d5e6
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      personPresence:
+                        $_type: PersonPresenceData
+                        id: xPr3s_1d0-aBcDeFgHiJkL
+                        creationTimestamp: 1546300800000
+                        modificationTimestamp: 1548979200000
+                        accountId: A7d9E_0-c3cC4aoFDb85t6n
+                        joinedTimestamp: 1551398400000
+                        leftTimestamp: null
+                        personId: nta30CBa-6d1a89cE57Db_F
+                        deviceInfo:
+                          $_type: DeviceInfo
+                          id: DeVi3ceInf01a2b3c4d5e6
+                          creationTimestamp: 1546300800000
+                          modificationTimestamp: 1548979200000
+                          accountId: A7d9E_0-c3cC4aoFDb85t6n
+                          osName: fake_osName
+                          osVersion: "1.0"
+                          browserName: fake_runtimeName
+                          browserVersion: fake_runtimeVersion
+                          userAgent: Unit Test Runtime
+                          screenWidth: null
+                          screenHeight: null
+                          screenPixelRatio: null
+                          type: DESKTOP
+                          identifier: test-exmplDeviceIdent0
+                          identifierSource: COOKIE
+                          pushToken: null
+                          pushKitToken: null
+                          mobilePushNotificationVersion: 0
+                          ownerPersonId: nta30CBa-6d1a89cE57Db_F
+                          lastSuccessful2FATimestamp: null
+                          pushNotificationsEnabled: true
+                        impersonationType: NONE
+                        impersonatedFromUserId: null
+                        impersonatedFromAccountId: null
+                        additionalInfo: null
+                        authInfo: null
+                        propagated: false
+                      conversationId: AcviDb210C5BoFd6e_79oan
+                      joinedTimestamp: 1551398400000
+                      leftTimestamp: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /conversationsummaries/{conversationSummaryId}/getAvailableTranslations:
     get:
       tags:
@@ -7833,6 +7985,305 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversationvisibilityrules/create:
+    post:
+      tags:
+      - ConversationVisibilityRules
+      summary: create
+      description: <p>This endpoint is in preview mode.</p>Creates the given conversation visibility rule. The ID of the conversation visibility rule is generated automatically. Any ID provided in the conversation visibility rule entity is ignored.<br>
+      operationId: conversationVisibilityRulesCreate
+      requestBody:
+        description: The conversation visibility rule to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationVisibilityRuleData"
+            examples:
+              create-for-conversation-rule:
+                summary: create for conversation rule
+                description: Create a new conversation visibility rule
+                value:
+                  $_type: ConversationVisibilityRuleData
+                  id: null
+                  accountId: null
+                  name: read-test-rule
+                  enabled: null
+                  description: description of the rule
+                  agentLabelSelection: DEFINED_LABELS
+                  agentLabelNames:
+                  - webapi-conv-rule-agent-label
+                  conversationLabelSelection: DEFINED_LABELS
+                  conversationLabelNames:
+                  - webapi-conv-rule-conversation-label
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+        required: true
+      responses:
+        "200":
+          description: The conversation visibility rule as created in Unblu
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVisibilityRuleData"
+              examples:
+                create-for-conversation-rule:
+                  summary: create for conversation rule
+                  description: New conversation visibility rule
+                  value:
+                    $_type: ConversationVisibilityRuleData
+                    id: g3cv4sPpVCXFgTyEscbbPQ
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: read-test-rule
+                    enabled: true
+                    description: description of the rule
+                    agentLabelSelection: DEFINED_LABELS
+                    agentLabelNames:
+                    - webapi-conv-rule-agent-label
+                    conversationLabelSelection: DEFINED_LABELS
+                    conversationLabelNames:
+                    - webapi-conv-rule-conversation-label
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationvisibilityrules/{conversationVisibilityRuleId}/delete:
+    delete:
+      tags:
+      - ConversationVisibilityRules
+      summary: delete
+      description: <p>This endpoint is in preview mode.</p>Deletes the conversation visibility rule with the given ID<br>
+      operationId: conversationVisibilityRulesDelete
+      parameters:
+      - name: conversationVisibilityRuleId
+        in: path
+        description: The ID of the conversation visibility rule to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationvisibilityrules/getByNames:
+    post:
+      tags:
+      - ConversationVisibilityRules
+      summary: getByNames
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of the conversation visibility rules with the names provided. Names that don't match any conversation visibility rules are ignored.<br>
+      operationId: conversationVisibilityRulesGetByNames
+      requestBody:
+        description: The names of the conversation visibility rules to fetch
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: A list of the conversation visibility rules that match the names provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVisibilityRuleDataList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationvisibilityrules/getByUsedLabelName:
+    post:
+      tags:
+      - ConversationVisibilityRules
+      summary: getByUsedLabelName
+      description: "<p>This endpoint is in preview mode.</p>Returns the conversation visibility rules which use the provided label name in their selection, or an empty list if none are found<br>"
+      operationId: conversationVisibilityRulesGetByUsedLabelName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationVisibilityRulesGetByUsedLabelNameBody"
+        required: true
+      responses:
+        "200":
+          description: A list of the visibility rules found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVisibilityRuleDataList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationvisibilityrules/{conversationVisibilityRuleId}/read:
+    get:
+      tags:
+      - ConversationVisibilityRules
+      summary: read
+      description: <p>This endpoint is in preview mode.</p>Returns the conversation visibility rule with the given ID<br>
+      operationId: conversationVisibilityRulesRead
+      parameters:
+      - name: conversationVisibilityRuleId
+        in: path
+        description: The ID of the conversation visibility rule to return
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The conversation visibility rule with the ID provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVisibilityRuleData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationvisibilityrules/readMultiple:
+    post:
+      tags:
+      - ConversationVisibilityRules
+      summary: readMultiple
+      description: <p>This endpoint is in preview mode.</p>Retrieves a list of conversation visibility rules for the given IDs. IDs that don't match any conversation visibility rules are ignored.<br>
+      operationId: conversationVisibilityRulesReadMultiple
+      requestBody:
+        description: The IDs for which to fetch the conversation visibility rules
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: A list of conversation visibility rules matching the given IDs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVisibilityRuleDataList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationvisibilityrules/search:
+    post:
+      tags:
+      - ConversationVisibilityRules
+      summary: search
+      description: <p>This endpoint is in preview mode.</p>Searches for conversation visibility rules<br>
+      operationId: conversationVisibilityRulesSearch
+      requestBody:
+        description: The query to use for the search
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationVisibilityRuleQuery"
+        required: true
+      responses:
+        "200":
+          description: A container of conversation visibility rules that match the query provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVisibilityRuleResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationvisibilityrules/update:
+    post:
+      tags:
+      - ConversationVisibilityRules
+      summary: update
+      description: <p>This endpoint is in preview mode.</p>Updates the conversation visibility rule. The update fails if no conversation visibility rule exists with the ID provided.<br>
+      operationId: conversationVisibilityRulesUpdate
+      requestBody:
+        description: The details to update the conversation visibility rule with
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationVisibilityRuleData"
+            examples:
+              update-for-conversation-rule:
+                summary: update for conversation rule
+                description: Update a conversation visibility rule
+                value:
+                  $_type: ConversationVisibilityRuleData
+                  id: g3cv4sPpVCXFgTyEscbbPQ
+                  accountId: A7d9E_0-c3cC4aoFDb85t6n
+                  name: rule-for-update
+                  enabled: true
+                  description: updated description
+                  agentLabelSelection: DEFINED_LABELS
+                  agentLabelNames:
+                  - webapi-conv-rule-agent-label
+                  conversationLabelSelection: DEFINED_LABELS
+                  conversationLabelNames:
+                  - webapi-conv-rule-conversation-label
+                  creationTimestamp: 1546300800000
+                  modificationTimestamp: 1548979200000
+                  version: 1
+        required: true
+      responses:
+        "200":
+          description: The updated version of the conversation visibility rule. Always use this instance for any further processing.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVisibilityRuleData"
+              examples:
+                update-for-conversation-rule:
+                  summary: update for conversation rule
+                  description: Updated conversation visibility rule
+                  value:
+                    $_type: ConversationVisibilityRuleData
+                    id: g3cv4sPpVCXFgTyEscbbPQ
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    name: rule-for-update
+                    enabled: true
+                    description: updated description
+                    agentLabelSelection: DEFINED_LABELS
+                    agentLabelNames:
+                    - webapi-conv-rule-agent-label
+                    conversationLabelSelection: DEFINED_LABELS
+                    conversationLabelNames:
+                    - webapi-conv-rule-conversation-label
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 2
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
   /conversations/{conversationId}/addExternalParticipant:
     post:
       tags:
@@ -8396,6 +8847,7 @@ paths:
                       note: ""
                       noteLastEditedTimestamp: null
                       noteLastEditedPersonId: null
+                      archived: false
                       links:
                       - $_type: PersonLink
                         type: AGENT_DESK_VISITOR_DETAILS
@@ -8470,6 +8922,7 @@ paths:
                       note: ""
                       noteLastEditedTimestamp: null
                       noteLastEditedPersonId: null
+                      archived: false
                       links:
                       - $_type: PersonLink
                         type: AGENT_DESK_VISITOR_DETAILS
@@ -16177,6 +16630,7 @@ paths:
                   visitorLabelSelection: DEFINED_LABELS
                   visitorLabelNames:
                   - webapi-label-test-2
+                  showVisitorConversations: null
                   creationTimestamp: null
                   modificationTimestamp: null
                   version: null
@@ -16205,6 +16659,7 @@ paths:
                     visitorLabelSelection: DEFINED_LABELS
                     visitorLabelNames:
                     - webapi-label-test-2
+                    showVisitorConversations: true
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
                     version: 1
@@ -16409,6 +16864,7 @@ paths:
                   visitorLabelSelection: DEFINED_LABELS
                   visitorLabelNames:
                   - webapi-label-test-2
+                  showVisitorConversations: true
                   creationTimestamp: 1546300800000
                   modificationTimestamp: 1548979200000
                   version: 1
@@ -16437,6 +16893,7 @@ paths:
                     visitorLabelSelection: DEFINED_LABELS
                     visitorLabelNames:
                     - webapi-label-test-2
+                    showVisitorConversations: true
                     creationTimestamp: 1546300800000
                     modificationTimestamp: 1548979200000
                     version: 2
@@ -20100,6 +20557,34 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.presence.joined:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.presence.joined
+              description: An event triggered every time a person actively connects to a conversation (a conversation presence is opened). Can be filtered by conversation ID and participant person ID.
+              operationId: conversationPresenceJoinedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationPresenceJoinedEvent"
+              responses:
+                "200":
+                  description: OK
+        conversation.presence.left:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.presence.left
+              description: An event triggered every time a person disconnects from a conversation (a conversation presence is closed). Can be filtered by conversation ID and participant person ID.
+              operationId: conversationPresenceLeftCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationPresenceLeftEvent"
+              responses:
+                "200":
+                  description: OK
         conversation.queued:
           '{$request.body#/endpoint}':
             post:
@@ -20296,6 +20781,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation_visibility_rule:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation_visibility_rule
+              description: "An event triggered every time a `ConversationVisibilityRule` is created, deleted or changed."
+              operationId: conversationVisibilityRuleCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationVisibilityRuleModificationEvent"
+              responses:
+                "200":
+                  description: OK
         deputy_relationship:
           '{$request.body#/endpoint}':
             post:
@@ -20405,6 +20904,34 @@ paths:
                   application/json:
                     schema:
                       $ref: "#/components/schemas/MessageRejectedEvent"
+              responses:
+                "200":
+                  description: OK
+        metrics_snapshot.availability:
+          '{$request.body#/endpoint}':
+            post:
+              summary: metrics_snapshot.availability
+              description: "A snapshot of the account's agent availability: every emission carries the complete current set of online agents subscribed to the queue, including the conversations they are actively handling."
+              operationId: metricsSnapshotAvailabilityCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/AvailabilitySnapshotEvent"
+              responses:
+                "200":
+                  description: OK
+        metrics_snapshot.queue:
+          '{$request.body#/endpoint}':
+            post:
+              summary: metrics_snapshot.queue
+              description: "A snapshot of the account's queue: every emission carries the complete current set of tracked conversations waiting in the queue."
+              operationId: metricsSnapshotQueueCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/QueueSnapshotEvent"
               responses:
                 "200":
                   description: OK
@@ -20896,6 +21423,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WebhookRegistrationList"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /webhookregistrations/{registrationId}/resetDeliveryBackoff:
+    post:
+      tags:
+      - WebhookRegistrations
+      summary: resetDeliveryBackoff
+      description: "Resets the retry backoff of the webhook registration. <p> The waiting time between delivery retries grows exponentially with every failure. Call this once the endpoint is available again to deliver the pending events immediately instead of at the next scheduled retry. <p> <b>Note:</b> The status isn't changed, and only an `ACTIVE` registration delivers. After reactivating a registration that was set to `INACTIVE`, call this operation to drop any backoff it still has. A registration that Unblu deactivated (`INACTIVE_UNAVAILABLE`) has no backoff left, so calling this operation isn't needed.<br>"
+      operationId: webhookRegistrationsResetDeliveryBackoff
+      parameters:
+      - name: registrationId
+        in: path
+        description: The ID of the webhook registration to reset the backoff for
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -21580,6 +22131,101 @@ components:
           $ref: "#/components/schemas/EBranchClientStateDataSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    AgentAvailabilityConversationData:
+      type: object
+      description: A conversation actively handled by an agent in an agent availability snapshot (nested under the agent handling it). Carries exactly the conversation fields common to every snapshot conversation; the queue-specific fields are added by `QueuedConversationData`.
+      properties:
+        $_type:
+          type: string
+          default: AgentAvailabilityConversationData
+          enum:
+          - AgentAvailabilityConversationData
+        id:
+          type: string
+          description: The unique ID of the conversation.
+        conversationTemplateId:
+          type: string
+          description: The conversation template the conversation was created from.
+        recipientId:
+          type: string
+          description: Routing target ID (named area / team / agent).
+        recipientType:
+          $ref: "#/components/schemas/EConversationRecipientType"
+        locale:
+          type: string
+          description: Locale of the conversation language (as BCP 47 language tag form including region if available).
+        initialEngagementType:
+          $ref: "#/components/schemas/EInitialEngagementType"
+        initialEngagementUrl:
+          type: string
+          description: "The URL where the conversation originated. The following conversations always have an initial engagement URL: <ul> <li>Conversations initiated by a visitor on a customer's website where Unblu is integrated</li> <li>PIN-based conversations, provided a visitor redeems the PIN on a customer's website where Unblu is integrated</li> <li>Conversations created using the Web API, provided an initial engagement URL was included when the conversation was created</li> </ul> Conversations initiated from the mobile SDK don't have an initial engagement URL."
+        externalMessengerChannelId:
+          type: string
+          description: ID of the external messenger channel the conversation is linked to. If this property is null the conversation is an Unblu conversation and not linked to an external messenger.
+        contextPersonId:
+          type: string
+          description: The ID of the conversation's context person (visitor); null when no context person is resolvable.
+        topic:
+          type: string
+          description: The conversation topic; null when not available.
+        conversationVisibility:
+          $ref: "#/components/schemas/EConversationVisibility"
+        awaitedPersonType:
+          $ref: "#/components/schemas/EAwaitedPersonType"
+        awaitedPersonTypeChangeTimestamp:
+          type: integer
+          format: int64
+          description: When the awaited person type last changed (Unix timestamp in ms); null when not available.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: When the conversation was created (Unix timestamp in ms).
+        sourceId:
+          type: string
+          description: Custom ID to identify the source of the conversation. Typically used in connection with an external messenger to create a link to the external conversation; null when not available.
+        sourceUrl:
+          type: string
+          description: URL identifying the system where the conversation was created. Null if created in Unblu.
+        priority:
+          $ref: "#/components/schemas/EBusySessionLimitPriority"
+    AgentAvailabilityData:
+      type: object
+      description: "An online agent subscribed to the queue, as reported in a live-tracking snapshot."
+      properties:
+        $_type:
+          type: string
+          default: AgentAvailabilityData
+          enum:
+          - AgentAvailabilityData
+        agentPersonId:
+          type: string
+          description: The person ID of the agent.
+        availableForInboundRequests:
+          type: boolean
+          description: Whether the agent is currently available to be routed new inbound requests.
+        capacities:
+          type: array
+          description: "Per-priority capacity breakdown: the configured session limit and the free slots of each enabled priority, from the highest to the lowest. Populated while the agent is available or busy, empty while they are away. <p> A conversation's priority follows from its queue sorting order through`com.unblu.agentavailability.queueSortingOrderToPriorityMapping`, whose entries are the minimum sorting order of each priority. That mapping is empty by default, in which case every conversation counts as priority 1 and a single capacity is reported. A priority's limit is the account's`com.unblu.agentavailability.busyStateSessionLimitPriority1` to `...Priority4`: the number of ongoing conversations of that priority at which the agent switches to BUSY. A limit of 0 disables that priority, and it is left out here. <p> Once a priority is full, Unblu no longer dispatches conversations of that priority or of any lower one to the agent until a slot frees up, but a conversation of a higher priority still reaches them. That is what lets an agent who is already handling their maximum of asynchronous conversations take on a live conversation, since the asynchronous ones can wait a little longer."
+          items:
+            $ref: "#/components/schemas/CapacityData"
+        teamId:
+          type: string
+          description: The agent's team.
+        filteredNamedAreaIds:
+          type: array
+          description: "The named areas the agent serves. Empty means the agent serves all named areas (wildcard), not none."
+          items:
+            type: string
+        filteredLocales:
+          type: array
+          description: "The languages the agent serves. Empty means the agent serves all languages (wildcard), not none."
+          items:
+            type: string
+        conversations:
+          type: array
+          description: "The conversations this agent is currently handling. A conversation is listed when the agent is its assignee and has it open themselves; another participant's presence does not put it here, so a conversation the assignee has closed in their desk is not reported. <p> An ended conversation is left out even while the agent still has it open, since it no longer counts towards their load. An offboarding one is still listed, because the agent may be doing follow-up work on it. A queued conversation never appears, having no assignee yet."
+          items:
+            $ref: "#/components/schemas/AgentAvailabilityConversationData"
     AgentAvailabilityStateData:
       type: object
       description: Information about an agent's availability for inbound conversation requests
@@ -21885,6 +22531,20 @@ components:
           description: Determines if the target is added as a hidden agent once the invitation is redeemed
         invitationResponseState:
           $ref: "#/components/schemas/EInvitationResponseState"
+    AgentLabelSelectionConversationVisibilityRuleSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: AgentLabelSelectionConversationVisibilityRuleSearchFilter
+          enum:
+          - AgentLabelSelectionConversationVisibilityRuleSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationVisibilityRuleSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/VisibilityRuleLabelSelectionOperator"
     AgentLabelSelectionPersonVisibilityRuleSearchFilter:
       type: object
       required:
@@ -23906,6 +24566,30 @@ components:
           $ref: "#/components/schemas/EAgentStateSearchFilterField"
         operator:
           $ref: "#/components/schemas/IdOperator"
+    AvailabilitySnapshotEvent:
+      type: object
+      description: "A snapshot of the account's agent availability: every emission carries the complete current set of online agents subscribed to the queue, including the conversations they are actively handling."
+      properties:
+        $_type:
+          type: string
+          default: AvailabilitySnapshotEvent
+          enum:
+          - AvailabilitySnapshotEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        agents:
+          type: array
+          description: "All agents subscribed to the inbound request queue. An agent is subscribed when they are online and their inbound queue is enabled, meaning they are a target for requests that name no specific agent. <p> Whether the agent can currently take such a request does not matter: a busy or otherwise unavailable agent is still listed, with`isAvailableForInboundRequests` saying which of them can be dispatched to right now. Agents who are configured to only ever receive invitations and forwardings are not listed at all."
+          items:
+            $ref: "#/components/schemas/AgentAvailabilityData"
     Avatar:
       type: object
       description: derived images model class (used for avatar-images)
@@ -27652,6 +28336,25 @@ components:
           description: The list of the used canned responses
           items:
             $ref: "#/components/schemas/CannedResponse"
+    CapacityData:
+      type: object
+      description: An agent's capacity for conversations of one priority.
+      properties:
+        $_type:
+          type: string
+          default: CapacityData
+          enum:
+          - CapacityData
+        priority:
+          $ref: "#/components/schemas/EBusySessionLimitPriority"
+        capacity:
+          type: integer
+          format: int32
+          description: "The configured busy-state session limit for this priority, that is the number of ongoing conversations of it at which the agent switches to BUSY; null when the priority is configured as unlimited."
+        availableCapacity:
+          type: integer
+          format: int32
+          description: The server-computed free slots for this priority (may be negative); null when the priority is configured as unlimited.
     CardMessageData:
       type: object
       description: "Card message which may contain an image, title, body and actions. <p> All of these parts are optional as long as it contains at least one of them."
@@ -28460,6 +29163,9 @@ components:
           default: CollaborationLayerLogEntryData
           enum:
           - CollaborationLayerLogEntryData
+        id:
+          type: string
+          description: The unique ID of the collaboration layer log entry
         conversationId:
           type: string
           description: The ID of the conversation the event originated from
@@ -28495,12 +29201,17 @@ components:
           $ref: "#/components/schemas/ELayerStopReason"
         participantPersonData:
           type: array
-          description: The list of active participants of the collaboration layer
+          description: "The persons who had an active conversation presence at any point while the collaboration layer was displayed. This is the per-person view of`activeConversationPresenceIds`: it lists the distinct persons behind those conversation presences."
           items:
             $ref: "#/components/schemas/PersonData"
         conversationRecordingIds:
           type: array
           description: "The IDs of the conversation recordings associated with this layer, null if no recording was active"
+          items:
+            type: string
+        activeConversationPresenceIds:
+          type: array
+          description: The IDs of the conversation presences that were active at least once while this layer was displayed. A conversation presence indicates that a person was connected to the conversation (through a person presence) while the layer was active; it does not prove that the person actually saw the layer. A single person can have multiple parallel conversation presences if they are connected with multiple devices. The persons behind these presences are exposed as`participantPersonData`.
           items:
             type: string
     CollaborationLayerLogEntryOrderBy:
@@ -29142,6 +29853,9 @@ components:
         noteLastEditedPersonId:
           type: string
           description: ID of the person who last edited the note
+        archived:
+          type: boolean
+          description: Whether this person has been archived.
         links:
           type: array
           items:
@@ -29415,6 +30129,11 @@ components:
         locale:
           type: string
           description: "The locale of the conversation (e.g., \"en\", \"de\")."
+        labels:
+          type: array
+          description: The labels set on the conversation at the time of the event.
+          items:
+            type: string
         recipient:
           $ref: "#/components/schemas/RecipientAnalyticsKpiData"
         initialEngagementType:
@@ -29948,6 +30667,11 @@ components:
           description: List of conversation state changes that occurred in a conversation with corresponding time stamps
           items:
             $ref: "#/components/schemas/ConversationStateChangeData"
+        labels:
+          type: array
+          description: The labels set on the conversation that are readable by the requesting user
+          items:
+            $ref: "#/components/schemas/LabelData"
     ConversationHistoryDataResult:
       type: object
       description: Container to return list of conversations
@@ -30093,6 +30817,7 @@ components:
       - $ref: "#/components/schemas/LastCompletedRecordingTimestampConversationHistorySearchFilter"
       - $ref: "#/components/schemas/VisibilityConversationHistorySearchFilter"
       - $ref: "#/components/schemas/InheritConfigurationAndTextsConversationHistorySearchFilter"
+      - $ref: "#/components/schemas/LabelsConversationHistorySearchFilter"
       discriminator:
         propertyName: field
         mapping:
@@ -30106,6 +30831,7 @@ components:
           END_TIMESTAMP: "#/components/schemas/EndTimestampConversationHistorySearchFilter"
           INHERIT_CONFIGURATION_AND_TEXTS: "#/components/schemas/InheritConfigurationAndTextsConversationHistorySearchFilter"
           INITIAL_ENGAGEMENT_TYPE: "#/components/schemas/InitialEngagementTypeConversationHistorySearchFilter"
+          LABELS: "#/components/schemas/LabelsConversationHistorySearchFilter"
           LAST_COMPLETED_RECORDING_TIMESTAMP: "#/components/schemas/LastCompletedRecordingTimestampConversationHistorySearchFilter"
           LAST_MESSAGE_TIMESTAMP: "#/components/schemas/LastMessageTimestampConversationHistorySearchFilter"
           PARTICIPANT_EXTERNAL_MESSENGER_CONTACT_ID: "#/components/schemas/ParticipantExternalMessengerContactIdConversationHistorySearchFilter"
@@ -30185,6 +30911,20 @@ components:
           - ConversationIdConversationInvitationSearchFilter
         field:
           $ref: "#/components/schemas/EConversationInvitationSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/IdOperator"
+    ConversationIdConversationPresenceSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ConversationIdConversationPresenceSearchFilter
+          enum:
+          - ConversationIdConversationPresenceSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationPresenceSearchFilterField"
         operator:
           $ref: "#/components/schemas/IdOperator"
     ConversationIdConversationSummarySearchFilter:
@@ -30371,6 +31111,20 @@ components:
           description: The id of the person to who this secondary invitation target belongs to
         responseState:
           $ref: "#/components/schemas/EInvitationResponseState"
+    ConversationLabelSelectionConversationVisibilityRuleSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ConversationLabelSelectionConversationVisibilityRuleSearchFilter
+          enum:
+          - ConversationLabelSelectionConversationVisibilityRuleSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationVisibilityRuleSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/VisibilityRuleLabelSelectionOperator"
     ConversationLabelsBody:
       type: object
       description: "Request body carrying the label names to add to, remove from, or set on a conversation."
@@ -30727,6 +31481,151 @@ components:
           description: The ID of the conversation the participation belongs to
         person:
           $ref: "#/components/schemas/PersonData"
+    ConversationPresenceData:
+      type: object
+      description: Model of a conversation presence.<br> A conversation presence represents the time span during which a person was actively connected to a conversation with a specific device. This means a single person can have multiple parallel conversation presences if they are connected to the same conversation with multiple devices.
+      properties:
+        $_type:
+          type: string
+          default: ConversationPresenceData
+          enum:
+          - ConversationPresenceData
+        id:
+          type: string
+          description: Unique ID of the entity.
+        accountId:
+          type: string
+          description: ID of the account that an entity belongs to.
+        personPresence:
+          $ref: "#/components/schemas/PersonPresenceData"
+        conversationId:
+          type: string
+          description: Conversation ID that an entity belongs to.
+        joinedTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the device of the person connected to the conversation.
+        leftTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the device of the person disconnected from the conversation. `null` while the person is still connected to the conversation.
+    ConversationPresenceJoinedEvent:
+      type: object
+      description: An event triggered every time a person actively connects to a conversation (a conversation presence is opened). Can be filtered by conversation ID and participant person ID.
+      properties:
+        $_type:
+          type: string
+          default: ConversationPresenceJoinedEvent
+          enum:
+          - ConversationPresenceJoinedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationPresence:
+          $ref: "#/components/schemas/ConversationPresenceData"
+    ConversationPresenceLeftEvent:
+      type: object
+      description: An event triggered every time a person disconnects from a conversation (a conversation presence is closed). Can be filtered by conversation ID and participant person ID.
+      properties:
+        $_type:
+          type: string
+          default: ConversationPresenceLeftEvent
+          enum:
+          - ConversationPresenceLeftEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationPresence:
+          $ref: "#/components/schemas/ConversationPresenceData"
+    ConversationPresenceOrderBy:
+      type: object
+      description: ConversationPresence orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: ConversationPresenceOrderBy
+          enum:
+          - ConversationPresenceOrderBy
+        field:
+          $ref: "#/components/schemas/EConversationPresenceOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    ConversationPresenceQuery:
+      type: object
+      description: Container to search ConversationPresences
+      properties:
+        $_type:
+          type: string
+          default: ConversationPresenceQuery
+          enum:
+          - ConversationPresenceQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search
+          items:
+            $ref: "#/components/schemas/ConversationPresenceSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the list of search results
+          items:
+            $ref: "#/components/schemas/ConversationPresenceOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of items returned
+    ConversationPresenceResult:
+      type: object
+      description: Container to return list of conversation presences
+      properties:
+        $_type:
+          type: string
+          default: ConversationPresenceResult
+          enum:
+          - ConversationPresenceResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/ConversationPresenceData"
+    ConversationPresenceSearchFilter:
+      description: ConversationPresence filter item.
+      oneOf:
+      - $ref: "#/components/schemas/ConversationIdConversationPresenceSearchFilter"
+      - $ref: "#/components/schemas/PersonIdConversationPresenceSearchFilter"
+      - $ref: "#/components/schemas/JoinedTimestampConversationPresenceSearchFilter"
+      - $ref: "#/components/schemas/LeftTimestampConversationPresenceSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          CONVERSATION_ID: "#/components/schemas/ConversationIdConversationPresenceSearchFilter"
+          JOINED_TIMESTAMP: "#/components/schemas/JoinedTimestampConversationPresenceSearchFilter"
+          LEFT_TIMESTAMP: "#/components/schemas/LeftTimestampConversationPresenceSearchFilter"
+          PERSON_ID: "#/components/schemas/PersonIdConversationPresenceSearchFilter"
     ConversationQuery:
       type: object
       description: Container to search conversations
@@ -32289,6 +33188,175 @@ components:
         mapping:
           EQUALS: "#/components/schemas/EqualsConversationVisibilityOperator"
           NOT_EQUALS: "#/components/schemas/NotEqualsConversationVisibilityOperator"
+    ConversationVisibilityRuleData:
+      type: object
+      description: <p>This type is in preview mode.</p>Model of a conversation visibility rule.
+      properties:
+        $_type:
+          type: string
+          default: ConversationVisibilityRuleData
+          enum:
+          - ConversationVisibilityRuleData
+        id:
+          type: string
+          description: The rule's unique ID. When creating a rule this property can be omitted; it's generated by the server.
+        accountId:
+          type: string
+          description: "ID of the Unblu account the rule belongs to. When creating an entity, this property can be omitted. Unblu automatically fills it with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Unique name of the visibility rule. Maximum length of 250 characters. Mandatory.
+        enabled:
+          type: boolean
+          description: Flag indicating whether the rule is enabled or not. The default value is true.
+        description:
+          type: string
+          description: Description of the visibility rule. Maximum length of 2000 characters. Optional.
+        agentLabelSelection:
+          $ref: "#/components/schemas/EVisibilityLabelSelection"
+        agentLabelNames:
+          type: array
+          description: A list of all the person labels an agent needs to have so that they're selected by the visibility rule. May contain at most one label per scope. Mandatory when agentLabelSelection = DEFINED_LABELS.
+          items:
+            type: string
+        conversationLabelSelection:
+          $ref: "#/components/schemas/EVisibilityLabelSelection"
+        conversationLabelNames:
+          type: array
+          description: A list of all the conversation labels a conversation needs to carry so that it's selected by the visibility rule. May contain at most one label per scope. Mandatory when conversationLabelSelection = DEFINED_LABELS.
+          items:
+            type: string
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. The version is incremented on each change. Entity updates that aren't based on the latest version are rejected. When creating an object, the version can be omitted."
+      x-status: PREVIEW
+    ConversationVisibilityRuleDataList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationVisibilityRuleDataList
+          enum:
+          - ConversationVisibilityRuleDataList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: "#/components/schemas/ConversationVisibilityRuleData"
+    ConversationVisibilityRuleModificationEvent:
+      type: object
+      description: "An event triggered every time a `ConversationVisibilityRule` is created, deleted or changed."
+      properties:
+        $_type:
+          type: string
+          default: ConversationVisibilityRuleModificationEvent
+          enum:
+          - ConversationVisibilityRuleModificationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        action:
+          $ref: "#/components/schemas/EntityModificationAction"
+        entity:
+          $ref: "#/components/schemas/ConversationVisibilityRuleData"
+        editingUser:
+          $ref: "#/components/schemas/UserInfo"
+    ConversationVisibilityRuleOrderBy:
+      type: object
+      description: ConversationVisibilityRule orderBy item
+      properties:
+        $_type:
+          type: string
+          default: ConversationVisibilityRuleOrderBy
+          enum:
+          - ConversationVisibilityRuleOrderBy
+        field:
+          $ref: "#/components/schemas/EConversationVisibilityRuleOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    ConversationVisibilityRuleQuery:
+      type: object
+      description: Container to search conversation visibility rules
+      properties:
+        $_type:
+          type: string
+          default: ConversationVisibilityRuleQuery
+          enum:
+          - ConversationVisibilityRuleQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search
+          items:
+            $ref: "#/components/schemas/ConversationVisibilityRuleSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the list of search results
+          items:
+            $ref: "#/components/schemas/ConversationVisibilityRuleOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of items returned
+    ConversationVisibilityRuleResult:
+      type: object
+      description: Container to return list of conversation visibility rules
+      properties:
+        $_type:
+          type: string
+          default: ConversationVisibilityRuleResult
+          enum:
+          - ConversationVisibilityRuleResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/ConversationVisibilityRuleData"
+    ConversationVisibilityRuleSearchFilter:
+      description: ConversationVisibilityRule filter item
+      oneOf:
+      - $ref: "#/components/schemas/NameConversationVisibilityRuleSearchFilter"
+      - $ref: "#/components/schemas/AgentLabelSelectionConversationVisibilityRuleSearchFilter"
+      - $ref: "#/components/schemas/ConversationLabelSelectionConversationVisibilityRuleSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          AGENT_LABEL_SELECTION: "#/components/schemas/AgentLabelSelectionConversationVisibilityRuleSearchFilter"
+          CONVERSATION_LABEL_SELECTION: "#/components/schemas/ConversationLabelSelectionConversationVisibilityRuleSearchFilter"
+          NAME: "#/components/schemas/NameConversationVisibilityRuleSearchFilter"
+    ConversationVisibilityRulesGetByUsedLabelNameBody:
+      type: object
+      description: Request body for the 'conversationVisibilityRulesGetByUsedLabelName' operation
+      properties:
+        labelName:
+          type: string
+          description: The name of a conversation label to search for in the rule selection
     ConversationsAddExternalParticipantBody:
       type: object
       description: Request body for the 'conversationsAddExternalParticipant' operation
@@ -36538,6 +37606,19 @@ components:
       - "ACTIVE: Branch is fully active and can be used"
       - "MAINTENANCE: Branch is currently under maintenance and isn't fully accessible for agents. Technicians can access the branch to configure it and to test functionality."
       - "INACTIVE: Branch is inactive and cannot be used"
+    EBusySessionLimitPriority:
+      type: string
+      description: "Enumeration that makes it easier to deal with the different busyStateSessionLimitXXX configuration properties. <p> The order in which the elements is defined is important! They are orderer from higher to lower priority <p> The constants carry no state, so that the enum can be used as a field of a transferable model."
+      enum:
+      - PRIORITY_1
+      - PRIORITY_2
+      - PRIORITY_3
+      - PRIORITY_4
+      x-enum-descriptions:
+      - PRIORITY_1
+      - PRIORITY_2
+      - PRIORITY_3
+      - PRIORITY_4
     ECallEndReason:
       type: string
       description: The reason a call has ended
@@ -36997,11 +38078,13 @@ components:
       - ACCESS_AS_AGENT_PARTICIPANT
       - ACCESS_AS_GHOST_PARTICIPANT
       - ACCESS_AS_GHOST_WITHOUT_PARTICIPATION
+      - EXPORT_CONVERSATION_LOG
       x-enum-descriptions:
       - "ACCESS_AS_VISITOR_PARTICIPANT: A visitor person with an active conversation participation is trying to open the conversation"
       - "ACCESS_AS_AGENT_PARTICIPANT: An agent person with an active conversation participation is trying to open the conversation in \"normal\" mode"
       - "ACCESS_AS_GHOST_PARTICIPANT: An agent person with an active conversation participation is trying to open the conversation as a ghost"
       - "ACCESS_AS_GHOST_WITHOUT_PARTICIPATION: An agent person without an active conversation participation is trying to open the conversation as a ghost"
+      - "EXPORT_CONVERSATION_LOG: An agent is trying to export the conversation logs"
     EConversationAgentParticipationType:
       type: string
       description: "This enum contains all agent participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`EConversationImpactingParticipationType`</b> All human participation types (No recorder) <li><b>`EConversationRealParticipationType`</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
@@ -37138,6 +38221,7 @@ components:
       - LAST_COMPLETED_RECORDING_TIMESTAMP
       - VISIBILITY
       - INHERIT_CONFIGURATION_AND_TEXTS
+      - LABELS
       x-enum-descriptions:
       - COMPOUND
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
@@ -37161,6 +38245,7 @@ components:
       - "LAST_COMPLETED_RECORDING_TIMESTAMP: Filter by the 'lastCompletedRecordingTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "VISIBILITY: Filter by the 'conversationVisibility' attribute"
       - "INHERIT_CONFIGURATION_AND_TEXTS: Filter by the 'inheritConfigurationAndTexts' attribute"
+      - "LABELS: Filter by the names of the labels set on the conversation"
     EConversationImpactingParticipationType:
       type: string
       description: "This enum contains all human participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`ENonVisitorParticipationType`</b> All types excluding visitors <li><b> EConversationImpactingParticipationType</b> All human participation types (No recorder) <li><b>`EConversationRealParticipationType`</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
@@ -37384,6 +38469,26 @@ components:
       - SECONDARY_VISITOR
       - GHOST
       - RECORDER
+    EConversationPresenceOrderByField:
+      type: string
+      enum:
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EConversationPresenceSearchFilterField:
+      type: string
+      enum:
+      - CONVERSATION_ID
+      - PERSON_ID
+      - JOINED_TIMESTAMP
+      - LEFT_TIMESTAMP
+      x-enum-descriptions:
+      - "CONVERSATION_ID: Filter by the 'conversationId' attribute"
+      - "PERSON_ID: Filter by the 'personId' attribute (resolved through the associated person presence)"
+      - "JOINED_TIMESTAMP: Filter by the 'joinedTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "LEFT_TIMESTAMP: Filter by the 'leftTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EConversationRatingMode:
       type: string
       description: How the result of a rating question message affects the conversation rating.
@@ -37703,6 +38808,26 @@ components:
       x-enum-descriptions:
       - "EQUALS: Check if the value is equal to the one provided in the operator"
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+    EConversationVisibilityRuleOrderByField:
+      type: string
+      enum:
+      - ID
+      - NAME
+      - CREATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'ID' attribute"
+      - "NAME: Sort by the 'name' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+    EConversationVisibilityRuleSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - AGENT_LABEL_SELECTION
+      - CONVERSATION_LABEL_SELECTION
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+      - "AGENT_LABEL_SELECTION: Filter by the 'agentLabelSelection' attribute"
+      - "CONVERSATION_LABEL_SELECTION: Filter by the 'conversationLabelSelection' attribute"
     EConversationsEndedCountGroupBy:
       type: string
       enum:
@@ -39758,16 +40883,6 @@ components:
       - "TEAM_ID: Filter by the 'teamId' attribute"
       - "PERSON_LABELS: Filter by the 'name' attribute of assigned person labels"
       - "COMPOUND: Filter meant for linking other filters with logical AND/OR"
-    EPersonVisibilityLabelSelection:
-      type: string
-      enum:
-      - ALL
-      - UNLABELED
-      - DEFINED_LABELS
-      x-enum-descriptions:
-      - "ALL: Any person matches the selection"
-      - "UNLABELED: Only a person without any assigned labels matches the selection"
-      - "DEFINED_LABELS: Only a person with all of the defined labels matches the selection"
     EPersonVisibilityRuleOrderByField:
       type: string
       enum:
@@ -40307,6 +41422,16 @@ components:
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "VIRTUAL_USER: Filter by the 'virtualUser' attribute"
       - "EXTERNALLY_MANAGED: Filter by the 'externallyManaged' attribute"
+    EVisibilityLabelSelection:
+      type: string
+      enum:
+      - ALL
+      - UNLABELED
+      - DEFINED_LABELS
+      x-enum-descriptions:
+      - "ALL: Any person matches the selection"
+      - "UNLABELED: Only a person without any assigned labels matches the selection"
+      - "DEFINED_LABELS: Only a person with all of the defined labels matches the selection"
     EVisibilityRuleLabelSelectionOperatorType:
       type: string
       enum:
@@ -41142,7 +42267,7 @@ components:
         type:
           $ref: "#/components/schemas/EVisibilityRuleLabelSelectionOperatorType"
         value:
-          $ref: "#/components/schemas/EPersonVisibilityLabelSelection"
+          $ref: "#/components/schemas/EVisibilityLabelSelection"
     Error:
       type: object
       properties:
@@ -42439,6 +43564,30 @@ components:
           $ref: "#/components/schemas/EUserSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    GeoLocation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: GeoLocation
+          enum:
+          - GeoLocation
+        continent:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        city:
+          type: string
+        userAgentTimeZone:
+          type: string
+        longitude:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
     GlobalChangeAuditChangeSearchFilter:
       type: object
       required:
@@ -44114,6 +45263,20 @@ components:
           - IsNullTimestampOperator
         type:
           $ref: "#/components/schemas/ETimestampOperatorType"
+    JoinedTimestampConversationPresenceSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: JoinedTimestampConversationPresenceSearchFilter
+          enum:
+          - JoinedTimestampConversationPresenceSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationPresenceSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     JoinedTimestampPersonPresenceSearchFilter:
       type: object
       required:
@@ -44330,6 +45493,20 @@ components:
         propertyName: field
         mapping:
           NAME: "#/components/schemas/NameLabelSearchFilter"
+    LabelsConversationHistorySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: LabelsConversationHistorySearchFilter
+          enum:
+          - LabelsConversationHistorySearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationHistorySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/LabelsOperator"
     LabelsConversationSearchFilter:
       type: object
       required:
@@ -44533,6 +45710,20 @@ components:
         errorDescription:
           type: string
           description: Error description if the LDAP sync finishes with an error.
+    LeftTimestampConversationPresenceSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: LeftTimestampConversationPresenceSearchFilter
+          enum:
+          - LeftTimestampConversationPresenceSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationPresenceSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     LeftTimestampPersonPresenceSearchFilter:
       type: object
       required:
@@ -46157,6 +47348,20 @@ components:
           $ref: "#/components/schemas/EConversationTemplateSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    NameConversationVisibilityRuleSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: NameConversationVisibilityRuleSearchFilter
+          enum:
+          - NameConversationVisibilityRuleSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationVisibilityRuleSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     NameCustomExternalMessengerChannelSearchFilter:
       type: object
       required:
@@ -47161,7 +48366,7 @@ components:
         type:
           $ref: "#/components/schemas/EVisibilityRuleLabelSelectionOperatorType"
         value:
-          $ref: "#/components/schemas/EPersonVisibilityLabelSelection"
+          $ref: "#/components/schemas/EVisibilityLabelSelection"
     NotInAccountIngressEntryPathOperator:
       type: object
       required:
@@ -48610,6 +49815,9 @@ components:
         noteLastEditedPersonId:
           type: string
           description: ID of the person who last edited the note
+        archived:
+          type: boolean
+          description: Whether this person has been archived.
         links:
           type: array
           items:
@@ -48654,6 +49862,20 @@ components:
           - PersonIdCannedResponseUsageSearchFilter
         field:
           $ref: "#/components/schemas/ECannedResponseUsageSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/IdOperator"
+    PersonIdConversationPresenceSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: PersonIdConversationPresenceSearchFilter
+          enum:
+          - PersonIdConversationPresenceSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationPresenceSearchFilterField"
         operator:
           $ref: "#/components/schemas/IdOperator"
     PersonIdExternalMessengerContactSearchFilter:
@@ -49149,7 +50371,7 @@ components:
           - PersonVisibilityRuleData
         id:
           type: string
-          description: "The person's unique ID. When creating a person this property can be omitted, it's generated by the server."
+          description: "The rule's unique ID. When creating a rule this property can be omitted, it's generated by the server."
         accountId:
           type: string
           description: "ID of the Unblu account the person belongs to. When creating an entity this property can be omitted. Unblu automatically fills it with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
@@ -49161,21 +50383,24 @@ components:
           description: Flag indicating whether the rule is enabled or not. The default value is true.
         description:
           type: string
-          description: Description of the visibility rule. Maximum length of 500 characters. Optional.
+          description: Description of the visibility rule. Maximum length of 2000 characters. Optional.
         agentLabelSelection:
-          $ref: "#/components/schemas/EPersonVisibilityLabelSelection"
+          $ref: "#/components/schemas/EVisibilityLabelSelection"
         agentLabelNames:
           type: array
-          description: "A list of all the person labels an agent needs to have so that they're selected by the visibility rule. For any given scope, the list may only contain one label in that scope. Mandatory when agentLabelSelection = DEFINED_LIST."
+          description: A list of all the person labels an agent needs to have so that they're selected by the visibility rule. May contain at most one label per scope. Mandatory when agentLabelSelection = DEFINED_LABELS.
           items:
             type: string
         visitorLabelSelection:
-          $ref: "#/components/schemas/EPersonVisibilityLabelSelection"
+          $ref: "#/components/schemas/EVisibilityLabelSelection"
         visitorLabelNames:
           type: array
-          description: "A list of all the person labels a visitor needs to have so that they're selected by the visibility rule. For any given scope, the list may only contain one label in that scope. Mandatory when visitorLabelSelection = DEFINED_LIST."
+          description: A list of all the person labels a visitor needs to have so that they're selected by the visibility rule. May contain at most one label per scope. Mandatory when visitorLabelSelection = DEFINED_LABELS.
           items:
             type: string
+        showVisitorConversations:
+          type: boolean
+          description: "When true, an agent matched by this rule additionally sees the conversations of the context persons the rule grants visibility of. Evaluated against the context person's labels only, not the conversation's own labels. The default value is true, so a rule keeps exposing those persons' conversations unless this is explicitly disabled."
         creationTimestamp:
           type: integer
           format: int64
@@ -50078,6 +51303,102 @@ components:
             $ref: "#/components/schemas/EQueueInteractionGroupBy"
         filters:
           $ref: "#/components/schemas/QueueInteractionCountAnalyticsKpiFilterData"
+    QueueSnapshotEvent:
+      type: object
+      description: "A snapshot of the account's queue: every emission carries the complete current set of tracked conversations waiting in the queue."
+      properties:
+        $_type:
+          type: string
+          default: QueueSnapshotEvent
+          enum:
+          - QueueSnapshotEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        queuedConversations:
+          type: array
+          description: All conversations that are in QUEUED state at the time of the snapshot.
+          items:
+            $ref: "#/components/schemas/QueuedConversationData"
+    QueuedConversationData:
+      type: object
+      description: A conversation waiting in the queue in a live-tracking snapshot. Adds the queue-specific fields to the conversation fields shared with`AgentAvailabilityConversationData`.
+      properties:
+        $_type:
+          type: string
+          default: QueuedConversationData
+          enum:
+          - QueuedConversationData
+        id:
+          type: string
+          description: The unique ID of the conversation.
+        conversationTemplateId:
+          type: string
+          description: The conversation template the conversation was created from.
+        recipientId:
+          type: string
+          description: Routing target ID (named area / team / agent).
+        recipientType:
+          $ref: "#/components/schemas/EConversationRecipientType"
+        locale:
+          type: string
+          description: Locale of the conversation language (as BCP 47 language tag form including region if available).
+        initialEngagementType:
+          $ref: "#/components/schemas/EInitialEngagementType"
+        initialEngagementUrl:
+          type: string
+          description: "The URL where the conversation originated. The following conversations always have an initial engagement URL: <ul> <li>Conversations initiated by a visitor on a customer's website where Unblu is integrated</li> <li>PIN-based conversations, provided a visitor redeems the PIN on a customer's website where Unblu is integrated</li> <li>Conversations created using the Web API, provided an initial engagement URL was included when the conversation was created</li> </ul> Conversations initiated from the mobile SDK don't have an initial engagement URL."
+        externalMessengerChannelId:
+          type: string
+          description: ID of the external messenger channel the conversation is linked to. If this property is null the conversation is an Unblu conversation and not linked to an external messenger.
+        contextPersonId:
+          type: string
+          description: The ID of the conversation's context person (visitor); null when no context person is resolvable.
+        topic:
+          type: string
+          description: The conversation topic; null when not available.
+        conversationVisibility:
+          $ref: "#/components/schemas/EConversationVisibility"
+        awaitedPersonType:
+          $ref: "#/components/schemas/EAwaitedPersonType"
+        awaitedPersonTypeChangeTimestamp:
+          type: integer
+          format: int64
+          description: When the awaited person type last changed (Unix timestamp in ms); null when not available.
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: When the conversation was created (Unix timestamp in ms).
+        sourceId:
+          type: string
+          description: Custom ID to identify the source of the conversation. Typically used in connection with an external messenger to create a link to the external conversation; null when not available.
+        sourceUrl:
+          type: string
+          description: URL identifying the system where the conversation was created. Null if created in Unblu.
+        priority:
+          $ref: "#/components/schemas/EBusySessionLimitPriority"
+        sortingOrder:
+          type: integer
+          format: int64
+          description: "The queue sorting order of the conversation. Always set: a queued conversation is given the configured order, defaulting to`com.unblu.conversation.invitation.conversationRequestQueueSortingOrder`."
+        queueTimestamp:
+          type: integer
+          format: int64
+          description: When the conversation entered the queue (Unix timestamp in ms).
+        preferredAgentPersonIds:
+          type: array
+          description: The person IDs of the agents preferred for this queued conversation; null or empty when none.
+          items:
+            type: string
+        geolocation:
+          $ref: "#/components/schemas/GeoLocation"
     QuickReply:
       type: object
       description: "Represents a Quick reply option, which can be optionally added to a certain `PostMessageData`"

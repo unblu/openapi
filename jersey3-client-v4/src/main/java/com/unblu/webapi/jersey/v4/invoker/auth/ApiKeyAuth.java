@@ -1,10 +1,10 @@
 
 package com.unblu.webapi.jersey.v4.invoker.auth;
 
-import com.unblu.webapi.jersey.v4.invoker.Pair;
-
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import com.unblu.webapi.jersey.v4.invoker.Pair;
 
 public class ApiKeyAuth implements Authentication {
 	private final String location;

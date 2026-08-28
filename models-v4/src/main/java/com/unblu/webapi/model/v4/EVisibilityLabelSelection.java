@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EPersonVisibilityLabelSelection
+ * Gets or Sets EVisibilityLabelSelection
  */
-public enum EPersonVisibilityLabelSelection {
+public enum EVisibilityLabelSelection {
 
 	/**
 	 * ALL: Any person matches the selection
@@ -26,7 +26,7 @@ public enum EPersonVisibilityLabelSelection {
 
 	private String value;
 
-	EPersonVisibilityLabelSelection(String value) {
+	EVisibilityLabelSelection(String value) {
 		this.value = value;
 	}
 
@@ -41,8 +41,8 @@ public enum EPersonVisibilityLabelSelection {
 	}
 
 	@JsonCreator
-	public static EPersonVisibilityLabelSelection fromValue(String value) {
-		for (EPersonVisibilityLabelSelection b : EPersonVisibilityLabelSelection.values()) {
+	public static EVisibilityLabelSelection fromValue(String value) {
+		for (EVisibilityLabelSelection b : EVisibilityLabelSelection.values()) {
 			if (b.value.equals(value)) {
 				return b;
 			}

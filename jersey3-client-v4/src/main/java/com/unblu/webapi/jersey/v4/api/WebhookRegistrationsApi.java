@@ -1,22 +1,21 @@
 package com.unblu.webapi.jersey.v4.api;
 
-import com.unblu.webapi.jersey.v4.invoker.ApiException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.unblu.webapi.jersey.v4.invoker.ApiClient;
+import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
-
-import jakarta.ws.rs.core.GenericType;
-
 import com.unblu.webapi.model.v4.WebhookRegistration;
 import com.unblu.webapi.model.v4.WebhookRegistrationList;
 import com.unblu.webapi.model.v4.WebhookRegistrationQuery;
 import com.unblu.webapi.model.v4.WebhookRegistrationResult;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import jakarta.ws.rs.core.GenericType;
 
 public class WebhookRegistrationsApi {
 	private ApiClient apiClient;
@@ -286,6 +285,63 @@ public class WebhookRegistrationsApi {
 		GenericType<WebhookRegistrationList> localVarReturnType = new GenericType<WebhookRegistrationList>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * resetDeliveryBackoff Resets the retry backoff of the webhook registration. &lt;p&gt; The waiting time between delivery retries grows exponentially with every
+	 * failure. Call this once the endpoint is available again to deliver the pending events immediately instead of at the next scheduled retry. &lt;p&gt;
+	 * &lt;b&gt;Note:&lt;/b&gt; The status isn&#39;t changed, and only an &#x60;ACTIVE&#x60; registration delivers. After reactivating a registration that was set
+	 * to &#x60;INACTIVE&#x60;, call this operation to drop any backoff it still has. A registration that Unblu deactivated (&#x60;INACTIVE_UNAVAILABLE&#x60;) has
+	 * no backoff left, so calling this operation isn&#39;t needed.&lt;br&gt;
+	 * 
+	 * @param registrationId The ID of the webhook registration to reset the backoff for (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void webhookRegistrationsResetDeliveryBackoff(String registrationId) throws ApiException {
+
+		webhookRegistrationsResetDeliveryBackoffWithHttpInfo(registrationId);
+	}
+
+	/**
+	 * resetDeliveryBackoff Resets the retry backoff of the webhook registration. &lt;p&gt; The waiting time between delivery retries grows exponentially with every
+	 * failure. Call this once the endpoint is available again to deliver the pending events immediately instead of at the next scheduled retry. &lt;p&gt;
+	 * &lt;b&gt;Note:&lt;/b&gt; The status isn&#39;t changed, and only an &#x60;ACTIVE&#x60; registration delivers. After reactivating a registration that was set
+	 * to &#x60;INACTIVE&#x60;, call this operation to drop any backoff it still has. A registration that Unblu deactivated (&#x60;INACTIVE_UNAVAILABLE&#x60;) has
+	 * no backoff left, so calling this operation isn&#39;t needed.&lt;br&gt;
+	 * 
+	 * @param registrationId The ID of the webhook registration to reset the backoff for (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> webhookRegistrationsResetDeliveryBackoffWithHttpInfo(String registrationId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'registrationId' is set
+		if (registrationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'registrationId' when calling webhookRegistrationsResetDeliveryBackoff");
+		}
+
+		// create path and map variables
+		String localVarPath = "/webhookregistrations/{registrationId}/resetDeliveryBackoff"
+				.replaceAll("\\{" + "registrationId" + "\\}", apiClient.escapeString(registrationId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
 	}
 
 	/**

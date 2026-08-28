@@ -27,7 +27,12 @@ public enum EConversationAccessType {
 	/**
 	 * ACCESS_AS_GHOST_WITHOUT_PARTICIPATION: An agent person without an active conversation participation is trying to open the conversation as a ghost
 	 */
-	ACCESS_AS_GHOST_WITHOUT_PARTICIPATION("ACCESS_AS_GHOST_WITHOUT_PARTICIPATION");
+	ACCESS_AS_GHOST_WITHOUT_PARTICIPATION("ACCESS_AS_GHOST_WITHOUT_PARTICIPATION"),
+
+	/**
+	 * EXPORT_CONVERSATION_LOG: An agent is trying to export the conversation logs
+	 */
+	EXPORT_CONVERSATION_LOG("EXPORT_CONVERSATION_LOG");
 
 	private String value;
 

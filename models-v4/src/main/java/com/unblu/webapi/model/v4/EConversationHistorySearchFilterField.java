@@ -118,7 +118,12 @@ public enum EConversationHistorySearchFilterField {
 	/**
 	 * INHERIT_CONFIGURATION_AND_TEXTS: Filter by the &#39;inheritConfigurationAndTexts&#39; attribute
 	 */
-	INHERIT_CONFIGURATION_AND_TEXTS("INHERIT_CONFIGURATION_AND_TEXTS");
+	INHERIT_CONFIGURATION_AND_TEXTS("INHERIT_CONFIGURATION_AND_TEXTS"),
+
+	/**
+	 * LABELS: Filter by the names of the labels set on the conversation
+	 */
+	LABELS("LABELS");
 
 	private String value;
 

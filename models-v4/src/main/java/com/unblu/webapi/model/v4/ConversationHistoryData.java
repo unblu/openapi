@@ -51,6 +51,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryData.JSON_PROPERTY_AWAITED_PERSON_TYPE_CHANGE_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_CONVERSATION_VISIBILITY,
 	ConversationHistoryData.JSON_PROPERTY_STATE_CHANGES,
+	ConversationHistoryData.JSON_PROPERTY_LABELS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationHistoryData {
@@ -206,6 +207,10 @@ public class ConversationHistoryData {
 	public static final String JSON_PROPERTY_STATE_CHANGES = "stateChanges";
 	@JsonProperty(JSON_PROPERTY_STATE_CHANGES)
 	private List<ConversationStateChangeData> stateChanges = null;
+
+	public static final String JSON_PROPERTY_LABELS = "labels";
+	@JsonProperty(JSON_PROPERTY_LABELS)
+	private List<LabelData> labels = null;
 
 	public ConversationHistoryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -817,6 +822,33 @@ public class ConversationHistoryData {
 		this.stateChanges = stateChanges;
 	}
 
+	public ConversationHistoryData labels(List<LabelData> labels) {
+		this.labels = labels;
+		return this;
+	}
+
+	public ConversationHistoryData addLabelsItem(LabelData labelsItem) {
+		if (this.labels == null) {
+			this.labels = new ArrayList<>();
+		}
+		this.labels.add(labelsItem);
+		return this;
+	}
+
+	/**
+	 * The labels set on the conversation that are readable by the requesting user
+	 * 
+	 * @return labels
+	 **/
+	@ApiModelProperty(value = "The labels set on the conversation that are readable by the requesting user")
+	public List<LabelData> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<LabelData> labels) {
+		this.labels = labels;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -855,12 +887,13 @@ public class ConversationHistoryData {
 				Objects.equals(this.awaitedPersonType, conversationHistoryData.awaitedPersonType) &&
 				Objects.equals(this.awaitedPersonTypeChangeTimestamp, conversationHistoryData.awaitedPersonTypeChangeTimestamp) &&
 				Objects.equals(this.conversationVisibility, conversationHistoryData.conversationVisibility) &&
-				Objects.equals(this.stateChanges, conversationHistoryData.stateChanges);
+				Objects.equals(this.stateChanges, conversationHistoryData.stateChanges) &&
+				Objects.equals(this.labels, conversationHistoryData.labels);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, recipient, endPerson, participants, externalParticipants, botParticipants, createdTimestamp, assigneeJoinTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, state, initialEngagementType, locale, endReason, endComment, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, dueDeletionTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, conversationVisibility, stateChanges);
+		return Objects.hash($type, id, recipient, endPerson, participants, externalParticipants, botParticipants, createdTimestamp, assigneeJoinTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, state, initialEngagementType, locale, endReason, endComment, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, dueDeletionTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, conversationVisibility, stateChanges, labels);
 	}
 
 	@Override
@@ -897,6 +930,7 @@ public class ConversationHistoryData {
 		sb.append("    awaitedPersonTypeChangeTimestamp: ").append(toIndentedString(awaitedPersonTypeChangeTimestamp)).append("\n");
 		sb.append("    conversationVisibility: ").append(toIndentedString(conversationVisibility)).append("\n");
 		sb.append("    stateChanges: ").append(toIndentedString(stateChanges)).append("\n");
+		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

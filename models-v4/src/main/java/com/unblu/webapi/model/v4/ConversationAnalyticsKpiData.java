@@ -1,6 +1,8 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -23,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationAnalyticsKpiData.JSON_PROPERTY_ID,
 	ConversationAnalyticsKpiData.JSON_PROPERTY_TEMPLATE_ID,
 	ConversationAnalyticsKpiData.JSON_PROPERTY_LOCALE,
+	ConversationAnalyticsKpiData.JSON_PROPERTY_LABELS,
 	ConversationAnalyticsKpiData.JSON_PROPERTY_RECIPIENT,
 	ConversationAnalyticsKpiData.JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE,
 	ConversationAnalyticsKpiData.JSON_PROPERTY_INITIAL_ENGAGEMENT_URL,
@@ -79,6 +82,10 @@ public class ConversationAnalyticsKpiData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_LABELS = "labels";
+	@JsonProperty(JSON_PROPERTY_LABELS)
+	private List<String> labels = null;
 
 	public static final String JSON_PROPERTY_RECIPIENT = "recipient";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT)
@@ -174,6 +181,33 @@ public class ConversationAnalyticsKpiData {
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public ConversationAnalyticsKpiData labels(List<String> labels) {
+		this.labels = labels;
+		return this;
+	}
+
+	public ConversationAnalyticsKpiData addLabelsItem(String labelsItem) {
+		if (this.labels == null) {
+			this.labels = new ArrayList<>();
+		}
+		this.labels.add(labelsItem);
+		return this;
+	}
+
+	/**
+	 * The labels set on the conversation at the time of the event.
+	 * 
+	 * @return labels
+	 **/
+	@ApiModelProperty(value = "The labels set on the conversation at the time of the event.")
+	public List<String> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
 	}
 
 	public ConversationAnalyticsKpiData recipient(RecipientAnalyticsKpiData recipient) {
@@ -284,6 +318,7 @@ public class ConversationAnalyticsKpiData {
 				Objects.equals(this.id, conversationAnalyticsKpiData.id) &&
 				Objects.equals(this.templateId, conversationAnalyticsKpiData.templateId) &&
 				Objects.equals(this.locale, conversationAnalyticsKpiData.locale) &&
+				Objects.equals(this.labels, conversationAnalyticsKpiData.labels) &&
 				Objects.equals(this.recipient, conversationAnalyticsKpiData.recipient) &&
 				Objects.equals(this.initialEngagementType, conversationAnalyticsKpiData.initialEngagementType) &&
 				Objects.equals(this.initialEngagementUrl, conversationAnalyticsKpiData.initialEngagementUrl) &&
@@ -293,7 +328,7 @@ public class ConversationAnalyticsKpiData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, templateId, locale, recipient, initialEngagementType, initialEngagementUrl, contextPerson, assignedAgent);
+		return Objects.hash($type, id, templateId, locale, labels, recipient, initialEngagementType, initialEngagementUrl, contextPerson, assignedAgent);
 	}
 
 	@Override
@@ -304,6 +339,7 @@ public class ConversationAnalyticsKpiData {
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    recipient: ").append(toIndentedString(recipient)).append("\n");
 		sb.append("    initialEngagementType: ").append(toIndentedString(initialEngagementType)).append("\n");
 		sb.append("    initialEngagementUrl: ").append(toIndentedString(initialEngagementUrl)).append("\n");
