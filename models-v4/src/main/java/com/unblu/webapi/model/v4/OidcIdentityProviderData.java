@@ -736,11 +736,11 @@ public class OidcIdentityProviderData {
 	}
 
 	/**
-	 * The interval in minutes at which OIDC tokens are refreshed
+	 * The interval in minutes at which OIDC tokens are refreshed. Mandatory.
 	 * 
 	 * @return refreshInterval
 	 **/
-	@ApiModelProperty(value = "The interval in minutes at which OIDC tokens are refreshed")
+	@ApiModelProperty(value = "The interval in minutes at which OIDC tokens are refreshed. Mandatory.")
 	public Integer getRefreshInterval() {
 		return refreshInterval;
 	}

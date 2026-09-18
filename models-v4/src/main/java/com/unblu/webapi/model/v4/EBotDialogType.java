@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EBotDialogType {
 
 	/**
-	 * ONBOARDING
+	 * ONBOARDING: Dialog run while the conversation is in the onboarding state, before it is queued or assigned
 	 */
 	ONBOARDING("ONBOARDING"),
 
 	/**
-	 * REBOARDING
+	 * REBOARDING: Dialog run while the conversation is in the reboarding state, after a message is sent to an unassigned conversation
 	 */
 	REBOARDING("REBOARDING"),
 
 	/**
-	 * OFFBOARDING
+	 * OFFBOARDING: Dialog run while the conversation is in the offboarding state, before it ends
 	 */
 	OFFBOARDING("OFFBOARDING");
 

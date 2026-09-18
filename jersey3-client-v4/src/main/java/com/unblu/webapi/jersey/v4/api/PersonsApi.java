@@ -20,6 +20,7 @@ import com.unblu.webapi.model.v4.NotificationCountData;
 import com.unblu.webapi.model.v4.NotificationCountForConversationsData;
 import com.unblu.webapi.model.v4.NotificationCountForConversationsRequest;
 import com.unblu.webapi.model.v4.PersonData;
+import com.unblu.webapi.model.v4.PersonOutOfOfficeBody;
 import com.unblu.webapi.model.v4.PersonQuery;
 import com.unblu.webapi.model.v4.PersonResult;
 import com.unblu.webapi.model.v4.PersonStateData;
@@ -189,9 +190,11 @@ public class PersonsApi {
 	}
 
 	/**
-	 * archiveBot Archives the bot person identified by &#x60;sourceId&#x60;. A bot person referenced by an existing dialog bot configuration can still be archived.
-	 * Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and
-	 * prevents it from being set as a conversation recipient or assigned to a new bot.&lt;br&gt;
+	 * archiveBot Archives the bot person identified by &#x60;sourceId&#x60;. The built-in concierge bot person can&#39;t be archived. A bot person that is still
+	 * referenced by at least one dialog bot configuration can&#39;t be archived; remove it from all dialog bots first. A bot person that a conversation template
+	 * configures as its concierge stays archivable; that template&#39;s concierge then resolves to the account&#39;s default concierge bot person. Archiving a
+	 * person makes it eligible for garbage collection in accordance with the retention policies in place, hides it from search results, and prevents it from being
+	 * set as a conversation recipient or assigned to a dialog bot.&lt;br&gt;
 	 * 
 	 * @param personsArchiveBotBody (required)
 	 * @return ArchivePersonResult
@@ -202,9 +205,11 @@ public class PersonsApi {
 	}
 
 	/**
-	 * archiveBot Archives the bot person identified by &#x60;sourceId&#x60;. A bot person referenced by an existing dialog bot configuration can still be archived.
-	 * Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and
-	 * prevents it from being set as a conversation recipient or assigned to a new bot.&lt;br&gt;
+	 * archiveBot Archives the bot person identified by &#x60;sourceId&#x60;. The built-in concierge bot person can&#39;t be archived. A bot person that is still
+	 * referenced by at least one dialog bot configuration can&#39;t be archived; remove it from all dialog bots first. A bot person that a conversation template
+	 * configures as its concierge stays archivable; that template&#39;s concierge then resolves to the account&#39;s default concierge bot person. Archiving a
+	 * person makes it eligible for garbage collection in accordance with the retention policies in place, hides it from search results, and prevents it from being
+	 * set as a conversation recipient or assigned to a dialog bot.&lt;br&gt;
 	 * 
 	 * @param personsArchiveBotBody (required)
 	 * @return ApiResponse&lt;ArchivePersonResult&gt;
@@ -353,6 +358,106 @@ public class PersonsApi {
 	}
 
 	/**
+	 * cancelOutOfOffice Cancels another person&#39;s out of office period, whether it&#39;s already active or scheduled for the future. &lt;p&gt; The same role and
+	 * team restrictions apply as for &#x60;scheduleOutOfOffice&#x60;.&lt;br&gt;
+	 * 
+	 * @param personId The ID of the person to cancel the out of office period for (required)
+	 * @return AgentPersonStateData
+	 * @throws ApiException if fails to make API call
+	 */
+	public AgentPersonStateData personsCancelOutOfOffice(String personId) throws ApiException {
+		return personsCancelOutOfOfficeWithHttpInfo(personId).getData();
+	}
+
+	/**
+	 * cancelOutOfOffice Cancels another person&#39;s out of office period, whether it&#39;s already active or scheduled for the future. &lt;p&gt; The same role and
+	 * team restrictions apply as for &#x60;scheduleOutOfOffice&#x60;.&lt;br&gt;
+	 * 
+	 * @param personId The ID of the person to cancel the out of office period for (required)
+	 * @return ApiResponse&lt;AgentPersonStateData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<AgentPersonStateData> personsCancelOutOfOfficeWithHttpInfo(String personId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'personId' is set
+		if (personId == null) {
+			throw new ApiException(400, "Missing the required parameter 'personId' when calling personsCancelOutOfOffice");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/{personId}/cancelOutOfOffice"
+				.replaceAll("\\{" + "personId" + "\\}", apiClient.escapeString(personId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * cancelOutOfOfficeForCurrentPerson Cancels the current person&#39;s out of office period, whether it&#39;s already active or scheduled for the future.
+	 * &lt;p&gt; The person&#39;s online state and status message revert immediately, and the automatic notification pause is removed.&lt;br&gt;
+	 * 
+	 * @return AgentPersonStateData
+	 * @throws ApiException if fails to make API call
+	 */
+	public AgentPersonStateData personsCancelOutOfOfficeForCurrentPerson() throws ApiException {
+		return personsCancelOutOfOfficeForCurrentPersonWithHttpInfo().getData();
+	}
+
+	/**
+	 * cancelOutOfOfficeForCurrentPerson Cancels the current person&#39;s out of office period, whether it&#39;s already active or scheduled for the future.
+	 * &lt;p&gt; The person&#39;s online state and status message revert immediately, and the automatic notification pause is removed.&lt;br&gt;
+	 * 
+	 * @return ApiResponse&lt;AgentPersonStateData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<AgentPersonStateData> personsCancelOutOfOfficeForCurrentPersonWithHttpInfo() throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// create path and map variables
+		String localVarPath = "/persons/cancelOutOfOfficeForCurrentPerson";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * createOrUpdateBot Updates and returns an existing bot person or creates and returns a bot person if absent.&lt;br&gt;
 	 * 
 	 * @param personData person data (required)
@@ -470,7 +575,7 @@ public class PersonsApi {
 	 * propagated and whose person source is \&quot;VIRTUAL\&quot;, the source ID is the value of the propagated \&quot;userId\&quot; field which is saved as ${link
 	 * User.username} in the User entity. &lt;li&gt;For users whose identity is managed in Unblu (and whose person source is therefore \&quot;USER_DB\&quot;), the
 	 * source ID is the ${link User.id} of the user represented by the person. &lt;li&gt;For anonymous visitors, the source ID is a random String. &lt;li&gt;For the
-	 * concierge bot, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
+	 * default concierge bot person defined in the account scope, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
 	 * @param expand (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
@@ -487,7 +592,7 @@ public class PersonsApi {
 	 * propagated and whose person source is \&quot;VIRTUAL\&quot;, the source ID is the value of the propagated \&quot;userId\&quot; field which is saved as ${link
 	 * User.username} in the User entity. &lt;li&gt;For users whose identity is managed in Unblu (and whose person source is therefore \&quot;USER_DB\&quot;), the
 	 * source ID is the ${link User.id} of the user represented by the person. &lt;li&gt;For anonymous visitors, the source ID is a random String. &lt;li&gt;For the
-	 * concierge bot, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
+	 * default concierge bot person defined in the account scope, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
 	 * @param expand (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
@@ -1024,6 +1129,128 @@ public class PersonsApi {
 
 		final String[] localVarContentTypes = {
 
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * scheduleOutOfOffice Sets another person out of office for a given period. The person must be an agent. &lt;p&gt; Who is allowed to set out of office for
+	 * another agent is defined on the roles set in &lt;code&gt;com.unblu.permission.roleAllowed.allowSettingOutOfOfficeOnBehalf&lt;/code&gt;. Supervisors can only
+	 * do so for agents in their own team and its subteams. &lt;p&gt; The timestamps behave as described in
+	 * &#x60;scheduleOutOfOfficeForCurrentPerson&#x60;.&lt;br&gt;
+	 * 
+	 * @param personId The ID of the person to set out of office (required)
+	 * @param personOutOfOfficeBody A data wrapper containing the out of office status message, as well as the timestamps defining the period. (required)
+	 * @return AgentPersonStateData
+	 * @throws ApiException if fails to make API call
+	 */
+	public AgentPersonStateData personsScheduleOutOfOffice(String personId, PersonOutOfOfficeBody personOutOfOfficeBody) throws ApiException {
+		return personsScheduleOutOfOfficeWithHttpInfo(personId, personOutOfOfficeBody).getData();
+	}
+
+	/**
+	 * scheduleOutOfOffice Sets another person out of office for a given period. The person must be an agent. &lt;p&gt; Who is allowed to set out of office for
+	 * another agent is defined on the roles set in &lt;code&gt;com.unblu.permission.roleAllowed.allowSettingOutOfOfficeOnBehalf&lt;/code&gt;. Supervisors can only
+	 * do so for agents in their own team and its subteams. &lt;p&gt; The timestamps behave as described in
+	 * &#x60;scheduleOutOfOfficeForCurrentPerson&#x60;.&lt;br&gt;
+	 * 
+	 * @param personId The ID of the person to set out of office (required)
+	 * @param personOutOfOfficeBody A data wrapper containing the out of office status message, as well as the timestamps defining the period. (required)
+	 * @return ApiResponse&lt;AgentPersonStateData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<AgentPersonStateData> personsScheduleOutOfOfficeWithHttpInfo(String personId, PersonOutOfOfficeBody personOutOfOfficeBody) throws ApiException {
+		Object localVarPostBody = personOutOfOfficeBody;
+
+		// verify the required parameter 'personId' is set
+		if (personId == null) {
+			throw new ApiException(400, "Missing the required parameter 'personId' when calling personsScheduleOutOfOffice");
+		}
+
+		// verify the required parameter 'personOutOfOfficeBody' is set
+		if (personOutOfOfficeBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'personOutOfOfficeBody' when calling personsScheduleOutOfOffice");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/{personId}/scheduleOutOfOffice"
+				.replaceAll("\\{" + "personId" + "\\}", apiClient.escapeString(personId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<AgentPersonStateData> localVarReturnType = new GenericType<AgentPersonStateData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * scheduleOutOfOfficeForCurrentPerson Sets the current person out of office for a given period. &lt;p&gt; If no start timestamp is provided, the out of office
+	 * period starts immediately. A start timestamp in the past is treated as the current time; out of office can&#39;t be set retroactively. If no end timestamp is
+	 * provided, the person remains out of office until the period is canceled. &lt;p&gt; While a person is out of office, their online state is OUT_OF_OFFICE and
+	 * their notifications are paused automatically.&lt;br&gt;
+	 * 
+	 * @param personOutOfOfficeBody (required)
+	 * @return AgentPersonStateData
+	 * @throws ApiException if fails to make API call
+	 */
+	public AgentPersonStateData personsScheduleOutOfOfficeForCurrentPerson(PersonOutOfOfficeBody personOutOfOfficeBody) throws ApiException {
+		return personsScheduleOutOfOfficeForCurrentPersonWithHttpInfo(personOutOfOfficeBody).getData();
+	}
+
+	/**
+	 * scheduleOutOfOfficeForCurrentPerson Sets the current person out of office for a given period. &lt;p&gt; If no start timestamp is provided, the out of office
+	 * period starts immediately. A start timestamp in the past is treated as the current time; out of office can&#39;t be set retroactively. If no end timestamp is
+	 * provided, the person remains out of office until the period is canceled. &lt;p&gt; While a person is out of office, their online state is OUT_OF_OFFICE and
+	 * their notifications are paused automatically.&lt;br&gt;
+	 * 
+	 * @param personOutOfOfficeBody (required)
+	 * @return ApiResponse&lt;AgentPersonStateData&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<AgentPersonStateData> personsScheduleOutOfOfficeForCurrentPersonWithHttpInfo(PersonOutOfOfficeBody personOutOfOfficeBody) throws ApiException {
+		Object localVarPostBody = personOutOfOfficeBody;
+
+		// verify the required parameter 'personOutOfOfficeBody' is set
+		if (personOutOfOfficeBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'personOutOfOfficeBody' when calling personsScheduleOutOfOfficeForCurrentPerson");
+		}
+
+		// create path and map variables
+		String localVarPath = "/persons/scheduleOutOfOfficeForCurrentPerson";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
 		};
 		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 

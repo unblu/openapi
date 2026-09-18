@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EFileUploadInterceptorSource {
 
 	/**
-	 * BOT
+	 * BOT: The file is being uploaded as a file message by a bot
 	 */
 	BOT("BOT"),
 

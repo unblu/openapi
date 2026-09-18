@@ -43,6 +43,8 @@ import io.swagger.annotations.ApiModelProperty;
 	RatingQuestionMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	RatingQuestionMessageData.JSON_PROPERTY_LOCALE,
 	RatingQuestionMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
+	RatingQuestionMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
+	RatingQuestionMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
 	RatingQuestionMessageData.JSON_PROPERTY_TEXT,
 	RatingQuestionMessageData.JSON_PROPERTY_TEXT_TYPE,
 	RatingQuestionMessageData.JSON_PROPERTY_OPTIONS,
@@ -170,6 +172,14 @@ public class RatingQuestionMessageData implements MessageData {
 	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
 	private String conversationLocale;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID = "lastEditedByPersonId";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID)
+	private String lastEditedByPersonId;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
+	private Long lastEditedTimestamp;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -615,6 +625,44 @@ public class RatingQuestionMessageData implements MessageData {
 		this.conversationLocale = conversationLocale;
 	}
 
+	public RatingQuestionMessageData lastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedByPersonId
+	 **/
+	@ApiModelProperty(value = "The ID of the person who performed the most recent edit of the message. Null if the message was never edited.")
+	public String getLastEditedByPersonId() {
+		return lastEditedByPersonId;
+	}
+
+	public void setLastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+	}
+
+	public RatingQuestionMessageData lastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.")
+	public Long getLastEditedTimestamp() {
+		return lastEditedTimestamp;
+	}
+
+	public void setLastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+	}
+
 	public RatingQuestionMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -814,6 +862,8 @@ public class RatingQuestionMessageData implements MessageData {
 				Objects.equals(this.replyToExternalMessageId, ratingQuestionMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, ratingQuestionMessageData.locale) &&
 				Objects.equals(this.conversationLocale, ratingQuestionMessageData.conversationLocale) &&
+				Objects.equals(this.lastEditedByPersonId, ratingQuestionMessageData.lastEditedByPersonId) &&
+				Objects.equals(this.lastEditedTimestamp, ratingQuestionMessageData.lastEditedTimestamp) &&
 				Objects.equals(this.text, ratingQuestionMessageData.text) &&
 				Objects.equals(this.textType, ratingQuestionMessageData.textType) &&
 				Objects.equals(this.options, ratingQuestionMessageData.options) &&
@@ -826,7 +876,7 @@ public class RatingQuestionMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, text, textType, options, answerStatus, declinable, declineLabel, declineValue, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text, textType, options, answerStatus, declinable, declineLabel, declineValue, availableTranslations);
 	}
 
 	@Override
@@ -854,6 +904,8 @@ public class RatingQuestionMessageData implements MessageData {
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
+		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
+		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

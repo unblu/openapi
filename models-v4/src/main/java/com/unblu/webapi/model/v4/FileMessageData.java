@@ -42,6 +42,8 @@ import io.swagger.annotations.ApiModelProperty;
 	FileMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	FileMessageData.JSON_PROPERTY_LOCALE,
 	FileMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
+	FileMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
+	FileMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
 	FileMessageData.JSON_PROPERTY_FILE_NAME,
 	FileMessageData.JSON_PROPERTY_CAPTION,
 	FileMessageData.JSON_PROPERTY_CAPTION_TYPE,
@@ -173,6 +175,14 @@ public class FileMessageData implements MessageData {
 	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
 	private String conversationLocale;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID = "lastEditedByPersonId";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID)
+	private String lastEditedByPersonId;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
+	private Long lastEditedTimestamp;
 
 	public static final String JSON_PROPERTY_FILE_NAME = "fileName";
 	@JsonProperty(JSON_PROPERTY_FILE_NAME)
@@ -634,6 +644,44 @@ public class FileMessageData implements MessageData {
 		this.conversationLocale = conversationLocale;
 	}
 
+	public FileMessageData lastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedByPersonId
+	 **/
+	@ApiModelProperty(value = "The ID of the person who performed the most recent edit of the message. Null if the message was never edited.")
+	public String getLastEditedByPersonId() {
+		return lastEditedByPersonId;
+	}
+
+	public void setLastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+	}
+
+	public FileMessageData lastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.")
+	public Long getLastEditedTimestamp() {
+		return lastEditedTimestamp;
+	}
+
+	public void setLastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+	}
+
 	public FileMessageData fileName(String fileName) {
 		this.fileName = fileName;
 		return this;
@@ -919,6 +967,8 @@ public class FileMessageData implements MessageData {
 				Objects.equals(this.replyToExternalMessageId, fileMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, fileMessageData.locale) &&
 				Objects.equals(this.conversationLocale, fileMessageData.conversationLocale) &&
+				Objects.equals(this.lastEditedByPersonId, fileMessageData.lastEditedByPersonId) &&
+				Objects.equals(this.lastEditedTimestamp, fileMessageData.lastEditedTimestamp) &&
 				Objects.equals(this.fileName, fileMessageData.fileName) &&
 				Objects.equals(this.caption, fileMessageData.caption) &&
 				Objects.equals(this.captionType, fileMessageData.captionType) &&
@@ -935,7 +985,7 @@ public class FileMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -963,6 +1013,8 @@ public class FileMessageData implements MessageData {
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
+		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
+		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
 		sb.append("    caption: ").append(toIndentedString(caption)).append("\n");
 		sb.append("    captionType: ").append(toIndentedString(captionType)).append("\n");

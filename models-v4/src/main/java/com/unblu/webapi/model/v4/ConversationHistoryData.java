@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryData.JSON_PROPERTY_ASSIGNEE_JOIN_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_END_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_LAST_MESSAGE_TIMESTAMP,
+	ConversationHistoryData.JSON_PROPERTY_LAST_MESSAGE_EDITED_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_LAST_COMPLETED_RECORDING_TIMESTAMP,
 	ConversationHistoryData.JSON_PROPERTY_STATE,
 	ConversationHistoryData.JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE,
@@ -131,6 +132,10 @@ public class ConversationHistoryData {
 	public static final String JSON_PROPERTY_LAST_MESSAGE_TIMESTAMP = "lastMessageTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_MESSAGE_TIMESTAMP)
 	private Long lastMessageTimestamp;
+
+	public static final String JSON_PROPERTY_LAST_MESSAGE_EDITED_TIMESTAMP = "lastMessageEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_MESSAGE_EDITED_TIMESTAMP)
+	private Long lastMessageEditedTimestamp;
 
 	public static final String JSON_PROPERTY_LAST_COMPLETED_RECORDING_TIMESTAMP = "lastCompletedRecordingTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_COMPLETED_RECORDING_TIMESTAMP)
@@ -445,6 +450,25 @@ public class ConversationHistoryData {
 
 	public void setLastMessageTimestamp(Long lastMessageTimestamp) {
 		this.lastMessageTimestamp = lastMessageTimestamp;
+	}
+
+	public ConversationHistoryData lastMessageEditedTimestamp(Long lastMessageEditedTimestamp) {
+		this.lastMessageEditedTimestamp = lastMessageEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * Unix timestamp (ms) when a message of the conversation was last edited. Null if no message has been edited yet.
+	 * 
+	 * @return lastMessageEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "Unix timestamp (ms) when a message of the conversation was last edited. Null if no message has been edited yet.")
+	public Long getLastMessageEditedTimestamp() {
+		return lastMessageEditedTimestamp;
+	}
+
+	public void setLastMessageEditedTimestamp(Long lastMessageEditedTimestamp) {
+		this.lastMessageEditedTimestamp = lastMessageEditedTimestamp;
 	}
 
 	public ConversationHistoryData lastCompletedRecordingTimestamp(Long lastCompletedRecordingTimestamp) {
@@ -869,6 +893,7 @@ public class ConversationHistoryData {
 				Objects.equals(this.assigneeJoinTimestamp, conversationHistoryData.assigneeJoinTimestamp) &&
 				Objects.equals(this.endTimestamp, conversationHistoryData.endTimestamp) &&
 				Objects.equals(this.lastMessageTimestamp, conversationHistoryData.lastMessageTimestamp) &&
+				Objects.equals(this.lastMessageEditedTimestamp, conversationHistoryData.lastMessageEditedTimestamp) &&
 				Objects.equals(this.lastCompletedRecordingTimestamp, conversationHistoryData.lastCompletedRecordingTimestamp) &&
 				Objects.equals(this.state, conversationHistoryData.state) &&
 				Objects.equals(this.initialEngagementType, conversationHistoryData.initialEngagementType) &&
@@ -893,7 +918,7 @@ public class ConversationHistoryData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, recipient, endPerson, participants, externalParticipants, botParticipants, createdTimestamp, assigneeJoinTimestamp, endTimestamp, lastMessageTimestamp, lastCompletedRecordingTimestamp, state, initialEngagementType, locale, endReason, endComment, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, dueDeletionTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, conversationVisibility, stateChanges, labels);
+		return Objects.hash($type, id, recipient, endPerson, participants, externalParticipants, botParticipants, createdTimestamp, assigneeJoinTimestamp, endTimestamp, lastMessageTimestamp, lastMessageEditedTimestamp, lastCompletedRecordingTimestamp, state, initialEngagementType, locale, endReason, endComment, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, dueDeletionTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, conversationVisibility, stateChanges, labels);
 	}
 
 	@Override
@@ -911,6 +936,7 @@ public class ConversationHistoryData {
 		sb.append("    assigneeJoinTimestamp: ").append(toIndentedString(assigneeJoinTimestamp)).append("\n");
 		sb.append("    endTimestamp: ").append(toIndentedString(endTimestamp)).append("\n");
 		sb.append("    lastMessageTimestamp: ").append(toIndentedString(lastMessageTimestamp)).append("\n");
+		sb.append("    lastMessageEditedTimestamp: ").append(toIndentedString(lastMessageEditedTimestamp)).append("\n");
 		sb.append("    lastCompletedRecordingTimestamp: ").append(toIndentedString(lastCompletedRecordingTimestamp)).append("\n");
 		sb.append("    state: ").append(toIndentedString(state)).append("\n");
 		sb.append("    initialEngagementType: ").append(toIndentedString(initialEngagementType)).append("\n");

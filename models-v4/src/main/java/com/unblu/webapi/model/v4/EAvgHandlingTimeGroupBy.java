@@ -42,7 +42,22 @@ public enum EAvgHandlingTimeGroupBy {
 	/**
 	 * RESOLUTION_TYPE: Group by resolution type.
 	 */
-	RESOLUTION_TYPE("RESOLUTION_TYPE");
+	RESOLUTION_TYPE("RESOLUTION_TYPE"),
+
+	/**
+	 * CONVERSATION_LABELS: Group by the labels attached to the conversation.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent.
+	 */
+	ASSIGNED_AGENT_LABELS("ASSIGNED_AGENT_LABELS");
 
 	private String value;
 

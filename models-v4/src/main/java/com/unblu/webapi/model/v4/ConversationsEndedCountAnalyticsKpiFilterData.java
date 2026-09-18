@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationsEndedCountAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_TEAM_IDS,
 	ConversationsEndedCountAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_NAMED_AREA_IDS,
 	ConversationsEndedCountAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_ACCOUNT_ID,
+	ConversationsEndedCountAnalyticsKpiFilterData.JSON_PROPERTY_LABEL_FILTERS,
 	ConversationsEndedCountAnalyticsKpiFilterData.JSON_PROPERTY_CONVERSATION_END_REASONS,
 	ConversationsEndedCountAnalyticsKpiFilterData.JSON_PROPERTY_USED_FEATURES,
 	ConversationsEndedCountAnalyticsKpiFilterData.JSON_PROPERTY_ASSIGNED_AGENT_PERSON_IDS,
@@ -117,6 +118,10 @@ public class ConversationsEndedCountAnalyticsKpiFilterData {
 	public static final String JSON_PROPERTY_RECIPIENT_ACCOUNT_ID = "recipientAccountId";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_ACCOUNT_ID)
 	private Boolean recipientAccountId;
+
+	public static final String JSON_PROPERTY_LABEL_FILTERS = "labelFilters";
+	@JsonProperty(JSON_PROPERTY_LABEL_FILTERS)
+	private List<LabelsAnalyticsKpiFilter> labelFilters = null;
 
 	public static final String JSON_PROPERTY_CONVERSATION_END_REASONS = "conversationEndReasons";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_END_REASONS)
@@ -389,6 +394,35 @@ public class ConversationsEndedCountAnalyticsKpiFilterData {
 		this.recipientAccountId = recipientAccountId;
 	}
 
+	public ConversationsEndedCountAnalyticsKpiFilterData labelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+		return this;
+	}
+
+	public ConversationsEndedCountAnalyticsKpiFilterData addLabelFiltersItem(LabelsAnalyticsKpiFilter labelFiltersItem) {
+		if (this.labelFilters == null) {
+			this.labelFilters = new ArrayList<>();
+		}
+		this.labelFilters.add(labelFiltersItem);
+		return this;
+	}
+
+	/**
+	 * A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation&#39;s or one of its
+	 * persons&#39; labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each
+	 * condition&#39;s target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.
+	 * 
+	 * @return labelFilters
+	 **/
+	@ApiModelProperty(value = "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.")
+	public List<LabelsAnalyticsKpiFilter> getLabelFilters() {
+		return labelFilters;
+	}
+
+	public void setLabelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+	}
+
 	public ConversationsEndedCountAnalyticsKpiFilterData conversationEndReasons(List<EConversationEndReason> conversationEndReasons) {
 		this.conversationEndReasons = conversationEndReasons;
 		return this;
@@ -561,6 +595,7 @@ public class ConversationsEndedCountAnalyticsKpiFilterData {
 				Objects.equals(this.recipientTeamIds, conversationsEndedCountAnalyticsKpiFilterData.recipientTeamIds) &&
 				Objects.equals(this.recipientNamedAreaIds, conversationsEndedCountAnalyticsKpiFilterData.recipientNamedAreaIds) &&
 				Objects.equals(this.recipientAccountId, conversationsEndedCountAnalyticsKpiFilterData.recipientAccountId) &&
+				Objects.equals(this.labelFilters, conversationsEndedCountAnalyticsKpiFilterData.labelFilters) &&
 				Objects.equals(this.conversationEndReasons, conversationsEndedCountAnalyticsKpiFilterData.conversationEndReasons) &&
 				Objects.equals(this.usedFeatures, conversationsEndedCountAnalyticsKpiFilterData.usedFeatures) &&
 				Objects.equals(this.assignedAgentPersonIds, conversationsEndedCountAnalyticsKpiFilterData.assignedAgentPersonIds) &&
@@ -571,7 +606,7 @@ public class ConversationsEndedCountAnalyticsKpiFilterData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, conversationEndReasons, usedFeatures, assignedAgentPersonIds, assignedAgentTeamIds, contextPersonMinRating, contextPersonMaxRating);
+		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, labelFilters, conversationEndReasons, usedFeatures, assignedAgentPersonIds, assignedAgentTeamIds, contextPersonMinRating, contextPersonMaxRating);
 	}
 
 	@Override
@@ -588,6 +623,7 @@ public class ConversationsEndedCountAnalyticsKpiFilterData {
 		sb.append("    recipientTeamIds: ").append(toIndentedString(recipientTeamIds)).append("\n");
 		sb.append("    recipientNamedAreaIds: ").append(toIndentedString(recipientNamedAreaIds)).append("\n");
 		sb.append("    recipientAccountId: ").append(toIndentedString(recipientAccountId)).append("\n");
+		sb.append("    labelFilters: ").append(toIndentedString(labelFilters)).append("\n");
 		sb.append("    conversationEndReasons: ").append(toIndentedString(conversationEndReasons)).append("\n");
 		sb.append("    usedFeatures: ").append(toIndentedString(usedFeatures)).append("\n");
 		sb.append("    assignedAgentPersonIds: ").append(toIndentedString(assignedAgentPersonIds)).append("\n");

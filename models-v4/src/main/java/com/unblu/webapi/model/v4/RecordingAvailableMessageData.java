@@ -42,6 +42,8 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordingAvailableMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_LOCALE,
 	RecordingAvailableMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
+	RecordingAvailableMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
+	RecordingAvailableMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_SIZE,
 	RecordingAvailableMessageData.JSON_PROPERTY_FILE_NAME,
@@ -166,6 +168,14 @@ public class RecordingAvailableMessageData implements MessageData {
 	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
 	private String conversationLocale;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID = "lastEditedByPersonId";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID)
+	private String lastEditedByPersonId;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
+	private Long lastEditedTimestamp;
 
 	public static final String JSON_PROPERTY_BLOB_ID = "blobId";
 	@JsonProperty(JSON_PROPERTY_BLOB_ID)
@@ -599,6 +609,44 @@ public class RecordingAvailableMessageData implements MessageData {
 		this.conversationLocale = conversationLocale;
 	}
 
+	public RecordingAvailableMessageData lastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedByPersonId
+	 **/
+	@ApiModelProperty(value = "The ID of the person who performed the most recent edit of the message. Null if the message was never edited.")
+	public String getLastEditedByPersonId() {
+		return lastEditedByPersonId;
+	}
+
+	public void setLastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+	}
+
+	public RecordingAvailableMessageData lastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.")
+	public Long getLastEditedTimestamp() {
+		return lastEditedTimestamp;
+	}
+
+	public void setLastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+	}
+
 	public RecordingAvailableMessageData blobId(String blobId) {
 		this.blobId = blobId;
 		return this;
@@ -724,6 +772,8 @@ public class RecordingAvailableMessageData implements MessageData {
 				Objects.equals(this.replyToExternalMessageId, recordingAvailableMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, recordingAvailableMessageData.locale) &&
 				Objects.equals(this.conversationLocale, recordingAvailableMessageData.conversationLocale) &&
+				Objects.equals(this.lastEditedByPersonId, recordingAvailableMessageData.lastEditedByPersonId) &&
+				Objects.equals(this.lastEditedTimestamp, recordingAvailableMessageData.lastEditedTimestamp) &&
 				Objects.equals(this.blobId, recordingAvailableMessageData.blobId) &&
 				Objects.equals(this.blobSize, recordingAvailableMessageData.blobSize) &&
 				Objects.equals(this.fileName, recordingAvailableMessageData.fileName) &&
@@ -733,7 +783,7 @@ public class RecordingAvailableMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, blobId, blobSize, fileName, startTimestamp, endTimestamp);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, blobId, blobSize, fileName, startTimestamp, endTimestamp);
 	}
 
 	@Override
@@ -761,6 +811,8 @@ public class RecordingAvailableMessageData implements MessageData {
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
+		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
+		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
 		sb.append("    blobId: ").append(toIndentedString(blobId)).append("\n");
 		sb.append("    blobSize: ").append(toIndentedString(blobSize)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");

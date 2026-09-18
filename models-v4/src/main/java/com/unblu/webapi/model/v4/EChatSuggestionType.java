@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EChatSuggestionType {
 
 	/**
-	 * MANUAL
+	 * MANUAL: The suggestion was requested explicitly by the agent
 	 */
 	MANUAL("MANUAL"),
 
 	/**
-	 * AUTOMATIC
+	 * AUTOMATIC: The suggestion was produced automatically as the conversation progressed
 	 */
 	AUTOMATIC("AUTOMATIC");
 

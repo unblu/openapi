@@ -10,897 +10,897 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ECurrencyCode {
 
 	/**
-	 * AED
+	 * AED: UAE dirham (United Arab Emirates)
 	 */
 	AED("AED"),
 
 	/**
-	 * AFN
+	 * AFN: Afghan afghani (Afghanistan)
 	 */
 	AFN("AFN"),
 
 	/**
-	 * ALL
+	 * ALL: Albanian lek (Albania)
 	 */
 	ALL("ALL"),
 
 	/**
-	 * AMD
+	 * AMD: Armenian dram (Armenia)
 	 */
 	AMD("AMD"),
 
 	/**
-	 * ANG
+	 * ANG: Netherlands Antillean guilder (Curacao, Sint Maarten)
 	 */
 	ANG("ANG"),
 
 	/**
-	 * AOA
+	 * AOA: Angolan kwanza (Angola)
 	 */
 	AOA("AOA"),
 
 	/**
-	 * ARS
+	 * ARS: Argentine peso (Argentina)
 	 */
 	ARS("ARS"),
 
 	/**
-	 * AUD
+	 * AUD: Australian dollar (Australia)
 	 */
 	AUD("AUD"),
 
 	/**
-	 * AWG
+	 * AWG: Aruban florin (Aruba)
 	 */
 	AWG("AWG"),
 
 	/**
-	 * AZN
+	 * AZN: Azerbaijani manat (Azerbaijan)
 	 */
 	AZN("AZN"),
 
 	/**
-	 * BAM
+	 * BAM: Bosnia and Herzegovina convertible mark (Bosnia and Herzegovina)
 	 */
 	BAM("BAM"),
 
 	/**
-	 * BBD
+	 * BBD: Barbados dollar (Barbados)
 	 */
 	BBD("BBD"),
 
 	/**
-	 * BDT
+	 * BDT: Bangladeshi taka (Bangladesh)
 	 */
 	BDT("BDT"),
 
 	/**
-	 * BGN
+	 * BGN: Bulgarian lev (Bulgaria)
 	 */
 	BGN("BGN"),
 
 	/**
-	 * BHD
+	 * BHD: Bahraini dinar (Bahrain)
 	 */
 	BHD("BHD"),
 
 	/**
-	 * BIF
+	 * BIF: Burundian franc (Burundi)
 	 */
 	BIF("BIF"),
 
 	/**
-	 * BMD
+	 * BMD: Bermudian dollar (Bermuda)
 	 */
 	BMD("BMD"),
 
 	/**
-	 * BND
+	 * BND: Brunei dollar (Brunei)
 	 */
 	BND("BND"),
 
 	/**
-	 * BOB
+	 * BOB: Boliviano (Bolivia)
 	 */
 	BOB("BOB"),
 
 	/**
-	 * BOV
+	 * BOV: Bolivian Mvdol, a funds code used for accounting in Bolivia
 	 */
 	BOV("BOV"),
 
 	/**
-	 * BRL
+	 * BRL: Brazilian real (Brazil)
 	 */
 	BRL("BRL"),
 
 	/**
-	 * BSD
+	 * BSD: Bahamian dollar (Bahamas)
 	 */
 	BSD("BSD"),
 
 	/**
-	 * BTN
+	 * BTN: Bhutanese ngultrum (Bhutan)
 	 */
 	BTN("BTN"),
 
 	/**
-	 * BWP
+	 * BWP: Botswana pula (Botswana)
 	 */
 	BWP("BWP"),
 
 	/**
-	 * BYN
+	 * BYN: Belarusian ruble (Belarus)
 	 */
 	BYN("BYN"),
 
 	/**
-	 * BZD
+	 * BZD: Belize dollar (Belize)
 	 */
 	BZD("BZD"),
 
 	/**
-	 * CAD
+	 * CAD: Canadian dollar (Canada)
 	 */
 	CAD("CAD"),
 
 	/**
-	 * CDF
+	 * CDF: Congolese franc (Democratic Republic of the Congo)
 	 */
 	CDF("CDF"),
 
 	/**
-	 * CHE
+	 * CHE: WIR euro, a complementary currency issued in Switzerland
 	 */
 	CHE("CHE"),
 
 	/**
-	 * CHF
+	 * CHF: Swiss franc (Switzerland, Liechtenstein)
 	 */
 	CHF("CHF"),
 
 	/**
-	 * CHW
+	 * CHW: WIR franc, a complementary currency issued in Switzerland
 	 */
 	CHW("CHW"),
 
 	/**
-	 * CLF
+	 * CLF: Unidad de Fomento, an inflation-indexed funds code used in Chile
 	 */
 	CLF("CLF"),
 
 	/**
-	 * CLP
+	 * CLP: Chilean peso (Chile)
 	 */
 	CLP("CLP"),
 
 	/**
-	 * CNY
+	 * CNY: Renminbi yuan (China)
 	 */
 	CNY("CNY"),
 
 	/**
-	 * COP
+	 * COP: Colombian peso (Colombia)
 	 */
 	COP("COP"),
 
 	/**
-	 * COU
+	 * COU: Unidad de Valor Real, an inflation-indexed funds code used in Colombia
 	 */
 	COU("COU"),
 
 	/**
-	 * CRC
+	 * CRC: Costa Rican colon (Costa Rica)
 	 */
 	CRC("CRC"),
 
 	/**
-	 * CUP
+	 * CUP: Cuban peso (Cuba)
 	 */
 	CUP("CUP"),
 
 	/**
-	 * CVE
+	 * CVE: Cape Verdean escudo (Cabo Verde)
 	 */
 	CVE("CVE"),
 
 	/**
-	 * CZK
+	 * CZK: Czech koruna (Czechia)
 	 */
 	CZK("CZK"),
 
 	/**
-	 * DJF
+	 * DJF: Djiboutian franc (Djibouti)
 	 */
 	DJF("DJF"),
 
 	/**
-	 * DKK
+	 * DKK: Danish krone (Denmark, Faroe Islands, Greenland)
 	 */
 	DKK("DKK"),
 
 	/**
-	 * DOP
+	 * DOP: Dominican peso (Dominican Republic)
 	 */
 	DOP("DOP"),
 
 	/**
-	 * DZD
+	 * DZD: Algerian dinar (Algeria)
 	 */
 	DZD("DZD"),
 
 	/**
-	 * EGP
+	 * EGP: Egyptian pound (Egypt)
 	 */
 	EGP("EGP"),
 
 	/**
-	 * ERN
+	 * ERN: Eritrean nakfa (Eritrea)
 	 */
 	ERN("ERN"),
 
 	/**
-	 * ETB
+	 * ETB: Ethiopian birr (Ethiopia)
 	 */
 	ETB("ETB"),
 
 	/**
-	 * EUR
+	 * EUR: Euro (the euro area)
 	 */
 	EUR("EUR"),
 
 	/**
-	 * FJD
+	 * FJD: Fiji dollar (Fiji)
 	 */
 	FJD("FJD"),
 
 	/**
-	 * FKP
+	 * FKP: Falkland Islands pound (Falkland Islands)
 	 */
 	FKP("FKP"),
 
 	/**
-	 * GBP
+	 * GBP: Pound sterling (United Kingdom)
 	 */
 	GBP("GBP"),
 
 	/**
-	 * GEL
+	 * GEL: Georgian lari (Georgia)
 	 */
 	GEL("GEL"),
 
 	/**
-	 * GHS
+	 * GHS: Ghanaian cedi (Ghana)
 	 */
 	GHS("GHS"),
 
 	/**
-	 * GIP
+	 * GIP: Gibraltar pound (Gibraltar)
 	 */
 	GIP("GIP"),
 
 	/**
-	 * GMD
+	 * GMD: Gambian dalasi (Gambia)
 	 */
 	GMD("GMD"),
 
 	/**
-	 * GNF
+	 * GNF: Guinean franc (Guinea)
 	 */
 	GNF("GNF"),
 
 	/**
-	 * GTQ
+	 * GTQ: Guatemalan quetzal (Guatemala)
 	 */
 	GTQ("GTQ"),
 
 	/**
-	 * GYD
+	 * GYD: Guyanese dollar (Guyana)
 	 */
 	GYD("GYD"),
 
 	/**
-	 * HKD
+	 * HKD: Hong Kong dollar (Hong Kong)
 	 */
 	HKD("HKD"),
 
 	/**
-	 * HNL
+	 * HNL: Honduran lempira (Honduras)
 	 */
 	HNL("HNL"),
 
 	/**
-	 * HTG
+	 * HTG: Haitian gourde (Haiti)
 	 */
 	HTG("HTG"),
 
 	/**
-	 * HUF
+	 * HUF: Hungarian forint (Hungary)
 	 */
 	HUF("HUF"),
 
 	/**
-	 * IDR
+	 * IDR: Indonesian rupiah (Indonesia)
 	 */
 	IDR("IDR"),
 
 	/**
-	 * ILS
+	 * ILS: Israeli new shekel (Israel)
 	 */
 	ILS("ILS"),
 
 	/**
-	 * INR
+	 * INR: Indian rupee (India)
 	 */
 	INR("INR"),
 
 	/**
-	 * IQD
+	 * IQD: Iraqi dinar (Iraq)
 	 */
 	IQD("IQD"),
 
 	/**
-	 * IRR
+	 * IRR: Iranian rial (Iran)
 	 */
 	IRR("IRR"),
 
 	/**
-	 * ISK
+	 * ISK: Icelandic krona (Iceland)
 	 */
 	ISK("ISK"),
 
 	/**
-	 * JMD
+	 * JMD: Jamaican dollar (Jamaica)
 	 */
 	JMD("JMD"),
 
 	/**
-	 * JOD
+	 * JOD: Jordanian dinar (Jordan)
 	 */
 	JOD("JOD"),
 
 	/**
-	 * JPY
+	 * JPY: Japanese yen (Japan)
 	 */
 	JPY("JPY"),
 
 	/**
-	 * KES
+	 * KES: Kenyan shilling (Kenya)
 	 */
 	KES("KES"),
 
 	/**
-	 * KGS
+	 * KGS: Kyrgyzstani som (Kyrgyzstan)
 	 */
 	KGS("KGS"),
 
 	/**
-	 * KHR
+	 * KHR: Cambodian riel (Cambodia)
 	 */
 	KHR("KHR"),
 
 	/**
-	 * KMF
+	 * KMF: Comorian franc (Comoros)
 	 */
 	KMF("KMF"),
 
 	/**
-	 * KPW
+	 * KPW: North Korean won (North Korea)
 	 */
 	KPW("KPW"),
 
 	/**
-	 * KRW
+	 * KRW: South Korean won (South Korea)
 	 */
 	KRW("KRW"),
 
 	/**
-	 * KWD
+	 * KWD: Kuwaiti dinar (Kuwait)
 	 */
 	KWD("KWD"),
 
 	/**
-	 * KYD
+	 * KYD: Cayman Islands dollar (Cayman Islands)
 	 */
 	KYD("KYD"),
 
 	/**
-	 * KZT
+	 * KZT: Kazakhstani tenge (Kazakhstan)
 	 */
 	KZT("KZT"),
 
 	/**
-	 * LAK
+	 * LAK: Lao kip (Laos)
 	 */
 	LAK("LAK"),
 
 	/**
-	 * LBP
+	 * LBP: Lebanese pound (Lebanon)
 	 */
 	LBP("LBP"),
 
 	/**
-	 * LKR
+	 * LKR: Sri Lankan rupee (Sri Lanka)
 	 */
 	LKR("LKR"),
 
 	/**
-	 * LRD
+	 * LRD: Liberian dollar (Liberia)
 	 */
 	LRD("LRD"),
 
 	/**
-	 * LSL
+	 * LSL: Lesotho loti (Lesotho)
 	 */
 	LSL("LSL"),
 
 	/**
-	 * LYD
+	 * LYD: Libyan dinar (Libya)
 	 */
 	LYD("LYD"),
 
 	/**
-	 * MAD
+	 * MAD: Moroccan dirham (Morocco)
 	 */
 	MAD("MAD"),
 
 	/**
-	 * MDL
+	 * MDL: Moldovan leu (Moldova)
 	 */
 	MDL("MDL"),
 
 	/**
-	 * MGA
+	 * MGA: Malagasy ariary (Madagascar)
 	 */
 	MGA("MGA"),
 
 	/**
-	 * MKD
+	 * MKD: Macedonian denar (North Macedonia)
 	 */
 	MKD("MKD"),
 
 	/**
-	 * MMK
+	 * MMK: Myanmar kyat (Myanmar)
 	 */
 	MMK("MMK"),
 
 	/**
-	 * MNT
+	 * MNT: Mongolian tugrik (Mongolia)
 	 */
 	MNT("MNT"),
 
 	/**
-	 * MOP
+	 * MOP: Macanese pataca (Macao)
 	 */
 	MOP("MOP"),
 
 	/**
-	 * MRU
+	 * MRU: Mauritanian ouguiya (Mauritania)
 	 */
 	MRU("MRU"),
 
 	/**
-	 * MUR
+	 * MUR: Mauritian rupee (Mauritius)
 	 */
 	MUR("MUR"),
 
 	/**
-	 * MVR
+	 * MVR: Maldivian rufiyaa (Maldives)
 	 */
 	MVR("MVR"),
 
 	/**
-	 * MWK
+	 * MWK: Malawian kwacha (Malawi)
 	 */
 	MWK("MWK"),
 
 	/**
-	 * MXN
+	 * MXN: Mexican peso (Mexico)
 	 */
 	MXN("MXN"),
 
 	/**
-	 * MXV
+	 * MXV: Mexican Unidad de Inversion, an inflation-indexed funds code used in Mexico
 	 */
 	MXV("MXV"),
 
 	/**
-	 * MYR
+	 * MYR: Malaysian ringgit (Malaysia)
 	 */
 	MYR("MYR"),
 
 	/**
-	 * MZN
+	 * MZN: Mozambican metical (Mozambique)
 	 */
 	MZN("MZN"),
 
 	/**
-	 * NAD
+	 * NAD: Namibian dollar (Namibia)
 	 */
 	NAD("NAD"),
 
 	/**
-	 * NGN
+	 * NGN: Nigerian naira (Nigeria)
 	 */
 	NGN("NGN"),
 
 	/**
-	 * NIO
+	 * NIO: Nicaraguan cordoba (Nicaragua)
 	 */
 	NIO("NIO"),
 
 	/**
-	 * NOK
+	 * NOK: Norwegian krone (Norway)
 	 */
 	NOK("NOK"),
 
 	/**
-	 * NPR
+	 * NPR: Nepalese rupee (Nepal)
 	 */
 	NPR("NPR"),
 
 	/**
-	 * NZD
+	 * NZD: New Zealand dollar (New Zealand)
 	 */
 	NZD("NZD"),
 
 	/**
-	 * OMR
+	 * OMR: Omani rial (Oman)
 	 */
 	OMR("OMR"),
 
 	/**
-	 * PAB
+	 * PAB: Panamanian balboa (Panama)
 	 */
 	PAB("PAB"),
 
 	/**
-	 * PEN
+	 * PEN: Peruvian sol (Peru)
 	 */
 	PEN("PEN"),
 
 	/**
-	 * PGK
+	 * PGK: Papua New Guinean kina (Papua New Guinea)
 	 */
 	PGK("PGK"),
 
 	/**
-	 * PHP
+	 * PHP: Philippine peso (Philippines)
 	 */
 	PHP("PHP"),
 
 	/**
-	 * PKR
+	 * PKR: Pakistani rupee (Pakistan)
 	 */
 	PKR("PKR"),
 
 	/**
-	 * PLN
+	 * PLN: Polish zloty (Poland)
 	 */
 	PLN("PLN"),
 
 	/**
-	 * PYG
+	 * PYG: Paraguayan guarani (Paraguay)
 	 */
 	PYG("PYG"),
 
 	/**
-	 * QAR
+	 * QAR: Qatari riyal (Qatar)
 	 */
 	QAR("QAR"),
 
 	/**
-	 * RON
+	 * RON: Romanian leu (Romania)
 	 */
 	RON("RON"),
 
 	/**
-	 * RSD
+	 * RSD: Serbian dinar (Serbia)
 	 */
 	RSD("RSD"),
 
 	/**
-	 * RUB
+	 * RUB: Russian ruble (Russia)
 	 */
 	RUB("RUB"),
 
 	/**
-	 * RWF
+	 * RWF: Rwandan franc (Rwanda)
 	 */
 	RWF("RWF"),
 
 	/**
-	 * SAR
+	 * SAR: Saudi riyal (Saudi Arabia)
 	 */
 	SAR("SAR"),
 
 	/**
-	 * SBD
+	 * SBD: Solomon Islands dollar (Solomon Islands)
 	 */
 	SBD("SBD"),
 
 	/**
-	 * SCR
+	 * SCR: Seychellois rupee (Seychelles)
 	 */
 	SCR("SCR"),
 
 	/**
-	 * SDG
+	 * SDG: Sudanese pound (Sudan)
 	 */
 	SDG("SDG"),
 
 	/**
-	 * SEK
+	 * SEK: Swedish krona (Sweden)
 	 */
 	SEK("SEK"),
 
 	/**
-	 * SGD
+	 * SGD: Singapore dollar (Singapore)
 	 */
 	SGD("SGD"),
 
 	/**
-	 * SHP
+	 * SHP: Saint Helena pound (Saint Helena, Ascension and Tristan da Cunha)
 	 */
 	SHP("SHP"),
 
 	/**
-	 * SLE
+	 * SLE: Sierra Leonean leone (Sierra Leone)
 	 */
 	SLE("SLE"),
 
 	/**
-	 * SLL
+	 * SLL: Sierra Leonean leone, the old code replaced by SLE after the 2022 redenomination
 	 */
 	SLL("SLL"),
 
 	/**
-	 * SOS
+	 * SOS: Somali shilling (Somalia)
 	 */
 	SOS("SOS"),
 
 	/**
-	 * SRD
+	 * SRD: Surinamese dollar (Suriname)
 	 */
 	SRD("SRD"),
 
 	/**
-	 * SSP
+	 * SSP: South Sudanese pound (South Sudan)
 	 */
 	SSP("SSP"),
 
 	/**
-	 * STN
+	 * STN: Sao Tome and Principe dobra (Sao Tome and Principe)
 	 */
 	STN("STN"),
 
 	/**
-	 * SVC
+	 * SVC: Salvadoran colon (El Salvador)
 	 */
 	SVC("SVC"),
 
 	/**
-	 * SYP
+	 * SYP: Syrian pound (Syria)
 	 */
 	SYP("SYP"),
 
 	/**
-	 * SZL
+	 * SZL: Swazi lilangeni (Eswatini)
 	 */
 	SZL("SZL"),
 
 	/**
-	 * THB
+	 * THB: Thai baht (Thailand)
 	 */
 	THB("THB"),
 
 	/**
-	 * TJS
+	 * TJS: Tajikistani somoni (Tajikistan)
 	 */
 	TJS("TJS"),
 
 	/**
-	 * TMT
+	 * TMT: Turkmenistan manat (Turkmenistan)
 	 */
 	TMT("TMT"),
 
 	/**
-	 * TND
+	 * TND: Tunisian dinar (Tunisia)
 	 */
 	TND("TND"),
 
 	/**
-	 * TOP
+	 * TOP: Tongan pa&#39;anga (Tonga)
 	 */
 	TOP("TOP"),
 
 	/**
-	 * TRY
+	 * TRY: Turkish lira (Turkey)
 	 */
 	TRY("TRY"),
 
 	/**
-	 * TTD
+	 * TTD: Trinidad and Tobago dollar (Trinidad and Tobago)
 	 */
 	TTD("TTD"),
 
 	/**
-	 * TWD
+	 * TWD: New Taiwan dollar (Taiwan)
 	 */
 	TWD("TWD"),
 
 	/**
-	 * TZS
+	 * TZS: Tanzanian shilling (Tanzania)
 	 */
 	TZS("TZS"),
 
 	/**
-	 * UAH
+	 * UAH: Ukrainian hryvnia (Ukraine)
 	 */
 	UAH("UAH"),
 
 	/**
-	 * UGX
+	 * UGX: Ugandan shilling (Uganda)
 	 */
 	UGX("UGX"),
 
 	/**
-	 * USD
+	 * USD: United States dollar (United States)
 	 */
 	USD("USD"),
 
 	/**
-	 * USN
+	 * USN: United States dollar (next day), a funds code used for settlement in the United States
 	 */
 	USN("USN"),
 
 	/**
-	 * UYI
+	 * UYI: Uruguay Peso en Unidades Indexadas, an inflation-indexed funds code used in Uruguay
 	 */
 	UYI("UYI"),
 
 	/**
-	 * UYU
+	 * UYU: Uruguayan peso (Uruguay)
 	 */
 	UYU("UYU"),
 
 	/**
-	 * UYW
+	 * UYW: Unidad Previsional, a wage-indexed funds code used in Uruguay
 	 */
 	UYW("UYW"),
 
 	/**
-	 * UZS
+	 * UZS: Uzbekistani sum (Uzbekistan)
 	 */
 	UZS("UZS"),
 
 	/**
-	 * VED
+	 * VED: Venezuelan bolivar digital (Venezuela)
 	 */
 	VED("VED"),
 
 	/**
-	 * VES
+	 * VES: Venezuelan bolivar soberano (Venezuela)
 	 */
 	VES("VES"),
 
 	/**
-	 * VND
+	 * VND: Vietnamese dong (Vietnam)
 	 */
 	VND("VND"),
 
 	/**
-	 * VUV
+	 * VUV: Vanuatu vatu (Vanuatu)
 	 */
 	VUV("VUV"),
 
 	/**
-	 * WST
+	 * WST: Samoan tala (Samoa)
 	 */
 	WST("WST"),
 
 	/**
-	 * XAF
+	 * XAF: Central African CFA franc (the CEMAC member states)
 	 */
 	XAF("XAF"),
 
 	/**
-	 * XAG
+	 * XAG: One troy ounce of silver, a metal code
 	 */
 	XAG("XAG"),
 
 	/**
-	 * XAU
+	 * XAU: One troy ounce of gold, a metal code
 	 */
 	XAU("XAU"),
 
 	/**
-	 * XBA
+	 * XBA: European Composite Unit (EURCO), a bond market unit
 	 */
 	XBA("XBA"),
 
 	/**
-	 * XBB
+	 * XBB: European Monetary Unit (E.M.U.-6), a bond market unit
 	 */
 	XBB("XBB"),
 
 	/**
-	 * XBC
+	 * XBC: European Unit of Account 9 (E.U.A.-9), a bond market unit
 	 */
 	XBC("XBC"),
 
 	/**
-	 * XBD
+	 * XBD: European Unit of Account 17 (E.U.A.-17), a bond market unit
 	 */
 	XBD("XBD"),
 
 	/**
-	 * XCD
+	 * XCD: East Caribbean dollar (the Organisation of Eastern Caribbean States)
 	 */
 	XCD("XCD"),
 
 	/**
-	 * XDR
+	 * XDR: Special drawing rights of the International Monetary Fund
 	 */
 	XDR("XDR"),
 
 	/**
-	 * XOF
+	 * XOF: West African CFA franc (the UEMOA member states)
 	 */
 	XOF("XOF"),
 
 	/**
-	 * XPD
+	 * XPD: One troy ounce of palladium, a metal code
 	 */
 	XPD("XPD"),
 
 	/**
-	 * XPF
+	 * XPF: CFP franc (French Polynesia, New Caledonia, Wallis and Futuna)
 	 */
 	XPF("XPF"),
 
 	/**
-	 * XPT
+	 * XPT: One troy ounce of platinum, a metal code
 	 */
 	XPT("XPT"),
 
 	/**
-	 * XSU
+	 * XSU: Sucre, the unit of account of the ALBA member states
 	 */
 	XSU("XSU"),
 
 	/**
-	 * XTS
+	 * XTS: Code reserved for testing purposes
 	 */
 	XTS("XTS"),
 
 	/**
-	 * XUA
+	 * XUA: ADB unit of account of the African Development Bank
 	 */
 	XUA("XUA"),
 
 	/**
-	 * XXX
+	 * XXX: Code for a transaction where no currency is involved
 	 */
 	XXX("XXX"),
 
 	/**
-	 * YER
+	 * YER: Yemeni rial (Yemen)
 	 */
 	YER("YER"),
 
 	/**
-	 * ZAR
+	 * ZAR: South African rand (South Africa)
 	 */
 	ZAR("ZAR"),
 
 	/**
-	 * ZMW
+	 * ZMW: Zambian kwacha (Zambia)
 	 */
 	ZMW("ZMW"),
 
 	/**
-	 * ZWL
+	 * ZWL: Zimbabwean dollar (Zimbabwe)
 	 */
 	ZWL("ZWL");
 

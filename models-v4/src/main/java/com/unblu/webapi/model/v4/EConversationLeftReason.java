@@ -10,77 +10,77 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationLeftReason {
 
 	/**
-	 * FORWARDED
+	 * FORWARDED: The participation ended because the conversation was forwarded to somebody else
 	 */
 	FORWARDED("FORWARDED"),
 
 	/**
-	 * PARTICIPANT_LEFT
+	 * PARTICIPANT_LEFT: The participant left the conversation on their own
 	 */
 	PARTICIPANT_LEFT("PARTICIPANT_LEFT"),
 
 	/**
-	 * REMOVED_AFTER_TIMEOUT
+	 * REMOVED_AFTER_TIMEOUT: The participant was removed from the conversation after being inactive for too long
 	 */
 	REMOVED_AFTER_TIMEOUT("REMOVED_AFTER_TIMEOUT"),
 
 	/**
-	 * ONBOARDING_DECLINED
+	 * ONBOARDING_DECLINED: The participant declined the onboarding and therefore never joined
 	 */
 	ONBOARDING_DECLINED("ONBOARDING_DECLINED"),
 
 	/**
-	 * ONBOARDING_IDLE_TIMEOUT
+	 * ONBOARDING_IDLE_TIMEOUT: The participant did not react during the onboarding
 	 */
 	ONBOARDING_IDLE_TIMEOUT("ONBOARDING_IDLE_TIMEOUT"),
 
 	/**
-	 * ONBOARDING_TIMEOUT
+	 * ONBOARDING_TIMEOUT: The participant did not complete onboarding within the allowed time
 	 */
 	ONBOARDING_TIMEOUT("ONBOARDING_TIMEOUT"),
 
 	/**
-	 * USER_CHANGED
+	 * USER_CHANGED: The participation ended because the person behind the participant changed, for example on login
 	 */
 	USER_CHANGED("USER_CHANGED"),
 
 	/**
-	 * KICKED
+	 * KICKED: The participant was removed from the conversation by somebody else
 	 */
 	KICKED("KICKED"),
 
 	/**
-	 * CONVERSATION_UNASSIGNED
+	 * CONVERSATION_UNASSIGNED: The participation ended because the conversation became unassigned
 	 */
 	CONVERSATION_UNASSIGNED("CONVERSATION_UNASSIGNED"),
 
 	/**
-	 * CONVERSATION_REQUEUED
+	 * CONVERSATION_REQUEUED: The participation ended because the conversation was put back into the queue
 	 */
 	CONVERSATION_REQUEUED("CONVERSATION_REQUEUED"),
 
 	/**
-	 * PUBLIC_DIALIN_ENDED
+	 * PUBLIC_DIALIN_ENDED: The participation ended because the public dial-in session ended
 	 */
 	PUBLIC_DIALIN_ENDED("PUBLIC_DIALIN_ENDED"),
 
 	/**
-	 * EXTERNAL_CONTACT_UNLINKED
+	 * EXTERNAL_CONTACT_UNLINKED: The participation ended because the external contact was unlinked from the person
 	 */
 	EXTERNAL_CONTACT_UNLINKED("EXTERNAL_CONTACT_UNLINKED"),
 
 	/**
-	 * ASSISTANT_SYNCHRONIZATION
+	 * ASSISTANT_SYNCHRONIZATION: The participation was removed while synchronizing the assistants of the conversation
 	 */
 	ASSISTANT_SYNCHRONIZATION("ASSISTANT_SYNCHRONIZATION"),
 
 	/**
-	 * DEPUTY_REMOVAL
+	 * DEPUTY_REMOVAL: The participation was removed because the deputy relationship it was based on ended
 	 */
 	DEPUTY_REMOVAL("DEPUTY_REMOVAL"),
 
 	/**
-	 * OTHER
+	 * OTHER: The participation ended for a reason not covered by the other values
 	 */
 	OTHER("OTHER");
 

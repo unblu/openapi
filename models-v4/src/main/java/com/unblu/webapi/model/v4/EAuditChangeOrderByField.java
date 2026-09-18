@@ -10,52 +10,52 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EAuditChangeOrderByField {
 
 	/**
-	 * ID
+	 * ID: Sort by the &#39;id&#39; attribute
 	 */
 	ID("ID"),
 
 	/**
-	 * CREATION_TIMESTAMP
+	 * CREATION_TIMESTAMP: Sort by the &#39;creationTimestamp&#39; attribute
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 
 	/**
-	 * ENTITY_TYPE
+	 * ENTITY_TYPE: Sort by the &#39;entityType&#39; attribute
 	 */
 	ENTITY_TYPE("ENTITY_TYPE"),
 
 	/**
-	 * INTERACTION_TYPE
+	 * INTERACTION_TYPE: Sort by the &#39;interactionType&#39; attribute
 	 */
 	INTERACTION_TYPE("INTERACTION_TYPE"),
 
 	/**
-	 * INTERACTION_NAME
+	 * INTERACTION_NAME: Sort by the &#39;interactionName&#39; attribute
 	 */
 	INTERACTION_NAME("INTERACTION_NAME"),
 
 	/**
-	 * USERNAME
+	 * USERNAME: Sort by the &#39;userName&#39; attribute
 	 */
 	USERNAME("USERNAME"),
 
 	/**
-	 * USER_ID
+	 * USER_ID: Sort by the &#39;userId&#39; attribute
 	 */
 	USER_ID("USER_ID"),
 
 	/**
-	 * CHANGE_TYPE
+	 * CHANGE_TYPE: Sort by the &#39;changeType&#39; attribute
 	 */
 	CHANGE_TYPE("CHANGE_TYPE"),
 
 	/**
-	 * AUTHORIZATION_ROLE
+	 * AUTHORIZATION_ROLE: Sort by the &#39;userRole&#39; attribute
 	 */
 	AUTHORIZATION_ROLE("AUTHORIZATION_ROLE"),
 
 	/**
-	 * IMPERSONATION_TYPE
+	 * IMPERSONATION_TYPE: Sort by the &#39;userImpersonationType&#39; attribute
 	 */
 	IMPERSONATION_TYPE("IMPERSONATION_TYPE");
 

@@ -3,13 +3,15 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.41.4
+  version: 8.42.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
 - basicAuth: []
 - bearerAuth: []
 tags:
+- name: AbbreviationEntries
+  description: "API service to manage the abbreviation entries of an account. Abbreviation entries map a short abbreviation to a longer expansion. Autocorrect replaces the abbreviation with its expansion as an agent types. <p> An abbreviation entry is owned either by the account or by a user. The entries owned by the account are available to all users of the account, and every user of the account can read and manage them. Personal entries are only available to the user that owns them. Every user manages their own personal entries, and a user with the supervisor role also manages the personal entries of the other users of the account. An entry that the caller may not manage is reported as missing rather than as forbidden, so that the API doesn't reveal which entries other users own. <p> Account and personal abbreviations are enabled separately. While account or personal abbreviations are disabled, only a user with the administrator role can manage entries of that owner type."
 - name: AccountIngresses
   description: API service to manage account ingresses
 - name: Accounts
@@ -125,6 +127,150 @@ tags:
 - name: WebhookRegistrations
   description: Service to manage all webhook registrations
 paths:
+  /abbreviationentries/create:
+    post:
+      tags:
+      - AbbreviationEntries
+      summary: create
+      description: "Creates a new abbreviation entry. The owner type is mandatory. If the body doesn't name an owner, the entry belongs to the current account or to the current user, depending on the owner type. Creating an entry owned by another user requires the supervisor role.<br>"
+      operationId: abbreviationEntriesCreate
+      requestBody:
+        description: the abbreviation entry to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AbbreviationEntryCreateBody"
+        required: true
+      responses:
+        "200":
+          description: the created abbreviation entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbbreviationEntryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /abbreviationentries/{abbreviationEntryId}/delete:
+    delete:
+      tags:
+      - AbbreviationEntries
+      summary: delete
+      description: Deletes the abbreviation entry with the specified ID<br>
+      operationId: abbreviationEntriesDelete
+      parameters:
+      - name: abbreviationEntryId
+        in: path
+        description: the ID of the abbreviation entry to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /abbreviationentries/{abbreviationEntryId}/read:
+    get:
+      tags:
+      - AbbreviationEntries
+      summary: read
+      description: Reads an existing abbreviation entry<br>
+      operationId: abbreviationEntriesRead
+      parameters:
+      - name: abbreviationEntryId
+        in: path
+        description: the ID of the abbreviation entry to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: the requested abbreviation entry or an error if the abbreviation entry doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbbreviationEntryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /abbreviationentries/search:
+    post:
+      tags:
+      - AbbreviationEntries
+      summary: search
+      description: "Searches the abbreviation entries the current user can see: the entries owned by the current account, and their own personal entries. A user with the supervisor role also sees the personal entries of the other users of the account. Entries the current user can't see are never part of the result, whatever the query asks for.<br>"
+      operationId: abbreviationEntriesSearch
+      requestBody:
+        description: the query to narrow the search
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AbbreviationEntryQuery"
+        required: true
+      responses:
+        "200":
+          description: a result container
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbbreviationEntryDataResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
+  /abbreviationentries/{abbreviationEntryId}/update:
+    post:
+      tags:
+      - AbbreviationEntries
+      summary: update
+      description: "Updates an abbreviation entry. The update replaces every mutable value, so unchanged values have to be sent along. The owner of an entry can't be changed after creation.<br>"
+      operationId: abbreviationEntriesUpdate
+      parameters:
+      - name: abbreviationEntryId
+        in: path
+        description: the ID of the abbreviation entry to update
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: the abbreviation entry with the updated values
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AbbreviationEntryUpdateBody"
+        required: true
+      responses:
+        "200":
+          description: the updated abbreviation entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbbreviationEntryData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /accountingresses/create:
     post:
       tags:
@@ -1817,6 +1963,7 @@ paths:
                     recipientTeamIds: null
                     recipientNamedAreaIds: null
                     recipientAccountId: null
+                    labelFilters: null
                     waitingTimeOutcomes:
                     - ACCEPTED
                     - ABORTED
@@ -1896,6 +2043,7 @@ paths:
                       recipientTeamIds: null
                       recipientNamedAreaIds: null
                       recipientAccountId: null
+                      labelFilters: null
                       waitingTimeOutcomes:
                       - ACCEPTED
                       - ABORTED
@@ -2098,6 +2246,7 @@ paths:
                         recipientTeamIds: null
                         recipientNamedAreaIds: null
                         recipientAccountId: null
+                        labelFilters: null
                         waitingTimeOutcomes:
                         - ACCEPTED
                         - ABORTED
@@ -2164,6 +2313,7 @@ paths:
                         recipientTeamIds: null
                         recipientNamedAreaIds: null
                         recipientAccountId: null
+                        labelFilters: null
                         waitingTimeOutcomes:
                         - ACCEPTED
                         - ABORTED
@@ -2230,6 +2380,7 @@ paths:
                         recipientTeamIds: null
                         recipientNamedAreaIds: null
                         recipientAccountId: null
+                        labelFilters: null
                         waitingTimeOutcomes:
                         - ACCEPTED
                         - ABORTED
@@ -2296,6 +2447,7 @@ paths:
                         recipientTeamIds: null
                         recipientNamedAreaIds: null
                         recipientAccountId: null
+                        labelFilters: null
                         waitingTimeOutcomes:
                         - ACCEPTED
                         - ABORTED
@@ -2362,6 +2514,7 @@ paths:
                         recipientTeamIds: null
                         recipientNamedAreaIds: null
                         recipientAccountId: null
+                        labelFilters: null
                         waitingTimeOutcomes:
                         - ACCEPTED
                         - ABORTED
@@ -2453,6 +2606,7 @@ paths:
                     recipientTeamIds: null
                     recipientNamedAreaIds: null
                     recipientAccountId: null
+                    labelFilters: null
                     waitingTimeOutcomes:
                     - ACCEPTED
                     - ABORTED
@@ -2532,6 +2686,7 @@ paths:
                       recipientTeamIds: null
                       recipientNamedAreaIds: null
                       recipientAccountId: null
+                      labelFilters: null
                       waitingTimeOutcomes:
                       - ACCEPTED
                       - ABORTED
@@ -3505,6 +3660,9 @@ paths:
                   webhookSecret: null
                   messageStateHandledExternally: false
                   automaticTypingStateHandlingEnabled: true
+                  optionalOutboundEvents:
+                  - DIALOG_COUNTERPART_CHANGED
+                  - DIALOG_ABORT_ANSWER
         required: true
       responses:
         "200":
@@ -3590,6 +3748,9 @@ paths:
                     webhookSecret: null
                     messageStateHandledExternally: false
                     automaticTypingStateHandlingEnabled: true
+                    optionalOutboundEvents:
+                    - DIALOG_COUNTERPART_CHANGED
+                    - DIALOG_ABORT_ANSWER
         default:
           $ref: "#/components/responses/ErrorResponse"
       callbacks:
@@ -3615,7 +3776,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.dialog.closed
-              description: "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog."
+              description: "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bot that is currently handling this dialog."
               operationId: outboundBotDialogClosedCallback
               requestBody:
                 content:
@@ -3633,7 +3794,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.dialog.counterpart_changed
-              description: Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
+              description: Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bot that is currently handling this dialog.
               operationId: outboundBotDialogCounterpartChangedCallback
               requestBody:
                 content:
@@ -3651,7 +3812,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.dialog.message
-              description: Request sent when a new message is sent in a dialog between a person and a bot. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
+              description: Request sent when a new message is sent in a dialog between a person and a bot. <p> The request is only delivered to the dialog bot that is currently handling this dialog.
               operationId: outboundBotDialogMessageCallback
               requestBody:
                 content:
@@ -3665,11 +3826,29 @@ paths:
                     application/json:
                       schema:
                         $ref: "#/components/schemas/BotDialogMessageResponse"
+        outbound.bot.dialog.message_deleted:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.bot.dialog.message_deleted
+              description: "Request sent when a message is deleted in a dialog between a person and a bot. <p> Participants can delete a message for all participants or only for themselves. In the latter case, the request is sent each time a participant deletes the message for themselves. <p> The request is only delivered to the dialog bot that is currently handling this dialog."
+              operationId: outboundBotDialogMessageDeletedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/BotDialogMessageDeletedRequest"
+              responses:
+                "200":
+                  description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/BotDialogMessageDeletedResponse"
         outbound.bot.dialog.message_state:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.dialog.message_state
-              description: Request sent when a message in a dialog between a person and a bot is marked as delivered/read. <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog.
+              description: Request sent when a message in a dialog between a person and a bot is marked as delivered/read. <p> The request is only delivered to the dialog bot that is currently handling this dialog.
               operationId: outboundBotDialogMessageStateCallback
               requestBody:
                 content:
@@ -3687,7 +3866,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: outbound.bot.dialog.opened
-              description: "Request sent when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog."
+              description: "Request sent when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The request is only delivered to the dialog bot that is currently handling this dialog."
               operationId: outboundBotDialogOpenedCallback
               requestBody:
                 content:
@@ -3838,6 +4017,85 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /bots/editDialogMessage:
+    post:
+      tags:
+      - Bots
+      summary: editDialogMessage
+      description: "Replaces the content of a message the bot sent earlier into an ongoing dialog. <p> It can only be used after the bot received the `BotDialogOpenEvent` webhook for this dialog, and only for messages the bot of that dialog sent itself. The supplied content replaces the current content of the message; only `text` is mandatory, and each optional field of the new content states what happens when it's left out. The content the edit supersedes is kept on the server but isn't returned by any web API operation. Messages in a conversation connected to an external messenger cannot be edited. <p> The result carries the message ID only.<br>"
+      operationId: botsEditDialogMessage
+      requestBody:
+        description: The message to edit and its new content
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BotDialogEditMessage"
+        required: true
+      responses:
+        "200":
+          description: The ID of the edited message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EditMessageResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+  /bots/editMessage:
+    post:
+      tags:
+      - Bots
+      summary: editMessage
+      description: "Replaces the content of a message a bot sent earlier to a conversation. <p> A bot can only edit its own messages: the message must have been sent by the given bot person. The supplied content replaces the current content of the message; only `text` is mandatory, and each optional field of the new content states what happens when it's left out. The content the edit supersedes is kept on the server but isn't returned by any web API operation. Messages in a conversation connected to an external messenger cannot be edited. <p> The result carries the message ID only. Read the message with its new content through the conversation history service's getMessage operation.<br>"
+      operationId: botsEditMessage
+      requestBody:
+        description: The message to edit and its new content
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BotEditMessage"
+            examples:
+              edit-text-message:
+                summary: edit text message
+                description: Replace the content of a message the bot sent earlier
+                value:
+                  $_type: BotEditMessage
+                  conversationId: AcviDb210C5BoFd6e_79oan
+                  senderPersonId: nta30CBa-6d1a89cE57Db_F
+                  messageId: mGesYagET_2GipaDGinA9A
+                  editMessageData:
+                    $_type: TextEditMessageData
+                    type: TEXT
+                    fallbackText: Your appointment is on Tuesday
+                    locale: en
+                    text: Your appointment is on Tuesday
+                    textType: MARKDOWN
+                    quickReplies:
+                    - $_type: QuickReply
+                      text: Tuesday
+                      availableTranslations: null
+        required: true
+      responses:
+        "200":
+          description: The ID of the edited message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EditMessageResult"
+              examples:
+                edit-text-message:
+                  summary: edit text message
+                  description: The ID of the edited message
+                  value:
+                    $_type: EditMessageResult
+                    messageId: mGesYagET_2GipaDGinA9A
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
   /bots/finishDialog:
     post:
       tags:
@@ -3937,6 +4195,9 @@ paths:
                     webhookSecret: null
                     messageStateHandledExternally: false
                     automaticTypingStateHandlingEnabled: true
+                    optionalOutboundEvents:
+                    - DIALOG_COUNTERPART_CHANGED
+                    - DIALOG_ABORT_ANSWER
                 get-by-name-copilot-bot:
                   summary: get by name copilot bot
                   description: Copilot Dialog bot
@@ -4051,6 +4312,9 @@ paths:
                     webhookSecret: null
                     messageStateHandledExternally: false
                     automaticTypingStateHandlingEnabled: true
+                    optionalOutboundEvents:
+                    - DIALOG_COUNTERPART_CHANGED
+                    - DIALOG_ABORT_ANSWER
                 read-copilot-bot:
                   summary: read copilot bot
                   description: Copilot Dialog bot
@@ -7160,6 +7424,8 @@ paths:
                     rejectionSeverity: null
                     rejectionReason: null
                     text: ""
+                    lastEditedByPersonId: null
+                    lastEditedTimestamp: null
                     deletedForAll: null
                     deletedForSelf: []
                 getmessage-text:
@@ -7182,6 +7448,8 @@ paths:
                     rejectionSeverity: null
                     rejectionReason: null
                     text: Hello world!
+                    lastEditedByPersonId: null
+                    lastEditedTimestamp: null
                     deletedForAll: null
                     deletedForSelf: []
         default:
@@ -8870,6 +9138,8 @@ paths:
                     replyToExternalMessageId: null
                     locale: null
                     conversationLocale: en
+                    lastEditedByPersonId: null
+                    lastEditedTimestamp: null
                     fileName: test-image.png
                     caption: A test image
                     captionType: SIMPLE_TEXT
@@ -8945,6 +9215,8 @@ paths:
                     replyToExternalMessageId: null
                     locale: en
                     conversationLocale: en
+                    lastEditedByPersonId: null
+                    lastEditedTimestamp: null
                     text: Hello world!
                     textType: SIMPLE_TEXT
                     quickReplies: []
@@ -16989,7 +17261,7 @@ paths:
       tags:
       - Persons
       summary: archiveBot
-      description: "Archives the bot person identified by `sourceId`. A bot person referenced by an existing dialog bot configuration can still be archived. Archiving a person makes it eligible for collection by the retention policies once it is no longer assigned to any bots, hides it from search results, and prevents it from being set as a conversation recipient or assigned to a new bot.<br>"
+      description: "Archives the bot person identified by `sourceId`. The built-in concierge bot person can't be archived. A bot person that is still referenced by at least one dialog bot configuration can't be archived; remove it from all dialog bots first. A bot person that a conversation template configures as its concierge stays archivable; that template's concierge then resolves to the account's default concierge bot person. Archiving a person makes it eligible for garbage collection in accordance with the retention policies in place, hides it from search results, and prevents it from being set as a conversation recipient or assigned to a dialog bot.<br>"
       operationId: personsArchiveBot
       requestBody:
         content:
@@ -17062,6 +17334,53 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /persons/{personId}/cancelOutOfOffice:
+    post:
+      tags:
+      - Persons
+      summary: cancelOutOfOffice
+      description: "Cancels another person's out of office period, whether it's already active or scheduled for the future. <p> The same role and team restrictions apply as for `scheduleOutOfOffice`.<br>"
+      operationId: personsCancelOutOfOffice
+      parameters:
+      - name: personId
+        in: path
+        description: The ID of the person to cancel the out of office period for
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The person's updated state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentPersonStateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPERVISOR
+  /persons/cancelOutOfOfficeForCurrentPerson:
+    post:
+      tags:
+      - Persons
+      summary: cancelOutOfOfficeForCurrentPerson
+      description: "Cancels the current person's out of office period, whether it's already active or scheduled for the future. <p> The person's online state and status message revert immediately, and the automatic notification pause is removed.<br>"
+      operationId: personsCancelOutOfOfficeForCurrentPerson
+      responses:
+        "200":
+          description: The person's updated state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentPersonStateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /persons/createOrUpdateBot:
     post:
       tags:
@@ -17198,7 +17517,7 @@ paths:
         explode: true
       - name: sourceId
         in: query
-        description: "The identifier of the source for the person's information<br> <ul> <li>For agents and visitors whose identity is propagated and whose person source is \"VIRTUAL\", the source ID is the value of the propagated \"userId\" field which is saved as ${link User.username} in the User entity. <li>For users whose identity is managed in Unblu (and whose person source is therefore \"USER_DB\"), the source ID is the ${link User.id} of the user represented by the person. <li>For anonymous visitors, the source ID is a random String. <li>For the concierge bot, the source ID is the String \"concierge-bot-person-id\". </ul>"
+        description: "The identifier of the source for the person's information<br> <ul> <li>For agents and visitors whose identity is propagated and whose person source is \"VIRTUAL\", the source ID is the value of the propagated \"userId\" field which is saved as ${link User.username} in the User entity. <li>For users whose identity is managed in Unblu (and whose person source is therefore \"USER_DB\"), the source ID is the ${link User.id} of the user represented by the person. <li>For anonymous visitors, the source ID is a random String. <li>For the default concierge bot person defined in the account scope, the source ID is the String \"concierge-bot-person-id\". </ul>"
         required: false
         schema:
           type: string
@@ -17510,6 +17829,66 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /persons/{personId}/scheduleOutOfOffice:
+    post:
+      tags:
+      - Persons
+      summary: scheduleOutOfOffice
+      description: Sets another person out of office for a given period. The person must be an agent. <p> Who is allowed to set out of office for another agent is defined on the roles set in <code>com.unblu.permission.roleAllowed.allowSettingOutOfOfficeOnBehalf</code>. Supervisors can only do so for agents in their own team and its subteams. <p> The timestamps behave as described in `scheduleOutOfOfficeForCurrentPerson`.<br>
+      operationId: personsScheduleOutOfOffice
+      parameters:
+      - name: personId
+        in: path
+        description: The ID of the person to set out of office
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: "A data wrapper containing the out of office status message, as well as the timestamps defining the period."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonOutOfOfficeBody"
+        required: true
+      responses:
+        "200":
+          description: The person's updated state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentPersonStateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - SUPERVISOR
+  /persons/scheduleOutOfOfficeForCurrentPerson:
+    post:
+      tags:
+      - Persons
+      summary: scheduleOutOfOfficeForCurrentPerson
+      description: "Sets the current person out of office for a given period. <p> If no start timestamp is provided, the out of office period starts immediately. A start timestamp in the past is treated as the current time; out of office can't be set retroactively. If no end timestamp is provided, the person remains out of office until the period is canceled. <p> While a person is out of office, their online state is OUT_OF_OFFICE and their notifications are paused automatically.<br>"
+      operationId: personsScheduleOutOfOfficeForCurrentPerson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonOutOfOfficeBody"
+        required: true
+      responses:
+        "200":
+          description: The person's updated state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentPersonStateData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - REGISTERED_USER
   /persons/search:
     post:
       tags:
@@ -20333,6 +20712,20 @@ paths:
               responses:
                 "200":
                   description: OK
+        conversation.message_edited:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.message_edited
+              description: "Represents an event that is triggered when the content of a message is replaced by an edit. <p> The message carries the content it holds after the edit. The content the edit superseded is not part of the event. A message that is pending approval or was rejected cannot be edited, so the event is only ever triggered for messages that were announced as a conversation.new_message event before. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+              operationId: conversationMessageEditedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationMessageEditedEvent"
+              responses:
+                "200":
+                  description: OK
         conversation.message_state:
           '{$request.body#/endpoint}':
             post:
@@ -21529,6 +21922,189 @@ paths:
       - ADMIN
 components:
   schemas:
+    AbbreviationAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: AbbreviationAbbreviationEntrySearchFilter
+          enum:
+          - AbbreviationAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
+    AbbreviationEntryCreateBody:
+      type: object
+      description: Body for creating an abbreviation entry
+      properties:
+        $_type:
+          type: string
+          default: AbbreviationEntryCreateBody
+          enum:
+          - AbbreviationEntryCreateBody
+        ownerType:
+          $ref: "#/components/schemas/EAbbreviationEntryOwnerType"
+        ownerId:
+          type: string
+          description: "ID of the owner of the abbreviation entry. Optional. If omitted, an entry with owner type <code>ACCOUNT</code> is owned by the current account, and an entry with owner type <code>USER</code> is owned by the current user. Only a user with the supervisor role can create an entry owned by another user."
+        abbreviation:
+          type: string
+          description: "The abbreviation that gets expanded. ASCII letters and digits only, no whitespace or punctuation. Maximum of 100 characters. Must be unique for the entry's owner, language, and case sensitivity."
+        expansion:
+          type: string
+          description: The expansion the abbreviation is replaced with. May contain multiple words. Must differ from the abbreviation. Maximum of 1000 characters.
+        language:
+          type: string
+          description: "Language tag the abbreviation entry applies to, for example <code>en</code> or <code>zh-Hans</code>. Must be one of the account's supported languages. Optional. If omitted, the entry applies to all languages."
+        caseSensitive:
+          type: boolean
+          description: "Whether the abbreviation matches case-sensitively. Optional, <code>false</code> if not provided. If <code>false</code>, the abbreviation matches regardless of casing."
+    AbbreviationEntryData:
+      type: object
+      description: An abbreviation entry. Abbreviation entries map a short abbreviation to a longer expansion. Autocorrect replaces the abbreviation with its expansion as an agent types.
+      properties:
+        $_type:
+          type: string
+          default: AbbreviationEntryData
+          enum:
+          - AbbreviationEntryData
+        id:
+          type: string
+          description: ID of the abbreviation entry
+        accountId:
+          type: string
+          description: ID of the account the abbreviation entry belongs to
+        ownerType:
+          $ref: "#/components/schemas/EAbbreviationEntryOwnerType"
+        ownerId:
+          type: string
+          description: "ID of the owner of the abbreviation entry. The account ID for owner type <code>ACCOUNT</code>, the user ID for owner type <code>USER</code>."
+        abbreviation:
+          type: string
+          description: "The abbreviation that gets expanded. ASCII letters and digits only, no whitespace or punctuation. Maximum of 100 characters."
+        expansion:
+          type: string
+          description: The expansion the abbreviation is replaced with. May contain multiple words. Maximum of 1000 characters.
+        language:
+          type: string
+          description: "Language tag the abbreviation entry applies to, for example <code>en</code> or <code>zh-Hans</code>. One of the account's supported languages. Absent if the entry applies to all languages."
+        caseSensitive:
+          type: boolean
+          description: "Whether the abbreviation matches case-sensitively. If <code>false</code>, the abbreviation matches regardless of casing."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the entity was created. It is defined when the entity is stored the first time in the system.
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the entity was last modified
+    AbbreviationEntryDataResult:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: AbbreviationEntryDataResult
+          enum:
+          - AbbreviationEntryDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/AbbreviationEntryData"
+    AbbreviationEntryOrderBy:
+      type: object
+      description: Abbreviation entry orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: AbbreviationEntryOrderBy
+          enum:
+          - AbbreviationEntryOrderBy
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntryOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    AbbreviationEntryQuery:
+      type: object
+      description: Container to search abbreviation entries
+      properties:
+        $_type:
+          type: string
+          default: AbbreviationEntryQuery
+          enum:
+          - AbbreviationEntryQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search
+          items:
+            $ref: "#/components/schemas/AbbreviationEntrySearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the list of search results
+          items:
+            $ref: "#/components/schemas/AbbreviationEntryOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of items returned
+    AbbreviationEntrySearchFilter:
+      description: Abbreviation entry filter item.
+      oneOf:
+      - $ref: "#/components/schemas/AbbreviationAbbreviationEntrySearchFilter"
+      - $ref: "#/components/schemas/ExpansionAbbreviationEntrySearchFilter"
+      - $ref: "#/components/schemas/LanguageAbbreviationEntrySearchFilter"
+      - $ref: "#/components/schemas/CaseSensitiveAbbreviationEntrySearchFilter"
+      - $ref: "#/components/schemas/OwnerIdAbbreviationEntrySearchFilter"
+      - $ref: "#/components/schemas/OwnerTypeAbbreviationEntrySearchFilter"
+      - $ref: "#/components/schemas/CreationTimestampAbbreviationEntrySearchFilter"
+      - $ref: "#/components/schemas/ModificationTimestampAbbreviationEntrySearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          ABBREVIATION: "#/components/schemas/AbbreviationAbbreviationEntrySearchFilter"
+          CASE_SENSITIVE: "#/components/schemas/CaseSensitiveAbbreviationEntrySearchFilter"
+          CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampAbbreviationEntrySearchFilter"
+          EXPANSION: "#/components/schemas/ExpansionAbbreviationEntrySearchFilter"
+          LANGUAGE: "#/components/schemas/LanguageAbbreviationEntrySearchFilter"
+          MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampAbbreviationEntrySearchFilter"
+          OWNER_ID: "#/components/schemas/OwnerIdAbbreviationEntrySearchFilter"
+          OWNER_TYPE: "#/components/schemas/OwnerTypeAbbreviationEntrySearchFilter"
+    AbbreviationEntryUpdateBody:
+      type: object
+      description: "Body for updating an abbreviation entry. Every attribute is replaced: <code>abbreviation</code> and <code>expansion</code> can't be omitted, and an omitted <code>language</code> or <code>caseSensitive</code> is reset rather than kept. The owner of an abbreviation entry can't be changed after creation."
+      properties:
+        $_type:
+          type: string
+          default: AbbreviationEntryUpdateBody
+          enum:
+          - AbbreviationEntryUpdateBody
+        abbreviation:
+          type: string
+          description: "The abbreviation that gets expanded. ASCII letters and digits only, no whitespace or punctuation. Maximum of 100 characters. Must be unique within the owner, language, and case sensitivity of the entry."
+        expansion:
+          type: string
+          description: The expansion the abbreviation is replaced with. May contain multiple words. Must differ from the abbreviation. Maximum of 1000 characters.
+        language:
+          type: string
+          description: "Language tag the abbreviation entry applies to, for example <code>en</code> or <code>zh-Hans</code>. Must be one of the account's supported languages. Optional. If omitted, the entry applies to all languages."
+        caseSensitive:
+          type: boolean
+          description: "Whether the abbreviation matches case-sensitively. Optional, <code>false</code> if not provided. If <code>false</code>, the abbreviation matches regardless of casing."
     AbortedTimestampCollaborationLayerLogEntrySearchFilter:
       type: object
       required:
@@ -22598,6 +23174,17 @@ components:
           $ref: "#/components/schemas/EOnlineState"
         type:
           $ref: "#/components/schemas/EPersonStateType"
+        outOfOfficeStartTimestamp:
+          type: integer
+          format: int64
+          description: The start timestamp for a user's out of office state
+        outOfOfficeEndTimestamp:
+          type: integer
+          format: int64
+          description: The end timestamp for a user's out of office state
+        outOfOfficeStatusMessage:
+          type: string
+          description: A status message for when a user is out of office
         statusMessage:
           type: string
           description: The agent's status message. The message is displayed in the person's details in the UI.
@@ -23535,6 +24122,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         text:
           type: string
           description: Text of the message
@@ -24297,11 +24891,11 @@ components:
       - MARK_DELETED
       - UNMARK_DELETED
       x-enum-descriptions:
-      - CREATE
-      - UPDATE
-      - DELETE
-      - MARK_DELETED
-      - UNMARK_DELETED
+      - "CREATE: The entity was inserted into the database."
+      - "UPDATE: One or more columns of an existing entity were modified."
+      - "DELETE: The entity was physically removed from the database."
+      - "MARK_DELETED: The entity was flagged for deletion but for now it's still in the database."
+      - "UNMARK_DELETED: A previously flagged entity was restored to an undeleted state."
     AuditChangeTypeOperator:
       oneOf:
       - $ref: "#/components/schemas/EqualsAuditChangeTypeOperator"
@@ -24326,13 +24920,13 @@ components:
       - SYNCJOB
       - GC
       x-enum-descriptions:
-      - API
-      - RPC
-      - JOB
-      - ACTION
-      - INTERNAL
-      - SYNCJOB
-      - GC
+      - "API: The change was triggered by a call to the public web API."
+      - "RPC: The change was triggered by an RPC call from a client (Agent Desk or visitor UI)."
+      - "JOB: The change was triggered by a scheduled background job."
+      - "ACTION: The change was triggered by an explicit administrative action."
+      - "INTERNAL: The change was triggered by server-internal logic without an external caller."
+      - "SYNCJOB: The change was triggered by a synchronization job importing data from an external system."
+      - "GC: The change was triggered by the garbage collector cleaning up expired data."
     AuthenticationRequiredChatSuggestionResponse:
       type: object
       description: Model that represents the response to a chat suggestion request when authentication is required
@@ -24682,6 +25276,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         resolutionTypes:
           type: array
           description: "A list of resolution types used to filter the analytics data included in the KPI calculation. Records matching any of the specified types are included. If null, the filter is not applied. An empty list is not allowed."
@@ -24846,6 +25445,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         queueInteractionTypes:
           type: array
           description: "A list of queue interaction types used to restrict which reservation outcomes are considered in the KPI calculation. Records matching any of the specified outcomes are included. Only `RESERVATION_*` values are accepted; other values are rejected during validation. If null, all reservation outcomes are considered. An empty list is not allowed."
@@ -25013,6 +25617,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         waitingTimeOutcomes:
           type: array
           description: "A list of waiting time outcomes used to filter the analytics data included in the KPI calculation. Records matching any of the specified outcomes are included. If null, the filter is not applied. An empty list is not allowed."
@@ -25291,7 +25900,7 @@ components:
           - BotDialogAbortAnswerResponse
     BotDialogClosedRequest:
       type: object
-      description: "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog."
+      description: "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bot that is currently handling this dialog."
       properties:
         $_type:
           type: string
@@ -25321,7 +25930,7 @@ components:
           - BotDialogClosedResponse
     BotDialogCounterpartChangedRequest:
       type: object
-      description: Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
+      description: Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bot that is currently handling this dialog.
       properties:
         $_type:
           type: string
@@ -25341,7 +25950,7 @@ components:
           $ref: "#/components/schemas/PersonData"
         conversationId:
           type: string
-          description: ID of the conversation the request is sent to.
+          description: The ID of the conversation this dialog belongs to.
     BotDialogCounterpartChangedResponse:
       type: object
       properties:
@@ -25350,9 +25959,66 @@ components:
           default: BotDialogCounterpartChangedResponse
           enum:
           - BotDialogCounterpartChangedResponse
+    BotDialogEditMessage:
+      type: object
+      description: "An edit of a message a bot sent earlier into a dialog. <p> The editing bot is the one the dialog belongs to, and it can only edit its own messages."
+      properties:
+        $_type:
+          type: string
+          default: BotDialogEditMessage
+          enum:
+          - BotDialogEditMessage
+        dialogToken:
+          type: string
+          description: The token belonging to the dialog the edited message was sent to
+        messageId:
+          type: string
+          description: The ID of the message to edit
+        editMessageData:
+          $ref: "#/components/schemas/EditMessageData"
+    BotDialogMessageDeletedRequest:
+      type: object
+      description: "Request sent when a message is deleted in a dialog between a person and a bot. <p> Participants can delete a message for all participants or only for themselves. In the latter case, the request is sent each time a participant deletes the message for themselves. <p> The request is only delivered to the dialog bot that is currently handling this dialog."
+      properties:
+        $_type:
+          type: string
+          default: BotDialogMessageDeletedRequest
+          enum:
+          - BotDialogMessageDeletedRequest
+        accountId:
+          type: string
+        serviceName:
+          type: string
+        dialogToken:
+          type: string
+          description: Token for this dialog. It is present in every dialog webhook and must be passed to all bot web API service calls to identify the dialog.
+        conversationMessage:
+          $ref: "#/components/schemas/MessageData"
+        conversationId:
+          type: string
+          description: The ID of the conversation this dialog belongs to.
+        markedAsDeletedForEverybody:
+          type: boolean
+          description: Whether the message is marked as deleted for all participants.
+        deletingPersonId:
+          type: string
+          description: The ID of the person who marked the message as deleted for all participants. Null if the message wasn't deleted for all participants.
+        deletedOnlyForPersonIds:
+          type: array
+          description: The IDs of the participants who have marked this message as deleted for themselves.
+          items:
+            type: string
+    BotDialogMessageDeletedResponse:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BotDialogMessageDeletedResponse
+          enum:
+          - BotDialogMessageDeletedResponse
     BotDialogMessageRequest:
       type: object
-      description: Request sent when a new message is sent in a dialog between a person and a bot. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.
+      description: Request sent when a new message is sent in a dialog between a person and a bot. <p> The request is only delivered to the dialog bot that is currently handling this dialog.
       properties:
         $_type:
           type: string
@@ -25370,7 +26036,7 @@ components:
           $ref: "#/components/schemas/MessageData"
         conversationId:
           type: string
-          description: ID of the conversation the request is sent to.
+          description: The ID of the conversation this dialog belongs to.
     BotDialogMessageResponse:
       type: object
       properties:
@@ -25381,7 +26047,7 @@ components:
           - BotDialogMessageResponse
     BotDialogMessageStateRequest:
       type: object
-      description: Request sent when a message in a dialog between a person and a bot is marked as delivered/read. <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog.
+      description: Request sent when a message in a dialog between a person and a bot is marked as delivered/read. <p> The request is only delivered to the dialog bot that is currently handling this dialog.
       properties:
         $_type:
           type: string
@@ -25405,7 +26071,7 @@ components:
           description: The ID of the bot that sent the message
         conversationId:
           type: string
-          description: The conversation the message belongs to
+          description: The ID of the conversation this dialog belongs to.
     BotDialogMessageStateResponse:
       type: object
       properties:
@@ -25416,7 +26082,7 @@ components:
           - BotDialogMessageStateResponse
     BotDialogOpenRequest:
       type: object
-      description: "Request sent when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog."
+      description: "Request sent when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The request is only delivered to the dialog bot that is currently handling this dialog."
       properties:
         $_type:
           type: string
@@ -25475,6 +26141,26 @@ components:
           description: Name of the bot
         state:
           $ref: "#/components/schemas/EBotDialogStatus"
+    BotEditMessage:
+      type: object
+      description: "An edit of a message a bot sent earlier. <p> A bot can only edit its own messages: the message must have been sent by the given bot person."
+      properties:
+        $_type:
+          type: string
+          default: BotEditMessage
+          enum:
+          - BotEditMessage
+        conversationId:
+          type: string
+          description: The ID of the conversation the message belongs to
+        senderPersonId:
+          type: string
+          description: ID of the bot person that sent the message
+        messageId:
+          type: string
+          description: The ID of the message to edit
+        editMessageData:
+          $ref: "#/components/schemas/EditMessageData"
     BotOffboardingOfferRequest:
       type: object
       description: "Request sent when a person offboards a conversation, giving the bot a chance to participate in the person's offboarding. <p> This may be triggered by several things: <ul> <li><b>A person leaves a conversation:</b> A bot can participate in the offboarding process of this person.</li> <li><b>A conversation ends:</b> A bot can participate in the offboarding process for every person in the conversation.</li> </ul> Bots must accept or decline the dialog offer by responding to the request with a `BotBoardingOfferResponse`. <p> <b>Note:</b> <ul> <li>If the offboarding person doesn't match the offboarding filter defined in the `CustomDialogBot`, the request isn't sent to the bot's endpoint.</li> <li>The bot MUST respond to the request. If it doesn't, the offboarding person has to wait for a timeout before their offboarding can proceed.</li> </ul>"
@@ -27882,6 +28568,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         assignedAgentPersonIds:
           type: array
           description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not included in the calculation. Empty list is not allowed. Optional."
@@ -28428,6 +29119,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         imageUrl:
           type: string
           description: URL of the image displayed at the top of the card.
@@ -28521,6 +29219,20 @@ components:
           description: List of quick replies available to the message's recipients. (optional) <p> Max number of quick replies is 13.
           items:
             $ref: "#/components/schemas/QuickReply"
+    CaseSensitiveAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: CaseSensitiveAbbreviationEntrySearchFilter
+          enum:
+          - CaseSensitiveAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/BooleanOperator"
     ChangeTypeAuditChangeSearchFilter:
       type: object
       required:
@@ -29496,6 +30208,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         assignedAgentPersonIds:
           type: array
           description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not included in the calculation. Empty list is not allowed. Optional."
@@ -30609,6 +31326,10 @@ components:
           type: integer
           format: int64
           description: Unix timestamp (ms) when the last message was sent to the conversation. Null if there hasn't been any yet.
+        lastMessageEditedTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when a message of the conversation was last edited. Null if no message has been edited yet.
         lastCompletedRecordingTimestamp:
           type: integer
           format: int64
@@ -30746,6 +31467,13 @@ components:
         text:
           type: string
           description: Text representation of the message.
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         deletedForAll:
           $ref: "#/components/schemas/MessageDeletionForAllInfo"
         deletedForSelf:
@@ -30814,6 +31542,7 @@ components:
       - $ref: "#/components/schemas/AwaitedPersonTypeConversationHistorySearchFilter"
       - $ref: "#/components/schemas/StateConversationHistorySearchFilter"
       - $ref: "#/components/schemas/LastMessageTimestampConversationHistorySearchFilter"
+      - $ref: "#/components/schemas/LastMessageSentOrEditedTimestampConversationHistorySearchFilter"
       - $ref: "#/components/schemas/LastCompletedRecordingTimestampConversationHistorySearchFilter"
       - $ref: "#/components/schemas/VisibilityConversationHistorySearchFilter"
       - $ref: "#/components/schemas/InheritConfigurationAndTextsConversationHistorySearchFilter"
@@ -30833,6 +31562,7 @@ components:
           INITIAL_ENGAGEMENT_TYPE: "#/components/schemas/InitialEngagementTypeConversationHistorySearchFilter"
           LABELS: "#/components/schemas/LabelsConversationHistorySearchFilter"
           LAST_COMPLETED_RECORDING_TIMESTAMP: "#/components/schemas/LastCompletedRecordingTimestampConversationHistorySearchFilter"
+          LAST_MESSAGE_SENT_OR_EDITED_TIMESTAMP: "#/components/schemas/LastMessageSentOrEditedTimestampConversationHistorySearchFilter"
           LAST_MESSAGE_TIMESTAMP: "#/components/schemas/LastMessageTimestampConversationHistorySearchFilter"
           PARTICIPANT_EXTERNAL_MESSENGER_CONTACT_ID: "#/components/schemas/ParticipantExternalMessengerContactIdConversationHistorySearchFilter"
           PARTICIPANT_PERSON_ID: "#/components/schemas/ParticipantPersonIdConversationHistorySearchFilter"
@@ -31185,6 +31915,27 @@ components:
           description: The IDs of the participants who have marked this message as deleted for themselves
           items:
             type: string
+    ConversationMessageEditedEvent:
+      type: object
+      description: "Represents an event that is triggered when the content of a message is replaced by an edit. <p> The message carries the content it holds after the edit. The content the edit superseded is not part of the event. A message that is pending approval or was rejected cannot be edited, so the event is only ever triggered for messages that were announced as a conversation.new_message event before. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: ConversationMessageEditedEvent
+          enum:
+          - ConversationMessageEditedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversationMessage:
+          $ref: "#/components/schemas/MessageData"
     ConversationMessageStateEvent:
       type: object
       description: "Event emitted when message is delivered/read. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
@@ -33510,6 +34261,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         conversationEndReasons:
           type: array
           description: "A list of conversation end reasons used to filter the analytics data included in the KPI calculation. Records matching any of the specified reasons are included. If null, the filter is not applied. An empty list is not allowed."
@@ -33917,6 +34673,20 @@ components:
           type: integer
           format: int64
           description: Number of entities found
+    CreationTimestampAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampAbbreviationEntrySearchFilter
+          enum:
+          - CreationTimestampAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampAccountIngressSearchFilter:
       type: object
       required:
@@ -34814,7 +35584,7 @@ components:
           $ref: "#/components/schemas/ERegistrationStatus"
         webhookEndpoint:
           type: string
-          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> Based on the configured filters/flags the following events will be sent to the endpoint: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a preaviously accepted bot dialog starts</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul>"
+          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> The following events are always sent to the endpoint: <ul> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a previously accepted bot dialog starts.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul> The following events are also always sent, but only occur while the setting governing them is active: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog, when messageStateHandledExternally is set to true.</li> </ul> The following events are sent only when listed in optionalOutboundEvents: <ul> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of a dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_ABORT_ANSWER`: When the counterpart aborts an answer the bot is waiting for. Requires web API version 4 or newer.</li> </ul>"
         outboundTimeoutMillis:
           type: integer
           format: int64
@@ -34830,6 +35600,11 @@ components:
         automaticTypingStateHandlingEnabled:
           type: boolean
           description: "Defines if the bot should automatically display a typing indicator after receiving a message from the counterpart person. The indication starts 1s after the message is received. The typing state can also be influenced through the web API, independently of this property."
+        optionalOutboundEvents:
+          type: array
+          description: "The optional outbound events this bot receives. Mandatory events are always delivered and are never listed here. <p> On update, omitting the property leaves the bot's current selection unchanged. On create, omitting it gives the bot the events that were delivered to every bot before this property existed (`EBotOutboundEventType.DIALOG_COUNTERPART_CHANGED` and `EBotOutboundEventType.DIALOG_ABORT_ANSWER`), so an integration written before the property keeps creating bots that behave as they always did. <p> An empty array is distinct from omitting the property: it is a selection, and it switches every optional event off."
+          items:
+            $ref: "#/components/schemas/EBotOutboundEventType"
     CustomExternalMessengerChannel:
       type: object
       description: "Channel between the collaboration server and an external messenger server. This could be emails, sms or other channels.<br> It defines basically a webhook endpoint where the collaboration server sends new messages to. Messages from the external messenger can be send via the ExternalMessengers web api."
@@ -36661,6 +37436,49 @@ components:
         url:
           type: string
           description: The URL of the link
+    EAbbreviationEntryOrderByField:
+      type: string
+      enum:
+      - ID
+      - ABBREVIATION
+      - LANGUAGE
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ID: Sort by the 'id' attribute"
+      - "ABBREVIATION: Sort by the 'abbreviation' attribute"
+      - "LANGUAGE: Sort by the 'language' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EAbbreviationEntryOwnerType:
+      type: string
+      description: Type of the owner of an abbreviation entry
+      enum:
+      - ACCOUNT
+      - USER
+      x-enum-descriptions:
+      - "ACCOUNT: The account owns the abbreviation entry. The entry is available to every user of the account."
+      - "USER: A user owns the abbreviation entry. Only that user's typing expands it; supervisors and administrators can still read and manage it."
+    EAbbreviationEntrySearchFilterField:
+      type: string
+      enum:
+      - ABBREVIATION
+      - EXPANSION
+      - LANGUAGE
+      - CASE_SENSITIVE
+      - OWNER_ID
+      - OWNER_TYPE
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "ABBREVIATION: Filter by the 'abbreviation' attribute"
+      - "EXPANSION: Filter by the 'expansion' attribute"
+      - "LANGUAGE: Filter by the 'language' attribute"
+      - "CASE_SENSITIVE: Filter by the 'caseSensitive' attribute"
+      - "OWNER_ID: Filter by the 'ownerId' attribute"
+      - "OWNER_TYPE: Filter by the 'ownerType' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EAccountIngressEntryPath:
       type: string
       enum:
@@ -36751,9 +37569,9 @@ components:
       - REMOVE_ASSIGNED_AGENT
       - REMOVE_ALL_AGENTS
       x-enum-descriptions:
-      - KEEP_AGENTS
-      - REMOVE_ASSIGNED_AGENT
-      - REMOVE_ALL_AGENTS
+      - "KEEP_AGENTS: All agents stay in the conversation"
+      - "REMOVE_ASSIGNED_AGENT: Only the assigned agent is removed from the conversation"
+      - "REMOVE_ALL_AGENTS: The assigned agent and all secondary agents are removed from the conversation"
     EAgentStateOrderByField:
       type: string
       enum:
@@ -36832,6 +37650,9 @@ components:
       - RECIPIENT_ID
       - ASSIGNED_AGENT_PERSON_ID
       - ASSIGNED_AGENT_TEAM_ID
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
       x-enum-descriptions:
       - "CONVERSATION_TEMPLATE_ID: Allows filtering the whole dashboard by conversation template IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
       - "CONVERSATION_LOCALE: Allows filtering the whole dashboard by conversation locales. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
@@ -36839,6 +37660,9 @@ components:
       - "RECIPIENT_ID: Allows filtering the whole dashboard by recipient agent persons, recipient agent teams, named areas, account IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
       - "ASSIGNED_AGENT_PERSON_ID: Allows filtering the whole dashboard by assigned agent person IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
       - "ASSIGNED_AGENT_TEAM_ID: Allows filtering the whole dashboard by assigned agent team IDs. The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "CONVERSATION_LABELS: Allows filtering the whole dashboard by conversation labels. You can specify mandatory labels (the conversation must have all of them), any labels (it must have at least one of them), and excluded labels (it must have none of them). The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "CONTEXT_PERSON_LABELS: Allows filtering the whole dashboard by context person labels. You can specify mandatory labels (the context person must have all of them), any labels (they must have at least one of them), and excluded labels (they must have none of them). The filter applies to all dashboard widgets whose KPI supports filtering by this type."
+      - "ASSIGNED_AGENT_LABELS: Allows filtering the whole dashboard by assigned agent labels. You can specify mandatory labels (the assigned agent must have all of them), any labels (they must have at least one of them), and excluded labels (they must have none of them). The filter applies to all dashboard widgets whose KPI supports filtering by this type."
     EAnalyticsKpiDataQueryFilterField:
       type: string
       description: Fields available for filtering in an `AnalyticsKpiDataQueryFilter`.
@@ -36965,6 +37789,27 @@ components:
       - "CALLS_COUNT: KPI for the number of calls."
       - "QUEUE_INTERACTION_COUNT: KPI for the number of queue interactions."
       - "AVG_RESERVATION_TIME: KPI for the average reservation time of a queue interaction."
+    EAnalyticsLabelTarget:
+      type: string
+      description: "The entity whose labels a `LabelsAnalyticsKpiFilter` applies to: the conversation itself or one of its persons. Each KPI supports only the targets available on its analytics data; a filter using an unsupported target is rejected."
+      enum:
+      - CONVERSATION
+      - CONTEXT_PERSON
+      - ASSIGNED_AGENT
+      - SENDER_PERSON
+      - STARTING_PERSON
+      - STOPPING_PERSON
+      - LAYER_OWNER
+      - INVITATION_ACCEPTING_AGENT
+      x-enum-descriptions:
+      - "CONVERSATION: The conversation itself."
+      - "CONTEXT_PERSON: The conversation's context person."
+      - "ASSIGNED_AGENT: The conversation's assigned agent."
+      - "SENDER_PERSON: The person who sent the message. Only available for the messages KPI."
+      - "STARTING_PERSON: The person who started the call or collaboration layer. Only available for the calls and collaboration layers KPIs."
+      - "STOPPING_PERSON: The person who stopped the collaboration layer. Only available for the collaboration layers KPI."
+      - "LAYER_OWNER: The owner of the collaboration layer. Only available for the collaboration layers KPI."
+      - "INVITATION_ACCEPTING_AGENT: The agent who accepted the invitation. Only available for the average waiting time KPI."
     EAnalyticsWaitingTimeOutcome:
       type: string
       description: "Defines the outcome of a waiting time entry, indicating whether the invitation was accepted or aborted."
@@ -37060,10 +37905,10 @@ components:
       - SUGGESTION_SOURCE
       - CUSTOM_ACTION
       x-enum-descriptions:
-      - MULTIFLOW
-      - SINGLE_FLOW
-      - SUGGESTION_SOURCE
-      - CUSTOM_ACTION
+      - "MULTIFLOW: The content describes a set of flows the bot can choose between"
+      - "SINGLE_FLOW: The content describes a single flow the bot runs"
+      - "SUGGESTION_SOURCE: The content describes a source the bot draws suggestions from"
+      - "CUSTOM_ACTION: The content describes a custom action the bot can invoke"
     EAriaAgenticFlowType:
       type: string
       description: Type of an Aria Agentic Flow
@@ -37092,7 +37937,7 @@ components:
       enum:
       - MULTIFLOW
       x-enum-descriptions:
-      - MULTIFLOW
+      - "MULTIFLOW: The bot is configured with a set of flows it can choose between"
     EAriaDialogBotType:
       type: string
       description: Type of an Aria Dialog Bot
@@ -37122,10 +37967,10 @@ components:
       - LEVEL_2
       - LEVEL_3
       x-enum-descriptions:
-      - ASSISTANTS
-      - LEVEL_1
-      - LEVEL_2
-      - LEVEL_3
+      - "ASSISTANTS: The agent's assistants, notified together with the first escalation level"
+      - "LEVEL_1: The first escalation level, tried before the higher levels"
+      - "LEVEL_2: The second escalation level, tried when level 1 did not answer"
+      - "LEVEL_3: The third and final escalation level, tried when level 2 did not answer"
     EAuditChangeInteractionTypeOperatorType:
       type: string
       enum:
@@ -37152,16 +37997,16 @@ components:
       - AUTHORIZATION_ROLE
       - IMPERSONATION_TYPE
       x-enum-descriptions:
-      - ID
-      - CREATION_TIMESTAMP
-      - ENTITY_TYPE
-      - INTERACTION_TYPE
-      - INTERACTION_NAME
-      - USERNAME
-      - USER_ID
-      - CHANGE_TYPE
-      - AUTHORIZATION_ROLE
-      - IMPERSONATION_TYPE
+      - "ID: Sort by the 'id' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "ENTITY_TYPE: Sort by the 'entityType' attribute"
+      - "INTERACTION_TYPE: Sort by the 'interactionType' attribute"
+      - "INTERACTION_NAME: Sort by the 'interactionName' attribute"
+      - "USERNAME: Sort by the 'userName' attribute"
+      - "USER_ID: Sort by the 'userId' attribute"
+      - "CHANGE_TYPE: Sort by the 'changeType' attribute"
+      - "AUTHORIZATION_ROLE: Sort by the 'userRole' attribute"
+      - "IMPERSONATION_TYPE: Sort by the 'userImpersonationType' attribute"
     EAuditChangeSearchFilterField:
       type: string
       enum:
@@ -37181,21 +38026,21 @@ components:
       - AUTHORIZATION_ROLE
       - IMPERSONATION_TYPE
       x-enum-descriptions:
-      - CREATION_TIMESTAMP
-      - ENTITY_TYPE
-      - ENTITY_ID
-      - OWNER_ID
-      - OWNER_TYPE
-      - ENTITY_NAME
-      - INTERACTION_TYPE
-      - INTERACTION_NAME
-      - USERNAME
-      - USER_ID
-      - GLOBAL_CHANGE
-      - ACCOUNT_CHANGE
-      - CHANGE_TYPE
-      - AUTHORIZATION_ROLE
-      - IMPERSONATION_TYPE
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "ENTITY_TYPE: Filter by the 'entityType' attribute"
+      - "ENTITY_ID: Filter by the 'entityId' attribute"
+      - "OWNER_ID: Filter by the 'ownerId' attribute"
+      - "OWNER_TYPE: Filter by the 'ownerType' attribute"
+      - "ENTITY_NAME: Filter by the 'entityName' attribute"
+      - "INTERACTION_TYPE: Filter by the 'interactionType' attribute"
+      - "INTERACTION_NAME: Filter by the 'interactionName' attribute"
+      - "USERNAME: Filter by the 'userName' attribute"
+      - "USER_ID: Filter by the 'userId' attribute"
+      - "GLOBAL_CHANGE: Filter by the 'globalChange' attribute, which marks changes outside of any account"
+      - "ACCOUNT_CHANGE: Filter by the 'accountChange' attribute, which marks changes belonging to a single account"
+      - "CHANGE_TYPE: Filter by the 'changeType' attribute"
+      - "AUTHORIZATION_ROLE: Filter by the 'userRole' attribute"
+      - "IMPERSONATION_TYPE: Filter by the 'userImpersonationType' attribute"
     EAuditChangeTypeOperatorType:
       type: string
       enum:
@@ -37280,6 +38125,9 @@ components:
       - ASSIGNED_AGENT_PERSON_ID
       - ASSIGNED_AGENT_TEAM_ID
       - RESOLUTION_TYPE
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
       x-enum-descriptions:
       - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
@@ -37288,6 +38136,9 @@ components:
       - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID."
       - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID."
       - "RESOLUTION_TYPE: Group by resolution type."
+      - "CONVERSATION_LABELS: Group by the labels attached to the conversation."
+      - "CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation."
+      - "ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent."
     EAvgReservationTimeGroupBy:
       type: string
       enum:
@@ -37298,6 +38149,9 @@ components:
       - INITIAL_ENGAGEMENT_TYPE
       - ASSIGNED_AGENT_PERSON_ID
       - ASSIGNED_AGENT_TEAM_ID
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
       x-enum-descriptions:
       - "QUEUE_INTERACTION_TYPE: Group by queue interaction type. See `EQueueInteractionType` for the full set of values."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
@@ -37306,6 +38160,9 @@ components:
       - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
       - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
       - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
+      - "CONVERSATION_LABELS: Group by the labels attached to the conversation."
+      - "CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation."
+      - "ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent."
     EAvgWaitingTimeGroupBy:
       type: string
       enum:
@@ -37318,6 +38175,9 @@ components:
       - INVITATION_TARGET_ID
       - INVITATION_ACCEPTING_AGENT_PERSON_ID
       - INVITATION_ACCEPTING_AGENT_TEAM_ID
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - INVITATION_ACCEPTING_AGENT_LABELS
       x-enum-descriptions:
       - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
@@ -37328,6 +38188,9 @@ components:
       - "INVITATION_TARGET_ID: Group by invitation target ID, which can be one of the following: person ID, team ID, or named area ID."
       - "INVITATION_ACCEPTING_AGENT_PERSON_ID: Group by the person ID of the agent who accepted the invitation."
       - "INVITATION_ACCEPTING_AGENT_TEAM_ID: Group by the team ID of the agent who accepted the invitation."
+      - "CONVERSATION_LABELS: Group by the labels attached to the conversation."
+      - "CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation."
+      - "INVITATION_ACCEPTING_AGENT_LABELS: Group by the labels attached to the agent who accepted the invitation."
     EAwaitedPersonType:
       type: string
       description: Indicates which type of person the conversation is waiting for
@@ -37336,9 +38199,9 @@ components:
       - VISITOR
       - AGENT
       x-enum-descriptions:
-      - NONE
-      - VISITOR
-      - AGENT
+      - "NONE: The conversation is not waiting for anybody"
+      - "VISITOR: The next action in the conversation is expected from a visitor"
+      - "AGENT: The next action in the conversation is expected from an agent"
     EAwaitedPersonTypeOperatorType:
       type: string
       enum:
@@ -37414,9 +38277,9 @@ components:
       - REBOARDING
       - OFFBOARDING
       x-enum-descriptions:
-      - ONBOARDING
-      - REBOARDING
-      - OFFBOARDING
+      - "ONBOARDING: Dialog run while the conversation is in the onboarding state, before it is queued or assigned"
+      - "REBOARDING: Dialog run while the conversation is in the reboarding state, after a message is sent to an unassigned conversation"
+      - "OFFBOARDING: Dialog run while the conversation is in the offboarding state, before it ends"
     EBotIndicatorType:
       type: string
       description: Defines the type of indicator shown while the bot is processing.
@@ -37428,6 +38291,31 @@ components:
       - "NONE: No indicator is shown."
       - "TYPING: A typing indicator is shown."
       - "THINKING: A thinking indicator with configurable texts is shown."
+    EBotOutboundEventType:
+      type: string
+      description: "The outbound events a custom dialog bot can receive. <p> Each constant declares everything the delivery layer branches on: the wire event type, whether the event is mandatory or selectable per bot, the lowest web API version able to carry it. <p> Which optional events a given bot receives is data, not code: it is stored on the bot. Optional events are delivered only when enabled on the bot (`optionalOutboundEvents`). <p> Some mandatory events occur only while a corresponding bot setting is active; see the individual events."
+      enum:
+      - ONBOARDING_OFFER
+      - REBOARDING_OFFER
+      - OFFBOARDING_OFFER
+      - DIALOG_MESSAGE_STATE
+      - DIALOG_OPENED
+      - DIALOG_MESSAGE
+      - DIALOG_CLOSED
+      - DIALOG_COUNTERPART_CHANGED
+      - DIALOG_ABORT_ANSWER
+      - DIALOG_MESSAGE_DELETED
+      x-enum-descriptions:
+      - "ONBOARDING_OFFER: Sent when a person matching the bot's onboarding filter joins a conversation. Only occurs when the onboarding filter is set."
+      - "REBOARDING_OFFER: Sent when a person writes a message to an unassigned conversation. Only occurs when reboarding is enabled on the bot."
+      - "OFFBOARDING_OFFER: Sent when a person matching the bot's offboarding filter leaves a conversation or the conversation ends. Only occurs when the offboarding filter is set."
+      - "DIALOG_MESSAGE_STATE: Sent on each message state update of a previously accepted bot dialog. Only occurs when message state is handled externally."
+      - "DIALOG_OPENED: Delivered when a previously accepted bot dialog starts."
+      - "DIALOG_MESSAGE: Delivered on each message of a previously accepted bot dialog."
+      - "DIALOG_CLOSED: Delivered when a previously accepted bot dialog closes."
+      - "DIALOG_COUNTERPART_CHANGED: Delivered when the counterpart person of a dialog changes during the dialog."
+      - "DIALOG_ABORT_ANSWER: Delivered when the counterpart aborts an answer the bot is waiting for."
+      - "DIALOG_MESSAGE_DELETED: Delivered when a message of a previously accepted bot dialog is deleted, whether for all participants or only for individual participants."
     EBotThreadEndTrigger:
       type: string
       description: The trigger for a bot thread end
@@ -37470,9 +38358,9 @@ components:
       - CUSTOM
       - ARIA
       x-enum-descriptions:
-      - COPILOT
-      - CUSTOM
-      - ARIA
+      - "COPILOT: A bot backed by a Microsoft Copilot Studio agent"
+      - "CUSTOM: A bot backed by a customer-provided implementation reached over the bot webhook API"
+      - "ARIA: A bot backed by Unblu's built-in Aria AI assistant"
     EBranchClientIssueType:
       type: string
       description: Type of issues a branch client can have
@@ -37480,11 +38368,17 @@ components:
       - MAIN_CAMERA
       - AUXILIARY_CAMERA
       - MICROPHONE
+      - MAIN_CAMERA_ACCESS_NOT_GRANTED
+      - AUXILIARY_CAMERA_ACCESS_NOT_GRANTED
+      - MICROPHONE_ACCESS_NOT_GRANTED
       - OTHER
       x-enum-descriptions:
       - "MAIN_CAMERA: There is an issue with the main camera, for example label of the configured device doesn't match any camera connected to the branch client"
       - "AUXILIARY_CAMERA: There is an issue with one or more auxiliary cameras, for example, the label of the configured device doesn't match any camera connected to the branch client"
       - "MICROPHONE: There is an issue with the microphone, for example, the label of the configured device doesn't match any microphone connected to the branch client"
+      - "MAIN_CAMERA_ACCESS_NOT_GRANTED: The main camera is configured, but the Branch client hasn't been granted camera access, so the configured device can't be looked up."
+      - "AUXILIARY_CAMERA_ACCESS_NOT_GRANTED: One or more auxiliary cameras are configured, but the Branch client hasn't been granted camera access, so the configured devices can't be looked up."
+      - "MICROPHONE_ACCESS_NOT_GRANTED: The microphone is configured, but the Branch client hasn't been granted microphone access, so the configured device can't be looked up."
       - "OTHER: There is a general issue with the branch client"
     EBranchClientOrderByField:
       type: string
@@ -37514,8 +38408,8 @@ components:
       - AVAILABLE
       - OFFLINE
       x-enum-descriptions:
-      - AVAILABLE
-      - OFFLINE
+      - "AVAILABLE: The Branch client is connected and ready to serve visitors"
+      - "OFFLINE: The Branch client is not connected"
     EBranchClientStateDataOrderByField:
       type: string
       enum:
@@ -37540,10 +38434,10 @@ components:
       - MEETING_ROOM
       - OTHER
       x-enum-descriptions:
-      - RECEPTION
-      - SELF_SERVICE
-      - MEETING_ROOM
-      - OTHER
+      - "RECEPTION: A client operated by branch staff at a reception desk"
+      - "SELF_SERVICE: A client operated by the visitor without branch staff present"
+      - "MEETING_ROOM: A client installed in a meeting room"
+      - "OTHER: A client that does not fall into any of the other categories"
     EBranchDeviceType:
       type: string
       enum:
@@ -37557,15 +38451,15 @@ components:
       - STATUS_LAMP
       - OTHER
       x-enum-descriptions:
-      - SIGN_PAD
-      - PRINTER
-      - DOOR
-      - LOCK
-      - INFO
-      - EXTERNAL_APPLICATION
-      - DOOR_OPENER
-      - STATUS_LAMP
-      - OTHER
+      - "SIGN_PAD: A signature pad used to capture handwritten signatures"
+      - "PRINTER: A printer"
+      - "DOOR: A door that can be monitored or controlled"
+      - "LOCK: A lock that can be opened or closed"
+      - "INFO: A device that only displays information"
+      - "EXTERNAL_APPLICATION: An external application controlled as if it were a device"
+      - "DOOR_OPENER: A door opener that unlocks a door on request"
+      - "STATUS_LAMP: A lamp indicating the current status of the Branch client"
+      - "OTHER: A device that does not fall into any of the other categories"
     EBranchLinkType:
       type: string
       enum:
@@ -37576,12 +38470,12 @@ components:
       - INFO
       - OTHER
       x-enum-descriptions:
-      - PHONE_NUMBER
-      - TIME
-      - TEAM
-      - EXTERNAL_APPLICATION
-      - INFO
-      - OTHER
+      - "PHONE_NUMBER: A link to a phone number to call"
+      - "TIME: A link to opening hours or another time-related resource"
+      - "TEAM: A link to a team that can be contacted"
+      - "EXTERNAL_APPLICATION: A link that opens an external application"
+      - "INFO: A link to purely informational content"
+      - "OTHER: A link that does not fall into any of the other categories"
     EBranchOrderByField:
       type: string
       enum:
@@ -37615,10 +38509,10 @@ components:
       - PRIORITY_3
       - PRIORITY_4
       x-enum-descriptions:
-      - PRIORITY_1
-      - PRIORITY_2
-      - PRIORITY_3
-      - PRIORITY_4
+      - "PRIORITY_1: The highest priority band, configured with 'busyStateSessionLimitPriority1'"
+      - "PRIORITY_2: The second-highest priority band, configured with 'busyStateSessionLimitPriority2'"
+      - "PRIORITY_3: The third-highest priority band, configured with 'busyStateSessionLimitPriority3'"
+      - "PRIORITY_4: The lowest priority band, configured with 'busyStateSessionLimitPriority4'"
     ECallEndReason:
       type: string
       description: The reason a call has ended
@@ -37779,6 +38673,10 @@ components:
       - NUMBER_OVERALL_CALL_PARTICIPANTS
       - STARTING_PERSON_ID
       - STARTING_PERSON_TEAM_ID
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
+      - STARTING_PERSON_LABELS
       x-enum-descriptions:
       - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
@@ -37789,6 +38687,10 @@ components:
       - "NUMBER_OVERALL_CALL_PARTICIPANTS: Group by number of overall call participants."
       - "STARTING_PERSON_ID: Group by starting person ID."
       - "STARTING_PERSON_TEAM_ID: Group by starting person team ID."
+      - "CONVERSATION_LABELS: Group by the labels attached to the conversation."
+      - "CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation."
+      - "ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent."
+      - "STARTING_PERSON_LABELS: Group by the labels attached to the person who started the call."
     ECannedResponseOrderByField:
       type: string
       enum:
@@ -37862,17 +38764,17 @@ components:
       - TEXT
       - AUTHENTICATION_REQUIRED
       x-enum-descriptions:
-      - EMPTY
-      - TEXT
-      - AUTHENTICATION_REQUIRED
+      - "EMPTY: No suggestion could be produced"
+      - "TEXT: The suggestion is a text the agent can send"
+      - "AUTHENTICATION_REQUIRED: No suggestion is returned because the requester must authenticate first"
     EChatSuggestionType:
       type: string
       enum:
       - MANUAL
       - AUTOMATIC
       x-enum-descriptions:
-      - MANUAL
-      - AUTOMATIC
+      - "MANUAL: The suggestion was requested explicitly by the agent"
+      - "AUTOMATIC: The suggestion was produced automatically as the conversation progressed"
     ECollaborationLayerEventOrderByField:
       type: string
       description: Collaboration layer event orderBy values
@@ -37990,15 +38892,27 @@ components:
       - LAYER_STOP_REASON
       - STARTING_PERSON_ID
       - STARTING_PERSON_TEAM_ID
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
+      - STARTING_PERSON_LABELS
+      - STOPPING_PERSON_LABELS
+      - LAYER_OWNER_LABELS
       x-enum-descriptions:
       - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
       - "CONVERSATION_LOCALE: Group by language."
       - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
-      - "LAYER_TYPE: Group by layer type."
-      - "LAYER_STOP_REASON: Group by layer stop reason."
+      - "LAYER_TYPE: Group by collaboration layer type."
+      - "LAYER_STOP_REASON: Group by the reason the collaboration layer was stopped."
       - "STARTING_PERSON_ID: Group by starting person ID."
       - "STARTING_PERSON_TEAM_ID: Group by starting person team ID."
+      - "CONVERSATION_LABELS: Group by the labels attached to the conversation."
+      - "CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation."
+      - "ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent."
+      - "STARTING_PERSON_LABELS: Group by the labels attached to the person who started the collaboration layer."
+      - "STOPPING_PERSON_LABELS: Group by the labels attached to the person who stopped the collaboration layer."
+      - "LAYER_OWNER_LABELS: Group by the labels attached to the owner of the collaboration layer."
     ECompoundOperatorType:
       type: string
       enum:
@@ -38050,8 +38964,8 @@ components:
       - GRANT
       - DENY
       x-enum-descriptions:
-      - GRANT
-      - DENY
+      - "GRANT: The interceptor allows the person to access the conversation"
+      - "DENY: The interceptor refuses the person access to the conversation"
     EConversationAccessInterceptorSearchFilterField:
       type: string
       enum:
@@ -38093,9 +39007,9 @@ components:
       - SECONDARY_AGENT
       - GHOST
       x-enum-descriptions:
-      - ASSIGNED_AGENT
-      - SECONDARY_AGENT
-      - GHOST
+      - "ASSIGNED_AGENT: The agent the conversation is assigned to"
+      - "SECONDARY_AGENT: An agent who joined the conversation in addition to the assigned agent"
+      - "GHOST: An agent following the conversation without being visible to the other participants"
     EConversationEndReason:
       type: string
       description: Closing reason of a conversation
@@ -38111,16 +39025,16 @@ components:
       - NO_AGENT_AVAILABLE
       - OTHER
       x-enum-descriptions:
-      - ENDED_BY_PARTICIPANT
-      - MANDATORY_PARTICIPANT_GONE
-      - REQUEST_DECLINED
-      - REQUEST_NOT_ANSWERED
-      - EXTERNAL_CHANNEL_CLOSED
-      - SOLVED_BY_BOT
-      - CANCELED
-      - CALL_ENDED
-      - NO_AGENT_AVAILABLE
-      - OTHER
+      - "ENDED_BY_PARTICIPANT: A participant explicitly ended the conversation"
+      - "MANDATORY_PARTICIPANT_GONE: A participant without whom the conversation cannot continue left it"
+      - "REQUEST_DECLINED: The conversation request was declined"
+      - "REQUEST_NOT_ANSWERED: The conversation request was never answered"
+      - "EXTERNAL_CHANNEL_CLOSED: The external messenger channel carrying the conversation was closed"
+      - "SOLVED_BY_BOT: A bot handled the request, so no agent was needed"
+      - "CANCELED: The conversation was ended while it was still being created or onboarded, so it never became active"
+      - "CALL_ENDED: The call the conversation was created for ended"
+      - "NO_AGENT_AVAILABLE: No agent was available to take the conversation"
+      - "OTHER: The conversation ended for a reason not covered by the other values"
     EConversationEndReasonOperatorType:
       type: string
       enum:
@@ -38135,7 +39049,7 @@ components:
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
     EConversationFileStatus:
       type: string
-      description: Status of a file which is/was uploaded to the collaboration server
+      description: Status of a file which is/was uploaded to the Collaboration Server
       enum:
       - UPLOADING
       - COMPLETED
@@ -38145,13 +39059,13 @@ components:
       - SCANNING
       - REJECTED
       x-enum-descriptions:
-      - UPLOADING
-      - COMPLETED
-      - CANCELED
-      - FAILED
-      - DELETED
-      - SCANNING
-      - REJECTED
+      - "UPLOADING: The file is being transferred to the Collaboration Server"
+      - "COMPLETED: The file was uploaded successfully and can be downloaded"
+      - "CANCELED: The upload was aborted before it finished"
+      - "FAILED: The upload ended with an error"
+      - "DELETED: The file was removed from the Collaboration Server"
+      - "SCANNING: The uploaded file is being checked by the virus scanner"
+      - "REJECTED: The file was refused, for example because the virus scanner flagged it"
     EConversationHistoryOrderByField:
       type: string
       enum:
@@ -38218,12 +39132,13 @@ components:
       - RECIPIENT_TYPE
       - TOKBOX_SESSION_ID
       - LAST_MESSAGE_TIMESTAMP
+      - LAST_MESSAGE_SENT_OR_EDITED_TIMESTAMP
       - LAST_COMPLETED_RECORDING_TIMESTAMP
       - VISIBILITY
       - INHERIT_CONFIGURATION_AND_TEXTS
       - LABELS
       x-enum-descriptions:
-      - COMPOUND
+      - "COMPOUND: Combine several filters with a boolean operator instead of filtering on a single attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "END_TIMESTAMP: Filter by the 'endTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "SCHEDULED_TIMESTAMP: Filter by the 'scheduledTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
@@ -38242,6 +39157,7 @@ components:
       - "RECIPIENT_TYPE: Filter by the 'type' of the 'recipient' attribute"
       - "TOKBOX_SESSION_ID: Filter by the 'tokboxSessionId' attribute"
       - "LAST_MESSAGE_TIMESTAMP: Filter by the 'lastMessageTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "LAST_MESSAGE_SENT_OR_EDITED_TIMESTAMP: Filter by the 'lastMessageTimestamp' or the 'lastMessageEditedTimestamp' attribute: a conversation matches if either satisfies the operator. Use this to find conversations whose messages changed since a given time, whether by a new message or by an edit. Specify the timestamp in the UTC timezone with milliseconds."
       - "LAST_COMPLETED_RECORDING_TIMESTAMP: Filter by the 'lastCompletedRecordingTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "VISIBILITY: Filter by the 'conversationVisibility' attribute"
       - "INHERIT_CONFIGURATION_AND_TEXTS: Filter by the 'inheritConfigurationAndTexts' attribute"
@@ -38256,11 +39172,11 @@ components:
       - SECONDARY_VISITOR
       - GHOST
       x-enum-descriptions:
-      - ASSIGNED_AGENT
-      - CONTEXT_PERSON
-      - SECONDARY_AGENT
-      - SECONDARY_VISITOR
-      - GHOST
+      - "ASSIGNED_AGENT: The agent the conversation is assigned to"
+      - "CONTEXT_PERSON: The visitor the conversation is about"
+      - "SECONDARY_AGENT: An agent who joined the conversation in addition to the assigned agent"
+      - "SECONDARY_VISITOR: A visitor who joined the conversation in addition to the context person"
+      - "GHOST: An agent following the conversation without being visible to the other participants"
     EConversationInvitationOrderByField:
       type: string
       enum:
@@ -38333,21 +39249,21 @@ components:
       - DEPUTY_REMOVAL
       - OTHER
       x-enum-descriptions:
-      - FORWARDED
-      - PARTICIPANT_LEFT
-      - REMOVED_AFTER_TIMEOUT
-      - ONBOARDING_DECLINED
-      - ONBOARDING_IDLE_TIMEOUT
-      - ONBOARDING_TIMEOUT
-      - USER_CHANGED
-      - KICKED
-      - CONVERSATION_UNASSIGNED
-      - CONVERSATION_REQUEUED
-      - PUBLIC_DIALIN_ENDED
-      - EXTERNAL_CONTACT_UNLINKED
-      - ASSISTANT_SYNCHRONIZATION
-      - DEPUTY_REMOVAL
-      - OTHER
+      - "FORWARDED: The participation ended because the conversation was forwarded to somebody else"
+      - "PARTICIPANT_LEFT: The participant left the conversation on their own"
+      - "REMOVED_AFTER_TIMEOUT: The participant was removed from the conversation after being inactive for too long"
+      - "ONBOARDING_DECLINED: The participant declined the onboarding and therefore never joined"
+      - "ONBOARDING_IDLE_TIMEOUT: The participant did not react during the onboarding"
+      - "ONBOARDING_TIMEOUT: The participant did not complete onboarding within the allowed time"
+      - "USER_CHANGED: The participation ended because the person behind the participant changed, for example on login"
+      - "KICKED: The participant was removed from the conversation by somebody else"
+      - "CONVERSATION_UNASSIGNED: The participation ended because the conversation became unassigned"
+      - "CONVERSATION_REQUEUED: The participation ended because the conversation was put back into the queue"
+      - "PUBLIC_DIALIN_ENDED: The participation ended because the public dial-in session ended"
+      - "EXTERNAL_CONTACT_UNLINKED: The participation ended because the external contact was unlinked from the person"
+      - "ASSISTANT_SYNCHRONIZATION: The participation was removed while synchronizing the assistants of the conversation"
+      - "DEPUTY_REMOVAL: The participation was removed because the deputy relationship it was based on ended"
+      - "OTHER: The participation ended for a reason not covered by the other values"
     EConversationLinkType:
       type: string
       description: Type of link used to accept an invitation.
@@ -38463,12 +39379,12 @@ components:
       - GHOST
       - RECORDER
       x-enum-descriptions:
-      - ASSIGNED_AGENT
-      - CONTEXT_PERSON
-      - SECONDARY_AGENT
-      - SECONDARY_VISITOR
-      - GHOST
-      - RECORDER
+      - "ASSIGNED_AGENT: The agent the conversation is assigned to"
+      - "CONTEXT_PERSON: The visitor the conversation is about"
+      - "SECONDARY_AGENT: An agent who joined the conversation in addition to the assigned agent"
+      - "SECONDARY_VISITOR: A visitor who joined the conversation in addition to the context person"
+      - "GHOST: An agent following the conversation without being visible to the other participants"
+      - "RECORDER: The non-human participant that records the conversation"
     EConversationPresenceOrderByField:
       type: string
       enum:
@@ -38507,10 +39423,10 @@ components:
       - SECONDARY_AGENT
       - SECONDARY_VISITOR
       x-enum-descriptions:
-      - ASSIGNED_AGENT
-      - CONTEXT_PERSON
-      - SECONDARY_AGENT
-      - SECONDARY_VISITOR
+      - "ASSIGNED_AGENT: The agent the conversation is assigned to"
+      - "CONTEXT_PERSON: The visitor the conversation is about"
+      - "SECONDARY_AGENT: An agent who joined the conversation in addition to the assigned agent"
+      - "SECONDARY_VISITOR: A visitor who joined the conversation in addition to the context person"
     EConversationRealVisitorParticipationType:
       type: string
       description: "This enum contains all \"real\" visitor participation types within a conversation: <ul> <li><b>`EConversationParticipationType`</b> All types including non-human ones <li><b>`EConversationImpactingParticipationType`</b> All human participation types (No recorder) <li><b>`EConversationRealParticipationType`</b> Only the participation types that actually create a `ConversationParticipation` (No ghost or recorder) </ul>"
@@ -38518,8 +39434,8 @@ components:
       - CONTEXT_PERSON
       - SECONDARY_VISITOR
       x-enum-descriptions:
-      - CONTEXT_PERSON
-      - SECONDARY_VISITOR
+      - "CONTEXT_PERSON: The visitor the conversation is about"
+      - "SECONDARY_VISITOR: A visitor who joined the conversation in addition to the context person"
     EConversationRecipientType:
       type: string
       description: Recipient type of the conversation
@@ -38744,7 +39660,7 @@ components:
       - CREATION_TIMESTAMP
       - MODIFICATION_TIMESTAMP
       x-enum-descriptions:
-      - NAME
+      - "NAME: Filter by the 'name' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute"
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute"
     EConversationSummaryTriggerType:
@@ -38839,6 +39755,9 @@ components:
       - ASSIGNED_AGENT_TEAM_ID
       - CONTEXT_PERSON_RATING
       - CONVERSATION_END_REASON
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
       x-enum-descriptions:
       - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
@@ -38848,6 +39767,9 @@ components:
       - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID."
       - "CONTEXT_PERSON_RATING: Group by context person rating."
       - "CONVERSATION_END_REASON: Group by conversation end reason."
+      - "CONVERSATION_LABELS: Group by conversation label. A conversation with multiple labels is counted once per label."
+      - "CONTEXT_PERSON_LABELS: Group by context person label. A conversation whose context person has multiple labels is counted once per label."
+      - "ASSIGNED_AGENT_LABELS: Group by assigned agent label. A conversation whose assigned agent has multiple labels is counted once per label."
     ECurrencyCode:
       type: string
       description: List of <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency codes.
@@ -39032,185 +39954,185 @@ components:
       - ZMW
       - ZWL
       x-enum-descriptions:
-      - AED
-      - AFN
-      - ALL
-      - AMD
-      - ANG
-      - AOA
-      - ARS
-      - AUD
-      - AWG
-      - AZN
-      - BAM
-      - BBD
-      - BDT
-      - BGN
-      - BHD
-      - BIF
-      - BMD
-      - BND
-      - BOB
-      - BOV
-      - BRL
-      - BSD
-      - BTN
-      - BWP
-      - BYN
-      - BZD
-      - CAD
-      - CDF
-      - CHE
-      - CHF
-      - CHW
-      - CLF
-      - CLP
-      - CNY
-      - COP
-      - COU
-      - CRC
-      - CUP
-      - CVE
-      - CZK
-      - DJF
-      - DKK
-      - DOP
-      - DZD
-      - EGP
-      - ERN
-      - ETB
-      - EUR
-      - FJD
-      - FKP
-      - GBP
-      - GEL
-      - GHS
-      - GIP
-      - GMD
-      - GNF
-      - GTQ
-      - GYD
-      - HKD
-      - HNL
-      - HTG
-      - HUF
-      - IDR
-      - ILS
-      - INR
-      - IQD
-      - IRR
-      - ISK
-      - JMD
-      - JOD
-      - JPY
-      - KES
-      - KGS
-      - KHR
-      - KMF
-      - KPW
-      - KRW
-      - KWD
-      - KYD
-      - KZT
-      - LAK
-      - LBP
-      - LKR
-      - LRD
-      - LSL
-      - LYD
-      - MAD
-      - MDL
-      - MGA
-      - MKD
-      - MMK
-      - MNT
-      - MOP
-      - MRU
-      - MUR
-      - MVR
-      - MWK
-      - MXN
-      - MXV
-      - MYR
-      - MZN
-      - NAD
-      - NGN
-      - NIO
-      - NOK
-      - NPR
-      - NZD
-      - OMR
-      - PAB
-      - PEN
-      - PGK
-      - PHP
-      - PKR
-      - PLN
-      - PYG
-      - QAR
-      - RON
-      - RSD
-      - RUB
-      - RWF
-      - SAR
-      - SBD
-      - SCR
-      - SDG
-      - SEK
-      - SGD
-      - SHP
-      - SLE
-      - SLL
-      - SOS
-      - SRD
-      - SSP
-      - STN
-      - SVC
-      - SYP
-      - SZL
-      - THB
-      - TJS
-      - TMT
-      - TND
-      - TOP
-      - TRY
-      - TTD
-      - TWD
-      - TZS
-      - UAH
-      - UGX
-      - USD
-      - USN
-      - UYI
-      - UYU
-      - UYW
-      - UZS
-      - VED
-      - VES
-      - VND
-      - VUV
-      - WST
-      - XAF
-      - XAG
-      - XAU
-      - XBA
-      - XBB
-      - XBC
-      - XBD
-      - XCD
-      - XDR
-      - XOF
-      - XPD
-      - XPF
-      - XPT
-      - XSU
-      - XTS
-      - XUA
-      - XXX
-      - YER
-      - ZAR
-      - ZMW
-      - ZWL
+      - "AED: UAE dirham (United Arab Emirates)"
+      - "AFN: Afghan afghani (Afghanistan)"
+      - "ALL: Albanian lek (Albania)"
+      - "AMD: Armenian dram (Armenia)"
+      - "ANG: Netherlands Antillean guilder (Curacao, Sint Maarten)"
+      - "AOA: Angolan kwanza (Angola)"
+      - "ARS: Argentine peso (Argentina)"
+      - "AUD: Australian dollar (Australia)"
+      - "AWG: Aruban florin (Aruba)"
+      - "AZN: Azerbaijani manat (Azerbaijan)"
+      - "BAM: Bosnia and Herzegovina convertible mark (Bosnia and Herzegovina)"
+      - "BBD: Barbados dollar (Barbados)"
+      - "BDT: Bangladeshi taka (Bangladesh)"
+      - "BGN: Bulgarian lev (Bulgaria)"
+      - "BHD: Bahraini dinar (Bahrain)"
+      - "BIF: Burundian franc (Burundi)"
+      - "BMD: Bermudian dollar (Bermuda)"
+      - "BND: Brunei dollar (Brunei)"
+      - "BOB: Boliviano (Bolivia)"
+      - "BOV: Bolivian Mvdol, a funds code used for accounting in Bolivia"
+      - "BRL: Brazilian real (Brazil)"
+      - "BSD: Bahamian dollar (Bahamas)"
+      - "BTN: Bhutanese ngultrum (Bhutan)"
+      - "BWP: Botswana pula (Botswana)"
+      - "BYN: Belarusian ruble (Belarus)"
+      - "BZD: Belize dollar (Belize)"
+      - "CAD: Canadian dollar (Canada)"
+      - "CDF: Congolese franc (Democratic Republic of the Congo)"
+      - "CHE: WIR euro, a complementary currency issued in Switzerland"
+      - "CHF: Swiss franc (Switzerland, Liechtenstein)"
+      - "CHW: WIR franc, a complementary currency issued in Switzerland"
+      - "CLF: Unidad de Fomento, an inflation-indexed funds code used in Chile"
+      - "CLP: Chilean peso (Chile)"
+      - "CNY: Renminbi yuan (China)"
+      - "COP: Colombian peso (Colombia)"
+      - "COU: Unidad de Valor Real, an inflation-indexed funds code used in Colombia"
+      - "CRC: Costa Rican colon (Costa Rica)"
+      - "CUP: Cuban peso (Cuba)"
+      - "CVE: Cape Verdean escudo (Cabo Verde)"
+      - "CZK: Czech koruna (Czechia)"
+      - "DJF: Djiboutian franc (Djibouti)"
+      - "DKK: Danish krone (Denmark, Faroe Islands, Greenland)"
+      - "DOP: Dominican peso (Dominican Republic)"
+      - "DZD: Algerian dinar (Algeria)"
+      - "EGP: Egyptian pound (Egypt)"
+      - "ERN: Eritrean nakfa (Eritrea)"
+      - "ETB: Ethiopian birr (Ethiopia)"
+      - "EUR: Euro (the euro area)"
+      - "FJD: Fiji dollar (Fiji)"
+      - "FKP: Falkland Islands pound (Falkland Islands)"
+      - "GBP: Pound sterling (United Kingdom)"
+      - "GEL: Georgian lari (Georgia)"
+      - "GHS: Ghanaian cedi (Ghana)"
+      - "GIP: Gibraltar pound (Gibraltar)"
+      - "GMD: Gambian dalasi (Gambia)"
+      - "GNF: Guinean franc (Guinea)"
+      - "GTQ: Guatemalan quetzal (Guatemala)"
+      - "GYD: Guyanese dollar (Guyana)"
+      - "HKD: Hong Kong dollar (Hong Kong)"
+      - "HNL: Honduran lempira (Honduras)"
+      - "HTG: Haitian gourde (Haiti)"
+      - "HUF: Hungarian forint (Hungary)"
+      - "IDR: Indonesian rupiah (Indonesia)"
+      - "ILS: Israeli new shekel (Israel)"
+      - "INR: Indian rupee (India)"
+      - "IQD: Iraqi dinar (Iraq)"
+      - "IRR: Iranian rial (Iran)"
+      - "ISK: Icelandic krona (Iceland)"
+      - "JMD: Jamaican dollar (Jamaica)"
+      - "JOD: Jordanian dinar (Jordan)"
+      - "JPY: Japanese yen (Japan)"
+      - "KES: Kenyan shilling (Kenya)"
+      - "KGS: Kyrgyzstani som (Kyrgyzstan)"
+      - "KHR: Cambodian riel (Cambodia)"
+      - "KMF: Comorian franc (Comoros)"
+      - "KPW: North Korean won (North Korea)"
+      - "KRW: South Korean won (South Korea)"
+      - "KWD: Kuwaiti dinar (Kuwait)"
+      - "KYD: Cayman Islands dollar (Cayman Islands)"
+      - "KZT: Kazakhstani tenge (Kazakhstan)"
+      - "LAK: Lao kip (Laos)"
+      - "LBP: Lebanese pound (Lebanon)"
+      - "LKR: Sri Lankan rupee (Sri Lanka)"
+      - "LRD: Liberian dollar (Liberia)"
+      - "LSL: Lesotho loti (Lesotho)"
+      - "LYD: Libyan dinar (Libya)"
+      - "MAD: Moroccan dirham (Morocco)"
+      - "MDL: Moldovan leu (Moldova)"
+      - "MGA: Malagasy ariary (Madagascar)"
+      - "MKD: Macedonian denar (North Macedonia)"
+      - "MMK: Myanmar kyat (Myanmar)"
+      - "MNT: Mongolian tugrik (Mongolia)"
+      - "MOP: Macanese pataca (Macao)"
+      - "MRU: Mauritanian ouguiya (Mauritania)"
+      - "MUR: Mauritian rupee (Mauritius)"
+      - "MVR: Maldivian rufiyaa (Maldives)"
+      - "MWK: Malawian kwacha (Malawi)"
+      - "MXN: Mexican peso (Mexico)"
+      - "MXV: Mexican Unidad de Inversion, an inflation-indexed funds code used in Mexico"
+      - "MYR: Malaysian ringgit (Malaysia)"
+      - "MZN: Mozambican metical (Mozambique)"
+      - "NAD: Namibian dollar (Namibia)"
+      - "NGN: Nigerian naira (Nigeria)"
+      - "NIO: Nicaraguan cordoba (Nicaragua)"
+      - "NOK: Norwegian krone (Norway)"
+      - "NPR: Nepalese rupee (Nepal)"
+      - "NZD: New Zealand dollar (New Zealand)"
+      - "OMR: Omani rial (Oman)"
+      - "PAB: Panamanian balboa (Panama)"
+      - "PEN: Peruvian sol (Peru)"
+      - "PGK: Papua New Guinean kina (Papua New Guinea)"
+      - "PHP: Philippine peso (Philippines)"
+      - "PKR: Pakistani rupee (Pakistan)"
+      - "PLN: Polish zloty (Poland)"
+      - "PYG: Paraguayan guarani (Paraguay)"
+      - "QAR: Qatari riyal (Qatar)"
+      - "RON: Romanian leu (Romania)"
+      - "RSD: Serbian dinar (Serbia)"
+      - "RUB: Russian ruble (Russia)"
+      - "RWF: Rwandan franc (Rwanda)"
+      - "SAR: Saudi riyal (Saudi Arabia)"
+      - "SBD: Solomon Islands dollar (Solomon Islands)"
+      - "SCR: Seychellois rupee (Seychelles)"
+      - "SDG: Sudanese pound (Sudan)"
+      - "SEK: Swedish krona (Sweden)"
+      - "SGD: Singapore dollar (Singapore)"
+      - "SHP: Saint Helena pound (Saint Helena, Ascension and Tristan da Cunha)"
+      - "SLE: Sierra Leonean leone (Sierra Leone)"
+      - "SLL: Sierra Leonean leone, the old code replaced by SLE after the 2022 redenomination"
+      - "SOS: Somali shilling (Somalia)"
+      - "SRD: Surinamese dollar (Suriname)"
+      - "SSP: South Sudanese pound (South Sudan)"
+      - "STN: Sao Tome and Principe dobra (Sao Tome and Principe)"
+      - "SVC: Salvadoran colon (El Salvador)"
+      - "SYP: Syrian pound (Syria)"
+      - "SZL: Swazi lilangeni (Eswatini)"
+      - "THB: Thai baht (Thailand)"
+      - "TJS: Tajikistani somoni (Tajikistan)"
+      - "TMT: Turkmenistan manat (Turkmenistan)"
+      - "TND: Tunisian dinar (Tunisia)"
+      - "TOP: Tongan pa'anga (Tonga)"
+      - "TRY: Turkish lira (Turkey)"
+      - "TTD: Trinidad and Tobago dollar (Trinidad and Tobago)"
+      - "TWD: New Taiwan dollar (Taiwan)"
+      - "TZS: Tanzanian shilling (Tanzania)"
+      - "UAH: Ukrainian hryvnia (Ukraine)"
+      - "UGX: Ugandan shilling (Uganda)"
+      - "USD: United States dollar (United States)"
+      - "USN: United States dollar (next day), a funds code used for settlement in the United States"
+      - "UYI: Uruguay Peso en Unidades Indexadas, an inflation-indexed funds code used in Uruguay"
+      - "UYU: Uruguayan peso (Uruguay)"
+      - "UYW: Unidad Previsional, a wage-indexed funds code used in Uruguay"
+      - "UZS: Uzbekistani sum (Uzbekistan)"
+      - "VED: Venezuelan bolivar digital (Venezuela)"
+      - "VES: Venezuelan bolivar soberano (Venezuela)"
+      - "VND: Vietnamese dong (Vietnam)"
+      - "VUV: Vanuatu vatu (Vanuatu)"
+      - "WST: Samoan tala (Samoa)"
+      - "XAF: Central African CFA franc (the CEMAC member states)"
+      - "XAG: One troy ounce of silver, a metal code"
+      - "XAU: One troy ounce of gold, a metal code"
+      - "XBA: European Composite Unit (EURCO), a bond market unit"
+      - "XBB: European Monetary Unit (E.M.U.-6), a bond market unit"
+      - "XBC: European Unit of Account 9 (E.U.A.-9), a bond market unit"
+      - "XBD: European Unit of Account 17 (E.U.A.-17), a bond market unit"
+      - "XCD: East Caribbean dollar (the Organisation of Eastern Caribbean States)"
+      - "XDR: Special drawing rights of the International Monetary Fund"
+      - "XOF: West African CFA franc (the UEMOA member states)"
+      - "XPD: One troy ounce of palladium, a metal code"
+      - "XPF: CFP franc (French Polynesia, New Caledonia, Wallis and Futuna)"
+      - "XPT: One troy ounce of platinum, a metal code"
+      - "XSU: Sucre, the unit of account of the ALBA member states"
+      - "XTS: Code reserved for testing purposes"
+      - "XUA: ADB unit of account of the African Development Bank"
+      - "XXX: Code for a transaction where no currency is involved"
+      - "YER: Yemeni rial (Yemen)"
+      - "ZAR: South African rand (South Africa)"
+      - "ZMW: Zambian kwacha (Zambia)"
+      - "ZWL: Zimbabwean dollar (Zimbabwe)"
     ECustomActionInvocationResponseType:
       type: string
       enum:
@@ -39341,9 +40263,9 @@ components:
       - LEVEL_2
       - LEVEL_3
       x-enum-descriptions:
-      - LEVEL_1
-      - LEVEL_2
-      - LEVEL_3
+      - "LEVEL_1: The first escalation level, tried before the higher levels"
+      - "LEVEL_2: The second escalation level, tried when level 1 did not answer"
+      - "LEVEL_3: The third and final escalation level, tried when level 2 did not answer"
     EDeputyDelegationEscalationLevelOperatorType:
       type: string
       enum:
@@ -39387,7 +40309,7 @@ components:
       - "AGENT_USER_ID: Filter by the 'agentUserId' attribute"
       - "DEPUTY_TYPE: Filter by the 'deputyType' attribute"
       - "DEPUTY_ID: Filter by the 'deputyId' attribute"
-      - ESCALATION_LEVEL
+      - "ESCALATION_LEVEL: Filter by the 'escalationLevel' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EDeputyType:
@@ -39396,8 +40318,8 @@ components:
       - AGENT
       - TEAM
       x-enum-descriptions:
-      - AGENT
-      - TEAM
+      - "AGENT: The deputy is a single agent"
+      - "TEAM: The deputy is a team, so every member of the team can act as deputy"
     EDeputyTypeOperatorType:
       type: string
       enum:
@@ -39420,12 +40342,12 @@ components:
       - CREATION_TIMESTAMP
       - LAST_SEEN
       x-enum-descriptions:
-      - ID
-      - DEVICE_TYPE
-      - OS_NAME
-      - BROWSER_NAME
-      - CREATION_TIMESTAMP
-      - LAST_SEEN
+      - "ID: Sort by the 'id' attribute"
+      - "DEVICE_TYPE: Sort by the 'deviceType' attribute"
+      - "OS_NAME: Sort by the 'osName' attribute"
+      - "BROWSER_NAME: Sort by the 'browserName' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "LAST_SEEN: Sort by the 'lastSeen' attribute"
     EDeviceInfoSearchFilterField:
       type: string
       enum:
@@ -39434,10 +40356,10 @@ components:
       - BROWSER_NAME
       - OWNER_PERSON_ID
       x-enum-descriptions:
-      - DEVICE_TYPE
-      - OS_NAME
-      - BROWSER_NAME
-      - OWNER_PERSON_ID
+      - "DEVICE_TYPE: Filter by the 'deviceType' attribute"
+      - "OS_NAME: Filter by the 'osName' attribute"
+      - "BROWSER_NAME: Filter by the 'browserName' attribute"
+      - "OWNER_PERSON_ID: Filter by the 'ownerPersonId' attribute"
     EDeviceType:
       type: string
       description: The device type of the physical device
@@ -39455,10 +40377,10 @@ components:
       - IN
       - NOT_IN
       x-enum-descriptions:
-      - EQUALS
-      - NOT_EQUALS
-      - IN
-      - NOT_IN
+      - "EQUALS: Check if the value is equal to the one provided in the operator"
+      - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
+      - "IN: Check whether the value is one of those provided in the operator"
+      - "NOT_IN: Check whether the value is not one of those provided in the operator"
     EDialInServiceProvider:
       type: string
       enum:
@@ -39545,9 +40467,9 @@ components:
       - NOT_AVAILABLE
       - OTHER
       x-enum-descriptions:
-      - NO_SUGGESTION
-      - NOT_AVAILABLE
-      - OTHER
+      - "NO_SUGGESTION: The suggestion source ran but had nothing to suggest"
+      - "NOT_AVAILABLE: No suggestion could be requested because the suggestion source is not available"
+      - "OTHER: No suggestion was returned for a reason not covered by the other values"
     EExternalMessengerChannelOrderByField:
       type: string
       enum:
@@ -39674,15 +40596,15 @@ components:
       - DOCUMENT_CAMERA_SHARING
       - CALLS
       x-enum-descriptions:
-      - SCREEN_SHARING
-      - EMBEDDED_COBROWSING
-      - CONTEXT_MIGRATION_COBROWSING
-      - MOBILE_COBROWSING
-      - DOCUMENT_COBROWSING
-      - WHITEBOARD
-      - UNIVERSAL_COBROWSING
-      - DOCUMENT_CAMERA_SHARING
-      - CALLS
+      - "SCREEN_SHARING: The screen sharing collaboration layer was used at least once."
+      - "EMBEDDED_COBROWSING: The embedded co-browsing collaboration layer was used at least once."
+      - "CONTEXT_MIGRATION_COBROWSING: The context migration co-browsing collaboration layer was used at least once."
+      - "MOBILE_COBROWSING: The mobile co-browsing collaboration layer was used at least once."
+      - "DOCUMENT_COBROWSING: The document co-browsing collaboration layer was used at least once."
+      - "WHITEBOARD: The whiteboard collaboration layer was used at least once."
+      - "UNIVERSAL_COBROWSING: The universal co-browsing collaboration layer was used at least once."
+      - "DOCUMENT_CAMERA_SHARING: The document camera sharing collaboration layer was used at least once."
+      - "CALLS: The calls feature was used at least once."
     EFileUploadInterceptorOrderByField:
       type: string
       enum:
@@ -39717,7 +40639,7 @@ components:
       - CO_BROWSING_DOWNLOAD
       - BROADCAST
       x-enum-descriptions:
-      - BOT
+      - "BOT: The file is being uploaded as a file message by a bot"
       - "EXTERNAL_MESSENGER: The file is being upload as a file message via an external channel"
       - "CONVERSATION: The file is being uploaded as a file message through an external messenger"
       - "CALL_SNAPSHOT: The file is a snapshot from a call"
@@ -39812,10 +40734,10 @@ components:
       - USER_SUPER_ADMIN
       - ACCOUNT
       x-enum-descriptions:
-      - NONE
-      - USER_OWN_ROLE
-      - USER_SUPER_ADMIN
-      - ACCOUNT
+      - "NONE: The user acts under their own identity, no impersonation is in place"
+      - "USER_OWN_ROLE: A superadmin impersonates a user and acts with the role of that user"
+      - "USER_SUPER_ADMIN: A superadmin impersonates a user but keeps their own superadmin role"
+      - "ACCOUNT: A superadmin acts within an account other than their own"
     EImpersonationTypeOperatorType:
       type: string
       enum:
@@ -40028,10 +40950,10 @@ components:
       - REVOKED
       - EXPIRED
       x-enum-descriptions:
-      - OPEN
-      - REDEEMED
-      - REVOKED
-      - EXPIRED
+      - "OPEN: The invitation has been issued and can still be redeemed"
+      - "REDEEMED: The invitation has been accepted by its target"
+      - "REVOKED: The invitation was withdrawn before it was redeemed"
+      - "EXPIRED: The invitation was not redeemed within its validity period"
     EInvitationStateOperatorType:
       type: string
       enum:
@@ -40050,12 +40972,12 @@ components:
       - NAMED_AREA
       - ACCOUNT
       x-enum-descriptions:
-      - ANONYMOUS
-      - VISITOR
-      - AGENT
-      - TEAM
-      - NAMED_AREA
-      - ACCOUNT
+      - "ANONYMOUS: The invitation can be redeemed by anybody holding the link, no target ID is needed"
+      - "VISITOR: The invitation targets a specific visitor"
+      - "AGENT: The invitation targets a specific agent"
+      - "TEAM: The invitation targets a team, so every member of the team can redeem it"
+      - "NAMED_AREA: The invitation targets a named area"
+      - "ACCOUNT: The invitation targets an account, so every agent of the account can redeem it"
     EInvitationTargetTypeOperatorType:
       type: string
       enum:
@@ -40206,14 +41128,14 @@ components:
       - UNIVERSAL_COBROWSING
       - DOCUMENT_CAMERA_SHARING
       x-enum-descriptions:
-      - SCREEN_SHARING
-      - EMBEDDED_COBROWSING
-      - CONTEXT_MIGRATION_COBROWSING
-      - MOBILE_COBROWSING
-      - DOCUMENT_COBROWSING
-      - WHITEBOARD
-      - UNIVERSAL_COBROWSING
-      - DOCUMENT_CAMERA_SHARING
+      - "SCREEN_SHARING: The agent or the visitor shares their whole screen"
+      - "EMBEDDED_COBROWSING: Co-browsing of a website that embeds the Unblu JavaScript library"
+      - "CONTEXT_MIGRATION_COBROWSING: Co-browsing that starts on one website and continues on another one"
+      - "MOBILE_COBROWSING: Mobile co-apping: sharing a mobile app that embeds the Unblu mobile SDK"
+      - "DOCUMENT_COBROWSING: Collaboration on a document uploaded to the conversation"
+      - "WHITEBOARD: A shared whiteboard the participants can draw on"
+      - "UNIVERSAL_COBROWSING: Co-browsing of a website that does not embed the Unblu JavaScript library"
+      - "DOCUMENT_CAMERA_SHARING: Sharing of a live camera image of a physical document"
     ELayerTypeOperatorType:
       type: string
       enum:
@@ -40258,8 +41180,10 @@ components:
       type: string
       enum:
       - SEND_TIMESTAMP
+      - SEND_OR_LAST_EDITED_TIMESTAMP
       x-enum-descriptions:
       - "SEND_TIMESTAMP: Filter by the 'sendTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "SEND_OR_LAST_EDITED_TIMESTAMP: Filter by the 'sendTimestamp' or the 'lastEditedTimestamp' attribute: a message matches if either of the two matches the operator.  Use it to export all messages of a time range, including messages sent before the range whose content was last edited within it. Specify the timestamp in the UTC timezone with milliseconds."
     EMessageExportOrderByField:
       type: string
       enum:
@@ -40294,9 +41218,9 @@ components:
       - VISITOR
       - ALL
       x-enum-descriptions:
-      - AGENT
-      - VISITOR
-      - ALL
+      - "AGENT: Only messages sent by agents are intercepted"
+      - "VISITOR: Only messages sent by visitors are intercepted"
+      - "ALL: Messages sent by agents and by visitors are intercepted"
     EMessageInterceptorMessageScope:
       type: string
       description: The kinds of messages a message interceptor processes.
@@ -40326,8 +41250,8 @@ components:
       - APPROVE
       - REJECT
       x-enum-descriptions:
-      - APPROVE
-      - REJECT
+      - "APPROVE: The interceptor lets the message through, possibly modified"
+      - "REJECT: The interceptor blocks the message"
     EMessageInterceptorSearchFilterField:
       type: string
       enum:
@@ -40353,8 +41277,8 @@ components:
       - EXTERNAL
       - INTERNAL
       x-enum-descriptions:
-      - EXTERNAL
-      - INTERNAL
+      - "EXTERNAL: The interceptor is a remote endpoint called over the outbound message interceptor webhook"
+      - "INTERNAL: The interceptor is implemented in the Collaboration Server"
     EMessageSenderType:
       type: string
       description: The type of participant who sent a message
@@ -40395,19 +41319,19 @@ components:
       - RECORDING_AVAILABLE
       - WHATS_APP_TEMPLATE
       x-enum-descriptions:
-      - TEXT
-      - SYSTEM
-      - FILE
-      - CARD
-      - LIST
-      - APPROVAL_REQUEST
-      - MULTICHOICE_QUESTION
-      - RATING_QUESTION
-      - TEXT_QUESTION
-      - REPLY
-      - QUESTION_ABORTED
-      - RECORDING_AVAILABLE
-      - WHATS_APP_TEMPLATE
+      - "TEXT: A plain text message written by a participant"
+      - "SYSTEM: A message generated by the system to report an event in the conversation"
+      - "FILE: A message carrying an uploaded file"
+      - "CARD: A message rendered as a card with a title, an image, and actions"
+      - "LIST: A message rendered as a list of items, each of which may carry an action"
+      - "APPROVAL_REQUEST: A question asking the recipient to approve or reject something"
+      - "MULTICHOICE_QUESTION: A question offering the recipient a set of answers to choose from"
+      - "RATING_QUESTION: A question asking the recipient for a rating"
+      - "TEXT_QUESTION: A question asking the recipient for a free-text answer"
+      - "REPLY: The answer a participant gave to a question message"
+      - "QUESTION_ABORTED: A message reporting that a question was canceled before it was answered"
+      - "RECORDING_AVAILABLE: A message announcing that a conversation recording is ready"
+      - "WHATS_APP_TEMPLATE: A message sent as a pre-approved WhatsApp message template"
     EMessagesCountGroupBy:
       type: string
       enum:
@@ -40421,6 +41345,10 @@ components:
       - SENDER_PERSON_ID
       - SENDER_PERSON_TEAM_ID
       - MESSAGE_TYPE
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
+      - SENDER_PERSON_LABELS
       x-enum-descriptions:
       - "CONVERSATION_RECIPIENT_ID: Group by conversation recipient ID."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
@@ -40432,6 +41360,10 @@ components:
       - "SENDER_PERSON_ID: Group by sender person ID."
       - "SENDER_PERSON_TEAM_ID: Group by sender person team ID."
       - "MESSAGE_TYPE: Group by message type."
+      - "CONVERSATION_LABELS: Group by the labels attached to the conversation."
+      - "CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation."
+      - "ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent."
+      - "SENDER_PERSON_LABELS: Group by the labels attached to the person who sent the message."
     ENamedAreaOrderByField:
       type: string
       enum:
@@ -40628,10 +41560,12 @@ components:
       - ONLINE
       - OFFLINE
       - AWAY
+      - OUT_OF_OFFICE
       x-enum-descriptions:
-      - ONLINE
-      - OFFLINE
-      - AWAY
+      - "ONLINE: The person is present and available"
+      - "OFFLINE: The person is not present"
+      - "AWAY: The person is present but currently not available"
+      - "OUT_OF_OFFICE: The person is out of office, whether or not they are present"
     EOnlineStateOperatorType:
       type: string
       enum:
@@ -40806,8 +41740,8 @@ components:
       - AGENT
       - VISITOR
       x-enum-descriptions:
-      - AGENT
-      - VISITOR
+      - "AGENT: The state belongs to an agent"
+      - "VISITOR: The state belongs to a visitor"
     EPersonType:
       type: string
       description: The type of a person (participant of a session)
@@ -40909,8 +41843,8 @@ components:
       - TEXT
       - MULTIPLE_CHOICE
       x-enum-descriptions:
-      - TEXT
-      - MULTIPLE_CHOICE
+      - "TEXT: The agent fills the placeholder with free text"
+      - "MULTIPLE_CHOICE: The agent fills the placeholder by picking one of the predefined values"
     EPostMessageType:
       type: string
       description: Type of a message which is send to the collaboration server
@@ -40994,6 +41928,9 @@ components:
       - INITIAL_ENGAGEMENT_TYPE
       - ASSIGNED_AGENT_PERSON_ID
       - ASSIGNED_AGENT_TEAM_ID
+      - CONVERSATION_LABELS
+      - CONTEXT_PERSON_LABELS
+      - ASSIGNED_AGENT_LABELS
       x-enum-descriptions:
       - "QUEUE_INTERACTION_TYPE: Group by queue interaction type. See `EQueueInteractionType` for the full set of values."
       - "CONVERSATION_TEMPLATE_ID: Group by conversation template ID."
@@ -41002,6 +41939,9 @@ components:
       - "INITIAL_ENGAGEMENT_TYPE: Group by initial engagement type."
       - "ASSIGNED_AGENT_PERSON_ID: Group by assigned agent person ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
       - "ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID (the agent who redeemed the invitation, or the agent the invitation was reserved for)."
+      - "CONVERSATION_LABELS: Group by the labels attached to the conversation."
+      - "CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation."
+      - "ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent."
     EQueueInteractionType:
       type: string
       description: Represents the outcome of a queue interaction (the way an invitation/reservation was resolved).
@@ -41107,8 +42047,8 @@ components:
       - JWT
       - OIDC_ACCESS_TOKEN
       x-enum-descriptions:
-      - JWT
-      - OIDC_ACCESS_TOKEN
+      - "JWT: A JSON web token issued for the Unblu login"
+      - "OIDC_ACCESS_TOKEN: An access token issued by an OpenID Connect provider"
     ESendFailState:
       type: string
       description: The failed state of a message which was sent to an external messenger
@@ -41269,14 +42209,14 @@ components:
       - PAYLOAD
       - LOCATION
       x-enum-descriptions:
-      - CURRENCY
-      - DATE_TIME
-      - DOCUMENT
-      - IMAGE
-      - TEXT
-      - VIDEO
-      - "PAYLOAD: Only allowed for components of type `ETemplateComponentParametersType.BUTTON`"
-      - LOCATION
+      - "CURRENCY: The parameter carries an amount of money together with its currency"
+      - "DATE_TIME: The parameter carries a date and time"
+      - "DOCUMENT: The parameter carries a document to attach"
+      - "IMAGE: The parameter carries an image to attach"
+      - "TEXT: The parameter carries a text that is substituted into the template"
+      - "VIDEO: The parameter carries a video to attach"
+      - "PAYLOAD: The parameter carries the payload a quick-reply button sends back when it is tapped. Only allowed for components of type `ETemplateComponentParametersType.BUTTON`"
+      - "LOCATION: The parameter carries a geographic location"
     ETemplateComponentParametersSubType:
       type: string
       enum:
@@ -41284,9 +42224,9 @@ components:
       - URL
       - CATALOG
       x-enum-descriptions:
-      - QUICK_REPLY
-      - URL
-      - CATALOG
+      - "QUICK_REPLY: A button that sends a predefined reply back when tapped"
+      - "URL: A button that opens a URL when tapped"
+      - "CATALOG: A button that opens the product catalog when tapped"
     ETemplateComponentParametersType:
       type: string
       enum:
@@ -41295,20 +42235,21 @@ components:
       - BUTTON
       - CAROUSEL
       x-enum-descriptions:
-      - HEADER
-      - BODY
-      - BUTTON
-      - CAROUSEL
+      - "HEADER: Parameters for the header of the template"
+      - "BODY: Parameters for the body of the template"
+      - "BUTTON: Parameters for a button of the template"
+      - "CAROUSEL: Parameters for the carousel of the template"
     ETextBoxAlign:
       type: string
+      description: "The alignment of the text inside a text box, applied to one axis at a time: a text box has a separate horizontal and vertical alignment"
       enum:
       - START
       - MIDDLE
       - END
       x-enum-descriptions:
-      - START
-      - MIDDLE
-      - END
+      - "START: The text is aligned to the start of the axis: to the left horizontally, to the top vertically"
+      - "MIDDLE: The text is centered on the axis"
+      - "END: The text is aligned to the end of the axis: to the right horizontally, to the bottom vertically"
     ETextQuestionType:
       type: string
       description: Type of a question message. Defines the reply value of a text message.
@@ -41523,6 +42464,25 @@ components:
       - "ENDPOINT: Sort by the 'endpoint' attribute"
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+    EditMessageData:
+      description: "Base class for the new content of a message edit. <p> Can be one of `TextEditMessageData`. <p> An edit replaces the message's content: only `text` is mandatory, and each optional field states what happens when it is left out."
+      oneOf:
+      - $ref: "#/components/schemas/TextEditMessageData"
+      discriminator:
+        propertyName: type
+        mapping:
+          TEXT: "#/components/schemas/TextEditMessageData"
+    EditMessageResult:
+      type: object
+      description: The result of editing a message
+      properties:
+        $_type:
+          type: string
+          default: EditMessageResult
+          enum:
+          - EditMessageResult
+        messageId:
+          type: string
     EmailPersonSearchFilter:
       type: object
       required:
@@ -42356,6 +43316,20 @@ components:
       - logoImage
       - metadata
       - text
+    ExpansionAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ExpansionAbbreviationEntrySearchFilter
+          enum:
+          - ExpansionAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     ExpirationTimestampConversationInvitationSearchFilter:
       type: object
       required:
@@ -43273,6 +44247,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         fileName:
           type: string
           description: The name of the file that is send
@@ -45493,6 +46474,24 @@ components:
         propertyName: field
         mapping:
           NAME: "#/components/schemas/NameLabelSearchFilter"
+    LabelsAnalyticsKpiFilter:
+      type: object
+      description: "A label condition on analytics KPI data: the entity named by `target` must carry all of, any of, or none of the labels in `labelNames`, as determined by `operator`."
+      properties:
+        $_type:
+          type: string
+          default: LabelsAnalyticsKpiFilter
+          enum:
+          - LabelsAnalyticsKpiFilter
+        target:
+          $ref: "#/components/schemas/EAnalyticsLabelTarget"
+        operator:
+          $ref: "#/components/schemas/ELabelsOperatorType"
+        labelNames:
+          type: array
+          description: The label names to check. Mandatory and must not be empty.
+          items:
+            type: string
     LabelsConversationHistorySearchFilter:
       type: object
       required:
@@ -45539,6 +46538,20 @@ components:
           ALL_OF: "#/components/schemas/AllOfLabelsOperator"
           ANY_OF: "#/components/schemas/AnyOfLabelsOperator"
           NONE_OF: "#/components/schemas/NoneOfLabelsOperator"
+    LanguageAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: LanguageAbbreviationEntrySearchFilter
+          enum:
+          - LanguageAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
     LastCompletedRecordingTimestampConversationHistorySearchFilter:
       type: object
       description: Filters by last completed recording timestamp made for a conversation.
@@ -45550,6 +46563,21 @@ components:
           default: LastCompletedRecordingTimestampConversationHistorySearchFilter
           enum:
           - LastCompletedRecordingTimestampConversationHistorySearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationHistorySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
+    LastMessageSentOrEditedTimestampConversationHistorySearchFilter:
+      type: object
+      description: "Filters by the timestamp of the last message sent or the last message edit in a conversation: a conversation matches if either timestamp satisfies the operator."
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: LastMessageSentOrEditedTimestampConversationHistorySearchFilter
+          enum:
+          - LastMessageSentOrEditedTimestampConversationHistorySearchFilter
         field:
           $ref: "#/components/schemas/EConversationHistorySearchFilterField"
         operator:
@@ -45888,6 +46916,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         header:
           $ref: "#/components/schemas/MessageHeader"
         items:
@@ -46129,9 +47164,11 @@ components:
       description: Message filter item.
       oneOf:
       - $ref: "#/components/schemas/SendTimestampMessageExportFilter"
+      - $ref: "#/components/schemas/SendOrLastEditedTimestampMessageExportFilter"
       discriminator:
         propertyName: field
         mapping:
+          SEND_OR_LAST_EDITED_TIMESTAMP: "#/components/schemas/SendOrLastEditedTimestampMessageExportFilter"
           SEND_TIMESTAMP: "#/components/schemas/SendTimestampMessageExportFilter"
     MessageExportOrderBy:
       type: object
@@ -46517,6 +47554,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         assignedAgentPersonIds:
           type: array
           description: "A list of assigned agent person IDs used to filter the analytics data included in the KPI calculation. Records matching any of the specified IDs are included. The specified IDs must exist in the Unblu database and be accessible to the user. Supports the `CURRENT_USER` variable. If null, the filter is not applied. An empty list is not allowed."
@@ -46705,6 +47747,20 @@ components:
           description: Person ID of the person calling
         callEndReason:
           $ref: "#/components/schemas/ECallParticipationEndReason"
+    ModificationTimestampAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampAbbreviationEntrySearchFilter
+          enum:
+          - ModificationTimestampAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampAccountIngressSearchFilter:
       type: object
       required:
@@ -47100,6 +48156,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         text:
           type: string
           description: Text of the message
@@ -49011,7 +50074,7 @@ components:
         refreshInterval:
           type: integer
           format: int32
-          description: The interval in minutes at which OIDC tokens are refreshed
+          description: The interval in minutes at which OIDC tokens are refreshed. Mandatory.
         endSessionEndpoint:
           type: string
           description: The end session endpoint URL for OIDC logout
@@ -49126,6 +50189,20 @@ components:
           $ref: "#/components/schemas/EDeviceInfoSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    OwnerIdAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: OwnerIdAbbreviationEntrySearchFilter
+          enum:
+          - OwnerIdAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/IdOperator"
     OwnerIdAuditChangeSearchFilter:
       type: object
       required:
@@ -49168,6 +50245,20 @@ components:
           $ref: "#/components/schemas/EDeviceInfoSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    OwnerTypeAbbreviationEntrySearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: OwnerTypeAbbreviationEntrySearchFilter
+          enum:
+          - OwnerTypeAbbreviationEntrySearchFilter
+        field:
+          $ref: "#/components/schemas/EAbbreviationEntrySearchFilterField"
+        operator:
+          $ref: "#/components/schemas/PropertyOwnerTypeOperator"
     OwnerTypeAuditChangeSearchFilter:
       type: object
       required:
@@ -50006,6 +51097,25 @@ components:
           $ref: "#/components/schemas/EPersonOrderByField"
         order:
           $ref: "#/components/schemas/Order"
+    PersonOutOfOfficeBody:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: PersonOutOfOfficeBody
+          enum:
+          - PersonOutOfOfficeBody
+        statusMessage:
+          type: string
+          description: Status message for an agent who's out of office. Displayed in the user profile.
+        outOfOfficeStartTimestamp:
+          type: integer
+          format: int64
+          description: The start timestamp for the out of office state of an agent.
+        outOfOfficeEndTimestamp:
+          type: integer
+          format: int64
+          description: The end timestamp for the out of office state of an agent.
     PersonPresenceData:
       type: object
       description: Model of a person-presence<br> A presence represents the time that a participant is logged into / available in the system.
@@ -51064,6 +52174,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -51186,6 +52303,11 @@ components:
         recipientAccountId:
           type: boolean
           description: "If true, includes records where the conversation recipient ID matches the current user's account ID. The filter is not applied otherwise. Optional."
+        labelFilters:
+          type: array
+          description: "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed."
+          items:
+            $ref: "#/components/schemas/LabelsAnalyticsKpiFilter"
         queueInteractionTypes:
           type: array
           description: "A list of queue interaction types used to filter the analytics data included in the KPI calculation. Records matching any of the specified outcomes are included. If null, the filter is not applied. An empty list is not allowed."
@@ -51520,6 +52642,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         text:
           type: string
           description: Text of the message
@@ -51883,6 +53012,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         blobId:
           type: string
           description: The blob store ID of the recording
@@ -51988,6 +53124,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -52310,6 +53453,20 @@ components:
           - SendMessageResult
         messageId:
           type: string
+    SendOrLastEditedTimestampMessageExportFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: SendOrLastEditedTimestampMessageExportFilter
+          enum:
+          - SendOrLastEditedTimestampMessageExportFilter
+        field:
+          $ref: "#/components/schemas/EMessageExportFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     SendTimestampMessageExportFilter:
       type: object
       required:
@@ -52959,6 +54116,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         text:
           type: string
           description: Text of the message
@@ -53297,6 +54461,35 @@ components:
         suggestionComment:
           type: string
           description: Comment on the suggestion. The comment is displayed to the agent but not sent as part of the suggested message. Can be Markdown. Optional.
+    TextEditMessageData:
+      type: object
+      description: "New content for a text message edit. <p> The provided content replaces the message's current content: only `text` is mandatory. `textType` and `quickReplies` are kept from the current content when left out; the other fields are derived from the new text."
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: TextEditMessageData
+          enum:
+          - TextEditMessageData
+        type:
+          $ref: "#/components/schemas/EPostMessageType"
+        fallbackText:
+          type: string
+          description: "Optional fallback text of the new content, used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the new content is generated. This may however not always be a perfect textual representation of the content."
+        locale:
+          type: string
+          description: "Optional source language of the new content (as BCP 47 language tag, including region if available).<br> If not provided, the language is automatically detected based on the new content. If the detection can't confidently detect the language, the message keeps its current locale."
+        text:
+          type: string
+          description: Mandatory new message text
+        textType:
+          $ref: "#/components/schemas/EConversationMessageTextType"
+        quickReplies:
+          type: array
+          description: "Optional quick replies available to the message's recipients after the edit. <p> The provided array replaces the message's current quick replies, and an empty array removes them. If the field is omitted, the message keeps its current quick replies. <p> Max number of quick replies is 13."
+          items:
+            $ref: "#/components/schemas/QuickReply"
     TextMessageData:
       type: object
       description: Text message
@@ -53370,6 +54563,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         text:
           type: string
           description: Text of the message
@@ -53502,6 +54702,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         text:
           type: string
           description: Text of the message
@@ -54459,6 +55666,17 @@ components:
           $ref: "#/components/schemas/EOnlineState"
         type:
           $ref: "#/components/schemas/EPersonStateType"
+        outOfOfficeStartTimestamp:
+          type: integer
+          format: int64
+          description: The start timestamp for a user's out of office state
+        outOfOfficeEndTimestamp:
+          type: integer
+          format: int64
+          description: The end timestamp for a user's out of office state
+        outOfOfficeStatusMessage:
+          type: string
+          description: A status message for when a user is out of office
     VisitorPersonStateResult:
       type: object
       description: A container to return a list of visitor person states
@@ -55094,6 +56312,13 @@ components:
         conversationLocale:
           type: string
           description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
         templateId:
           type: string
           description: ID of the template

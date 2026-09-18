@@ -10,7 +10,9 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
+import com.unblu.webapi.model.v4.BotDialogEditMessage;
 import com.unblu.webapi.model.v4.BotDialogPostMessage;
+import com.unblu.webapi.model.v4.BotEditMessage;
 import com.unblu.webapi.model.v4.BotPostMessage;
 import com.unblu.webapi.model.v4.BotsCancelDialogBotThinkingIndicatorBody;
 import com.unblu.webapi.model.v4.BotsCancelDialogBotTypingIndicatorBody;
@@ -24,6 +26,7 @@ import com.unblu.webapi.model.v4.BotsStartDialogBotTypingIndicatorBody;
 import com.unblu.webapi.model.v4.DialogBotData;
 import com.unblu.webapi.model.v4.DialogBotQuery;
 import com.unblu.webapi.model.v4.DialogBotResult;
+import com.unblu.webapi.model.v4.EditMessageResult;
 import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.PingResponse;
 import com.unblu.webapi.model.v4.SendMessageResult;
@@ -448,6 +451,124 @@ public class BotsApi {
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
+	 * editDialogMessage Replaces the content of a message the bot sent earlier into an ongoing dialog. &lt;p&gt; It can only be used after the bot received the
+	 * &#x60;BotDialogOpenEvent&#x60; webhook for this dialog, and only for messages the bot of that dialog sent itself. The supplied content replaces the current
+	 * content of the message; only &#x60;text&#x60; is mandatory, and each optional field of the new content states what happens when it&#39;s left out. The
+	 * content the edit supersedes is kept on the server but isn&#39;t returned by any web API operation. Messages in a conversation connected to an external
+	 * messenger cannot be edited. &lt;p&gt; The result carries the message ID only.&lt;br&gt;
+	 * 
+	 * @param botDialogEditMessage The message to edit and its new content (required)
+	 * @return EditMessageResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public EditMessageResult botsEditDialogMessage(BotDialogEditMessage botDialogEditMessage) throws ApiException {
+		return botsEditDialogMessageWithHttpInfo(botDialogEditMessage).getData();
+	}
+
+	/**
+	 * editDialogMessage Replaces the content of a message the bot sent earlier into an ongoing dialog. &lt;p&gt; It can only be used after the bot received the
+	 * &#x60;BotDialogOpenEvent&#x60; webhook for this dialog, and only for messages the bot of that dialog sent itself. The supplied content replaces the current
+	 * content of the message; only &#x60;text&#x60; is mandatory, and each optional field of the new content states what happens when it&#39;s left out. The
+	 * content the edit supersedes is kept on the server but isn&#39;t returned by any web API operation. Messages in a conversation connected to an external
+	 * messenger cannot be edited. &lt;p&gt; The result carries the message ID only.&lt;br&gt;
+	 * 
+	 * @param botDialogEditMessage The message to edit and its new content (required)
+	 * @return ApiResponse&lt;EditMessageResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<EditMessageResult> botsEditDialogMessageWithHttpInfo(BotDialogEditMessage botDialogEditMessage) throws ApiException {
+		Object localVarPostBody = botDialogEditMessage;
+
+		// verify the required parameter 'botDialogEditMessage' is set
+		if (botDialogEditMessage == null) {
+			throw new ApiException(400, "Missing the required parameter 'botDialogEditMessage' when calling botsEditDialogMessage");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/editDialogMessage";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<EditMessageResult> localVarReturnType = new GenericType<EditMessageResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * editMessage Replaces the content of a message a bot sent earlier to a conversation. &lt;p&gt; A bot can only edit its own messages: the message must have
+	 * been sent by the given bot person. The supplied content replaces the current content of the message; only &#x60;text&#x60; is mandatory, and each optional
+	 * field of the new content states what happens when it&#39;s left out. The content the edit supersedes is kept on the server but isn&#39;t returned by any web
+	 * API operation. Messages in a conversation connected to an external messenger cannot be edited. &lt;p&gt; The result carries the message ID only. Read the
+	 * message with its new content through the conversation history service&#39;s getMessage operation.&lt;br&gt;
+	 * 
+	 * @param botEditMessage The message to edit and its new content (required)
+	 * @return EditMessageResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public EditMessageResult botsEditMessage(BotEditMessage botEditMessage) throws ApiException {
+		return botsEditMessageWithHttpInfo(botEditMessage).getData();
+	}
+
+	/**
+	 * editMessage Replaces the content of a message a bot sent earlier to a conversation. &lt;p&gt; A bot can only edit its own messages: the message must have
+	 * been sent by the given bot person. The supplied content replaces the current content of the message; only &#x60;text&#x60; is mandatory, and each optional
+	 * field of the new content states what happens when it&#39;s left out. The content the edit supersedes is kept on the server but isn&#39;t returned by any web
+	 * API operation. Messages in a conversation connected to an external messenger cannot be edited. &lt;p&gt; The result carries the message ID only. Read the
+	 * message with its new content through the conversation history service&#39;s getMessage operation.&lt;br&gt;
+	 * 
+	 * @param botEditMessage The message to edit and its new content (required)
+	 * @return ApiResponse&lt;EditMessageResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<EditMessageResult> botsEditMessageWithHttpInfo(BotEditMessage botEditMessage) throws ApiException {
+		Object localVarPostBody = botEditMessage;
+
+		// verify the required parameter 'botEditMessage' is set
+		if (botEditMessage == null) {
+			throw new ApiException(400, "Missing the required parameter 'botEditMessage' when calling botsEditMessage");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/editMessage";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<EditMessageResult> localVarReturnType = new GenericType<EditMessageResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**

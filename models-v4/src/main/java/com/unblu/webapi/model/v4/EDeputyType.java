@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EDeputyType {
 
 	/**
-	 * AGENT
+	 * AGENT: The deputy is a single agent
 	 */
 	AGENT("AGENT"),
 
 	/**
-	 * TEAM
+	 * TEAM: The deputy is a team, so every member of the team can act as deputy
 	 */
 	TEAM("TEAM");
 

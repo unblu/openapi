@@ -25,6 +25,9 @@ import io.swagger.annotations.ApiModelProperty;
 	AgentPersonStateData.JSON_PROPERTY_PERSON_ID,
 	AgentPersonStateData.JSON_PROPERTY_ONLINE_STATE,
 	AgentPersonStateData.JSON_PROPERTY_TYPE,
+	AgentPersonStateData.JSON_PROPERTY_OUT_OF_OFFICE_START_TIMESTAMP,
+	AgentPersonStateData.JSON_PROPERTY_OUT_OF_OFFICE_END_TIMESTAMP,
+	AgentPersonStateData.JSON_PROPERTY_OUT_OF_OFFICE_STATUS_MESSAGE,
 	AgentPersonStateData.JSON_PROPERTY_STATUS_MESSAGE,
 	AgentPersonStateData.JSON_PROPERTY_PAUSE_NOTIFICATIONS_MODE,
 	AgentPersonStateData.JSON_PROPERTY_PAUSE_NOTIFICATIONS_STATE,
@@ -81,6 +84,18 @@ public class AgentPersonStateData implements PersonStateData {
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private EPersonStateType type = EPersonStateType.AGENT;
+
+	public static final String JSON_PROPERTY_OUT_OF_OFFICE_START_TIMESTAMP = "outOfOfficeStartTimestamp";
+	@JsonProperty(JSON_PROPERTY_OUT_OF_OFFICE_START_TIMESTAMP)
+	private Long outOfOfficeStartTimestamp;
+
+	public static final String JSON_PROPERTY_OUT_OF_OFFICE_END_TIMESTAMP = "outOfOfficeEndTimestamp";
+	@JsonProperty(JSON_PROPERTY_OUT_OF_OFFICE_END_TIMESTAMP)
+	private Long outOfOfficeEndTimestamp;
+
+	public static final String JSON_PROPERTY_OUT_OF_OFFICE_STATUS_MESSAGE = "outOfOfficeStatusMessage";
+	@JsonProperty(JSON_PROPERTY_OUT_OF_OFFICE_STATUS_MESSAGE)
+	private String outOfOfficeStatusMessage;
 
 	public static final String JSON_PROPERTY_STATUS_MESSAGE = "statusMessage";
 	@JsonProperty(JSON_PROPERTY_STATUS_MESSAGE)
@@ -176,6 +191,63 @@ public class AgentPersonStateData implements PersonStateData {
 
 	public void setType(EPersonStateType type) {
 		this.type = type;
+	}
+
+	public AgentPersonStateData outOfOfficeStartTimestamp(Long outOfOfficeStartTimestamp) {
+		this.outOfOfficeStartTimestamp = outOfOfficeStartTimestamp;
+		return this;
+	}
+
+	/**
+	 * The start timestamp for a user&#39;s out of office state
+	 * 
+	 * @return outOfOfficeStartTimestamp
+	 **/
+	@ApiModelProperty(value = "The start timestamp for a user's out of office state")
+	public Long getOutOfOfficeStartTimestamp() {
+		return outOfOfficeStartTimestamp;
+	}
+
+	public void setOutOfOfficeStartTimestamp(Long outOfOfficeStartTimestamp) {
+		this.outOfOfficeStartTimestamp = outOfOfficeStartTimestamp;
+	}
+
+	public AgentPersonStateData outOfOfficeEndTimestamp(Long outOfOfficeEndTimestamp) {
+		this.outOfOfficeEndTimestamp = outOfOfficeEndTimestamp;
+		return this;
+	}
+
+	/**
+	 * The end timestamp for a user&#39;s out of office state
+	 * 
+	 * @return outOfOfficeEndTimestamp
+	 **/
+	@ApiModelProperty(value = "The end timestamp for a user's out of office state")
+	public Long getOutOfOfficeEndTimestamp() {
+		return outOfOfficeEndTimestamp;
+	}
+
+	public void setOutOfOfficeEndTimestamp(Long outOfOfficeEndTimestamp) {
+		this.outOfOfficeEndTimestamp = outOfOfficeEndTimestamp;
+	}
+
+	public AgentPersonStateData outOfOfficeStatusMessage(String outOfOfficeStatusMessage) {
+		this.outOfOfficeStatusMessage = outOfOfficeStatusMessage;
+		return this;
+	}
+
+	/**
+	 * A status message for when a user is out of office
+	 * 
+	 * @return outOfOfficeStatusMessage
+	 **/
+	@ApiModelProperty(value = "A status message for when a user is out of office")
+	public String getOutOfOfficeStatusMessage() {
+		return outOfOfficeStatusMessage;
+	}
+
+	public void setOutOfOfficeStatusMessage(String outOfOfficeStatusMessage) {
+		this.outOfOfficeStatusMessage = outOfOfficeStatusMessage;
 	}
 
 	public AgentPersonStateData statusMessage(String statusMessage) {
@@ -295,6 +367,9 @@ public class AgentPersonStateData implements PersonStateData {
 				Objects.equals(this.personId, agentPersonStateData.personId) &&
 				Objects.equals(this.onlineState, agentPersonStateData.onlineState) &&
 				Objects.equals(this.type, agentPersonStateData.type) &&
+				Objects.equals(this.outOfOfficeStartTimestamp, agentPersonStateData.outOfOfficeStartTimestamp) &&
+				Objects.equals(this.outOfOfficeEndTimestamp, agentPersonStateData.outOfOfficeEndTimestamp) &&
+				Objects.equals(this.outOfOfficeStatusMessage, agentPersonStateData.outOfOfficeStatusMessage) &&
 				Objects.equals(this.statusMessage, agentPersonStateData.statusMessage) &&
 				Objects.equals(this.pauseNotificationsMode, agentPersonStateData.pauseNotificationsMode) &&
 				Objects.equals(this.pauseNotificationsState, agentPersonStateData.pauseNotificationsState) &&
@@ -304,7 +379,7 @@ public class AgentPersonStateData implements PersonStateData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, personId, onlineState, type, statusMessage, pauseNotificationsMode, pauseNotificationsState, pauseNotificationsEndTimestamp, autoPauseNotificationsReasons);
+		return Objects.hash($type, personId, onlineState, type, outOfOfficeStartTimestamp, outOfOfficeEndTimestamp, outOfOfficeStatusMessage, statusMessage, pauseNotificationsMode, pauseNotificationsState, pauseNotificationsEndTimestamp, autoPauseNotificationsReasons);
 	}
 
 	@Override
@@ -315,6 +390,9 @@ public class AgentPersonStateData implements PersonStateData {
 		sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
 		sb.append("    onlineState: ").append(toIndentedString(onlineState)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    outOfOfficeStartTimestamp: ").append(toIndentedString(outOfOfficeStartTimestamp)).append("\n");
+		sb.append("    outOfOfficeEndTimestamp: ").append(toIndentedString(outOfOfficeEndTimestamp)).append("\n");
+		sb.append("    outOfOfficeStatusMessage: ").append(toIndentedString(outOfOfficeStatusMessage)).append("\n");
 		sb.append("    statusMessage: ").append(toIndentedString(statusMessage)).append("\n");
 		sb.append("    pauseNotificationsMode: ").append(toIndentedString(pauseNotificationsMode)).append("\n");
 		sb.append("    pauseNotificationsState: ").append(toIndentedString(pauseNotificationsState)).append("\n");

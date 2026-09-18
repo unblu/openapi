@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EBranchClientState {
 
 	/**
-	 * AVAILABLE
+	 * AVAILABLE: The Branch client is connected and ready to serve visitors
 	 */
 	AVAILABLE("AVAILABLE"),
 
 	/**
-	 * OFFLINE
+	 * OFFLINE: The Branch client is not connected
 	 */
 	OFFLINE("OFFLINE");
 

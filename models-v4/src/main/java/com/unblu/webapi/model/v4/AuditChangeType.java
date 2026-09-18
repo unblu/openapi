@@ -10,27 +10,27 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum AuditChangeType {
 
 	/**
-	 * CREATE
+	 * CREATE: The entity was inserted into the database.
 	 */
 	CREATE("CREATE"),
 
 	/**
-	 * UPDATE
+	 * UPDATE: One or more columns of an existing entity were modified.
 	 */
 	UPDATE("UPDATE"),
 
 	/**
-	 * DELETE
+	 * DELETE: The entity was physically removed from the database.
 	 */
 	DELETE("DELETE"),
 
 	/**
-	 * MARK_DELETED
+	 * MARK_DELETED: The entity was flagged for deletion but for now it&#39;s still in the database.
 	 */
 	MARK_DELETED("MARK_DELETED"),
 
 	/**
-	 * UNMARK_DELETED
+	 * UNMARK_DELETED: A previously flagged entity was restored to an undeleted state.
 	 */
 	UNMARK_DELETED("UNMARK_DELETED");
 

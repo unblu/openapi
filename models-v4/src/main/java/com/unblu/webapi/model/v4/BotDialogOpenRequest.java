@@ -15,9 +15,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Request sent when a dialog between a person and a bot starts. &lt;br&gt; After this event has been received, messages may be sent in this dialog using the
- * passed dialogToken &lt;p&gt; The request is only delivered to the dialog bots that accepted the dialog offer for the dialog.
+ * passed dialogToken &lt;p&gt; The request is only delivered to the dialog bot that is currently handling this dialog.
  */
-@ApiModel(description = "Request sent when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog.")
+@ApiModel(description = "Request sent when a dialog between a person and a bot starts. <br> After this event has been received, messages may be sent in this dialog using the passed dialogToken <p> The request is only delivered to the dialog bot that is currently handling this dialog.")
 
 @JsonPropertyOrder({
 	BotDialogOpenRequest.JSON_PROPERTY_$_TYPE,

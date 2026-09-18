@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EMessageInterceptorOutboundResponseType {
 
 	/**
-	 * APPROVE
+	 * APPROVE: The interceptor lets the message through, possibly modified
 	 */
 	APPROVE("APPROVE"),
 
 	/**
-	 * REJECT
+	 * REJECT: The interceptor blocks the message
 	 */
 	REJECT("REJECT");
 

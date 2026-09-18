@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_TEAM_IDS,
 	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_NAMED_AREA_IDS,
 	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_ACCOUNT_ID,
+	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_LABEL_FILTERS,
 	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_WAITING_TIME_OUTCOMES,
 	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_WAITING_TIME_TYPES,
 	AvgWaitingTimeAnalyticsKpiFilterData.JSON_PROPERTY_INVITATION_AGENT_PERSON_IDS,
@@ -119,6 +120,10 @@ public class AvgWaitingTimeAnalyticsKpiFilterData {
 	public static final String JSON_PROPERTY_RECIPIENT_ACCOUNT_ID = "recipientAccountId";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_ACCOUNT_ID)
 	private Boolean recipientAccountId;
+
+	public static final String JSON_PROPERTY_LABEL_FILTERS = "labelFilters";
+	@JsonProperty(JSON_PROPERTY_LABEL_FILTERS)
+	private List<LabelsAnalyticsKpiFilter> labelFilters = null;
 
 	public static final String JSON_PROPERTY_WAITING_TIME_OUTCOMES = "waitingTimeOutcomes";
 	@JsonProperty(JSON_PROPERTY_WAITING_TIME_OUTCOMES)
@@ -399,6 +404,35 @@ public class AvgWaitingTimeAnalyticsKpiFilterData {
 		this.recipientAccountId = recipientAccountId;
 	}
 
+	public AvgWaitingTimeAnalyticsKpiFilterData labelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+		return this;
+	}
+
+	public AvgWaitingTimeAnalyticsKpiFilterData addLabelFiltersItem(LabelsAnalyticsKpiFilter labelFiltersItem) {
+		if (this.labelFilters == null) {
+			this.labelFilters = new ArrayList<>();
+		}
+		this.labelFilters.add(labelFiltersItem);
+		return this;
+	}
+
+	/**
+	 * A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation&#39;s or one of its
+	 * persons&#39; labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each
+	 * condition&#39;s target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.
+	 * 
+	 * @return labelFilters
+	 **/
+	@ApiModelProperty(value = "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.")
+	public List<LabelsAnalyticsKpiFilter> getLabelFilters() {
+		return labelFilters;
+	}
+
+	public void setLabelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+	}
+
 	public AvgWaitingTimeAnalyticsKpiFilterData waitingTimeOutcomes(List<EWaitingTimeOutcome> waitingTimeOutcomes) {
 		this.waitingTimeOutcomes = waitingTimeOutcomes;
 		return this;
@@ -636,6 +670,7 @@ public class AvgWaitingTimeAnalyticsKpiFilterData {
 				Objects.equals(this.recipientTeamIds, avgWaitingTimeAnalyticsKpiFilterData.recipientTeamIds) &&
 				Objects.equals(this.recipientNamedAreaIds, avgWaitingTimeAnalyticsKpiFilterData.recipientNamedAreaIds) &&
 				Objects.equals(this.recipientAccountId, avgWaitingTimeAnalyticsKpiFilterData.recipientAccountId) &&
+				Objects.equals(this.labelFilters, avgWaitingTimeAnalyticsKpiFilterData.labelFilters) &&
 				Objects.equals(this.waitingTimeOutcomes, avgWaitingTimeAnalyticsKpiFilterData.waitingTimeOutcomes) &&
 				Objects.equals(this.waitingTimeTypes, avgWaitingTimeAnalyticsKpiFilterData.waitingTimeTypes) &&
 				Objects.equals(this.invitationAgentPersonIds, avgWaitingTimeAnalyticsKpiFilterData.invitationAgentPersonIds) &&
@@ -648,7 +683,7 @@ public class AvgWaitingTimeAnalyticsKpiFilterData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, waitingTimeOutcomes, waitingTimeTypes, invitationAgentPersonIds, invitationTeamIds, invitationNamedAreaIds, invitationAccountId, invitationAcceptingAgentPersonIds, invitationAcceptingAgentTeamIds);
+		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, labelFilters, waitingTimeOutcomes, waitingTimeTypes, invitationAgentPersonIds, invitationTeamIds, invitationNamedAreaIds, invitationAccountId, invitationAcceptingAgentPersonIds, invitationAcceptingAgentTeamIds);
 	}
 
 	@Override
@@ -665,6 +700,7 @@ public class AvgWaitingTimeAnalyticsKpiFilterData {
 		sb.append("    recipientTeamIds: ").append(toIndentedString(recipientTeamIds)).append("\n");
 		sb.append("    recipientNamedAreaIds: ").append(toIndentedString(recipientNamedAreaIds)).append("\n");
 		sb.append("    recipientAccountId: ").append(toIndentedString(recipientAccountId)).append("\n");
+		sb.append("    labelFilters: ").append(toIndentedString(labelFilters)).append("\n");
 		sb.append("    waitingTimeOutcomes: ").append(toIndentedString(waitingTimeOutcomes)).append("\n");
 		sb.append("    waitingTimeTypes: ").append(toIndentedString(waitingTimeTypes)).append("\n");
 		sb.append("    invitationAgentPersonIds: ").append(toIndentedString(invitationAgentPersonIds)).append("\n");

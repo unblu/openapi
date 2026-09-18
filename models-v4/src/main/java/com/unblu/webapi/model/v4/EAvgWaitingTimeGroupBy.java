@@ -52,7 +52,22 @@ public enum EAvgWaitingTimeGroupBy {
 	/**
 	 * INVITATION_ACCEPTING_AGENT_TEAM_ID: Group by the team ID of the agent who accepted the invitation.
 	 */
-	INVITATION_ACCEPTING_AGENT_TEAM_ID("INVITATION_ACCEPTING_AGENT_TEAM_ID");
+	INVITATION_ACCEPTING_AGENT_TEAM_ID("INVITATION_ACCEPTING_AGENT_TEAM_ID"),
+
+	/**
+	 * CONVERSATION_LABELS: Group by the labels attached to the conversation.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * INVITATION_ACCEPTING_AGENT_LABELS: Group by the labels attached to the agent who accepted the invitation.
+	 */
+	INVITATION_ACCEPTING_AGENT_LABELS("INVITATION_ACCEPTING_AGENT_LABELS");
 
 	private String value;
 

@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ETemplateComponentParametersSubType {
 
 	/**
-	 * QUICK_REPLY
+	 * QUICK_REPLY: A button that sends a predefined reply back when tapped
 	 */
 	QUICK_REPLY("QUICK_REPLY"),
 
 	/**
-	 * URL
+	 * URL: A button that opens a URL when tapped
 	 */
 	URL("URL"),
 
 	/**
-	 * CATALOG
+	 * CATALOG: A button that opens the product catalog when tapped
 	 */
 	CATALOG("CATALOG");
 

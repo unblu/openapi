@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EBotType {
 
 	/**
-	 * COPILOT
+	 * COPILOT: A bot backed by a Microsoft Copilot Studio agent
 	 */
 	COPILOT("COPILOT"),
 
 	/**
-	 * CUSTOM
+	 * CUSTOM: A bot backed by a customer-provided implementation reached over the bot webhook API
 	 */
 	CUSTOM("CUSTOM"),
 
 	/**
-	 * ARIA
+	 * ARIA: A bot backed by Unblu&#39;s built-in Aria AI assistant
 	 */
 	ARIA("ARIA");
 

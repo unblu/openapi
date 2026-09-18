@@ -10,22 +10,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EBranchClientType {
 
 	/**
-	 * RECEPTION
+	 * RECEPTION: A client operated by branch staff at a reception desk
 	 */
 	RECEPTION("RECEPTION"),
 
 	/**
-	 * SELF_SERVICE
+	 * SELF_SERVICE: A client operated by the visitor without branch staff present
 	 */
 	SELF_SERVICE("SELF_SERVICE"),
 
 	/**
-	 * MEETING_ROOM
+	 * MEETING_ROOM: A client installed in a meeting room
 	 */
 	MEETING_ROOM("MEETING_ROOM"),
 
 	/**
-	 * OTHER
+	 * OTHER: A client that does not fall into any of the other categories
 	 */
 	OTHER("OTHER");
 

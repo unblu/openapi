@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EEmptyChatSuggestionReason {
 
 	/**
-	 * NO_SUGGESTION
+	 * NO_SUGGESTION: The suggestion source ran but had nothing to suggest
 	 */
 	NO_SUGGESTION("NO_SUGGESTION"),
 
 	/**
-	 * NOT_AVAILABLE
+	 * NOT_AVAILABLE: No suggestion could be requested because the suggestion source is not available
 	 */
 	NOT_AVAILABLE("NOT_AVAILABLE"),
 
 	/**
-	 * OTHER
+	 * OTHER: No suggestion was returned for a reason not covered by the other values
 	 */
 	OTHER("OTHER");
 

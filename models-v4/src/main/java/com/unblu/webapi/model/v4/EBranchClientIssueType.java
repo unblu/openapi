@@ -27,6 +27,24 @@ public enum EBranchClientIssueType {
 	MICROPHONE("MICROPHONE"),
 
 	/**
+	 * MAIN_CAMERA_ACCESS_NOT_GRANTED: The main camera is configured, but the Branch client hasn&#39;t been granted camera access, so the configured device
+	 * can&#39;t be looked up.
+	 */
+	MAIN_CAMERA_ACCESS_NOT_GRANTED("MAIN_CAMERA_ACCESS_NOT_GRANTED"),
+
+	/**
+	 * AUXILIARY_CAMERA_ACCESS_NOT_GRANTED: One or more auxiliary cameras are configured, but the Branch client hasn&#39;t been granted camera access, so the
+	 * configured devices can&#39;t be looked up.
+	 */
+	AUXILIARY_CAMERA_ACCESS_NOT_GRANTED("AUXILIARY_CAMERA_ACCESS_NOT_GRANTED"),
+
+	/**
+	 * MICROPHONE_ACCESS_NOT_GRANTED: The microphone is configured, but the Branch client hasn&#39;t been granted microphone access, so the configured device
+	 * can&#39;t be looked up.
+	 */
+	MICROPHONE_ACCESS_NOT_GRANTED("MICROPHONE_ACCESS_NOT_GRANTED"),
+
+	/**
 	 * OTHER: There is a general issue with the branch client
 	 */
 	OTHER("OTHER");

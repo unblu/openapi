@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EAgentRemovalType {
 
 	/**
-	 * KEEP_AGENTS
+	 * KEEP_AGENTS: All agents stay in the conversation
 	 */
 	KEEP_AGENTS("KEEP_AGENTS"),
 
 	/**
-	 * REMOVE_ASSIGNED_AGENT
+	 * REMOVE_ASSIGNED_AGENT: Only the assigned agent is removed from the conversation
 	 */
 	REMOVE_ASSIGNED_AGENT("REMOVE_ASSIGNED_AGENT"),
 
 	/**
-	 * REMOVE_ALL_AGENTS
+	 * REMOVE_ALL_AGENTS: The assigned agent and all secondary agents are removed from the conversation
 	 */
 	REMOVE_ALL_AGENTS("REMOVE_ALL_AGENTS");
 

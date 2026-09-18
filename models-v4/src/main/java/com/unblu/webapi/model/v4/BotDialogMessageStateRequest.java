@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Request sent when a message in a dialog between a person and a bot is marked as delivered/read. &lt;p&gt; The request is only delivered to the dialog bots
- * that accepted the dialog offer for the dialog.
+ * Request sent when a message in a dialog between a person and a bot is marked as delivered/read. &lt;p&gt; The request is only delivered to the dialog bot
+ * that is currently handling this dialog.
  */
-@ApiModel(description = "Request sent when a message in a dialog between a person and a bot is marked as delivered/read. <p> The request is only delivered to the dialog bots that accepted the dialog offer for the dialog.")
+@ApiModel(description = "Request sent when a message in a dialog between a person and a bot is marked as delivered/read. <p> The request is only delivered to the dialog bot that is currently handling this dialog.")
 
 @JsonPropertyOrder({
 	BotDialogMessageStateRequest.JSON_PROPERTY_$_TYPE,
@@ -235,11 +235,11 @@ public class BotDialogMessageStateRequest {
 	}
 
 	/**
-	 * The conversation the message belongs to
+	 * The ID of the conversation this dialog belongs to.
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "The conversation the message belongs to")
+	@ApiModelProperty(value = "The ID of the conversation this dialog belongs to.")
 	public String getConversationId() {
 		return conversationId;
 	}

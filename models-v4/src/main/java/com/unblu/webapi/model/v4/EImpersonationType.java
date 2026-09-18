@@ -10,22 +10,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EImpersonationType {
 
 	/**
-	 * NONE
+	 * NONE: The user acts under their own identity, no impersonation is in place
 	 */
 	NONE("NONE"),
 
 	/**
-	 * USER_OWN_ROLE
+	 * USER_OWN_ROLE: A superadmin impersonates a user and acts with the role of that user
 	 */
 	USER_OWN_ROLE("USER_OWN_ROLE"),
 
 	/**
-	 * USER_SUPER_ADMIN
+	 * USER_SUPER_ADMIN: A superadmin impersonates a user but keeps their own superadmin role
 	 */
 	USER_SUPER_ADMIN("USER_SUPER_ADMIN"),
 
 	/**
-	 * ACCOUNT
+	 * ACCOUNT: A superadmin acts within an account other than their own
 	 */
 	ACCOUNT("ACCOUNT");
 

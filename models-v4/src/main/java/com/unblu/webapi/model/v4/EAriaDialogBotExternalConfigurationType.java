@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EAriaDialogBotExternalConfigurationType {
 
 	/**
-	 * MULTIFLOW
+	 * MULTIFLOW: The bot is configured with a set of flows it can choose between
 	 */
 	MULTIFLOW("MULTIFLOW");
 

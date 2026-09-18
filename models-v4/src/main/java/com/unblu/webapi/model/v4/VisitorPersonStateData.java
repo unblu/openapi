@@ -23,6 +23,9 @@ import io.swagger.annotations.ApiModelProperty;
 	VisitorPersonStateData.JSON_PROPERTY_PERSON_ID,
 	VisitorPersonStateData.JSON_PROPERTY_ONLINE_STATE,
 	VisitorPersonStateData.JSON_PROPERTY_TYPE,
+	VisitorPersonStateData.JSON_PROPERTY_OUT_OF_OFFICE_START_TIMESTAMP,
+	VisitorPersonStateData.JSON_PROPERTY_OUT_OF_OFFICE_END_TIMESTAMP,
+	VisitorPersonStateData.JSON_PROPERTY_OUT_OF_OFFICE_STATUS_MESSAGE,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class VisitorPersonStateData implements PersonStateData {
@@ -74,6 +77,18 @@ public class VisitorPersonStateData implements PersonStateData {
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private EPersonStateType type = EPersonStateType.VISITOR;
+
+	public static final String JSON_PROPERTY_OUT_OF_OFFICE_START_TIMESTAMP = "outOfOfficeStartTimestamp";
+	@JsonProperty(JSON_PROPERTY_OUT_OF_OFFICE_START_TIMESTAMP)
+	private Long outOfOfficeStartTimestamp;
+
+	public static final String JSON_PROPERTY_OUT_OF_OFFICE_END_TIMESTAMP = "outOfOfficeEndTimestamp";
+	@JsonProperty(JSON_PROPERTY_OUT_OF_OFFICE_END_TIMESTAMP)
+	private Long outOfOfficeEndTimestamp;
+
+	public static final String JSON_PROPERTY_OUT_OF_OFFICE_STATUS_MESSAGE = "outOfOfficeStatusMessage";
+	@JsonProperty(JSON_PROPERTY_OUT_OF_OFFICE_STATUS_MESSAGE)
+	private String outOfOfficeStatusMessage;
 
 	public VisitorPersonStateData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -151,6 +166,63 @@ public class VisitorPersonStateData implements PersonStateData {
 		this.type = type;
 	}
 
+	public VisitorPersonStateData outOfOfficeStartTimestamp(Long outOfOfficeStartTimestamp) {
+		this.outOfOfficeStartTimestamp = outOfOfficeStartTimestamp;
+		return this;
+	}
+
+	/**
+	 * The start timestamp for a user&#39;s out of office state
+	 * 
+	 * @return outOfOfficeStartTimestamp
+	 **/
+	@ApiModelProperty(value = "The start timestamp for a user's out of office state")
+	public Long getOutOfOfficeStartTimestamp() {
+		return outOfOfficeStartTimestamp;
+	}
+
+	public void setOutOfOfficeStartTimestamp(Long outOfOfficeStartTimestamp) {
+		this.outOfOfficeStartTimestamp = outOfOfficeStartTimestamp;
+	}
+
+	public VisitorPersonStateData outOfOfficeEndTimestamp(Long outOfOfficeEndTimestamp) {
+		this.outOfOfficeEndTimestamp = outOfOfficeEndTimestamp;
+		return this;
+	}
+
+	/**
+	 * The end timestamp for a user&#39;s out of office state
+	 * 
+	 * @return outOfOfficeEndTimestamp
+	 **/
+	@ApiModelProperty(value = "The end timestamp for a user's out of office state")
+	public Long getOutOfOfficeEndTimestamp() {
+		return outOfOfficeEndTimestamp;
+	}
+
+	public void setOutOfOfficeEndTimestamp(Long outOfOfficeEndTimestamp) {
+		this.outOfOfficeEndTimestamp = outOfOfficeEndTimestamp;
+	}
+
+	public VisitorPersonStateData outOfOfficeStatusMessage(String outOfOfficeStatusMessage) {
+		this.outOfOfficeStatusMessage = outOfOfficeStatusMessage;
+		return this;
+	}
+
+	/**
+	 * A status message for when a user is out of office
+	 * 
+	 * @return outOfOfficeStatusMessage
+	 **/
+	@ApiModelProperty(value = "A status message for when a user is out of office")
+	public String getOutOfOfficeStatusMessage() {
+		return outOfOfficeStatusMessage;
+	}
+
+	public void setOutOfOfficeStatusMessage(String outOfOfficeStatusMessage) {
+		this.outOfOfficeStatusMessage = outOfOfficeStatusMessage;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -163,12 +235,15 @@ public class VisitorPersonStateData implements PersonStateData {
 		return Objects.equals(this.$type, visitorPersonStateData.$type) &&
 				Objects.equals(this.personId, visitorPersonStateData.personId) &&
 				Objects.equals(this.onlineState, visitorPersonStateData.onlineState) &&
-				Objects.equals(this.type, visitorPersonStateData.type);
+				Objects.equals(this.type, visitorPersonStateData.type) &&
+				Objects.equals(this.outOfOfficeStartTimestamp, visitorPersonStateData.outOfOfficeStartTimestamp) &&
+				Objects.equals(this.outOfOfficeEndTimestamp, visitorPersonStateData.outOfOfficeEndTimestamp) &&
+				Objects.equals(this.outOfOfficeStatusMessage, visitorPersonStateData.outOfOfficeStatusMessage);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, personId, onlineState, type);
+		return Objects.hash($type, personId, onlineState, type, outOfOfficeStartTimestamp, outOfOfficeEndTimestamp, outOfOfficeStatusMessage);
 	}
 
 	@Override
@@ -179,6 +254,9 @@ public class VisitorPersonStateData implements PersonStateData {
 		sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
 		sb.append("    onlineState: ").append(toIndentedString(onlineState)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    outOfOfficeStartTimestamp: ").append(toIndentedString(outOfOfficeStartTimestamp)).append("\n");
+		sb.append("    outOfOfficeEndTimestamp: ").append(toIndentedString(outOfOfficeEndTimestamp)).append("\n");
+		sb.append("    outOfOfficeStatusMessage: ").append(toIndentedString(outOfOfficeStatusMessage)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

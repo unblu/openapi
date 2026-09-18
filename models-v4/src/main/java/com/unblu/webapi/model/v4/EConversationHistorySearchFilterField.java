@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationHistorySearchFilterField {
 
 	/**
-	 * COMPOUND
+	 * COMPOUND: Combine several filters with a boolean operator instead of filtering on a single attribute
 	 */
 	COMPOUND("COMPOUND"),
 
@@ -103,6 +103,13 @@ public enum EConversationHistorySearchFilterField {
 	 * LAST_MESSAGE_TIMESTAMP: Filter by the &#39;lastMessageTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with milliseconds.
 	 */
 	LAST_MESSAGE_TIMESTAMP("LAST_MESSAGE_TIMESTAMP"),
+
+	/**
+	 * LAST_MESSAGE_SENT_OR_EDITED_TIMESTAMP: Filter by the &#39;lastMessageTimestamp&#39; or the &#39;lastMessageEditedTimestamp&#39; attribute: a conversation
+	 * matches if either satisfies the operator. Use this to find conversations whose messages changed since a given time, whether by a new message or by an edit.
+	 * Specify the timestamp in the UTC timezone with milliseconds.
+	 */
+	LAST_MESSAGE_SENT_OR_EDITED_TIMESTAMP("LAST_MESSAGE_SENT_OR_EDITED_TIMESTAMP"),
 
 	/**
 	 * LAST_COMPLETED_RECORDING_TIMESTAMP: Filter by the &#39;lastCompletedRecordingTimestamp&#39; attribute. Specify the timestamp in the UTC timezone with

@@ -57,7 +57,27 @@ public enum EMessagesCountGroupBy {
 	/**
 	 * MESSAGE_TYPE: Group by message type.
 	 */
-	MESSAGE_TYPE("MESSAGE_TYPE");
+	MESSAGE_TYPE("MESSAGE_TYPE"),
+
+	/**
+	 * CONVERSATION_LABELS: Group by the labels attached to the conversation.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent.
+	 */
+	ASSIGNED_AGENT_LABELS("ASSIGNED_AGENT_LABELS"),
+
+	/**
+	 * SENDER_PERSON_LABELS: Group by the labels attached to the person who sent the message.
+	 */
+	SENDER_PERSON_LABELS("SENDER_PERSON_LABELS");
 
 	private String value;
 

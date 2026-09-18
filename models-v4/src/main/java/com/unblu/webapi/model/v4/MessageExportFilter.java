@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "field", visible = true)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = SendOrLastEditedTimestampMessageExportFilter.class, name = "SEND_OR_LAST_EDITED_TIMESTAMP"),
 	@JsonSubTypes.Type(value = SendTimestampMessageExportFilter.class, name = "SEND_TIMESTAMP"),
 })
 public interface MessageExportFilter {

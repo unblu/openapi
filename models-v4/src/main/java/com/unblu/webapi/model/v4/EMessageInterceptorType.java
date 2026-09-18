@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EMessageInterceptorType {
 
 	/**
-	 * EXTERNAL
+	 * EXTERNAL: The interceptor is a remote endpoint called over the outbound message interceptor webhook
 	 */
 	EXTERNAL("EXTERNAL"),
 
 	/**
-	 * INTERNAL
+	 * INTERNAL: The interceptor is implemented in the Collaboration Server
 	 */
 	INTERNAL("INTERNAL");
 

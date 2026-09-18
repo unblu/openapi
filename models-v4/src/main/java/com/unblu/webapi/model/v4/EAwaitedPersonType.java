@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EAwaitedPersonType {
 
 	/**
-	 * NONE
+	 * NONE: The conversation is not waiting for anybody
 	 */
 	NONE("NONE"),
 
 	/**
-	 * VISITOR
+	 * VISITOR: The next action in the conversation is expected from a visitor
 	 */
 	VISITOR("VISITOR"),
 
 	/**
-	 * AGENT
+	 * AGENT: The next action in the conversation is expected from an agent
 	 */
 	AGENT("AGENT");
 

@@ -30,12 +30,12 @@ public enum ECollaborationLayersCountGroupBy {
 	INITIAL_ENGAGEMENT_TYPE("INITIAL_ENGAGEMENT_TYPE"),
 
 	/**
-	 * LAYER_TYPE: Group by layer type.
+	 * LAYER_TYPE: Group by collaboration layer type.
 	 */
 	LAYER_TYPE("LAYER_TYPE"),
 
 	/**
-	 * LAYER_STOP_REASON: Group by layer stop reason.
+	 * LAYER_STOP_REASON: Group by the reason the collaboration layer was stopped.
 	 */
 	LAYER_STOP_REASON("LAYER_STOP_REASON"),
 
@@ -47,7 +47,37 @@ public enum ECollaborationLayersCountGroupBy {
 	/**
 	 * STARTING_PERSON_TEAM_ID: Group by starting person team ID.
 	 */
-	STARTING_PERSON_TEAM_ID("STARTING_PERSON_TEAM_ID");
+	STARTING_PERSON_TEAM_ID("STARTING_PERSON_TEAM_ID"),
+
+	/**
+	 * CONVERSATION_LABELS: Group by the labels attached to the conversation.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent.
+	 */
+	ASSIGNED_AGENT_LABELS("ASSIGNED_AGENT_LABELS"),
+
+	/**
+	 * STARTING_PERSON_LABELS: Group by the labels attached to the person who started the collaboration layer.
+	 */
+	STARTING_PERSON_LABELS("STARTING_PERSON_LABELS"),
+
+	/**
+	 * STOPPING_PERSON_LABELS: Group by the labels attached to the person who stopped the collaboration layer.
+	 */
+	STOPPING_PERSON_LABELS("STOPPING_PERSON_LABELS"),
+
+	/**
+	 * LAYER_OWNER_LABELS: Group by the labels attached to the owner of the collaboration layer.
+	 */
+	LAYER_OWNER_LABELS("LAYER_OWNER_LABELS");
 
 	private String value;
 

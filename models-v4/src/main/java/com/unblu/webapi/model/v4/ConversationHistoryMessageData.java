@@ -36,6 +36,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryMessageData.JSON_PROPERTY_REJECTION_SEVERITY,
 	ConversationHistoryMessageData.JSON_PROPERTY_REJECTION_REASON,
 	ConversationHistoryMessageData.JSON_PROPERTY_TEXT,
+	ConversationHistoryMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
+	ConversationHistoryMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
 	ConversationHistoryMessageData.JSON_PROPERTY_DELETED_FOR_ALL,
 	ConversationHistoryMessageData.JSON_PROPERTY_DELETED_FOR_SELF,
 })
@@ -133,6 +135,14 @@ public class ConversationHistoryMessageData {
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
 	private String text;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID = "lastEditedByPersonId";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID)
+	private String lastEditedByPersonId;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
+	private Long lastEditedTimestamp;
 
 	public static final String JSON_PROPERTY_DELETED_FOR_ALL = "deletedForAll";
 	@JsonProperty(JSON_PROPERTY_DELETED_FOR_ALL)
@@ -435,6 +445,44 @@ public class ConversationHistoryMessageData {
 		this.text = text;
 	}
 
+	public ConversationHistoryMessageData lastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedByPersonId
+	 **/
+	@ApiModelProperty(value = "The ID of the person who performed the most recent edit of the message. Null if the message was never edited.")
+	public String getLastEditedByPersonId() {
+		return lastEditedByPersonId;
+	}
+
+	public void setLastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+	}
+
+	public ConversationHistoryMessageData lastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.")
+	public Long getLastEditedTimestamp() {
+		return lastEditedTimestamp;
+	}
+
+	public void setLastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+	}
+
 	public ConversationHistoryMessageData deletedForAll(MessageDeletionForAllInfo deletedForAll) {
 		this.deletedForAll = deletedForAll;
 		return this;
@@ -505,13 +553,15 @@ public class ConversationHistoryMessageData {
 				Objects.equals(this.rejectionSeverity, conversationHistoryMessageData.rejectionSeverity) &&
 				Objects.equals(this.rejectionReason, conversationHistoryMessageData.rejectionReason) &&
 				Objects.equals(this.text, conversationHistoryMessageData.text) &&
+				Objects.equals(this.lastEditedByPersonId, conversationHistoryMessageData.lastEditedByPersonId) &&
+				Objects.equals(this.lastEditedTimestamp, conversationHistoryMessageData.lastEditedTimestamp) &&
 				Objects.equals(this.deletedForAll, conversationHistoryMessageData.deletedForAll) &&
 				Objects.equals(this.deletedForSelf, conversationHistoryMessageData.deletedForSelf);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, replyToMessageId, externalMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text, deletedForAll, deletedForSelf);
+		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, replyToMessageId, externalMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text, lastEditedByPersonId, lastEditedTimestamp, deletedForAll, deletedForSelf);
 	}
 
 	@Override
@@ -533,6 +583,8 @@ public class ConversationHistoryMessageData {
 		sb.append("    rejectionSeverity: ").append(toIndentedString(rejectionSeverity)).append("\n");
 		sb.append("    rejectionReason: ").append(toIndentedString(rejectionReason)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
+		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
+		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
 		sb.append("    deletedForAll: ").append(toIndentedString(deletedForAll)).append("\n");
 		sb.append("    deletedForSelf: ").append(toIndentedString(deletedForSelf)).append("\n");
 		sb.append("}");

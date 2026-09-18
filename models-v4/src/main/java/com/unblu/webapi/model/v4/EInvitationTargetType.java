@@ -10,32 +10,32 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EInvitationTargetType {
 
 	/**
-	 * ANONYMOUS
+	 * ANONYMOUS: The invitation can be redeemed by anybody holding the link, no target ID is needed
 	 */
 	ANONYMOUS("ANONYMOUS"),
 
 	/**
-	 * VISITOR
+	 * VISITOR: The invitation targets a specific visitor
 	 */
 	VISITOR("VISITOR"),
 
 	/**
-	 * AGENT
+	 * AGENT: The invitation targets a specific agent
 	 */
 	AGENT("AGENT"),
 
 	/**
-	 * TEAM
+	 * TEAM: The invitation targets a team, so every member of the team can redeem it
 	 */
 	TEAM("TEAM"),
 
 	/**
-	 * NAMED_AREA
+	 * NAMED_AREA: The invitation targets a named area
 	 */
 	NAMED_AREA("NAMED_AREA"),
 
 	/**
-	 * ACCOUNT
+	 * ACCOUNT: The invitation targets an account, so every agent of the account can redeem it
 	 */
 	ACCOUNT("ACCOUNT");
 

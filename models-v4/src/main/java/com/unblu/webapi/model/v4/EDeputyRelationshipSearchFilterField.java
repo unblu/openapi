@@ -25,7 +25,7 @@ public enum EDeputyRelationshipSearchFilterField {
 	DEPUTY_ID("DEPUTY_ID"),
 
 	/**
-	 * ESCALATION_LEVEL
+	 * ESCALATION_LEVEL: Filter by the &#39;escalationLevel&#39; attribute
 	 */
 	ESCALATION_LEVEL("ESCALATION_LEVEL"),
 

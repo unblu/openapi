@@ -42,6 +42,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ListMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	ListMessageData.JSON_PROPERTY_LOCALE,
 	ListMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
+	ListMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
+	ListMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
 	ListMessageData.JSON_PROPERTY_HEADER,
 	ListMessageData.JSON_PROPERTY_ITEMS,
 	ListMessageData.JSON_PROPERTY_ACTIONS,
@@ -166,6 +168,14 @@ public class ListMessageData implements MessageData {
 	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
 	private String conversationLocale;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID = "lastEditedByPersonId";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID)
+	private String lastEditedByPersonId;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
+	private Long lastEditedTimestamp;
 
 	public static final String JSON_PROPERTY_HEADER = "header";
 	@JsonProperty(JSON_PROPERTY_HEADER)
@@ -599,6 +609,44 @@ public class ListMessageData implements MessageData {
 		this.conversationLocale = conversationLocale;
 	}
 
+	public ListMessageData lastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedByPersonId
+	 **/
+	@ApiModelProperty(value = "The ID of the person who performed the most recent edit of the message. Null if the message was never edited.")
+	public String getLastEditedByPersonId() {
+		return lastEditedByPersonId;
+	}
+
+	public void setLastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+	}
+
+	public ListMessageData lastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.")
+	public Long getLastEditedTimestamp() {
+		return lastEditedTimestamp;
+	}
+
+	public void setLastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+	}
+
 	public ListMessageData header(MessageHeader header) {
 		this.header = header;
 		return this;
@@ -758,6 +806,8 @@ public class ListMessageData implements MessageData {
 				Objects.equals(this.replyToExternalMessageId, listMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, listMessageData.locale) &&
 				Objects.equals(this.conversationLocale, listMessageData.conversationLocale) &&
+				Objects.equals(this.lastEditedByPersonId, listMessageData.lastEditedByPersonId) &&
+				Objects.equals(this.lastEditedTimestamp, listMessageData.lastEditedTimestamp) &&
 				Objects.equals(this.header, listMessageData.header) &&
 				Objects.equals(this.items, listMessageData.items) &&
 				Objects.equals(this.actions, listMessageData.actions) &&
@@ -767,7 +817,7 @@ public class ListMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, header, items, actions, quickReplies, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, header, items, actions, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -795,6 +845,8 @@ public class ListMessageData implements MessageData {
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
+		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
+		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
 		sb.append("    header: ").append(toIndentedString(header)).append("\n");
 		sb.append("    items: ").append(toIndentedString(items)).append("\n");
 		sb.append("    actions: ").append(toIndentedString(actions)).append("\n");

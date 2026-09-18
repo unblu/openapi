@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ESecureTokenType {
 
 	/**
-	 * JWT
+	 * JWT: A JSON web token issued for the Unblu login
 	 */
 	JWT("JWT"),
 
 	/**
-	 * OIDC_ACCESS_TOKEN
+	 * OIDC_ACCESS_TOKEN: An access token issued by an OpenID Connect provider
 	 */
 	OIDC_ACCESS_TOKEN("OIDC_ACCESS_TOKEN");
 

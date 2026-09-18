@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_TEAM_IDS,
 	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_NAMED_AREA_IDS,
 	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_ACCOUNT_ID,
+	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_LABEL_FILTERS,
 	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_ASSIGNED_AGENT_PERSON_IDS,
 	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_ASSIGNED_AGENT_TEAM_IDS,
 	CollaborationLayersCountAnalyticsKpiFilterData.JSON_PROPERTY_STARTING_PERSON_IDS,
@@ -119,6 +120,10 @@ public class CollaborationLayersCountAnalyticsKpiFilterData {
 	public static final String JSON_PROPERTY_RECIPIENT_ACCOUNT_ID = "recipientAccountId";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_ACCOUNT_ID)
 	private Boolean recipientAccountId;
+
+	public static final String JSON_PROPERTY_LABEL_FILTERS = "labelFilters";
+	@JsonProperty(JSON_PROPERTY_LABEL_FILTERS)
+	private List<LabelsAnalyticsKpiFilter> labelFilters = null;
 
 	public static final String JSON_PROPERTY_ASSIGNED_AGENT_PERSON_IDS = "assignedAgentPersonIds";
 	@JsonProperty(JSON_PROPERTY_ASSIGNED_AGENT_PERSON_IDS)
@@ -399,6 +404,35 @@ public class CollaborationLayersCountAnalyticsKpiFilterData {
 		this.recipientAccountId = recipientAccountId;
 	}
 
+	public CollaborationLayersCountAnalyticsKpiFilterData labelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+		return this;
+	}
+
+	public CollaborationLayersCountAnalyticsKpiFilterData addLabelFiltersItem(LabelsAnalyticsKpiFilter labelFiltersItem) {
+		if (this.labelFilters == null) {
+			this.labelFilters = new ArrayList<>();
+		}
+		this.labelFilters.add(labelFiltersItem);
+		return this;
+	}
+
+	/**
+	 * A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation&#39;s or one of its
+	 * persons&#39; labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each
+	 * condition&#39;s target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.
+	 * 
+	 * @return labelFilters
+	 **/
+	@ApiModelProperty(value = "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.")
+	public List<LabelsAnalyticsKpiFilter> getLabelFilters() {
+		return labelFilters;
+	}
+
+	public void setLabelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+	}
+
 	public CollaborationLayersCountAnalyticsKpiFilterData assignedAgentPersonIds(List<String> assignedAgentPersonIds) {
 		this.assignedAgentPersonIds = assignedAgentPersonIds;
 		return this;
@@ -627,6 +661,7 @@ public class CollaborationLayersCountAnalyticsKpiFilterData {
 				Objects.equals(this.recipientTeamIds, collaborationLayersCountAnalyticsKpiFilterData.recipientTeamIds) &&
 				Objects.equals(this.recipientNamedAreaIds, collaborationLayersCountAnalyticsKpiFilterData.recipientNamedAreaIds) &&
 				Objects.equals(this.recipientAccountId, collaborationLayersCountAnalyticsKpiFilterData.recipientAccountId) &&
+				Objects.equals(this.labelFilters, collaborationLayersCountAnalyticsKpiFilterData.labelFilters) &&
 				Objects.equals(this.assignedAgentPersonIds, collaborationLayersCountAnalyticsKpiFilterData.assignedAgentPersonIds) &&
 				Objects.equals(this.assignedAgentTeamIds, collaborationLayersCountAnalyticsKpiFilterData.assignedAgentTeamIds) &&
 				Objects.equals(this.startingPersonIds, collaborationLayersCountAnalyticsKpiFilterData.startingPersonIds) &&
@@ -639,7 +674,7 @@ public class CollaborationLayersCountAnalyticsKpiFilterData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, assignedAgentPersonIds, assignedAgentTeamIds, startingPersonIds, startingPersonTeamIds, layerTypes, layerStopReasons, minActiveDuration, maxActiveDuration);
+		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, labelFilters, assignedAgentPersonIds, assignedAgentTeamIds, startingPersonIds, startingPersonTeamIds, layerTypes, layerStopReasons, minActiveDuration, maxActiveDuration);
 	}
 
 	@Override
@@ -656,6 +691,7 @@ public class CollaborationLayersCountAnalyticsKpiFilterData {
 		sb.append("    recipientTeamIds: ").append(toIndentedString(recipientTeamIds)).append("\n");
 		sb.append("    recipientNamedAreaIds: ").append(toIndentedString(recipientNamedAreaIds)).append("\n");
 		sb.append("    recipientAccountId: ").append(toIndentedString(recipientAccountId)).append("\n");
+		sb.append("    labelFilters: ").append(toIndentedString(labelFilters)).append("\n");
 		sb.append("    assignedAgentPersonIds: ").append(toIndentedString(assignedAgentPersonIds)).append("\n");
 		sb.append("    assignedAgentTeamIds: ").append(toIndentedString(assignedAgentTeamIds)).append("\n");
 		sb.append("    startingPersonIds: ").append(toIndentedString(startingPersonIds)).append("\n");

@@ -10,22 +10,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EAriaAgenticFlowDataContentType {
 
 	/**
-	 * MULTIFLOW
+	 * MULTIFLOW: The content describes a set of flows the bot can choose between
 	 */
 	MULTIFLOW("MULTIFLOW"),
 
 	/**
-	 * SINGLE_FLOW
+	 * SINGLE_FLOW: The content describes a single flow the bot runs
 	 */
 	SINGLE_FLOW("SINGLE_FLOW"),
 
 	/**
-	 * SUGGESTION_SOURCE
+	 * SUGGESTION_SOURCE: The content describes a source the bot draws suggestions from
 	 */
 	SUGGESTION_SOURCE("SUGGESTION_SOURCE"),
 
 	/**
-	 * CUSTOM_ACTION
+	 * CUSTOM_ACTION: The content describes a custom action the bot can invoke
 	 */
 	CUSTOM_ACTION("CUSTOM_ACTION");
 

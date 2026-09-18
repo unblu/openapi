@@ -35,6 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_TEAM_IDS,
 	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_NAMED_AREA_IDS,
 	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_ACCOUNT_ID,
+	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_LABEL_FILTERS,
 	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_RESOLUTION_TYPES,
 	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_USED_FEATURES,
 	AvgHandlingTimeAnalyticsKpiFilterData.JSON_PROPERTY_ASSIGNED_AGENT_PERSON_IDS,
@@ -114,6 +115,10 @@ public class AvgHandlingTimeAnalyticsKpiFilterData {
 	public static final String JSON_PROPERTY_RECIPIENT_ACCOUNT_ID = "recipientAccountId";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_ACCOUNT_ID)
 	private Boolean recipientAccountId;
+
+	public static final String JSON_PROPERTY_LABEL_FILTERS = "labelFilters";
+	@JsonProperty(JSON_PROPERTY_LABEL_FILTERS)
+	private List<LabelsAnalyticsKpiFilter> labelFilters = null;
 
 	public static final String JSON_PROPERTY_RESOLUTION_TYPES = "resolutionTypes";
 	@JsonProperty(JSON_PROPERTY_RESOLUTION_TYPES)
@@ -378,6 +383,35 @@ public class AvgHandlingTimeAnalyticsKpiFilterData {
 		this.recipientAccountId = recipientAccountId;
 	}
 
+	public AvgHandlingTimeAnalyticsKpiFilterData labelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+		return this;
+	}
+
+	public AvgHandlingTimeAnalyticsKpiFilterData addLabelFiltersItem(LabelsAnalyticsKpiFilter labelFiltersItem) {
+		if (this.labelFilters == null) {
+			this.labelFilters = new ArrayList<>();
+		}
+		this.labelFilters.add(labelFiltersItem);
+		return this;
+	}
+
+	/**
+	 * A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation&#39;s or one of its
+	 * persons&#39; labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each
+	 * condition&#39;s target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.
+	 * 
+	 * @return labelFilters
+	 **/
+	@ApiModelProperty(value = "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.")
+	public List<LabelsAnalyticsKpiFilter> getLabelFilters() {
+		return labelFilters;
+	}
+
+	public void setLabelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+	}
+
 	public AvgHandlingTimeAnalyticsKpiFilterData resolutionTypes(List<EConversationResolutionType> resolutionTypes) {
 		this.resolutionTypes = resolutionTypes;
 		return this;
@@ -511,6 +545,7 @@ public class AvgHandlingTimeAnalyticsKpiFilterData {
 				Objects.equals(this.recipientTeamIds, avgHandlingTimeAnalyticsKpiFilterData.recipientTeamIds) &&
 				Objects.equals(this.recipientNamedAreaIds, avgHandlingTimeAnalyticsKpiFilterData.recipientNamedAreaIds) &&
 				Objects.equals(this.recipientAccountId, avgHandlingTimeAnalyticsKpiFilterData.recipientAccountId) &&
+				Objects.equals(this.labelFilters, avgHandlingTimeAnalyticsKpiFilterData.labelFilters) &&
 				Objects.equals(this.resolutionTypes, avgHandlingTimeAnalyticsKpiFilterData.resolutionTypes) &&
 				Objects.equals(this.usedFeatures, avgHandlingTimeAnalyticsKpiFilterData.usedFeatures) &&
 				Objects.equals(this.assignedAgentPersonIds, avgHandlingTimeAnalyticsKpiFilterData.assignedAgentPersonIds) &&
@@ -519,7 +554,7 @@ public class AvgHandlingTimeAnalyticsKpiFilterData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, resolutionTypes, usedFeatures, assignedAgentPersonIds, assignedAgentTeamIds);
+		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, labelFilters, resolutionTypes, usedFeatures, assignedAgentPersonIds, assignedAgentTeamIds);
 	}
 
 	@Override
@@ -536,6 +571,7 @@ public class AvgHandlingTimeAnalyticsKpiFilterData {
 		sb.append("    recipientTeamIds: ").append(toIndentedString(recipientTeamIds)).append("\n");
 		sb.append("    recipientNamedAreaIds: ").append(toIndentedString(recipientNamedAreaIds)).append("\n");
 		sb.append("    recipientAccountId: ").append(toIndentedString(recipientAccountId)).append("\n");
+		sb.append("    labelFilters: ").append(toIndentedString(labelFilters)).append("\n");
 		sb.append("    resolutionTypes: ").append(toIndentedString(resolutionTypes)).append("\n");
 		sb.append("    usedFeatures: ").append(toIndentedString(usedFeatures)).append("\n");
 		sb.append("    assignedAgentPersonIds: ").append(toIndentedString(assignedAgentPersonIds)).append("\n");

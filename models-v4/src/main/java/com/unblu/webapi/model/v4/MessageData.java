@@ -142,4 +142,16 @@ public interface MessageData {
 
 	MessageData conversationLocale(String conversationLocale);
 
+	void setLastEditedByPersonId(String lastEditedByPersonId);
+
+	String getLastEditedByPersonId();
+
+	MessageData lastEditedByPersonId(String lastEditedByPersonId);
+
+	void setLastEditedTimestamp(Long lastEditedTimestamp);
+
+	Long getLastEditedTimestamp();
+
+	MessageData lastEditedTimestamp(Long lastEditedTimestamp);
+
 }

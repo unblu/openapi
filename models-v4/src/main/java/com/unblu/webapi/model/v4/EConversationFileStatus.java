@@ -5,42 +5,42 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Status of a file which is/was uploaded to the collaboration server
+ * Status of a file which is/was uploaded to the Collaboration Server
  */
 public enum EConversationFileStatus {
 
 	/**
-	 * UPLOADING
+	 * UPLOADING: The file is being transferred to the Collaboration Server
 	 */
 	UPLOADING("UPLOADING"),
 
 	/**
-	 * COMPLETED
+	 * COMPLETED: The file was uploaded successfully and can be downloaded
 	 */
 	COMPLETED("COMPLETED"),
 
 	/**
-	 * CANCELED
+	 * CANCELED: The upload was aborted before it finished
 	 */
 	CANCELED("CANCELED"),
 
 	/**
-	 * FAILED
+	 * FAILED: The upload ended with an error
 	 */
 	FAILED("FAILED"),
 
 	/**
-	 * DELETED
+	 * DELETED: The file was removed from the Collaboration Server
 	 */
 	DELETED("DELETED"),
 
 	/**
-	 * SCANNING
+	 * SCANNING: The uploaded file is being checked by the virus scanner
 	 */
 	SCANNING("SCANNING"),
 
 	/**
-	 * REJECTED
+	 * REJECTED: The file was refused, for example because the virus scanner flagged it
 	 */
 	REJECTED("REJECTED");
 

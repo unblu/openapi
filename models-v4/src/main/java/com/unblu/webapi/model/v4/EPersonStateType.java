@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EPersonStateType {
 
 	/**
-	 * AGENT
+	 * AGENT: The state belongs to an agent
 	 */
 	AGENT("AGENT"),
 
 	/**
-	 * VISITOR
+	 * VISITOR: The state belongs to a visitor
 	 */
 	VISITOR("VISITOR");
 

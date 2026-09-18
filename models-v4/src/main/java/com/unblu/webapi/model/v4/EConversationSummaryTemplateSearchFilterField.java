@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationSummaryTemplateSearchFilterField {
 
 	/**
-	 * NAME
+	 * NAME: Filter by the &#39;name&#39; attribute
 	 */
 	NAME("NAME"),
 

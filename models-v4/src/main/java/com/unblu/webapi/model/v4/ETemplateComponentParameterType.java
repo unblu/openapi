@@ -10,42 +10,43 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ETemplateComponentParameterType {
 
 	/**
-	 * CURRENCY
+	 * CURRENCY: The parameter carries an amount of money together with its currency
 	 */
 	CURRENCY("CURRENCY"),
 
 	/**
-	 * DATE_TIME
+	 * DATE_TIME: The parameter carries a date and time
 	 */
 	DATE_TIME("DATE_TIME"),
 
 	/**
-	 * DOCUMENT
+	 * DOCUMENT: The parameter carries a document to attach
 	 */
 	DOCUMENT("DOCUMENT"),
 
 	/**
-	 * IMAGE
+	 * IMAGE: The parameter carries an image to attach
 	 */
 	IMAGE("IMAGE"),
 
 	/**
-	 * TEXT
+	 * TEXT: The parameter carries a text that is substituted into the template
 	 */
 	TEXT("TEXT"),
 
 	/**
-	 * VIDEO
+	 * VIDEO: The parameter carries a video to attach
 	 */
 	VIDEO("VIDEO"),
 
 	/**
-	 * PAYLOAD: Only allowed for components of type &#x60;ETemplateComponentParametersType.BUTTON&#x60;
+	 * PAYLOAD: The parameter carries the payload a quick-reply button sends back when it is tapped. Only allowed for components of type
+	 * &#x60;ETemplateComponentParametersType.BUTTON&#x60;
 	 */
 	PAYLOAD("PAYLOAD"),
 
 	/**
-	 * LOCATION
+	 * LOCATION: The parameter carries a geographic location
 	 */
 	LOCATION("LOCATION");
 

@@ -14,12 +14,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationRealVisitorParticipationType {
 
 	/**
-	 * CONTEXT_PERSON
+	 * CONTEXT_PERSON: The visitor the conversation is about
 	 */
 	CONTEXT_PERSON("CONTEXT_PERSON"),
 
 	/**
-	 * SECONDARY_VISITOR
+	 * SECONDARY_VISITOR: A visitor who joined the conversation in addition to the context person
 	 */
 	SECONDARY_VISITOR("SECONDARY_VISITOR");
 

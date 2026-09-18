@@ -42,6 +42,8 @@ import io.swagger.annotations.ApiModelProperty;
 	WhatsAppTemplateMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_LOCALE,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
+	WhatsAppTemplateMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
+	WhatsAppTemplateMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_TEMPLATE_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_COMPONENTS,
 })
@@ -163,6 +165,14 @@ public class WhatsAppTemplateMessageData implements MessageData {
 	public static final String JSON_PROPERTY_CONVERSATION_LOCALE = "conversationLocale";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_LOCALE)
 	private String conversationLocale;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID = "lastEditedByPersonId";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID)
+	private String lastEditedByPersonId;
+
+	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
+	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
+	private Long lastEditedTimestamp;
 
 	public static final String JSON_PROPERTY_TEMPLATE_ID = "templateId";
 	@JsonProperty(JSON_PROPERTY_TEMPLATE_ID)
@@ -584,6 +594,44 @@ public class WhatsAppTemplateMessageData implements MessageData {
 		this.conversationLocale = conversationLocale;
 	}
 
+	public WhatsAppTemplateMessageData lastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+		return this;
+	}
+
+	/**
+	 * The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedByPersonId
+	 **/
+	@ApiModelProperty(value = "The ID of the person who performed the most recent edit of the message. Null if the message was never edited.")
+	public String getLastEditedByPersonId() {
+		return lastEditedByPersonId;
+	}
+
+	public void setLastEditedByPersonId(String lastEditedByPersonId) {
+		this.lastEditedByPersonId = lastEditedByPersonId;
+	}
+
+	public WhatsAppTemplateMessageData lastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+		return this;
+	}
+
+	/**
+	 * The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
+	 * 
+	 * @return lastEditedTimestamp
+	 **/
+	@ApiModelProperty(value = "The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.")
+	public Long getLastEditedTimestamp() {
+		return lastEditedTimestamp;
+	}
+
+	public void setLastEditedTimestamp(Long lastEditedTimestamp) {
+		this.lastEditedTimestamp = lastEditedTimestamp;
+	}
+
 	public WhatsAppTemplateMessageData templateId(String templateId) {
 		this.templateId = templateId;
 		return this;
@@ -660,13 +708,15 @@ public class WhatsAppTemplateMessageData implements MessageData {
 				Objects.equals(this.replyToExternalMessageId, whatsAppTemplateMessageData.replyToExternalMessageId) &&
 				Objects.equals(this.locale, whatsAppTemplateMessageData.locale) &&
 				Objects.equals(this.conversationLocale, whatsAppTemplateMessageData.conversationLocale) &&
+				Objects.equals(this.lastEditedByPersonId, whatsAppTemplateMessageData.lastEditedByPersonId) &&
+				Objects.equals(this.lastEditedTimestamp, whatsAppTemplateMessageData.lastEditedTimestamp) &&
 				Objects.equals(this.templateId, whatsAppTemplateMessageData.templateId) &&
 				Objects.equals(this.components, whatsAppTemplateMessageData.components);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, templateId, components);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, templateId, components);
 	}
 
 	@Override
@@ -694,6 +744,8 @@ public class WhatsAppTemplateMessageData implements MessageData {
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
+		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
+		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
 		sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
 		sb.append("    components: ").append(toIndentedString(components)).append("\n");
 		sb.append("}");

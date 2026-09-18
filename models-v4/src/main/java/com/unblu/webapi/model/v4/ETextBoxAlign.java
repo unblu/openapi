@@ -5,22 +5,22 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ETextBoxAlign
+ * The alignment of the text inside a text box, applied to one axis at a time: a text box has a separate horizontal and vertical alignment
  */
 public enum ETextBoxAlign {
 
 	/**
-	 * START
+	 * START: The text is aligned to the start of the axis: to the left horizontally, to the top vertically
 	 */
 	START("START"),
 
 	/**
-	 * MIDDLE
+	 * MIDDLE: The text is centered on the axis
 	 */
 	MIDDLE("MIDDLE"),
 
 	/**
-	 * END
+	 * END: The text is aligned to the end of the axis: to the right horizontally, to the bottom vertically
 	 */
 	END("END");
 

@@ -12,22 +12,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EBusySessionLimitPriority {
 
 	/**
-	 * PRIORITY_1
+	 * PRIORITY_1: The highest priority band, configured with &#39;busyStateSessionLimitPriority1&#39;
 	 */
 	PRIORITY_1("PRIORITY_1"),
 
 	/**
-	 * PRIORITY_2
+	 * PRIORITY_2: The second-highest priority band, configured with &#39;busyStateSessionLimitPriority2&#39;
 	 */
 	PRIORITY_2("PRIORITY_2"),
 
 	/**
-	 * PRIORITY_3
+	 * PRIORITY_3: The third-highest priority band, configured with &#39;busyStateSessionLimitPriority3&#39;
 	 */
 	PRIORITY_3("PRIORITY_3"),
 
 	/**
-	 * PRIORITY_4
+	 * PRIORITY_4: The lowest priority band, configured with &#39;busyStateSessionLimitPriority4&#39;
 	 */
 	PRIORITY_4("PRIORITY_4");
 

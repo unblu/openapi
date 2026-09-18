@@ -42,7 +42,22 @@ public enum EQueueInteractionGroupBy {
 	/**
 	 * ASSIGNED_AGENT_TEAM_ID: Group by assigned agent team ID (the agent who redeemed the invitation, or the agent the invitation was reserved for).
 	 */
-	ASSIGNED_AGENT_TEAM_ID("ASSIGNED_AGENT_TEAM_ID");
+	ASSIGNED_AGENT_TEAM_ID("ASSIGNED_AGENT_TEAM_ID"),
+
+	/**
+	 * CONVERSATION_LABELS: Group by the labels attached to the conversation.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent.
+	 */
+	ASSIGNED_AGENT_LABELS("ASSIGNED_AGENT_LABELS");
 
 	private String value;
 

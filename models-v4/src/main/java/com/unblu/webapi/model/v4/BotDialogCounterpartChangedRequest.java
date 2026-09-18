@@ -16,10 +16,10 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Request sent when the counterpart person of a dialog changes during the dialog.&lt;br&gt; This can only happen if an anonymous person in a dialog logs in or
  * authenticates during the dialog.&lt;br&gt; In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent
- * by that person. The dialog (and the dialog token) stays the same and continues.&lt;br&gt; &lt;p&gt; The request is only delivered to the dialog bots that
- * accepted the dialog offer for this dialog.
+ * by that person. The dialog (and the dialog token) stays the same and continues.&lt;br&gt; &lt;p&gt; The request is only delivered to the dialog bot that is
+ * currently handling this dialog.
  */
-@ApiModel(description = "Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.")
+@ApiModel(description = "Request sent when the counterpart person of a dialog changes during the dialog.<br> This can only happen if an anonymous person in a dialog logs in or authenticates during the dialog.<br> In this case the person ID and all details switch to an authenticated person and all subsequent messages are sent by that person. The dialog (and the dialog token) stays the same and continues.<br> <p> The request is only delivered to the dialog bot that is currently handling this dialog.")
 
 @JsonPropertyOrder({
 	BotDialogCounterpartChangedRequest.JSON_PROPERTY_$_TYPE,
@@ -213,11 +213,11 @@ public class BotDialogCounterpartChangedRequest {
 	}
 
 	/**
-	 * ID of the conversation the request is sent to.
+	 * The ID of the conversation this dialog belongs to.
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "ID of the conversation the request is sent to.")
+	@ApiModelProperty(value = "The ID of the conversation this dialog belongs to.")
 	public String getConversationId() {
 		return conversationId;
 	}

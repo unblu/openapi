@@ -38,6 +38,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_TEAM_IDS,
 	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_NAMED_AREA_IDS,
 	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_RECIPIENT_ACCOUNT_ID,
+	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_LABEL_FILTERS,
 	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_QUEUE_INTERACTION_TYPES,
 	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_ASSIGNED_AGENT_PERSON_IDS,
 	AvgReservationTimeAnalyticsKpiFilterData.JSON_PROPERTY_ASSIGNED_AGENT_TEAM_IDS,
@@ -118,6 +119,10 @@ public class AvgReservationTimeAnalyticsKpiFilterData {
 	public static final String JSON_PROPERTY_RECIPIENT_ACCOUNT_ID = "recipientAccountId";
 	@JsonProperty(JSON_PROPERTY_RECIPIENT_ACCOUNT_ID)
 	private Boolean recipientAccountId;
+
+	public static final String JSON_PROPERTY_LABEL_FILTERS = "labelFilters";
+	@JsonProperty(JSON_PROPERTY_LABEL_FILTERS)
+	private List<LabelsAnalyticsKpiFilter> labelFilters = null;
 
 	public static final String JSON_PROPERTY_QUEUE_INTERACTION_TYPES = "queueInteractionTypes";
 	@JsonProperty(JSON_PROPERTY_QUEUE_INTERACTION_TYPES)
@@ -386,6 +391,35 @@ public class AvgReservationTimeAnalyticsKpiFilterData {
 		this.recipientAccountId = recipientAccountId;
 	}
 
+	public AvgReservationTimeAnalyticsKpiFilterData labelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+		return this;
+	}
+
+	public AvgReservationTimeAnalyticsKpiFilterData addLabelFiltersItem(LabelsAnalyticsKpiFilter labelFiltersItem) {
+		if (this.labelFilters == null) {
+			this.labelFilters = new ArrayList<>();
+		}
+		this.labelFilters.add(labelFiltersItem);
+		return this;
+	}
+
+	/**
+	 * A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation&#39;s or one of its
+	 * persons&#39; labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each
+	 * condition&#39;s target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.
+	 * 
+	 * @return labelFilters
+	 **/
+	@ApiModelProperty(value = "A list of label conditions used to filter the analytics data included in the KPI calculation, each targeting the conversation's or one of its persons' labels. Records are included only if every condition holds. At most one condition per target and operator combination is allowed, and each condition's target must be supported by the KPI. If null, the filter is not applied. An empty list is not allowed.")
+	public List<LabelsAnalyticsKpiFilter> getLabelFilters() {
+		return labelFilters;
+	}
+
+	public void setLabelFilters(List<LabelsAnalyticsKpiFilter> labelFilters) {
+		this.labelFilters = labelFilters;
+	}
+
 	public AvgReservationTimeAnalyticsKpiFilterData queueInteractionTypes(List<EQueueInteractionType> queueInteractionTypes) {
 		this.queueInteractionTypes = queueInteractionTypes;
 		return this;
@@ -533,6 +567,7 @@ public class AvgReservationTimeAnalyticsKpiFilterData {
 				Objects.equals(this.recipientTeamIds, avgReservationTimeAnalyticsKpiFilterData.recipientTeamIds) &&
 				Objects.equals(this.recipientNamedAreaIds, avgReservationTimeAnalyticsKpiFilterData.recipientNamedAreaIds) &&
 				Objects.equals(this.recipientAccountId, avgReservationTimeAnalyticsKpiFilterData.recipientAccountId) &&
+				Objects.equals(this.labelFilters, avgReservationTimeAnalyticsKpiFilterData.labelFilters) &&
 				Objects.equals(this.queueInteractionTypes, avgReservationTimeAnalyticsKpiFilterData.queueInteractionTypes) &&
 				Objects.equals(this.assignedAgentPersonIds, avgReservationTimeAnalyticsKpiFilterData.assignedAgentPersonIds) &&
 				Objects.equals(this.assignedAgentTeamIds, avgReservationTimeAnalyticsKpiFilterData.assignedAgentTeamIds) &&
@@ -542,7 +577,7 @@ public class AvgReservationTimeAnalyticsKpiFilterData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, queueInteractionTypes, assignedAgentPersonIds, assignedAgentTeamIds, minReservationTimeDuration, maxReservationTimeDuration);
+		return Objects.hash($type, startTimestamp, endTimestamp, conversationTemplateIds, conversationLocales, initialEngagementTypes, recipientAgentPersonIds, recipientTeamIds, recipientNamedAreaIds, recipientAccountId, labelFilters, queueInteractionTypes, assignedAgentPersonIds, assignedAgentTeamIds, minReservationTimeDuration, maxReservationTimeDuration);
 	}
 
 	@Override
@@ -559,6 +594,7 @@ public class AvgReservationTimeAnalyticsKpiFilterData {
 		sb.append("    recipientTeamIds: ").append(toIndentedString(recipientTeamIds)).append("\n");
 		sb.append("    recipientNamedAreaIds: ").append(toIndentedString(recipientNamedAreaIds)).append("\n");
 		sb.append("    recipientAccountId: ").append(toIndentedString(recipientAccountId)).append("\n");
+		sb.append("    labelFilters: ").append(toIndentedString(labelFilters)).append("\n");
 		sb.append("    queueInteractionTypes: ").append(toIndentedString(queueInteractionTypes)).append("\n");
 		sb.append("    assignedAgentPersonIds: ").append(toIndentedString(assignedAgentPersonIds)).append("\n");
 		sb.append("    assignedAgentTeamIds: ").append(toIndentedString(assignedAgentTeamIds)).append("\n");

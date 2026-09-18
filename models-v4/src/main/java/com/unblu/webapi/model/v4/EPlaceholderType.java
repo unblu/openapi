@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EPlaceholderType {
 
 	/**
-	 * TEXT
+	 * TEXT: The agent fills the placeholder with free text
 	 */
 	TEXT("TEXT"),
 
 	/**
-	 * MULTIPLE_CHOICE
+	 * MULTIPLE_CHOICE: The agent fills the placeholder by picking one of the predefined values
 	 */
 	MULTIPLE_CHOICE("MULTIPLE_CHOICE");
 

@@ -15,22 +15,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationRealParticipationType {
 
 	/**
-	 * ASSIGNED_AGENT
+	 * ASSIGNED_AGENT: The agent the conversation is assigned to
 	 */
 	ASSIGNED_AGENT("ASSIGNED_AGENT"),
 
 	/**
-	 * CONTEXT_PERSON
+	 * CONTEXT_PERSON: The visitor the conversation is about
 	 */
 	CONTEXT_PERSON("CONTEXT_PERSON"),
 
 	/**
-	 * SECONDARY_AGENT
+	 * SECONDARY_AGENT: An agent who joined the conversation in addition to the assigned agent
 	 */
 	SECONDARY_AGENT("SECONDARY_AGENT"),
 
 	/**
-	 * SECONDARY_VISITOR
+	 * SECONDARY_VISITOR: A visitor who joined the conversation in addition to the context person
 	 */
 	SECONDARY_VISITOR("SECONDARY_VISITOR");
 

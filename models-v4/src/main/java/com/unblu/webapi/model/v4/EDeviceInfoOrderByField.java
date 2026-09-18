@@ -10,32 +10,32 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EDeviceInfoOrderByField {
 
 	/**
-	 * ID
+	 * ID: Sort by the &#39;id&#39; attribute
 	 */
 	ID("ID"),
 
 	/**
-	 * DEVICE_TYPE
+	 * DEVICE_TYPE: Sort by the &#39;deviceType&#39; attribute
 	 */
 	DEVICE_TYPE("DEVICE_TYPE"),
 
 	/**
-	 * OS_NAME
+	 * OS_NAME: Sort by the &#39;osName&#39; attribute
 	 */
 	OS_NAME("OS_NAME"),
 
 	/**
-	 * BROWSER_NAME
+	 * BROWSER_NAME: Sort by the &#39;browserName&#39; attribute
 	 */
 	BROWSER_NAME("BROWSER_NAME"),
 
 	/**
-	 * CREATION_TIMESTAMP
+	 * CREATION_TIMESTAMP: Sort by the &#39;creationTimestamp&#39; attribute
 	 */
 	CREATION_TIMESTAMP("CREATION_TIMESTAMP"),
 
 	/**
-	 * LAST_SEEN
+	 * LAST_SEEN: Sort by the &#39;lastSeen&#39; attribute
 	 */
 	LAST_SEEN("LAST_SEEN");
 

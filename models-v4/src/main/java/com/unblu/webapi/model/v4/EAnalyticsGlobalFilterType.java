@@ -46,7 +46,28 @@ public enum EAnalyticsGlobalFilterType {
 	 * ASSIGNED_AGENT_TEAM_ID: Allows filtering the whole dashboard by assigned agent team IDs. The filter applies to all dashboard widgets whose KPI supports
 	 * filtering by this type.
 	 */
-	ASSIGNED_AGENT_TEAM_ID("ASSIGNED_AGENT_TEAM_ID");
+	ASSIGNED_AGENT_TEAM_ID("ASSIGNED_AGENT_TEAM_ID"),
+
+	/**
+	 * CONVERSATION_LABELS: Allows filtering the whole dashboard by conversation labels. You can specify mandatory labels (the conversation must have all of them),
+	 * any labels (it must have at least one of them), and excluded labels (it must have none of them). The filter applies to all dashboard widgets whose KPI
+	 * supports filtering by this type.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Allows filtering the whole dashboard by context person labels. You can specify mandatory labels (the context person must have all of
+	 * them), any labels (they must have at least one of them), and excluded labels (they must have none of them). The filter applies to all dashboard widgets whose
+	 * KPI supports filtering by this type.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * ASSIGNED_AGENT_LABELS: Allows filtering the whole dashboard by assigned agent labels. You can specify mandatory labels (the assigned agent must have all of
+	 * them), any labels (they must have at least one of them), and excluded labels (they must have none of them). The filter applies to all dashboard widgets whose
+	 * KPI supports filtering by this type.
+	 */
+	ASSIGNED_AGENT_LABELS("ASSIGNED_AGENT_LABELS");
 
 	private String value;
 

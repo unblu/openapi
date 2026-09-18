@@ -17,9 +17,9 @@ import io.swagger.annotations.ApiModelProperty;
  * Request sent when a dialog between a person and a bot closes. &lt;br&gt; After this request has been received, no further messages can be sent in this
  * dialog.&lt;br&gt; It should be used to clean up all resources related to this dialog. &lt;p&gt; &lt;b&gt;Note:&lt;/b&gt; This request may be sent before the
  * bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. &lt;p&gt; The request is
- * only delivered to the dialog bots that accepted the dialog offer for this dialog.
+ * only delivered to the dialog bot that is currently handling this dialog.
  */
-@ApiModel(description = "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bots that accepted the dialog offer for this dialog.")
+@ApiModel(description = "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bot that is currently handling this dialog.")
 
 @JsonPropertyOrder({
 	BotDialogClosedRequest.JSON_PROPERTY_$_TYPE,

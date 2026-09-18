@@ -47,7 +47,22 @@ public enum EConversationsEndedCountGroupBy {
 	/**
 	 * CONVERSATION_END_REASON: Group by conversation end reason.
 	 */
-	CONVERSATION_END_REASON("CONVERSATION_END_REASON");
+	CONVERSATION_END_REASON("CONVERSATION_END_REASON"),
+
+	/**
+	 * CONVERSATION_LABELS: Group by conversation label. A conversation with multiple labels is counted once per label.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Group by context person label. A conversation whose context person has multiple labels is counted once per label.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * ASSIGNED_AGENT_LABELS: Group by assigned agent label. A conversation whose assigned agent has multiple labels is counted once per label.
+	 */
+	ASSIGNED_AGENT_LABELS("ASSIGNED_AGENT_LABELS");
 
 	private String value;
 

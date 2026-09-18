@@ -52,7 +52,27 @@ public enum ECallsCountGroupBy {
 	/**
 	 * STARTING_PERSON_TEAM_ID: Group by starting person team ID.
 	 */
-	STARTING_PERSON_TEAM_ID("STARTING_PERSON_TEAM_ID");
+	STARTING_PERSON_TEAM_ID("STARTING_PERSON_TEAM_ID"),
+
+	/**
+	 * CONVERSATION_LABELS: Group by the labels attached to the conversation.
+	 */
+	CONVERSATION_LABELS("CONVERSATION_LABELS"),
+
+	/**
+	 * CONTEXT_PERSON_LABELS: Group by the labels attached to the context person of the conversation.
+	 */
+	CONTEXT_PERSON_LABELS("CONTEXT_PERSON_LABELS"),
+
+	/**
+	 * ASSIGNED_AGENT_LABELS: Group by the labels attached to the assigned agent.
+	 */
+	ASSIGNED_AGENT_LABELS("ASSIGNED_AGENT_LABELS"),
+
+	/**
+	 * STARTING_PERSON_LABELS: Group by the labels attached to the person who started the call.
+	 */
+	STARTING_PERSON_LABELS("STARTING_PERSON_LABELS");
 
 	private String value;
 

@@ -10,19 +10,24 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EOnlineState {
 
 	/**
-	 * ONLINE
+	 * ONLINE: The person is present and available
 	 */
 	ONLINE("ONLINE"),
 
 	/**
-	 * OFFLINE
+	 * OFFLINE: The person is not present
 	 */
 	OFFLINE("OFFLINE"),
 
 	/**
-	 * AWAY
+	 * AWAY: The person is present but currently not available
 	 */
-	AWAY("AWAY");
+	AWAY("AWAY"),
+
+	/**
+	 * OUT_OF_OFFICE: The person is out of office, whether or not they are present
+	 */
+	OUT_OF_OFFICE("OUT_OF_OFFICE");
 
 	private String value;
 

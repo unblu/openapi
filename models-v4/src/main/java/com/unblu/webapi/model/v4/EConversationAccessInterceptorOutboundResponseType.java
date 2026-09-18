@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationAccessInterceptorOutboundResponseType {
 
 	/**
-	 * GRANT
+	 * GRANT: The interceptor allows the person to access the conversation
 	 */
 	GRANT("GRANT"),
 
 	/**
-	 * DENY
+	 * DENY: The interceptor refuses the person access to the conversation
 	 */
 	DENY("DENY");
 

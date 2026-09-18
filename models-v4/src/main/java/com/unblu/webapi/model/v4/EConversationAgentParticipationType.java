@@ -13,17 +13,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EConversationAgentParticipationType {
 
 	/**
-	 * ASSIGNED_AGENT
+	 * ASSIGNED_AGENT: The agent the conversation is assigned to
 	 */
 	ASSIGNED_AGENT("ASSIGNED_AGENT"),
 
 	/**
-	 * SECONDARY_AGENT
+	 * SECONDARY_AGENT: An agent who joined the conversation in addition to the assigned agent
 	 */
 	SECONDARY_AGENT("SECONDARY_AGENT"),
 
 	/**
-	 * GHOST
+	 * GHOST: An agent following the conversation without being visible to the other participants
 	 */
 	GHOST("GHOST");
 

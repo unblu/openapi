@@ -10,37 +10,37 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum AuditInteractionType {
 
 	/**
-	 * API
+	 * API: The change was triggered by a call to the public web API.
 	 */
 	API("API"),
 
 	/**
-	 * RPC
+	 * RPC: The change was triggered by an RPC call from a client (Agent Desk or visitor UI).
 	 */
 	RPC("RPC"),
 
 	/**
-	 * JOB
+	 * JOB: The change was triggered by a scheduled background job.
 	 */
 	JOB("JOB"),
 
 	/**
-	 * ACTION
+	 * ACTION: The change was triggered by an explicit administrative action.
 	 */
 	ACTION("ACTION"),
 
 	/**
-	 * INTERNAL
+	 * INTERNAL: The change was triggered by server-internal logic without an external caller.
 	 */
 	INTERNAL("INTERNAL"),
 
 	/**
-	 * SYNCJOB
+	 * SYNCJOB: The change was triggered by a synchronization job importing data from an external system.
 	 */
 	SYNCJOB("SYNCJOB"),
 
 	/**
-	 * GC
+	 * GC: The change was triggered by the garbage collector cleaning up expired data.
 	 */
 	GC("GC");
 

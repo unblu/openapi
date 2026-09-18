@@ -10,32 +10,32 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EBranchLinkType {
 
 	/**
-	 * PHONE_NUMBER
+	 * PHONE_NUMBER: A link to a phone number to call
 	 */
 	PHONE_NUMBER("PHONE_NUMBER"),
 
 	/**
-	 * TIME
+	 * TIME: A link to opening hours or another time-related resource
 	 */
 	TIME("TIME"),
 
 	/**
-	 * TEAM
+	 * TEAM: A link to a team that can be contacted
 	 */
 	TEAM("TEAM"),
 
 	/**
-	 * EXTERNAL_APPLICATION
+	 * EXTERNAL_APPLICATION: A link that opens an external application
 	 */
 	EXTERNAL_APPLICATION("EXTERNAL_APPLICATION"),
 
 	/**
-	 * INFO
+	 * INFO: A link to purely informational content
 	 */
 	INFO("INFO"),
 
 	/**
-	 * OTHER
+	 * OTHER: A link that does not fall into any of the other categories
 	 */
 	OTHER("OTHER");
 

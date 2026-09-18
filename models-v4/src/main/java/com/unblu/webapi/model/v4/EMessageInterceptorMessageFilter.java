@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EMessageInterceptorMessageFilter {
 
 	/**
-	 * AGENT
+	 * AGENT: Only messages sent by agents are intercepted
 	 */
 	AGENT("AGENT"),
 
 	/**
-	 * VISITOR
+	 * VISITOR: Only messages sent by visitors are intercepted
 	 */
 	VISITOR("VISITOR"),
 
 	/**
-	 * ALL
+	 * ALL: Messages sent by agents and by visitors are intercepted
 	 */
 	ALL("ALL");
 

@@ -27,4 +27,22 @@ public interface PersonStateData {
 
 	PersonStateData type(EPersonStateType type);
 
+	void setOutOfOfficeStartTimestamp(Long outOfOfficeStartTimestamp);
+
+	Long getOutOfOfficeStartTimestamp();
+
+	PersonStateData outOfOfficeStartTimestamp(Long outOfOfficeStartTimestamp);
+
+	void setOutOfOfficeEndTimestamp(Long outOfOfficeEndTimestamp);
+
+	Long getOutOfOfficeEndTimestamp();
+
+	PersonStateData outOfOfficeEndTimestamp(Long outOfOfficeEndTimestamp);
+
+	void setOutOfOfficeStatusMessage(String outOfOfficeStatusMessage);
+
+	String getOutOfOfficeStatusMessage();
+
+	PersonStateData outOfOfficeStatusMessage(String outOfOfficeStatusMessage);
+
 }

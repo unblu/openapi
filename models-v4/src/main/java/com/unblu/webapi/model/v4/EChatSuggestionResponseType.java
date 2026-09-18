@@ -10,17 +10,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EChatSuggestionResponseType {
 
 	/**
-	 * EMPTY
+	 * EMPTY: No suggestion could be produced
 	 */
 	EMPTY("EMPTY"),
 
 	/**
-	 * TEXT
+	 * TEXT: The suggestion is a text the agent can send
 	 */
 	TEXT("TEXT"),
 
 	/**
-	 * AUTHENTICATION_REQUIRED
+	 * AUTHENTICATION_REQUIRED: No suggestion is returned because the requester must authenticate first
 	 */
 	AUTHENTICATION_REQUIRED("AUTHENTICATION_REQUIRED");
 

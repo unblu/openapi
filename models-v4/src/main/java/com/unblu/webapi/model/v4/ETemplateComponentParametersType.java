@@ -10,22 +10,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ETemplateComponentParametersType {
 
 	/**
-	 * HEADER
+	 * HEADER: Parameters for the header of the template
 	 */
 	HEADER("HEADER"),
 
 	/**
-	 * BODY
+	 * BODY: Parameters for the body of the template
 	 */
 	BODY("BODY"),
 
 	/**
-	 * BUTTON
+	 * BUTTON: Parameters for a button of the template
 	 */
 	BUTTON("BUTTON"),
 
 	/**
-	 * CAROUSEL
+	 * CAROUSEL: Parameters for the carousel of the template
 	 */
 	CAROUSEL("CAROUSEL");
 

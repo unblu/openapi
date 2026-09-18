@@ -10,22 +10,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum EInvitationState {
 
 	/**
-	 * OPEN
+	 * OPEN: The invitation has been issued and can still be redeemed
 	 */
 	OPEN("OPEN"),
 
 	/**
-	 * REDEEMED
+	 * REDEEMED: The invitation has been accepted by its target
 	 */
 	REDEEMED("REDEEMED"),
 
 	/**
-	 * REVOKED
+	 * REVOKED: The invitation was withdrawn before it was redeemed
 	 */
 	REVOKED("REVOKED"),
 
 	/**
-	 * EXPIRED
+	 * EXPIRED: The invitation was not redeemed within its validity period
 	 */
 	EXPIRED("EXPIRED");
 
