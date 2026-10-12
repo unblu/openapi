@@ -262,11 +262,11 @@ public class BranchClientAuxiliaryCameraData {
 	}
 
 	/**
-	 * X coordinate of the camera&#39;s icon on the floor plan. 0 marks the left edge of the plan.
+	 * X coordinate of the camera&#39;s icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return x
 	 **/
-	@ApiModelProperty(value = "X coordinate of the camera's icon on the floor plan. 0 marks the left edge of the plan.")
+	@ApiModelProperty(value = "X coordinate of the camera's icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.")
 	public Integer getX() {
 		return x;
 	}
@@ -281,11 +281,11 @@ public class BranchClientAuxiliaryCameraData {
 	}
 
 	/**
-	 * Y coordinate of the camera&#39;s icon on the floor plan. 0 marks the top edge of the plan.
+	 * Y coordinate of the camera&#39;s icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return y
 	 **/
-	@ApiModelProperty(value = "Y coordinate of the camera's icon on the floor plan. 0 marks the top edge of the plan.")
+	@ApiModelProperty(value = "Y coordinate of the camera's icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.")
 	public Integer getY() {
 		return y;
 	}
@@ -300,11 +300,11 @@ public class BranchClientAuxiliaryCameraData {
 	}
 
 	/**
-	 * Size of the camera&#39;s icon on the floor plan
+	 * Size of the camera&#39;s icon on the floor plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return size
 	 **/
-	@ApiModelProperty(value = "Size of the camera's icon on the floor plan")
+	@ApiModelProperty(value = "Size of the camera's icon on the floor plan. Optional. 0 if not explicitly set.")
 	public Integer getSize() {
 		return size;
 	}
@@ -319,11 +319,11 @@ public class BranchClientAuxiliaryCameraData {
 	}
 
 	/**
-	 * Rotation, in degrees, of the camera&#39;s icon on the floor plan. 0 degree is to the right and the rotation is clockwise.
+	 * Rotation, in degrees, of the camera&#39;s icon on the floor plan. 0 degree is to the right and the rotation is clockwise. Optional. 0 if not explicitly set.
 	 * 
 	 * @return rotation
 	 **/
-	@ApiModelProperty(value = "Rotation, in degrees, of the camera's icon on the floor plan. 0 degree is to the right and the rotation is clockwise.")
+	@ApiModelProperty(value = "Rotation, in degrees, of the camera's icon on the floor plan. 0 degree is to the right and the rotation is clockwise. Optional. 0 if not explicitly set.")
 	public Integer getRotation() {
 		return rotation;
 	}
@@ -357,11 +357,12 @@ public class BranchClientAuxiliaryCameraData {
 	}
 
 	/**
-	 * If set to true, the video feed of this camera is automatically displayed to the agent during calls, otherwise the feed must be activated manually.
+	 * If set to &#x60;true&#x60;, the video feed of this camera is automatically displayed to the agent during calls, otherwise the feed must be activated
+	 * manually. Optional. &#x60;false&#x60; if not explicitly set.
 	 * 
 	 * @return alwaysDisplayDuringCall
 	 **/
-	@ApiModelProperty(value = "If set to true, the video feed of this camera is automatically displayed to the agent during calls, otherwise the feed must be activated manually.")
+	@ApiModelProperty(value = "If set to `true`, the video feed of this camera is automatically displayed to the agent during calls, otherwise the feed must be activated manually. Optional. `false` if not explicitly set.")
 	public Boolean isAlwaysDisplayDuringCall() {
 		return alwaysDisplayDuringCall;
 	}
@@ -376,11 +377,11 @@ public class BranchClientAuxiliaryCameraData {
 	}
 
 	/**
-	 * Display in floor plan
+	 * If set to &#x60;true&#x60;, the camera&#39;s icon is displayed on the floor plan. Optional. &#x60;false&#x60; if not explicitly set.
 	 * 
 	 * @return displayInFloorPlan
 	 **/
-	@ApiModelProperty(value = "Display in floor plan")
+	@ApiModelProperty(value = "If set to `true`, the camera's icon is displayed on the floor plan. Optional. `false` if not explicitly set.")
 	public Boolean isDisplayInFloorPlan() {
 		return displayInFloorPlan;
 	}

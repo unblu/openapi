@@ -265,11 +265,11 @@ public class BranchDeviceData {
 	}
 
 	/**
-	 * X coordinate of the device&#39;s icon on the floor plan. 0 marks the left edge of the plan.
+	 * X coordinate of the device&#39;s icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return x
 	 **/
-	@ApiModelProperty(value = "X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan.")
+	@ApiModelProperty(value = "X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.")
 	public Integer getX() {
 		return x;
 	}
@@ -284,11 +284,11 @@ public class BranchDeviceData {
 	}
 
 	/**
-	 * Y coordinate of the device&#39;s icon on the floor plan. 0 marks the top edge of the plan.
+	 * Y coordinate of the device&#39;s icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return y
 	 **/
-	@ApiModelProperty(value = "Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan.")
+	@ApiModelProperty(value = "Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.")
 	public Integer getY() {
 		return y;
 	}
@@ -303,11 +303,11 @@ public class BranchDeviceData {
 	}
 
 	/**
-	 * Size of the device&#39;s icon on the floor plan
+	 * Size of the device&#39;s icon on the floor plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return size
 	 **/
-	@ApiModelProperty(value = "Size of the device's icon on the floor plan")
+	@ApiModelProperty(value = "Size of the device's icon on the floor plan. Optional. 0 if not explicitly set.")
 	public Integer getSize() {
 		return size;
 	}
@@ -322,11 +322,11 @@ public class BranchDeviceData {
 	}
 
 	/**
-	 * Rotation, in degrees, of the device&#39;s icon on the floor plan. 0 degree is to the right and the rotation is clockwise.
+	 * Rotation, in degrees, of the device&#39;s icon on the floor plan. 0 degree is to the right and the rotation is clockwise. Optional. 0 if not explicitly set.
 	 * 
 	 * @return rotation
 	 **/
-	@ApiModelProperty(value = "Rotation, in degrees, of the device's icon on the floor plan. 0 degree is to the right and the rotation is clockwise.")
+	@ApiModelProperty(value = "Rotation, in degrees, of the device's icon on the floor plan. 0 degree is to the right and the rotation is clockwise. Optional. 0 if not explicitly set.")
 	public Integer getRotation() {
 		return rotation;
 	}

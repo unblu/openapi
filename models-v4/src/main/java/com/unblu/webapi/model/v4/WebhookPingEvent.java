@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Event send when using the &#x60;ping&#x60; to test a webhook
+ * Event sent when using the webhook registration API&#39;s sendPing operation to test a webhook
  */
-@ApiModel(description = "Event send when using the `ping` to test a webhook")
+@ApiModel(description = "Event sent when using the webhook registration API's sendPing operation to test a webhook")
 
 @JsonPropertyOrder({
 	WebhookPingEvent.JSON_PROPERTY_$_TYPE,
@@ -78,7 +78,7 @@ public class WebhookPingEvent {
 
 	public static final String JSON_PROPERTY_WEBHOOK_CONFIGURATION = "webhookConfiguration";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_CONFIGURATION)
-	private WebhookRegistration webhookConfiguration = null;
+	private WebhookRegistrationData webhookConfiguration = null;
 
 	public WebhookPingEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -156,7 +156,7 @@ public class WebhookPingEvent {
 		this.accountId = accountId;
 	}
 
-	public WebhookPingEvent webhookConfiguration(WebhookRegistration webhookConfiguration) {
+	public WebhookPingEvent webhookConfiguration(WebhookRegistrationData webhookConfiguration) {
 		this.webhookConfiguration = webhookConfiguration;
 		return this;
 	}
@@ -167,11 +167,11 @@ public class WebhookPingEvent {
 	 * @return webhookConfiguration
 	 **/
 	@ApiModelProperty(value = "")
-	public WebhookRegistration getWebhookConfiguration() {
+	public WebhookRegistrationData getWebhookConfiguration() {
 		return webhookConfiguration;
 	}
 
-	public void setWebhookConfiguration(WebhookRegistration webhookConfiguration) {
+	public void setWebhookConfiguration(WebhookRegistrationData webhookConfiguration) {
 		this.webhookConfiguration = webhookConfiguration;
 	}
 

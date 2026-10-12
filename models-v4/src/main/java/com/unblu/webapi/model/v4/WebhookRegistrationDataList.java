@@ -15,20 +15,20 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * WebhookRegistrationList
+ * WebhookRegistrationDataList
  */
 
 @JsonPropertyOrder({
-	WebhookRegistrationList.JSON_PROPERTY_$_TYPE,
-	WebhookRegistrationList.JSON_PROPERTY_ITEMS,
+	WebhookRegistrationDataList.JSON_PROPERTY_$_TYPE,
+	WebhookRegistrationDataList.JSON_PROPERTY_ITEMS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class WebhookRegistrationList {
+public class WebhookRegistrationDataList {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		WEBHOOKREGISTRATIONLIST("WebhookRegistrationList");
+		WEBHOOKREGISTRATIONDATALIST("WebhookRegistrationDataList");
 
 		private String value;
 
@@ -53,19 +53,19 @@ public class WebhookRegistrationList {
 					return b;
 				}
 			}
-			return TypeEnum.WEBHOOKREGISTRATIONLIST;
+			return TypeEnum.WEBHOOKREGISTRATIONDATALIST;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.WEBHOOKREGISTRATIONLIST;
+	private TypeEnum $type = TypeEnum.WEBHOOKREGISTRATIONDATALIST;
 
 	public static final String JSON_PROPERTY_ITEMS = "items";
 	@JsonProperty(JSON_PROPERTY_ITEMS)
-	private List<WebhookRegistration> items = null;
+	private List<WebhookRegistrationData> items = null;
 
-	public WebhookRegistrationList $type(TypeEnum $type) {
+	public WebhookRegistrationDataList $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -84,12 +84,12 @@ public class WebhookRegistrationList {
 		this.$type = $type;
 	}
 
-	public WebhookRegistrationList items(List<WebhookRegistration> items) {
+	public WebhookRegistrationDataList items(List<WebhookRegistrationData> items) {
 		this.items = items;
 		return this;
 	}
 
-	public WebhookRegistrationList addItemsItem(WebhookRegistration itemsItem) {
+	public WebhookRegistrationDataList addItemsItem(WebhookRegistrationData itemsItem) {
 		if (this.items == null) {
 			this.items = new ArrayList<>();
 		}
@@ -103,11 +103,11 @@ public class WebhookRegistrationList {
 	 * @return items
 	 **/
 	@ApiModelProperty(value = "The list of mapped entities")
-	public List<WebhookRegistration> getItems() {
+	public List<WebhookRegistrationData> getItems() {
 		return items;
 	}
 
-	public void setItems(List<WebhookRegistration> items) {
+	public void setItems(List<WebhookRegistrationData> items) {
 		this.items = items;
 	}
 
@@ -119,9 +119,9 @@ public class WebhookRegistrationList {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		WebhookRegistrationList webhookRegistrationList = (WebhookRegistrationList) o;
-		return Objects.equals(this.$type, webhookRegistrationList.$type) &&
-				Objects.equals(this.items, webhookRegistrationList.items);
+		WebhookRegistrationDataList webhookRegistrationDataList = (WebhookRegistrationDataList) o;
+		return Objects.equals(this.$type, webhookRegistrationDataList.$type) &&
+				Objects.equals(this.items, webhookRegistrationDataList.items);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class WebhookRegistrationList {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class WebhookRegistrationList {\n");
+		sb.append("class WebhookRegistrationDataList {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    items: ").append(toIndentedString(items)).append("\n");
 		sb.append("}");

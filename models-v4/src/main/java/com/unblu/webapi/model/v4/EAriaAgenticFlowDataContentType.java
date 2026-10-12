@@ -27,7 +27,12 @@ public enum EAriaAgenticFlowDataContentType {
 	/**
 	 * CUSTOM_ACTION: The content describes a custom action the bot can invoke
 	 */
-	CUSTOM_ACTION("CUSTOM_ACTION");
+	CUSTOM_ACTION("CUSTOM_ACTION"),
+
+	/**
+	 * WEBHOOK: The content describes a Webhook
+	 */
+	WEBHOOK("WEBHOOK");
 
 	private String value;
 

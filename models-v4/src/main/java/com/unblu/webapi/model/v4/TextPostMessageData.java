@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TextPostMessageData.JSON_PROPERTY_TYPE,
 	TextPostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	TextPostMessageData.JSON_PROPERTY_LOCALE,
+	TextPostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	TextPostMessageData.JSON_PROPERTY_TEXT,
 	TextPostMessageData.JSON_PROPERTY_TEXT_TYPE,
 	TextPostMessageData.JSON_PROPERTY_QUICK_REPLIES,
@@ -79,6 +80,10 @@ public class TextPostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -173,6 +178,25 @@ public class TextPostMessageData implements PostMessageData {
 		this.locale = locale;
 	}
 
+	public TextPostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+	}
+
 	public TextPostMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -251,6 +275,7 @@ public class TextPostMessageData implements PostMessageData {
 				Objects.equals(this.type, textPostMessageData.type) &&
 				Objects.equals(this.fallbackText, textPostMessageData.fallbackText) &&
 				Objects.equals(this.locale, textPostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, textPostMessageData.contentOrigin) &&
 				Objects.equals(this.text, textPostMessageData.text) &&
 				Objects.equals(this.textType, textPostMessageData.textType) &&
 				Objects.equals(this.quickReplies, textPostMessageData.quickReplies);
@@ -258,7 +283,7 @@ public class TextPostMessageData implements PostMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, text, textType, quickReplies);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, text, textType, quickReplies);
 	}
 
 	@Override
@@ -269,6 +294,7 @@ public class TextPostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    quickReplies: ").append(toIndentedString(quickReplies)).append("\n");

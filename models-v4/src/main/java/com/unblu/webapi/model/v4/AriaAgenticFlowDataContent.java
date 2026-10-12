@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = AriaMultiflowAgenticFlowDataContent.class, name = "MULTIFLOW"),
 	@JsonSubTypes.Type(value = AriaSingleFlowAgenticFlowDataContent.class, name = "SINGLE_FLOW"),
 	@JsonSubTypes.Type(value = AriaSuggestionSourceAgenticFlowDataContent.class, name = "SUGGESTION_SOURCE"),
+	@JsonSubTypes.Type(value = AriaWebhookAgenticFlowDataContent.class, name = "WEBHOOK"),
 })
 public interface AriaAgenticFlowDataContent {
 	void setType(EAriaAgenticFlowDataContentType type);

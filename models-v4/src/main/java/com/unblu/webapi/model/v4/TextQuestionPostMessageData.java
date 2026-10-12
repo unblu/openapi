@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TextQuestionPostMessageData.JSON_PROPERTY_TYPE,
 	TextQuestionPostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	TextQuestionPostMessageData.JSON_PROPERTY_LOCALE,
+	TextQuestionPostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	TextQuestionPostMessageData.JSON_PROPERTY_TEXT,
 	TextQuestionPostMessageData.JSON_PROPERTY_TEXT_TYPE,
 	TextQuestionPostMessageData.JSON_PROPERTY_QUESTION_TYPE,
@@ -86,6 +87,10 @@ public class TextQuestionPostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -206,6 +211,25 @@ public class TextQuestionPostMessageData implements PostMessageData {
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public TextQuestionPostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
 	}
 
 	public TextQuestionPostMessageData text(String text) {
@@ -411,6 +435,7 @@ public class TextQuestionPostMessageData implements PostMessageData {
 				Objects.equals(this.type, textQuestionPostMessageData.type) &&
 				Objects.equals(this.fallbackText, textQuestionPostMessageData.fallbackText) &&
 				Objects.equals(this.locale, textQuestionPostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, textQuestionPostMessageData.contentOrigin) &&
 				Objects.equals(this.text, textQuestionPostMessageData.text) &&
 				Objects.equals(this.textType, textQuestionPostMessageData.textType) &&
 				Objects.equals(this.questionType, textQuestionPostMessageData.questionType) &&
@@ -425,7 +450,7 @@ public class TextQuestionPostMessageData implements PostMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, text, textType, questionType, hint, minCharacters, maxCharacters, additionalRegex, declinable, declineLabel, declineValue);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, text, textType, questionType, hint, minCharacters, maxCharacters, additionalRegex, declinable, declineLabel, declineValue);
 	}
 
 	@Override
@@ -436,6 +461,7 @@ public class TextQuestionPostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    questionType: ").append(toIndentedString(questionType)).append("\n");

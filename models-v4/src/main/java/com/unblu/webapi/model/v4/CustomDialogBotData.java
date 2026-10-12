@@ -48,6 +48,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
 	CustomDialogBotData.JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY,
 	CustomDialogBotData.JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL,
+	CustomDialogBotData.JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN,
 	CustomDialogBotData.JSON_PROPERTY_WEBHOOK_STATUS,
 	CustomDialogBotData.JSON_PROPERTY_WEBHOOK_ENDPOINT,
 	CustomDialogBotData.JSON_PROPERTY_OUTBOUND_TIMEOUT_MILLIS,
@@ -199,6 +200,10 @@ public class CustomDialogBotData implements DialogBotData {
 	public static final String JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL = "thinkingIndicatorTextCycleInterval";
 	@JsonProperty(JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL)
 	private Integer thinkingIndicatorTextCycleInterval;
+
+	public static final String JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN = "defaultContentOrigin";
+	@JsonProperty(JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN)
+	private EMessageContentOrigin defaultContentOrigin;
 
 	public static final String JSON_PROPERTY_WEBHOOK_STATUS = "webhookStatus";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_STATUS)
@@ -765,6 +770,25 @@ public class CustomDialogBotData implements DialogBotData {
 		this.thinkingIndicatorTextCycleInterval = thinkingIndicatorTextCycleInterval;
 	}
 
+	public CustomDialogBotData defaultContentOrigin(EMessageContentOrigin defaultContentOrigin) {
+		this.defaultContentOrigin = defaultContentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get defaultContentOrigin
+	 * 
+	 * @return defaultContentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getDefaultContentOrigin() {
+		return defaultContentOrigin;
+	}
+
+	public void setDefaultContentOrigin(EMessageContentOrigin defaultContentOrigin) {
+		this.defaultContentOrigin = defaultContentOrigin;
+	}
+
 	public CustomDialogBotData webhookStatus(ERegistrationStatus webhookStatus) {
 		this.webhookStatus = webhookStatus;
 		return this;
@@ -980,6 +1004,7 @@ public class CustomDialogBotData implements DialogBotData {
 				Objects.equals(this.maxThinkingIndicatorTime, customDialogBotData.maxThinkingIndicatorTime) &&
 				Objects.equals(this.autoStartThinkingIndicatorDelay, customDialogBotData.autoStartThinkingIndicatorDelay) &&
 				Objects.equals(this.thinkingIndicatorTextCycleInterval, customDialogBotData.thinkingIndicatorTextCycleInterval) &&
+				Objects.equals(this.defaultContentOrigin, customDialogBotData.defaultContentOrigin) &&
 				Objects.equals(this.webhookStatus, customDialogBotData.webhookStatus) &&
 				Objects.equals(this.webhookEndpoint, customDialogBotData.webhookEndpoint) &&
 				Objects.equals(this.outboundTimeoutMillis, customDialogBotData.outboundTimeoutMillis) &&
@@ -992,7 +1017,7 @@ public class CustomDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, webhookStatus, webhookEndpoint, outboundTimeoutMillis, webhookApiVersion, webhookSecret, messageStateHandledExternally, automaticTypingStateHandlingEnabled, optionalOutboundEvents);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, webhookStatus, webhookEndpoint, outboundTimeoutMillis, webhookApiVersion, webhookSecret, messageStateHandledExternally, automaticTypingStateHandlingEnabled, optionalOutboundEvents);
 	}
 
 	@Override
@@ -1026,6 +1051,7 @@ public class CustomDialogBotData implements DialogBotData {
 		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");
 		sb.append("    autoStartThinkingIndicatorDelay: ").append(toIndentedString(autoStartThinkingIndicatorDelay)).append("\n");
 		sb.append("    thinkingIndicatorTextCycleInterval: ").append(toIndentedString(thinkingIndicatorTextCycleInterval)).append("\n");
+		sb.append("    defaultContentOrigin: ").append(toIndentedString(defaultContentOrigin)).append("\n");
 		sb.append("    webhookStatus: ").append(toIndentedString(webhookStatus)).append("\n");
 		sb.append("    webhookEndpoint: ").append(toIndentedString(webhookEndpoint)).append("\n");
 		sb.append("    outboundTimeoutMillis: ").append(toIndentedString(outboundTimeoutMillis)).append("\n");

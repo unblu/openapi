@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ReplyPostMessageData.JSON_PROPERTY_TYPE,
 	ReplyPostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	ReplyPostMessageData.JSON_PROPERTY_LOCALE,
+	ReplyPostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	ReplyPostMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	ReplyPostMessageData.JSON_PROPERTY_VALUE,
 })
@@ -76,6 +77,10 @@ public class ReplyPostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
@@ -166,6 +171,25 @@ public class ReplyPostMessageData implements PostMessageData {
 		this.locale = locale;
 	}
 
+	public ReplyPostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+	}
+
 	public ReplyPostMessageData questionMessageId(String questionMessageId) {
 		this.questionMessageId = questionMessageId;
 		return this;
@@ -217,13 +241,14 @@ public class ReplyPostMessageData implements PostMessageData {
 				Objects.equals(this.type, replyPostMessageData.type) &&
 				Objects.equals(this.fallbackText, replyPostMessageData.fallbackText) &&
 				Objects.equals(this.locale, replyPostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, replyPostMessageData.contentOrigin) &&
 				Objects.equals(this.questionMessageId, replyPostMessageData.questionMessageId) &&
 				Objects.equals(this.value, replyPostMessageData.value);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, questionMessageId, value);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, questionMessageId, value);
 	}
 
 	@Override
@@ -234,6 +259,7 @@ public class ReplyPostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("}");

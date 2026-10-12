@@ -1,5 +1,7 @@
 package com.unblu.webapi.model.v4;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -32,5 +34,11 @@ public interface AgentTargetData {
 	ExpandableField<Avatar> getAvatar();
 
 	AgentTargetData avatar(ExpandableField<Avatar> avatar);
+
+	void setAvatarUrls(List<AvatarUrl> avatarUrls);
+
+	List<AvatarUrl> getAvatarUrls();
+
+	AgentTargetData avatarUrls(List<AvatarUrl> avatarUrls);
 
 }

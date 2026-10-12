@@ -50,6 +50,7 @@ import io.swagger.annotations.ApiModelProperty;
 	PersonData.JSON_PROPERTY_ARCHIVED,
 	PersonData.JSON_PROPERTY_LINKS,
 	PersonData.JSON_PROPERTY_AVATAR,
+	PersonData.JSON_PROPERTY_AVATAR_URLS,
 	PersonData.JSON_PROPERTY_METADATA,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -194,6 +195,10 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
 	private ExpandableField<Avatar> avatar = null;
+
+	public static final String JSON_PROPERTY_AVATAR_URLS = "avatarUrls";
+	@JsonProperty(JSON_PROPERTY_AVATAR_URLS)
+	private List<AvatarUrl> avatarUrls = null;
 
 	public static final String JSON_PROPERTY_METADATA = "metadata";
 	@JsonProperty(JSON_PROPERTY_METADATA)
@@ -457,11 +462,11 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	}
 
 	/**
-	 * The person&#39;s display name as displayed to agents. This is read-only information set by the Collaboration Server.
+	 * The person&#39;s display name as displayed to agents. This is read-only information set by Unblu.
 	 * 
 	 * @return displayNameForAgent
 	 **/
-	@ApiModelProperty(value = "The person's display name as displayed to agents. This is read-only information set by the Collaboration Server.")
+	@ApiModelProperty(value = "The person's display name as displayed to agents. This is read-only information set by Unblu.")
 	public String getDisplayNameForAgent() {
 		return displayNameForAgent;
 	}
@@ -476,11 +481,11 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 	}
 
 	/**
-	 * The person&#39;s display name as displayed to visitors. This is read-only information set by the Collaboration Server.
+	 * The person&#39;s display name as displayed to visitors. This is read-only information set by Unblu.
 	 * 
 	 * @return displayNameForVisitor
 	 **/
-	@ApiModelProperty(value = "The person's display name as displayed to visitors. This is read-only information set by the Collaboration Server.")
+	@ApiModelProperty(value = "The person's display name as displayed to visitors. This is read-only information set by Unblu.")
 	public String getDisplayNameForVisitor() {
 		return displayNameForVisitor;
 	}
@@ -733,6 +738,37 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		this.avatar = avatar;
 	}
 
+	public PersonData avatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+		return this;
+	}
+
+	public PersonData addAvatarUrlsItem(AvatarUrl avatarUrlsItem) {
+		if (this.avatarUrls == null) {
+			this.avatarUrls = new ArrayList<>();
+		}
+		this.avatarUrls.add(avatarUrlsItem);
+		return this;
+	}
+
+	/**
+	 * URLs of the person&#39;s avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.&lt;br&gt; Fetching an
+	 * avatar image requires no authentication.&lt;br&gt; This is a read-only property. Any value provided in create or update operations will be ignored.&lt;br&gt;
+	 * Only the person&#39;s own avatar is considered: this property is &#x60;null&#x60; when the person has no avatar of their own, even when the Agent Desk
+	 * displays an inherited team or account avatar for them.&lt;br&gt; Each URL is absolute when the server is configured with a base URL for its entry path, and
+	 * relative to the server root otherwise.
+	 * 
+	 * @return avatarUrls
+	 **/
+	@ApiModelProperty(value = "URLs of the person's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> Only the person's own avatar is considered: this property is `null` when the person has no avatar of their own, even when the Agent Desk displays an inherited team or account avatar for them.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise.")
+	public List<AvatarUrl> getAvatarUrls() {
+		return avatarUrls;
+	}
+
+	public void setAvatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+	}
+
 	public PersonData metadata(Map<String, String> metadata) {
 		this.metadata = metadata;
 		return this;
@@ -797,12 +833,13 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.archived, personData.archived) &&
 				Objects.equals(this.links, personData.links) &&
 				Objects.equals(this.avatar, personData.avatar) &&
+				Objects.equals(this.avatarUrls, personData.avatarUrls) &&
 				Objects.equals(this.metadata, personData.metadata);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, archived, links, avatar, metadata);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, archived, links, avatar, avatarUrls, metadata);
 	}
 
 	@Override
@@ -836,6 +873,7 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    archived: ").append(toIndentedString(archived)).append("\n");
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+		sb.append("    avatarUrls: ").append(toIndentedString(avatarUrls)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("}");
 		return sb.toString();

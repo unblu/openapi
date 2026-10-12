@@ -1,7 +1,9 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -27,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TeamData.JSON_PROPERTY_DISPLAY_NAME,
 	TeamData.JSON_PROPERTY_DISPLAY_NAME_TRANSLATIONS,
 	TeamData.JSON_PROPERTY_AVATAR,
+	TeamData.JSON_PROPERTY_AVATAR_URLS,
 	TeamData.JSON_PROPERTY_PARENT_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -87,6 +90,10 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
 	private ExpandableField<Avatar> avatar = null;
+
+	public static final String JSON_PROPERTY_AVATAR_URLS = "avatarUrls";
+	@JsonProperty(JSON_PROPERTY_AVATAR_URLS)
+	private List<AvatarUrl> avatarUrls = null;
 
 	public static final String JSON_PROPERTY_PARENT_ID = "parentId";
 	@JsonProperty(JSON_PROPERTY_PARENT_ID)
@@ -214,6 +221,36 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 		this.avatar = avatar;
 	}
 
+	public TeamData avatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+		return this;
+	}
+
+	public TeamData addAvatarUrlsItem(AvatarUrl avatarUrlsItem) {
+		if (this.avatarUrls == null) {
+			this.avatarUrls = new ArrayList<>();
+		}
+		this.avatarUrls.add(avatarUrlsItem);
+		return this;
+	}
+
+	/**
+	 * URLs of the team&#39;s avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.&lt;br&gt; Fetching an avatar
+	 * image requires no authentication.&lt;br&gt; This is a read-only property. Any value provided in create or update operations will be ignored.&lt;br&gt; This
+	 * property is &#x60;null&#x60; when the team has no avatar.&lt;br&gt; Each URL is absolute when the server is configured with a base URL for its entry path,
+	 * and relative to the server root otherwise.
+	 * 
+	 * @return avatarUrls
+	 **/
+	@ApiModelProperty(value = "URLs of the team's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the team has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise.")
+	public List<AvatarUrl> getAvatarUrls() {
+		return avatarUrls;
+	}
+
+	public void setAvatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+	}
+
 	public TeamData parentId(String parentId) {
 		this.parentId = parentId;
 		return this;
@@ -249,12 +286,13 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 				Objects.equals(this.displayName, teamData.displayName) &&
 				Objects.equals(this.displayNameTranslations, teamData.displayNameTranslations) &&
 				Objects.equals(this.avatar, teamData.avatar) &&
+				Objects.equals(this.avatarUrls, teamData.avatarUrls) &&
 				Objects.equals(this.parentId, teamData.parentId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, displayName, displayNameTranslations, avatar, parentId);
+		return Objects.hash($type, id, accountId, displayName, displayNameTranslations, avatar, avatarUrls, parentId);
 	}
 
 	@Override
@@ -267,6 +305,7 @@ public class TeamData implements ConversationRecipientData, AgentTargetData {
 		sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
 		sb.append("    displayNameTranslations: ").append(toIndentedString(displayNameTranslations)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+		sb.append("    avatarUrls: ").append(toIndentedString(avatarUrls)).append("\n");
 		sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
 		sb.append("}");
 		return sb.toString();

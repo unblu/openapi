@@ -190,11 +190,11 @@ public class ConversationCreationData {
 
 	/**
 	 * Topic of the conversation. Optional unless the initial engagement type is &#x60;EInitialEngagementType.SCHEDULED_CONVERSATION&#x60;, in which case it&#39;s
-	 * mandatory.
+	 * mandatory. Must not be longer than 200 characters.
 	 * 
 	 * @return topic
 	 **/
-	@ApiModelProperty(value = "Topic of the conversation. Optional unless the initial engagement type is `EInitialEngagementType.SCHEDULED_CONVERSATION`, in which case it's mandatory.")
+	@ApiModelProperty(value = "Topic of the conversation. Optional unless the initial engagement type is `EInitialEngagementType.SCHEDULED_CONVERSATION`, in which case it's mandatory. Must not be longer than 200 characters.")
 	public String getTopic() {
 		return topic;
 	}

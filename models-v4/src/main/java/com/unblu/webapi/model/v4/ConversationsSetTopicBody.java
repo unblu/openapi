@@ -31,11 +31,11 @@ public class ConversationsSetTopicBody {
 	}
 
 	/**
-	 * the new topic
+	 * the new topic. Must not be longer than 200 characters.
 	 * 
 	 * @return topic
 	 **/
-	@ApiModelProperty(value = "the new topic")
+	@ApiModelProperty(value = "the new topic. Must not be longer than 200 characters.")
 	public String getTopic() {
 		return topic;
 	}

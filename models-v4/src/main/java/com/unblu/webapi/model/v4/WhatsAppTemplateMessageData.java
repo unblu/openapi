@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	WhatsAppTemplateMessageData.JSON_PROPERTY_SOURCE_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_INTERNAL,
+	WhatsAppTemplateMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
@@ -145,6 +146,10 @@ public class WhatsAppTemplateMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
@@ -498,6 +503,25 @@ public class WhatsAppTemplateMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public WhatsAppTemplateMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+	}
+
 	public WhatsAppTemplateMessageData replyToMessageId(String replyToMessageId) {
 		this.replyToMessageId = replyToMessageId;
 		return this;
@@ -703,6 +727,7 @@ public class WhatsAppTemplateMessageData implements MessageData {
 				Objects.equals(this.sourceId, whatsAppTemplateMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, whatsAppTemplateMessageData.botThreadId) &&
 				Objects.equals(this.internal, whatsAppTemplateMessageData.internal) &&
+				Objects.equals(this.contentOrigin, whatsAppTemplateMessageData.contentOrigin) &&
 				Objects.equals(this.replyToMessageId, whatsAppTemplateMessageData.replyToMessageId) &&
 				Objects.equals(this.externalMessageId, whatsAppTemplateMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, whatsAppTemplateMessageData.replyToExternalMessageId) &&
@@ -716,7 +741,7 @@ public class WhatsAppTemplateMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, templateId, components);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, templateId, components);
 	}
 
 	@Override
@@ -739,6 +764,7 @@ public class WhatsAppTemplateMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");

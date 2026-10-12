@@ -112,11 +112,11 @@ public class ApiSecretCreateBody {
 	}
 
 	/**
-	 * Expiration time of the API secret. The minimum value is 1 minute, the maximum value is 2 years in the future.
+	 * Expiration time of the API secret. The minimum value is 1 minute, the maximum value is 2 years in the future. Mandatory.
 	 * 
 	 * @return expirationTimestamp
 	 **/
-	@ApiModelProperty(value = "Expiration time of the API secret. The minimum value is 1 minute, the maximum value is 2 years in the future.")
+	@ApiModelProperty(value = "Expiration time of the API secret. The minimum value is 1 minute, the maximum value is 2 years in the future. Mandatory.")
 	public Long getExpirationTimestamp() {
 		return expirationTimestamp;
 	}

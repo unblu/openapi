@@ -1,5 +1,7 @@
 package com.unblu.webapi.model.v4;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -28,5 +30,11 @@ public interface ConversationRecipientData {
 	ExpandableField<Avatar> getAvatar();
 
 	ConversationRecipientData avatar(ExpandableField<Avatar> avatar);
+
+	void setAvatarUrls(List<AvatarUrl> avatarUrls);
+
+	List<AvatarUrl> getAvatarUrls();
+
+	ConversationRecipientData avatarUrls(List<AvatarUrl> avatarUrls);
 
 }

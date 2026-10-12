@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CardPostMessageData.JSON_PROPERTY_TYPE,
 	CardPostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	CardPostMessageData.JSON_PROPERTY_LOCALE,
+	CardPostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	CardPostMessageData.JSON_PROPERTY_IMAGE_URL,
 	CardPostMessageData.JSON_PROPERTY_IMAGE_ALT_TEXT,
 	CardPostMessageData.JSON_PROPERTY_TITLE,
@@ -84,6 +85,10 @@ public class CardPostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_IMAGE_URL = "imageUrl";
 	@JsonProperty(JSON_PROPERTY_IMAGE_URL)
@@ -192,6 +197,25 @@ public class CardPostMessageData implements PostMessageData {
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public CardPostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
 	}
 
 	public CardPostMessageData imageUrl(String imageUrl) {
@@ -358,6 +382,7 @@ public class CardPostMessageData implements PostMessageData {
 				Objects.equals(this.type, cardPostMessageData.type) &&
 				Objects.equals(this.fallbackText, cardPostMessageData.fallbackText) &&
 				Objects.equals(this.locale, cardPostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, cardPostMessageData.contentOrigin) &&
 				Objects.equals(this.imageUrl, cardPostMessageData.imageUrl) &&
 				Objects.equals(this.imageAltText, cardPostMessageData.imageAltText) &&
 				Objects.equals(this.title, cardPostMessageData.title) &&
@@ -369,7 +394,7 @@ public class CardPostMessageData implements PostMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies);
 	}
 
 	@Override
@@ -380,6 +405,7 @@ public class CardPostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
 		sb.append("    imageAltText: ").append(toIndentedString(imageAltText)).append("\n");
 		sb.append("    title: ").append(toIndentedString(title)).append("\n");

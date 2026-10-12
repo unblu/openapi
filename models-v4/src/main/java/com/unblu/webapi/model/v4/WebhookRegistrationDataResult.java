@@ -12,27 +12,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Container to return list of webhook registrations
+ * WebhookRegistrationDataResult
  */
-@ApiModel(description = "Container to return list of webhook registrations")
 
 @JsonPropertyOrder({
-	WebhookRegistrationResult.JSON_PROPERTY_$_TYPE,
-	WebhookRegistrationResult.JSON_PROPERTY_HAS_MORE_ITEMS,
-	WebhookRegistrationResult.JSON_PROPERTY_NEXT_OFFSET,
-	WebhookRegistrationResult.JSON_PROPERTY_ITEMS,
+	WebhookRegistrationDataResult.JSON_PROPERTY_$_TYPE,
+	WebhookRegistrationDataResult.JSON_PROPERTY_HAS_MORE_ITEMS,
+	WebhookRegistrationDataResult.JSON_PROPERTY_NEXT_OFFSET,
+	WebhookRegistrationDataResult.JSON_PROPERTY_ITEMS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class WebhookRegistrationResult {
+public class WebhookRegistrationDataResult {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		WEBHOOKREGISTRATIONRESULT("WebhookRegistrationResult");
+		WEBHOOKREGISTRATIONDATARESULT("WebhookRegistrationDataResult");
 
 		private String value;
 
@@ -57,13 +55,13 @@ public class WebhookRegistrationResult {
 					return b;
 				}
 			}
-			return TypeEnum.WEBHOOKREGISTRATIONRESULT;
+			return TypeEnum.WEBHOOKREGISTRATIONDATARESULT;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.WEBHOOKREGISTRATIONRESULT;
+	private TypeEnum $type = TypeEnum.WEBHOOKREGISTRATIONDATARESULT;
 
 	public static final String JSON_PROPERTY_HAS_MORE_ITEMS = "hasMoreItems";
 	@JsonProperty(JSON_PROPERTY_HAS_MORE_ITEMS)
@@ -75,9 +73,9 @@ public class WebhookRegistrationResult {
 
 	public static final String JSON_PROPERTY_ITEMS = "items";
 	@JsonProperty(JSON_PROPERTY_ITEMS)
-	private List<WebhookRegistration> items = null;
+	private List<WebhookRegistrationData> items = null;
 
-	public WebhookRegistrationResult $type(TypeEnum $type) {
+	public WebhookRegistrationDataResult $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -96,7 +94,7 @@ public class WebhookRegistrationResult {
 		this.$type = $type;
 	}
 
-	public WebhookRegistrationResult hasMoreItems(Boolean hasMoreItems) {
+	public WebhookRegistrationDataResult hasMoreItems(Boolean hasMoreItems) {
 		this.hasMoreItems = hasMoreItems;
 		return this;
 	}
@@ -115,7 +113,7 @@ public class WebhookRegistrationResult {
 		this.hasMoreItems = hasMoreItems;
 	}
 
-	public WebhookRegistrationResult nextOffset(Integer nextOffset) {
+	public WebhookRegistrationDataResult nextOffset(Integer nextOffset) {
 		this.nextOffset = nextOffset;
 		return this;
 	}
@@ -134,12 +132,12 @@ public class WebhookRegistrationResult {
 		this.nextOffset = nextOffset;
 	}
 
-	public WebhookRegistrationResult items(List<WebhookRegistration> items) {
+	public WebhookRegistrationDataResult items(List<WebhookRegistrationData> items) {
 		this.items = items;
 		return this;
 	}
 
-	public WebhookRegistrationResult addItemsItem(WebhookRegistration itemsItem) {
+	public WebhookRegistrationDataResult addItemsItem(WebhookRegistrationData itemsItem) {
 		if (this.items == null) {
 			this.items = new ArrayList<>();
 		}
@@ -153,11 +151,11 @@ public class WebhookRegistrationResult {
 	 * @return items
 	 **/
 	@ApiModelProperty(value = "The returned list of entities")
-	public List<WebhookRegistration> getItems() {
+	public List<WebhookRegistrationData> getItems() {
 		return items;
 	}
 
-	public void setItems(List<WebhookRegistration> items) {
+	public void setItems(List<WebhookRegistrationData> items) {
 		this.items = items;
 	}
 
@@ -169,11 +167,11 @@ public class WebhookRegistrationResult {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		WebhookRegistrationResult webhookRegistrationResult = (WebhookRegistrationResult) o;
-		return Objects.equals(this.$type, webhookRegistrationResult.$type) &&
-				Objects.equals(this.hasMoreItems, webhookRegistrationResult.hasMoreItems) &&
-				Objects.equals(this.nextOffset, webhookRegistrationResult.nextOffset) &&
-				Objects.equals(this.items, webhookRegistrationResult.items);
+		WebhookRegistrationDataResult webhookRegistrationDataResult = (WebhookRegistrationDataResult) o;
+		return Objects.equals(this.$type, webhookRegistrationDataResult.$type) &&
+				Objects.equals(this.hasMoreItems, webhookRegistrationDataResult.hasMoreItems) &&
+				Objects.equals(this.nextOffset, webhookRegistrationDataResult.nextOffset) &&
+				Objects.equals(this.items, webhookRegistrationDataResult.items);
 	}
 
 	@Override
@@ -184,7 +182,7 @@ public class WebhookRegistrationResult {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class WebhookRegistrationResult {\n");
+		sb.append("class WebhookRegistrationDataResult {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    hasMoreItems: ").append(toIndentedString(hasMoreItems)).append("\n");
 		sb.append("    nextOffset: ").append(toIndentedString(nextOffset)).append("\n");

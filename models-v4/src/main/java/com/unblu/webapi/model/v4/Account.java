@@ -1,7 +1,9 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -28,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 	Account.JSON_PROPERTY_VERSION,
 	Account.JSON_PROPERTY_NAME,
 	Account.JSON_PROPERTY_AVATAR,
+	Account.JSON_PROPERTY_AVATAR_URLS,
 	Account.JSON_PROPERTY_TRANSLATIONS,
 	Account.JSON_PROPERTY_CONFIGURATION,
 	Account.JSON_PROPERTY_METADATA,
@@ -95,6 +98,10 @@ public class Account {
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
 	private ExpandableField<Avatar> avatar = null;
+
+	public static final String JSON_PROPERTY_AVATAR_URLS = "avatarUrls";
+	@JsonProperty(JSON_PROPERTY_AVATAR_URLS)
+	private List<AvatarUrl> avatarUrls = null;
 
 	public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
 	@JsonProperty(JSON_PROPERTY_TRANSLATIONS)
@@ -249,6 +256,36 @@ public class Account {
 		this.avatar = avatar;
 	}
 
+	public Account avatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+		return this;
+	}
+
+	public Account addAvatarUrlsItem(AvatarUrl avatarUrlsItem) {
+		if (this.avatarUrls == null) {
+			this.avatarUrls = new ArrayList<>();
+		}
+		this.avatarUrls.add(avatarUrlsItem);
+		return this;
+	}
+
+	/**
+	 * URLs of the account&#39;s avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.&lt;br&gt; Fetching an
+	 * avatar image requires no authentication.&lt;br&gt; This is a read-only property. Any value provided in create or update operations will be ignored.&lt;br&gt;
+	 * This property is &#x60;null&#x60; when the account has no avatar.&lt;br&gt; Each URL is absolute when the server is configured with a base URL for its entry
+	 * path, and relative to the server root otherwise.
+	 * 
+	 * @return avatarUrls
+	 **/
+	@ApiModelProperty(value = "URLs of the account's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the account has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise.")
+	public List<AvatarUrl> getAvatarUrls() {
+		return avatarUrls;
+	}
+
+	public void setAvatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+	}
+
 	public Account translations(Map<String, AccountTranslation> translations) {
 		this.translations = translations;
 		return this;
@@ -376,6 +413,7 @@ public class Account {
 				Objects.equals(this.version, account.version) &&
 				Objects.equals(this.name, account.name) &&
 				Objects.equals(this.avatar, account.avatar) &&
+				Objects.equals(this.avatarUrls, account.avatarUrls) &&
 				Objects.equals(this.translations, account.translations) &&
 				Objects.equals(this._configuration, account._configuration) &&
 				Objects.equals(this.metadata, account.metadata) &&
@@ -384,7 +422,7 @@ public class Account {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, name, avatar, translations, _configuration, metadata, text);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, name, avatar, avatarUrls, translations, _configuration, metadata, text);
 	}
 
 	@Override
@@ -398,6 +436,7 @@ public class Account {
 		sb.append("    version: ").append(toIndentedString(version)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+		sb.append("    avatarUrls: ").append(toIndentedString(avatarUrls)).append("\n");
 		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");

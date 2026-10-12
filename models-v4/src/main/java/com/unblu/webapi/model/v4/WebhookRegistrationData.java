@@ -21,29 +21,31 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Model of a webhook registration. Registered webhooks for certain events are stored inside this model.")
 
 @JsonPropertyOrder({
-	WebhookRegistration.JSON_PROPERTY_$_TYPE,
-	WebhookRegistration.JSON_PROPERTY_ID,
-	WebhookRegistration.JSON_PROPERTY_CREATION_TIMESTAMP,
-	WebhookRegistration.JSON_PROPERTY_MODIFICATION_TIMESTAMP,
-	WebhookRegistration.JSON_PROPERTY_VERSION,
-	WebhookRegistration.JSON_PROPERTY_ACCOUNT_ID,
-	WebhookRegistration.JSON_PROPERTY_NAME,
-	WebhookRegistration.JSON_PROPERTY_STATUS,
-	WebhookRegistration.JSON_PROPERTY_DESCRIPTION,
-	WebhookRegistration.JSON_PROPERTY_ENDPOINT,
-	WebhookRegistration.JSON_PROPERTY_API_VERSION,
-	WebhookRegistration.JSON_PROPERTY_SECRET,
-	WebhookRegistration.JSON_PROPERTY_FILTERS,
-	WebhookRegistration.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
-	WebhookRegistration.JSON_PROPERTY_EVENTS,
+	WebhookRegistrationData.JSON_PROPERTY_$_TYPE,
+	WebhookRegistrationData.JSON_PROPERTY_ID,
+	WebhookRegistrationData.JSON_PROPERTY_CREATION_TIMESTAMP,
+	WebhookRegistrationData.JSON_PROPERTY_MODIFICATION_TIMESTAMP,
+	WebhookRegistrationData.JSON_PROPERTY_VERSION,
+	WebhookRegistrationData.JSON_PROPERTY_ACCOUNT_ID,
+	WebhookRegistrationData.JSON_PROPERTY_NAME,
+	WebhookRegistrationData.JSON_PROPERTY_STATUS,
+	WebhookRegistrationData.JSON_PROPERTY_DESCRIPTION,
+	WebhookRegistrationData.JSON_PROPERTY_ENDPOINT,
+	WebhookRegistrationData.JSON_PROPERTY_API_VERSION,
+	WebhookRegistrationData.JSON_PROPERTY_SECRET,
+	WebhookRegistrationData.JSON_PROPERTY_FILTERS,
+	WebhookRegistrationData.JSON_PROPERTY_EXPIRATION_TIMESTAMP,
+	WebhookRegistrationData.JSON_PROPERTY_EVENTS,
+	WebhookRegistrationData.JSON_PROPERTY_TRIGGER_AGENTIC_FLOW,
+	WebhookRegistrationData.JSON_PROPERTY_AGENTIC_FLOW_DATA,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
-public class WebhookRegistration {
+public class WebhookRegistrationData {
 	/**
 	 * Gets or Sets $type
 	 */
 	public enum TypeEnum {
-		WEBHOOKREGISTRATION("WebhookRegistration");
+		WEBHOOKREGISTRATIONDATA("WebhookRegistrationData");
 
 		private String value;
 
@@ -68,13 +70,13 @@ public class WebhookRegistration {
 					return b;
 				}
 			}
-			return TypeEnum.WEBHOOKREGISTRATION;
+			return TypeEnum.WEBHOOKREGISTRATIONDATA;
 		}
 	}
 
 	public static final String JSON_PROPERTY_$_TYPE = "$_type";
 	@JsonProperty(JSON_PROPERTY_$_TYPE)
-	private TypeEnum $type = TypeEnum.WEBHOOKREGISTRATION;
+	private TypeEnum $type = TypeEnum.WEBHOOKREGISTRATIONDATA;
 
 	public static final String JSON_PROPERTY_ID = "id";
 	@JsonProperty(JSON_PROPERTY_ID)
@@ -132,7 +134,15 @@ public class WebhookRegistration {
 	@JsonProperty(JSON_PROPERTY_EVENTS)
 	private List<String> events = null;
 
-	public WebhookRegistration $type(TypeEnum $type) {
+	public static final String JSON_PROPERTY_TRIGGER_AGENTIC_FLOW = "triggerAgenticFlow";
+	@JsonProperty(JSON_PROPERTY_TRIGGER_AGENTIC_FLOW)
+	private Boolean triggerAgenticFlow;
+
+	public static final String JSON_PROPERTY_AGENTIC_FLOW_DATA = "agenticFlowData";
+	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_DATA)
+	private ExpandableField<AriaAgenticFlowDataContent> agenticFlowData = null;
+
+	public WebhookRegistrationData $type(TypeEnum $type) {
 		this.$type = $type;
 		return this;
 	}
@@ -151,7 +161,7 @@ public class WebhookRegistration {
 		this.$type = $type;
 	}
 
-	public WebhookRegistration id(String id) {
+	public WebhookRegistrationData id(String id) {
 		this.id = id;
 		return this;
 	}
@@ -170,7 +180,7 @@ public class WebhookRegistration {
 		this.id = id;
 	}
 
-	public WebhookRegistration creationTimestamp(Long creationTimestamp) {
+	public WebhookRegistrationData creationTimestamp(Long creationTimestamp) {
 		this.creationTimestamp = creationTimestamp;
 		return this;
 	}
@@ -190,7 +200,7 @@ public class WebhookRegistration {
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public WebhookRegistration modificationTimestamp(Long modificationTimestamp) {
+	public WebhookRegistrationData modificationTimestamp(Long modificationTimestamp) {
 		this.modificationTimestamp = modificationTimestamp;
 		return this;
 	}
@@ -211,7 +221,7 @@ public class WebhookRegistration {
 		this.modificationTimestamp = modificationTimestamp;
 	}
 
-	public WebhookRegistration version(Long version) {
+	public WebhookRegistrationData version(Long version) {
 		this.version = version;
 		return this;
 	}
@@ -231,7 +241,7 @@ public class WebhookRegistration {
 		this.version = version;
 	}
 
-	public WebhookRegistration accountId(String accountId) {
+	public WebhookRegistrationData accountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
@@ -251,17 +261,17 @@ public class WebhookRegistration {
 		this.accountId = accountId;
 	}
 
-	public WebhookRegistration name(String name) {
+	public WebhookRegistrationData name(String name) {
 		this.name = name;
 		return this;
 	}
 
 	/**
-	 * Name of the webhook registration. Maximum length of 250 characters. Can not be omitted.
+	 * Name of the webhook registration. Maximum length of 250 characters. Mandatory.
 	 * 
 	 * @return name
 	 **/
-	@ApiModelProperty(value = "Name of the webhook registration. Maximum length of 250 characters. Can not be omitted.")
+	@ApiModelProperty(value = "Name of the webhook registration. Maximum length of 250 characters. Mandatory.")
 	public String getName() {
 		return name;
 	}
@@ -270,7 +280,7 @@ public class WebhookRegistration {
 		this.name = name;
 	}
 
-	public WebhookRegistration status(ERegistrationStatus status) {
+	public WebhookRegistrationData status(ERegistrationStatus status) {
 		this.status = status;
 		return this;
 	}
@@ -289,17 +299,17 @@ public class WebhookRegistration {
 		this.status = status;
 	}
 
-	public WebhookRegistration description(String description) {
+	public WebhookRegistrationData description(String description) {
 		this.description = description;
 		return this;
 	}
 
 	/**
-	 * Description of the webhook registration. Maximum length of 500 characters. Can be omitted.
+	 * Description of the webhook registration. Maximum length of 500 characters. Optional.
 	 * 
 	 * @return description
 	 **/
-	@ApiModelProperty(value = "Description of the webhook registration. Maximum length of 500 characters. Can be omitted.")
+	@ApiModelProperty(value = "Description of the webhook registration. Maximum length of 500 characters. Optional.")
 	public String getDescription() {
 		return description;
 	}
@@ -308,18 +318,18 @@ public class WebhookRegistration {
 		this.description = description;
 	}
 
-	public WebhookRegistration endpoint(String endpoint) {
+	public WebhookRegistrationData endpoint(String endpoint) {
 		this.endpoint = endpoint;
 		return this;
 	}
 
 	/**
-	 * The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. Can be omitted,
-	 * but should not.
+	 * The endpoint URL of the webhook registration. This is the URL that requests for webhook events are sent to. Maximum length of 4000 characters. Mandatory,
+	 * unless the registration triggers an Aria agentic flow, in which case it must be omitted.
 	 * 
 	 * @return endpoint
 	 **/
-	@ApiModelProperty(value = "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. Can be omitted, but should not.")
+	@ApiModelProperty(value = "The endpoint URL of the webhook registration. This is the URL that requests for webhook events are sent to. Maximum length of 4000 characters. Mandatory, unless the registration triggers an Aria agentic flow, in which case it must be omitted.")
 	public String getEndpoint() {
 		return endpoint;
 	}
@@ -328,7 +338,7 @@ public class WebhookRegistration {
 		this.endpoint = endpoint;
 	}
 
-	public WebhookRegistration apiVersion(EWebApiVersion apiVersion) {
+	public WebhookRegistrationData apiVersion(EWebApiVersion apiVersion) {
 		this.apiVersion = apiVersion;
 		return this;
 	}
@@ -347,17 +357,17 @@ public class WebhookRegistration {
 		this.apiVersion = apiVersion;
 	}
 
-	public WebhookRegistration secret(String secret) {
+	public WebhookRegistrationData secret(String secret) {
 		this.secret = secret;
 		return this;
 	}
 
 	/**
-	 * A secret which is send with each webhook event. Maximum length of 4000 characters. Can be omitted.
+	 * A secret that is sent with each webhook event. Maximum length of 4000 characters. Optional. Prohibited for registrations that trigger an Aria agentic flow.
 	 * 
 	 * @return secret
 	 **/
-	@ApiModelProperty(value = "A secret which is send with each webhook event. Maximum length of 4000 characters. Can be omitted.")
+	@ApiModelProperty(value = "A secret that is sent with each webhook event. Maximum length of 4000 characters. Optional. Prohibited for registrations that trigger an Aria agentic flow.")
 	public String getSecret() {
 		return secret;
 	}
@@ -366,12 +376,12 @@ public class WebhookRegistration {
 		this.secret = secret;
 	}
 
-	public WebhookRegistration filters(List<WebhookRegistrationFilter> filters) {
+	public WebhookRegistrationData filters(List<WebhookRegistrationFilter> filters) {
 		this.filters = filters;
 		return this;
 	}
 
-	public WebhookRegistration addFiltersItem(WebhookRegistrationFilter filtersItem) {
+	public WebhookRegistrationData addFiltersItem(WebhookRegistrationFilter filtersItem) {
 		if (this.filters == null) {
 			this.filters = new ArrayList<>();
 		}
@@ -380,14 +390,13 @@ public class WebhookRegistration {
 	}
 
 	/**
-	 * Defines the filters for the webhook registration. Only events that match all the specified filters will be delivered. Webhook registrations with at least one
-	 * filter defined must also specify an &#x60;expirationTimestamp. Please refer to the documentation of each event to understand the filters they support, as
-	 * each event supports a specific set of filters. If the webhook registration is for multiple events, all the filters you apply must be supported by all the
-	 * events.
+	 * Defines the filters for the webhook registration. Only events that match all the specified filters are delivered. Webhook registrations with at least one
+	 * filter defined must also specify an &#x60;expirationTimestamp&#x60;. Each event supports a specific set of filters; for further information, refer to the
+	 * documentation of each event. If the webhook registration is for multiple events, each event must support all the filters you apply.
 	 * 
 	 * @return filters
 	 **/
-	@ApiModelProperty(value = "Defines the filters for the webhook registration. Only events that match all the specified filters will be delivered. Webhook registrations with at least one filter defined must also specify an `expirationTimestamp. Please refer to the documentation of each event to understand the filters they support, as each event supports a specific set of filters. If the webhook registration is for multiple events, all the filters you apply must be supported by all the events.")
+	@ApiModelProperty(value = "Defines the filters for the webhook registration. Only events that match all the specified filters are delivered. Webhook registrations with at least one filter defined must also specify an `expirationTimestamp`. Each event supports a specific set of filters; for further information, refer to the documentation of each event. If the webhook registration is for multiple events, each event must support all the filters you apply.")
 	public List<WebhookRegistrationFilter> getFilters() {
 		return filters;
 	}
@@ -396,7 +405,7 @@ public class WebhookRegistration {
 		this.filters = filters;
 	}
 
-	public WebhookRegistration expirationTimestamp(Long expirationTimestamp) {
+	public WebhookRegistrationData expirationTimestamp(Long expirationTimestamp) {
 		this.expirationTimestamp = expirationTimestamp;
 		return this;
 	}
@@ -416,12 +425,12 @@ public class WebhookRegistration {
 		this.expirationTimestamp = expirationTimestamp;
 	}
 
-	public WebhookRegistration events(List<String> events) {
+	public WebhookRegistrationData events(List<String> events) {
 		this.events = events;
 		return this;
 	}
 
-	public WebhookRegistration addEventsItem(String eventsItem) {
+	public WebhookRegistrationData addEventsItem(String eventsItem) {
 		if (this.events == null) {
 			this.events = new ArrayList<>();
 		}
@@ -430,17 +439,58 @@ public class WebhookRegistration {
 	}
 
 	/**
-	 * Events for which the webhook endpoint is called, if they occur. Can not be omitted. Check the Webhook Events for possible values.
+	 * Events for which the webhook endpoint is called, if they occur. Mandatory. Check the Webhook Events for possible values.
 	 * 
 	 * @return events
 	 **/
-	@ApiModelProperty(value = "Events for which the webhook endpoint is called, if they occur. Can not be omitted. Check the Webhook Events for possible values.")
+	@ApiModelProperty(value = "Events for which the webhook endpoint is called, if they occur. Mandatory. Check the Webhook Events for possible values.")
 	public List<String> getEvents() {
 		return events;
 	}
 
 	public void setEvents(List<String> events) {
 		this.events = events;
+	}
+
+	public WebhookRegistrationData triggerAgenticFlow(Boolean triggerAgenticFlow) {
+		this.triggerAgenticFlow = triggerAgenticFlow;
+		return this;
+	}
+
+	/**
+	 * Whether this webhook registration triggers an Aria agentic flow rather than call an HTTP endpoint. On create this expresses the caller&#39;s wish: if set to
+	 * &#x60;true&#x60; and no agentic flow data is imported, a new agentic flow is created from the default template. On read this reflects whether an agentic flow
+	 * is currently linked. The value cannot be changed on update.
+	 * 
+	 * @return triggerAgenticFlow
+	 **/
+	@ApiModelProperty(value = "Whether this webhook registration triggers an Aria agentic flow rather than call an HTTP endpoint. On create this expresses the caller's wish: if set to `true` and no agentic flow data is imported, a new agentic flow is created from the default template. On read this reflects whether an agentic flow is currently linked. The value cannot be changed on update.")
+	public Boolean isTriggerAgenticFlow() {
+		return triggerAgenticFlow;
+	}
+
+	public void setTriggerAgenticFlow(Boolean triggerAgenticFlow) {
+		this.triggerAgenticFlow = triggerAgenticFlow;
+	}
+
+	public WebhookRegistrationData agenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
+		return this;
+	}
+
+	/**
+	 * The Aria agentic flow ID, if the registration triggers an Aria agentic flow. Maximum length 36 characters. Managed by the server, never provided by the
+	 * caller. Add &#x60;?expand&#x3D;agenticFlowData&#x60; to the request to replace this ID with the full flow content.
+	 * 
+	 * @return agenticFlowData
+	 **/
+	@ApiModelProperty(value = "The Aria agentic flow ID, if the registration triggers an Aria agentic flow. Maximum length 36 characters. Managed by the server, never provided by the caller. Add `?expand=agenticFlowData` to the request to replace this ID with the full flow content.")
+	public ExpandableField<AriaAgenticFlowDataContent> getAgenticFlowData() {
+		return agenticFlowData;
+	}
+
+	public void setAgenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
+		this.agenticFlowData = agenticFlowData;
 	}
 
 	@Override
@@ -451,33 +501,35 @@ public class WebhookRegistration {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		WebhookRegistration webhookRegistration = (WebhookRegistration) o;
-		return Objects.equals(this.$type, webhookRegistration.$type) &&
-				Objects.equals(this.id, webhookRegistration.id) &&
-				Objects.equals(this.creationTimestamp, webhookRegistration.creationTimestamp) &&
-				Objects.equals(this.modificationTimestamp, webhookRegistration.modificationTimestamp) &&
-				Objects.equals(this.version, webhookRegistration.version) &&
-				Objects.equals(this.accountId, webhookRegistration.accountId) &&
-				Objects.equals(this.name, webhookRegistration.name) &&
-				Objects.equals(this.status, webhookRegistration.status) &&
-				Objects.equals(this.description, webhookRegistration.description) &&
-				Objects.equals(this.endpoint, webhookRegistration.endpoint) &&
-				Objects.equals(this.apiVersion, webhookRegistration.apiVersion) &&
-				Objects.equals(this.secret, webhookRegistration.secret) &&
-				Objects.equals(this.filters, webhookRegistration.filters) &&
-				Objects.equals(this.expirationTimestamp, webhookRegistration.expirationTimestamp) &&
-				Objects.equals(this.events, webhookRegistration.events);
+		WebhookRegistrationData webhookRegistrationData = (WebhookRegistrationData) o;
+		return Objects.equals(this.$type, webhookRegistrationData.$type) &&
+				Objects.equals(this.id, webhookRegistrationData.id) &&
+				Objects.equals(this.creationTimestamp, webhookRegistrationData.creationTimestamp) &&
+				Objects.equals(this.modificationTimestamp, webhookRegistrationData.modificationTimestamp) &&
+				Objects.equals(this.version, webhookRegistrationData.version) &&
+				Objects.equals(this.accountId, webhookRegistrationData.accountId) &&
+				Objects.equals(this.name, webhookRegistrationData.name) &&
+				Objects.equals(this.status, webhookRegistrationData.status) &&
+				Objects.equals(this.description, webhookRegistrationData.description) &&
+				Objects.equals(this.endpoint, webhookRegistrationData.endpoint) &&
+				Objects.equals(this.apiVersion, webhookRegistrationData.apiVersion) &&
+				Objects.equals(this.secret, webhookRegistrationData.secret) &&
+				Objects.equals(this.filters, webhookRegistrationData.filters) &&
+				Objects.equals(this.expirationTimestamp, webhookRegistrationData.expirationTimestamp) &&
+				Objects.equals(this.events, webhookRegistrationData.events) &&
+				Objects.equals(this.triggerAgenticFlow, webhookRegistrationData.triggerAgenticFlow) &&
+				Objects.equals(this.agenticFlowData, webhookRegistrationData.agenticFlowData);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, status, description, endpoint, apiVersion, secret, filters, expirationTimestamp, events);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, status, description, endpoint, apiVersion, secret, filters, expirationTimestamp, events, triggerAgenticFlow, agenticFlowData);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class WebhookRegistration {\n");
+		sb.append("class WebhookRegistrationData {\n");
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
@@ -493,6 +545,8 @@ public class WebhookRegistration {
 		sb.append("    filters: ").append(toIndentedString(filters)).append("\n");
 		sb.append("    expirationTimestamp: ").append(toIndentedString(expirationTimestamp)).append("\n");
 		sb.append("    events: ").append(toIndentedString(events)).append("\n");
+		sb.append("    triggerAgenticFlow: ").append(toIndentedString(triggerAgenticFlow)).append("\n");
+		sb.append("    agenticFlowData: ").append(toIndentedString(agenticFlowData)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

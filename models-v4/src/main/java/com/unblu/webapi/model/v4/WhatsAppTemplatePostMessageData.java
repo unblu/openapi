@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_TYPE,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_LOCALE,
+	WhatsAppTemplatePostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_TEMPLATE_ID,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_TEMPLATE_NAME,
 	WhatsAppTemplatePostMessageData.JSON_PROPERTY_COMPONENTS,
@@ -79,6 +80,10 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_TEMPLATE_ID = "templateId";
 	@JsonProperty(JSON_PROPERTY_TEMPLATE_ID)
@@ -173,6 +178,25 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 		this.locale = locale;
 	}
 
+	public WhatsAppTemplatePostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+	}
+
 	public WhatsAppTemplatePostMessageData templateId(String templateId) {
 		this.templateId = templateId;
 		return this;
@@ -252,6 +276,7 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 				Objects.equals(this.type, whatsAppTemplatePostMessageData.type) &&
 				Objects.equals(this.fallbackText, whatsAppTemplatePostMessageData.fallbackText) &&
 				Objects.equals(this.locale, whatsAppTemplatePostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, whatsAppTemplatePostMessageData.contentOrigin) &&
 				Objects.equals(this.templateId, whatsAppTemplatePostMessageData.templateId) &&
 				Objects.equals(this.templateName, whatsAppTemplatePostMessageData.templateName) &&
 				Objects.equals(this.components, whatsAppTemplatePostMessageData.components);
@@ -259,7 +284,7 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, templateId, templateName, components);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, templateId, templateName, components);
 	}
 
 	@Override
@@ -270,6 +295,7 @@ public class WhatsAppTemplatePostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
 		sb.append("    templateName: ").append(toIndentedString(templateName)).append("\n");
 		sb.append("    components: ").append(toIndentedString(components)).append("\n");

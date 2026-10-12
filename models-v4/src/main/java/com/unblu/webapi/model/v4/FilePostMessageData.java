@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	FilePostMessageData.JSON_PROPERTY_TYPE,
 	FilePostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	FilePostMessageData.JSON_PROPERTY_LOCALE,
+	FilePostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	FilePostMessageData.JSON_PROPERTY_FILE_NAME,
 	FilePostMessageData.JSON_PROPERTY_CAPTION,
 	FilePostMessageData.JSON_PROPERTY_CAPTION_TYPE,
@@ -81,6 +82,10 @@ public class FilePostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_FILE_NAME = "fileName";
 	@JsonProperty(JSON_PROPERTY_FILE_NAME)
@@ -181,6 +186,25 @@ public class FilePostMessageData implements PostMessageData {
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public FilePostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
 	}
 
 	public FilePostMessageData fileName(String fileName) {
@@ -299,6 +323,7 @@ public class FilePostMessageData implements PostMessageData {
 				Objects.equals(this.type, filePostMessageData.type) &&
 				Objects.equals(this.fallbackText, filePostMessageData.fallbackText) &&
 				Objects.equals(this.locale, filePostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, filePostMessageData.contentOrigin) &&
 				Objects.equals(this.fileName, filePostMessageData.fileName) &&
 				Objects.equals(this.caption, filePostMessageData.caption) &&
 				Objects.equals(this.captionType, filePostMessageData.captionType) &&
@@ -308,7 +333,7 @@ public class FilePostMessageData implements PostMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, fileName, caption, captionType, fileData, quickReplies);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, fileName, caption, captionType, fileData, quickReplies);
 	}
 
 	@Override
@@ -319,6 +344,7 @@ public class FilePostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
 		sb.append("    caption: ").append(toIndentedString(caption)).append("\n");
 		sb.append("    captionType: ").append(toIndentedString(captionType)).append("\n");

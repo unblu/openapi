@@ -48,6 +48,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AriaDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
 	AriaDialogBotData.JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY,
 	AriaDialogBotData.JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL,
+	AriaDialogBotData.JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN,
 	AriaDialogBotData.JSON_PROPERTY_AGENTIC_FLOW_DATA,
 	AriaDialogBotData.JSON_PROPERTY_ACTIVE,
 	AriaDialogBotData.JSON_PROPERTY_OUTBOUND_ENDPOINT,
@@ -198,6 +199,10 @@ public class AriaDialogBotData implements DialogBotData {
 	public static final String JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL = "thinkingIndicatorTextCycleInterval";
 	@JsonProperty(JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL)
 	private Integer thinkingIndicatorTextCycleInterval;
+
+	public static final String JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN = "defaultContentOrigin";
+	@JsonProperty(JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN)
+	private EMessageContentOrigin defaultContentOrigin;
 
 	public static final String JSON_PROPERTY_AGENTIC_FLOW_DATA = "agenticFlowData";
 	@JsonProperty(JSON_PROPERTY_AGENTIC_FLOW_DATA)
@@ -760,6 +765,25 @@ public class AriaDialogBotData implements DialogBotData {
 		this.thinkingIndicatorTextCycleInterval = thinkingIndicatorTextCycleInterval;
 	}
 
+	public AriaDialogBotData defaultContentOrigin(EMessageContentOrigin defaultContentOrigin) {
+		this.defaultContentOrigin = defaultContentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get defaultContentOrigin
+	 * 
+	 * @return defaultContentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getDefaultContentOrigin() {
+		return defaultContentOrigin;
+	}
+
+	public void setDefaultContentOrigin(EMessageContentOrigin defaultContentOrigin) {
+		this.defaultContentOrigin = defaultContentOrigin;
+	}
+
 	public AriaDialogBotData agenticFlowData(ExpandableField<AriaAgenticFlowDataContent> agenticFlowData) {
 		this.agenticFlowData = agenticFlowData;
 		return this;
@@ -938,6 +962,7 @@ public class AriaDialogBotData implements DialogBotData {
 				Objects.equals(this.maxThinkingIndicatorTime, ariaDialogBotData.maxThinkingIndicatorTime) &&
 				Objects.equals(this.autoStartThinkingIndicatorDelay, ariaDialogBotData.autoStartThinkingIndicatorDelay) &&
 				Objects.equals(this.thinkingIndicatorTextCycleInterval, ariaDialogBotData.thinkingIndicatorTextCycleInterval) &&
+				Objects.equals(this.defaultContentOrigin, ariaDialogBotData.defaultContentOrigin) &&
 				Objects.equals(this.agenticFlowData, ariaDialogBotData.agenticFlowData) &&
 				Objects.equals(this.active, ariaDialogBotData.active) &&
 				Objects.equals(this.outboundEndpoint, ariaDialogBotData.outboundEndpoint) &&
@@ -949,7 +974,7 @@ public class AriaDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, agenticFlowData, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion, ariaDialogBotType, externalConfiguration);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, agenticFlowData, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion, ariaDialogBotType, externalConfiguration);
 	}
 
 	@Override
@@ -983,6 +1008,7 @@ public class AriaDialogBotData implements DialogBotData {
 		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");
 		sb.append("    autoStartThinkingIndicatorDelay: ").append(toIndentedString(autoStartThinkingIndicatorDelay)).append("\n");
 		sb.append("    thinkingIndicatorTextCycleInterval: ").append(toIndentedString(thinkingIndicatorTextCycleInterval)).append("\n");
+		sb.append("    defaultContentOrigin: ").append(toIndentedString(defaultContentOrigin)).append("\n");
 		sb.append("    agenticFlowData: ").append(toIndentedString(agenticFlowData)).append("\n");
 		sb.append("    active: ").append(toIndentedString(active)).append("\n");
 		sb.append("    outboundEndpoint: ").append(toIndentedString(outboundEndpoint)).append("\n");

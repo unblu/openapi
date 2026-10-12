@@ -268,11 +268,11 @@ public class BranchClientAuxiliaryCameraPtzPresetData {
 	}
 
 	/**
-	 * If set to true, this PTZ preset will be activated by default
+	 * If set to &#x60;true&#x60;, this PTZ preset will be activated by default. Optional. &#x60;false&#x60; if not explicitly set.
 	 * 
 	 * @return defaultValue
 	 **/
-	@ApiModelProperty(value = "If set to true, this PTZ preset will be activated by default")
+	@ApiModelProperty(value = "If set to `true`, this PTZ preset will be activated by default. Optional. `false` if not explicitly set.")
 	public Boolean isDefaultValue() {
 		return defaultValue;
 	}

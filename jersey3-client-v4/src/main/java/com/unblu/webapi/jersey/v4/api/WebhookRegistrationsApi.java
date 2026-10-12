@@ -10,10 +10,11 @@ import com.unblu.webapi.jersey.v4.invoker.ApiException;
 import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
-import com.unblu.webapi.model.v4.WebhookRegistration;
-import com.unblu.webapi.model.v4.WebhookRegistrationList;
+import com.unblu.webapi.model.v4.ExpandFields;
+import com.unblu.webapi.model.v4.WebhookRegistrationData;
+import com.unblu.webapi.model.v4.WebhookRegistrationDataList;
+import com.unblu.webapi.model.v4.WebhookRegistrationDataResult;
 import com.unblu.webapi.model.v4.WebhookRegistrationQuery;
-import com.unblu.webapi.model.v4.WebhookRegistrationResult;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -37,29 +38,33 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
+	 * create Creates a new webhook registration. For registrations that trigger an Aria agentic flow, the flow is created in the Aria orchestrator as part of this
+	 * operation.&lt;br&gt;
 	 * 
-	 * @param webhookRegistration The entity to create (required)
-	 * @return WebhookRegistration
+	 * @param webhookRegistrationData The webhook registration to create (required)
+	 * @param expand (optional)
+	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public WebhookRegistration webhookRegistrationsCreate(WebhookRegistration webhookRegistration) throws ApiException {
-		return webhookRegistrationsCreateWithHttpInfo(webhookRegistration).getData();
+	public WebhookRegistrationData webhookRegistrationsCreate(WebhookRegistrationData webhookRegistrationData, List<ExpandFields> expand) throws ApiException {
+		return webhookRegistrationsCreateWithHttpInfo(webhookRegistrationData, expand).getData();
 	}
 
 	/**
-	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
+	 * create Creates a new webhook registration. For registrations that trigger an Aria agentic flow, the flow is created in the Aria orchestrator as part of this
+	 * operation.&lt;br&gt;
 	 * 
-	 * @param webhookRegistration The entity to create (required)
-	 * @return ApiResponse&lt;WebhookRegistration&gt;
+	 * @param webhookRegistrationData The webhook registration to create (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<WebhookRegistration> webhookRegistrationsCreateWithHttpInfo(WebhookRegistration webhookRegistration) throws ApiException {
-		Object localVarPostBody = webhookRegistration;
+	public ApiResponse<WebhookRegistrationData> webhookRegistrationsCreateWithHttpInfo(WebhookRegistrationData webhookRegistrationData, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = webhookRegistrationData;
 
-		// verify the required parameter 'webhookRegistration' is set
-		if (webhookRegistration == null) {
-			throw new ApiException(400, "Missing the required parameter 'webhookRegistration' when calling webhookRegistrationsCreate");
+		// verify the required parameter 'webhookRegistrationData' is set
+		if (webhookRegistrationData == null) {
+			throw new ApiException(400, "Missing the required parameter 'webhookRegistrationData' when calling webhookRegistrationsCreate");
 		}
 
 		// create path and map variables
@@ -69,6 +74,8 @@ public class WebhookRegistrationsApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -82,7 +89,7 @@ public class WebhookRegistrationsApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
-		GenericType<WebhookRegistration> localVarReturnType = new GenericType<WebhookRegistration>() {
+		GenericType<WebhookRegistrationData> localVarReturnType = new GenericType<WebhookRegistrationData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
@@ -90,7 +97,7 @@ public class WebhookRegistrationsApi {
 	/**
 	 * delete Deletes the webhook registration with the given ID&lt;br&gt;
 	 * 
-	 * @param registrationId The ID of the webhook registration which should be deleted (required)
+	 * @param registrationId The ID of the webhook registration to delete (required)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void webhookRegistrationsDelete(String registrationId) throws ApiException {
@@ -101,7 +108,7 @@ public class WebhookRegistrationsApi {
 	/**
 	 * delete Deletes the webhook registration with the given ID&lt;br&gt;
 	 * 
-	 * @param registrationId The ID of the webhook registration which should be deleted (required)
+	 * @param registrationId The ID of the webhook registration to delete (required)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> webhookRegistrationsDeleteWithHttpInfo(String registrationId) throws ApiException {
@@ -137,24 +144,26 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * getByName Returns the webhook registration for the given name.&lt;br&gt;
+	 * getByName Returns the webhook registration with the name provided.&lt;br&gt;
 	 * 
 	 * @param name The name of the requested webhook registration (optional)
-	 * @return WebhookRegistration
+	 * @param expand (optional)
+	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public WebhookRegistration webhookRegistrationsGetByName(String name) throws ApiException {
-		return webhookRegistrationsGetByNameWithHttpInfo(name).getData();
+	public WebhookRegistrationData webhookRegistrationsGetByName(String name, List<ExpandFields> expand) throws ApiException {
+		return webhookRegistrationsGetByNameWithHttpInfo(name, expand).getData();
 	}
 
 	/**
-	 * getByName Returns the webhook registration for the given name.&lt;br&gt;
+	 * getByName Returns the webhook registration with the name provided.&lt;br&gt;
 	 * 
 	 * @param name The name of the requested webhook registration (optional)
-	 * @return ApiResponse&lt;WebhookRegistration&gt;
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<WebhookRegistration> webhookRegistrationsGetByNameWithHttpInfo(String name) throws ApiException {
+	public ApiResponse<WebhookRegistrationData> webhookRegistrationsGetByNameWithHttpInfo(String name, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// create path and map variables
@@ -166,6 +175,7 @@ public class WebhookRegistrationsApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "name", name));
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -179,7 +189,7 @@ public class WebhookRegistrationsApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
-		GenericType<WebhookRegistration> localVarReturnType = new GenericType<WebhookRegistration>() {
+		GenericType<WebhookRegistrationData> localVarReturnType = new GenericType<WebhookRegistrationData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
@@ -187,22 +197,24 @@ public class WebhookRegistrationsApi {
 	/**
 	 * read Returns the webhook registration with the given ID&lt;br&gt;
 	 * 
-	 * @param registrationId ID of the webhook registration which should be returned (required)
-	 * @return WebhookRegistration
+	 * @param registrationId ID of the webhook registration to return (required)
+	 * @param expand (optional)
+	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public WebhookRegistration webhookRegistrationsRead(String registrationId) throws ApiException {
-		return webhookRegistrationsReadWithHttpInfo(registrationId).getData();
+	public WebhookRegistrationData webhookRegistrationsRead(String registrationId, List<ExpandFields> expand) throws ApiException {
+		return webhookRegistrationsReadWithHttpInfo(registrationId, expand).getData();
 	}
 
 	/**
 	 * read Returns the webhook registration with the given ID&lt;br&gt;
 	 * 
-	 * @param registrationId ID of the webhook registration which should be returned (required)
-	 * @return ApiResponse&lt;WebhookRegistration&gt;
+	 * @param registrationId ID of the webhook registration to return (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<WebhookRegistration> webhookRegistrationsReadWithHttpInfo(String registrationId) throws ApiException {
+	public ApiResponse<WebhookRegistrationData> webhookRegistrationsReadWithHttpInfo(String registrationId, List<ExpandFields> expand) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
 		// verify the required parameter 'registrationId' is set
@@ -219,6 +231,8 @@ public class WebhookRegistrationsApi {
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
+
 		final String[] localVarAccepts = {
 			"application/json"
 		};
@@ -231,30 +245,30 @@ public class WebhookRegistrationsApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
-		GenericType<WebhookRegistration> localVarReturnType = new GenericType<WebhookRegistration>() {
+		GenericType<WebhookRegistrationData> localVarReturnType = new GenericType<WebhookRegistrationData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**
-	 * readMultiple Gets a list of webhook registrations with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
+	 * readMultiple Gets a list of the webhook registrations with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the webhook registrations to fetch (required)
-	 * @return WebhookRegistrationList
+	 * @return WebhookRegistrationDataList
 	 * @throws ApiException if fails to make API call
 	 */
-	public WebhookRegistrationList webhookRegistrationsReadMultiple(List<String> requestBody) throws ApiException {
+	public WebhookRegistrationDataList webhookRegistrationsReadMultiple(List<String> requestBody) throws ApiException {
 		return webhookRegistrationsReadMultipleWithHttpInfo(requestBody).getData();
 	}
 
 	/**
-	 * readMultiple Gets a list of webhook registrations with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
+	 * readMultiple Gets a list of the webhook registrations with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the webhook registrations to fetch (required)
-	 * @return ApiResponse&lt;WebhookRegistrationList&gt;
+	 * @return ApiResponse&lt;WebhookRegistrationDataList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<WebhookRegistrationList> webhookRegistrationsReadMultipleWithHttpInfo(List<String> requestBody) throws ApiException {
+	public ApiResponse<WebhookRegistrationDataList> webhookRegistrationsReadMultipleWithHttpInfo(List<String> requestBody) throws ApiException {
 		Object localVarPostBody = requestBody;
 
 		// verify the required parameter 'requestBody' is set
@@ -282,7 +296,7 @@ public class WebhookRegistrationsApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
-		GenericType<WebhookRegistrationList> localVarReturnType = new GenericType<WebhookRegistrationList>() {
+		GenericType<WebhookRegistrationDataList> localVarReturnType = new GenericType<WebhookRegistrationDataList>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
@@ -348,10 +362,10 @@ public class WebhookRegistrationsApi {
 	 * search Search for webhook registrations in the current account&lt;br&gt;
 	 * 
 	 * @param webhookRegistrationQuery (required)
-	 * @return WebhookRegistrationResult
+	 * @return WebhookRegistrationDataResult
 	 * @throws ApiException if fails to make API call
 	 */
-	public WebhookRegistrationResult webhookRegistrationsSearch(WebhookRegistrationQuery webhookRegistrationQuery) throws ApiException {
+	public WebhookRegistrationDataResult webhookRegistrationsSearch(WebhookRegistrationQuery webhookRegistrationQuery) throws ApiException {
 		return webhookRegistrationsSearchWithHttpInfo(webhookRegistrationQuery).getData();
 	}
 
@@ -359,10 +373,10 @@ public class WebhookRegistrationsApi {
 	 * search Search for webhook registrations in the current account&lt;br&gt;
 	 * 
 	 * @param webhookRegistrationQuery (required)
-	 * @return ApiResponse&lt;WebhookRegistrationResult&gt;
+	 * @return ApiResponse&lt;WebhookRegistrationDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<WebhookRegistrationResult> webhookRegistrationsSearchWithHttpInfo(WebhookRegistrationQuery webhookRegistrationQuery) throws ApiException {
+	public ApiResponse<WebhookRegistrationDataResult> webhookRegistrationsSearchWithHttpInfo(WebhookRegistrationQuery webhookRegistrationQuery) throws ApiException {
 		Object localVarPostBody = webhookRegistrationQuery;
 
 		// verify the required parameter 'webhookRegistrationQuery' is set
@@ -390,7 +404,7 @@ public class WebhookRegistrationsApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
-		GenericType<WebhookRegistrationResult> localVarReturnType = new GenericType<WebhookRegistrationResult>() {
+		GenericType<WebhookRegistrationDataResult> localVarReturnType = new GenericType<WebhookRegistrationDataResult>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
@@ -398,7 +412,7 @@ public class WebhookRegistrationsApi {
 	/**
 	 * sendPing Sends a \&quot;ping\&quot; webhook to the endpoint of the given registration.&lt;br&gt;
 	 * 
-	 * @param registrationId Id of the registration to send the ping webhook to. (required)
+	 * @param registrationId ID of the registration to send the ping webhook to. (required)
 	 * @throws ApiException if fails to make API call
 	 */
 	public void webhookRegistrationsSendPing(String registrationId) throws ApiException {
@@ -409,7 +423,7 @@ public class WebhookRegistrationsApi {
 	/**
 	 * sendPing Sends a \&quot;ping\&quot; webhook to the endpoint of the given registration.&lt;br&gt;
 	 * 
-	 * @param registrationId Id of the registration to send the ping webhook to. (required)
+	 * @param registrationId ID of the registration to send the ping webhook to. (required)
 	 * @throws ApiException if fails to make API call
 	 */
 	public ApiResponse<Void> webhookRegistrationsSendPingWithHttpInfo(String registrationId) throws ApiException {
@@ -445,29 +459,31 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * update Updates the entity in the system with the given entity.&lt;br&gt;
+	 * update Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed.&lt;br&gt;
 	 * 
-	 * @param webhookRegistration The entity to update (required)
-	 * @return WebhookRegistration
+	 * @param webhookRegistrationData The webhook registration to update (required)
+	 * @param expand (optional)
+	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
-	public WebhookRegistration webhookRegistrationsUpdate(WebhookRegistration webhookRegistration) throws ApiException {
-		return webhookRegistrationsUpdateWithHttpInfo(webhookRegistration).getData();
+	public WebhookRegistrationData webhookRegistrationsUpdate(WebhookRegistrationData webhookRegistrationData, List<ExpandFields> expand) throws ApiException {
+		return webhookRegistrationsUpdateWithHttpInfo(webhookRegistrationData, expand).getData();
 	}
 
 	/**
-	 * update Updates the entity in the system with the given entity.&lt;br&gt;
+	 * update Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed.&lt;br&gt;
 	 * 
-	 * @param webhookRegistration The entity to update (required)
-	 * @return ApiResponse&lt;WebhookRegistration&gt;
+	 * @param webhookRegistrationData The webhook registration to update (required)
+	 * @param expand (optional)
+	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
-	public ApiResponse<WebhookRegistration> webhookRegistrationsUpdateWithHttpInfo(WebhookRegistration webhookRegistration) throws ApiException {
-		Object localVarPostBody = webhookRegistration;
+	public ApiResponse<WebhookRegistrationData> webhookRegistrationsUpdateWithHttpInfo(WebhookRegistrationData webhookRegistrationData, List<ExpandFields> expand) throws ApiException {
+		Object localVarPostBody = webhookRegistrationData;
 
-		// verify the required parameter 'webhookRegistration' is set
-		if (webhookRegistration == null) {
-			throw new ApiException(400, "Missing the required parameter 'webhookRegistration' when calling webhookRegistrationsUpdate");
+		// verify the required parameter 'webhookRegistrationData' is set
+		if (webhookRegistrationData == null) {
+			throw new ApiException(400, "Missing the required parameter 'webhookRegistrationData' when calling webhookRegistrationsUpdate");
 		}
 
 		// create path and map variables
@@ -477,6 +493,8 @@ public class WebhookRegistrationsApi {
 		List<Pair> localVarQueryParams = new ArrayList<Pair>();
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		localVarQueryParams.addAll(apiClient.parameterToPairs("csv", "expand", expand));
 
 		final String[] localVarAccepts = {
 			"application/json"
@@ -490,7 +508,7 @@ public class WebhookRegistrationsApi {
 
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
-		GenericType<WebhookRegistration> localVarReturnType = new GenericType<WebhookRegistration>() {
+		GenericType<WebhookRegistrationData> localVarReturnType = new GenericType<WebhookRegistrationData>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

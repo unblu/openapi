@@ -78,7 +78,7 @@ public class WebhookExpiredEvent {
 
 	public static final String JSON_PROPERTY_WEBHOOK_REGISTRATION = "webhookRegistration";
 	@JsonProperty(JSON_PROPERTY_WEBHOOK_REGISTRATION)
-	private WebhookRegistration webhookRegistration = null;
+	private WebhookRegistrationData webhookRegistration = null;
 
 	public WebhookExpiredEvent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -156,7 +156,7 @@ public class WebhookExpiredEvent {
 		this.accountId = accountId;
 	}
 
-	public WebhookExpiredEvent webhookRegistration(WebhookRegistration webhookRegistration) {
+	public WebhookExpiredEvent webhookRegistration(WebhookRegistrationData webhookRegistration) {
 		this.webhookRegistration = webhookRegistration;
 		return this;
 	}
@@ -167,11 +167,11 @@ public class WebhookExpiredEvent {
 	 * @return webhookRegistration
 	 **/
 	@ApiModelProperty(value = "")
-	public WebhookRegistration getWebhookRegistration() {
+	public WebhookRegistrationData getWebhookRegistration() {
 		return webhookRegistration;
 	}
 
-	public void setWebhookRegistration(WebhookRegistration webhookRegistration) {
+	public void setWebhookRegistration(WebhookRegistrationData webhookRegistration) {
 		this.webhookRegistration = webhookRegistration;
 	}
 

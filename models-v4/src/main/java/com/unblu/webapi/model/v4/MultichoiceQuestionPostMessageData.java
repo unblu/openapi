@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	MultichoiceQuestionPostMessageData.JSON_PROPERTY_TYPE,
 	MultichoiceQuestionPostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	MultichoiceQuestionPostMessageData.JSON_PROPERTY_LOCALE,
+	MultichoiceQuestionPostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	MultichoiceQuestionPostMessageData.JSON_PROPERTY_TEXT,
 	MultichoiceQuestionPostMessageData.JSON_PROPERTY_TEXT_TYPE,
 	MultichoiceQuestionPostMessageData.JSON_PROPERTY_OPTIONS,
@@ -79,6 +80,10 @@ public class MultichoiceQuestionPostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -173,6 +178,25 @@ public class MultichoiceQuestionPostMessageData implements PostMessageData {
 		this.locale = locale;
 	}
 
+	public MultichoiceQuestionPostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+	}
+
 	public MultichoiceQuestionPostMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -251,6 +275,7 @@ public class MultichoiceQuestionPostMessageData implements PostMessageData {
 				Objects.equals(this.type, multichoiceQuestionPostMessageData.type) &&
 				Objects.equals(this.fallbackText, multichoiceQuestionPostMessageData.fallbackText) &&
 				Objects.equals(this.locale, multichoiceQuestionPostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, multichoiceQuestionPostMessageData.contentOrigin) &&
 				Objects.equals(this.text, multichoiceQuestionPostMessageData.text) &&
 				Objects.equals(this.textType, multichoiceQuestionPostMessageData.textType) &&
 				Objects.equals(this.options, multichoiceQuestionPostMessageData.options);
@@ -258,7 +283,7 @@ public class MultichoiceQuestionPostMessageData implements PostMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, text, textType, options);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, text, textType, options);
 	}
 
 	@Override
@@ -269,6 +294,7 @@ public class MultichoiceQuestionPostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

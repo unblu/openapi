@@ -190,11 +190,11 @@ public class BranchTextBoxData {
 	}
 
 	/**
-	 * Font size in the text box
+	 * Font size, in pixels, of the text in the text box. Optional. 14 if not explicitly set.
 	 * 
 	 * @return fontSize
 	 **/
-	@ApiModelProperty(value = "Font size in the text box")
+	@ApiModelProperty(value = "Font size, in pixels, of the text in the text box. Optional. 14 if not explicitly set.")
 	public Integer getFontSize() {
 		return fontSize;
 	}
@@ -274,11 +274,11 @@ public class BranchTextBoxData {
 	}
 
 	/**
-	 * X coordinate of the text box on the floor plan. 0 marks the left edge of the plan.
+	 * X coordinate of the text box on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return x
 	 **/
-	@ApiModelProperty(value = "X coordinate of the text box on the floor plan. 0 marks the left edge of the plan.")
+	@ApiModelProperty(value = "X coordinate of the text box on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.")
 	public Integer getX() {
 		return x;
 	}
@@ -293,11 +293,11 @@ public class BranchTextBoxData {
 	}
 
 	/**
-	 * Y coordinate of the text box on the floor plan. 0 marks the top edge of the plan.
+	 * Y coordinate of the text box on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return y
 	 **/
-	@ApiModelProperty(value = "Y coordinate of the text box on the floor plan. 0 marks the top edge of the plan.")
+	@ApiModelProperty(value = "Y coordinate of the text box on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.")
 	public Integer getY() {
 		return y;
 	}
@@ -312,11 +312,11 @@ public class BranchTextBoxData {
 	}
 
 	/**
-	 * Width of the text box on the floor plan
+	 * Width of the text box on the floor plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return width
 	 **/
-	@ApiModelProperty(value = "Width of the text box on the floor plan")
+	@ApiModelProperty(value = "Width of the text box on the floor plan. Optional. 0 if not explicitly set.")
 	public Integer getWidth() {
 		return width;
 	}
@@ -331,11 +331,11 @@ public class BranchTextBoxData {
 	}
 
 	/**
-	 * Height of the text box on the floor plan
+	 * Height of the text box on the floor plan. Optional. 0 if not explicitly set.
 	 * 
 	 * @return height
 	 **/
-	@ApiModelProperty(value = "Height of the text box on the floor plan")
+	@ApiModelProperty(value = "Height of the text box on the floor plan. Optional. 0 if not explicitly set.")
 	public Integer getHeight() {
 		return height;
 	}
@@ -350,11 +350,11 @@ public class BranchTextBoxData {
 	}
 
 	/**
-	 * Rotation, in degrees, of the text box on the floor plan. The rotation is clockwise.
+	 * Rotation, in degrees, of the text box on the floor plan. The rotation is clockwise. Optional. 0 if not explicitly set.
 	 * 
 	 * @return rotation
 	 **/
-	@ApiModelProperty(value = "Rotation, in degrees, of the text box on the floor plan. The rotation is clockwise.")
+	@ApiModelProperty(value = "Rotation, in degrees, of the text box on the floor plan. The rotation is clockwise. Optional. 0 if not explicitly set.")
 	public Integer getRotation() {
 		return rotation;
 	}

@@ -34,4 +34,10 @@ public interface PostMessageData {
 
 	PostMessageData locale(String locale);
 
+	void setContentOrigin(EMessageContentOrigin contentOrigin);
+
+	EMessageContentOrigin getContentOrigin();
+
+	PostMessageData contentOrigin(EMessageContentOrigin contentOrigin);
+
 }

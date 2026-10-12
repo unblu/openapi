@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.42.2
+  version: 8.43.1
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -50,6 +50,8 @@ tags:
   description: Service to manage all kind of collaboration layer log entries.
 - name: ConversationAccessInterceptors
   description: Service to manage conversation access interceptors
+- name: ConversationContextPanels
+  description: Service to manage custom conversation context panels.
 - name: ConversationHistory
   description: Service to get the history of conversations
 - name: ConversationPresences
@@ -600,6 +602,32 @@ paths:
             schema:
               $ref: "#/components/schemas/Account"
             examples:
+              create-with-avatar:
+                summary: create with avatar
+                description: Create an Account with an avatar
+                value:
+                  $_type: Account
+                  id: null
+                  creationTimestamp: null
+                  modificationTimestamp: null
+                  version: null
+                  name: aaa
+                  avatar:
+                    $_type: Avatar
+                    id: null
+                    creationTimestamp: null
+                    modificationTimestamp: null
+                    accountId: null
+                    imageZoomFactor: null
+                    imageXPositionRatio: null
+                    imageYPositionRatio: null
+                    imageRotationAngle: null
+                    imageData: "data:image/png;base64,iVBORw0KG...QmCC"
+                  avatarUrls: null
+                  translations: null
+                  configuration: null
+                  metadata: null
+                  text: null
               request-body:
                 summary: request body
                 description: Create an Account with translations of the name for it
@@ -611,6 +639,7 @@ paths:
                   version: null
                   name: with-translations-test
                   avatar: null
+                  avatarUrls: null
                   translations:
                     de:
                       $_type: AccountTranslation
@@ -634,6 +663,56 @@ paths:
               schema:
                 $ref: "#/components/schemas/Account"
               examples:
+                create-with-avatar:
+                  summary: create with avatar
+                  description: Create an Account with an avatar
+                  value:
+                    $_type: Account
+                    id: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 2
+                    name: aaa
+                    avatar:
+                      $_type: Avatar
+                      id: _1dA8a75B-9v3r6Ct4EbADa
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      imageZoomFactor: null
+                      imageXPositionRatio: 0.5
+                      imageYPositionRatio: 0.5
+                      imageRotationAngle: 0
+                      imageData: "data:image/png;base64,iVBORw0KG...QmCC"
+                    avatarUrls:
+                    - $_type: AvatarUrl
+                      size: SMALL
+                      entryPath: PUBLIC
+                      url: '...'
+                    - $_type: AvatarUrl
+                      size: MEDIUM
+                      entryPath: PUBLIC
+                      url: '...'
+                    - $_type: AvatarUrl
+                      size: LARGE
+                      entryPath: PUBLIC
+                      url: '...'
+                    - $_type: AvatarUrl
+                      size: SMALL
+                      entryPath: INTERNAL
+                      url: '...'
+                    - $_type: AvatarUrl
+                      size: MEDIUM
+                      entryPath: INTERNAL
+                      url: '...'
+                    - $_type: AvatarUrl
+                      size: LARGE
+                      entryPath: INTERNAL
+                      url: '...'
+                    translations: {}
+                    configuration: null
+                    metadata: null
+                    text: null
                 response-body:
                   summary: response body
                   description: Create an Account with translations of the name for it
@@ -645,6 +724,7 @@ paths:
                     version: 1
                     name: with-translations-test
                     avatar: null
+                    avatarUrls: null
                     translations:
                       de:
                         $_type: AccountTranslation
@@ -702,6 +782,7 @@ paths:
                     version: null
                     name: with-admin-test
                     avatar: null
+                    avatarUrls: null
                     translations: null
                     configuration: null
                     metadata: null
@@ -3615,6 +3696,7 @@ paths:
                   maxThinkingIndicatorTime: null
                   autoStartThinkingIndicatorDelay: null
                   thinkingIndicatorTextCycleInterval: null
+                  defaultContentOrigin: null
                   authToken: some auth token
                   copilotId: Some copilot id
                   copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -3653,6 +3735,7 @@ paths:
                   maxThinkingIndicatorTime: null
                   autoStartThinkingIndicatorDelay: null
                   thinkingIndicatorTextCycleInterval: null
+                  defaultContentOrigin: null
                   webhookStatus: INACTIVE
                   webhookEndpoint: https://test.unblu.com
                   outboundTimeoutMillis: 3000
@@ -3703,6 +3786,7 @@ paths:
                     maxThinkingIndicatorTime: null
                     autoStartThinkingIndicatorDelay: null
                     thinkingIndicatorTextCycleInterval: null
+                    defaultContentOrigin: null
                     authToken: some auth token
                     copilotId: Some copilot id
                     copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -3741,6 +3825,7 @@ paths:
                     maxThinkingIndicatorTime: null
                     autoStartThinkingIndicatorDelay: null
                     thinkingIndicatorTextCycleInterval: null
+                    defaultContentOrigin: null
                     webhookStatus: INACTIVE
                     webhookEndpoint: https://test.unblu.com
                     outboundTimeoutMillis: 3000
@@ -4188,6 +4273,7 @@ paths:
                     maxThinkingIndicatorTime: null
                     autoStartThinkingIndicatorDelay: null
                     thinkingIndicatorTextCycleInterval: null
+                    defaultContentOrigin: null
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
                     outboundTimeoutMillis: 3000
@@ -4229,6 +4315,7 @@ paths:
                     maxThinkingIndicatorTime: null
                     autoStartThinkingIndicatorDelay: null
                     thinkingIndicatorTextCycleInterval: null
+                    defaultContentOrigin: null
                     authToken: some auth token
                     copilotId: Some copilot id
                     copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -4305,6 +4392,7 @@ paths:
                     maxThinkingIndicatorTime: null
                     autoStartThinkingIndicatorDelay: null
                     thinkingIndicatorTextCycleInterval: null
+                    defaultContentOrigin: null
                     webhookStatus: INACTIVE
                     webhookEndpoint: http://test.webhook.com
                     outboundTimeoutMillis: 3000
@@ -4346,6 +4434,7 @@ paths:
                     maxThinkingIndicatorTime: null
                     autoStartThinkingIndicatorDelay: null
                     thinkingIndicatorTextCycleInterval: null
+                    defaultContentOrigin: null
                     authToken: some auth token
                     copilotId: Some copilot id
                     copilotEnvironmentId: eaaz3AiSRp6wIB2wGq6L0g
@@ -4460,6 +4549,7 @@ paths:
                     type: CARD
                     fallbackText: This is the plain body text
                     locale: null
+                    contentOrigin: null
                     imageUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURfolAT39/6qSgZ2hko6xpLeDbrzfdCUAAAFvSURBVHja7c8BDYBADASwBQfvAAkkSOCRgH8rmLgwAq2D1lYZy+hVIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLvjxx7xuyOjI8QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERedB5hXRH1koRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERH5S2Sm3Pdeq7vUBkC2AAAAAElFTkSuQmCC"
                     imageAltText: test image
                     title: Title
@@ -4509,6 +4599,7 @@ paths:
                     type: CARD
                     fallbackText: This is the plain body text
                     locale: null
+                    contentOrigin: null
                     imageUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURfolAT39/6qSgZ2hko6xpLeDbrzfdCUAAAFvSURBVHja7c8BDYBADASwBQfvAAkkSOCRgH8rmLgwAq2D1lYZy+hVIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLvjxx7xuyOjI8QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERedB5hXRH1koRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERH5S2Sm3Pdeq7vUBkC2AAAAAElFTkSuQmCC"
                     imageAltText: test image
                     title: Title
@@ -4543,6 +4634,7 @@ paths:
                     type: FILE
                     fallbackText: Picture file testImage.png
                     locale: null
+                    contentOrigin: null
                     fileName: testImage.png
                     caption: See file below
                     captionType: MARKDOWN
@@ -4570,6 +4662,7 @@ paths:
                     type: LIST
                     fallbackText: This is the plain body text
                     locale: null
+                    contentOrigin: null
                     header:
                       $_type: MessageHeader
                       imageUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURfolAT39/6qSgZ2hko6xpLeDbrzfdCUAAAFvSURBVHja7c8BDYBADASwBQfvAAkkSOCRgH8rmLgwAq2D1lYZy+hVIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLvjxx7xuyOjI8QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERedB5hXRH1koRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERH5S2Sm3Pdeq7vUBkC2AAAAAElFTkSuQmCC"
@@ -4654,6 +4747,7 @@ paths:
                     type: MULTICHOICE_QUESTION
                     fallbackText: Choose one of the options
                     locale: null
+                    contentOrigin: null
                     text: Choose one of the options
                     textType: MARKDOWN
                     options:
@@ -4702,6 +4796,7 @@ paths:
                     type: RATING_QUESTION
                     fallbackText: Rate question
                     locale: null
+                    contentOrigin: null
                     text: Rate question
                     textType: MARKDOWN
                     options:
@@ -4733,6 +4828,7 @@ paths:
                     type: TEXT
                     fallbackText: "Hello, how can I help?"
                     locale: null
+                    contentOrigin: null
                     text: "Hello, I am a bot. How can I help you?"
                     textType: MARKDOWN
                     quickReplies:
@@ -4758,6 +4854,7 @@ paths:
                     type: TEXT_QUESTION
                     fallbackText: question text
                     locale: null
+                    contentOrigin: null
                     text: question text
                     textType: MARKDOWN
                     questionType: SHORT_TEXT
@@ -7310,6 +7407,170 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /conversationcontextpanels/create:
+    post:
+      tags:
+      - ConversationContextPanels
+      summary: create
+      description: "<p>This endpoint is in preview mode.</p>Creates a new conversation context panel. <p> The icon is mandatory. To set it, send the name 'icon' and the expanded `icon` in the `expand` parameter. Without it the icon is not read from the body and the create is rejected. The icon ID cannot be set directly.<br>"
+      operationId: conversationContextPanelsCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The conversation context panel to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationContextPanelData"
+        required: true
+      responses:
+        "200":
+          description: The created conversation context panel
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationContextPanelData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationcontextpanels/{conversationContextPanelId}/delete:
+    delete:
+      tags:
+      - ConversationContextPanels
+      summary: delete
+      description: <p>This endpoint is in preview mode.</p>Deletes an existing conversation context panel.<br>
+      operationId: conversationContextPanelsDelete
+      parameters:
+      - name: conversationContextPanelId
+        in: path
+        description: The ID of the conversation context panel to delete
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationcontextpanels/{conversationContextPanelId}/read:
+    get:
+      tags:
+      - ConversationContextPanels
+      summary: read
+      description: <p>This endpoint is in preview mode.</p>Reads an existing conversation context panel.<br>
+      operationId: conversationContextPanelsRead
+      parameters:
+      - name: conversationContextPanelId
+        in: path
+        description: The ID of the conversation context panel to read
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      responses:
+        "200":
+          description: "The conversation context panel, or  `null`  if none exists for the given ID"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationContextPanelData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationcontextpanels/search:
+    post:
+      tags:
+      - ConversationContextPanels
+      summary: search
+      description: <p>This endpoint is in preview mode.</p>Searches for conversation context panels in the current account.<br>
+      operationId: conversationContextPanelsSearch
+      requestBody:
+        description: The search query
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationContextPanelQuery"
+        required: true
+      responses:
+        "200":
+          description: A result container with the matching conversation context panels
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationContextPanelSearchResult"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
+  /conversationcontextpanels/update:
+    post:
+      tags:
+      - ConversationContextPanels
+      summary: update
+      description: "<p>This endpoint is in preview mode.</p>Updates an existing conversation context panel. The ID and version are carried in the body. <p> To replace the panel icon, send the name 'icon' and the expanded `icon` in the `expand` parameter. Without it the icon is not read from the body: the existing icon is kept when the body carries its unchanged icon ID, and the update is rejected when it does not, as the icon is mandatory. The icon ID cannot be changed directly.<br>"
+      operationId: conversationContextPanelsUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
+      requestBody:
+        description: The conversation context panel to update
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationContextPanelData"
+        required: true
+      responses:
+        "200":
+          description: The updated conversation context panel
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationContextPanelData"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - ADMIN
+      x-status: PREVIEW
   /conversationhistory/{conversationId}/exportMessageLog:
     post:
       tags:
@@ -7416,6 +7677,7 @@ paths:
                     senderPersonId: nta30CBa-6d1a89cE57Db_F
                     type: FILE
                     internal: false
+                    contentOrigin: null
                     replyToMessageId: null
                     externalMessageId: null
                     recipientPersonIds:
@@ -7440,6 +7702,7 @@ paths:
                     senderPersonId: nta30CBa-6d1a89cE57Db_F
                     type: TEXT
                     internal: false
+                    contentOrigin: null
                     replyToMessageId: null
                     externalMessageId: null
                     recipientPersonIds:
@@ -8652,6 +8915,7 @@ paths:
                       displayName: Main Account
                       displayNameTranslations: {}
                       avatar: null
+                      avatarUrls: null
                     participants:
                     - $_type: ParticipantData
                       state: ACTIVE
@@ -8853,6 +9117,7 @@ paths:
                       displayName: Main Account
                       displayNameTranslations: {}
                       avatar: null
+                      avatarUrls: null
                     participants:
                     - $_type: ParticipantData
                       state: ACTIVE
@@ -9121,6 +9386,7 @@ paths:
                         type: AGENT_DESK_VISITOR_DETAILS
                         url: '...'
                       avatar: null
+                      avatarUrls: null
                       metadata: null
                     senderPersonPresenceId: null
                     serverTimestamp: 1551398400000
@@ -9133,6 +9399,7 @@ paths:
                     sourceId: null
                     botThreadId: null
                     internal: false
+                    contentOrigin: null
                     replyToMessageId: null
                     externalMessageId: null
                     replyToExternalMessageId: null
@@ -9198,6 +9465,7 @@ paths:
                         type: AGENT_DESK_VISITOR_DETAILS
                         url: '...'
                       avatar: null
+                      avatarUrls: null
                       metadata: null
                     senderPersonPresenceId: xPr3s_1d0-aBcDeFgHiJkL
                     serverTimestamp: 1551398400000
@@ -9210,6 +9478,7 @@ paths:
                     sourceId: null
                     botThreadId: null
                     internal: false
+                    contentOrigin: null
                     replyToMessageId: null
                     externalMessageId: null
                     replyToExternalMessageId: null
@@ -9399,6 +9668,7 @@ paths:
                       displayName: Main Account
                       displayNameTranslations: {}
                       avatar: null
+                      avatarUrls: null
                     participants:
                     - $_type: ParticipantData
                       state: ACTIVE
@@ -9731,6 +10001,7 @@ paths:
                       displayName: Main Account
                       displayNameTranslations: {}
                       avatar: null
+                      avatarUrls: null
                     participants:
                     - $_type: ParticipantData
                       state: ACTIVE
@@ -10271,6 +10542,7 @@ paths:
                       displayName: Main Account
                       displayNameTranslations: {}
                       avatar: null
+                      avatarUrls: null
                     participants:
                     - $_type: ParticipantData
                       state: ACTIVE
@@ -10393,6 +10665,7 @@ paths:
                       displayName: Main Account
                       displayNameTranslations: {}
                       avatar: null
+                      avatarUrls: null
                     participants:
                     - $_type: ParticipantData
                       state: ACTIVE
@@ -10518,6 +10791,7 @@ paths:
                       displayName: Main Account
                       displayNameTranslations: {}
                       avatar: null
+                      avatarUrls: null
                     participants:
                     - $_type: ParticipantData
                       state: ACTIVE
@@ -13081,6 +13355,7 @@ paths:
                     type: TEXT
                     fallbackText: message from visitor fallback
                     locale: null
+                    contentOrigin: null
                     text: 'message from visitor '
                     textType: SIMPLE_TEXT
                     quickReplies:
@@ -13107,6 +13382,7 @@ paths:
                     type: CARD
                     fallbackText: This is the plain card body text
                     locale: null
+                    contentOrigin: null
                     imageUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURfolAT39/6qSgZ2hko6xpLeDbrzfdCUAAAFvSURBVHja7c8BDYBADASwBQfvAAkkSOCRgH8rmLgwAq2D1lYZy+hVIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLvjxx7xuyOjI8QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERedB5hXRH1koRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERH5S2Sm3Pdeq7vUBkC2AAAAAElFTkSuQmCC"
                     imageAltText: test image
                     title: Card Title
@@ -13152,6 +13428,7 @@ paths:
                     type: FILE
                     fallbackText: see file testImage.png
                     locale: null
+                    contentOrigin: null
                     fileName: testImage.png
                     caption: 'see file from visitor '
                     captionType: SIMPLE_TEXT
@@ -13180,6 +13457,7 @@ paths:
                     type: LIST
                     fallbackText: This is the plain list body text
                     locale: null
+                    contentOrigin: null
                     header:
                       $_type: MessageHeader
                       imageUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURfolAT39/6qSgZ2hko6xpLeDbrzfdCUAAAFvSURBVHja7c8BDYBADASwBQfvAAkkSOCRgH8rmLgwAq2D1lYZy+hVIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLvjxx7xuyOjI8QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERedB5hXRH1koRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERH5S2Sm3Pdeq7vUBkC2AAAAAElFTkSuQmCC"
@@ -13230,6 +13508,7 @@ paths:
                     type: MULTICHOICE_QUESTION
                     fallbackText: question fallback text
                     locale: null
+                    contentOrigin: null
                     text: 'question from visitor '
                     textType: SIMPLE_TEXT
                     options:
@@ -13266,6 +13545,7 @@ paths:
                     type: RATING_QUESTION
                     fallbackText: rating question fallback text
                     locale: null
+                    contentOrigin: null
                     text: 'rating question from visitor '
                     textType: SIMPLE_TEXT
                     options:
@@ -13298,6 +13578,7 @@ paths:
                     type: TEXT
                     fallbackText: null
                     locale: null
+                    contentOrigin: null
                     text: Message from visitor
                     textType: null
                     quickReplies: null
@@ -13319,6 +13600,7 @@ paths:
                     type: TEXT_QUESTION
                     fallbackText: question fallback text
                     locale: null
+                    contentOrigin: null
                     text: 'question from visitor '
                     textType: SIMPLE_TEXT
                     questionType: SHORT_TEXT
@@ -15660,6 +15942,7 @@ paths:
                   version: null
                   accountId: null
                   avatar: null
+                  avatarUrls: null
                   name: Name_with-translations-test
                   description: Desc_with-translations-test
                   type: META_TAG
@@ -15698,6 +15981,7 @@ paths:
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
                     avatar: null
+                    avatarUrls: null
                     name: Name_with-translations-test
                     description: Desc_with-translations-test
                     type: META_TAG
@@ -18981,6 +19265,7 @@ paths:
                   version: null
                   accountId: null
                   avatar: null
+                  avatarUrls: null
                   name: with-translations-test
                   parentId: null
                   description: The  team
@@ -19018,6 +19303,7 @@ paths:
                     version: 1
                     accountId: A7d9E_0-c3cC4aoFDb85t6n
                     avatar: null
+                    avatarUrls: null
                     name: with-translations-test
                     parentId: JZh4ADRnEeasYZ5xEoyudw
                     description: The  team
@@ -19965,22 +20251,32 @@ paths:
       tags:
       - WebhookRegistrations
       summary: create
-      description: "Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.<br>"
+      description: "Creates a new webhook registration. For registrations that trigger an Aria agentic flow, the flow is created in the Aria orchestrator as part of this operation.<br>"
       operationId: webhookRegistrationsCreate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       requestBody:
-        description: The entity to create
+        description: The webhook registration to create
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookRegistration"
+              $ref: "#/components/schemas/WebhookRegistrationData"
         required: true
       responses:
         "200":
-          description: The entity as it exists now in the system
+          description: The created webhook registration
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WebhookRegistration"
+                $ref: "#/components/schemas/WebhookRegistrationData"
         default:
           $ref: "#/components/responses/ErrorResponse"
       callbacks:
@@ -21462,7 +21758,7 @@ paths:
           '{$request.body#/endpoint}':
             post:
               summary: ping
-              description: Event send when using the `ping` to test a webhook
+              description: Event sent when using the webhook registration API's sendPing operation to test a webhook
               operationId: pingCallback
               requestBody:
                 content:
@@ -21723,7 +22019,7 @@ paths:
       parameters:
       - name: registrationId
         in: path
-        description: The ID of the webhook registration which should be deleted
+        description: The ID of the webhook registration to delete
         required: true
         schema:
           type: string
@@ -21742,7 +22038,7 @@ paths:
       tags:
       - WebhookRegistrations
       summary: getByName
-      description: Returns the webhook registration for the given name.<br>
+      description: Returns the webhook registration with the name provided.<br>
       operationId: webhookRegistrationsGetByName
       parameters:
       - name: name
@@ -21753,13 +22049,22 @@ paths:
           type: string
         style: form
         explode: true
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       responses:
         "200":
-          description: The webhook registration for the given name
+          description: The webhook registration with the name provided
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WebhookRegistration"
+                $ref: "#/components/schemas/WebhookRegistrationData"
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -21775,11 +22080,20 @@ paths:
       parameters:
       - name: registrationId
         in: path
-        description: ID of the webhook registration which should be returned
+        description: ID of the webhook registration to return
         required: true
         schema:
           type: string
         style: simple
+        explode: false
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
         explode: false
       responses:
         "200":
@@ -21787,7 +22101,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WebhookRegistration"
+                $ref: "#/components/schemas/WebhookRegistrationData"
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -21798,7 +22112,7 @@ paths:
       tags:
       - WebhookRegistrations
       summary: readMultiple
-      description: Gets a list of webhook registrations with the given IDs. IDs that can't be found are ignored.<br>
+      description: Gets a list of the webhook registrations with the given IDs. IDs that can't be found are ignored.<br>
       operationId: webhookRegistrationsReadMultiple
       requestBody:
         description: The IDs of the webhook registrations to fetch
@@ -21811,11 +22125,11 @@ paths:
         required: true
       responses:
         "200":
-          description: A list of webhook registrations matching the IDs provided
+          description: A list of webhook registrations that match the IDs provided
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WebhookRegistrationList"
+                $ref: "#/components/schemas/WebhookRegistrationDataList"
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -21864,7 +22178,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WebhookRegistrationResult"
+                $ref: "#/components/schemas/WebhookRegistrationDataResult"
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -21880,7 +22194,7 @@ paths:
       parameters:
       - name: registrationId
         in: path
-        description: Id of the registration to send the ping webhook to.
+        description: ID of the registration to send the ping webhook to.
         required: true
         schema:
           type: string
@@ -21899,22 +22213,32 @@ paths:
       tags:
       - WebhookRegistrations
       summary: update
-      description: Updates the entity in the system with the given entity.<br>
+      description: Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed.<br>
       operationId: webhookRegistrationsUpdate
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExpandFields"
+        style: form
+        explode: false
       requestBody:
-        description: The entity to update
+        description: The webhook registration to update
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookRegistration"
+              $ref: "#/components/schemas/WebhookRegistrationData"
         required: true
       responses:
         "200":
-          description: The updated version of the entity. Use always this instance for further processing
+          description: The updated webhook registration
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WebhookRegistration"
+                $ref: "#/components/schemas/WebhookRegistrationData"
         default:
           $ref: "#/components/responses/ErrorResponse"
       x-required-entry-path: INTERNAL
@@ -22191,6 +22515,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the account's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the account has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
         translations:
           type: object
           description: A map of localized versions of the name of this entity
@@ -22262,6 +22591,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the account's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the account has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
     AccountIngressCreateBody:
       type: object
       description: Body for creating an account ingress
@@ -23999,7 +24333,7 @@ components:
         expirationTimestamp:
           type: integer
           format: int64
-          description: "Expiration time of the API secret. The minimum value is 1 minute, the maximum value is 2 years in the future."
+          description: "Expiration time of the API secret. The minimum value is 1 minute, the maximum value is 2 years in the future. Mandatory."
     ApiSecretCreateResult:
       type: object
       properties:
@@ -24107,6 +24441,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -24164,6 +24500,7 @@ components:
       - $ref: "#/components/schemas/AriaSingleFlowAgenticFlowDataContent"
       - $ref: "#/components/schemas/AriaSuggestionSourceAgenticFlowDataContent"
       - $ref: "#/components/schemas/AriaCustomActionAgenticFlowDataContent"
+      - $ref: "#/components/schemas/AriaWebhookAgenticFlowDataContent"
       discriminator:
         propertyName: type
         mapping:
@@ -24171,6 +24508,7 @@ components:
           MULTIFLOW: "#/components/schemas/AriaMultiflowAgenticFlowDataContent"
           SINGLE_FLOW: "#/components/schemas/AriaSingleFlowAgenticFlowDataContent"
           SUGGESTION_SOURCE: "#/components/schemas/AriaSuggestionSourceAgenticFlowDataContent"
+          WEBHOOK: "#/components/schemas/AriaWebhookAgenticFlowDataContent"
     AriaAgenticFlowScenarioTransferableData:
       type: object
       description: Model representing a simplified Aria Agentic Flow Scenario
@@ -24320,6 +24658,8 @@ components:
           type: integer
           format: int32
           description: "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used."
+        defaultContentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         agenticFlowData:
           description: "Aria agentic flow ID. Add `?expand=agenticFlowData` to the request to replace this ID with the full flow content in `agenticFlowData`. Maximum length: 36 characters."
           oneOf:
@@ -24475,6 +24815,26 @@ components:
           - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
           x-expand-query-key: agenticFlowData
           x-type: ExpandableField
+    AriaWebhookAgenticFlowDataContent:
+      type: object
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AriaWebhookAgenticFlowDataContent
+          enum:
+          - AriaWebhookAgenticFlowDataContent
+        type:
+          $ref: "#/components/schemas/EAriaAgenticFlowDataContentType"
+        id:
+          type: string
+          description: The id of the main agentic flow of the entity
+        publishedAgenticFlows:
+          type: array
+          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
     AssigneePersonIdConversationHistorySearchFilter:
       type: object
       description: Filters conversations history by their assigneePersonId field.
@@ -25226,6 +25586,22 @@ components:
         imageData:
           type: string
           description: "Image content as data URL scheme (RFC2397 - <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code>)"
+    AvatarUrl:
+      type: object
+      description: A URL of an avatar image in one standard size.
+      properties:
+        $_type:
+          type: string
+          default: AvatarUrl
+          enum:
+          - AvatarUrl
+        size:
+          $ref: "#/components/schemas/EImageSize"
+        entryPath:
+          $ref: "#/components/schemas/EAvatarUrlEntryPath"
+        url:
+          type: string
+          description: "The URL of the avatar image in the given size, addressed to the given entry path."
     AvgHandlingTimeAnalyticsKpiFilterData:
       type: object
       description: "Data model object representing filters for the KPI calculation of average handling time <p> Filter logic: <ul> <li>startTimestamp AND</li> <li>endTimestamp AND</li> <li>conversationTemplateIds AND</li> <li>conversationLocales AND</li> <li>initialEngagementTypes AND</li> <li>(recipientAgentIds OR recipientTeamIds OR recipientNamedAreaIds OR recipientAccountId)</li> <li>resolutionTypes AND</li> <li>usedFeatures AND</li> <li>assignedAgentPersonIds AND</li> <li>assignedAgentTeamIds</li> </ul>"
@@ -26691,28 +27067,28 @@ components:
         x:
           type: integer
           format: int32
-          description: X coordinate of the camera's icon on the floor plan. 0 marks the left edge of the plan.
+          description: X coordinate of the camera's icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
         "y":
           type: integer
           format: int32
-          description: Y coordinate of the camera's icon on the floor plan. 0 marks the top edge of the plan.
+          description: Y coordinate of the camera's icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
         size:
           type: integer
           format: int32
-          description: Size of the camera's icon on the floor plan
+          description: Size of the camera's icon on the floor plan. Optional. 0 if not explicitly set.
         rotation:
           type: integer
           format: int32
-          description: "Rotation, in degrees, of the camera's icon on the floor plan. 0 degree is to the right and the rotation is clockwise."
+          description: "Rotation, in degrees, of the camera's icon on the floor plan. 0 degree is to the right and the rotation is clockwise. Optional. 0 if not explicitly set."
         iconId:
           type: string
           description: File ID of the icon
         alwaysDisplayDuringCall:
           type: boolean
-          description: "If set to true, the video feed of this camera is automatically displayed to the agent during calls, otherwise the feed must be activated manually."
+          description: "If set to `true`, the video feed of this camera is automatically displayed to the agent during calls, otherwise the feed must be activated manually. Optional. `false` if not explicitly set."
         displayInFloorPlan:
           type: boolean
-          description: Display in floor plan
+          description: "If set to `true`, the camera's icon is displayed on the floor plan. Optional. `false` if not explicitly set."
         mediaDeviceLabel:
           type: string
           description: Media device label of the branch client auxiliary camera. The name is provided by the device. Maximum of 250 characters. Mandatory.
@@ -26758,7 +27134,7 @@ components:
           description: "Target zoom value for the PTZ camera source (if set to null, no zoom will be applied)"
         defaultValue:
           type: boolean
-          description: "If set to true, this PTZ preset will be activated by default"
+          description: "If set to `true`, this PTZ preset will be activated by default. Optional. `false` if not explicitly set."
     BranchClientAuxiliaryCameraPtzPresetTranslation:
       type: object
       properties:
@@ -26854,19 +27230,19 @@ components:
         x:
           type: integer
           format: int32
-          description: X coordinate of the client's icon on the floor plan. 0 marks the left edge of the plan.
+          description: X coordinate of the client's icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
         "y":
           type: integer
           format: int32
-          description: Y coordinate of the client's icon on the floor plan. 0 marks the top edge of the plan.
+          description: Y coordinate of the client's icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
         size:
           type: integer
           format: int32
-          description: Size of the client's icon on the floor plan
+          description: Size of the client's icon on the floor plan. Optional. 0 if not explicitly set.
         rotation:
           type: integer
           format: int32
-          description: "Rotation, in degrees, of the client's icon on the floor plan. 0 degree is to the right and the rotation is clockwise."
+          description: "Rotation, in degrees, of the client's icon on the floor plan. 0 degree is to the right and the rotation is clockwise. Optional. 0 if not explicitly set."
         branchClientDevices:
           type: array
           description: List of all branch client devices that belong to the branch client
@@ -26923,19 +27299,19 @@ components:
         x:
           type: integer
           format: int32
-          description: X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan.
+          description: X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
         "y":
           type: integer
           format: int32
-          description: Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan.
+          description: Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
         size:
           type: integer
           format: int32
-          description: Size of the device's icon on the floor plan
+          description: Size of the device's icon on the floor plan. Optional. 0 if not explicitly set.
         rotation:
           type: integer
           format: int32
-          description: "Rotation, in degrees, of the device's icon on the floor plan"
+          description: "Rotation, in degrees, of the device's icon on the floor plan. Optional. 0 if not explicitly set."
         iconId:
           type: string
           description: File ID of the icon
@@ -27460,19 +27836,19 @@ components:
         x:
           type: integer
           format: int32
-          description: X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan.
+          description: X coordinate of the device's icon on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
         "y":
           type: integer
           format: int32
-          description: Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan.
+          description: Y coordinate of the device's icon on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
         size:
           type: integer
           format: int32
-          description: Size of the device's icon on the floor plan
+          description: Size of the device's icon on the floor plan. Optional. 0 if not explicitly set.
         rotation:
           type: integer
           format: int32
-          description: "Rotation, in degrees, of the device's icon on the floor plan. 0 degree is to the right and the rotation is clockwise."
+          description: "Rotation, in degrees, of the device's icon on the floor plan. 0 degree is to the right and the rotation is clockwise. Optional. 0 if not explicitly set."
         iconId:
           type: string
           description: File ID of the icon
@@ -27685,7 +28061,7 @@ components:
         fontSize:
           type: integer
           format: int32
-          description: Font size in the text box
+          description: "Font size, in pixels, of the text in the text box. Optional. 14 if not explicitly set."
         fontColor:
           type: string
           description: Color of text in the text box
@@ -27700,23 +28076,23 @@ components:
         x:
           type: integer
           format: int32
-          description: X coordinate of the text box on the floor plan. 0 marks the left edge of the plan.
+          description: X coordinate of the text box on the floor plan. 0 marks the left edge of the plan. Optional. 0 if not explicitly set.
         "y":
           type: integer
           format: int32
-          description: Y coordinate of the text box on the floor plan. 0 marks the top edge of the plan.
+          description: Y coordinate of the text box on the floor plan. 0 marks the top edge of the plan. Optional. 0 if not explicitly set.
         width:
           type: integer
           format: int32
-          description: Width of the text box on the floor plan
+          description: Width of the text box on the floor plan. Optional. 0 if not explicitly set.
         height:
           type: integer
           format: int32
-          description: Height of the text box on the floor plan
+          description: Height of the text box on the floor plan. Optional. 0 if not explicitly set.
         rotation:
           type: integer
           format: int32
-          description: "Rotation, in degrees, of the text box on the floor plan. The rotation is clockwise."
+          description: "Rotation, in degrees, of the text box on the floor plan. The rotation is clockwise. Optional. 0 if not explicitly set."
         horizontalTextAlign:
           $ref: "#/components/schemas/ETextBoxAlign"
         verticalTextAlign:
@@ -29104,6 +29480,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -29195,6 +29573,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         imageUrl:
           type: string
           description: "URL of the image displayed at the top of the card. (optional) <p> <ul> <li>The image is always displayed with an aspect ratio of 16:9</li> <li>If the image doesn't fit the aspect ratio it's magnified to cover the whole area</li> <li>Depending on the chat windows size, the image is displayed with a width of 200-400px.</li> </ul>"
@@ -30538,10 +30918,10 @@ components:
           description: The person's name as displayed in UIs. This is read-only information set by Unblu.
         displayNameForAgent:
           type: string
-          description: The person's display name as displayed to agents. This is read-only information set by the Collaboration Server.
+          description: The person's display name as displayed to agents. This is read-only information set by Unblu.
         displayNameForVisitor:
           type: string
-          description: The person's display name as displayed to visitors. This is read-only information set by the Collaboration Server.
+          description: The person's display name as displayed to visitors. This is read-only information set by Unblu.
         personType:
           $ref: "#/components/schemas/EPersonType"
         authorizationRole:
@@ -30584,6 +30964,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the person's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> Only the person's own avatar is considered: this property is `null` when the person has no avatar of their own, even when the Agent Desk displays an inherited team or account avatar for them.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
         osName:
           type: string
           description: The operation system name of the visitors computer
@@ -30862,6 +31247,171 @@ components:
           $ref: "#/components/schemas/PersonAnalyticsKpiData"
         assignedAgent:
           $ref: "#/components/schemas/PersonAnalyticsKpiData"
+    ConversationContextPanelData:
+      type: object
+      description: "<p>This type is in preview mode.</p>A public model that represents a custom conversation context panel: an iframe rendered alongside a conversation. The panel's URL, permissions, and applicability are configurable per account."
+      properties:
+        $_type:
+          type: string
+          default: ConversationContextPanelData
+          enum:
+          - ConversationContextPanelData
+        id:
+          type: string
+          description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity. Will be incremented on each change. New updates must always be based on the newest version, if not updates will be rejected. When creating an object, the version can be omitted."
+        accountId:
+          type: string
+          description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
+        name:
+          type: string
+          description: Canonical name of the context panel. Must be unique within the account. Maximum of 250 characters. Mandatory.
+        description:
+          type: string
+          description: Description of the context panel in the default language. Maximum of 500 characters. Optional.
+        enabled:
+          type: boolean
+          description: "Whether the context panel is active. If omitted, the default is false."
+        icon:
+          description: "The ID of the avatar used as the panel's icon. Mandatory: a panel cannot be created or updated without an icon. The ID can be expanded, but cannot be set directly; send the expanded `icon` instead."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/Avatar"
+          x-expand-query-key: icon
+          x-type: ExpandableField
+        showHeader:
+          type: boolean
+          description: "Whether the panel renders its header. If omitted, the default is false."
+        keepAliveWhenClosed:
+          type: boolean
+          description: "Whether the panel's iframe is kept alive in the background while the panel is closed. If omitted, the default is false, and the panel's content is discarded each time it is closed."
+        url:
+          type: string
+          description: "The panel's iframe URL. Must be an absolute http or https URL of at most 2000 characters. Mandatory. <p> The URL may contain conversation variables in the form <code>${name}</code>, which are replaced server-side before the panel is delivered to the agent, each value URL-encoded. The storage service rejects any other variable. The supported variables are <code>conversation.id</code>, <code>conversation.sourceId</code>, <code>conversation.contextPerson.id</code>, <code>conversation.contextPerson.sourceId</code>, <code>conversation.assignedAgent.id</code> and <code>conversation.assignedAgent.sourceId</code>. A variable whose value is unknown for the conversation — no context person, or nobody assigned — is replaced with the literal string <code>null</code>."
+        iframeAllowTokens:
+          type: array
+          description: The permission tokens the panel's iframe may request via its `allow` attribute. Optional.
+          items:
+            $ref: "#/components/schemas/EIframeAllowToken"
+        allowedParticipationTypes:
+          type: array
+          description: "The agent participation types the panel is shown for. Must name at least one: a panel that allows none is never shown. Mandatory."
+          items:
+            $ref: "#/components/schemas/EConversationAgentParticipationType"
+        enabledFrontends:
+          type: array
+          description: The frontends the panel is enabled on. Must name at least one of `AGENT_DESK` and `AGENT_SINGLE_CONVERSATION_DESK`. Mandatory.
+          items:
+            $ref: "#/components/schemas/EFrontend"
+        translations:
+          type: object
+          description: A map of localized versions of the name and description of this entity. Optional.
+          additionalProperties:
+            $ref: "#/components/schemas/ConversationContextPanelTranslation"
+      x-status: PREVIEW
+    ConversationContextPanelOrderBy:
+      type: object
+      description: ConversationContextPanel orderBy item.
+      properties:
+        $_type:
+          type: string
+          default: ConversationContextPanelOrderBy
+          enum:
+          - ConversationContextPanelOrderBy
+        field:
+          $ref: "#/components/schemas/EConversationContextPanelOrderByField"
+        order:
+          $ref: "#/components/schemas/Order"
+    ConversationContextPanelQuery:
+      type: object
+      description: Container to search conversation context panels
+      properties:
+        $_type:
+          type: string
+          default: ConversationContextPanelQuery
+          enum:
+          - ConversationContextPanelQuery
+        searchFilters:
+          type: array
+          description: List of filters to narrow the search
+          items:
+            $ref: "#/components/schemas/ConversationContextPanelSearchFilter"
+        orderBy:
+          type: array
+          description: List of criteria to order the list of search results
+          items:
+            $ref: "#/components/schemas/ConversationContextPanelOrderBy"
+        offset:
+          type: integer
+          format: int32
+          description: Offset position in the result set to start pagination
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of items returned
+    ConversationContextPanelSearchFilter:
+      description: ConversationContextPanel filter item.
+      oneOf:
+      - $ref: "#/components/schemas/CreationTimestampConversationContextPanelSearchFilter"
+      - $ref: "#/components/schemas/EnabledConversationContextPanelSearchFilter"
+      - $ref: "#/components/schemas/ModificationTimestampConversationContextPanelSearchFilter"
+      - $ref: "#/components/schemas/NameConversationContextPanelSearchFilter"
+      discriminator:
+        propertyName: field
+        mapping:
+          CREATION_TIMESTAMP: "#/components/schemas/CreationTimestampConversationContextPanelSearchFilter"
+          ENABLED: "#/components/schemas/EnabledConversationContextPanelSearchFilter"
+          MODIFICATION_TIMESTAMP: "#/components/schemas/ModificationTimestampConversationContextPanelSearchFilter"
+          NAME: "#/components/schemas/NameConversationContextPanelSearchFilter"
+    ConversationContextPanelSearchResult:
+      type: object
+      description: Container to return a list of conversation context panels.
+      properties:
+        $_type:
+          type: string
+          default: ConversationContextPanelSearchResult
+          enum:
+          - ConversationContextPanelSearchResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/ConversationContextPanelData"
+    ConversationContextPanelTranslation:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: ConversationContextPanelTranslation
+          enum:
+          - ConversationContextPanelTranslation
+        id:
+          type: string
+          description: Unique ID of the entity. When creating an entity this property can be omitted; it is generated by the server.
+        name:
+          type: string
+          description: Translated name of the entity this translation entity belongs to
+        description:
+          type: string
+          description: Translated description of the corresponding description field of the main entity this translation belongs to
     ConversationCreatedEvent:
       type: object
       description: "An event triggered every time a conversation is created <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> <li>`ETypedEventFilterKey.PARTICIPANT_PERSON_ID`: participant person ID</li> </ul>"
@@ -30909,7 +31459,7 @@ components:
           - ConversationCreationData
         topic:
           type: string
-          description: "Topic of the conversation. Optional unless the initial engagement type is `EInitialEngagementType.SCHEDULED_CONVERSATION`, in which case it's mandatory."
+          description: "Topic of the conversation. Optional unless the initial engagement type is `EInitialEngagementType.SCHEDULED_CONVERSATION`, in which case it's mandatory. Must not be longer than 200 characters."
         scheduledTimestamp:
           type: integer
           format: int64
@@ -31060,7 +31610,7 @@ components:
           description: The ID of the account the conversation belongs to
         topic:
           type: string
-          description: Topic of the conversation
+          description: Topic of the conversation. Must not be longer than 200 characters.
         scheduledTimestamp:
           type: integer
           format: int64
@@ -31445,6 +31995,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -34461,7 +35013,7 @@ components:
       properties:
         topic:
           type: string
-          description: the new topic
+          description: the new topic. Must not be longer than 200 characters.
     ConversationsSetVisibilityBody:
       type: object
       description: Request body for the 'conversationsSetVisibility' operation
@@ -34576,6 +35128,8 @@ components:
           type: integer
           format: int32
           description: "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used."
+        defaultContentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         authToken:
           type: string
           description: "The Authentication Token for the Microsoft Copilot Agent. Maximum length: 2000 characters"
@@ -34784,6 +35338,20 @@ components:
           - CreationTimestampConversationAccessInterceptorSearchFilter
         field:
           $ref: "#/components/schemas/EConversationAccessInterceptorSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
+    CreationTimestampConversationContextPanelSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: CreationTimestampConversationContextPanelSearchFilter
+          enum:
+          - CreationTimestampConversationContextPanelSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationContextPanelSearchFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
     CreationTimestampConversationHistorySearchFilter:
@@ -35580,6 +36148,8 @@ components:
           type: integer
           format: int32
           description: "The interval, in milliseconds, between cycling through the pre-configured thinking indicator text messages. Ignored if the text is set via API. Optional; if omitted the system default is used."
+        defaultContentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         webhookStatus:
           $ref: "#/components/schemas/ERegistrationStatus"
         webhookEndpoint:
@@ -37904,11 +38474,13 @@ components:
       - SINGLE_FLOW
       - SUGGESTION_SOURCE
       - CUSTOM_ACTION
+      - WEBHOOK
       x-enum-descriptions:
       - "MULTIFLOW: The content describes a set of flows the bot can choose between"
       - "SINGLE_FLOW: The content describes a single flow the bot runs"
       - "SUGGESTION_SOURCE: The content describes a source the bot draws suggestions from"
       - "CUSTOM_ACTION: The content describes a custom action the bot can invoke"
+      - "WEBHOOK: The content describes a Webhook"
     EAriaAgenticFlowType:
       type: string
       description: Type of an Aria Agentic Flow
@@ -37922,6 +38494,7 @@ components:
       - SUGGESTION_SOURCE_MAIN
       - SUGGESTION_SOURCE_EXECUTABLE
       - CUSTOM_ACTION_MAIN
+      - WEBHOOK_MAIN
       x-enum-descriptions:
       - "NONE: A generic agentic flow"
       - "DIALOG_BOT_ORCHESTRATOR: The orchestrator agentic flow representing the starting point of a Multi-flow Dialog bot, that routes to other agentic flows"
@@ -37932,6 +38505,7 @@ components:
       - "SUGGESTION_SOURCE_MAIN: An agentic flow used for a suggestion source"
       - "SUGGESTION_SOURCE_EXECUTABLE: A custom agentic flow for specific scenarios in a suggestion source"
       - "CUSTOM_ACTION_MAIN: An agentic flow used for a custom action"
+      - "WEBHOOK_MAIN: An agentic flow used for a webhook"
     EAriaDialogBotExternalConfigurationType:
       type: string
       enum:
@@ -38115,6 +38689,15 @@ components:
       - "AVAILABLE: There is at least one agent available for the specified named area and locale."
       - "BUSY: There is at least one agent watching the inbound queue for the specified named area and locale but the max capacity of parallel conversations is reached. It is very likely, that an agent will be available in a short time."
       - "UNAVAILABLE: There is currently no agent handling any inbound queue items. It is very unlikely, that an agent will be available in a short time."
+    EAvatarUrlEntryPath:
+      type: string
+      description: The entry path an avatar URL is addressed to.
+      enum:
+      - PUBLIC
+      - INTERNAL
+      x-enum-descriptions:
+      - "PUBLIC: The URL is addressed to the public entry path, the one visitors use."
+      - "INTERNAL: The URL is addressed to the internal entry path, the one agents use."
     EAvgHandlingTimeGroupBy:
       type: string
       enum:
@@ -39010,6 +39593,30 @@ components:
       - "ASSIGNED_AGENT: The agent the conversation is assigned to"
       - "SECONDARY_AGENT: An agent who joined the conversation in addition to the assigned agent"
       - "GHOST: An agent following the conversation without being visible to the other participants"
+    EConversationContextPanelOrderByField:
+      type: string
+      enum:
+      - NAME
+      - ENABLED
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "NAME: Sort by the 'name' attribute"
+      - "ENABLED: Sort by the 'enabled' attribute"
+      - "CREATION_TIMESTAMP: Sort by the 'creationTimestamp' attribute"
+      - "MODIFICATION_TIMESTAMP: Sort by the 'modificationTimestamp' attribute"
+    EConversationContextPanelSearchFilterField:
+      type: string
+      enum:
+      - NAME
+      - ENABLED
+      - CREATION_TIMESTAMP
+      - MODIFICATION_TIMESTAMP
+      x-enum-descriptions:
+      - "NAME: Filter by the 'name' attribute"
+      - "ENABLED: Filter by the 'enabled' attribute"
+      - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
+      - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EConversationEndReason:
       type: string
       description: Closing reason of a conversation
@@ -40725,6 +41332,36 @@ components:
       x-enum-descriptions:
       - "COOKIE: Cookie from browser"
       - "DEVICE_ID: Device id of MobileSDK"
+    EIframeAllowToken:
+      type: string
+      description: "The permission tokens a conversation context panel's iframe may request via its `allow` attribute, each carrying the Permissions Policy directive it is written as."
+      enum:
+      - MICROPHONE
+      - CAMERA
+      - DISPLAY_CAPTURE
+      - FULLSCREEN
+      - GEOLOCATION
+      - STORAGE_ACCESS
+      - CLIPBOARD_WRITE
+      x-enum-descriptions:
+      - "MICROPHONE: The panel may capture audio, through the iframe's microphone directive"
+      - "CAMERA: The panel may capture video, through the iframe's camera directive"
+      - "DISPLAY_CAPTURE: The panel may capture a screen, window or tab, through the iframe's display-capture directive"
+      - "FULLSCREEN: The panel may take itself fullscreen, through the iframe's fullscreen directive"
+      - "GEOLOCATION: The panel may read the viewer's location, through the iframe's geolocation directive"
+      - "STORAGE_ACCESS: The panel may read its own cookies and storage even when they are partitioned, through the iframe's storage-access directive"
+      - "CLIPBOARD_WRITE: The panel may write to the system clipboard, through the iframe's clipboard-write directive"
+    EImageSize:
+      type: string
+      description: "The standardized image sizes, used for avatar and channel icon images."
+      enum:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      x-enum-descriptions:
+      - "SMALL: Small image size, 64x64 pixels."
+      - "MEDIUM: Medium image size, 128x128 pixels."
+      - "LARGE: Large image size, 256x256 pixels."
     EImpersonationType:
       type: string
       description: Type of impersonation
@@ -41176,6 +41813,15 @@ components:
       - "VIDEO: Only video is being shared (typically through a camera)"
       - "AUDIO_VIDEO: Both audio and video are being shared (typically microphone & camera)"
       - "NONE: No media is being published, the participant is only watching / listening to the call"
+    EMessageContentOrigin:
+      type: string
+      description: How the content of a conversation message was produced. The value is set when the message is created and doesn't change afterward.
+      enum:
+      - AI_GENERATED
+      - AI_MODIFIED
+      x-enum-descriptions:
+      - "AI_GENERATED: The content was generated by an AI system."
+      - "AI_MODIFIED: The content was written by a person with the help of an AI system, for example an agent who edited and sent a suggestion drafted by AI."
     EMessageExportFilterField:
       type: string
       enum:
@@ -42585,6 +43231,20 @@ components:
           $ref: "#/components/schemas/EEmptyChatSuggestionReason"
         hint:
           type: string
+    EnabledConversationContextPanelSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: EnabledConversationContextPanelSearchFilter
+          enum:
+          - EnabledConversationContextPanelSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationContextPanelSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/BooleanOperator"
     EndReasonConversationHistorySearchFilter:
       type: object
       required:
@@ -43313,6 +43973,7 @@ components:
       - configuration
       - dicFile
       - floorPlanImage
+      - icon
       - logoImage
       - metadata
       - text
@@ -44232,6 +44893,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -44330,6 +44993,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         fileName:
           type: string
           description: The name of the file that is send
@@ -46901,6 +47566,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -46964,6 +47631,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         header:
           $ref: "#/components/schemas/MessageHeader"
         items:
@@ -47831,6 +48500,20 @@ components:
           $ref: "#/components/schemas/EConversationAccessInterceptorSearchFilterField"
         operator:
           $ref: "#/components/schemas/TimestampOperator"
+    ModificationTimestampConversationContextPanelSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: ModificationTimestampConversationContextPanelSearchFilter
+          enum:
+          - ModificationTimestampConversationContextPanelSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationContextPanelSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/TimestampOperator"
     ModificationTimestampConversationSummarySearchFilter:
       type: object
       required:
@@ -48141,6 +48824,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -48252,6 +48937,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         text:
           type: string
           description: Question message text
@@ -48381,6 +49068,20 @@ components:
           - NameConversationAccessInterceptorSearchFilter
         field:
           $ref: "#/components/schemas/EConversationAccessInterceptorSearchFilterField"
+        operator:
+          $ref: "#/components/schemas/StringOperator"
+    NameConversationContextPanelSearchFilter:
+      type: object
+      required:
+      - field
+      properties:
+        $_type:
+          type: string
+          default: NameConversationContextPanelSearchFilter
+          enum:
+          - NameConversationContextPanelSearchFilter
+        field:
+          $ref: "#/components/schemas/EConversationContextPanelSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
     NameConversationSummaryTemplateSearchFilter:
@@ -48641,6 +49342,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the named area's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the named area has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
         name:
           type: string
           description: Name of the named area. Maximum of 250 characters. Can not be omitted.
@@ -48712,6 +49418,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the named area's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the named area has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
     NamedAreaList:
       type: object
       properties:
@@ -50874,10 +51585,10 @@ components:
           description: The person's name as displayed in UIs. This is read-only information set by Unblu.
         displayNameForAgent:
           type: string
-          description: The person's display name as displayed to agents. This is read-only information set by the Collaboration Server.
+          description: The person's display name as displayed to agents. This is read-only information set by Unblu.
         displayNameForVisitor:
           type: string
-          description: The person's display name as displayed to visitors. This is read-only information set by the Collaboration Server.
+          description: The person's display name as displayed to visitors. This is read-only information set by Unblu.
         personType:
           $ref: "#/components/schemas/EPersonType"
         authorizationRole:
@@ -50920,6 +51631,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the person's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> Only the person's own avatar is considered: this property is `null` when the person has no avatar of their own, even when the Agent Desk displays an inherited team or account avatar for them.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
         metadata:
           type: object
           description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
@@ -52159,6 +52875,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -52627,6 +53345,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -52747,6 +53467,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         text:
           type: string
           description: Question message text
@@ -52997,6 +53719,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -53109,6 +53833,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -53176,6 +53902,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         questionMessageId:
           type: string
           description: ID of the question message for which this reply is
@@ -54101,6 +54829,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -54188,6 +54918,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the team's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the team has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
         name:
           type: string
           description: Name of the team. Maximum of 250 characters. Can not be omitted.
@@ -54251,6 +54986,11 @@ components:
           - $ref: "#/components/schemas/Avatar"
           x-expand-query-key: avatar
           x-type: ExpandableField
+        avatarUrls:
+          type: array
+          description: "URLs of the team's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> This property is `null` when the team has no avatar.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise."
+          items:
+            $ref: "#/components/schemas/AvatarUrl"
         parentId:
           type: string
           description: "Id of the parent team. Only the default team has no parent team. When creating a team and the parentId is omitted, the default team is automatically inserted by the server."
@@ -54548,6 +55288,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -54619,6 +55361,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         text:
           type: string
           description: Message text
@@ -54687,6 +55431,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -54783,6 +55529,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         text:
           type: string
           description: Message text
@@ -55852,10 +56600,10 @@ components:
           type: string
           description: The account ID the event originated from
         webhookRegistration:
-          $ref: "#/components/schemas/WebhookRegistration"
+          $ref: "#/components/schemas/WebhookRegistrationData"
     WebhookPingEvent:
       type: object
-      description: Event send when using the `ping` to test a webhook
+      description: Event sent when using the webhook registration API's sendPing operation to test a webhook
       properties:
         $_type:
           type: string
@@ -55873,16 +56621,16 @@ components:
           type: string
           description: The account ID the event originated from
         webhookConfiguration:
-          $ref: "#/components/schemas/WebhookRegistration"
-    WebhookRegistration:
+          $ref: "#/components/schemas/WebhookRegistrationData"
+    WebhookRegistrationData:
       type: object
       description: Model of a webhook registration. Registered webhooks for certain events are stored inside this model.
       properties:
         $_type:
           type: string
-          default: WebhookRegistration
+          default: WebhookRegistrationData
           enum:
-          - WebhookRegistration
+          - WebhookRegistrationData
         id:
           type: string
           description: "Unique ID of the entity. When creating an entity, this property can be omitted; it's generated by the server."
@@ -55903,23 +56651,23 @@ components:
           description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
         name:
           type: string
-          description: Name of the webhook registration. Maximum length of 250 characters. Can not be omitted.
+          description: Name of the webhook registration. Maximum length of 250 characters. Mandatory.
         status:
           $ref: "#/components/schemas/ERegistrationStatus"
         description:
           type: string
-          description: Description of the webhook registration. Maximum length of 500 characters. Can be omitted.
+          description: Description of the webhook registration. Maximum length of 500 characters. Optional.
         endpoint:
           type: string
-          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. Can be omitted, but should not."
+          description: "The endpoint URL of the webhook registration. This is the URL that requests for webhook events are sent to. Maximum length of 4000 characters. Mandatory, unless the registration triggers an Aria agentic flow, in which case it must be omitted."
         apiVersion:
           $ref: "#/components/schemas/EWebApiVersion"
         secret:
           type: string
-          description: A secret which is send with each webhook event. Maximum length of 4000 characters. Can be omitted.
+          description: A secret that is sent with each webhook event. Maximum length of 4000 characters. Optional. Prohibited for registrations that trigger an Aria agentic flow.
         filters:
           type: array
-          description: "Defines the filters for the webhook registration. Only events that match all the specified filters will be delivered. Webhook registrations with at least one filter defined must also specify an `expirationTimestamp. Please refer to the documentation of each event to understand the filters they support, as each event supports a specific set of filters. If the webhook registration is for multiple events, all the filters you apply must be supported by all the events."
+          description: "Defines the filters for the webhook registration. Only events that match all the specified filters are delivered. Webhook registrations with at least one filter defined must also specify an `expirationTimestamp`. Each event supports a specific set of filters; for further information, refer to the documentation of each event. If the webhook registration is for multiple events, each event must support all the filters you apply."
           items:
             $ref: "#/components/schemas/WebhookRegistrationFilter"
         expirationTimestamp:
@@ -55928,9 +56676,52 @@ components:
           description: Unix timestamp (ms) when the webhook registration will expire. Mandatory for webhook registrations that define filters. The webhook registration is automatically deleted when the expiration time is reached. This timestamp can be updated at any time to extend the life of the webhook registration.
         events:
           type: array
-          description: "Events for which the webhook endpoint is called, if they occur. Can not be omitted. Check the Webhook Events for possible values."
+          description: "Events for which the webhook endpoint is called, if they occur. Mandatory. Check the Webhook Events for possible values."
           items:
             type: string
+        triggerAgenticFlow:
+          type: boolean
+          description: "Whether this webhook registration triggers an Aria agentic flow rather than call an HTTP endpoint. On create this expresses the caller's wish: if set to `true` and no agentic flow data is imported, a new agentic flow is created from the default template. On read this reflects whether an agentic flow is currently linked. The value cannot be changed on update."
+        agenticFlowData:
+          description: "The Aria agentic flow ID, if the registration triggers an Aria agentic flow. Maximum length 36 characters. Managed by the server, never provided by the caller. Add `?expand=agenticFlowData` to the request to replace this ID with the full flow content."
+          oneOf:
+          - type: string
+          - $ref: "#/components/schemas/AriaAgenticFlowDataContent"
+          x-expand-query-key: agenticFlowData
+          x-type: ExpandableField
+    WebhookRegistrationDataList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WebhookRegistrationDataList
+          enum:
+          - WebhookRegistrationDataList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: "#/components/schemas/WebhookRegistrationData"
+    WebhookRegistrationDataResult:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: WebhookRegistrationDataResult
+          enum:
+          - WebhookRegistrationDataResult
+        hasMoreItems:
+          type: boolean
+          description: Flag to indicate if there are more items on the server
+        nextOffset:
+          type: integer
+          format: int32
+          description: "If there are more items present on the server, this value can be used as the offset in the next query"
+        items:
+          type: array
+          description: The returned list of entities
+          items:
+            $ref: "#/components/schemas/WebhookRegistrationData"
     WebhookRegistrationFilter:
       type: object
       description: Model of a webhook registration event filter.
@@ -55945,19 +56736,6 @@ components:
         value:
           type: string
           description: The value of the filter
-    WebhookRegistrationList:
-      type: object
-      properties:
-        $_type:
-          type: string
-          default: WebhookRegistrationList
-          enum:
-          - WebhookRegistrationList
-        items:
-          type: array
-          description: The list of mapped entities
-          items:
-            $ref: "#/components/schemas/WebhookRegistration"
     WebhookRegistrationOrderBy:
       type: object
       description: WebhookRegistration orderBy item.
@@ -55998,27 +56776,6 @@ components:
           type: integer
           format: int32
           description: Maximum number of items returned
-    WebhookRegistrationResult:
-      type: object
-      description: Container to return list of webhook registrations
-      properties:
-        $_type:
-          type: string
-          default: WebhookRegistrationResult
-          enum:
-          - WebhookRegistrationResult
-        hasMoreItems:
-          type: boolean
-          description: Flag to indicate if there are more items on the server
-        nextOffset:
-          type: integer
-          format: int32
-          description: "If there are more items present on the server, this value can be used as the offset in the next query"
-        items:
-          type: array
-          description: The returned list of entities
-          items:
-            $ref: "#/components/schemas/WebhookRegistration"
     WebhookRegistrationSearchFilter:
       description: WebhookRegistration filter item.
       oneOf:
@@ -56297,6 +57054,8 @@ components:
         internal:
           type: boolean
           description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         replyToMessageId:
           type: string
           description: Optional ID that identifies the message that this message is replying to
@@ -56385,6 +57144,8 @@ components:
         locale:
           type: string
           description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
         templateId:
           type: string
           description: ID of the message template

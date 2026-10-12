@@ -52,7 +52,12 @@ public enum EAriaAgenticFlowType {
 	/**
 	 * CUSTOM_ACTION_MAIN: An agentic flow used for a custom action
 	 */
-	CUSTOM_ACTION_MAIN("CUSTOM_ACTION_MAIN");
+	CUSTOM_ACTION_MAIN("CUSTOM_ACTION_MAIN"),
+
+	/**
+	 * WEBHOOK_MAIN: An agentic flow used for a webhook
+	 */
+	WEBHOOK_MAIN("WEBHOOK_MAIN");
 
 	private String value;
 

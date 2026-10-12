@@ -316,11 +316,11 @@ public class ConversationData {
 	}
 
 	/**
-	 * Topic of the conversation
+	 * Topic of the conversation. Must not be longer than 200 characters.
 	 * 
 	 * @return topic
 	 **/
-	@ApiModelProperty(value = "Topic of the conversation")
+	@ApiModelProperty(value = "Topic of the conversation. Must not be longer than 200 characters.")
 	public String getTopic() {
 		return topic;
 	}

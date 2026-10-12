@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ListPostMessageData.JSON_PROPERTY_TYPE,
 	ListPostMessageData.JSON_PROPERTY_FALLBACK_TEXT,
 	ListPostMessageData.JSON_PROPERTY_LOCALE,
+	ListPostMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	ListPostMessageData.JSON_PROPERTY_HEADER,
 	ListPostMessageData.JSON_PROPERTY_ITEMS,
 	ListPostMessageData.JSON_PROPERTY_ACTIONS,
@@ -80,6 +81,10 @@ public class ListPostMessageData implements PostMessageData {
 	public static final String JSON_PROPERTY_LOCALE = "locale";
 	@JsonProperty(JSON_PROPERTY_LOCALE)
 	private String locale;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_HEADER = "header";
 	@JsonProperty(JSON_PROPERTY_HEADER)
@@ -176,6 +181,25 @@ public class ListPostMessageData implements PostMessageData {
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public ListPostMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
 	}
 
 	public ListPostMessageData header(MessageHeader header) {
@@ -291,6 +315,7 @@ public class ListPostMessageData implements PostMessageData {
 				Objects.equals(this.type, listPostMessageData.type) &&
 				Objects.equals(this.fallbackText, listPostMessageData.fallbackText) &&
 				Objects.equals(this.locale, listPostMessageData.locale) &&
+				Objects.equals(this.contentOrigin, listPostMessageData.contentOrigin) &&
 				Objects.equals(this.header, listPostMessageData.header) &&
 				Objects.equals(this.items, listPostMessageData.items) &&
 				Objects.equals(this.actions, listPostMessageData.actions) &&
@@ -299,7 +324,7 @@ public class ListPostMessageData implements PostMessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, fallbackText, locale, header, items, actions, quickReplies);
+		return Objects.hash($type, type, fallbackText, locale, contentOrigin, header, items, actions, quickReplies);
 	}
 
 	@Override
@@ -310,6 +335,7 @@ public class ListPostMessageData implements PostMessageData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    fallbackText: ").append(toIndentedString(fallbackText)).append("\n");
 		sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    header: ").append(toIndentedString(header)).append("\n");
 		sb.append("    items: ").append(toIndentedString(items)).append("\n");
 		sb.append("    actions: ").append(toIndentedString(actions)).append("\n");

@@ -48,6 +48,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CopilotDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
 	CopilotDialogBotData.JSON_PROPERTY_AUTO_START_THINKING_INDICATOR_DELAY,
 	CopilotDialogBotData.JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL,
+	CopilotDialogBotData.JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN,
 	CopilotDialogBotData.JSON_PROPERTY_AUTH_TOKEN,
 	CopilotDialogBotData.JSON_PROPERTY_COPILOT_ID,
 	CopilotDialogBotData.JSON_PROPERTY_COPILOT_ENVIRONMENT_ID,
@@ -198,6 +199,10 @@ public class CopilotDialogBotData implements DialogBotData {
 	public static final String JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL = "thinkingIndicatorTextCycleInterval";
 	@JsonProperty(JSON_PROPERTY_THINKING_INDICATOR_TEXT_CYCLE_INTERVAL)
 	private Integer thinkingIndicatorTextCycleInterval;
+
+	public static final String JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN = "defaultContentOrigin";
+	@JsonProperty(JSON_PROPERTY_DEFAULT_CONTENT_ORIGIN)
+	private EMessageContentOrigin defaultContentOrigin;
 
 	public static final String JSON_PROPERTY_AUTH_TOKEN = "authToken";
 	@JsonProperty(JSON_PROPERTY_AUTH_TOKEN)
@@ -760,6 +765,25 @@ public class CopilotDialogBotData implements DialogBotData {
 		this.thinkingIndicatorTextCycleInterval = thinkingIndicatorTextCycleInterval;
 	}
 
+	public CopilotDialogBotData defaultContentOrigin(EMessageContentOrigin defaultContentOrigin) {
+		this.defaultContentOrigin = defaultContentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get defaultContentOrigin
+	 * 
+	 * @return defaultContentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getDefaultContentOrigin() {
+		return defaultContentOrigin;
+	}
+
+	public void setDefaultContentOrigin(EMessageContentOrigin defaultContentOrigin) {
+		this.defaultContentOrigin = defaultContentOrigin;
+	}
+
 	public CopilotDialogBotData authToken(String authToken) {
 		this.authToken = authToken;
 		return this;
@@ -937,6 +961,7 @@ public class CopilotDialogBotData implements DialogBotData {
 				Objects.equals(this.maxThinkingIndicatorTime, copilotDialogBotData.maxThinkingIndicatorTime) &&
 				Objects.equals(this.autoStartThinkingIndicatorDelay, copilotDialogBotData.autoStartThinkingIndicatorDelay) &&
 				Objects.equals(this.thinkingIndicatorTextCycleInterval, copilotDialogBotData.thinkingIndicatorTextCycleInterval) &&
+				Objects.equals(this.defaultContentOrigin, copilotDialogBotData.defaultContentOrigin) &&
 				Objects.equals(this.authToken, copilotDialogBotData.authToken) &&
 				Objects.equals(this.copilotId, copilotDialogBotData.copilotId) &&
 				Objects.equals(this.copilotEnvironmentId, copilotDialogBotData.copilotEnvironmentId) &&
@@ -948,7 +973,7 @@ public class CopilotDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
 	}
 
 	@Override
@@ -982,6 +1007,7 @@ public class CopilotDialogBotData implements DialogBotData {
 		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");
 		sb.append("    autoStartThinkingIndicatorDelay: ").append(toIndentedString(autoStartThinkingIndicatorDelay)).append("\n");
 		sb.append("    thinkingIndicatorTextCycleInterval: ").append(toIndentedString(thinkingIndicatorTextCycleInterval)).append("\n");
+		sb.append("    defaultContentOrigin: ").append(toIndentedString(defaultContentOrigin)).append("\n");
 		sb.append("    authToken: ").append(toIndentedString(authToken)).append("\n");
 		sb.append("    copilotId: ").append(toIndentedString(copilotId)).append("\n");
 		sb.append("    copilotEnvironmentId: ").append(toIndentedString(copilotEnvironmentId)).append("\n");

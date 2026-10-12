@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ApprovalRequestMessageData.JSON_PROPERTY_SOURCE_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_INTERNAL,
+	ApprovalRequestMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	ApprovalRequestMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
@@ -148,6 +149,10 @@ public class ApprovalRequestMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
@@ -513,6 +518,25 @@ public class ApprovalRequestMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public ApprovalRequestMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+	}
+
 	public ApprovalRequestMessageData replyToMessageId(String replyToMessageId) {
 		this.replyToMessageId = replyToMessageId;
 		return this;
@@ -784,6 +808,7 @@ public class ApprovalRequestMessageData implements MessageData {
 				Objects.equals(this.sourceId, approvalRequestMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, approvalRequestMessageData.botThreadId) &&
 				Objects.equals(this.internal, approvalRequestMessageData.internal) &&
+				Objects.equals(this.contentOrigin, approvalRequestMessageData.contentOrigin) &&
 				Objects.equals(this.replyToMessageId, approvalRequestMessageData.replyToMessageId) &&
 				Objects.equals(this.externalMessageId, approvalRequestMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, approvalRequestMessageData.replyToExternalMessageId) &&
@@ -800,7 +825,7 @@ public class ApprovalRequestMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text, textType, options, answerStatus, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text, textType, options, answerStatus, availableTranslations);
 	}
 
 	@Override
@@ -823,6 +848,7 @@ public class ApprovalRequestMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");

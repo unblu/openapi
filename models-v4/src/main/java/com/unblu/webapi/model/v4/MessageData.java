@@ -112,6 +112,12 @@ public interface MessageData {
 
 	MessageData internal(Boolean internal);
 
+	void setContentOrigin(EMessageContentOrigin contentOrigin);
+
+	EMessageContentOrigin getContentOrigin();
+
+	MessageData contentOrigin(EMessageContentOrigin contentOrigin);
+
 	void setReplyToMessageId(String replyToMessageId);
 
 	String getReplyToMessageId();

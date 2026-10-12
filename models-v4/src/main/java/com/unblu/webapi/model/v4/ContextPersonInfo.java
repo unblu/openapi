@@ -48,6 +48,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ContextPersonInfo.JSON_PROPERTY_ARCHIVED,
 	ContextPersonInfo.JSON_PROPERTY_LINKS,
 	ContextPersonInfo.JSON_PROPERTY_AVATAR,
+	ContextPersonInfo.JSON_PROPERTY_AVATAR_URLS,
 	ContextPersonInfo.JSON_PROPERTY_OS_NAME,
 	ContextPersonInfo.JSON_PROPERTY_OS_VERSION,
 	ContextPersonInfo.JSON_PROPERTY_BROWSER_NAME,
@@ -198,6 +199,10 @@ public class ContextPersonInfo {
 	public static final String JSON_PROPERTY_AVATAR = "avatar";
 	@JsonProperty(JSON_PROPERTY_AVATAR)
 	private ExpandableField<Avatar> avatar = null;
+
+	public static final String JSON_PROPERTY_AVATAR_URLS = "avatarUrls";
+	@JsonProperty(JSON_PROPERTY_AVATAR_URLS)
+	private List<AvatarUrl> avatarUrls = null;
 
 	public static final String JSON_PROPERTY_OS_NAME = "osName";
 	@JsonProperty(JSON_PROPERTY_OS_NAME)
@@ -485,11 +490,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * The person&#39;s display name as displayed to agents. This is read-only information set by the Collaboration Server.
+	 * The person&#39;s display name as displayed to agents. This is read-only information set by Unblu.
 	 * 
 	 * @return displayNameForAgent
 	 **/
-	@ApiModelProperty(value = "The person's display name as displayed to agents. This is read-only information set by the Collaboration Server.")
+	@ApiModelProperty(value = "The person's display name as displayed to agents. This is read-only information set by Unblu.")
 	public String getDisplayNameForAgent() {
 		return displayNameForAgent;
 	}
@@ -504,11 +509,11 @@ public class ContextPersonInfo {
 	}
 
 	/**
-	 * The person&#39;s display name as displayed to visitors. This is read-only information set by the Collaboration Server.
+	 * The person&#39;s display name as displayed to visitors. This is read-only information set by Unblu.
 	 * 
 	 * @return displayNameForVisitor
 	 **/
-	@ApiModelProperty(value = "The person's display name as displayed to visitors. This is read-only information set by the Collaboration Server.")
+	@ApiModelProperty(value = "The person's display name as displayed to visitors. This is read-only information set by Unblu.")
 	public String getDisplayNameForVisitor() {
 		return displayNameForVisitor;
 	}
@@ -761,6 +766,37 @@ public class ContextPersonInfo {
 		this.avatar = avatar;
 	}
 
+	public ContextPersonInfo avatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+		return this;
+	}
+
+	public ContextPersonInfo addAvatarUrlsItem(AvatarUrl avatarUrlsItem) {
+		if (this.avatarUrls == null) {
+			this.avatarUrls = new ArrayList<>();
+		}
+		this.avatarUrls.add(avatarUrlsItem);
+		return this;
+	}
+
+	/**
+	 * URLs of the person&#39;s avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.&lt;br&gt; Fetching an
+	 * avatar image requires no authentication.&lt;br&gt; This is a read-only property. Any value provided in create or update operations will be ignored.&lt;br&gt;
+	 * Only the person&#39;s own avatar is considered: this property is &#x60;null&#x60; when the person has no avatar of their own, even when the Agent Desk
+	 * displays an inherited team or account avatar for them.&lt;br&gt; Each URL is absolute when the server is configured with a base URL for its entry path, and
+	 * relative to the server root otherwise.
+	 * 
+	 * @return avatarUrls
+	 **/
+	@ApiModelProperty(value = "URLs of the person's avatar, one for each of the sizes SMALL, MEDIUM and LARGE on each of the PUBLIC and INTERNAL entry paths.<br> Fetching an avatar image requires no authentication.<br> This is a read-only property. Any value provided in create or update operations will be ignored.<br> Only the person's own avatar is considered: this property is `null` when the person has no avatar of their own, even when the Agent Desk displays an inherited team or account avatar for them.<br> Each URL is absolute when the server is configured with a base URL for its entry path, and relative to the server root otherwise.")
+	public List<AvatarUrl> getAvatarUrls() {
+		return avatarUrls;
+	}
+
+	public void setAvatarUrls(List<AvatarUrl> avatarUrls) {
+		this.avatarUrls = avatarUrls;
+	}
+
 	public ContextPersonInfo osName(String osName) {
 		this.osName = osName;
 		return this;
@@ -930,6 +966,7 @@ public class ContextPersonInfo {
 				Objects.equals(this.archived, contextPersonInfo.archived) &&
 				Objects.equals(this.links, contextPersonInfo.links) &&
 				Objects.equals(this.avatar, contextPersonInfo.avatar) &&
+				Objects.equals(this.avatarUrls, contextPersonInfo.avatarUrls) &&
 				Objects.equals(this.osName, contextPersonInfo.osName) &&
 				Objects.equals(this.osVersion, contextPersonInfo.osVersion) &&
 				Objects.equals(this.browserName, contextPersonInfo.browserName) &&
@@ -941,7 +978,7 @@ public class ContextPersonInfo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, archived, links, avatar, osName, osVersion, browserName, browserVersion, locale, city, country);
+		return Objects.hash($type, id, accountId, personSource, sourceId, sourceUrl, sourceData, firstName, lastName, functionTitle, username, nickname, displayName, displayNameForAgent, displayNameForVisitor, personType, authorizationRole, email, phone, teamId, labels, note, noteLastEditedTimestamp, noteLastEditedPersonId, archived, links, avatar, avatarUrls, osName, osVersion, browserName, browserVersion, locale, city, country);
 	}
 
 	@Override
@@ -975,6 +1012,7 @@ public class ContextPersonInfo {
 		sb.append("    archived: ").append(toIndentedString(archived)).append("\n");
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+		sb.append("    avatarUrls: ").append(toIndentedString(avatarUrls)).append("\n");
 		sb.append("    osName: ").append(toIndentedString(osName)).append("\n");
 		sb.append("    osVersion: ").append(toIndentedString(osVersion)).append("\n");
 		sb.append("    browserName: ").append(toIndentedString(browserName)).append("\n");

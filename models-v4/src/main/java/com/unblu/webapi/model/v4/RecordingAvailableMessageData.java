@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordingAvailableMessageData.JSON_PROPERTY_SOURCE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BOT_THREAD_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_INTERNAL,
+	RecordingAvailableMessageData.JSON_PROPERTY_CONTENT_ORIGIN,
 	RecordingAvailableMessageData.JSON_PROPERTY_REPLY_TO_MESSAGE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_EXTERNAL_MESSAGE_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_REPLY_TO_EXTERNAL_MESSAGE_ID,
@@ -148,6 +149,10 @@ public class RecordingAvailableMessageData implements MessageData {
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
 	private Boolean internal;
+
+	public static final String JSON_PROPERTY_CONTENT_ORIGIN = "contentOrigin";
+	@JsonProperty(JSON_PROPERTY_CONTENT_ORIGIN)
+	private EMessageContentOrigin contentOrigin;
 
 	public static final String JSON_PROPERTY_REPLY_TO_MESSAGE_ID = "replyToMessageId";
 	@JsonProperty(JSON_PROPERTY_REPLY_TO_MESSAGE_ID)
@@ -513,6 +518,25 @@ public class RecordingAvailableMessageData implements MessageData {
 		this.internal = internal;
 	}
 
+	public RecordingAvailableMessageData contentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+		return this;
+	}
+
+	/**
+	 * Get contentOrigin
+	 * 
+	 * @return contentOrigin
+	 **/
+	@ApiModelProperty(value = "")
+	public EMessageContentOrigin getContentOrigin() {
+		return contentOrigin;
+	}
+
+	public void setContentOrigin(EMessageContentOrigin contentOrigin) {
+		this.contentOrigin = contentOrigin;
+	}
+
 	public RecordingAvailableMessageData replyToMessageId(String replyToMessageId) {
 		this.replyToMessageId = replyToMessageId;
 		return this;
@@ -767,6 +791,7 @@ public class RecordingAvailableMessageData implements MessageData {
 				Objects.equals(this.sourceId, recordingAvailableMessageData.sourceId) &&
 				Objects.equals(this.botThreadId, recordingAvailableMessageData.botThreadId) &&
 				Objects.equals(this.internal, recordingAvailableMessageData.internal) &&
+				Objects.equals(this.contentOrigin, recordingAvailableMessageData.contentOrigin) &&
 				Objects.equals(this.replyToMessageId, recordingAvailableMessageData.replyToMessageId) &&
 				Objects.equals(this.externalMessageId, recordingAvailableMessageData.externalMessageId) &&
 				Objects.equals(this.replyToExternalMessageId, recordingAvailableMessageData.replyToExternalMessageId) &&
@@ -783,7 +808,7 @@ public class RecordingAvailableMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, blobId, blobSize, fileName, startTimestamp, endTimestamp);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, blobId, blobSize, fileName, startTimestamp, endTimestamp);
 	}
 
 	@Override
@@ -806,6 +831,7 @@ public class RecordingAvailableMessageData implements MessageData {
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
 		sb.append("    botThreadId: ").append(toIndentedString(botThreadId)).append("\n");
 		sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
+		sb.append("    contentOrigin: ").append(toIndentedString(contentOrigin)).append("\n");
 		sb.append("    replyToMessageId: ").append(toIndentedString(replyToMessageId)).append("\n");
 		sb.append("    externalMessageId: ").append(toIndentedString(externalMessageId)).append("\n");
 		sb.append("    replyToExternalMessageId: ").append(toIndentedString(replyToExternalMessageId)).append("\n");
