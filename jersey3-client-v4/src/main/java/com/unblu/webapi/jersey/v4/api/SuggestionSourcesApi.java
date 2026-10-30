@@ -38,10 +38,12 @@ public class SuggestionSourcesApi {
 	}
 
 	/**
-	 * create Creates a new suggestion source&lt;br&gt;
+	 * create Creates a new suggestion source. You can only create an Aria suggestion source with &#x60;outboundStatus&#x60; set to &#x60;ENABLED&#x60; if the
+	 * &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData The suggestion source to create. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -50,10 +52,12 @@ public class SuggestionSourcesApi {
 	}
 
 	/**
-	 * create Creates a new suggestion source&lt;br&gt;
+	 * create Creates a new suggestion source. You can only create an Aria suggestion source with &#x60;outboundStatus&#x60; set to &#x60;ENABLED&#x60; if the
+	 * &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData The suggestion source to create. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -145,7 +149,7 @@ public class SuggestionSourcesApi {
 	 * getByName Searches for an existing suggestion source with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the suggestion source. (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -157,7 +161,7 @@ public class SuggestionSourcesApi {
 	 * getByName Searches for an existing suggestion source with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the suggestion source. (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -196,7 +200,7 @@ public class SuggestionSourcesApi {
 	 * read Reads an existing suggestion source.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceId The ID of the suggestion source. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -208,7 +212,7 @@ public class SuggestionSourcesApi {
 	 * read Reads an existing suggestion source.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceId The ID of the suggestion source. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -354,10 +358,12 @@ public class SuggestionSourcesApi {
 	}
 
 	/**
-	 * update Updates an existing suggestion source.&lt;br&gt;
+	 * update Updates an existing suggestion source. You can only set the &#x60;outboundStatus&#x60; of an Aria suggestion source to &#x60;ENABLED&#x60; if its
+	 * agentic flow has a published version or if the &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return SuggestionSourceData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -366,10 +372,12 @@ public class SuggestionSourcesApi {
 	}
 
 	/**
-	 * update Updates an existing suggestion source.&lt;br&gt;
+	 * update Updates an existing suggestion source. You can only set the &#x60;outboundStatus&#x60; of an Aria suggestion source to &#x60;ENABLED&#x60; if its
+	 * agentic flow has a published version or if the &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param suggestionSourceData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;SuggestionSourceData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

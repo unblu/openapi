@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationData.JSON_PROPERTY_VISITOR_DATA,
 	ConversationData.JSON_PROPERTY_CONVERSATION_TEMPLATE_ID,
 	ConversationData.JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS,
+	ConversationData.JSON_PROPERTY_USING_ONLY_ENCRYPTED_STORES,
 	ConversationData.JSON_PROPERTY_LINKS,
 	ConversationData.JSON_PROPERTY_EXTERNAL_MESSENGER_CHANNEL_ID,
 	ConversationData.JSON_PROPERTY_SOURCE_ID,
@@ -169,6 +170,10 @@ public class ConversationData {
 	public static final String JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS = "inheritConfigurationAndTexts";
 	@JsonProperty(JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS)
 	private Boolean inheritConfigurationAndTexts;
+
+	public static final String JSON_PROPERTY_USING_ONLY_ENCRYPTED_STORES = "usingOnlyEncryptedStores";
+	@JsonProperty(JSON_PROPERTY_USING_ONLY_ENCRYPTED_STORES)
+	private Boolean usingOnlyEncryptedStores;
 
 	public static final String JSON_PROPERTY_LINKS = "links";
 	@JsonProperty(JSON_PROPERTY_LINKS)
@@ -628,6 +633,27 @@ public class ConversationData {
 		this.inheritConfigurationAndTexts = inheritConfigurationAndTexts;
 	}
 
+	public ConversationData usingOnlyEncryptedStores(Boolean usingOnlyEncryptedStores) {
+		this.usingOnlyEncryptedStores = usingOnlyEncryptedStores;
+		return this;
+	}
+
+	/**
+	 * True if the conversation keeps its data only in encrypted stores: its messages aren&#39;t indexed for search and its analytics events are redacted. Set when
+	 * the conversation is created, from its conversation template or the account default, and never changes afterward. This is a read-only property. Any value
+	 * provided in create or update operations will be ignored.
+	 * 
+	 * @return usingOnlyEncryptedStores
+	 **/
+	@ApiModelProperty(value = "True if the conversation keeps its data only in encrypted stores: its messages aren't indexed for search and its analytics events are redacted. Set when the conversation is created, from its conversation template or the account default, and never changes afterward. This is a read-only property. Any value provided in create or update operations will be ignored.")
+	public Boolean isUsingOnlyEncryptedStores() {
+		return usingOnlyEncryptedStores;
+	}
+
+	public void setUsingOnlyEncryptedStores(Boolean usingOnlyEncryptedStores) {
+		this.usingOnlyEncryptedStores = usingOnlyEncryptedStores;
+	}
+
 	public ConversationData links(List<ConversationLink> links) {
 		this.links = links;
 		return this;
@@ -905,6 +931,7 @@ public class ConversationData {
 				Objects.equals(this.visitorData, conversationData.visitorData) &&
 				Objects.equals(this.conversationTemplateId, conversationData.conversationTemplateId) &&
 				Objects.equals(this.inheritConfigurationAndTexts, conversationData.inheritConfigurationAndTexts) &&
+				Objects.equals(this.usingOnlyEncryptedStores, conversationData.usingOnlyEncryptedStores) &&
 				Objects.equals(this.links, conversationData.links) &&
 				Objects.equals(this.externalMessengerChannelId, conversationData.externalMessengerChannelId) &&
 				Objects.equals(this.sourceId, conversationData.sourceId) &&
@@ -920,7 +947,7 @@ public class ConversationData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, creationTimestamp, endTimestamp, id, accountId, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, labels, state, initialEngagementType, conversationVisibility, locale, tokboxSessionId, visitorData, conversationTemplateId, inheritConfigurationAndTexts, links, externalMessengerChannelId, sourceId, sourceUrl, endReason, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, metadata, _configuration, text);
+		return Objects.hash($type, creationTimestamp, endTimestamp, id, accountId, topic, scheduledTimestamp, recipient, participants, externalParticipants, botParticipants, labels, state, initialEngagementType, conversationVisibility, locale, tokboxSessionId, visitorData, conversationTemplateId, inheritConfigurationAndTexts, usingOnlyEncryptedStores, links, externalMessengerChannelId, sourceId, sourceUrl, endReason, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, metadata, _configuration, text);
 	}
 
 	@Override
@@ -947,6 +974,7 @@ public class ConversationData {
 		sb.append("    visitorData: ").append(toIndentedString(visitorData)).append("\n");
 		sb.append("    conversationTemplateId: ").append(toIndentedString(conversationTemplateId)).append("\n");
 		sb.append("    inheritConfigurationAndTexts: ").append(toIndentedString(inheritConfigurationAndTexts)).append("\n");
+		sb.append("    usingOnlyEncryptedStores: ").append(toIndentedString(usingOnlyEncryptedStores)).append("\n");
 		sb.append("    links: ").append(toIndentedString(links)).append("\n");
 		sb.append("    externalMessengerChannelId: ").append(toIndentedString(externalMessengerChannelId)).append("\n");
 		sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");

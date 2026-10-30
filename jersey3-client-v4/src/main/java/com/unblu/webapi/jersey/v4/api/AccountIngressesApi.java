@@ -42,7 +42,8 @@ public class AccountIngressesApi {
 	 * create Creates a new account ingress&lt;br&gt;
 	 * 
 	 * @param accountIngressCreateBody The account ingress to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return AccountIngressData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -54,7 +55,8 @@ public class AccountIngressesApi {
 	 * create Creates a new account ingress&lt;br&gt;
 	 * 
 	 * @param accountIngressCreateBody The account ingress to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountIngressData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -148,7 +150,7 @@ public class AccountIngressesApi {
 	 * read Reads an existing account ingress&lt;br&gt;
 	 * 
 	 * @param accountIngressId The ID of the account ingress to read (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return AccountIngressData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -160,7 +162,7 @@ public class AccountIngressesApi {
 	 * read Reads an existing account ingress&lt;br&gt;
 	 * 
 	 * @param accountIngressId The ID of the account ingress to read (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountIngressData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -204,7 +206,7 @@ public class AccountIngressesApi {
 	 * search Search for account ingresses in the current account&lt;br&gt;
 	 * 
 	 * @param accountIngressQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return AccountIngressDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -216,7 +218,7 @@ public class AccountIngressesApi {
 	 * search Search for account ingresses in the current account&lt;br&gt;
 	 * 
 	 * @param accountIngressQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountIngressDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -260,7 +262,7 @@ public class AccountIngressesApi {
 	 * &#x60;EEntryPath.PUBLIC&#x60; ingress.&lt;br&gt;
 	 * 
 	 * @param accountIngressId The ID of the account ingress to set as the primary ingress (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return AccountIngressData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -273,7 +275,7 @@ public class AccountIngressesApi {
 	 * &#x60;EEntryPath.PUBLIC&#x60; ingress.&lt;br&gt;
 	 * 
 	 * @param accountIngressId The ID of the account ingress to set as the primary ingress (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountIngressData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -317,7 +319,8 @@ public class AccountIngressesApi {
 	 * update Updates an account ingress&lt;br&gt;
 	 * 
 	 * @param accountIngressUpdateBody The account ingress with the updated values (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return AccountIngressData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -329,7 +332,8 @@ public class AccountIngressesApi {
 	 * update Updates an account ingress&lt;br&gt;
 	 * 
 	 * @param accountIngressUpdateBody The account ingress with the updated values (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountIngressData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -374,7 +378,7 @@ public class AccountIngressesApi {
 	 * @param accountIngressId The ID of the account ingress to be updated (required)
 	 * @param requestBody The key-value map of settings to update. The source for this map has to be the &lt;code&gt;configuration&lt;/code&gt; attribute when you
 	 * read the account ingress using &lt;code&gt;configuration&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return AccountIngressData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -388,7 +392,7 @@ public class AccountIngressesApi {
 	 * @param accountIngressId The ID of the account ingress to be updated (required)
 	 * @param requestBody The key-value map of settings to update. The source for this map has to be the &lt;code&gt;configuration&lt;/code&gt; attribute when you
 	 * read the account ingress using &lt;code&gt;configuration&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountIngressData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -439,7 +443,7 @@ public class AccountIngressesApi {
 	 * @param accountIngressId The ID of the account ingress to update (required)
 	 * @param requestBody The key-value map of metadata to update. The source for this map has to be the &lt;code&gt;metadata&lt;/code&gt; attribute when you read
 	 * the account ingress using &lt;code&gt;metadata&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return AccountIngressData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -453,7 +457,7 @@ public class AccountIngressesApi {
 	 * @param accountIngressId The ID of the account ingress to update (required)
 	 * @param requestBody The key-value map of metadata to update. The source for this map has to be the &lt;code&gt;metadata&lt;/code&gt; attribute when you read
 	 * the account ingress using &lt;code&gt;metadata&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountIngressData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

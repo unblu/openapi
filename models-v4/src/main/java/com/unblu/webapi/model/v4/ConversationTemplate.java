@@ -1,7 +1,9 @@
 
 package com.unblu.webapi.model.v4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -32,8 +34,10 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationTemplate.JSON_PROPERTY_DEFAULT_TEMPLATE,
 	ConversationTemplate.JSON_PROPERTY_CONVERSATION_VISIBILITY,
 	ConversationTemplate.JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE,
+	ConversationTemplate.JSON_PROPERTY_USE_ONLY_ENCRYPTED_STORES,
 	ConversationTemplate.JSON_PROPERTY_TRANSLATIONS,
 	ConversationTemplate.JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS,
+	ConversationTemplate.JSON_PROPERTY_INITIAL_LABEL_NAMES,
 	ConversationTemplate.JSON_PROPERTY_CONFIGURATION,
 	ConversationTemplate.JSON_PROPERTY_TEXT,
 	ConversationTemplate.JSON_PROPERTY_METADATA,
@@ -117,6 +121,10 @@ public class ConversationTemplate {
 	@JsonProperty(JSON_PROPERTY_INITIAL_ENGAGEMENT_TYPE)
 	private EInitialEngagementType initialEngagementType;
 
+	public static final String JSON_PROPERTY_USE_ONLY_ENCRYPTED_STORES = "useOnlyEncryptedStores";
+	@JsonProperty(JSON_PROPERTY_USE_ONLY_ENCRYPTED_STORES)
+	private Boolean useOnlyEncryptedStores;
+
 	public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
 	@JsonProperty(JSON_PROPERTY_TRANSLATIONS)
 	private Map<String, ConversationTemplateTranslation> translations = null;
@@ -124,6 +132,10 @@ public class ConversationTemplate {
 	public static final String JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS = "inheritConfigurationAndTexts";
 	@JsonProperty(JSON_PROPERTY_INHERIT_CONFIGURATION_AND_TEXTS)
 	private Boolean inheritConfigurationAndTexts;
+
+	public static final String JSON_PROPERTY_INITIAL_LABEL_NAMES = "initialLabelNames";
+	@JsonProperty(JSON_PROPERTY_INITIAL_LABEL_NAMES)
+	private List<String> initialLabelNames = null;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -351,6 +363,27 @@ public class ConversationTemplate {
 		this.initialEngagementType = initialEngagementType;
 	}
 
+	public ConversationTemplate useOnlyEncryptedStores(Boolean useOnlyEncryptedStores) {
+		this.useOnlyEncryptedStores = useOnlyEncryptedStores;
+		return this;
+	}
+
+	/**
+	 * True if conversations created from this template keep their data only in encrypted stores: their messages aren&#39;t indexed for search and their analytics
+	 * events are redacted. If omitted, the account&#39;s &#x60;com.unblu.conversation.encryption.useOnlyEncryptedStores&#x60; setting applies. Ignored while data
+	 * encryption is disabled on the account.
+	 * 
+	 * @return useOnlyEncryptedStores
+	 **/
+	@ApiModelProperty(value = "True if conversations created from this template keep their data only in encrypted stores: their messages aren't indexed for search and their analytics events are redacted. If omitted, the account's `com.unblu.conversation.encryption.useOnlyEncryptedStores` setting applies. Ignored while data encryption is disabled on the account.")
+	public Boolean isUseOnlyEncryptedStores() {
+		return useOnlyEncryptedStores;
+	}
+
+	public void setUseOnlyEncryptedStores(Boolean useOnlyEncryptedStores) {
+		this.useOnlyEncryptedStores = useOnlyEncryptedStores;
+	}
+
 	public ConversationTemplate translations(Map<String, ConversationTemplateTranslation> translations) {
 		this.translations = translations;
 		return this;
@@ -365,11 +398,12 @@ public class ConversationTemplate {
 	}
 
 	/**
-	 * A map of localized versions of the name and description of this entity
+	 * A map of localized versions of the name and description of this entity. Unblu takes a default template&#39;s displayed name and description from text
+	 * properties, and any value sent to the Unblu server for a default template is ignored.
 	 * 
 	 * @return translations
 	 **/
-	@ApiModelProperty(value = "A map of localized versions of the name and description of this entity")
+	@ApiModelProperty(value = "A map of localized versions of the name and description of this entity. Unblu takes a default template's displayed name and description from text properties, and any value sent to the Unblu server for a default template is ignored.")
 	public Map<String, ConversationTemplateTranslation> getTranslations() {
 		return translations;
 	}
@@ -396,6 +430,37 @@ public class ConversationTemplate {
 
 	public void setInheritConfigurationAndTexts(Boolean inheritConfigurationAndTexts) {
 		this.inheritConfigurationAndTexts = inheritConfigurationAndTexts;
+	}
+
+	public ConversationTemplate initialLabelNames(List<String> initialLabelNames) {
+		this.initialLabelNames = initialLabelNames;
+		return this;
+	}
+
+	public ConversationTemplate addInitialLabelNamesItem(String initialLabelNamesItem) {
+		if (this.initialLabelNames == null) {
+			this.initialLabelNames = new ArrayList<>();
+		}
+		this.initialLabelNames.add(initialLabelNamesItem);
+		return this;
+	}
+
+	/**
+	 * Names of the labels to assign to every conversation created from this template. Each label must be settable on conversations, and no two labels may share a
+	 * scope; otherwise saving the conversation template fails with an invalid-labels error. You can specify up to 100 labels. The labels are assigned once, when
+	 * the conversation is created, so changing this list afterward doesn&#39;t affect existing conversations. If labels are given in the request that creates the
+	 * conversation, those are assigned as well; where a label given in the request has the same scope as one listed here, the one from the request is kept. You
+	 * can&#39;t delete a label listed here or remove &#x60;CONVERSATION&#x60; from its &#x60;settableOn&#x60; targets.
+	 * 
+	 * @return initialLabelNames
+	 **/
+	@ApiModelProperty(value = "Names of the labels to assign to every conversation created from this template. Each label must be settable on conversations, and no two labels may share a scope; otherwise saving the conversation template fails with an invalid-labels error. You can specify up to 100 labels. The labels are assigned once, when the conversation is created, so changing this list afterward doesn't affect existing conversations. If labels are given in the request that creates the conversation, those are assigned as well; where a label given in the request has the same scope as one listed here, the one from the request is kept. You can't delete a label listed here or remove `CONVERSATION` from its `settableOn` targets.")
+	public List<String> getInitialLabelNames() {
+		return initialLabelNames;
+	}
+
+	public void setInitialLabelNames(List<String> initialLabelNames) {
+		this.initialLabelNames = initialLabelNames;
 	}
 
 	public ConversationTemplate _configuration(Map<String, String> _configuration) {
@@ -502,8 +567,10 @@ public class ConversationTemplate {
 				Objects.equals(this.defaultTemplate, conversationTemplate.defaultTemplate) &&
 				Objects.equals(this.conversationVisibility, conversationTemplate.conversationVisibility) &&
 				Objects.equals(this.initialEngagementType, conversationTemplate.initialEngagementType) &&
+				Objects.equals(this.useOnlyEncryptedStores, conversationTemplate.useOnlyEncryptedStores) &&
 				Objects.equals(this.translations, conversationTemplate.translations) &&
 				Objects.equals(this.inheritConfigurationAndTexts, conversationTemplate.inheritConfigurationAndTexts) &&
+				Objects.equals(this.initialLabelNames, conversationTemplate.initialLabelNames) &&
 				Objects.equals(this._configuration, conversationTemplate._configuration) &&
 				Objects.equals(this.text, conversationTemplate.text) &&
 				Objects.equals(this.metadata, conversationTemplate.metadata);
@@ -511,7 +578,7 @@ public class ConversationTemplate {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, defaultTemplate, conversationVisibility, initialEngagementType, translations, inheritConfigurationAndTexts, _configuration, text, metadata);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, defaultTemplate, conversationVisibility, initialEngagementType, useOnlyEncryptedStores, translations, inheritConfigurationAndTexts, initialLabelNames, _configuration, text, metadata);
 	}
 
 	@Override
@@ -529,8 +596,10 @@ public class ConversationTemplate {
 		sb.append("    defaultTemplate: ").append(toIndentedString(defaultTemplate)).append("\n");
 		sb.append("    conversationVisibility: ").append(toIndentedString(conversationVisibility)).append("\n");
 		sb.append("    initialEngagementType: ").append(toIndentedString(initialEngagementType)).append("\n");
+		sb.append("    useOnlyEncryptedStores: ").append(toIndentedString(useOnlyEncryptedStores)).append("\n");
 		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
 		sb.append("    inheritConfigurationAndTexts: ").append(toIndentedString(inheritConfigurationAndTexts)).append("\n");
+		sb.append("    initialLabelNames: ").append(toIndentedString(initialLabelNames)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");

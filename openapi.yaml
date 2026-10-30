@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
   title: Unblu Web API
   description: Unblu Web API v4
-  version: 8.43.1
+  version: 8.44.2
 servers:
 - url: https://unblu.cloud/app/rest/v4
 security:
@@ -98,6 +98,8 @@ tags:
   description: A service for managing images.
 - name: Invitations
   description: Service to manage conversation invitations
+- name: KeyEncryptionKeys
+  description: API service for managing the key encryption keys of an account.
 - name: Labels
   description: Storage service for `Label`. Labels can be applied to persons and conversations.
 - name: MessageInterceptors
@@ -283,6 +285,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -309,7 +312,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accountingresses/{accountIngressId}/delete:
     delete:
       tags:
@@ -334,7 +337,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accountingresses/{accountIngressId}/read:
     get:
       tags:
@@ -353,6 +356,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -372,7 +376,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accountingresses/search:
     post:
       tags:
@@ -383,6 +387,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -408,7 +413,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accountingresses/{accountIngressId}/setAsPublicPrimaryIngress:
     post:
       tags:
@@ -427,6 +432,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -446,7 +452,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accountingresses/update:
     post:
       tags:
@@ -457,6 +463,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -483,7 +490,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accountingresses/{accountIngressId}/updateConfiguration:
     post:
       tags:
@@ -502,6 +509,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -530,7 +538,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accountingresses/{accountIngressId}/updateMetadata:
     post:
       tags:
@@ -549,6 +557,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -577,7 +586,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /accounts/create:
     post:
       tags:
@@ -588,6 +597,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -625,6 +635,7 @@ paths:
                     imageData: "data:image/png;base64,iVBORw0KG...QmCC"
                   avatarUrls: null
                   translations: null
+                  encryptionEnabled: null
                   configuration: null
                   metadata: null
                   text: null
@@ -651,6 +662,7 @@ paths:
                       id: null
                       name: Loan bank
                       description: null
+                  encryptionEnabled: null
                   configuration: null
                   metadata: null
                   text: null
@@ -710,6 +722,7 @@ paths:
                       entryPath: INTERNAL
                       url: '...'
                     translations: {}
+                    encryptionEnabled: false
                     configuration: null
                     metadata: null
                     text: null
@@ -736,6 +749,7 @@ paths:
                         id: IO4wYQFeQ2y86kxBWrKaBQ
                         name: Loan bank
                         description: null
+                    encryptionEnabled: false
                     configuration: null
                     metadata: null
                     text: null
@@ -755,6 +769,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -784,6 +799,7 @@ paths:
                     avatar: null
                     avatarUrls: null
                     translations: null
+                    encryptionEnabled: null
                     configuration: null
                     metadata: null
                     text: null
@@ -900,6 +916,32 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - SUPER_ADMIN
+  /accounts/{accountId}/enableEncryption:
+    post:
+      tags:
+      - Accounts
+      summary: enableEncryption
+      description: "<p>This endpoint is in preview mode.</p>Enables encryption for the account with the specified ID. Once enabled, the account's data is encrypted at rest using data encryption keys wrapped by the account's active key encryption key. Calling this method for an account that already has encryption enabled has no effect. <p> The account must have an active key encryption key, otherwise the call is rejected. Set one with the key encryption key API first. <p> Only superadmins can call this endpoint for accounts other than their own. <p> Encryption can't be disabled once it's been enabled.<br>"
+      operationId: accountsEnableEncryption
+      parameters:
+      - name: accountId
+        in: path
+        description: The ID of the account for which encryption should be enabled
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
   /accounts/{accountId}/getAccountSecret:
     get:
       tags:
@@ -928,7 +970,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /accounts/getByName:
     get:
       tags:
@@ -947,6 +989,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -977,6 +1020,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -1025,7 +1069,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /accounts/getQuotaUsage:
     get:
       tags:
@@ -1110,6 +1154,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -1140,6 +1185,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -1204,6 +1250,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -1240,6 +1287,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -1266,7 +1314,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /analytics/dashboards/create:
     post:
       tags:
@@ -1331,7 +1379,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /analytics/dashboards/createFromTemplate:
     post:
@@ -1359,7 +1407,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /analytics/dashboards/{analyticsDashboardId}/delete:
     delete:
@@ -1385,7 +1433,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /analytics/dashboards/{analyticsDashboardId}/read:
     get:
@@ -1601,7 +1649,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /analytics/data/searchCalls:
     post:
@@ -2144,7 +2192,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /analytics/widgets/{id}/delete:
     delete:
@@ -2170,7 +2218,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /analytics/widgets/{id}/read:
     get:
@@ -2787,7 +2835,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /apikeys/create:
     post:
@@ -2799,6 +2847,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -2825,7 +2874,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /apikeys/{apiKeyId}/delete:
     delete:
       tags:
@@ -2850,7 +2899,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /apikeys/getByKey:
     get:
       tags:
@@ -2869,6 +2918,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -2888,7 +2938,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /apikeys/getDefault:
     get:
       tags:
@@ -2899,6 +2949,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -2918,7 +2969,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /apikeys/{apiKeyId}/read:
     get:
       tags:
@@ -2937,6 +2988,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -2956,7 +3008,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /apikeys/readMultiple:
     post:
       tags:
@@ -2967,6 +3019,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -2995,7 +3048,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /apikeys/search:
     post:
       tags:
@@ -3006,6 +3059,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -3031,7 +3085,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /apikeys/update:
     post:
       tags:
@@ -3042,6 +3096,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -3068,7 +3123,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /audit/search:
     post:
       tags:
@@ -3205,6 +3260,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -3646,11 +3702,12 @@ paths:
       tags:
       - Bots
       summary: create
-      description: "Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding.<br>"
+      description: "Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding. You can only create an Aria bot with `active` set to `true` if the `agenticFlowData` you provide contains a published version.<br>"
       operationId: botsCreate
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -3746,6 +3803,7 @@ paths:
                   optionalOutboundEvents:
                   - DIALOG_COUNTERPART_CHANGED
                   - DIALOG_ABORT_ANSWER
+                  - DIALOG_LINK_CLICKED
         required: true
       responses:
         "200":
@@ -3836,6 +3894,7 @@ paths:
                     optionalOutboundEvents:
                     - DIALOG_COUNTERPART_CHANGED
                     - DIALOG_ABORT_ANSWER
+                    - DIALOG_LINK_CLICKED
         default:
           $ref: "#/components/responses/ErrorResponse"
       callbacks:
@@ -3857,6 +3916,24 @@ paths:
                     application/json:
                       schema:
                         $ref: "#/components/schemas/BotDialogAbortAnswerResponse"
+        outbound.bot.dialog.adaptive_card_action:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.bot.dialog.adaptive_card_action
+              description: "Request sent when a submitting action on an Adaptive Card message is executed inside a dialog between a person and a bot. <p> The request is only delivered to the dialog bot that sent the card: a dialog can involve several bots, and an action belongs to the bot that authored the card it sits on. Only `EAdaptiveCardActionType.SUBMIT` and `EAdaptiveCardActionType.EXECUTE` are delivered, as they are the only actions that carry input the bot has to act on. `Action.OpenUrl` is reported through the `adaptive_card_action.invoked` webhook event only."
+              operationId: outboundBotDialogAdaptiveCardActionCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/BotDialogAdaptiveCardActionRequest"
+              responses:
+                "200":
+                  description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/BotDialogAdaptiveCardActionResponse"
         outbound.bot.dialog.closed:
           '{$request.body#/endpoint}':
             post:
@@ -3893,6 +3970,24 @@ paths:
                     application/json:
                       schema:
                         $ref: "#/components/schemas/BotDialogCounterpartChangedResponse"
+        outbound.bot.dialog.link_clicked:
+          '{$request.body#/endpoint}':
+            post:
+              summary: outbound.bot.dialog.link_clicked
+              description: "Request sent when a person clicks a link in a message of a dialog between a person and a bot. <p> The request covers links in the message text and the link actions of card and list messages. The URL, the link source, and the message action are reported by the client that displays the message. Unblu doesn't verify them. The message action is only set for the `ELinkSource.MESSAGE_ACTION` link source. <p> The request isn't sent in the cases listed for `ConversationLinkClickedEvent`. If the link opens in the same browser tab and the page the Unblu UI is integrated in unloads, the request may be lost. <p> The request is only delivered to the dialog bot that is currently handling this dialog, and only for links in messages of the dialog's bot thread. These include messages sent before the dialog started, for example by a bot that handled the bot thread earlier."
+              operationId: outboundBotDialogLinkClickedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/BotDialogLinkClickedRequest"
+              responses:
+                "200":
+                  description: OK
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/BotDialogLinkClickedResponse"
         outbound.bot.dialog.message:
           '{$request.body#/endpoint}':
             post:
@@ -4134,6 +4229,9 @@ paths:
       - Bots
       summary: editMessage
       description: "Replaces the content of a message a bot sent earlier to a conversation. <p> A bot can only edit its own messages: the message must have been sent by the given bot person. The supplied content replaces the current content of the message; only `text` is mandatory, and each optional field of the new content states what happens when it's left out. The content the edit supersedes is kept on the server but isn't returned by any web API operation. Messages in a conversation connected to an external messenger cannot be edited. <p> The result carries the message ID only. Read the message with its new content through the conversation history service's getMessage operation.<br>"
+      externalDocs:
+        description: Unblu Adaptive Card schema reference
+        url: ../schemas/v4/unblu-adaptive-card.html
       operationId: botsEditMessage
       requestBody:
         description: The message to edit and its new content
@@ -4142,6 +4240,25 @@ paths:
             schema:
               $ref: "#/components/schemas/BotEditMessage"
             examples:
+              edit-adaptive-card-message:
+                summary: edit Adaptive Card message
+                description: Replace the card of an Adaptive Card message the bot sent earlier
+                value:
+                  $_type: BotEditMessage
+                  conversationId: AcviDb210C5BoFd6e_79oan
+                  senderPersonId: nta30CBa-6d1a89cE57Db_F
+                  messageId: mGesYagET_2GipaDGinA9A
+                  editMessageData:
+                    $_type: AdaptiveCardEditMessageData
+                    type: ADAPTIVE_CARD
+                    fallbackText: Your appointment is on Tuesday
+                    locale: en
+                    adaptiveCard:
+                      type: AdaptiveCard
+                      version: "1.5"
+                      body:
+                      - type: TextBlock
+                        text: Your appointment is on Tuesday
               edit-text-message:
                 summary: edit text message
                 description: Replace the content of a message the bot sent earlier
@@ -4227,6 +4344,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -4284,6 +4402,7 @@ paths:
                     optionalOutboundEvents:
                     - DIALOG_COUNTERPART_CHANGED
                     - DIALOG_ABORT_ANSWER
+                    - DIALOG_LINK_CLICKED
                 get-by-name-copilot-bot:
                   summary: get by name copilot bot
                   description: Copilot Dialog bot
@@ -4346,6 +4465,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -4403,6 +4523,7 @@ paths:
                     optionalOutboundEvents:
                     - DIALOG_COUNTERPART_CHANGED
                     - DIALOG_ABORT_ANSWER
+                    - DIALOG_LINK_CLICKED
                 read-copilot-bot:
                   summary: read copilot bot
                   description: Copilot Dialog bot
@@ -4525,6 +4646,9 @@ paths:
       - Bots
       summary: sendMessage
       description: Sends a message to a conversation as a bot. <p> This can be used at any time during a conversation. It is not related to bot dialogs.<br>
+      externalDocs:
+        description: Unblu Adaptive Card schema reference
+        url: ../schemas/v4/unblu-adaptive-card.html
       operationId: botsSendMessage
       requestBody:
         description: The message to send
@@ -4533,6 +4657,66 @@ paths:
             schema:
               $ref: "#/components/schemas/BotPostMessage"
             examples:
+              send-adaptive-card-message:
+                summary: send Adaptive Card message
+                description: Send Adaptive Card message from the bot
+                value:
+                  $_type: BotPostMessage
+                  conversationId: AcviDb210C5BoFd6e_79oan
+                  senderPersonId: nta30CBa-6d1a89cE57Db_F
+                  recipientPersonIds:
+                  - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: null
+                  replyToMessageId: null
+                  messageData:
+                    $_type: AdaptiveCardPostMessageData
+                    type: ADAPTIVE_CARD
+                    fallbackText: Hello from Unblu!
+                    locale: null
+                    contentOrigin: null
+                    adaptiveCard:
+                      type: AdaptiveCard
+                      version: "1.5"
+                      body:
+                      - type: TextBlock
+                        text: Hello from Unblu!
+                        size: Large
+                        weight: Bolder
+              send-adaptive-card-with-instruction:
+                summary: send Adaptive Card with an Unblu instruction
+                description: "Send an Adaptive Card that offers the participant a ready-made answer. When they trigger the action, the Collaboration Server posts the message declared under `unbluInstructions` in their name, as if they had typed it themselves. An action declaring instructions must carry an `id`."
+                value:
+                  $_type: BotPostMessage
+                  conversationId: AcviDb210C5BoFd6e_79oan
+                  senderPersonId: nta30CBa-6d1a89cE57Db_F
+                  recipientPersonIds:
+                  - PtwoVi1O-2G9FFCR_rZLKQ
+                  internal: null
+                  replyToMessageId: null
+                  messageData:
+                    $_type: AdaptiveCardPostMessageData
+                    type: ADAPTIVE_CARD
+                    fallbackText: Would you like us to call you back?
+                    locale: null
+                    contentOrigin: null
+                    adaptiveCard:
+                      type: AdaptiveCard
+                      version: "1.5"
+                      body:
+                      - type: TextBlock
+                        text: Would you like us to call you back?
+                        wrap: true
+                      actions:
+                      - type: Action.Execute
+                        id: callMeBack
+                        title: "Yes, call me"
+                        verb: callMeBack
+                        data:
+                          ticketId: AB-1042
+                        unbluInstructions:
+                          sendMessage:
+                            type: TEXT
+                            text: "Yes please, call me back"
               send-card-message:
                 summary: send card message
                 description: Send card message from the bot
@@ -4981,11 +5165,12 @@ paths:
       tags:
       - Bots
       summary: update
-      description: Updates an existing dialog bot.<br>
+      description: Updates an existing dialog bot. You can only set `active` to `true` on an Aria bot if its agentic flow has a published version or if the `agenticFlowData` you provide contains a published version.<br>
       operationId: botsUpdate
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -5314,7 +5499,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branchclients/{branchClientId}/delete:
     delete:
       tags:
@@ -5339,7 +5524,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branchclients/{branchClientId}/generateToken:
     post:
       tags:
@@ -5374,7 +5559,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branchclients/getByBranchId:
     post:
       tags:
@@ -5400,7 +5585,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branchclients/{branchClientId}/invalidateTokens:
     post:
       tags:
@@ -5429,7 +5614,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branchclients/{branchClientId}/read:
     get:
       tags:
@@ -5737,7 +5922,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branches/create:
     post:
       tags:
@@ -5748,6 +5933,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `floorPlanImage`."
         required: false
         schema:
           type: array
@@ -6126,7 +6312,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branches/{branchId}/delete:
     delete:
       tags:
@@ -6151,7 +6337,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /branches/{branchId}/read:
     get:
       tags:
@@ -6170,6 +6356,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `floorPlanImage`."
         required: false
         schema:
           type: array
@@ -6255,6 +6442,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `floorPlanImage`."
         required: false
         schema:
           type: array
@@ -6541,7 +6729,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /calls/{callId}/read:
     get:
       tags:
@@ -7002,6 +7190,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -7417,6 +7606,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `icon`."
         required: false
         schema:
           type: array
@@ -7487,6 +7677,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `icon`."
         required: false
         schema:
           type: array
@@ -7544,6 +7735,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `icon`."
         required: false
         schema:
           type: array
@@ -7738,6 +7930,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -7767,6 +7960,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -8215,6 +8409,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8244,6 +8439,7 @@ paths:
                   defaultTemplate: false
                   conversationVisibility: PRIVATE
                   initialEngagementType: CHAT_INVITE
+                  useOnlyEncryptedStores: null
                   translations:
                     de:
                       $_type: ConversationTemplateTranslation
@@ -8256,6 +8452,7 @@ paths:
                       name: Loan bank
                       description: Offering short term loans
                   inheritConfigurationAndTexts: true
+                  initialLabelNames: null
                   configuration: null
                   text: null
                   metadata: null
@@ -8283,6 +8480,7 @@ paths:
                     defaultTemplate: false
                     conversationVisibility: PRIVATE
                     initialEngagementType: CHAT_INVITE
+                    useOnlyEncryptedStores: null
                     translations:
                       de:
                         $_type: ConversationTemplateTranslation
@@ -8295,6 +8493,7 @@ paths:
                         name: Loan bank
                         description: Offering short term loans
                     inheritConfigurationAndTexts: true
+                    initialLabelNames: []
                     configuration: null
                     text: null
                     metadata: null
@@ -8303,7 +8502,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /conversationtemplates/{templateId}/delete:
     delete:
       tags:
@@ -8328,7 +8527,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /conversationtemplates/getDefaultTemplateByEngagementType:
     get:
       tags:
@@ -8346,6 +8545,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8384,6 +8584,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8414,6 +8615,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8453,6 +8655,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8489,6 +8692,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8515,7 +8719,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /conversationvisibilityrules/create:
     post:
       tags:
@@ -8833,6 +9037,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8876,6 +9081,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -8937,6 +9143,7 @@ paths:
                     visitorData: null
                     conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
                     inheritConfigurationAndTexts: true
+                    usingOnlyEncryptedStores: false
                     links:
                     - $_type: ConversationLink
                       type: OPEN_IN_VISITOR_DESK
@@ -8987,6 +9194,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9037,6 +9245,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9079,6 +9288,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9136,6 +9346,7 @@ paths:
                     visitorData: test-visitorData-1234
                     conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
                     inheritConfigurationAndTexts: true
+                    usingOnlyEncryptedStores: false
                     links:
                     - $_type: ConversationLink
                       type: OPEN_IN_VISITOR_DESK
@@ -9209,6 +9420,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9267,6 +9479,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9541,6 +9754,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9592,6 +9806,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9629,6 +9844,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9687,6 +9903,7 @@ paths:
                     visitorData: null
                     conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
                     inheritConfigurationAndTexts: true
+                    usingOnlyEncryptedStores: false
                     links:
                     - $_type: ConversationLink
                       type: OPEN_IN_VISITOR_DESK
@@ -9729,6 +9946,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9772,6 +9990,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9821,6 +10040,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9870,6 +10090,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9919,6 +10140,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -9962,6 +10184,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10023,6 +10246,7 @@ paths:
                     visitorData: null
                     conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
                     inheritConfigurationAndTexts: true
+                    usingOnlyEncryptedStores: false
                     links:
                     - $_type: ConversationLink
                       type: OPEN_IN_VISITOR_DESK
@@ -10073,6 +10297,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10122,6 +10347,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10165,6 +10391,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10214,6 +10441,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10257,6 +10485,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10300,6 +10529,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10349,6 +10579,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10398,6 +10629,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10490,6 +10722,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10561,6 +10794,7 @@ paths:
                     visitorData: null
                     conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
                     inheritConfigurationAndTexts: true
+                    usingOnlyEncryptedStores: false
                     links:
                     - $_type: ConversationLink
                       type: OPEN_IN_VISITOR_DESK
@@ -10616,6 +10850,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10684,6 +10919,7 @@ paths:
                     visitorData: null
                     conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
                     inheritConfigurationAndTexts: true
+                    usingOnlyEncryptedStores: false
                     links:
                     - $_type: ConversationLink
                       type: OPEN_IN_VISITOR_DESK
@@ -10736,6 +10972,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -10810,6 +11047,7 @@ paths:
                     visitorData: null
                     conversationTemplateId: ab32em6Be-5le_48rE1F9Ad
                     inheritConfigurationAndTexts: true
+                    usingOnlyEncryptedStores: false
                     links:
                     - $_type: ConversationLink
                       type: OPEN_IN_VISITOR_DESK
@@ -10858,6 +11096,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `actionIcon`, `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -11179,6 +11418,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `actionIcon`, `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -11322,6 +11562,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `actionIcon`, `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -12009,6 +12250,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `affFile`, `dicFile`."
         required: false
         schema:
           type: array
@@ -12114,6 +12356,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `affFile`, `dicFile`."
         required: false
         schema:
           type: array
@@ -12151,6 +12394,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `affFile`, `dicFile`."
         required: false
         schema:
           type: array
@@ -12180,6 +12424,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `affFile`, `dicFile`."
         required: false
         schema:
           type: array
@@ -12340,7 +12585,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /domains/{domainId}/delete:
     delete:
       tags:
@@ -12365,7 +12610,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /domains/{domainId}/read:
     get:
       tags:
@@ -12394,7 +12639,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /domains/readMultiple:
     post:
       tags:
@@ -12423,7 +12668,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /domains/search:
     post:
       tags:
@@ -12449,7 +12694,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /domains/update:
     post:
       tags:
@@ -12476,7 +12721,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /externalmessengercontacts/create:
     post:
       tags:
@@ -12730,6 +12975,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `channelIcon`, `metadata`."
         required: false
         schema:
           type: array
@@ -12959,6 +13205,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `channelIcon`, `metadata`."
         required: false
         schema:
           type: array
@@ -13162,6 +13409,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `channelIcon`, `metadata`."
         required: false
         schema:
           type: array
@@ -13221,6 +13469,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `channelIcon`, `metadata`."
         required: false
         schema:
           type: array
@@ -13256,6 +13505,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `channelIcon`, `metadata`."
         required: false
         schema:
           type: array
@@ -13291,6 +13541,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `channelIcon`, `metadata`."
         required: false
         schema:
           type: array
@@ -13669,6 +13920,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `channelIcon`, `metadata`."
         required: false
         schema:
           type: array
@@ -14395,6 +14647,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -14471,6 +14724,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -14501,6 +14755,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -14531,6 +14786,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -14562,7 +14818,7 @@ paths:
       tags:
       - GlobalAria
       summary: productVersion
-      description: Returns the Aria product information
+      description: "Returns the Aria product information <p> Fails with 404 Not Found when the Aria features are disabled, and with 400 Bad Request when no Aria URL is configured or the version can't be read."
       operationId: globalAriaProductVersion
       responses:
         "200":
@@ -15210,6 +15466,279 @@ paths:
       x-required-entry-path: INTERNAL
       x-required-role:
       - ADMIN
+  /keyencryptionkeys/{keyEncryptionKeyId}/delete:
+    delete:
+      tags:
+      - KeyEncryptionKeys
+      summary: delete
+      description: <p>This endpoint is in preview mode.</p>Removes the key encryption key with the specified ID. Only key encryption keys with status `DECOMMISSIONED` can be removed; the request fails for a key encryption key with status `ACTIVE` or `DRAINING`.<br>
+      operationId: keyEncryptionKeysDelete
+      parameters:
+      - name: keyEncryptionKeyId
+        in: path
+        description: The ID of the key encryption key to remove.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /keyencryptionkeys/getAll:
+    get:
+      tags:
+      - KeyEncryptionKeys
+      summary: getAll
+      description: <p>This endpoint is in preview mode.</p>Lists all key encryption keys of the current account.<br>
+      operationId: keyEncryptionKeysGetAll
+      responses:
+        "200":
+          description: A list of all key encryption keys of the current account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyEncryptionKeyList"
+              examples:
+                list-key-encryption-keys:
+                  summary: List key encryption keys
+                  description: All key encryption keys of the account
+                  value:
+                    $_type: KeyEncryptionKeyList
+                    items:
+                    - $_type: KeyEncryptionKeyData
+                      id: eKcKE2y1RtGaQ9dxbT4Fnw
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      creationTimestamp: 1546300800000
+                      modificationTimestamp: 1548979200000
+                      version: 1
+                      name: Example key
+                      type: GCP_KMS
+                      endpoint: https://kms.example.com/keys/example-key
+                      status: ACTIVE
+                      activationTimestamp: 1551398400000
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /keyencryptionkeys/{keyEncryptionKeyId}/getUsageStatistics:
+    get:
+      tags:
+      - KeyEncryptionKeys
+      summary: getUsageStatistics
+      description: "<p>This endpoint is in preview mode.</p>Returns how much the specified version of the specified key encryption key is used overall, broken down by encryption consumer. <p> The usage of a consumer is the number of its stored entities whose data encryption key is wrapped by that key encryption key version, counted across all of its entities. Determining the usage doubles as the consumer's availability check: a consumer that can't be reached is reported as `UNAVAILABLE` with no `usage` and the failure reason in `unavailabilityReason`, rather than failing the whole request. Every consumer that the deployment expects is part of the report: one that isn't registered, for example because it is still starting up, is reported as `UNAVAILABLE` rather than being left out. The total usage is therefore `null` while any consumer is unavailable, because it can't be determined then. Consumers that the server configuration excludes from the statistics are the exception: they are left out of the report and don't count towards the total usage, whether they are available or not.<br>"
+      operationId: keyEncryptionKeysGetUsageStatistics
+      parameters:
+      - name: keyEncryptionKeyId
+        in: path
+        description: The ID of the key encryption key. Mandatory.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: version
+        in: query
+        description: The identifier of the key encryption key version. Mandatory.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      responses:
+        "200":
+          description: The usage statistics of the key encryption key version.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyEncryptionKeyUsageStatistics"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /keyencryptionkeys/{keyEncryptionKeyId}/getVersions:
+    get:
+      tags:
+      - KeyEncryptionKeys
+      summary: getVersions
+      description: "<p>This endpoint is in preview mode.</p>Lists all versions of the key encryption key with the specified ID, ordered by age, oldest first.<br>"
+      operationId: keyEncryptionKeysGetVersions
+      parameters:
+      - name: keyEncryptionKeyId
+        in: path
+        description: The ID of the key encryption key whose versions should be returned.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: A list of all versions of the key encryption key.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyEncryptionKeyVersionList"
+              examples:
+                list-key-versions:
+                  summary: List key versions
+                  description: All versions of the key encryption key
+                  value:
+                    $_type: KeyEncryptionKeyVersionList
+                    items:
+                    - $_type: KeyEncryptionKeyVersion
+                      id: vErS1oNKSgWm4xQpLb9Ftg
+                      accountId: A7d9E_0-c3cC4aoFDb85t6n
+                      keyEncryptionKeyId: eKcKE2y1RtGaQ9dxbT4Fnw
+                      versionIdentifier: "1"
+                      status: ACTIVE
+                      creationTimestamp: 1546300800000
+                      drainingStartTimestamp: null
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /keyencryptionkeys/{keyEncryptionKeyId}/read:
+    get:
+      tags:
+      - KeyEncryptionKeys
+      summary: read
+      description: <p>This endpoint is in preview mode.</p>Returns the key encryption key with the specified ID.<br>
+      operationId: keyEncryptionKeysRead
+      parameters:
+      - name: keyEncryptionKeyId
+        in: path
+        description: The ID of the key encryption key to return.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "200":
+          description: The key encryption key with the ID provided.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyEncryptionKeyData"
+              examples:
+                read-key-encryption-key:
+                  summary: Read key encryption key
+                  description: The key encryption key
+                  value:
+                    $_type: KeyEncryptionKeyData
+                    id: eKcKE2y1RtGaQ9dxbT4Fnw
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: Example key
+                    type: GCP_KMS
+                    endpoint: https://kms.example.com/keys/example-key
+                    status: ACTIVE
+                    activationTimestamp: 1551398400000
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /keyencryptionkeys/setActive:
+    post:
+      tags:
+      - KeyEncryptionKeys
+      summary: setActive
+      description: "<p>This endpoint is in preview mode.</p>Sets the active key encryption key of the current account. <ul> <li>If the specified key encryption key is already the active key of the account, no change is made and the existing key encryption key is returned.</li> <li>If the account already has a key encryption key with the specified type and endpoint that isn't active, that key becomes the active key again.</li> <li>In all other cases, a new key encryption key with status `ACTIVE` is created.</li> </ul> Whenever the active key changes, the previously active key encryption key transitions to status `DRAINING`. <p> The name is only applied when the key encryption key is created or reactivated, not when the key is already the active key of the account. It therefore only renames an existing key that isn't active. <p> The key encryption key is tested before it's persisted.<br>"
+      operationId: keyEncryptionKeysSetActive
+      requestBody:
+        description: "The name, type, and endpoint of the key encryption key to activate."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KeyEncryptionKeyActivationBody"
+            examples:
+              set-active-key-encryption-key:
+                summary: Set active key encryption key
+                description: Set the active key encryption key of the account
+                value:
+                  $_type: KeyEncryptionKeyActivationBody
+                  name: Example key
+                  type: GCP_KMS
+                  endpoint: https://kms.example.com/keys/example-key
+        required: true
+      responses:
+        "200":
+          description: The active key encryption key of the current account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyEncryptionKeyData"
+              examples:
+                set-active-key-encryption-key:
+                  summary: Set active key encryption key
+                  description: The active key encryption key
+                  value:
+                    $_type: KeyEncryptionKeyData
+                    id: eKcKE2y1RtGaQ9dxbT4Fnw
+                    accountId: A7d9E_0-c3cC4aoFDb85t6n
+                    creationTimestamp: 1546300800000
+                    modificationTimestamp: 1548979200000
+                    version: 1
+                    name: Example key
+                    type: GCP_KMS
+                    endpoint: https://kms.example.com/keys/example-key
+                    status: ACTIVE
+                    activationTimestamp: 1551398400000
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
+  /keyencryptionkeys/{keyEncryptionKeyId}/test:
+    post:
+      tags:
+      - KeyEncryptionKeys
+      summary: test
+      description: <p>This endpoint is in preview mode.</p>Tests whether the key encryption key with the specified ID is usable. The request succeeds if the test passed and fails with an error describing the problem otherwise.<br>
+      operationId: keyEncryptionKeysTest
+      parameters:
+      - name: keyEncryptionKeyId
+        in: path
+        description: The ID of the key encryption key to test.
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      responses:
+        "204":
+          description: Ok
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
+      x-required-entry-path: INTERNAL
+      x-required-role:
+      - TECHNICAL_ADMIN
+      x-status: PREVIEW
   /labels/create:
     post:
       tags:
@@ -15236,7 +15765,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /labels/{labelId}/delete:
     delete:
@@ -15262,7 +15791,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /labels/getByNames:
     post:
@@ -15435,7 +15964,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: PREVIEW
   /messageinterceptors/create:
     post:
@@ -15917,6 +16446,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -16005,7 +16535,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /namedareas/{namedAreaId}/delete:
     delete:
       tags:
@@ -16030,7 +16560,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /namedareas/{namedAreaId}/read:
     get:
       tags:
@@ -16049,6 +16579,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -16079,6 +16610,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -16118,6 +16650,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -16154,6 +16687,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`, `text`."
         required: false
         schema:
           type: array
@@ -16180,7 +16714,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /oidcidentityproviders/create:
     post:
       tags:
@@ -16191,6 +16725,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `logoImage`."
         required: false
         schema:
           type: array
@@ -16305,7 +16840,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       x-status: PREVIEW
   /oidcidentityproviders/createWithSecret:
     post:
@@ -16317,6 +16852,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `logoImage`."
         required: false
         schema:
           type: array
@@ -16434,7 +16970,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       x-status: PREVIEW
   /oidcidentityproviders/{oidcIdentityProviderId}/delete:
     delete:
@@ -16460,7 +16996,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       x-status: PREVIEW
   /oidcidentityproviders/{oidcIdentityProviderId}/read:
     get:
@@ -16480,6 +17016,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `logoImage`."
         required: false
         schema:
           type: array
@@ -16543,7 +17080,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       x-status: PREVIEW
   /oidcidentityproviders/{oidcIdentityProviderId}/removeSecret:
     post:
@@ -16563,6 +17100,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `logoImage`."
         required: false
         schema:
           type: array
@@ -16582,7 +17120,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       x-status: PREVIEW
   /oidcidentityproviders/{oidcIdentityProviderId}/setSecret:
     post:
@@ -16602,6 +17140,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `logoImage`."
         required: false
         schema:
           type: array
@@ -16633,7 +17172,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       x-status: PREVIEW
   /oidcidentityproviders/update:
     post:
@@ -16645,6 +17184,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `logoImage`."
         required: false
         schema:
           type: array
@@ -16759,7 +17299,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       x-status: PREVIEW
   /personlabels/create:
     post:
@@ -16842,7 +17382,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: DEPRECATED
   /personlabels/{personLabelId}/delete:
     delete:
@@ -16869,7 +17409,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: DEPRECATED
   /personlabels/getByNames:
     post:
@@ -17102,7 +17642,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
       x-status: DEPRECATED
   /personpresences/{presenceId}/read:
     get:
@@ -17511,6 +18051,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -17675,6 +18216,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -17757,6 +18299,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -17809,6 +18352,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -17958,6 +18502,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18056,6 +18601,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18183,6 +18729,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18237,6 +18784,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18259,6 +18807,7 @@ paths:
                 $ref: "#/components/schemas/PersonResult"
         default:
           $ref: "#/components/responses/ErrorResponse"
+      x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
       - REGISTERED_USER
@@ -18297,6 +18846,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18332,6 +18882,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18434,6 +18985,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18481,6 +19033,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `metadata`."
         required: false
         schema:
           type: array
@@ -18586,7 +19139,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /searchindex/cancelReindexingOperation:
     post:
       tags:
@@ -18612,7 +19165,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /searchindex/getIndexState:
     get:
       tags:
@@ -18640,7 +19193,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /searchindex/getIndexingOperationState:
     get:
       tags:
@@ -18668,7 +19221,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /searchindex/triggerReindexingOperation:
     post:
       tags:
@@ -18694,7 +19247,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
   /searchindex/triggerReindexingOperations:
     post:
       tags:
@@ -18903,11 +19456,12 @@ paths:
       tags:
       - SuggestionSources
       summary: create
-      description: Creates a new suggestion source<br>
+      description: Creates a new suggestion source. You can only create an Aria suggestion source with `outboundStatus` set to `ENABLED` if the `agenticFlowData` you provide contains a published version.<br>
       operationId: suggestionSourcesCreate
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -19037,6 +19591,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -19095,6 +19650,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -19200,11 +19756,12 @@ paths:
       tags:
       - SuggestionSources
       summary: update
-      description: Updates an existing suggestion source.<br>
+      description: Updates an existing suggestion source. You can only set the `outboundStatus` of an Aria suggestion source to `ENABLED` if its agentic flow has a published version or if the `agenticFlowData` you provide contains a published version.<br>
       operationId: suggestionSourcesUpdate
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -19240,6 +19797,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19326,7 +19884,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /teams/{teamId}/delete:
     delete:
       tags:
@@ -19351,7 +19909,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /teams/{teamId}/getChildTeams:
     get:
       tags:
@@ -19370,6 +19928,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19400,6 +19959,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19438,6 +19998,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19468,6 +20029,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19507,6 +20069,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19543,6 +20106,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19580,6 +20144,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19606,7 +20171,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/{userId}/createApiSecret:
     post:
       tags:
@@ -19651,6 +20216,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19708,7 +20274,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/createWithRandomPassword:
     post:
       tags:
@@ -19719,6 +20285,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19745,7 +20312,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/{userId}/delete:
     delete:
       tags:
@@ -19770,7 +20337,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/getByUsername:
     get:
       tags:
@@ -19789,6 +20356,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19837,7 +20405,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/{userId}/read:
     get:
       tags:
@@ -19856,6 +20424,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19886,6 +20455,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19933,6 +20503,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -19952,7 +20523,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/{userId}/revokeApiSecret:
     post:
       tags:
@@ -19993,6 +20564,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -20037,6 +20609,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -20087,6 +20660,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -20106,7 +20680,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/{userId}/transformPhysicalToVirtual:
     post:
       tags:
@@ -20125,6 +20699,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -20144,7 +20719,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/transformVirtualToPhysical:
     post:
       tags:
@@ -20155,6 +20730,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -20180,7 +20756,7 @@ paths:
       x-allow-impersonated-access: "true"
       x-required-entry-path: INTERNAL
       x-required-role:
-      - ADMIN
+      - TECHNICAL_ADMIN
   /users/update:
     post:
       tags:
@@ -20191,6 +20767,7 @@ paths:
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `avatar`, `configuration`, `metadata`."
         required: false
         schema:
           type: array
@@ -20251,11 +20828,12 @@ paths:
       tags:
       - WebhookRegistrations
       summary: create
-      description: "Creates a new webhook registration. For registrations that trigger an Aria agentic flow, the flow is created in the Aria orchestrator as part of this operation.<br>"
+      description: "Creates a new webhook registration. For registrations that trigger an Aria agentic flow, the flow is created in the Aria orchestrator as part of this operation. You can only create such a registration with `status` set to `ACTIVE` if the `agenticFlowData` you provide contains a published version.<br>"
       operationId: webhookRegistrationsCreate
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -20291,6 +20869,20 @@ paths:
                   application/json:
                     schema:
                       $ref: "#/components/schemas/AccountModificationEvent"
+              responses:
+                "200":
+                  description: OK
+        adaptive_card_action.invoked:
+          '{$request.body#/endpoint}':
+            post:
+              summary: adaptive_card_action.invoked
+              description: "An event triggered every time an action on an Adaptive Card message is executed. <p>`Action.ToggleVisibility` is handled by the card renderer in the browser and never produces this event. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+              operationId: adaptiveCardActionInvokedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/AdaptiveCardActionInvocationEvent"
               responses:
                 "200":
                   description: OK
@@ -20991,6 +21583,20 @@ paths:
                   application/json:
                     schema:
                       $ref: "#/components/schemas/ConversationEndedEvent"
+              responses:
+                "200":
+                  description: OK
+        conversation.link_clicked:
+          '{$request.body#/endpoint}':
+            post:
+              summary: conversation.link_clicked
+              description: "Represents an event that is triggered when a person clicks a link in a conversation message. <p> The event covers links in the message text and the link actions of card and list messages. The URL, the link source, and the message action are reported by the client that displays the message. Unblu doesn't verify them. <p> The event isn't triggered in the following cases: <ul> <li>The message is displayed in an external messenger channel.</li> <li>The link is opened from the browser's context menu, for example in a new tab.</li> <li>A mobile SDK renders the message natively.</li> <li>The message is awaiting approval, was rejected, or was deleted for the person who clicked.</li> <li>The URL, the message action label, or the message action value is longer than 8192 characters.</li> <li>The person who clicked is in the conversation as a ghost.</li> </ul> If the link opens in the same browser tab and the page the Unblu UI is integrated in unloads, the event may be lost. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+              operationId: conversationLinkClickedCallback
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConversationLinkClickedEvent"
               responses:
                 "200":
                   description: OK
@@ -22051,6 +22657,7 @@ paths:
         explode: true
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -22088,6 +22695,7 @@ paths:
         explode: false
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -22213,11 +22821,12 @@ paths:
       tags:
       - WebhookRegistrations
       summary: update
-      description: Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed.<br>
+      description: Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed. You can only set the `status` of a registration that triggers an Aria agentic flow to `ACTIVE` if its agentic flow has a published version or if the `agenticFlowData` you provide contains a published version.<br>
       operationId: webhookRegistrationsUpdate
       parameters:
       - name: expand
         in: query
+        description: "Names the expandable properties to return in full. Also names which of the request body's expandable properties to store; an expandable property not named here is ignored. Expandable in this operation: `agenticFlowData`."
         required: false
         schema:
           type: array
@@ -22525,6 +23134,9 @@ components:
           description: A map of localized versions of the name of this entity
           additionalProperties:
             $ref: "#/components/schemas/AccountTranslation"
+        encryptionEnabled:
+          type: boolean
+          description: "Whether application-level encryption is enabled for this account. If enabled, the account's data is encrypted at rest using data encryption keys wrapped by the account's active key encryption key. <p> Read-only: it can't be set when creating an account, and it can't be changed when updating one. Use the `enableEncryption` endpoint to enable encryption."
         configuration:
           type: object
           description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
@@ -22617,14 +23229,14 @@ components:
             type: string
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
+          description: The entity's configuration properties. Only stored when the 'expand' query parameter is used with the value 'configuration'; ignored otherwise.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
+          description: The entity's metadata properties. Only stored when the 'expand' query parameter is used with the value 'metadata'; ignored otherwise.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -22810,14 +23422,14 @@ components:
             type: string
         configuration:
           type: object
-          description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
+          description: The entity's configuration properties. Only stored when the 'expand' query parameter is used with the value 'configuration'; ignored otherwise.
           additionalProperties:
             type: string
           x-expand-query-key: configuration
           x-type: Map
         metadata:
           type: object
-          description: The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.
+          description: The entity's metadata properties. Only stored when the 'expand' query parameter is used with the value 'metadata'; ignored otherwise.
           additionalProperties:
             type: string
           x-expand-query-key: metadata
@@ -23041,6 +23653,206 @@ components:
           $ref: "#/components/schemas/EBranchClientStateDataSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    AdaptiveCardActionInvocationEvent:
+      type: object
+      description: "An event triggered every time an action on an Adaptive Card message is executed. <p>`Action.ToggleVisibility` is handled by the card renderer in the browser and never produces this event. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: AdaptiveCardActionInvocationEvent
+          enum:
+          - AdaptiveCardActionInvocationEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        actionType:
+          $ref: "#/components/schemas/EAdaptiveCardActionType"
+        actionId:
+          type: string
+          description: "The ID the card author assigned to the executed action, taken from the action's `id` property. May be `null`, as `id` is optional in the Adaptive Card schema. <p> Reported by the client and not verified against the card, so treat it as untrusted user input."
+        actionTitle:
+          type: string
+          description: "The label displayed on the executed action, taken from the action's `title` property. <p> Reported by the client and not verified against the card, so treat it as untrusted user input."
+        actionVerb:
+          type: string
+          description: "The verb identifying the operation to perform, taken from the action's `verb` property. Only `EAdaptiveCardActionType.EXECUTE` carries one."
+        actionUrl:
+          type: string
+          description: "The link the action opens, taken from the action's `url` property. Only `EAdaptiveCardActionType.OPEN_URL` carries one."
+        actionData:
+          type: object
+          description: "The action's `data` property, merged with the values of the card's `Input.*` elements. <p> Every input value is a string, regardless of the input element that produced it: an `Input.Number` of 42 arrives as `\"42\"` and an `Input.Toggle` as `\"true\"`. Keys come from the card author, so treat the whole object as untrusted user input."
+        actionInvocationId:
+          type: string
+          description: The unique invocation ID of the action
+        actionInvocationTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp of the action invocation (Unix timestamp in ms)
+        executedBy:
+          $ref: "#/components/schemas/PersonData"
+        conversation:
+          $ref: "#/components/schemas/ConversationData"
+        message:
+          $ref: "#/components/schemas/MessageData"
+    AdaptiveCardEditMessageData:
+      type: object
+      description: "New content for an Adaptive Card message edit. <p> The provided card replaces the message's current card: only `adaptiveCard` is mandatory. The payload is validated against the Unblu Adaptive Card schema exactly like the card of a newly sent Adaptive Card message. If no fallback text is given, one is derived from the card: its own `fallbackText` property if present, otherwise the text of all text blocks in its body, joined by line breaks. If neither exists, a generic fallback text is used (the text property `com.unblu.conversation.message.emptyAdaptiveCardFallback`). <p> On top of the schema, the URL of every `Action.OpenUrl` must start with `http://` or `https://`. The Collaboration Server rejects cards with an action URL that uses another protocol, such as `javascript:`, `data:`, or `file:`. <p> The web API serves the schema at `<unblu-server>/app/rest/v4/schemas/unblu-adaptive-card.json`. Its HTML reference is at `<unblu-server>/app/schemas/v4/unblu-adaptive-card.html`."
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AdaptiveCardEditMessageData
+          enum:
+          - AdaptiveCardEditMessageData
+        type:
+          $ref: "#/components/schemas/EPostMessageType"
+        fallbackText:
+          type: string
+          description: "Optional fallback text of the new content, used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the new content is generated. This may however not always be a perfect textual representation of the content."
+        locale:
+          type: string
+          description: "Optional source language of the new content (as BCP 47 language tag, including region if available).<br> If not provided, the language is automatically detected based on the new content. If the detection can't confidently detect the language, the message keeps its current locale."
+        adaptiveCard:
+          $ref: ./schemas/unblu-adaptive-card.json
+    AdaptiveCardMessageData:
+      type: object
+      description: Adaptive Card message carrying the card's JSON payload. <p> The card payload was validated against the Unblu Adaptive Card schema when the message was posted. The texts the card displays can be translated like those of a text message; the translations are listed in `availableTranslations`.
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AdaptiveCardMessageData
+          enum:
+          - AdaptiveCardMessageData
+        id:
+          type: string
+          description: The ID of the message<br>
+        conversationId:
+          type: string
+          description: Conversation ID this message belongs to
+        externalMessengerChannelId:
+          type: string
+          description: ID of the external messenger channel connected to the conversation. Null if the conversation is not connected to an external messenger.
+        accountId:
+          type: string
+          description: ID of the account this message and conversation belong to
+        senderPerson:
+          $ref: "#/components/schemas/PersonData"
+        senderPersonPresenceId:
+          type: string
+          description: ID of the person presence who sent the message. <p> May be null if the message was sent by the system.
+        serverTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the message was received by the server.
+        sendTimestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp when the message was sent by the client.
+        type:
+          $ref: "#/components/schemas/EMessageType"
+        recipientPersonIds:
+          type: array
+          description: "Person IDs of the recipients of the message. If null, all active participations are recipients."
+          items:
+            type: string
+        fallbackText:
+          type: string
+          description: "Text representation of the message which is used in following cases: <ul> <li>Unblu cannot restore the complex content of the message anymore</li> <li>Push notifications</li> <li>For the last message in the conversation overview</li> </ul> The value contains plain text without line breaks or Markdown formatting.<br> The fallback text can be provided by the sender (bot, external messenger) or is generated when missing. It may, however, not always be a perfect textual representation of the message.<br>"
+        actionId:
+          type: string
+          description: "The same value as in the messageID field. This field is maintained for reasons of backwards compatibility, since previously, it wasn't possible to provide bots and external messengers with the ID of the messages they'd created."
+        sourceId:
+          type: string
+          description: A custom ID which identifies where this message initially came from
+        botThreadId:
+          type: string
+          description: An ID which identifies the bot thread this message belongs. Null if the message is not part of a bot thread.
+        internal:
+          type: boolean
+          description: "Flag indicating whether the message is internal and only visible to agents. If 'false', the message is public and visible for everyone."
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
+        replyToMessageId:
+          type: string
+          description: Optional ID that identifies the message that this message is replying to
+        externalMessageId:
+          type: string
+          description: "Optional external ID, for example, for external messengers"
+        replyToExternalMessageId:
+          type: string
+          description: Optional external ID that identifies the message this message is replying to
+        locale:
+          type: string
+          description: "The language of the message, specified using the BCP 47 language tag format, including the region if applicable. If omitted, the message is processed as if it's in the conversation language."
+        conversationLocale:
+          type: string
+          description: "The language of the conversation this message belongs to, specified using the BCP 47 language tag format, including the region if applicable."
+        lastEditedByPersonId:
+          type: string
+          description: The ID of the person who performed the most recent edit of the message. Null if the message was never edited.
+        lastEditedTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) of the most recent edit of the message. Null if the message was never edited.
+        adaptiveCard:
+          type: object
+          description: The Adaptive Card payload as JSON.
+        availableTranslations:
+          type: array
+          description: "Adaptive Card message translations. Only languages that the message has already been translated into are included. Whenever someone requests a translation into a particular language, the translation is added here. As a result, the content of the variable may vary."
+          items:
+            $ref: "#/components/schemas/AdaptiveCardMessageTranslation"
+    AdaptiveCardMessageTranslation:
+      type: object
+      description: The translation of an Adaptive Card message's human-readable texts into one language.
+      properties:
+        $_type:
+          type: string
+          default: AdaptiveCardMessageTranslation
+          enum:
+          - AdaptiveCardMessageTranslation
+        locale:
+          type: string
+          description: The target language specified in the BCP 47 language tag format.
+        translatedTexts:
+          type: object
+          description: "The translated texts, keyed by the JSON pointer (RFC 6901) of the text they replace in the card, for example `/body/0/text` for the text of the first body element. Applying every entry to the card yields the translated card. Only human-readable texts are translated, never identifiers, input values, URLs, action data, or the fallback text."
+          additionalProperties:
+            type: string
+    AdaptiveCardPostMessageData:
+      type: object
+      description: "A message carrying an Adaptive Card JSON payload. <p> This model is used when a bot sends an Adaptive Card to a conversation. The Collaboration Server validates the card payload against the Unblu Adaptive Card schema when the message is posted and rejects payloads that violate it. The card's human-readable texts are translated like those of a text message. <p> On top of the schema, the URL of every `Action.OpenUrl` must start with `http://` or `https://`. The Collaboration Server rejects cards with an action URL that uses another protocol, such as `javascript:`, `data:`, or `file:`. <p> If no fallback text is given, one is derived from the card: its own `fallbackText` property if present, otherwise the text of all text blocks in its body, joined by line breaks. If neither exists, a generic fallback text is used (the text property `com.unblu.conversation.message.emptyAdaptiveCardFallback`). <p> The web API serves the schema at `<unblu-server>/app/rest/v4/schemas/unblu-adaptive-card.json`. Its HTML reference is at `<unblu-server>/app/schemas/v4/unblu-adaptive-card.html`."
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: AdaptiveCardPostMessageData
+          enum:
+          - AdaptiveCardPostMessageData
+        type:
+          $ref: "#/components/schemas/EPostMessageType"
+        fallbackText:
+          type: string
+          description: "Optional fallback text which is used when: <ul> <li>Unblu can't restore the complex content of a message</li> <li>A push notification couldn't be decrypted</li> <li>Last message in the conversation overview</li> </ul> The usage of this field is recommended especially for complex message types.<br> The value must not contain markdown.<br> If no fallback is given, a fallback text based on the content of the message is generated. This may however not always be a perfect textual representation of the message.<br>"
+        locale:
+          type: string
+          description: Optional source language of the message (as BCP 47 language tag form including region if available). If not provided the language will be automatically detected based on the provided content. If the detection can't confidently detect the language the message will be considered to be in the conversation's locale.
+        contentOrigin:
+          $ref: "#/components/schemas/EMessageContentOrigin"
+        adaptiveCard:
+          $ref: ./schemas/unblu-adaptive-card.json
     AgentAvailabilityConversationData:
       type: object
       description: A conversation actively handled by an agent in an agent availability snapshot (nested under the agent handling it). Carries exactly the conversation fields common to every snapshot conversation; the queue-specific fields are added by `QueuedConversationData`.
@@ -24559,7 +25371,12 @@ components:
           description: The id of the main agentic flow of the entity
         publishedAgenticFlows:
           type: array
-          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          description: "Published version of the agentic flows required for the entity, base-64 encoded. Empty when the entity's flow has never been published."
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
+        draftAgenticFlows:
+          type: array
+          description: "Draft of the agentic flows required for the entity, base-64 encoded"
           items:
             $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
     AriaDialogBotData:
@@ -24669,7 +25486,7 @@ components:
           x-type: ExpandableField
         active:
           type: boolean
-          description: Specifies whether the bot is active
+          description: Specifies whether the bot is active. You can only set it to `true` if the bot's agentic flow has a published version or if the `agenticFlowData` you provide on creation or update contains a published version.
         outboundEndpoint:
           type: string
           description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> Based on the configured filters/flags the following events will be sent to the endpoint: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a preaviously accepted bot dialog starts</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul>"
@@ -24707,11 +25524,22 @@ components:
           description: The id of the main agentic flow of the entity
         publishedAgenticFlows:
           type: array
-          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          description: "Published version of the agentic flows required for the entity, base-64 encoded. Empty when the entity's flow has never been published."
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
+        draftAgenticFlows:
+          type: array
+          description: "Draft of the agentic flows required for the entity, base-64 encoded"
           items:
             $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
         scenarios:
           type: array
+          description: Scenarios of the draft of the multiflow bot.
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowScenarioTransferableData"
+        publishedScenarios:
+          type: array
+          description: "Scenarios of the published version of the multiflow bot. Not set when the bot has never been published. When you create or update the bot, set it together with `publishedAgenticFlows`; otherwise the request fails."
           items:
             $ref: "#/components/schemas/AriaAgenticFlowScenarioTransferableData"
     AriaSingleFlowAgenticFlowDataContent:
@@ -24731,7 +25559,12 @@ components:
           description: The id of the main agentic flow of the entity
         publishedAgenticFlows:
           type: array
-          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          description: "Published version of the agentic flows required for the entity, base-64 encoded. Empty when the entity's flow has never been published."
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
+        draftAgenticFlows:
+          type: array
+          description: "Draft of the agentic flows required for the entity, base-64 encoded"
           items:
             $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
     AriaSuggestionSourceAgenticFlowDataContent:
@@ -24751,7 +25584,12 @@ components:
           description: The id of the main agentic flow of the entity
         publishedAgenticFlows:
           type: array
-          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          description: "Published version of the agentic flows required for the entity, base-64 encoded. Empty when the entity's flow has never been published."
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
+        draftAgenticFlows:
+          type: array
+          description: "Draft of the agentic flows required for the entity, base-64 encoded"
           items:
             $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
     AriaSuggestionSourceData:
@@ -24832,7 +25670,12 @@ components:
           description: The id of the main agentic flow of the entity
         publishedAgenticFlows:
           type: array
-          description: "Published version of the agentic flows required for the entity, base-64 encoded"
+          description: "Published version of the agentic flows required for the entity, base-64 encoded. Empty when the entity's flow has never been published."
+          items:
+            $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
+        draftAgenticFlows:
+          type: array
+          description: "Draft of the agentic flows required for the entity, base-64 encoded"
           items:
             $ref: "#/components/schemas/AriaAgenticFlowTransferableData"
     AssigneePersonIdConversationHistorySearchFilter:
@@ -26274,6 +27117,96 @@ components:
           default: BotDialogAbortAnswerResponse
           enum:
           - BotDialogAbortAnswerResponse
+    BotDialogAdaptiveCardActionEmptyResponse:
+      type: object
+      description: Acknowledgment response to a `BotDialogAdaptiveCardActionRequest` request. <p> Return this response when the bot has received the action and has nothing to return.
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: BotDialogAdaptiveCardActionEmptyResponse
+          enum:
+          - BotDialogAdaptiveCardActionEmptyResponse
+        type:
+          $ref: "#/components/schemas/EBotDialogAdaptiveCardActionResponseType"
+    BotDialogAdaptiveCardActionReplacementResponse:
+      type: object
+      description: "Response replacing the Adaptive Card the action was executed on. <p> Only `adaptiveCard` is mandatory. The payload is validated against the Unblu Adaptive Card schema exactly like a card sent through the `/bots/sendMessage` endpoint, including the rules on action URLs. <p> Only an `Action.Execute` action may be answered with a replacement card, as `Action.Submit` has no request/response semantics. A card returned for any other action type is ignored, as is a card that does not pass validation; in both cases the card the person acted on is left as it is. <p> The card is applied to the message, so every participant of the conversation sees it and it is kept in the conversation's history like any other message edit. <p> The web API serves the schema at `<unblu-server>/app/rest/v4/schemas/unblu-adaptive-card.json`. Its HTML reference is at `<unblu-server>/app/schemas/v4/unblu-adaptive-card.html`."
+      required:
+      - type
+      properties:
+        $_type:
+          type: string
+          default: BotDialogAdaptiveCardActionReplacementResponse
+          enum:
+          - BotDialogAdaptiveCardActionReplacementResponse
+        type:
+          $ref: "#/components/schemas/EBotDialogAdaptiveCardActionResponseType"
+        adaptiveCard:
+          $ref: ./schemas/unblu-adaptive-card.json
+        fallbackText:
+          type: string
+          description: "Optional fallback text of the replacement card, used where the card itself can't be rendered, for instance in a push notification or as the last message in the conversation overview. The value must not contain markdown. <p> If no fallback text is given, one is derived from the returned card, the same way as for a card sent with `/bots/sendMessage` or edited with the `/bots/editMessage` endpoint."
+    BotDialogAdaptiveCardActionRequest:
+      type: object
+      description: "Request sent when a submitting action on an Adaptive Card message is executed inside a dialog between a person and a bot. <p> The request is only delivered to the dialog bot that sent the card: a dialog can involve several bots, and an action belongs to the bot that authored the card it sits on. Only `EAdaptiveCardActionType.SUBMIT` and `EAdaptiveCardActionType.EXECUTE` are delivered, as they are the only actions that carry input the bot has to act on. `Action.OpenUrl` is reported through the `adaptive_card_action.invoked` webhook event only."
+      properties:
+        $_type:
+          type: string
+          default: BotDialogAdaptiveCardActionRequest
+          enum:
+          - BotDialogAdaptiveCardActionRequest
+        accountId:
+          type: string
+        serviceName:
+          type: string
+        dialogToken:
+          type: string
+          description: Token for this dialog. It is present in every dialog webhook and must be passed to all bot web API service calls to identify the dialog.
+        conversationId:
+          type: string
+          description: The ID of the conversation this dialog belongs to.
+        botThreadId:
+          type: string
+          description: "The ID of the bot thread the action was executed in. Reported so the invocation can be correlated with the `bot_thread.*` webhook events, which identify a boarding process by the same ID."
+        executedByPersonId:
+          type: string
+          description: The ID of the person who executed the action.
+        messageId:
+          type: string
+          description: The ID of the Adaptive Card message the action was executed on.
+        actionType:
+          $ref: "#/components/schemas/EAdaptiveCardActionType"
+        actionId:
+          type: string
+          description: "The ID the card author assigned to the executed action, taken from the action's `id` property. May be `null`, as `id` is optional in the Adaptive Card schema. <p> Reported by the client and not verified against the card, so treat it as untrusted user input."
+        actionTitle:
+          type: string
+          description: "The label displayed on the executed action, taken from the action's `title` property. <p> Reported by the client and not verified against the card, so treat it as untrusted user input."
+        actionVerb:
+          type: string
+          description: "The verb identifying the operation to perform, taken from the action's `verb` property. Only `EAdaptiveCardActionType.EXECUTE` carries one. <p> The server verifies that the card was sent by this bot and is visible to `executedByPersonId`, but not that the card actually offers this verb. Authorize the operation before performing it rather than trusting the verb alone."
+        actionData:
+          type: object
+          description: "The action's `data` property, merged with the values of the card's `Input.*` elements. Every input value is a string, regardless of the input element that produced it: an `Input.Number` of 42 arrives as `\"42\"` and an `Input.Toggle` as `\"true\"`."
+        actionInvocationId:
+          type: string
+          description: The unique invocation ID of the action. The same invocation is reported under this ID by the `adaptive_card_action.invoked` webhook event.
+        actionInvocationTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp of the action invocation (Unix timestamp in ms).
+    BotDialogAdaptiveCardActionResponse:
+      description: "Response to a `BotDialogAdaptiveCardActionRequest` request. <p> Can be one of `BotDialogAdaptiveCardActionEmptyResponse` or `BotDialogAdaptiveCardActionReplacementResponse`. Returning a replacement card is reserved for `Action.Execute`, the only action type with request/response semantics."
+      oneOf:
+      - $ref: "#/components/schemas/BotDialogAdaptiveCardActionEmptyResponse"
+      - $ref: "#/components/schemas/BotDialogAdaptiveCardActionReplacementResponse"
+      discriminator:
+        propertyName: type
+        mapping:
+          EMPTY: "#/components/schemas/BotDialogAdaptiveCardActionEmptyResponse"
+          REPLACEMENT: "#/components/schemas/BotDialogAdaptiveCardActionReplacementResponse"
     BotDialogClosedRequest:
       type: object
       description: "Request sent when a dialog between a person and a bot closes. <br> After this request has been received, no further messages can be sent in this dialog.<br> It should be used to clean up all resources related to this dialog. <p> <b>Note:</b> This request may be sent before the bot actively hands off the dialog, for example, if the conversation is ended beforehand or the counterpart leaves the conversation. <p> The request is only delivered to the dialog bot that is currently handling this dialog."
@@ -26352,6 +27285,51 @@ components:
           description: The ID of the message to edit
         editMessageData:
           $ref: "#/components/schemas/EditMessageData"
+    BotDialogLinkClickedRequest:
+      type: object
+      description: "Request sent when a person clicks a link in a message of a dialog between a person and a bot. <p> The request covers links in the message text and the link actions of card and list messages. The URL, the link source, and the message action are reported by the client that displays the message. Unblu doesn't verify them. The message action is only set for the `ELinkSource.MESSAGE_ACTION` link source. <p> The request isn't sent in the cases listed for `ConversationLinkClickedEvent`. If the link opens in the same browser tab and the page the Unblu UI is integrated in unloads, the request may be lost. <p> The request is only delivered to the dialog bot that is currently handling this dialog, and only for links in messages of the dialog's bot thread. These include messages sent before the dialog started, for example by a bot that handled the bot thread earlier."
+      properties:
+        $_type:
+          type: string
+          default: BotDialogLinkClickedRequest
+          enum:
+          - BotDialogLinkClickedRequest
+        accountId:
+          type: string
+        serviceName:
+          type: string
+        dialogToken:
+          type: string
+          description: Token for this dialog. It is present in every dialog webhook and must be passed to all bot web API service calls to identify the dialog.
+        conversationId:
+          type: string
+          description: The ID of the conversation this dialog belongs to.
+        conversationMessage:
+          $ref: "#/components/schemas/MessageData"
+        executedBy:
+          $ref: "#/components/schemas/PersonData"
+        url:
+          type: string
+          description: The URL of the link. It's reported by the client and not verified by Unblu.
+        linkSource:
+          $ref: "#/components/schemas/ELinkSource"
+        messageAction:
+          $ref: "#/components/schemas/MessageAction"
+        clickId:
+          type: string
+          description: The unique ID of the link click
+        clickTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when Unblu received the link click
+    BotDialogLinkClickedResponse:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: BotDialogLinkClickedResponse
+          enum:
+          - BotDialogLinkClickedResponse
     BotDialogMessageDeletedRequest:
       type: object
       description: "Request sent when a message is deleted in a dialog between a person and a bot. <p> Participants can delete a message for all participants or only for themselves. In the latter case, the request is sent each time a participant deletes the message for themselves. <p> The request is only delivered to the dialog bot that is currently handling this dialog."
@@ -28839,6 +29817,9 @@ components:
           type: integer
           format: int64
           description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        redacted:
+          type: boolean
+          description: "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this."
         initiationTimestamp:
           type: integer
           format: int64
@@ -30489,6 +31470,9 @@ components:
           type: integer
           format: int64
           description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        redacted:
+          type: boolean
+          description: "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this."
         startTimestamp:
           type: integer
           format: int64
@@ -31019,7 +32003,7 @@ components:
           description: "ID of the account the entity belongs to. When creating an entity, the account ID can be omitted. It will be filled by the server with the account ID of the user currently logged in. When editing an entity, you must include the account ID."
         name:
           type: string
-          description: A model representing a conversation access interceptor. These interceptors are used to approve or reject an attempt to join a conversation. Mandatory.
+          description: Name of the conversation access interceptor. Must be unique in the account. Maximum length of 250 characters. Mandatory.
         description:
           type: string
           description: Description of the conversation access interceptor. Maximum length of 500 characters.
@@ -31037,7 +32021,7 @@ components:
           $ref: "#/components/schemas/EOutboundEndpointStatus"
         outboundSecret:
           type: string
-          description: Optional secret sent with each outbound event. Mandatory. <p> Maximum length of 4000 characters.
+          description: Secret used to sign each outbound request and to verify the signature of the response. Optional. <p> Maximum length of 4000 characters.
         outboundApiVersion:
           $ref: "#/components/schemas/EWebApiVersion"
         retryCount:
@@ -31051,11 +32035,11 @@ components:
         order:
           type: integer
           format: int64
-          description: Order of execution of the file upload interceptor among all the file upload interceptors configured in the account. Mandatory.
+          description: Order of execution of the conversation access interceptor among all the conversation access interceptors configured in the account. Interceptors with a lower value run first. Mandatory.
         timeoutMillis:
           type: integer
           format: int64
-          description: A long for the amount of miliseconds until the timeout of the interceptor occurs.
+          description: "The number of milliseconds Unblu waits for the interceptor's response before applying `timeoutBehavior`. If omitted, it defaults to 5000."
     ConversationAccessInterceptorOrderBy:
       type: object
       properties:
@@ -31658,6 +32642,9 @@ components:
         inheritConfigurationAndTexts:
           type: boolean
           description: True if the conversation inherits all configuration and text properties from its conversation template
+        usingOnlyEncryptedStores:
+          type: boolean
+          description: "True if the conversation keeps its data only in encrypted stores: its messages aren't indexed for search and its analytics events are redacted. Set when the conversation is created, from its conversation template or the account default, and never changes afterward. This is a read-only property. Any value provided in create or update operations will be ignored."
         links:
           type: array
           description: Links to open the conversation
@@ -31943,6 +32930,9 @@ components:
           description: The labels set on the conversation that are readable by the requesting user
           items:
             $ref: "#/components/schemas/LabelData"
+        usingOnlyEncryptedStores:
+          type: boolean
+          description: "True if the conversation keeps its data only in encrypted stores: its messages aren't indexed for search and its analytics events are redacted. Set when the conversation is created, from its conversation template or the account default, and never changes afterward. This is a read-only property. Any value provided in create or update operations will be ignored."
     ConversationHistoryDataResult:
       type: object
       description: Container to return list of conversations
@@ -32435,6 +33425,45 @@ components:
         url:
           type: string
           description: Url of the link
+    ConversationLinkClickedEvent:
+      type: object
+      description: "Represents an event that is triggered when a person clicks a link in a conversation message. <p> The event covers links in the message text and the link actions of card and list messages. The URL, the link source, and the message action are reported by the client that displays the message. Unblu doesn't verify them. <p> The event isn't triggered in the following cases: <ul> <li>The message is displayed in an external messenger channel.</li> <li>The link is opened from the browser's context menu, for example in a new tab.</li> <li>A mobile SDK renders the message natively.</li> <li>The message is awaiting approval, was rejected, or was deleted for the person who clicked.</li> <li>The URL, the message action label, or the message action value is longer than 8192 characters.</li> <li>The person who clicked is in the conversation as a ghost.</li> </ul> If the link opens in the same browser tab and the page the Unblu UI is integrated in unloads, the event may be lost. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
+      properties:
+        $_type:
+          type: string
+          default: ConversationLinkClickedEvent
+          enum:
+          - ConversationLinkClickedEvent
+        timestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when the event occurred.
+        eventType:
+          type: string
+          description: The name of the event
+        accountId:
+          type: string
+          description: The account ID the event originated from
+        conversation:
+          $ref: "#/components/schemas/ConversationData"
+        conversationMessage:
+          $ref: "#/components/schemas/MessageData"
+        executedBy:
+          $ref: "#/components/schemas/PersonData"
+        url:
+          type: string
+          description: The URL of the link. It's reported by the client and not verified by Unblu.
+        linkSource:
+          $ref: "#/components/schemas/ELinkSource"
+        messageAction:
+          $ref: "#/components/schemas/MessageAction"
+        clickId:
+          type: string
+          description: The unique ID of the link click
+        clickTimestamp:
+          type: integer
+          format: int64
+          description: The server time (Unix timestamp in ms) when Unblu received the link click
     ConversationMessageDeletedEvent:
       type: object
       description: "Represents an event that is triggered when a message is deleted in a conversation. <p> Participants may delete a message for all participants or just themselves. In the latter case, the event is triggered each time a participant deletes the message for themselves. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>"
@@ -34270,14 +35299,22 @@ components:
           $ref: "#/components/schemas/EConversationVisibility"
         initialEngagementType:
           $ref: "#/components/schemas/EInitialEngagementType"
+        useOnlyEncryptedStores:
+          type: boolean
+          description: "True if conversations created from this template keep their data only in encrypted stores: their messages aren't indexed for search and their analytics events are redacted. If omitted, the account's `com.unblu.conversation.encryption.useOnlyEncryptedStores` setting applies. Ignored while data encryption is disabled on the account."
         translations:
           type: object
-          description: A map of localized versions of the name and description of this entity
+          description: "A map of localized versions of the name and description of this entity. Unblu takes a default template's displayed name and description from text properties, and any value sent to the Unblu server for a default template is ignored."
           additionalProperties:
             $ref: "#/components/schemas/ConversationTemplateTranslation"
         inheritConfigurationAndTexts:
           type: boolean
           description: "True if conversations, created from this template, inherit all configuration and texts. If omitted, the property is set to false. New conversations receive a copy of this conversation template's configuration and texts."
+        initialLabelNames:
+          type: array
+          description: "Names of the labels to assign to every conversation created from this template. Each label must be settable on conversations, and no two labels may share a scope; otherwise saving the conversation template fails with an invalid-labels error. You can specify up to 100 labels. The labels are assigned once, when the conversation is created, so changing this list afterward doesn't affect existing conversations. If labels are given in the request that creates the conversation, those are assigned as well; where a label given in the request has the same scope as one listed here, the one from the request is kept. You can't delete a label listed here or remove `CONVERSATION` from its `settableOn` targets."
+          items:
+            type: string
         configuration:
           type: object
           description: The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.
@@ -34712,6 +35749,9 @@ components:
           type: integer
           format: int64
           description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        redacted:
+          type: boolean
+          description: "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this."
         creationTimestamp:
           type: integer
           format: int64
@@ -35981,7 +37021,7 @@ components:
         sortingOrder:
           type: integer
           format: int32
-          description: The sorting order within the custom actions when displayed in the action bar. The default value is 5.
+          description: The sorting order within the custom actions when displayed in the action bar. Mandatory.
         type:
           $ref: "#/components/schemas/ECustomActionType"
         actionBarPosition:
@@ -36154,7 +37194,7 @@ components:
           $ref: "#/components/schemas/ERegistrationStatus"
         webhookEndpoint:
           type: string
-          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> The following events are always sent to the endpoint: <ul> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a previously accepted bot dialog starts.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul> The following events are also always sent, but only occur while the setting governing them is active: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog, when messageStateHandledExternally is set to true.</li> </ul> The following events are sent only when listed in optionalOutboundEvents: <ul> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of a dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_ABORT_ANSWER`: When the counterpart aborts an answer the bot is waiting for. Requires web API version 4 or newer.</li> </ul>"
+          description: "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> The following events are always sent to the endpoint: <ul> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a previously accepted bot dialog starts.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul> The following events are also always sent, but only occur while the setting governing them is active: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog, when messageStateHandledExternally is set to true.</li> </ul> The following events are sent only when listed in optionalOutboundEvents: <ul> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of a dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_ABORT_ANSWER`: When the counterpart aborts an answer the bot is waiting for. Requires web API version 4 or newer.</li> <li>`TypedEvent.BOT_DIALOG_LINK_CLICKED`: When a person clicks a link in a message of the bot thread of a previously accepted bot dialog. Requires web API version 4 or newer.</li> </ul>"
         outboundTimeoutMillis:
           type: integer
           format: int64
@@ -36488,7 +37528,7 @@ components:
         sortingOrder:
           type: integer
           format: int32
-          description: The sorting order within the custom actions when displayed in the action bar. The default value is 5.
+          description: The sorting order within the custom actions when displayed in the action bar. Mandatory.
         type:
           $ref: "#/components/schemas/ECustomActionType"
         messageTypes:
@@ -36684,7 +37724,7 @@ components:
         sortingOrder:
           type: integer
           format: int32
-          description: The sorting order within the custom actions when displayed in the action bar. The default value is 5.
+          description: The sorting order within the custom actions when displayed in the action bar. Mandatory.
         type:
           $ref: "#/components/schemas/ECustomActionType"
         availableForTargetPersonTypes:
@@ -37590,7 +38630,7 @@ components:
           NOT_EQUALS: "#/components/schemas/NotEqualsDeviceTypeOperator"
           NOT_IN: "#/components/schemas/NotInDeviceTypeOperator"
     DialogBotData:
-      description: Model representing an external dialog bot that can handle conversation onboarding and offboarding.
+      description: "Model representing an external dialog bot that can handle conversation onboarding and offboarding. If `type` is omitted, `CUSTOM` is assumed."
       oneOf:
       - $ref: "#/components/schemas/CustomDialogBotData"
       - $ref: "#/components/schemas/CopilotDialogBotData"
@@ -37601,6 +38641,7 @@ components:
           ARIA: "#/components/schemas/AriaDialogBotData"
           COPILOT: "#/components/schemas/CopilotDialogBotData"
           CUSTOM: "#/components/schemas/CustomDialogBotData"
+      x-discriminator-default: CUSTOM
     DialogBotOrderBy:
       type: object
       description: DialogBot orderBy item.
@@ -38132,6 +39173,17 @@ components:
       - "ALWAYS_VISIBLE: Action is always displayed in the action bar"
       - "ALWAYS_IN_OVERFLOW: Action is always displayed in the overflow section of the action bar"
       - "SHOW_IF_POSSIBLE: Action is displayed in the action bar if there is enough space"
+    EAdaptiveCardActionType:
+      type: string
+      description: The type of Adaptive Card action that was executed.
+      enum:
+      - SUBMIT
+      - EXECUTE
+      - OPEN_URL
+      x-enum-descriptions:
+      - "SUBMIT: `Action.Submit`: submits the card's collected `Input.*` values."
+      - "EXECUTE: `Action.Execute`: submits the card's collected `Input.*` values together with a verb identifying the operation to perform."
+      - "OPEN_URL: `Action.OpenUrl`: opens a link. The browser opens the link itself; the invocation is reported only so it's visible to a webhook."
     EAgentRemovalType:
       type: string
       enum:
@@ -38640,8 +39692,9 @@ components:
       description: The authorization role is mainly used for access definition of a service
       enum:
       - SUPER_ADMIN
-      - TECHNICAL_ADMIN
+      - ACCOUNT_SUPER_ADMIN
       - ADMIN
+      - TECHNICAL_ADMIN
       - SUPERVISOR
       - REGISTERED_USER
       - WEBUSER
@@ -38649,8 +39702,9 @@ components:
       - ANONYMOUS_USER
       x-enum-descriptions:
       - "SUPER_ADMIN: Super admin role. Only for unblu or system admins"
-      - "TECHNICAL_ADMIN: Technical admin role."
+      - "ACCOUNT_SUPER_ADMIN: Account super admin role."
       - "ADMIN: Admin role. For Admins of the system"
+      - "TECHNICAL_ADMIN: Technical admin role. A customer account admin without access to conversations or customer data. Sits below `ADMIN`: it administers the account's settings but must not reach anything carrying a conversation ID."
       - "SUPERVISOR: Supervisor role. For users which manage teams"
       - "REGISTERED_USER: User role. For normal users (agents)"
       - "WEBUSER: Webuser role. For internal representation of users from the outside"
@@ -38809,6 +39863,14 @@ components:
       - "NOT_EQUALS: Check if the value is different from the one provided in the operator"
       - "IS_NULL: Check if the value is null"
       - "IS_NOT_NULL: Check if the value is not null"
+    EBotDialogAdaptiveCardActionResponseType:
+      type: string
+      enum:
+      - EMPTY
+      - REPLACEMENT
+      x-enum-descriptions:
+      - "EMPTY: The action was received and the bot has nothing to return. The bot can react by calling the bot web API, for instance to send a message."
+      - "REPLACEMENT: The bot returns a card replacing the one the action was executed on. The Collaboration Server applies the card only for an `Action.Execute` action and ignores it otherwise."
     EBotDialogFilter:
       type: string
       enum:
@@ -38885,9 +39947,11 @@ components:
       - DIALOG_OPENED
       - DIALOG_MESSAGE
       - DIALOG_CLOSED
+      - DIALOG_ADAPTIVE_CARD_ACTION
       - DIALOG_COUNTERPART_CHANGED
       - DIALOG_ABORT_ANSWER
       - DIALOG_MESSAGE_DELETED
+      - DIALOG_LINK_CLICKED
       x-enum-descriptions:
       - "ONBOARDING_OFFER: Sent when a person matching the bot's onboarding filter joins a conversation. Only occurs when the onboarding filter is set."
       - "REBOARDING_OFFER: Sent when a person writes a message to an unassigned conversation. Only occurs when reboarding is enabled on the bot."
@@ -38896,9 +39960,11 @@ components:
       - "DIALOG_OPENED: Delivered when a previously accepted bot dialog starts."
       - "DIALOG_MESSAGE: Delivered on each message of a previously accepted bot dialog."
       - "DIALOG_CLOSED: Delivered when a previously accepted bot dialog closes."
+      - "DIALOG_ADAPTIVE_CARD_ACTION: Delivered when a person executes an `Action.Submit` or `Action.Execute` action on an Adaptive Card the bot sent in its own bot thread. Only occurs for a bot that sends cards carrying such actions."
       - "DIALOG_COUNTERPART_CHANGED: Delivered when the counterpart person of a dialog changes during the dialog."
       - "DIALOG_ABORT_ANSWER: Delivered when the counterpart aborts an answer the bot is waiting for."
       - "DIALOG_MESSAGE_DELETED: Delivered when a message of a previously accepted bot dialog is deleted, whether for all participants or only for individual participants."
+      - "DIALOG_LINK_CLICKED: Delivered when a person clicks a link in a message of the bot thread of a previously accepted bot dialog."
     EBotThreadEndTrigger:
       type: string
       description: The trigger for a bot thread end
@@ -41663,6 +42729,37 @@ components:
       x-enum-descriptions:
       - "IN: Check if the value is one of the one provided in the operator"
       - "NOT_IN: Check if the value is not one of the one provided in the operator"
+    EKeyEncryptionKeyConsumerAvailability:
+      type: string
+      description: Whether an encryption consumer could be reached while its key encryption key version usage was determined.
+      enum:
+      - AVAILABLE
+      - UNAVAILABLE
+      x-enum-descriptions:
+      - "AVAILABLE: The consumer answered, so its reported usage is accurate."
+      - "UNAVAILABLE: The consumer isn't registered, couldn't be reached, or failed to answer, so its usage is unknown and reported as `null`."
+    EKeyEncryptionKeyStatus:
+      type: string
+      description: The status of a key encryption key or one of its versions.
+      enum:
+      - ACTIVE
+      - DRAINING
+      - DECOMMISSIONED
+      x-enum-descriptions:
+      - "ACTIVE: The key encryption key is the active key of the account. New data encryption keys are wrapped with this key."
+      - "DRAINING: The key encryption key is being phased out. Data encryption keys wrapped with this key are re-wrapped with the active key."
+      - "DECOMMISSIONED: The key encryption key is no longer used by any data encryption key and can be removed."
+    EKeyManagementSystemType:
+      type: string
+      description: The type of external key management system that a key encryption key lives in.
+      enum:
+      - GCP_KMS
+      - IBM_KEY_PROTECT
+      - HASHICORP_VAULT
+      x-enum-descriptions:
+      - "GCP_KMS: Google Cloud Key Management Service"
+      - "IBM_KEY_PROTECT: IBM Key Protect"
+      - "HASHICORP_VAULT: HashiCorp Vault transit secrets engine"
     ELabelManagementRole:
       type: string
       description: The person type a label can be managed by
@@ -41800,6 +42897,17 @@ components:
       - "INVALID: Invalid license installed. All licensed features can not be used."
       - "INCOMPATIBLE: The license type of the installed license is not compatible with this server. All licensed features can not be used."
       - "EXPIRED: Valid license installed, but with an expiration date in the past. All licensed features can not be used."
+    ELinkSource:
+      type: string
+      description: The type of link that was clicked in a message
+      enum:
+      - MARKDOWN_LINK
+      - AUTO_DETECTED_URL
+      - MESSAGE_ACTION
+      x-enum-descriptions:
+      - "MARKDOWN_LINK: A link written in Markdown syntax in the message text"
+      - "AUTO_DETECTED_URL: A URL in the message text that Unblu turned into a link, including a URL written in angle brackets"
+      - "MESSAGE_ACTION: A link action of a card or list message"
     EMediaPublicationType:
       type: string
       description: The media being published during the participation of a call
@@ -41955,6 +43063,7 @@ components:
       - SYSTEM
       - FILE
       - CARD
+      - ADAPTIVE_CARD
       - LIST
       - APPROVAL_REQUEST
       - MULTICHOICE_QUESTION
@@ -41969,6 +43078,7 @@ components:
       - "SYSTEM: A message generated by the system to report an event in the conversation"
       - "FILE: A message carrying an uploaded file"
       - "CARD: A message rendered as a card with a title, an image, and actions"
+      - "ADAPTIVE_CARD: A message rendered from an Adaptive Card JSON payload"
       - "LIST: A message rendered as a list of items, each of which may carry an action"
       - "APPROVAL_REQUEST: A question asking the recipient to approve or reject something"
       - "MULTICHOICE_QUESTION: A question offering the recipient a set of answers to choose from"
@@ -42498,6 +43608,7 @@ components:
       - TEXT
       - FILE
       - CARD
+      - ADAPTIVE_CARD
       - LIST
       - MULTICHOICE_QUESTION
       - RATING_QUESTION
@@ -42508,6 +43619,7 @@ components:
       - "TEXT: See `TextPostMessageData`"
       - "FILE: See `FilePostMessageData`"
       - "CARD: See `CardPostMessageData`"
+      - "ADAPTIVE_CARD: See `AdaptiveCardPostMessageData`"
       - "LIST: See `ListPostMessageData`"
       - "MULTICHOICE_QUESTION: See `MultichoiceQuestionPostMessageData`"
       - "RATING_QUESTION: See `RatingQuestionPostMessageData`"
@@ -43111,12 +44223,14 @@ components:
       - "CREATION_TIMESTAMP: Filter by the 'creationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
       - "MODIFICATION_TIMESTAMP: Filter by the 'modificationTimestamp' attribute. Specify the timestamp in the UTC timezone with milliseconds."
     EditMessageData:
-      description: "Base class for the new content of a message edit. <p> Can be one of `TextEditMessageData`. <p> An edit replaces the message's content: only `text` is mandatory, and each optional field states what happens when it is left out."
+      description: "Base class for the new content of a message edit. <p> Can be one of `TextEditMessageData` or `AdaptiveCardEditMessageData`. <p> An edit replaces the message's content. Each variant has one mandatory field, the new content; every other field is optional, and its description states what happens when it is left out."
       oneOf:
       - $ref: "#/components/schemas/TextEditMessageData"
+      - $ref: "#/components/schemas/AdaptiveCardEditMessageData"
       discriminator:
         propertyName: type
         mapping:
+          ADAPTIVE_CARD: "#/components/schemas/AdaptiveCardEditMessageData"
           TEXT: "#/components/schemas/TextEditMessageData"
     EditMessageResult:
       type: object
@@ -45350,6 +46464,9 @@ components:
           type: integer
           format: int64
           description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        redacted:
+          type: boolean
+          description: "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this."
         startTimestamp:
           type: integer
           format: int64
@@ -46960,6 +48077,162 @@ components:
           $ref: "#/components/schemas/ECustomActionSearchFilterField"
         operator:
           $ref: "#/components/schemas/StringOperator"
+    KeyEncryptionKeyActivationBody:
+      type: object
+      description: Request body for setting the active key encryption key of an account.
+      properties:
+        $_type:
+          type: string
+          default: KeyEncryptionKeyActivationBody
+          enum:
+          - KeyEncryptionKeyActivationBody
+        name:
+          type: string
+          description: The name of the key encryption key. Maximum length of 500 characters.
+        type:
+          $ref: "#/components/schemas/EKeyManagementSystemType"
+        endpoint:
+          type: string
+          description: The endpoint of the key encryption key in the external key management system. Maximum length of 2000 characters.
+    KeyEncryptionKeyConsumerUsage:
+      type: object
+      description: How much a single encryption consumer uses a key encryption key version.
+      properties:
+        $_type:
+          type: string
+          default: KeyEncryptionKeyConsumerUsage
+          enum:
+          - KeyEncryptionKeyConsumerUsage
+        domain:
+          type: string
+          description: "The domain the encryption consumer belongs to, for example the component that owns it."
+        consumer:
+          type: string
+          description: The name of the encryption consumer within its domain.
+        usage:
+          type: integer
+          format: int64
+          description: "The number of this consumer's stored entities whose data encryption key is wrapped by the key encryption key version. `null` if the consumer is unavailable, because its usage is unknown then."
+        availability:
+          $ref: "#/components/schemas/EKeyEncryptionKeyConsumerAvailability"
+        unavailabilityReason:
+          type: string
+          description: Why the consumer is unavailable. `null` while the consumer is available.
+    KeyEncryptionKeyData:
+      type: object
+      description: Data model object for a key encryption key. A key encryption key represents a key in an external key management system that's used to wrap and unwrap the data encryption keys of an account.
+      properties:
+        $_type:
+          type: string
+          default: KeyEncryptionKeyData
+          enum:
+          - KeyEncryptionKeyData
+        id:
+          type: string
+          description: Unique ID of the key encryption key
+        accountId:
+          type: string
+          description: ID of the account the key encryption key belongs to
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: "Creation timestamp of the entity. It is defined when the entity is first stored in Unblu. Any value sent to the Unblu server is ignored, so it can be omitted. Note: If you set this property, Unblu returns the same value, but it isn't written to storage and doesn't affect data consistency."
+        modificationTimestamp:
+          type: integer
+          format: int64
+          description: "Timestamp of the last modification. This property is always optional and can be omitted when sending data to the server. If sent to the server, it is ignored. It is only informational in character. Note: If you set this property, it returns the same value but it isn't written to storage and doesn't affect the data consistency."
+        version:
+          type: integer
+          format: int64
+          description: "Version of the entity, incremented on each change. Updates must always be based on the latest version or they're rejected. When creating an object, the version can be omitted."
+        name:
+          type: string
+          description: The name of the key encryption key. Maximum length of 500 characters.
+        type:
+          $ref: "#/components/schemas/EKeyManagementSystemType"
+        endpoint:
+          type: string
+          description: The endpoint of the key encryption key in the external key management system. Maximum length of 2000 characters. The combination of type and endpoint must be unique among the key encryption keys of an account.
+        status:
+          $ref: "#/components/schemas/EKeyEncryptionKeyStatus"
+        activationTimestamp:
+          type: integer
+          format: int64
+          description: "The timestamp at which the key encryption key most recently became the active key of the account. Read-only, set by the server."
+    KeyEncryptionKeyList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: KeyEncryptionKeyList
+          enum:
+          - KeyEncryptionKeyList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: "#/components/schemas/KeyEncryptionKeyData"
+    KeyEncryptionKeyUsageStatistics:
+      type: object
+      description: "How much a key encryption key version is used overall, broken down by encryption consumer."
+      properties:
+        $_type:
+          type: string
+          default: KeyEncryptionKeyUsageStatistics
+          enum:
+          - KeyEncryptionKeyUsageStatistics
+        entries:
+          type: array
+          description: "One entry per encryption consumer, including the consumers that couldn't be reached."
+          items:
+            $ref: "#/components/schemas/KeyEncryptionKeyConsumerUsage"
+        totalUsage:
+          type: integer
+          format: int64
+          description: "The number of stored entities across all reported encryption consumers whose data encryption key is wrapped by the key encryption key version. `null` while any consumer is unavailable, because the total is unknown then."
+    KeyEncryptionKeyVersion:
+      type: object
+      description: "Model of a version of a key encryption key. A key encryption key is a container for the versions the external key management system holds for it. Data encryption keys are wrapped with a specific version, so the status that decides whether a version is still used for wrapping is tracked per version."
+      properties:
+        $_type:
+          type: string
+          default: KeyEncryptionKeyVersion
+          enum:
+          - KeyEncryptionKeyVersion
+        id:
+          type: string
+        accountId:
+          type: string
+          description: The ID of the account the version belongs to. It's always the account of the version's key encryption key. It's stored on the version as well so that a version looked up by its own ID can be checked against an account without loading the key encryption key first.
+        keyEncryptionKeyId:
+          type: string
+          description: The ID of the key encryption key this version belongs to.
+        versionIdentifier:
+          type: string
+          description: The identifier of the version in the external key management system. Maximum length of 500 characters. The combination of key encryption key and version identifier must be unique.
+        status:
+          $ref: "#/components/schemas/EKeyEncryptionKeyStatus"
+        creationTimestamp:
+          type: integer
+          format: int64
+          description: The timestamp at which the version was created in the external key management system. Determines which version of a key encryption key is the latest one.
+        drainingStartTimestamp:
+          type: integer
+          format: int64
+          description: "The timestamp at which the version transitioned to status `DRAINING`, or null while it isn't draining. Draining waits until data encryption keys that consumers cached before this point are guaranteed to have expired, so the version can't receive new data anymore and the set of entities to re-wrap is final before the first batch runs."
+    KeyEncryptionKeyVersionList:
+      type: object
+      properties:
+        $_type:
+          type: string
+          default: KeyEncryptionKeyVersionList
+          enum:
+          - KeyEncryptionKeyVersionList
+        items:
+          type: array
+          description: The list of mapped entities
+          items:
+            $ref: "#/components/schemas/KeyEncryptionKeyVersion"
     Label:
       type: object
       description: <p>This type is in preview mode.</p>Model of a label. A label can be set on the target types listed in its `settableOn` property (e.g. persons and/or conversations).
@@ -47781,9 +49054,11 @@ components:
       - $ref: "#/components/schemas/TextQuestionMessageData"
       - $ref: "#/components/schemas/RecordingAvailableMessageData"
       - $ref: "#/components/schemas/WhatsAppTemplateMessageData"
+      - $ref: "#/components/schemas/AdaptiveCardMessageData"
       discriminator:
         propertyName: type
         mapping:
+          ADAPTIVE_CARD: "#/components/schemas/AdaptiveCardMessageData"
           APPROVAL_REQUEST: "#/components/schemas/ApprovalRequestMessageData"
           CARD: "#/components/schemas/CardMessageData"
           FILE: "#/components/schemas/FileMessageData"
@@ -48128,6 +49403,9 @@ components:
           type: integer
           format: int64
           description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        redacted:
+          type: boolean
+          description: "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this."
         sendTimestamp:
           type: integer
           format: int64
@@ -48144,7 +49422,7 @@ components:
         characterCount:
           type: integer
           format: int32
-          description: The number of characters in the message.
+          description: "The number of characters in the message, or `-1` if the message text was redacted."
         type:
           $ref: "#/components/schemas/EMessageType"
         locale:
@@ -52762,7 +54040,7 @@ components:
         action:
           $ref: "#/components/schemas/MessageAction"
     PostMessageData:
-      description: "Base class for all conversation messages sent to the collaboration server. <p> Can be one of `CardPostMessageData`, `FilePostMessageData`, `ListPostMessageData`, `MultichoiceQuestionPostMessageData`,`RatingQuestionPostMessageData`, `ReplyPostMessageData`, `TextPostMessageData`, `TextQuestionPostMessageData` or`WhatsAppTemplatePostMessageData`"
+      description: "Base class for all conversation messages sent to the collaboration server. <p> Can be one of `CardPostMessageData`, `FilePostMessageData`, `ListPostMessageData`, `MultichoiceQuestionPostMessageData`,`RatingQuestionPostMessageData`, `ReplyPostMessageData`, `TextPostMessageData`, `TextQuestionPostMessageData`, `WhatsAppTemplatePostMessageData`, or `AdaptiveCardPostMessageData`."
       oneOf:
       - $ref: "#/components/schemas/ListPostMessageData"
       - $ref: "#/components/schemas/CardPostMessageData"
@@ -52773,9 +54051,11 @@ components:
       - $ref: "#/components/schemas/TextPostMessageData"
       - $ref: "#/components/schemas/TextQuestionPostMessageData"
       - $ref: "#/components/schemas/WhatsAppTemplatePostMessageData"
+      - $ref: "#/components/schemas/AdaptiveCardPostMessageData"
       discriminator:
         propertyName: type
         mapping:
+          ADAPTIVE_CARD: "#/components/schemas/AdaptiveCardPostMessageData"
           CARD: "#/components/schemas/CardPostMessageData"
           FILE: "#/components/schemas/FilePostMessageData"
           LIST: "#/components/schemas/ListPostMessageData"
@@ -52928,6 +54208,9 @@ components:
           type: integer
           format: int64
           description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        redacted:
+          type: boolean
+          description: "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this."
         reservationCreationTimestamp:
           type: integer
           format: int64
@@ -53649,6 +54932,10 @@ components:
           type: integer
           format: int64
           description: "Retention interval of broadcasts represented as number of seconds. Broadcasts are deleted after the time set below, counting from when they were created."
+        retentionIntervalAnalyticsSeconds:
+          type: integer
+          format: int64
+          description: "Retention interval of analytics data represented as number of seconds. Analytics events are deleted after this interval, counting from when they were recorded. Null when the server collects no analytics data."
     RecordedMinutesData:
       type: object
       properties:
@@ -54673,7 +55960,7 @@ components:
           NOT_EQUALS: "#/components/schemas/NotEqualsStringOperator"
           NOT_IN: "#/components/schemas/NotInStringOperator"
     SuggestionSourceData:
-      description: API Model representing a suggestion source
+      description: "API Model representing a suggestion source. If `type` is omitted, `CUSTOM` is assumed."
       oneOf:
       - $ref: "#/components/schemas/CustomSuggestionSourceData"
       - $ref: "#/components/schemas/CopilotSuggestionSourceData"
@@ -54684,6 +55971,7 @@ components:
           ARIA: "#/components/schemas/AriaSuggestionSourceData"
           COPILOT: "#/components/schemas/CopilotSuggestionSourceData"
           CUSTOM: "#/components/schemas/CustomSuggestionSourceData"
+      x-discriminator-default: CUSTOM
     SuggestionSourceOrderBy:
       type: object
       description: SuggestionSource orderBy item.
@@ -56512,6 +57800,9 @@ components:
           type: integer
           format: int64
           description: UTC timestamp (ms) for the KPI entry. This is the timestamp used for filtering
+        redacted:
+          type: boolean
+          description: "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this."
         startTimestamp:
           type: integer
           format: int64

@@ -49,6 +49,12 @@ public enum EBotOutboundEventType {
 	DIALOG_CLOSED("DIALOG_CLOSED"),
 
 	/**
+	 * DIALOG_ADAPTIVE_CARD_ACTION: Delivered when a person executes an &#x60;Action.Submit&#x60; or &#x60;Action.Execute&#x60; action on an Adaptive Card the bot
+	 * sent in its own bot thread. Only occurs for a bot that sends cards carrying such actions.
+	 */
+	DIALOG_ADAPTIVE_CARD_ACTION("DIALOG_ADAPTIVE_CARD_ACTION"),
+
+	/**
 	 * DIALOG_COUNTERPART_CHANGED: Delivered when the counterpart person of a dialog changes during the dialog.
 	 */
 	DIALOG_COUNTERPART_CHANGED("DIALOG_COUNTERPART_CHANGED"),
@@ -62,7 +68,12 @@ public enum EBotOutboundEventType {
 	 * DIALOG_MESSAGE_DELETED: Delivered when a message of a previously accepted bot dialog is deleted, whether for all participants or only for individual
 	 * participants.
 	 */
-	DIALOG_MESSAGE_DELETED("DIALOG_MESSAGE_DELETED");
+	DIALOG_MESSAGE_DELETED("DIALOG_MESSAGE_DELETED"),
+
+	/**
+	 * DIALOG_LINK_CLICKED: Delivered when a person clicks a link in a message of the bot thread of a previously accepted bot dialog.
+	 */
+	DIALOG_LINK_CLICKED("DIALOG_LINK_CLICKED");
 
 	private String value;
 

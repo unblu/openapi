@@ -272,11 +272,11 @@ public class ConversationAccessInterceptorData {
 	}
 
 	/**
-	 * A model representing a conversation access interceptor. These interceptors are used to approve or reject an attempt to join a conversation. Mandatory.
+	 * Name of the conversation access interceptor. Must be unique in the account. Maximum length of 250 characters. Mandatory.
 	 * 
 	 * @return name
 	 **/
-	@ApiModelProperty(value = "A model representing a conversation access interceptor. These interceptors are used to approve or reject an attempt to join a conversation. Mandatory.")
+	@ApiModelProperty(value = "Name of the conversation access interceptor. Must be unique in the account. Maximum length of 250 characters. Mandatory.")
 	public String getName() {
 		return name;
 	}
@@ -397,11 +397,11 @@ public class ConversationAccessInterceptorData {
 	}
 
 	/**
-	 * Optional secret sent with each outbound event. Mandatory. &lt;p&gt; Maximum length of 4000 characters.
+	 * Secret used to sign each outbound request and to verify the signature of the response. Optional. &lt;p&gt; Maximum length of 4000 characters.
 	 * 
 	 * @return outboundSecret
 	 **/
-	@ApiModelProperty(value = "Optional secret sent with each outbound event. Mandatory. <p> Maximum length of 4000 characters.")
+	@ApiModelProperty(value = "Secret used to sign each outbound request and to verify the signature of the response. Optional. <p> Maximum length of 4000 characters.")
 	public String getOutboundSecret() {
 		return outboundSecret;
 	}
@@ -473,11 +473,12 @@ public class ConversationAccessInterceptorData {
 	}
 
 	/**
-	 * Order of execution of the file upload interceptor among all the file upload interceptors configured in the account. Mandatory.
+	 * Order of execution of the conversation access interceptor among all the conversation access interceptors configured in the account. Interceptors with a lower
+	 * value run first. Mandatory.
 	 * 
 	 * @return order
 	 **/
-	@ApiModelProperty(value = "Order of execution of the file upload interceptor among all the file upload interceptors configured in the account. Mandatory.")
+	@ApiModelProperty(value = "Order of execution of the conversation access interceptor among all the conversation access interceptors configured in the account. Interceptors with a lower value run first. Mandatory.")
 	public Long getOrder() {
 		return order;
 	}
@@ -492,11 +493,11 @@ public class ConversationAccessInterceptorData {
 	}
 
 	/**
-	 * A long for the amount of miliseconds until the timeout of the interceptor occurs.
+	 * The number of milliseconds Unblu waits for the interceptor&#39;s response before applying &#x60;timeoutBehavior&#x60;. If omitted, it defaults to 5000.
 	 * 
 	 * @return timeoutMillis
 	 **/
-	@ApiModelProperty(value = "A long for the amount of miliseconds until the timeout of the interceptor occurs.")
+	@ApiModelProperty(value = "The number of milliseconds Unblu waits for the interceptor's response before applying `timeoutBehavior`. If omitted, it defaults to 5000.")
 	public Long getTimeoutMillis() {
 		return timeoutMillis;
 	}

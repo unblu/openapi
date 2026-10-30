@@ -772,11 +772,11 @@ public class CustomMessageActionData implements CustomActionData {
 	}
 
 	/**
-	 * The sorting order within the custom actions when displayed in the action bar. The default value is 5.
+	 * The sorting order within the custom actions when displayed in the action bar. Mandatory.
 	 * 
 	 * @return sortingOrder
 	 **/
-	@ApiModelProperty(value = "The sorting order within the custom actions when displayed in the action bar. The default value is 5.")
+	@ApiModelProperty(value = "The sorting order within the custom actions when displayed in the action bar. Mandatory.")
 	public Integer getSortingOrder() {
 		return sortingOrder;
 	}

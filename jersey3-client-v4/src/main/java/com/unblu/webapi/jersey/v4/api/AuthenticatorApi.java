@@ -198,7 +198,7 @@ public class AuthenticatorApi {
 	/**
 	 * getCurrentPerson Returns the current person&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -209,7 +209,7 @@ public class AuthenticatorApi {
 	/**
 	 * getCurrentPerson Returns the current person&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

@@ -64,7 +64,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The conversation to update (required)
 	 * @param conversationsAddExternalParticipantBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -78,7 +79,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The conversation to update (required)
 	 * @param conversationsAddExternalParticipantBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -129,7 +131,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The ID of the conversation to add the labels to (required)
 	 * @param conversationLabelsBody The names of the labels to be added to the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -143,7 +146,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The ID of the conversation to add the labels to (required)
 	 * @param conversationLabelsBody The names of the labels to be added to the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -194,7 +198,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsAddParticipantBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -208,7 +213,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsAddParticipantBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -258,7 +264,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId (required)
 	 * @param conversationsChangeParticipantVisibilityBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -271,7 +278,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId (required)
 	 * @param conversationsChangeParticipantVisibilityBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -325,7 +333,9 @@ public class ConversationsApi {
 	 * any active conversations. Ended conversations are ignored.&lt;br&gt;
 	 * 
 	 * @param conversationCreationData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -342,7 +352,9 @@ public class ConversationsApi {
 	 * any active conversations. Ended conversations are ignored.&lt;br&gt;
 	 * 
 	 * @param conversationCreationData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -442,7 +454,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsEndBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -456,7 +469,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsEndBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -510,7 +524,8 @@ public class ConversationsApi {
 	 * 
 	 * @param sourceId The source ID the conversation was created with (optional)
 	 * @param externalMessengerChannelId The messenger channel ID the conversation is connected to. Can be null for internal conversations. (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -527,7 +542,8 @@ public class ConversationsApi {
 	 * 
 	 * @param sourceId The source ID the conversation was created with (optional)
 	 * @param externalMessengerChannelId The messenger channel ID the conversation is connected to. Can be null for internal conversations. (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -732,7 +748,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsOffboardParticipantBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -745,7 +762,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsOffboardParticipantBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -795,7 +813,8 @@ public class ConversationsApi {
 	 * making the call must be a participant in the conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId ID of the conversation which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -808,7 +827,8 @@ public class ConversationsApi {
 	 * making the call must be a participant in the conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId ID of the conversation which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -853,7 +873,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The ID of the conversation to remove the labels from (required)
 	 * @param conversationLabelsBody The names of the labels to remove from the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -866,7 +887,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The ID of the conversation to remove the labels from (required)
 	 * @param conversationLabelsBody The names of the labels to remove from the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -917,7 +939,8 @@ public class ConversationsApi {
 	 * &#x60;SUPERVISOR&#x60;, the results only include conversations of the agents in their team or teams.&lt;br&gt;
 	 * 
 	 * @param conversationQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -931,7 +954,8 @@ public class ConversationsApi {
 	 * &#x60;SUPERVISOR&#x60;, the results only include conversations of the agents in their team or teams.&lt;br&gt;
 	 * 
 	 * @param conversationQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -976,7 +1000,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetAssigneePersonBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -990,7 +1015,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetAssigneePersonBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1040,7 +1066,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetAwaitedPersonTypeBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1053,7 +1080,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetAwaitedPersonTypeBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1104,7 +1132,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetContextPersonBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1118,7 +1147,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetContextPersonBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1172,7 +1202,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The conversation for which the configuration and text property inheritance are updated. (required)
 	 * @param conversationsSetInheritConfigurationAndTextsBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1189,7 +1220,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The conversation for which the configuration and text property inheritance are updated. (required)
 	 * @param conversationsSetInheritConfigurationAndTextsBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1242,7 +1274,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The ID of the conversation to set the labels on (required)
 	 * @param conversationLabelsBody The names of the labels to set on the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1258,7 +1291,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId The ID of the conversation to set the labels on (required)
 	 * @param conversationLabelsBody The names of the labels to set on the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1308,7 +1342,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetLocaleBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1321,7 +1356,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetLocaleBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1371,7 +1407,9 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationRecipientData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1384,7 +1422,9 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationRecipientData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1441,7 +1481,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetScheduledTimestampBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1461,7 +1502,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetScheduledTimestampBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1511,7 +1553,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the ID of the conversation to update (required)
 	 * @param conversationsSetSourceUrlBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1524,7 +1567,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the ID of the conversation to update (required)
 	 * @param conversationsSetSourceUrlBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1574,7 +1618,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation to be starred/unstarred (required)
 	 * @param conversationsSetStarredBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1587,7 +1632,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation to be starred/unstarred (required)
 	 * @param conversationsSetStarredBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1643,7 +1689,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetTopicBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1662,7 +1709,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetTopicBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1712,7 +1760,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetVisibilityBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1725,7 +1774,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation that is updated (required)
 	 * @param conversationsSetVisibilityBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1776,7 +1826,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation where the custom data should be added (required)
 	 * @param conversationsSetVisitorDataBody the custom visitor data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1790,7 +1841,8 @@ public class ConversationsApi {
 	 * 
 	 * @param conversationId the conversation where the custom data should be added (required)
 	 * @param conversationsSetVisitorDataBody the custom visitor data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1949,7 +2001,8 @@ public class ConversationsApi {
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of settings that will be updated. The source for this map has to be the &lt;code&gt;configuration&lt;/code&gt; attribute
 	 * when you read the conversation using &lt;code&gt;configuration&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1963,7 +2016,8 @@ public class ConversationsApi {
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of settings that will be updated. The source for this map has to be the &lt;code&gt;configuration&lt;/code&gt; attribute
 	 * when you read the conversation using &lt;code&gt;configuration&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -2014,7 +2068,8 @@ public class ConversationsApi {
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of metadata that will be updated. The source for this map has to be the &lt;code&gt;metadata&lt;/code&gt; attribute when
 	 * you read the conversation using &lt;code&gt;metadata&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -2028,7 +2083,8 @@ public class ConversationsApi {
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of metadata that will be updated. The source for this map has to be the &lt;code&gt;metadata&lt;/code&gt; attribute when
 	 * you read the conversation using &lt;code&gt;metadata&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -2079,7 +2135,8 @@ public class ConversationsApi {
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of translations that will be updated. The source for this map has to be the &lt;code&gt;text&lt;/code&gt; attribute when
 	 * you read the conversation using &lt;code&gt;text&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -2093,7 +2150,8 @@ public class ConversationsApi {
 	 * @param conversationId the conversation that is updated (required)
 	 * @param requestBody the key-value map of translations that will be updated. The source for this map has to be the &lt;code&gt;text&lt;/code&gt; attribute when
 	 * you read the conversation using &lt;code&gt;text&lt;/code&gt; in the &lt;code&gt;expand&lt;/code&gt; query parameter. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

@@ -129,7 +129,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
 	 * @param requestBody List of the label names to be added to the person (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -144,7 +144,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to add the labels to (required)
 	 * @param requestBody List of the label names to be added to the person (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -461,7 +461,8 @@ public class PersonsApi {
 	 * createOrUpdateBot Updates and returns an existing bot person or creates and returns a bot person if absent.&lt;br&gt;
 	 * 
 	 * @param personData person data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -473,7 +474,8 @@ public class PersonsApi {
 	 * createOrUpdateBot Updates and returns an existing bot person or creates and returns a bot person if absent.&lt;br&gt;
 	 * 
 	 * @param personData person data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -516,7 +518,8 @@ public class PersonsApi {
 	 * createOrUpdateVirtual Updates and returns an existing virtual person or creates and returns a virtual person if absent.&lt;br&gt;
 	 * 
 	 * @param personData person data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -528,7 +531,8 @@ public class PersonsApi {
 	 * createOrUpdateVirtual Updates and returns an existing virtual person or creates and returns a virtual person if absent.&lt;br&gt;
 	 * 
 	 * @param personData person data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -576,7 +580,7 @@ public class PersonsApi {
 	 * User.username} in the User entity. &lt;li&gt;For users whose identity is managed in Unblu (and whose person source is therefore \&quot;USER_DB\&quot;), the
 	 * source ID is the ${link User.id} of the user represented by the person. &lt;li&gt;For anonymous visitors, the source ID is a random String. &lt;li&gt;For the
 	 * default concierge bot person defined in the account scope, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -593,7 +597,7 @@ public class PersonsApi {
 	 * User.username} in the User entity. &lt;li&gt;For users whose identity is managed in Unblu (and whose person source is therefore \&quot;USER_DB\&quot;), the
 	 * source ID is the ${link User.id} of the user represented by the person. &lt;li&gt;For anonymous visitors, the source ID is a random String. &lt;li&gt;For the
 	 * default concierge bot person defined in the account scope, the source ID is the String \&quot;concierge-bot-person-id\&quot;. &lt;/ul&gt; (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -854,7 +858,7 @@ public class PersonsApi {
 	 * them.&lt;br&gt;
 	 * 
 	 * @param personId (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -867,7 +871,7 @@ public class PersonsApi {
 	 * them.&lt;br&gt;
 	 * 
 	 * @param personId (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1025,7 +1029,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
 	 * @param requestBody List of the label names to remove from the person (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1040,7 +1044,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to remove the labels from (required)
 	 * @param requestBody List of the label names to remove from the person (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1265,7 +1269,7 @@ public class PersonsApi {
 	 * search Search for persons in the current account&lt;br&gt;
 	 * 
 	 * @param personQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1277,7 +1281,7 @@ public class PersonsApi {
 	 * search Search for persons in the current account&lt;br&gt;
 	 * 
 	 * @param personQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1320,7 +1324,7 @@ public class PersonsApi {
 	 * searchAgents Searches for agents in the current account&lt;br&gt;
 	 * 
 	 * @param personTypedQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1332,7 +1336,7 @@ public class PersonsApi {
 	 * searchAgents Searches for agents in the current account&lt;br&gt;
 	 * 
 	 * @param personTypedQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1426,7 +1430,7 @@ public class PersonsApi {
 	 * searchBots Searches for bots in the current account&lt;br&gt;
 	 * 
 	 * @param personTypedQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1438,7 +1442,7 @@ public class PersonsApi {
 	 * searchBots Searches for bots in the current account&lt;br&gt;
 	 * 
 	 * @param personTypedQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1481,7 +1485,7 @@ public class PersonsApi {
 	 * searchVisitors Searches for visitors in the current account&lt;br&gt;
 	 * 
 	 * @param personTypedQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1493,7 +1497,7 @@ public class PersonsApi {
 	 * searchVisitors Searches for visitors in the current account&lt;br&gt;
 	 * 
 	 * @param personTypedQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1657,7 +1661,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
 	 * @param requestBody List of the label names to set on the person (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1674,7 +1678,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to set the labels on (required)
 	 * @param requestBody List of the label names to set on the person (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1724,7 +1728,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to set the note on (required)
 	 * @param personsSetNoteBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return PersonData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1737,7 +1741,7 @@ public class PersonsApi {
 	 * 
 	 * @param personId The ID of the person to set the note on (required)
 	 * @param personsSetNoteBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;PersonData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

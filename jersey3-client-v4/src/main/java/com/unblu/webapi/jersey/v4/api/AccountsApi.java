@@ -46,7 +46,9 @@ public class AccountsApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param account The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
@@ -58,7 +60,9 @@ public class AccountsApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param account The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -101,7 +105,8 @@ public class AccountsApi {
 	 * createAccountWithNewAdmin Create a new account with a new admin which will receive an email with the initial password.&lt;br&gt;
 	 * 
 	 * @param accountUserContainer the new account and admin user information (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return AccountUserContainer
 	 * @throws ApiException if fails to make API call
 	 */
@@ -113,7 +118,8 @@ public class AccountsApi {
 	 * createAccountWithNewAdmin Create a new account with a new admin which will receive an email with the initial password.&lt;br&gt;
 	 * 
 	 * @param accountUserContainer the new account and admin user information (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountUserContainer&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -324,6 +330,63 @@ public class AccountsApi {
 	}
 
 	/**
+	 * enableEncryption &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Enables encryption for the account with the specified ID. Once enabled, the
+	 * account&#39;s data is encrypted at rest using data encryption keys wrapped by the account&#39;s active key encryption key. Calling this method for an account
+	 * that already has encryption enabled has no effect. &lt;p&gt; The account must have an active key encryption key, otherwise the call is rejected. Set one with
+	 * the key encryption key API first. &lt;p&gt; Only superadmins can call this endpoint for accounts other than their own. &lt;p&gt; Encryption can&#39;t be
+	 * disabled once it&#39;s been enabled.&lt;br&gt;
+	 * 
+	 * @param accountId The ID of the account for which encryption should be enabled (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void accountsEnableEncryption(String accountId) throws ApiException {
+
+		accountsEnableEncryptionWithHttpInfo(accountId);
+	}
+
+	/**
+	 * enableEncryption &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Enables encryption for the account with the specified ID. Once enabled, the
+	 * account&#39;s data is encrypted at rest using data encryption keys wrapped by the account&#39;s active key encryption key. Calling this method for an account
+	 * that already has encryption enabled has no effect. &lt;p&gt; The account must have an active key encryption key, otherwise the call is rejected. Set one with
+	 * the key encryption key API first. &lt;p&gt; Only superadmins can call this endpoint for accounts other than their own. &lt;p&gt; Encryption can&#39;t be
+	 * disabled once it&#39;s been enabled.&lt;br&gt;
+	 * 
+	 * @param accountId The ID of the account for which encryption should be enabled (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> accountsEnableEncryptionWithHttpInfo(String accountId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'accountId' is set
+		if (accountId == null) {
+			throw new ApiException(400, "Missing the required parameter 'accountId' when calling accountsEnableEncryption");
+		}
+
+		// create path and map variables
+		String localVarPath = "/accounts/{accountId}/enableEncryption"
+				.replaceAll("\\{" + "accountId" + "\\}", apiClient.escapeString(accountId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
 	 * getAccountSecret Returns the account secret for the given account ID. &lt;p&gt; Only superadmins can call this endpoint for accounts other than their
 	 * own.&lt;br&gt;
 	 * 
@@ -381,7 +444,8 @@ public class AccountsApi {
 	 * getByName Returns an account by the given name or an error, if there is no such account&lt;br&gt;
 	 * 
 	 * @param name The name of the account which should be returned (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
@@ -393,7 +457,8 @@ public class AccountsApi {
 	 * getByName Returns an account by the given name or an error, if there is no such account&lt;br&gt;
 	 * 
 	 * @param name The name of the account which should be returned (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -431,7 +496,8 @@ public class AccountsApi {
 	/**
 	 * getCurrentAccount Returns the account object of the current logged in user&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
@@ -442,7 +508,8 @@ public class AccountsApi {
 	/**
 	 * getCurrentAccount Returns the account object of the current logged in user&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -639,7 +706,8 @@ public class AccountsApi {
 	 * read Returns the account with the given ID&lt;br&gt;
 	 * 
 	 * @param accountId ID of the account which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
@@ -651,7 +719,8 @@ public class AccountsApi {
 	 * read Returns the account with the given ID&lt;br&gt;
 	 * 
 	 * @param accountId ID of the account which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -695,7 +764,8 @@ public class AccountsApi {
 	 * readMultiple Gets a list of accounts with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the accounts to fetch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return AccountList
 	 * @throws ApiException if fails to make API call
 	 */
@@ -707,7 +777,8 @@ public class AccountsApi {
 	 * readMultiple Gets a list of accounts with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the accounts to fetch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -803,7 +874,8 @@ public class AccountsApi {
 	 * search Search for accounts&lt;br&gt;
 	 * 
 	 * @param accountQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return AccountResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -815,7 +887,8 @@ public class AccountsApi {
 	 * search Search for accounts&lt;br&gt;
 	 * 
 	 * @param accountQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;AccountResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -858,7 +931,9 @@ public class AccountsApi {
 	 * update Allows to update the current account as admin. If user is super admin, he can also update other accounts&lt;br&gt;
 	 * 
 	 * @param account The account entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return Account
 	 * @throws ApiException if fails to make API call
 	 */
@@ -870,7 +945,9 @@ public class AccountsApi {
 	 * update Allows to update the current account as admin. If user is super admin, he can also update other accounts&lt;br&gt;
 	 * 
 	 * @param account The account entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ApiResponse&lt;Account&gt;
 	 * @throws ApiException if fails to make API call
 	 */

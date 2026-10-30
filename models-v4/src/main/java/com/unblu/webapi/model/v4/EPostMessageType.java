@@ -25,6 +25,11 @@ public enum EPostMessageType {
 	CARD("CARD"),
 
 	/**
+	 * ADAPTIVE_CARD: See &#x60;AdaptiveCardPostMessageData&#x60;
+	 */
+	ADAPTIVE_CARD("ADAPTIVE_CARD"),
+
+	/**
 	 * LIST: See &#x60;ListPostMessageData&#x60;
 	 */
 	LIST("LIST"),

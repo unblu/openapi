@@ -1,13 +1,15 @@
 package com.unblu.webapi.model.v4;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true, defaultImpl = CustomDialogBotData.class)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = AriaDialogBotData.class, name = "ARIA"),
 	@JsonSubTypes.Type(value = CopilotDialogBotData.class, name = "COPILOT"),
 	@JsonSubTypes.Type(value = CustomDialogBotData.class, name = "CUSTOM"),
-	@JsonSubTypes.Type(value = AriaDialogBotData.class, name = "ARIA"),
 })
 public interface DialogBotData {
 	void setId(String id);
@@ -106,11 +108,71 @@ public interface DialogBotData {
 
 	DialogBotData onTimeoutBehavior(EBotDialogTimeoutBehavior onTimeoutBehavior);
 
+	void setRetryCount(Long retryCount);
+
+	Long getRetryCount();
+
+	DialogBotData retryCount(Long retryCount);
+
+	void setRetryDelay(Long retryDelay);
+
+	Long getRetryDelay();
+
+	DialogBotData retryDelay(Long retryDelay);
+
 	void setType(EBotType type);
 
 	EBotType getType();
 
 	DialogBotData type(EBotType type);
+
+	void setBotIndicatorType(EBotIndicatorType botIndicatorType);
+
+	EBotIndicatorType getBotIndicatorType();
+
+	DialogBotData botIndicatorType(EBotIndicatorType botIndicatorType);
+
+	void setThinkingTexts(List<BotThinkingTextData> thinkingTexts);
+
+	List<BotThinkingTextData> getThinkingTexts();
+
+	DialogBotData thinkingTexts(List<BotThinkingTextData> thinkingTexts);
+
+	void setThinkingInputMode(EThinkingInputMode thinkingInputMode);
+
+	EThinkingInputMode getThinkingInputMode();
+
+	DialogBotData thinkingInputMode(EThinkingInputMode thinkingInputMode);
+
+	void setRandomizeThinkingTexts(Boolean randomizeThinkingTexts);
+
+	Boolean isRandomizeThinkingTexts();
+
+	DialogBotData randomizeThinkingTexts(Boolean randomizeThinkingTexts);
+
+	void setMaxThinkingIndicatorTime(Integer maxThinkingIndicatorTime);
+
+	Integer getMaxThinkingIndicatorTime();
+
+	DialogBotData maxThinkingIndicatorTime(Integer maxThinkingIndicatorTime);
+
+	void setAutoStartThinkingIndicatorDelay(Integer autoStartThinkingIndicatorDelay);
+
+	Integer getAutoStartThinkingIndicatorDelay();
+
+	DialogBotData autoStartThinkingIndicatorDelay(Integer autoStartThinkingIndicatorDelay);
+
+	void setThinkingIndicatorTextCycleInterval(Integer thinkingIndicatorTextCycleInterval);
+
+	Integer getThinkingIndicatorTextCycleInterval();
+
+	DialogBotData thinkingIndicatorTextCycleInterval(Integer thinkingIndicatorTextCycleInterval);
+
+	void setDefaultContentOrigin(EMessageContentOrigin defaultContentOrigin);
+
+	EMessageContentOrigin getDefaultContentOrigin();
+
+	DialogBotData defaultContentOrigin(EMessageContentOrigin defaultContentOrigin);
 
 	void setOutboundTimeoutMillis(Long outboundTimeoutMillis);
 

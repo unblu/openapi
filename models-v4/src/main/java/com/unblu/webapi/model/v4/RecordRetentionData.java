@@ -27,6 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_WEBHOOK_DELIVERY_LOG_SECONDS,
 	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_AUDIT_LOG_SECONDS,
 	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_BROADCAST_SECONDS,
+	RecordRetentionData.JSON_PROPERTY_RETENTION_INTERVAL_ANALYTICS_SECONDS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class RecordRetentionData {
@@ -94,6 +95,10 @@ public class RecordRetentionData {
 	public static final String JSON_PROPERTY_RETENTION_INTERVAL_BROADCAST_SECONDS = "retentionIntervalBroadcastSeconds";
 	@JsonProperty(JSON_PROPERTY_RETENTION_INTERVAL_BROADCAST_SECONDS)
 	private Long retentionIntervalBroadcastSeconds;
+
+	public static final String JSON_PROPERTY_RETENTION_INTERVAL_ANALYTICS_SECONDS = "retentionIntervalAnalyticsSeconds";
+	@JsonProperty(JSON_PROPERTY_RETENTION_INTERVAL_ANALYTICS_SECONDS)
+	private Long retentionIntervalAnalyticsSeconds;
 
 	public RecordRetentionData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -249,6 +254,26 @@ public class RecordRetentionData {
 		this.retentionIntervalBroadcastSeconds = retentionIntervalBroadcastSeconds;
 	}
 
+	public RecordRetentionData retentionIntervalAnalyticsSeconds(Long retentionIntervalAnalyticsSeconds) {
+		this.retentionIntervalAnalyticsSeconds = retentionIntervalAnalyticsSeconds;
+		return this;
+	}
+
+	/**
+	 * Retention interval of analytics data represented as number of seconds. Analytics events are deleted after this interval, counting from when they were
+	 * recorded. Null when the server collects no analytics data.
+	 * 
+	 * @return retentionIntervalAnalyticsSeconds
+	 **/
+	@ApiModelProperty(value = "Retention interval of analytics data represented as number of seconds. Analytics events are deleted after this interval, counting from when they were recorded. Null when the server collects no analytics data.")
+	public Long getRetentionIntervalAnalyticsSeconds() {
+		return retentionIntervalAnalyticsSeconds;
+	}
+
+	public void setRetentionIntervalAnalyticsSeconds(Long retentionIntervalAnalyticsSeconds) {
+		this.retentionIntervalAnalyticsSeconds = retentionIntervalAnalyticsSeconds;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -265,12 +290,13 @@ public class RecordRetentionData {
 				Objects.equals(this.retentionIntervalPresenceSeconds, recordRetentionData.retentionIntervalPresenceSeconds) &&
 				Objects.equals(this.retentionIntervalWebhookDeliveryLogSeconds, recordRetentionData.retentionIntervalWebhookDeliveryLogSeconds) &&
 				Objects.equals(this.retentionIntervalAuditLogSeconds, recordRetentionData.retentionIntervalAuditLogSeconds) &&
-				Objects.equals(this.retentionIntervalBroadcastSeconds, recordRetentionData.retentionIntervalBroadcastSeconds);
+				Objects.equals(this.retentionIntervalBroadcastSeconds, recordRetentionData.retentionIntervalBroadcastSeconds) &&
+				Objects.equals(this.retentionIntervalAnalyticsSeconds, recordRetentionData.retentionIntervalAnalyticsSeconds);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, accountId, retentionIntervalConversationSeconds, retentionIntervalConversationDataSeconds, retentionIntervalPresenceSeconds, retentionIntervalWebhookDeliveryLogSeconds, retentionIntervalAuditLogSeconds, retentionIntervalBroadcastSeconds);
+		return Objects.hash($type, accountId, retentionIntervalConversationSeconds, retentionIntervalConversationDataSeconds, retentionIntervalPresenceSeconds, retentionIntervalWebhookDeliveryLogSeconds, retentionIntervalAuditLogSeconds, retentionIntervalBroadcastSeconds, retentionIntervalAnalyticsSeconds);
 	}
 
 	@Override
@@ -285,6 +311,7 @@ public class RecordRetentionData {
 		sb.append("    retentionIntervalWebhookDeliveryLogSeconds: ").append(toIndentedString(retentionIntervalWebhookDeliveryLogSeconds)).append("\n");
 		sb.append("    retentionIntervalAuditLogSeconds: ").append(toIndentedString(retentionIntervalAuditLogSeconds)).append("\n");
 		sb.append("    retentionIntervalBroadcastSeconds: ").append(toIndentedString(retentionIntervalBroadcastSeconds)).append("\n");
+		sb.append("    retentionIntervalAnalyticsSeconds: ").append(toIndentedString(retentionIntervalAnalyticsSeconds)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

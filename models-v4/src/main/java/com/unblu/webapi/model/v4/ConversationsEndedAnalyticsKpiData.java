@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_$_TYPE,
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_ID,
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_EVENT_TIMESTAMP,
+	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_REDACTED,
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_CREATION_TIMESTAMP,
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_ONBOARDING_TIMESTAMP,
 	ConversationsEndedAnalyticsKpiData.JSON_PROPERTY_FIRST_QUEUED_TIMESTAMP,
@@ -78,6 +79,10 @@ public class ConversationsEndedAnalyticsKpiData {
 	public static final String JSON_PROPERTY_EVENT_TIMESTAMP = "eventTimestamp";
 	@JsonProperty(JSON_PROPERTY_EVENT_TIMESTAMP)
 	private Long eventTimestamp;
+
+	public static final String JSON_PROPERTY_REDACTED = "redacted";
+	@JsonProperty(JSON_PROPERTY_REDACTED)
+	private Boolean redacted;
 
 	public static final String JSON_PROPERTY_CREATION_TIMESTAMP = "creationTimestamp";
 	@JsonProperty(JSON_PROPERTY_CREATION_TIMESTAMP)
@@ -170,6 +175,26 @@ public class ConversationsEndedAnalyticsKpiData {
 
 	public void setEventTimestamp(Long eventTimestamp) {
 		this.eventTimestamp = eventTimestamp;
+	}
+
+	public ConversationsEndedAnalyticsKpiData redacted(Boolean redacted) {
+		this.redacted = redacted;
+		return this;
+	}
+
+	/**
+	 * True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message
+	 * text or visitor data may be missing. False if the event wasn&#39;t redacted, or if the entry was recorded before Unblu tracked this.
+	 * 
+	 * @return redacted
+	 **/
+	@ApiModelProperty(value = "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this.")
+	public Boolean isRedacted() {
+		return redacted;
+	}
+
+	public void setRedacted(Boolean redacted) {
+		this.redacted = redacted;
 	}
 
 	public ConversationsEndedAnalyticsKpiData creationTimestamp(Long creationTimestamp) {
@@ -355,6 +380,7 @@ public class ConversationsEndedAnalyticsKpiData {
 		return Objects.equals(this.$type, conversationsEndedAnalyticsKpiData.$type) &&
 				Objects.equals(this.id, conversationsEndedAnalyticsKpiData.id) &&
 				Objects.equals(this.eventTimestamp, conversationsEndedAnalyticsKpiData.eventTimestamp) &&
+				Objects.equals(this.redacted, conversationsEndedAnalyticsKpiData.redacted) &&
 				Objects.equals(this.creationTimestamp, conversationsEndedAnalyticsKpiData.creationTimestamp) &&
 				Objects.equals(this.onboardingTimestamp, conversationsEndedAnalyticsKpiData.onboardingTimestamp) &&
 				Objects.equals(this.firstQueuedTimestamp, conversationsEndedAnalyticsKpiData.firstQueuedTimestamp) &&
@@ -368,7 +394,7 @@ public class ConversationsEndedAnalyticsKpiData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, eventTimestamp, creationTimestamp, onboardingTimestamp, firstQueuedTimestamp, firstActiveTimestamp, offboardingTimestamp, endTimestamp, endReason, conversation, metrics);
+		return Objects.hash($type, id, eventTimestamp, redacted, creationTimestamp, onboardingTimestamp, firstQueuedTimestamp, firstActiveTimestamp, offboardingTimestamp, endTimestamp, endReason, conversation, metrics);
 	}
 
 	@Override
@@ -378,6 +404,7 @@ public class ConversationsEndedAnalyticsKpiData {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    eventTimestamp: ").append(toIndentedString(eventTimestamp)).append("\n");
+		sb.append("    redacted: ").append(toIndentedString(redacted)).append("\n");
 		sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
 		sb.append("    onboardingTimestamp: ").append(toIndentedString(onboardingTimestamp)).append("\n");
 		sb.append("    firstQueuedTimestamp: ").append(toIndentedString(firstQueuedTimestamp)).append("\n");

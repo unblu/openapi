@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 	MessagesAnalyticsKpiData.JSON_PROPERTY_$_TYPE,
 	MessagesAnalyticsKpiData.JSON_PROPERTY_ID,
 	MessagesAnalyticsKpiData.JSON_PROPERTY_EVENT_TIMESTAMP,
+	MessagesAnalyticsKpiData.JSON_PROPERTY_REDACTED,
 	MessagesAnalyticsKpiData.JSON_PROPERTY_SEND_TIMESTAMP,
 	MessagesAnalyticsKpiData.JSON_PROPERTY_SERVER_TIMESTAMP,
 	MessagesAnalyticsKpiData.JSON_PROPERTY_SENDER,
@@ -77,6 +78,10 @@ public class MessagesAnalyticsKpiData {
 	public static final String JSON_PROPERTY_EVENT_TIMESTAMP = "eventTimestamp";
 	@JsonProperty(JSON_PROPERTY_EVENT_TIMESTAMP)
 	private Long eventTimestamp;
+
+	public static final String JSON_PROPERTY_REDACTED = "redacted";
+	@JsonProperty(JSON_PROPERTY_REDACTED)
+	private Boolean redacted;
 
 	public static final String JSON_PROPERTY_SEND_TIMESTAMP = "sendTimestamp";
 	@JsonProperty(JSON_PROPERTY_SEND_TIMESTAMP)
@@ -167,6 +172,26 @@ public class MessagesAnalyticsKpiData {
 		this.eventTimestamp = eventTimestamp;
 	}
 
+	public MessagesAnalyticsKpiData redacted(Boolean redacted) {
+		this.redacted = redacted;
+		return this;
+	}
+
+	/**
+	 * True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message
+	 * text or visitor data may be missing. False if the event wasn&#39;t redacted, or if the entry was recorded before Unblu tracked this.
+	 * 
+	 * @return redacted
+	 **/
+	@ApiModelProperty(value = "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this.")
+	public Boolean isRedacted() {
+		return redacted;
+	}
+
+	public void setRedacted(Boolean redacted) {
+		this.redacted = redacted;
+	}
+
 	public MessagesAnalyticsKpiData sendTimestamp(Long sendTimestamp) {
 		this.sendTimestamp = sendTimestamp;
 		return this;
@@ -249,11 +274,11 @@ public class MessagesAnalyticsKpiData {
 	}
 
 	/**
-	 * The number of characters in the message.
+	 * The number of characters in the message, or &#x60;-1&#x60; if the message text was redacted.
 	 * 
 	 * @return characterCount
 	 **/
-	@ApiModelProperty(value = "The number of characters in the message.")
+	@ApiModelProperty(value = "The number of characters in the message, or `-1` if the message text was redacted.")
 	public Integer getCharacterCount() {
 		return characterCount;
 	}
@@ -331,6 +356,7 @@ public class MessagesAnalyticsKpiData {
 		return Objects.equals(this.$type, messagesAnalyticsKpiData.$type) &&
 				Objects.equals(this.id, messagesAnalyticsKpiData.id) &&
 				Objects.equals(this.eventTimestamp, messagesAnalyticsKpiData.eventTimestamp) &&
+				Objects.equals(this.redacted, messagesAnalyticsKpiData.redacted) &&
 				Objects.equals(this.sendTimestamp, messagesAnalyticsKpiData.sendTimestamp) &&
 				Objects.equals(this.serverTimestamp, messagesAnalyticsKpiData.serverTimestamp) &&
 				Objects.equals(this.sender, messagesAnalyticsKpiData.sender) &&
@@ -343,7 +369,7 @@ public class MessagesAnalyticsKpiData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, eventTimestamp, sendTimestamp, serverTimestamp, sender, messageId, characterCount, type, locale, conversation);
+		return Objects.hash($type, id, eventTimestamp, redacted, sendTimestamp, serverTimestamp, sender, messageId, characterCount, type, locale, conversation);
 	}
 
 	@Override
@@ -353,6 +379,7 @@ public class MessagesAnalyticsKpiData {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    eventTimestamp: ").append(toIndentedString(eventTimestamp)).append("\n");
+		sb.append("    redacted: ").append(toIndentedString(redacted)).append("\n");
 		sb.append("    sendTimestamp: ").append(toIndentedString(sendTimestamp)).append("\n");
 		sb.append("    serverTimestamp: ").append(toIndentedString(serverTimestamp)).append("\n");
 		sb.append("    sender: ").append(toIndentedString(sender)).append("\n");

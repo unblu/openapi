@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 	Account.JSON_PROPERTY_AVATAR,
 	Account.JSON_PROPERTY_AVATAR_URLS,
 	Account.JSON_PROPERTY_TRANSLATIONS,
+	Account.JSON_PROPERTY_ENCRYPTION_ENABLED,
 	Account.JSON_PROPERTY_CONFIGURATION,
 	Account.JSON_PROPERTY_METADATA,
 	Account.JSON_PROPERTY_TEXT,
@@ -106,6 +107,10 @@ public class Account {
 	public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
 	@JsonProperty(JSON_PROPERTY_TRANSLATIONS)
 	private Map<String, AccountTranslation> translations = null;
+
+	public static final String JSON_PROPERTY_ENCRYPTION_ENABLED = "encryptionEnabled";
+	@JsonProperty(JSON_PROPERTY_ENCRYPTION_ENABLED)
+	private Boolean encryptionEnabled;
 
 	public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
 	@JsonProperty(JSON_PROPERTY_CONFIGURATION)
@@ -313,6 +318,27 @@ public class Account {
 		this.translations = translations;
 	}
 
+	public Account encryptionEnabled(Boolean encryptionEnabled) {
+		this.encryptionEnabled = encryptionEnabled;
+		return this;
+	}
+
+	/**
+	 * Whether application-level encryption is enabled for this account. If enabled, the account&#39;s data is encrypted at rest using data encryption keys wrapped
+	 * by the account&#39;s active key encryption key. &lt;p&gt; Read-only: it can&#39;t be set when creating an account, and it can&#39;t be changed when updating
+	 * one. Use the &#x60;enableEncryption&#x60; endpoint to enable encryption.
+	 * 
+	 * @return encryptionEnabled
+	 **/
+	@ApiModelProperty(value = "Whether application-level encryption is enabled for this account. If enabled, the account's data is encrypted at rest using data encryption keys wrapped by the account's active key encryption key. <p> Read-only: it can't be set when creating an account, and it can't be changed when updating one. Use the `enableEncryption` endpoint to enable encryption.")
+	public Boolean isEncryptionEnabled() {
+		return encryptionEnabled;
+	}
+
+	public void setEncryptionEnabled(Boolean encryptionEnabled) {
+		this.encryptionEnabled = encryptionEnabled;
+	}
+
 	public Account _configuration(Map<String, String> _configuration) {
 		this._configuration = _configuration;
 		return this;
@@ -415,6 +441,7 @@ public class Account {
 				Objects.equals(this.avatar, account.avatar) &&
 				Objects.equals(this.avatarUrls, account.avatarUrls) &&
 				Objects.equals(this.translations, account.translations) &&
+				Objects.equals(this.encryptionEnabled, account.encryptionEnabled) &&
 				Objects.equals(this._configuration, account._configuration) &&
 				Objects.equals(this.metadata, account.metadata) &&
 				Objects.equals(this.text, account.text);
@@ -422,7 +449,7 @@ public class Account {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, name, avatar, avatarUrls, translations, _configuration, metadata, text);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, name, avatar, avatarUrls, translations, encryptionEnabled, _configuration, metadata, text);
 	}
 
 	@Override
@@ -438,6 +465,7 @@ public class Account {
 		sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
 		sb.append("    avatarUrls: ").append(toIndentedString(avatarUrls)).append("\n");
 		sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
+		sb.append("    encryptionEnabled: ").append(toIndentedString(encryptionEnabled)).append("\n");
 		sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
 		sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");

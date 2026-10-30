@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CallsAnalyticsKpiData.JSON_PROPERTY_$_TYPE,
 	CallsAnalyticsKpiData.JSON_PROPERTY_ID,
 	CallsAnalyticsKpiData.JSON_PROPERTY_EVENT_TIMESTAMP,
+	CallsAnalyticsKpiData.JSON_PROPERTY_REDACTED,
 	CallsAnalyticsKpiData.JSON_PROPERTY_INITIATION_TIMESTAMP,
 	CallsAnalyticsKpiData.JSON_PROPERTY_ACCEPT_TIMESTAMP,
 	CallsAnalyticsKpiData.JSON_PROPERTY_ESTABLISHED_TIMESTAMP,
@@ -80,6 +81,10 @@ public class CallsAnalyticsKpiData {
 	public static final String JSON_PROPERTY_EVENT_TIMESTAMP = "eventTimestamp";
 	@JsonProperty(JSON_PROPERTY_EVENT_TIMESTAMP)
 	private Long eventTimestamp;
+
+	public static final String JSON_PROPERTY_REDACTED = "redacted";
+	@JsonProperty(JSON_PROPERTY_REDACTED)
+	private Boolean redacted;
 
 	public static final String JSON_PROPERTY_INITIATION_TIMESTAMP = "initiationTimestamp";
 	@JsonProperty(JSON_PROPERTY_INITIATION_TIMESTAMP)
@@ -180,6 +185,26 @@ public class CallsAnalyticsKpiData {
 
 	public void setEventTimestamp(Long eventTimestamp) {
 		this.eventTimestamp = eventTimestamp;
+	}
+
+	public CallsAnalyticsKpiData redacted(Boolean redacted) {
+		this.redacted = redacted;
+		return this;
+	}
+
+	/**
+	 * True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message
+	 * text or visitor data may be missing. False if the event wasn&#39;t redacted, or if the entry was recorded before Unblu tracked this.
+	 * 
+	 * @return redacted
+	 **/
+	@ApiModelProperty(value = "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this.")
+	public Boolean isRedacted() {
+		return redacted;
+	}
+
+	public void setRedacted(Boolean redacted) {
+		this.redacted = redacted;
 	}
 
 	public CallsAnalyticsKpiData initiationTimestamp(Long initiationTimestamp) {
@@ -405,6 +430,7 @@ public class CallsAnalyticsKpiData {
 		return Objects.equals(this.$type, callsAnalyticsKpiData.$type) &&
 				Objects.equals(this.id, callsAnalyticsKpiData.id) &&
 				Objects.equals(this.eventTimestamp, callsAnalyticsKpiData.eventTimestamp) &&
+				Objects.equals(this.redacted, callsAnalyticsKpiData.redacted) &&
 				Objects.equals(this.initiationTimestamp, callsAnalyticsKpiData.initiationTimestamp) &&
 				Objects.equals(this.acceptTimestamp, callsAnalyticsKpiData.acceptTimestamp) &&
 				Objects.equals(this.establishedTimestamp, callsAnalyticsKpiData.establishedTimestamp) &&
@@ -420,7 +446,7 @@ public class CallsAnalyticsKpiData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, eventTimestamp, initiationTimestamp, acceptTimestamp, establishedTimestamp, endTimestamp, activeDurationMs, serviceProviderType, endReason, type, overallCallParticipantsCount, conversation, initiator);
+		return Objects.hash($type, id, eventTimestamp, redacted, initiationTimestamp, acceptTimestamp, establishedTimestamp, endTimestamp, activeDurationMs, serviceProviderType, endReason, type, overallCallParticipantsCount, conversation, initiator);
 	}
 
 	@Override
@@ -430,6 +456,7 @@ public class CallsAnalyticsKpiData {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    eventTimestamp: ").append(toIndentedString(eventTimestamp)).append("\n");
+		sb.append("    redacted: ").append(toIndentedString(redacted)).append("\n");
 		sb.append("    initiationTimestamp: ").append(toIndentedString(initiationTimestamp)).append("\n");
 		sb.append("    acceptTimestamp: ").append(toIndentedString(acceptTimestamp)).append("\n");
 		sb.append("    establishedTimestamp: ").append(toIndentedString(establishedTimestamp)).append("\n");

@@ -42,7 +42,8 @@ public class ConversationContextPanelsApi {
 	 * rejected. The icon ID cannot be set directly.&lt;br&gt;
 	 * 
 	 * @param conversationContextPanelData The conversation context panel to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;icon&#x60;. (optional)
 	 * @return ConversationContextPanelData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -56,7 +57,8 @@ public class ConversationContextPanelsApi {
 	 * rejected. The icon ID cannot be set directly.&lt;br&gt;
 	 * 
 	 * @param conversationContextPanelData The conversation context panel to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;icon&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationContextPanelData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -148,7 +150,7 @@ public class ConversationContextPanelsApi {
 	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Reads an existing conversation context panel.&lt;br&gt;
 	 * 
 	 * @param conversationContextPanelId The ID of the conversation context panel to read (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;icon&#x60;. (optional)
 	 * @return ConversationContextPanelData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -160,7 +162,7 @@ public class ConversationContextPanelsApi {
 	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Reads an existing conversation context panel.&lt;br&gt;
 	 * 
 	 * @param conversationContextPanelId The ID of the conversation context panel to read (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;icon&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationContextPanelData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -258,7 +260,8 @@ public class ConversationContextPanelsApi {
 	 * mandatory. The icon ID cannot be changed directly.&lt;br&gt;
 	 * 
 	 * @param conversationContextPanelData The conversation context panel to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;icon&#x60;. (optional)
 	 * @return ConversationContextPanelData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -273,7 +276,8 @@ public class ConversationContextPanelsApi {
 	 * mandatory. The icon ID cannot be changed directly.&lt;br&gt;
 	 * 
 	 * @param conversationContextPanelData The conversation context panel to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;icon&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationContextPanelData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

@@ -15,14 +15,20 @@ public enum EAuthorizationRole {
 	SUPER_ADMIN("SUPER_ADMIN"),
 
 	/**
-	 * TECHNICAL_ADMIN: Technical admin role.
+	 * ACCOUNT_SUPER_ADMIN: Account super admin role.
 	 */
-	TECHNICAL_ADMIN("TECHNICAL_ADMIN"),
+	ACCOUNT_SUPER_ADMIN("ACCOUNT_SUPER_ADMIN"),
 
 	/**
 	 * ADMIN: Admin role. For Admins of the system
 	 */
 	ADMIN("ADMIN"),
+
+	/**
+	 * TECHNICAL_ADMIN: Technical admin role. A customer account admin without access to conversations or customer data. Sits below &#x60;ADMIN&#x60;: it
+	 * administers the account&#39;s settings but must not reach anything carrying a conversation ID.
+	 */
+	TECHNICAL_ADMIN("TECHNICAL_ADMIN"),
 
 	/**
 	 * SUPERVISOR: Supervisor role. For users which manage teams

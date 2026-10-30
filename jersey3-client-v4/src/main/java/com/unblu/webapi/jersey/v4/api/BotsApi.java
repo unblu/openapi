@@ -250,10 +250,12 @@ public class BotsApi {
 	}
 
 	/**
-	 * create Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding.&lt;br&gt;
+	 * create Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding. You can only create an Aria bot with
+	 * &#x60;active&#x60; set to &#x60;true&#x60; if the &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param dialogBotData The dialog bot to create. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -262,10 +264,12 @@ public class BotsApi {
 	}
 
 	/**
-	 * create Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding.&lt;br&gt;
+	 * create Creates a new dialog bot that can be used for conversation onboarding, reboarding and offboarding. You can only create an Aria bot with
+	 * &#x60;active&#x60; set to &#x60;true&#x60; if the &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param dialogBotData The dialog bot to create. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -522,6 +526,7 @@ public class BotsApi {
 	 * @param botEditMessage The message to edit and its new content (required)
 	 * @return EditMessageResult
 	 * @throws ApiException if fails to make API call
+	 * @see <a href="../schemas/v4/unblu-adaptive-card.html">Unblu Adaptive Card schema reference</a>
 	 */
 	public EditMessageResult botsEditMessage(BotEditMessage botEditMessage) throws ApiException {
 		return botsEditMessageWithHttpInfo(botEditMessage).getData();
@@ -537,6 +542,7 @@ public class BotsApi {
 	 * @param botEditMessage The message to edit and its new content (required)
 	 * @return ApiResponse&lt;EditMessageResult&gt;
 	 * @throws ApiException if fails to make API call
+	 * @see <a href="../schemas/v4/unblu-adaptive-card.html">Unblu Adaptive Card schema reference</a>
 	 */
 	public ApiResponse<EditMessageResult> botsEditMessageWithHttpInfo(BotEditMessage botEditMessage) throws ApiException {
 		Object localVarPostBody = botEditMessage;
@@ -663,7 +669,7 @@ public class BotsApi {
 	 * getByName Searches for an existing dialog bot with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the dialog bot. (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -675,7 +681,7 @@ public class BotsApi {
 	 * getByName Searches for an existing dialog bot with the given name.&lt;br&gt;
 	 * 
 	 * @param name Name of the dialog bot. (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -714,7 +720,7 @@ public class BotsApi {
 	 * read Reads an existing dialog bot.&lt;br&gt;
 	 * 
 	 * @param dialogBotId The ID of the dialog bot. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -726,7 +732,7 @@ public class BotsApi {
 	 * read Reads an existing dialog bot.&lt;br&gt;
 	 * 
 	 * @param dialogBotId The ID of the dialog bot. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -927,6 +933,7 @@ public class BotsApi {
 	 * @param botPostMessage The message to send (required)
 	 * @return SendMessageResult
 	 * @throws ApiException if fails to make API call
+	 * @see <a href="../schemas/v4/unblu-adaptive-card.html">Unblu Adaptive Card schema reference</a>
 	 */
 	public SendMessageResult botsSendMessage(BotPostMessage botPostMessage) throws ApiException {
 		return botsSendMessageWithHttpInfo(botPostMessage).getData();
@@ -939,6 +946,7 @@ public class BotsApi {
 	 * @param botPostMessage The message to send (required)
 	 * @return ApiResponse&lt;SendMessageResult&gt;
 	 * @throws ApiException if fails to make API call
+	 * @see <a href="../schemas/v4/unblu-adaptive-card.html">Unblu Adaptive Card schema reference</a>
 	 */
 	public ApiResponse<SendMessageResult> botsSendMessageWithHttpInfo(BotPostMessage botPostMessage) throws ApiException {
 		Object localVarPostBody = botPostMessage;
@@ -1136,10 +1144,12 @@ public class BotsApi {
 	}
 
 	/**
-	 * update Updates an existing dialog bot.&lt;br&gt;
+	 * update Updates an existing dialog bot. You can only set &#x60;active&#x60; to &#x60;true&#x60; on an Aria bot if its agentic flow has a published version or
+	 * if the &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param dialogBotData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return DialogBotData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -1148,10 +1158,12 @@ public class BotsApi {
 	}
 
 	/**
-	 * update Updates an existing dialog bot.&lt;br&gt;
+	 * update Updates an existing dialog bot. You can only set &#x60;active&#x60; to &#x60;true&#x60; on an Aria bot if its agentic flow has a published version or
+	 * if the &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param dialogBotData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;DialogBotData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

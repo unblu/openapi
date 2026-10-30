@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = AdaptiveCardPostMessageData.class, name = "ADAPTIVE_CARD"),
 	@JsonSubTypes.Type(value = CardPostMessageData.class, name = "CARD"),
 	@JsonSubTypes.Type(value = FilePostMessageData.class, name = "FILE"),
 	@JsonSubTypes.Type(value = ListPostMessageData.class, name = "LIST"),

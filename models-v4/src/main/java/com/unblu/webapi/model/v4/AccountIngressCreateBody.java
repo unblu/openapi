@@ -187,12 +187,12 @@ public class AccountIngressCreateBody {
 	}
 
 	/**
-	 * The entity&#39;s configuration properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;configuration&#39;. Not
-	 * filled in webhook events.
+	 * The entity&#39;s configuration properties. Only stored when the &#39;expand&#39; query parameter is used with the value &#39;configuration&#39;; ignored
+	 * otherwise.
 	 * 
 	 * @return _configuration
 	 **/
-	@ApiModelProperty(value = "The entity's configuration properties. Only contains values when the 'expand' query parameter is used with the value 'configuration'. Not filled in webhook events.")
+	@ApiModelProperty(value = "The entity's configuration properties. Only stored when the 'expand' query parameter is used with the value 'configuration'; ignored otherwise.")
 	public Map<String, String> getConfiguration() {
 		return _configuration;
 	}
@@ -215,12 +215,11 @@ public class AccountIngressCreateBody {
 	}
 
 	/**
-	 * The entity&#39;s metadata properties. Only contains values when the &#39;expand&#39; query parameter is used with the value &#39;metadata&#39;. Not filled in
-	 * webhook events.
+	 * The entity&#39;s metadata properties. Only stored when the &#39;expand&#39; query parameter is used with the value &#39;metadata&#39;; ignored otherwise.
 	 * 
 	 * @return metadata
 	 **/
-	@ApiModelProperty(value = "The entity's metadata properties. Only contains values when the 'expand' query parameter is used with the value 'metadata'. Not filled in webhook events.")
+	@ApiModelProperty(value = "The entity's metadata properties. Only stored when the 'expand' query parameter is used with the value 'metadata'; ignored otherwise.")
 	public Map<String, String> getMetadata() {
 		return metadata;
 	}

@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AriaWebhookAgenticFlowDataContent.JSON_PROPERTY_TYPE,
 	AriaWebhookAgenticFlowDataContent.JSON_PROPERTY_ID,
 	AriaWebhookAgenticFlowDataContent.JSON_PROPERTY_PUBLISHED_AGENTIC_FLOWS,
+	AriaWebhookAgenticFlowDataContent.JSON_PROPERTY_DRAFT_AGENTIC_FLOWS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class AriaWebhookAgenticFlowDataContent implements AriaAgenticFlowDataContent {
@@ -74,6 +75,10 @@ public class AriaWebhookAgenticFlowDataContent implements AriaAgenticFlowDataCon
 	public static final String JSON_PROPERTY_PUBLISHED_AGENTIC_FLOWS = "publishedAgenticFlows";
 	@JsonProperty(JSON_PROPERTY_PUBLISHED_AGENTIC_FLOWS)
 	private List<AriaAgenticFlowTransferableData> publishedAgenticFlows = null;
+
+	public static final String JSON_PROPERTY_DRAFT_AGENTIC_FLOWS = "draftAgenticFlows";
+	@JsonProperty(JSON_PROPERTY_DRAFT_AGENTIC_FLOWS)
+	private List<AriaAgenticFlowTransferableData> draftAgenticFlows = null;
 
 	public AriaWebhookAgenticFlowDataContent $type(TypeEnum $type) {
 		this.$type = $type;
@@ -146,17 +151,44 @@ public class AriaWebhookAgenticFlowDataContent implements AriaAgenticFlowDataCon
 	}
 
 	/**
-	 * Published version of the agentic flows required for the entity, base-64 encoded
+	 * Published version of the agentic flows required for the entity, base-64 encoded. Empty when the entity&#39;s flow has never been published.
 	 * 
 	 * @return publishedAgenticFlows
 	 **/
-	@ApiModelProperty(value = "Published version of the agentic flows required for the entity, base-64 encoded")
+	@ApiModelProperty(value = "Published version of the agentic flows required for the entity, base-64 encoded. Empty when the entity's flow has never been published.")
 	public List<AriaAgenticFlowTransferableData> getPublishedAgenticFlows() {
 		return publishedAgenticFlows;
 	}
 
 	public void setPublishedAgenticFlows(List<AriaAgenticFlowTransferableData> publishedAgenticFlows) {
 		this.publishedAgenticFlows = publishedAgenticFlows;
+	}
+
+	public AriaWebhookAgenticFlowDataContent draftAgenticFlows(List<AriaAgenticFlowTransferableData> draftAgenticFlows) {
+		this.draftAgenticFlows = draftAgenticFlows;
+		return this;
+	}
+
+	public AriaWebhookAgenticFlowDataContent addDraftAgenticFlowsItem(AriaAgenticFlowTransferableData draftAgenticFlowsItem) {
+		if (this.draftAgenticFlows == null) {
+			this.draftAgenticFlows = new ArrayList<>();
+		}
+		this.draftAgenticFlows.add(draftAgenticFlowsItem);
+		return this;
+	}
+
+	/**
+	 * Draft of the agentic flows required for the entity, base-64 encoded
+	 * 
+	 * @return draftAgenticFlows
+	 **/
+	@ApiModelProperty(value = "Draft of the agentic flows required for the entity, base-64 encoded")
+	public List<AriaAgenticFlowTransferableData> getDraftAgenticFlows() {
+		return draftAgenticFlows;
+	}
+
+	public void setDraftAgenticFlows(List<AriaAgenticFlowTransferableData> draftAgenticFlows) {
+		this.draftAgenticFlows = draftAgenticFlows;
 	}
 
 	@Override
@@ -171,12 +203,13 @@ public class AriaWebhookAgenticFlowDataContent implements AriaAgenticFlowDataCon
 		return Objects.equals(this.$type, ariaWebhookAgenticFlowDataContent.$type) &&
 				Objects.equals(this.type, ariaWebhookAgenticFlowDataContent.type) &&
 				Objects.equals(this.id, ariaWebhookAgenticFlowDataContent.id) &&
-				Objects.equals(this.publishedAgenticFlows, ariaWebhookAgenticFlowDataContent.publishedAgenticFlows);
+				Objects.equals(this.publishedAgenticFlows, ariaWebhookAgenticFlowDataContent.publishedAgenticFlows) &&
+				Objects.equals(this.draftAgenticFlows, ariaWebhookAgenticFlowDataContent.draftAgenticFlows);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, type, id, publishedAgenticFlows);
+		return Objects.hash($type, type, id, publishedAgenticFlows, draftAgenticFlows);
 	}
 
 	@Override
@@ -187,6 +220,7 @@ public class AriaWebhookAgenticFlowDataContent implements AriaAgenticFlowDataCon
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    publishedAgenticFlows: ").append(toIndentedString(publishedAgenticFlows)).append("\n");
+		sb.append("    draftAgenticFlows: ").append(toIndentedString(draftAgenticFlows)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

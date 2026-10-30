@@ -39,7 +39,7 @@ public class CollaborationLayerLogsApi {
 	 * search Search for CollaborationLayerLogEntry in the current account&lt;br&gt;
 	 * 
 	 * @param collaborationLayerLogEntryQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return CollaborationLayerLogEntryResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -51,7 +51,7 @@ public class CollaborationLayerLogsApi {
 	 * search Search for CollaborationLayerLogEntry in the current account&lt;br&gt;
 	 * 
 	 * @param collaborationLayerLogEntryQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;CollaborationLayerLogEntryResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */

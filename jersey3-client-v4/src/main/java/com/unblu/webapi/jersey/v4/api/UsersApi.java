@@ -48,7 +48,8 @@ public class UsersApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param user The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -60,7 +61,8 @@ public class UsersApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param user The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -162,7 +164,8 @@ public class UsersApi {
 	 * createWithPassword Creates a new user with the provided password.&lt;br&gt;
 	 * 
 	 * @param userPasswordContainer The user and the password to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -174,7 +177,8 @@ public class UsersApi {
 	 * createWithPassword Creates a new user with the provided password.&lt;br&gt;
 	 * 
 	 * @param userPasswordContainer The user and the password to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -217,7 +221,8 @@ public class UsersApi {
 	 * createWithRandomPassword Creates a new user with a random password. The random password is sent via email.&lt;br&gt;
 	 * 
 	 * @param user The data to create the new user with (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -229,7 +234,8 @@ public class UsersApi {
 	 * createWithRandomPassword Creates a new user with a random password. The random password is sent via email.&lt;br&gt;
 	 * 
 	 * @param user The data to create the new user with (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -321,7 +327,8 @@ public class UsersApi {
 	 * getByUsername Returns the user with the given username.&lt;br&gt;
 	 * 
 	 * @param username The username of the requested user (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -333,7 +340,8 @@ public class UsersApi {
 	 * getByUsername Returns the user with the given username.&lt;br&gt;
 	 * 
 	 * @param username The username of the requested user (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -424,7 +432,8 @@ public class UsersApi {
 	 * read Returns the user with the given ID.&lt;br&gt;
 	 * 
 	 * @param userId The ID of the user to return (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -436,7 +445,8 @@ public class UsersApi {
 	 * read Returns the user with the given ID.&lt;br&gt;
 	 * 
 	 * @param userId The ID of the user to return (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -480,7 +490,8 @@ public class UsersApi {
 	 * readMultiple Gets a list of users for the given IDs. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the users to be fetched (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return UserList
 	 * @throws ApiException if fails to make API call
 	 */
@@ -492,7 +503,8 @@ public class UsersApi {
 	 * readMultiple Gets a list of users for the given IDs. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the users to be fetched (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;UserList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -536,7 +548,8 @@ public class UsersApi {
 	 * are typically used in setups with ID propagation.&lt;br&gt;
 	 * 
 	 * @param userId The ID of the user whose password will be removed (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -549,7 +562,8 @@ public class UsersApi {
 	 * are typically used in setups with ID propagation.&lt;br&gt;
 	 * 
 	 * @param userId The ID of the user whose password will be removed (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -651,7 +665,8 @@ public class UsersApi {
 	 * search Search for users in the current account. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
 	 * @param userQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return UserResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -663,7 +678,8 @@ public class UsersApi {
 	 * search Search for users in the current account. The response doesn&#39;t include virtual visitors.&lt;br&gt;
 	 * 
 	 * @param userQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;UserResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -707,7 +723,8 @@ public class UsersApi {
 	 * 
 	 * @param userId The ID of the user whose password should be updated (required)
 	 * @param usersSetPasswordBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -720,7 +737,8 @@ public class UsersApi {
 	 * 
 	 * @param userId The ID of the user whose password should be updated (required)
 	 * @param usersSetPasswordBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -769,7 +787,8 @@ public class UsersApi {
 	 * setRandomPassword Updates a user&#39;s password with a new random password. The random password is sent via email.&lt;br&gt;
 	 * 
 	 * @param userId The ID of the user who will be assigned a random password (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -781,7 +800,8 @@ public class UsersApi {
 	 * setRandomPassword Updates a user&#39;s password with a new random password. The random password is sent via email.&lt;br&gt;
 	 * 
 	 * @param userId The ID of the user who will be assigned a random password (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -828,7 +848,8 @@ public class UsersApi {
 	 * must be finalized before conversion to virtual users, as virtual users can&#39;t be mutated afterward.&lt;br&gt;
 	 * 
 	 * @param userId The user ID of the user that should be converted to a virtual user (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -843,7 +864,8 @@ public class UsersApi {
 	 * must be finalized before conversion to virtual users, as virtual users can&#39;t be mutated afterward.&lt;br&gt;
 	 * 
 	 * @param userId The user ID of the user that should be converted to a virtual user (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -889,7 +911,8 @@ public class UsersApi {
 	 * or the user is a visitor, the endpoint returns an error.&lt;br&gt;
 	 * 
 	 * @param usersTransformVirtualToPhysicalBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -903,7 +926,8 @@ public class UsersApi {
 	 * or the user is a visitor, the endpoint returns an error.&lt;br&gt;
 	 * 
 	 * @param usersTransformVirtualToPhysicalBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -946,7 +970,8 @@ public class UsersApi {
 	 * update Updates the given user with the provided data.&lt;br&gt;
 	 * 
 	 * @param user The new user data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return User
 	 * @throws ApiException if fails to make API call
 	 */
@@ -958,7 +983,8 @@ public class UsersApi {
 	 * update Updates the given user with the provided data.&lt;br&gt;
 	 * 
 	 * @param user The new user data (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;User&gt;
 	 * @throws ApiException if fails to make API call
 	 */

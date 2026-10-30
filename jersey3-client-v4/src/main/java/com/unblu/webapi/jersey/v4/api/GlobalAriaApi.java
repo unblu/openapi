@@ -34,7 +34,8 @@ public class GlobalAriaApi {
 	}
 
 	/**
-	 * productVersion Returns the Aria product information
+	 * productVersion Returns the Aria product information &lt;p&gt; Fails with 404 Not Found when the Aria features are disabled, and with 400 Bad Request when no
+	 * Aria URL is configured or the version can&#39;t be read.
 	 * 
 	 * @return ProductVersion
 	 * @throws ApiException if fails to make API call
@@ -44,7 +45,8 @@ public class GlobalAriaApi {
 	}
 
 	/**
-	 * productVersion Returns the Aria product information
+	 * productVersion Returns the Aria product information &lt;p&gt; Fails with 404 Not Found when the Aria features are disabled, and with 400 Bad Request when no
+	 * Aria URL is configured or the version can&#39;t be read.
 	 * 
 	 * @return ApiResponse&lt;ProductVersion&gt;
 	 * @throws ApiException if fails to make API call

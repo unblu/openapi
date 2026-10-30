@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = AdaptiveCardMessageData.class, name = "ADAPTIVE_CARD"),
 	@JsonSubTypes.Type(value = ApprovalRequestMessageData.class, name = "APPROVAL_REQUEST"),
 	@JsonSubTypes.Type(value = CardMessageData.class, name = "CARD"),
 	@JsonSubTypes.Type(value = FileMessageData.class, name = "FILE"),

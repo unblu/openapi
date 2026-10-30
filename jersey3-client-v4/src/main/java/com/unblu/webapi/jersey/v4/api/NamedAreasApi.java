@@ -41,7 +41,9 @@ public class NamedAreasApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param namedArea The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return NamedArea
 	 * @throws ApiException if fails to make API call
 	 */
@@ -53,7 +55,9 @@ public class NamedAreasApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param namedArea The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ApiResponse&lt;NamedArea&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -145,7 +149,8 @@ public class NamedAreasApi {
 	 * read Returns the named area with the given ID&lt;br&gt;
 	 * 
 	 * @param namedAreaId ID of the named area which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return NamedArea
 	 * @throws ApiException if fails to make API call
 	 */
@@ -157,7 +162,8 @@ public class NamedAreasApi {
 	 * read Returns the named area with the given ID&lt;br&gt;
 	 * 
 	 * @param namedAreaId ID of the named area which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;NamedArea&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -201,7 +207,8 @@ public class NamedAreasApi {
 	 * readMultiple Gets a list of named areas for the given id&#39;s&lt;br&gt;
 	 * 
 	 * @param requestBody The id&#39;s for which the named areas should be fetched (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return NamedAreaList
 	 * @throws ApiException if fails to make API call
 	 */
@@ -213,7 +220,8 @@ public class NamedAreasApi {
 	 * readMultiple Gets a list of named areas for the given id&#39;s&lt;br&gt;
 	 * 
 	 * @param requestBody The id&#39;s for which the named areas should be fetched (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;NamedAreaList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -256,7 +264,8 @@ public class NamedAreasApi {
 	 * search Search for named areas in the current account&lt;br&gt;
 	 * 
 	 * @param namedAreaQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return NamedAreaResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -268,7 +277,8 @@ public class NamedAreasApi {
 	 * search Search for named areas in the current account&lt;br&gt;
 	 * 
 	 * @param namedAreaQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;NamedAreaResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -311,7 +321,9 @@ public class NamedAreasApi {
 	 * update Updates the entity in the system with the given entity.&lt;br&gt;
 	 * 
 	 * @param namedArea The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return NamedArea
 	 * @throws ApiException if fails to make API call
 	 */
@@ -323,7 +335,9 @@ public class NamedAreasApi {
 	 * update Updates the entity in the system with the given entity.&lt;br&gt;
 	 * 
 	 * @param namedArea The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;.
+	 * (optional)
 	 * @return ApiResponse&lt;NamedArea&gt;
 	 * @throws ApiException if fails to make API call
 	 */

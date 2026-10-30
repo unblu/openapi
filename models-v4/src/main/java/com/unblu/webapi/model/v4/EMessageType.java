@@ -30,6 +30,11 @@ public enum EMessageType {
 	CARD("CARD"),
 
 	/**
+	 * ADAPTIVE_CARD: A message rendered from an Adaptive Card JSON payload
+	 */
+	ADAPTIVE_CARD("ADAPTIVE_CARD"),
+
+	/**
 	 * LIST: A message rendered as a list of items, each of which may carry an action
 	 */
 	LIST("LIST"),

@@ -810,11 +810,12 @@ public class AriaDialogBotData implements DialogBotData {
 	}
 
 	/**
-	 * Specifies whether the bot is active
+	 * Specifies whether the bot is active. You can only set it to &#x60;true&#x60; if the bot&#39;s agentic flow has a published version or if the
+	 * &#x60;agenticFlowData&#x60; you provide on creation or update contains a published version.
 	 * 
 	 * @return active
 	 **/
-	@ApiModelProperty(value = "Specifies whether the bot is active")
+	@ApiModelProperty(value = "Specifies whether the bot is active. You can only set it to `true` if the bot's agentic flow has a published version or if the `agenticFlowData` you provide on creation or update contains a published version.")
 	public Boolean isActive() {
 		return active;
 	}

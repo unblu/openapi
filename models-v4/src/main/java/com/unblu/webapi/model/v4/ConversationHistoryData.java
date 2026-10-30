@@ -53,6 +53,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryData.JSON_PROPERTY_CONVERSATION_VISIBILITY,
 	ConversationHistoryData.JSON_PROPERTY_STATE_CHANGES,
 	ConversationHistoryData.JSON_PROPERTY_LABELS,
+	ConversationHistoryData.JSON_PROPERTY_USING_ONLY_ENCRYPTED_STORES,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationHistoryData {
@@ -216,6 +217,10 @@ public class ConversationHistoryData {
 	public static final String JSON_PROPERTY_LABELS = "labels";
 	@JsonProperty(JSON_PROPERTY_LABELS)
 	private List<LabelData> labels = null;
+
+	public static final String JSON_PROPERTY_USING_ONLY_ENCRYPTED_STORES = "usingOnlyEncryptedStores";
+	@JsonProperty(JSON_PROPERTY_USING_ONLY_ENCRYPTED_STORES)
+	private Boolean usingOnlyEncryptedStores;
 
 	public ConversationHistoryData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -873,6 +878,27 @@ public class ConversationHistoryData {
 		this.labels = labels;
 	}
 
+	public ConversationHistoryData usingOnlyEncryptedStores(Boolean usingOnlyEncryptedStores) {
+		this.usingOnlyEncryptedStores = usingOnlyEncryptedStores;
+		return this;
+	}
+
+	/**
+	 * True if the conversation keeps its data only in encrypted stores: its messages aren&#39;t indexed for search and its analytics events are redacted. Set when
+	 * the conversation is created, from its conversation template or the account default, and never changes afterward. This is a read-only property. Any value
+	 * provided in create or update operations will be ignored.
+	 * 
+	 * @return usingOnlyEncryptedStores
+	 **/
+	@ApiModelProperty(value = "True if the conversation keeps its data only in encrypted stores: its messages aren't indexed for search and its analytics events are redacted. Set when the conversation is created, from its conversation template or the account default, and never changes afterward. This is a read-only property. Any value provided in create or update operations will be ignored.")
+	public Boolean isUsingOnlyEncryptedStores() {
+		return usingOnlyEncryptedStores;
+	}
+
+	public void setUsingOnlyEncryptedStores(Boolean usingOnlyEncryptedStores) {
+		this.usingOnlyEncryptedStores = usingOnlyEncryptedStores;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -913,12 +939,13 @@ public class ConversationHistoryData {
 				Objects.equals(this.awaitedPersonTypeChangeTimestamp, conversationHistoryData.awaitedPersonTypeChangeTimestamp) &&
 				Objects.equals(this.conversationVisibility, conversationHistoryData.conversationVisibility) &&
 				Objects.equals(this.stateChanges, conversationHistoryData.stateChanges) &&
-				Objects.equals(this.labels, conversationHistoryData.labels);
+				Objects.equals(this.labels, conversationHistoryData.labels) &&
+				Objects.equals(this.usingOnlyEncryptedStores, conversationHistoryData.usingOnlyEncryptedStores);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, recipient, endPerson, participants, externalParticipants, botParticipants, createdTimestamp, assigneeJoinTimestamp, endTimestamp, lastMessageTimestamp, lastMessageEditedTimestamp, lastCompletedRecordingTimestamp, state, initialEngagementType, locale, endReason, endComment, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, dueDeletionTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, conversationVisibility, stateChanges, labels);
+		return Objects.hash($type, id, recipient, endPerson, participants, externalParticipants, botParticipants, createdTimestamp, assigneeJoinTimestamp, endTimestamp, lastMessageTimestamp, lastMessageEditedTimestamp, lastCompletedRecordingTimestamp, state, initialEngagementType, locale, endReason, endComment, tokboxSessionId, conversationTemplateId, externalMessengerChannelIconId, externalMessengerChannelName, topic, sourceUrl, scheduledTimestamp, dueDeletionTimestamp, initialEngagementUrl, awaitedPersonType, awaitedPersonTypeChangeTimestamp, conversationVisibility, stateChanges, labels, usingOnlyEncryptedStores);
 	}
 
 	@Override
@@ -957,6 +984,7 @@ public class ConversationHistoryData {
 		sb.append("    conversationVisibility: ").append(toIndentedString(conversationVisibility)).append("\n");
 		sb.append("    stateChanges: ").append(toIndentedString(stateChanges)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
+		sb.append("    usingOnlyEncryptedStores: ").append(toIndentedString(usingOnlyEncryptedStores)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

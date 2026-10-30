@@ -41,7 +41,8 @@ public class ApiKeysApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param apiKey The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
@@ -53,7 +54,8 @@ public class ApiKeysApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param apiKey The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -145,7 +147,8 @@ public class ApiKeysApi {
 	 * getByKey Returns the api key object for the given api key string in the current account&lt;br&gt;
 	 * 
 	 * @param apiKey The api key for which the object should be returned (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
@@ -157,7 +160,8 @@ public class ApiKeysApi {
 	 * getByKey Returns the api key object for the given api key string in the current account&lt;br&gt;
 	 * 
 	 * @param apiKey The api key for which the object should be returned (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -195,7 +199,8 @@ public class ApiKeysApi {
 	/**
 	 * getDefault Returns the default API key for the current account&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
@@ -206,7 +211,8 @@ public class ApiKeysApi {
 	/**
 	 * getDefault Returns the default API key for the current account&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -244,7 +250,8 @@ public class ApiKeysApi {
 	 * read Returns the API key with the given ID&lt;br&gt;
 	 * 
 	 * @param apiKeyId ID of the API key which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
@@ -256,7 +263,8 @@ public class ApiKeysApi {
 	 * read Returns the API key with the given ID&lt;br&gt;
 	 * 
 	 * @param apiKeyId ID of the API key which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -300,7 +308,8 @@ public class ApiKeysApi {
 	 * readMultiple Gets a list of API keys with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the API keys to fetch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiKeyList
 	 * @throws ApiException if fails to make API call
 	 */
@@ -312,7 +321,8 @@ public class ApiKeysApi {
 	 * readMultiple Gets a list of API keys with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the API keys to fetch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ApiKeyList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -355,7 +365,8 @@ public class ApiKeysApi {
 	 * search Search for api keys in the current account&lt;br&gt;
 	 * 
 	 * @param apiKeyQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiKeyResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -367,7 +378,8 @@ public class ApiKeysApi {
 	 * search Search for api keys in the current account&lt;br&gt;
 	 * 
 	 * @param apiKeyQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ApiKeyResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -410,7 +422,8 @@ public class ApiKeysApi {
 	 * update Updates the entity in the system with the given entity.&lt;br&gt;
 	 * 
 	 * @param apiKey The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiKey
 	 * @throws ApiException if fails to make API call
 	 */
@@ -422,7 +435,8 @@ public class ApiKeysApi {
 	 * update Updates the entity in the system with the given entity.&lt;br&gt;
 	 * 
 	 * @param apiKey The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ApiKey&gt;
 	 * @throws ApiException if fails to make API call
 	 */

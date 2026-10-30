@@ -51,7 +51,8 @@ public class ExternalMessengersApi {
 	 * create Creates a new external messenger channel&lt;br&gt;
 	 * 
 	 * @param externalMessengerChannel The channel which should be created (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
@@ -63,7 +64,8 @@ public class ExternalMessengersApi {
 	 * create Creates a new external messenger channel&lt;br&gt;
 	 * 
 	 * @param externalMessengerChannel The channel which should be created (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -155,7 +157,7 @@ public class ExternalMessengersApi {
 	 * getByName Returns the channel for the given name&lt;br&gt;
 	 * 
 	 * @param name The name of the external messenger channel (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
@@ -167,7 +169,7 @@ public class ExternalMessengersApi {
 	 * getByName Returns the channel for the given name&lt;br&gt;
 	 * 
 	 * @param name The name of the external messenger channel (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -448,7 +450,7 @@ public class ExternalMessengersApi {
 	 * read Returns the channel with the given ID&lt;br&gt;
 	 * 
 	 * @param channelId The ID of the external messenger channel (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
@@ -460,7 +462,7 @@ public class ExternalMessengersApi {
 	 * read Returns the channel with the given ID&lt;br&gt;
 	 * 
 	 * @param channelId The ID of the external messenger channel (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -504,7 +506,7 @@ public class ExternalMessengersApi {
 	 * search Search for external messenger channels in the current account&lt;br&gt;
 	 * 
 	 * @param externalMessengerChannelQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ExternalMessengerChannelResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -516,7 +518,7 @@ public class ExternalMessengersApi {
 	 * search Search for external messenger channels in the current account&lt;br&gt;
 	 * 
 	 * @param externalMessengerChannelQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;ExternalMessengerChannelResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -559,7 +561,7 @@ public class ExternalMessengersApi {
 	 * searchCustom Search for custom external messenger channels in the current account&lt;br&gt;
 	 * 
 	 * @param customExternalMessengerChannelQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return CustomExternalMessengerChannelResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -571,7 +573,7 @@ public class ExternalMessengersApi {
 	 * searchCustom Search for custom external messenger channels in the current account&lt;br&gt;
 	 * 
 	 * @param customExternalMessengerChannelQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;CustomExternalMessengerChannelResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -614,7 +616,7 @@ public class ExternalMessengersApi {
 	 * searchSms Search for SMS external messenger channels in the current account&lt;br&gt;
 	 * 
 	 * @param smsExternalMessengerChannelQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return SmsExternalMessengerChannelResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -626,7 +628,7 @@ public class ExternalMessengersApi {
 	 * searchSms Search for SMS external messenger channels in the current account&lt;br&gt;
 	 * 
 	 * @param smsExternalMessengerChannelQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;SmsExternalMessengerChannelResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -782,7 +784,8 @@ public class ExternalMessengersApi {
 	 * update Updates an external messenger channel&lt;br&gt;
 	 * 
 	 * @param externalMessengerChannel The channel which should be updated (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ExternalMessengerChannel
 	 * @throws ApiException if fails to make API call
 	 */
@@ -794,7 +797,8 @@ public class ExternalMessengersApi {
 	 * update Updates an external messenger channel&lt;br&gt;
 	 * 
 	 * @param externalMessengerChannel The channel which should be updated (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;channelIcon&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;ExternalMessengerChannel&gt;
 	 * @throws ApiException if fails to make API call
 	 */

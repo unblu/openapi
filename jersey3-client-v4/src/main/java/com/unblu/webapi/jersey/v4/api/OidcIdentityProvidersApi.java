@@ -41,7 +41,8 @@ public class OidcIdentityProvidersApi {
 	 * therefore any ID provided in the entity is ignored.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderData The OIDC identity provider data to create. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return OidcIdentityProviderData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -54,7 +55,8 @@ public class OidcIdentityProvidersApi {
 	 * therefore any ID provided in the entity is ignored.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderData The OIDC identity provider data to create. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return ApiResponse&lt;OidcIdentityProviderData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -98,7 +100,7 @@ public class OidcIdentityProvidersApi {
 	 * of &#x60;create&#x60; when the provider needs a client secret from the start.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderSecretContainer The OIDC identity provider data and its client secret. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return OidcIdentityProviderData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -111,7 +113,7 @@ public class OidcIdentityProvidersApi {
 	 * of &#x60;create&#x60; when the provider needs a client secret from the start.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderSecretContainer The OIDC identity provider data and its client secret. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return ApiResponse&lt;OidcIdentityProviderData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -203,7 +205,7 @@ public class OidcIdentityProvidersApi {
 	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the OIDC identity provider with the specified ID.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderId The ID of the OIDC identity provider to return. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return OidcIdentityProviderData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -215,7 +217,7 @@ public class OidcIdentityProvidersApi {
 	 * read &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns the OIDC identity provider with the specified ID.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderId The ID of the OIDC identity provider to return. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return ApiResponse&lt;OidcIdentityProviderData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -259,7 +261,7 @@ public class OidcIdentityProvidersApi {
 	 * removeSecret &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Removes the client secret from the OIDC identity provider with the specified ID.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderId The ID of the OIDC identity provider. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return OidcIdentityProviderData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -271,7 +273,7 @@ public class OidcIdentityProvidersApi {
 	 * removeSecret &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Removes the client secret from the OIDC identity provider with the specified ID.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderId The ID of the OIDC identity provider. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return ApiResponse&lt;OidcIdentityProviderData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -316,7 +318,7 @@ public class OidcIdentityProvidersApi {
 	 * 
 	 * @param oidcIdentityProviderId The ID of the OIDC identity provider. (required)
 	 * @param oidcIdentityProvidersSetSecretBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return OidcIdentityProviderData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -329,7 +331,7 @@ public class OidcIdentityProvidersApi {
 	 * 
 	 * @param oidcIdentityProviderId The ID of the OIDC identity provider. (required)
 	 * @param oidcIdentityProvidersSetSecretBody (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return ApiResponse&lt;OidcIdentityProviderData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -379,7 +381,8 @@ public class OidcIdentityProvidersApi {
 	 * OIDC identity provider exists with the specified ID.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderData The details to update the OIDC identity provider with. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return OidcIdentityProviderData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -392,7 +395,8 @@ public class OidcIdentityProvidersApi {
 	 * OIDC identity provider exists with the specified ID.&lt;br&gt;
 	 * 
 	 * @param oidcIdentityProviderData The details to update the OIDC identity provider with. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;logoImage&#x60;. (optional)
 	 * @return ApiResponse&lt;OidcIdentityProviderData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

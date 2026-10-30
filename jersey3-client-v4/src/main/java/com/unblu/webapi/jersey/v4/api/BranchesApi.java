@@ -41,7 +41,8 @@ public class BranchesApi {
 	 * create Creates a new branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;floorPlanImage&#x60;. (optional)
 	 * @return BranchData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -53,7 +54,8 @@ public class BranchesApi {
 	 * create Creates a new branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;floorPlanImage&#x60;. (optional)
 	 * @return ApiResponse&lt;BranchData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -145,7 +147,7 @@ public class BranchesApi {
 	 * read Returns the branch for the given branch ID&lt;br&gt;
 	 * 
 	 * @param branchId ID of the branch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;floorPlanImage&#x60;. (optional)
 	 * @return BranchData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -157,7 +159,7 @@ public class BranchesApi {
 	 * read Returns the branch for the given branch ID&lt;br&gt;
 	 * 
 	 * @param branchId ID of the branch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;floorPlanImage&#x60;. (optional)
 	 * @return ApiResponse&lt;BranchData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -303,7 +305,8 @@ public class BranchesApi {
 	 * update Updates a branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;floorPlanImage&#x60;. (optional)
 	 * @return BranchData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -315,7 +318,8 @@ public class BranchesApi {
 	 * update Updates a branch&lt;br&gt;
 	 * 
 	 * @param branchData The branch to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;floorPlanImage&#x60;. (optional)
 	 * @return ApiResponse&lt;BranchData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

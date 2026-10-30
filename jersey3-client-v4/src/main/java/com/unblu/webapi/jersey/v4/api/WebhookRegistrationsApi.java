@@ -39,10 +39,12 @@ public class WebhookRegistrationsApi {
 
 	/**
 	 * create Creates a new webhook registration. For registrations that trigger an Aria agentic flow, the flow is created in the Aria orchestrator as part of this
-	 * operation.&lt;br&gt;
+	 * operation. You can only create such a registration with &#x60;status&#x60; set to &#x60;ACTIVE&#x60; if the &#x60;agenticFlowData&#x60; you provide contains
+	 * a published version.&lt;br&gt;
 	 * 
 	 * @param webhookRegistrationData The webhook registration to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -52,10 +54,12 @@ public class WebhookRegistrationsApi {
 
 	/**
 	 * create Creates a new webhook registration. For registrations that trigger an Aria agentic flow, the flow is created in the Aria orchestrator as part of this
-	 * operation.&lt;br&gt;
+	 * operation. You can only create such a registration with &#x60;status&#x60; set to &#x60;ACTIVE&#x60; if the &#x60;agenticFlowData&#x60; you provide contains
+	 * a published version.&lt;br&gt;
 	 * 
 	 * @param webhookRegistrationData The webhook registration to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -147,7 +151,7 @@ public class WebhookRegistrationsApi {
 	 * getByName Returns the webhook registration with the name provided.&lt;br&gt;
 	 * 
 	 * @param name The name of the requested webhook registration (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -159,7 +163,7 @@ public class WebhookRegistrationsApi {
 	 * getByName Returns the webhook registration with the name provided.&lt;br&gt;
 	 * 
 	 * @param name The name of the requested webhook registration (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -198,7 +202,7 @@ public class WebhookRegistrationsApi {
 	 * read Returns the webhook registration with the given ID&lt;br&gt;
 	 * 
 	 * @param registrationId ID of the webhook registration to return (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -210,7 +214,7 @@ public class WebhookRegistrationsApi {
 	 * read Returns the webhook registration with the given ID&lt;br&gt;
 	 * 
 	 * @param registrationId ID of the webhook registration to return (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -459,10 +463,13 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * update Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed.&lt;br&gt;
+	 * update Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed. You can only set the &#x60;status&#x60; of a
+	 * registration that triggers an Aria agentic flow to &#x60;ACTIVE&#x60; if its agentic flow has a published version or if the &#x60;agenticFlowData&#x60; you
+	 * provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param webhookRegistrationData The webhook registration to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return WebhookRegistrationData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -471,10 +478,13 @@ public class WebhookRegistrationsApi {
 	}
 
 	/**
-	 * update Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed.&lt;br&gt;
+	 * update Updates a webhook registration. Whether the registration triggers an Aria agentic flow cannot be changed. You can only set the &#x60;status&#x60; of a
+	 * registration that triggers an Aria agentic flow to &#x60;ACTIVE&#x60; if its agentic flow has a published version or if the &#x60;agenticFlowData&#x60; you
+	 * provide contains a published version.&lt;br&gt;
 	 * 
 	 * @param webhookRegistrationData The webhook registration to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;WebhookRegistrationData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

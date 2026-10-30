@@ -41,7 +41,8 @@ public class CustomActionsApi {
 	 * create Creates a new custom action. You must specify the expanded parameter \&quot;actionIcon\&quot;.&lt;br&gt;
 	 * 
 	 * @param customActionData The custom action to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;actionIcon&#x60;, &#x60;agenticFlowData&#x60;. (optional)
 	 * @return CustomActionData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -53,7 +54,8 @@ public class CustomActionsApi {
 	 * create Creates a new custom action. You must specify the expanded parameter \&quot;actionIcon\&quot;.&lt;br&gt;
 	 * 
 	 * @param customActionData The custom action to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;actionIcon&#x60;, &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;CustomActionData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -145,7 +147,8 @@ public class CustomActionsApi {
 	 * read Returns a &#x60;CustomActionData&#x60; by ID&lt;br&gt;
 	 * 
 	 * @param customActionId (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;actionIcon&#x60;, &#x60;agenticFlowData&#x60;.
+	 * (optional)
 	 * @return CustomActionData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -157,7 +160,8 @@ public class CustomActionsApi {
 	 * read Returns a &#x60;CustomActionData&#x60; by ID&lt;br&gt;
 	 * 
 	 * @param customActionId (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;actionIcon&#x60;, &#x60;agenticFlowData&#x60;.
+	 * (optional)
 	 * @return ApiResponse&lt;CustomActionData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -304,7 +308,8 @@ public class CustomActionsApi {
 	 * update Updates a custom action. The parameter \&quot;actionIcon\&quot; may not be null.&lt;br&gt;
 	 * 
 	 * @param customActionData The custom action to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;actionIcon&#x60;, &#x60;agenticFlowData&#x60;. (optional)
 	 * @return CustomActionData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -316,7 +321,8 @@ public class CustomActionsApi {
 	 * update Updates a custom action. The parameter \&quot;actionIcon\&quot; may not be null.&lt;br&gt;
 	 * 
 	 * @param customActionData The custom action to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;actionIcon&#x60;, &#x60;agenticFlowData&#x60;. (optional)
 	 * @return ApiResponse&lt;CustomActionData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

@@ -41,7 +41,8 @@ public class TeamsApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param team The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
@@ -53,7 +54,8 @@ public class TeamsApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param team The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -146,7 +148,8 @@ public class TeamsApi {
 	 * &lt;p&gt; To search only for direct children, use &#x60;search&#x60; with a &#x60;ParentIdTeamSearchFilter&#x60;.&lt;br&gt;
 	 * 
 	 * @param teamId The ID of the parent team for which the child teams should be returned recursively (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return TeamList
 	 * @throws ApiException if fails to make API call
 	 */
@@ -159,7 +162,8 @@ public class TeamsApi {
 	 * &lt;p&gt; To search only for direct children, use &#x60;search&#x60; with a &#x60;ParentIdTeamSearchFilter&#x60;.&lt;br&gt;
 	 * 
 	 * @param teamId The ID of the parent team for which the child teams should be returned recursively (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;TeamList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -202,7 +206,8 @@ public class TeamsApi {
 	/**
 	 * getTeamOfCurrentUser Returns the team of the current logged in user. There is always a team, at least the default team.&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
@@ -213,7 +218,8 @@ public class TeamsApi {
 	/**
 	 * getTeamOfCurrentUser Returns the team of the current logged in user. There is always a team, at least the default team.&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -251,7 +257,8 @@ public class TeamsApi {
 	 * read Returns the team with the given ID&lt;br&gt;
 	 * 
 	 * @param teamId ID of the team which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
@@ -263,7 +270,8 @@ public class TeamsApi {
 	 * read Returns the team with the given ID&lt;br&gt;
 	 * 
 	 * @param teamId ID of the team which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -307,7 +315,8 @@ public class TeamsApi {
 	 * readMultiple Gets a list of teams for the given ID&#39;s&lt;br&gt;
 	 * 
 	 * @param requestBody The ID&#39;s for which the teams should be fetched (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return TeamList
 	 * @throws ApiException if fails to make API call
 	 */
@@ -319,7 +328,8 @@ public class TeamsApi {
 	 * readMultiple Gets a list of teams for the given ID&#39;s&lt;br&gt;
 	 * 
 	 * @param requestBody The ID&#39;s for which the teams should be fetched (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;TeamList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -362,7 +372,8 @@ public class TeamsApi {
 	 * search Searches for teams in the current account&lt;br&gt;
 	 * 
 	 * @param teamQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return TeamResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -374,7 +385,8 @@ public class TeamsApi {
 	 * search Searches for teams in the current account&lt;br&gt;
 	 * 
 	 * @param teamQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;,
+	 * &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;TeamResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -417,7 +429,8 @@ public class TeamsApi {
 	 * update Updates the team entity with the given instance. A supervisor can change his team and all sub teams&lt;br&gt;
 	 * 
 	 * @param team The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return Team
 	 * @throws ApiException if fails to make API call
 	 */
@@ -429,7 +442,8 @@ public class TeamsApi {
 	 * update Updates the team entity with the given instance. A supervisor can change his team and all sub teams&lt;br&gt;
 	 * 
 	 * @param team The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;avatar&#x60;, &#x60;configuration&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;Team&gt;
 	 * @throws ApiException if fails to make API call
 	 */

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true, defaultImpl = CustomSuggestionSourceData.class)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = AriaSuggestionSourceData.class, name = "ARIA"),
 	@JsonSubTypes.Type(value = CopilotSuggestionSourceData.class, name = "COPILOT"),
 	@JsonSubTypes.Type(value = CustomSuggestionSourceData.class, name = "CUSTOM"),
-	@JsonSubTypes.Type(value = AriaSuggestionSourceData.class, name = "ARIA"),
 })
 public interface SuggestionSourceData {
 	void setId(String id);
@@ -69,6 +69,18 @@ public interface SuggestionSourceData {
 	Long getOutboundTimeoutMillis();
 
 	SuggestionSourceData outboundTimeoutMillis(Long outboundTimeoutMillis);
+
+	void setRetryCount(Long retryCount);
+
+	Long getRetryCount();
+
+	SuggestionSourceData retryCount(Long retryCount);
+
+	void setRetryDelay(Long retryDelay);
+
+	Long getRetryDelay();
+
+	SuggestionSourceData retryDelay(Long retryDelay);
 
 	void setType(ESuggestionSourceType type);
 

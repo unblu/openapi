@@ -215,7 +215,7 @@ public class ConversationHistoryApi {
 	 * read Returns the conversation history data for a given conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId id of the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ConversationHistoryData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -227,7 +227,7 @@ public class ConversationHistoryApi {
 	 * read Returns the conversation history data for a given conversation.&lt;br&gt;
 	 * 
 	 * @param conversationId id of the conversation (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationHistoryData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -271,7 +271,7 @@ public class ConversationHistoryApi {
 	 * search Generic conversation history search.&lt;br&gt;
 	 * 
 	 * @param conversationHistoryQuery The Conversation history query. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ConversationHistoryDataResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -283,7 +283,7 @@ public class ConversationHistoryApi {
 	 * search Generic conversation history search.&lt;br&gt;
 	 * 
 	 * @param conversationHistoryQuery The Conversation history query. (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;avatar&#x60;, &#x60;metadata&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationHistoryDataResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */

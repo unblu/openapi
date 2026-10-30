@@ -38,7 +38,8 @@ public class DictionariesApi {
 	 * create Creates a new dictionary.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return DictionaryData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -50,7 +51,8 @@ public class DictionariesApi {
 	 * create Creates a new dictionary.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return ApiResponse&lt;DictionaryData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -142,7 +144,7 @@ public class DictionariesApi {
 	 * getByLanguage Searches for an existing dictionary with the specified language.&lt;br&gt;
 	 * 
 	 * @param language the language of the dictionary (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return DictionaryData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -154,7 +156,7 @@ public class DictionariesApi {
 	 * getByLanguage Searches for an existing dictionary with the specified language.&lt;br&gt;
 	 * 
 	 * @param language the language of the dictionary (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return ApiResponse&lt;DictionaryData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -193,7 +195,7 @@ public class DictionariesApi {
 	 * read Reads an existing dictionary.&lt;br&gt;
 	 * 
 	 * @param dictionaryId the ID of the dictionary (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return DictionaryData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -205,7 +207,7 @@ public class DictionariesApi {
 	 * read Reads an existing dictionary.&lt;br&gt;
 	 * 
 	 * @param dictionaryId the ID of the dictionary (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return ApiResponse&lt;DictionaryData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -249,7 +251,8 @@ public class DictionariesApi {
 	 * update Updates an existing dictionary.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return DictionaryData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -261,7 +264,8 @@ public class DictionariesApi {
 	 * update Updates an existing dictionary.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;affFile&#x60;, &#x60;dicFile&#x60;. (optional)
 	 * @return ApiResponse&lt;DictionaryData&gt;
 	 * @throws ApiException if fails to make API call
 	 */

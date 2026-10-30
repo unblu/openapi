@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_$_TYPE,
 	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_ID,
 	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_EVENT_TIMESTAMP,
+	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_REDACTED,
 	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_RESERVATION_CREATION_TIMESTAMP,
 	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_INVITATION_CREATION_TIMESTAMP,
 	QueueInteractionAnalyticsKpiData.JSON_PROPERTY_RESPONSE_END_TIMESTAMP,
@@ -77,6 +78,10 @@ public class QueueInteractionAnalyticsKpiData {
 	public static final String JSON_PROPERTY_EVENT_TIMESTAMP = "eventTimestamp";
 	@JsonProperty(JSON_PROPERTY_EVENT_TIMESTAMP)
 	private Long eventTimestamp;
+
+	public static final String JSON_PROPERTY_REDACTED = "redacted";
+	@JsonProperty(JSON_PROPERTY_REDACTED)
+	private Boolean redacted;
 
 	public static final String JSON_PROPERTY_RESERVATION_CREATION_TIMESTAMP = "reservationCreationTimestamp";
 	@JsonProperty(JSON_PROPERTY_RESERVATION_CREATION_TIMESTAMP)
@@ -161,6 +166,26 @@ public class QueueInteractionAnalyticsKpiData {
 
 	public void setEventTimestamp(Long eventTimestamp) {
 		this.eventTimestamp = eventTimestamp;
+	}
+
+	public QueueInteractionAnalyticsKpiData redacted(Boolean redacted) {
+		this.redacted = redacted;
+		return this;
+	}
+
+	/**
+	 * True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message
+	 * text or visitor data may be missing. False if the event wasn&#39;t redacted, or if the entry was recorded before Unblu tracked this.
+	 * 
+	 * @return redacted
+	 **/
+	@ApiModelProperty(value = "True if the analytics event this entry is based on was redacted because the conversation keeps its data only in encrypted stores, so content such as message text or visitor data may be missing. False if the event wasn't redacted, or if the entry was recorded before Unblu tracked this.")
+	public Boolean isRedacted() {
+		return redacted;
+	}
+
+	public void setRedacted(Boolean redacted) {
+		this.redacted = redacted;
 	}
 
 	public QueueInteractionAnalyticsKpiData reservationCreationTimestamp(Long reservationCreationTimestamp) {
@@ -308,6 +333,7 @@ public class QueueInteractionAnalyticsKpiData {
 		return Objects.equals(this.$type, queueInteractionAnalyticsKpiData.$type) &&
 				Objects.equals(this.id, queueInteractionAnalyticsKpiData.id) &&
 				Objects.equals(this.eventTimestamp, queueInteractionAnalyticsKpiData.eventTimestamp) &&
+				Objects.equals(this.redacted, queueInteractionAnalyticsKpiData.redacted) &&
 				Objects.equals(this.reservationCreationTimestamp, queueInteractionAnalyticsKpiData.reservationCreationTimestamp) &&
 				Objects.equals(this.invitationCreationTimestamp, queueInteractionAnalyticsKpiData.invitationCreationTimestamp) &&
 				Objects.equals(this.responseEndTimestamp, queueInteractionAnalyticsKpiData.responseEndTimestamp) &&
@@ -319,7 +345,7 @@ public class QueueInteractionAnalyticsKpiData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, eventTimestamp, reservationCreationTimestamp, invitationCreationTimestamp, responseEndTimestamp, reservationTimeDuration, queueInteractionType, target, conversation);
+		return Objects.hash($type, id, eventTimestamp, redacted, reservationCreationTimestamp, invitationCreationTimestamp, responseEndTimestamp, reservationTimeDuration, queueInteractionType, target, conversation);
 	}
 
 	@Override
@@ -329,6 +355,7 @@ public class QueueInteractionAnalyticsKpiData {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    eventTimestamp: ").append(toIndentedString(eventTimestamp)).append("\n");
+		sb.append("    redacted: ").append(toIndentedString(redacted)).append("\n");
 		sb.append("    reservationCreationTimestamp: ").append(toIndentedString(reservationCreationTimestamp)).append("\n");
 		sb.append("    invitationCreationTimestamp: ").append(toIndentedString(invitationCreationTimestamp)).append("\n");
 		sb.append("    responseEndTimestamp: ").append(toIndentedString(responseEndTimestamp)).append("\n");

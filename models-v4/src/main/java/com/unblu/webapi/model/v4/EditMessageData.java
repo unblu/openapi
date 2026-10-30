@@ -1,12 +1,11 @@
 package com.unblu.webapi.model.v4;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
+	@JsonSubTypes.Type(value = AdaptiveCardEditMessageData.class, name = "ADAPTIVE_CARD"),
 	@JsonSubTypes.Type(value = TextEditMessageData.class, name = "TEXT"),
 })
 public interface EditMessageData {
@@ -27,23 +26,5 @@ public interface EditMessageData {
 	String getLocale();
 
 	EditMessageData locale(String locale);
-
-	void setText(String text);
-
-	String getText();
-
-	EditMessageData text(String text);
-
-	void setTextType(EConversationMessageTextType textType);
-
-	EConversationMessageTextType getTextType();
-
-	EditMessageData textType(EConversationMessageTextType textType);
-
-	void setQuickReplies(List<QuickReply> quickReplies);
-
-	List<QuickReply> getQuickReplies();
-
-	EditMessageData quickReplies(List<QuickReply> quickReplies);
 
 }

@@ -42,7 +42,8 @@ public class ConversationTemplatesApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param conversationTemplate The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationTemplate
 	 * @throws ApiException if fails to make API call
 	 */
@@ -54,7 +55,8 @@ public class ConversationTemplatesApi {
 	 * create Creates the given entity in the system. The ID of the entity is ignored for create operations, a new one is generated.&lt;br&gt;
 	 * 
 	 * @param conversationTemplate The entity to create (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationTemplate&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -146,7 +148,8 @@ public class ConversationTemplatesApi {
 	 * getDefaultTemplateByEngagementType Gets the default conversation template for a given initial engagement type
 	 * 
 	 * @param initialEngagementType (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ConversationTemplate
 	 * @throws ApiException if fails to make API call
 	 */
@@ -158,7 +161,8 @@ public class ConversationTemplatesApi {
 	 * getDefaultTemplateByEngagementType Gets the default conversation template for a given initial engagement type
 	 * 
 	 * @param initialEngagementType (optional)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationTemplate&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -197,7 +201,8 @@ public class ConversationTemplatesApi {
 	 * read Returns the template with the given ID&lt;br&gt;
 	 * 
 	 * @param templateId ID of the template which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ConversationTemplate
 	 * @throws ApiException if fails to make API call
 	 */
@@ -209,7 +214,8 @@ public class ConversationTemplatesApi {
 	 * read Returns the template with the given ID&lt;br&gt;
 	 * 
 	 * @param templateId ID of the template which should be returned (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationTemplate&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -253,7 +259,8 @@ public class ConversationTemplatesApi {
 	 * readMultiple Gets a list of conversation templates with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the conversation templates to fetch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ConversationTemplateList
 	 * @throws ApiException if fails to make API call
 	 */
@@ -265,7 +272,8 @@ public class ConversationTemplatesApi {
 	 * readMultiple Gets a list of conversation templates with the given IDs. IDs that can&#39;t be found are ignored.&lt;br&gt;
 	 * 
 	 * @param requestBody The IDs of the conversation templates to fetch (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationTemplateList&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -308,7 +316,8 @@ public class ConversationTemplatesApi {
 	 * search Search for conversation-templates in the current account&lt;br&gt;
 	 * 
 	 * @param conversationTemplateQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ConversationTemplateResult
 	 * @throws ApiException if fails to make API call
 	 */
@@ -320,7 +329,8 @@ public class ConversationTemplatesApi {
 	 * search Search for conversation-templates in the current account&lt;br&gt;
 	 * 
 	 * @param conversationTemplateQuery (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationTemplateResult&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -363,7 +373,8 @@ public class ConversationTemplatesApi {
 	 * update Updates the entity in the system with the given entity.&lt;br&gt;
 	 * 
 	 * @param conversationTemplate The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ConversationTemplate
 	 * @throws ApiException if fails to make API call
 	 */
@@ -375,7 +386,8 @@ public class ConversationTemplatesApi {
 	 * update Updates the entity in the system with the given entity.&lt;br&gt;
 	 * 
 	 * @param conversationTemplate The entity to update (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;ConversationTemplate&gt;
 	 * @throws ApiException if fails to make API call
 	 */

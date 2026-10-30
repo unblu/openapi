@@ -32,4 +32,10 @@ public interface AriaAgenticFlowDataContent {
 
 	AriaAgenticFlowDataContent publishedAgenticFlows(List<AriaAgenticFlowTransferableData> publishedAgenticFlows);
 
+	void setDraftAgenticFlows(List<AriaAgenticFlowTransferableData> draftAgenticFlows);
+
+	List<AriaAgenticFlowTransferableData> getDraftAgenticFlows();
+
+	AriaAgenticFlowDataContent draftAgenticFlows(List<AriaAgenticFlowTransferableData> draftAgenticFlows);
+
 }

@@ -94,7 +94,8 @@ public class GlobalApi {
 	 * installLicense Install a new license in the global server.&lt;br&gt;
 	 * 
 	 * @param body licenseContent (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -106,7 +107,8 @@ public class GlobalApi {
 	 * installLicense Install a new license in the global server.&lt;br&gt;
 	 * 
 	 * @param body licenseContent (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -238,7 +240,8 @@ public class GlobalApi {
 	/**
 	 * read Returns the GlobalData object containing information about the system (license, settings).&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -249,7 +252,8 @@ public class GlobalApi {
 	/**
 	 * read Returns the GlobalData object containing information about the system (license, settings).&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -286,7 +290,8 @@ public class GlobalApi {
 	/**
 	 * removeLicense Remove a license from the global server if it was previously added via the UI or the installLicense WebAPI call.&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -297,7 +302,8 @@ public class GlobalApi {
 	/**
 	 * removeLicense Remove a license from the global server if it was previously added via the UI or the installLicense WebAPI call.&lt;br&gt;
 	 * 
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;,
+	 * &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
@@ -336,7 +342,8 @@ public class GlobalApi {
 	 * parameter.&lt;br&gt;
 	 * 
 	 * @param globalData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return GlobalData
 	 * @throws ApiException if fails to make API call
 	 */
@@ -349,7 +356,8 @@ public class GlobalApi {
 	 * parameter.&lt;br&gt;
 	 * 
 	 * @param globalData (required)
-	 * @param expand (optional)
+	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
+	 * property not named here is ignored. Expandable in this operation: &#x60;configuration&#x60;, &#x60;metadata&#x60;, &#x60;text&#x60;. (optional)
 	 * @return ApiResponse&lt;GlobalData&gt;
 	 * @throws ApiException if fails to make API call
 	 */
