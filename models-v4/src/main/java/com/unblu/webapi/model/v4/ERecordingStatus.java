@@ -27,7 +27,13 @@ public enum ERecordingStatus {
 	/**
 	 * COMPLETE: Recording completed
 	 */
-	COMPLETE("COMPLETE");
+	COMPLETE("COMPLETE"),
+
+	/**
+	 * POSTPROCESSING_FAILED: Recording finished, but postprocessing failed because the recorded file is missing, incomplete, or otherwise unreadable. It isn&#39;t
+	 * retried.
+	 */
+	POSTPROCESSING_FAILED("POSTPROCESSING_FAILED");
 
 	private String value;
 

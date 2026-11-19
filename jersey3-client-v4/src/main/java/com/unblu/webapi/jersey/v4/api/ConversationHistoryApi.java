@@ -13,6 +13,7 @@ import com.unblu.webapi.jersey.v4.invoker.Pair;
 import com.unblu.webapi.model.v4.ConversationHistoryData;
 import com.unblu.webapi.model.v4.ConversationHistoryDataResult;
 import com.unblu.webapi.model.v4.ConversationHistoryMessageData;
+import com.unblu.webapi.model.v4.ConversationHistoryMessageDataList;
 import com.unblu.webapi.model.v4.ConversationHistoryQuery;
 import com.unblu.webapi.model.v4.ConversationRecordingHistoryDataList;
 import com.unblu.webapi.model.v4.ExpandFields;
@@ -207,6 +208,68 @@ public class ConversationHistoryApi {
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<ConversationHistoryMessageData> localVarReturnType = new GenericType<ConversationHistoryMessageData>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * getMessageBatch Returns the messages of a conversation that were sent together in one action, ordered by their position within the batch. Messages rejected
+	 * by a message interceptor are left out.&lt;br&gt;
+	 * 
+	 * @param conversationId the ID of the conversation (required)
+	 * @param batchId the batch ID from the batch information of a message (required)
+	 * @return ConversationHistoryMessageDataList
+	 * @throws ApiException if fails to make API call
+	 */
+	public ConversationHistoryMessageDataList conversationHistoryGetMessageBatch(String conversationId, String batchId) throws ApiException {
+		return conversationHistoryGetMessageBatchWithHttpInfo(conversationId, batchId).getData();
+	}
+
+	/**
+	 * getMessageBatch Returns the messages of a conversation that were sent together in one action, ordered by their position within the batch. Messages rejected
+	 * by a message interceptor are left out.&lt;br&gt;
+	 * 
+	 * @param conversationId the ID of the conversation (required)
+	 * @param batchId the batch ID from the batch information of a message (required)
+	 * @return ApiResponse&lt;ConversationHistoryMessageDataList&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<ConversationHistoryMessageDataList> conversationHistoryGetMessageBatchWithHttpInfo(String conversationId, String batchId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationHistoryGetMessageBatch");
+		}
+
+		// verify the required parameter 'batchId' is set
+		if (batchId == null) {
+			throw new ApiException(400, "Missing the required parameter 'batchId' when calling conversationHistoryGetMessageBatch");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversationhistory/{conversationId}/getMessageBatch/{batchId}"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()))
+				.replaceAll("\\{" + "batchId" + "\\}", apiClient.escapeString(batchId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<ConversationHistoryMessageDataList> localVarReturnType = new GenericType<ConversationHistoryMessageDataList>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

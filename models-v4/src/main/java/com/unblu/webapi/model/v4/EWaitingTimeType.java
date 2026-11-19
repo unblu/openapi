@@ -20,9 +20,19 @@ public enum EWaitingTimeType {
 	REBOARDING_QUEUED("REBOARDING_QUEUED"),
 
 	/**
-	 * PUSH_TO_QUEUE: Conversation pushed back to queue by agent.
+	 * PUSH_TO_QUEUE: Deprecated, use &#x60;REQUEUED&#x60; instead. Matches the same records as &#x60;REQUEUED&#x60;.
 	 */
 	PUSH_TO_QUEUE("PUSH_TO_QUEUE"),
+
+	/**
+	 * REQUEUED: Queued again after the conversation was active or unassigned.
+	 */
+	REQUEUED("REQUEUED"),
+
+	/**
+	 * RECIPIENT_CHANGED: Queued again because the recipient of a queued conversation changed.
+	 */
+	RECIPIENT_CHANGED("RECIPIENT_CHANGED"),
 
 	/**
 	 * AGENT_FORWARDING: Queued after agent forwarding.

@@ -35,7 +35,9 @@ public class DictionariesApi {
 	}
 
 	/**
-	 * create Creates a new dictionary.&lt;br&gt;
+	 * create Creates a new dictionary. &lt;p&gt; Set both &#x60;affFile&#x60; and &#x60;dicFile&#x60;, or neither. If neither is set, Unblu uses its default files
+	 * for the dictionary&#39;s language, or the English ones if it has none for that language. If only one is set, an error is returned. File content is only read
+	 * for the files named in the expand parameter.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to create (required)
 	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
@@ -48,7 +50,9 @@ public class DictionariesApi {
 	}
 
 	/**
-	 * create Creates a new dictionary.&lt;br&gt;
+	 * create Creates a new dictionary. &lt;p&gt; Set both &#x60;affFile&#x60; and &#x60;dicFile&#x60;, or neither. If neither is set, Unblu uses its default files
+	 * for the dictionary&#39;s language, or the English ones if it has none for that language. If only one is set, an error is returned. File content is only read
+	 * for the files named in the expand parameter.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to create (required)
 	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
@@ -248,7 +252,8 @@ public class DictionariesApi {
 	}
 
 	/**
-	 * update Updates an existing dictionary.&lt;br&gt;
+	 * update Updates an existing dictionary. &lt;p&gt; Unlike &#x60;create&#x60;, &#x60;affFile&#x60; and &#x60;dicFile&#x60; can be set independently. An omitted
+	 * file keeps its current value, so a single file can be replaced.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to update (required)
 	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable
@@ -261,7 +266,8 @@ public class DictionariesApi {
 	}
 
 	/**
-	 * update Updates an existing dictionary.&lt;br&gt;
+	 * update Updates an existing dictionary. &lt;p&gt; Unlike &#x60;create&#x60;, &#x60;affFile&#x60; and &#x60;dicFile&#x60; can be set independently. An omitted
+	 * file keeps its current value, so a single file can be replaced.&lt;br&gt;
 	 * 
 	 * @param dictionaryData the dictionary to update (required)
 	 * @param expand Names the expandable properties to return in full. Also names which of the request body&#39;s expandable properties to store; an expandable

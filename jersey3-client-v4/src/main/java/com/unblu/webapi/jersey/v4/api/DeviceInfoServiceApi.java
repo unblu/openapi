@@ -253,8 +253,8 @@ public class DeviceInfoServiceApi {
 	/**
 	 * search Search for device infos in the current account. &lt;p&gt; The devices a caller may access depend on their role: a registered user can only see their
 	 * own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams), and an admin those of all users in the account. A
-	 * registered user must not set an &#x60;OwnerPersonId&#x60;filter; supervisors may only filter by persons they can manage, while admins may filter by any owner
-	 * within the account.&lt;br&gt;
+	 * registered user must not set an &#x60;OwnerPersonId&#x60; filter; supervisors may only filter by persons they can manage, while admins may filter by any
+	 * owner within the account.&lt;br&gt;
 	 * 
 	 * @param deviceInfoQuery The search query (required)
 	 * @return DeviceInfoResult
@@ -267,8 +267,8 @@ public class DeviceInfoServiceApi {
 	/**
 	 * search Search for device infos in the current account. &lt;p&gt; The devices a caller may access depend on their role: a registered user can only see their
 	 * own devices, a supervisor those of all users they can manage (persons in their own team and its sub-teams), and an admin those of all users in the account. A
-	 * registered user must not set an &#x60;OwnerPersonId&#x60;filter; supervisors may only filter by persons they can manage, while admins may filter by any owner
-	 * within the account.&lt;br&gt;
+	 * registered user must not set an &#x60;OwnerPersonId&#x60; filter; supervisors may only filter by persons they can manage, while admins may filter by any
+	 * owner within the account.&lt;br&gt;
 	 * 
 	 * @param deviceInfoQuery The search query (required)
 	 * @return ApiResponse&lt;DeviceInfoResult&gt;

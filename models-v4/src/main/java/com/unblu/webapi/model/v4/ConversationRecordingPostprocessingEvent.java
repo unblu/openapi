@@ -14,9 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event emitted when the postprocessing of a conversation recording starts
+ * An event emitted when the postprocessing of a conversation recording starts. Only sent for built-in conversation recordings, as a SIPREC recording has no
+ * file in Unblu.
  */
-@ApiModel(description = "An event emitted when the postprocessing of a conversation recording starts")
+@ApiModel(description = "An event emitted when the postprocessing of a conversation recording starts. Only sent for built-in conversation recordings, as a SIPREC recording has no file in Unblu.")
 
 @JsonPropertyOrder({
 	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_$_TYPE,
@@ -24,6 +25,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_EVENT_TYPE,
 	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_ACCOUNT_ID,
 	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_CONVERSATION_ID,
+	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_CONVERSATION_RECORDING_ID,
+	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_RECORDING_SYSTEM,
 	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_BLOB_STORE_ID,
 	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_MIME_TYPE,
 	ConversationRecordingPostprocessingEvent.JSON_PROPERTY_TOTAL_SIZE,
@@ -84,6 +87,14 @@ public class ConversationRecordingPostprocessingEvent {
 	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
 	private String conversationId;
+
+	public static final String JSON_PROPERTY_CONVERSATION_RECORDING_ID = "conversationRecordingId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_RECORDING_ID)
+	private String conversationRecordingId;
+
+	public static final String JSON_PROPERTY_RECORDING_SYSTEM = "recordingSystem";
+	@JsonProperty(JSON_PROPERTY_RECORDING_SYSTEM)
+	private ERecordingSystem recordingSystem;
 
 	public static final String JSON_PROPERTY_BLOB_STORE_ID = "blobStoreId";
 	@JsonProperty(JSON_PROPERTY_BLOB_STORE_ID)
@@ -200,6 +211,44 @@ public class ConversationRecordingPostprocessingEvent {
 		this.conversationId = conversationId;
 	}
 
+	public ConversationRecordingPostprocessingEvent conversationRecordingId(String conversationRecordingId) {
+		this.conversationRecordingId = conversationRecordingId;
+		return this;
+	}
+
+	/**
+	 * The ID of the recording.
+	 * 
+	 * @return conversationRecordingId
+	 **/
+	@ApiModelProperty(value = "The ID of the recording.")
+	public String getConversationRecordingId() {
+		return conversationRecordingId;
+	}
+
+	public void setConversationRecordingId(String conversationRecordingId) {
+		this.conversationRecordingId = conversationRecordingId;
+	}
+
+	public ConversationRecordingPostprocessingEvent recordingSystem(ERecordingSystem recordingSystem) {
+		this.recordingSystem = recordingSystem;
+		return this;
+	}
+
+	/**
+	 * Get recordingSystem
+	 * 
+	 * @return recordingSystem
+	 **/
+	@ApiModelProperty(value = "")
+	public ERecordingSystem getRecordingSystem() {
+		return recordingSystem;
+	}
+
+	public void setRecordingSystem(ERecordingSystem recordingSystem) {
+		this.recordingSystem = recordingSystem;
+	}
+
 	public ConversationRecordingPostprocessingEvent blobStoreId(String blobStoreId) {
 		this.blobStoreId = blobStoreId;
 		return this;
@@ -309,6 +358,8 @@ public class ConversationRecordingPostprocessingEvent {
 				Objects.equals(this.eventType, conversationRecordingPostprocessingEvent.eventType) &&
 				Objects.equals(this.accountId, conversationRecordingPostprocessingEvent.accountId) &&
 				Objects.equals(this.conversationId, conversationRecordingPostprocessingEvent.conversationId) &&
+				Objects.equals(this.conversationRecordingId, conversationRecordingPostprocessingEvent.conversationRecordingId) &&
+				Objects.equals(this.recordingSystem, conversationRecordingPostprocessingEvent.recordingSystem) &&
 				Objects.equals(this.blobStoreId, conversationRecordingPostprocessingEvent.blobStoreId) &&
 				Objects.equals(this.mimeType, conversationRecordingPostprocessingEvent.mimeType) &&
 				Objects.equals(this.totalSize, conversationRecordingPostprocessingEvent.totalSize) &&
@@ -318,7 +369,7 @@ public class ConversationRecordingPostprocessingEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversationId, blobStoreId, mimeType, totalSize, recordingStartTimestamp, recordingEndTimestamp);
+		return Objects.hash($type, timestamp, eventType, accountId, conversationId, conversationRecordingId, recordingSystem, blobStoreId, mimeType, totalSize, recordingStartTimestamp, recordingEndTimestamp);
 	}
 
 	@Override
@@ -330,6 +381,8 @@ public class ConversationRecordingPostprocessingEvent {
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+		sb.append("    conversationRecordingId: ").append(toIndentedString(conversationRecordingId)).append("\n");
+		sb.append("    recordingSystem: ").append(toIndentedString(recordingSystem)).append("\n");
 		sb.append("    blobStoreId: ").append(toIndentedString(blobStoreId)).append("\n");
 		sb.append("    mimeType: ").append(toIndentedString(mimeType)).append("\n");
 		sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");

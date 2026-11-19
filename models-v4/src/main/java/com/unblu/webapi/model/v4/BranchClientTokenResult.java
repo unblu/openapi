@@ -22,6 +22,8 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchClientTokenResult.JSON_PROPERTY_$_TYPE,
 	BranchClientTokenResult.JSON_PROPERTY_TOKEN,
 	BranchClientTokenResult.JSON_PROPERTY_EXPIRES_AT,
+	BranchClientTokenResult.JSON_PROPERTY_LANDING_PAGE_URL,
+	BranchClientTokenResult.JSON_PROPERTY_LANDING_PAGE_URL_UNAVAILABLE_REASON,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BranchClientTokenResult {
@@ -69,6 +71,14 @@ public class BranchClientTokenResult {
 	public static final String JSON_PROPERTY_EXPIRES_AT = "expiresAt";
 	@JsonProperty(JSON_PROPERTY_EXPIRES_AT)
 	private Long expiresAt;
+
+	public static final String JSON_PROPERTY_LANDING_PAGE_URL = "landingPageUrl";
+	@JsonProperty(JSON_PROPERTY_LANDING_PAGE_URL)
+	private String landingPageUrl;
+
+	public static final String JSON_PROPERTY_LANDING_PAGE_URL_UNAVAILABLE_REASON = "landingPageUrlUnavailableReason";
+	@JsonProperty(JSON_PROPERTY_LANDING_PAGE_URL_UNAVAILABLE_REASON)
+	private EBranchClientLandingPageUrlUnavailableReason landingPageUrlUnavailableReason;
 
 	public BranchClientTokenResult $type(TypeEnum $type) {
 		this.$type = $type;
@@ -127,6 +137,46 @@ public class BranchClientTokenResult {
 		this.expiresAt = expiresAt;
 	}
 
+	public BranchClientTokenResult landingPageUrl(String landingPageUrl) {
+		this.landingPageUrl = landingPageUrl;
+		return this;
+	}
+
+	/**
+	 * The landing page URL of the Branch client, carrying the token in its fragment. It opens the landing page with the API key, the language, and the additional
+	 * landing page parameters of the Branch client. Not set when neither the Branch client nor the account configures a landing page base URL, when the API key of
+	 * the Branch client doesn&#39;t exist in the account, or when the account has no API key.
+	 * 
+	 * @return landingPageUrl
+	 **/
+	@ApiModelProperty(value = "The landing page URL of the Branch client, carrying the token in its fragment. It opens the landing page with the API key, the language, and the additional landing page parameters of the Branch client. Not set when neither the Branch client nor the account configures a landing page base URL, when the API key of the Branch client doesn't exist in the account, or when the account has no API key.")
+	public String getLandingPageUrl() {
+		return landingPageUrl;
+	}
+
+	public void setLandingPageUrl(String landingPageUrl) {
+		this.landingPageUrl = landingPageUrl;
+	}
+
+	public BranchClientTokenResult landingPageUrlUnavailableReason(EBranchClientLandingPageUrlUnavailableReason landingPageUrlUnavailableReason) {
+		this.landingPageUrlUnavailableReason = landingPageUrlUnavailableReason;
+		return this;
+	}
+
+	/**
+	 * Get landingPageUrlUnavailableReason
+	 * 
+	 * @return landingPageUrlUnavailableReason
+	 **/
+	@ApiModelProperty(value = "")
+	public EBranchClientLandingPageUrlUnavailableReason getLandingPageUrlUnavailableReason() {
+		return landingPageUrlUnavailableReason;
+	}
+
+	public void setLandingPageUrlUnavailableReason(EBranchClientLandingPageUrlUnavailableReason landingPageUrlUnavailableReason) {
+		this.landingPageUrlUnavailableReason = landingPageUrlUnavailableReason;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -138,12 +188,14 @@ public class BranchClientTokenResult {
 		BranchClientTokenResult branchClientTokenResult = (BranchClientTokenResult) o;
 		return Objects.equals(this.$type, branchClientTokenResult.$type) &&
 				Objects.equals(this.token, branchClientTokenResult.token) &&
-				Objects.equals(this.expiresAt, branchClientTokenResult.expiresAt);
+				Objects.equals(this.expiresAt, branchClientTokenResult.expiresAt) &&
+				Objects.equals(this.landingPageUrl, branchClientTokenResult.landingPageUrl) &&
+				Objects.equals(this.landingPageUrlUnavailableReason, branchClientTokenResult.landingPageUrlUnavailableReason);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, token, expiresAt);
+		return Objects.hash($type, token, expiresAt, landingPageUrl, landingPageUrlUnavailableReason);
 	}
 
 	@Override
@@ -153,6 +205,8 @@ public class BranchClientTokenResult {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    token: ").append(toIndentedString(token)).append("\n");
 		sb.append("    expiresAt: ").append(toIndentedString(expiresAt)).append("\n");
+		sb.append("    landingPageUrl: ").append(toIndentedString(landingPageUrl)).append("\n");
+		sb.append("    landingPageUrlUnavailableReason: ").append(toIndentedString(landingPageUrlUnavailableReason)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

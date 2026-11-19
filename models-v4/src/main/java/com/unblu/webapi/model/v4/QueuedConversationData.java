@@ -16,10 +16,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * A conversation waiting in the queue in a live-tracking snapshot. Adds the queue-specific fields to the conversation fields shared
- * with&#x60;AgentAvailabilityConversationData&#x60;.
+ * A conversation waiting in the queue in a live-tracking snapshot. Adds the queue-specific fields to the conversation fields shared with
+ * &#x60;AgentAvailabilityConversationData&#x60;.
  */
-@ApiModel(description = "A conversation waiting in the queue in a live-tracking snapshot. Adds the queue-specific fields to the conversation fields shared with`AgentAvailabilityConversationData`.")
+@ApiModel(description = "A conversation waiting in the queue in a live-tracking snapshot. Adds the queue-specific fields to the conversation fields shared with `AgentAvailabilityConversationData`.")
 
 @JsonPropertyOrder({
 	QueuedConversationData.JSON_PROPERTY_$_TYPE,
@@ -521,12 +521,12 @@ public class QueuedConversationData {
 	}
 
 	/**
-	 * The queue sorting order of the conversation. Always set: a queued conversation is given the configured order, defaulting
-	 * to&#x60;com.unblu.conversation.invitation.conversationRequestQueueSortingOrder&#x60;.
+	 * The queue sorting order of the conversation. Always set: a queued conversation is given the configured order, defaulting to
+	 * &#x60;com.unblu.conversation.invitation.conversationRequestQueueSortingOrder&#x60;.
 	 * 
 	 * @return sortingOrder
 	 **/
-	@ApiModelProperty(value = "The queue sorting order of the conversation. Always set: a queued conversation is given the configured order, defaulting to`com.unblu.conversation.invitation.conversationRequestQueueSortingOrder`.")
+	@ApiModelProperty(value = "The queue sorting order of the conversation. Always set: a queued conversation is given the configured order, defaulting to `com.unblu.conversation.invitation.conversationRequestQueueSortingOrder`.")
 	public Long getSortingOrder() {
 		return sortingOrder;
 	}

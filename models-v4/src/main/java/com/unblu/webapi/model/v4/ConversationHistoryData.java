@@ -404,12 +404,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the assignee joined the conversation (timestamp when the state of the first agent participant was set
-	 * to&#x60;EConversationParticipationState.ACTIVE&#x60;) Value is null of no assignee has joined yet.
+	 * Unix timestamp (ms) when the assignee joined the conversation (timestamp when the state of the first agent participant was set to
+	 * &#x60;EConversationParticipationState.ACTIVE&#x60;) Value is null of no assignee has joined yet.
 	 * 
 	 * @return assigneeJoinTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the assignee joined the conversation (timestamp when the state of the first agent participant was set to`EConversationParticipationState.ACTIVE`) Value is null of no assignee has joined yet.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the assignee joined the conversation (timestamp when the state of the first agent participant was set to `EConversationParticipationState.ACTIVE`) Value is null of no assignee has joined yet.")
 	public Long getAssigneeJoinTimestamp() {
 		return assigneeJoinTimestamp;
 	}
@@ -424,12 +424,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the conversation ended (all active participants have finished their offboarding; timestamp when the state was set
-	 * to&#x60;EConversationState.ENDED&#x60;) Otherwise, the value is null.
+	 * Unix timestamp (ms) when the conversation ended (all active participants have finished their offboarding; timestamp when the state was set to
+	 * &#x60;EConversationState.ENDED&#x60;) Otherwise, the value is null.
 	 * 
 	 * @return endTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation ended (all active participants have finished their offboarding; timestamp when the state was set to`EConversationState.ENDED`) Otherwise, the value is null.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation ended (all active participants have finished their offboarding; timestamp when the state was set to `EConversationState.ENDED`) Otherwise, the value is null.")
 	public Long getEndTimestamp() {
 		return endTimestamp;
 	}
@@ -711,12 +711,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the conversation is scheduled for. Can be set only for conversations with initialEngagementType
-	 * :&#x60;EInitialEngagementType.SCHEDULED_CONVERSATION&#x60;
+	 * Unix timestamp (ms) when the conversation is scheduled for. Can be set only for conversations with initialEngagementType :
+	 * &#x60;EInitialEngagementType.SCHEDULED_CONVERSATION&#x60;
 	 * 
 	 * @return scheduledTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation is scheduled for. Can be set only for conversations with initialEngagementType :`EInitialEngagementType.SCHEDULED_CONVERSATION`")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation is scheduled for. Can be set only for conversations with initialEngagementType : `EInitialEngagementType.SCHEDULED_CONVERSATION`")
 	public Long getScheduledTimestamp() {
 		return scheduledTimestamp;
 	}
@@ -731,12 +731,12 @@ public class ConversationHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the conversation will be deleted automatically, taking into account the retention period defined for the entity. Calculated
-	 * from&#x60;endTimestamp&#x60;. Null if no record retention interval is configured. See &#x60;getRetentionIntervalConversationSeconds&#x60; for details.
+	 * Unix timestamp (ms) when the conversation will be deleted automatically, taking into account the retention period defined for the entity. Calculated from
+	 * &#x60;endTimestamp&#x60;. Null if no record retention interval is configured. See &#x60;getRetentionIntervalConversationSeconds&#x60; for details.
 	 * 
 	 * @return dueDeletionTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation will be deleted automatically, taking into account the retention period defined for the entity. Calculated from`endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation will be deleted automatically, taking into account the retention period defined for the entity. Calculated from `endTimestamp`. Null if no record retention interval is configured. See `getRetentionIntervalConversationSeconds` for details.")
 	public Long getDueDeletionTimestamp() {
 		return dueDeletionTimestamp;
 	}

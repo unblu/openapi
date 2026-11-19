@@ -575,13 +575,13 @@ public class DeviceInfo {
 	}
 
 	/**
-	 * Whether the user has enabled push notifications for this device. Defaults to the value
-	 * of&#x60;com.unblu.core.push_notification.PushNotificationConfiguration.defaultDevicePushNotificationsEnabled&#x60; when the device is created and is then
+	 * Whether the user has enabled push notifications for this device. Defaults to the value of
+	 * &#x60;com.unblu.core.push_notification.PushNotificationConfiguration.defaultDevicePushNotificationsEnabled&#x60; when the device is created and is then
 	 * preserved across re-logins.
 	 * 
 	 * @return pushNotificationsEnabled
 	 **/
-	@ApiModelProperty(value = "Whether the user has enabled push notifications for this device. Defaults to the value of`com.unblu.core.push_notification.PushNotificationConfiguration.defaultDevicePushNotificationsEnabled` when the device is created and is then preserved across re-logins.")
+	@ApiModelProperty(value = "Whether the user has enabled push notifications for this device. Defaults to the value of `com.unblu.core.push_notification.PushNotificationConfiguration.defaultDevicePushNotificationsEnabled` when the device is created and is then preserved across re-logins.")
 	public Boolean isPushNotificationsEnabled() {
 		return pushNotificationsEnabled;
 	}

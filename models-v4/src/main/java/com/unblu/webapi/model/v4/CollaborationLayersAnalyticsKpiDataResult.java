@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Paginated result containing &#x60;CollaborationLayersAnalyticsKpiData&#x60; entries, returned by&#x60;searchCollaborationLayers&#x60;.
+ * Paginated result containing &#x60;CollaborationLayersAnalyticsKpiData&#x60; entries, returned by &#x60;searchCollaborationLayers&#x60;.
  */
-@ApiModel(description = "Paginated result containing `CollaborationLayersAnalyticsKpiData` entries, returned by`searchCollaborationLayers`.")
+@ApiModel(description = "Paginated result containing `CollaborationLayersAnalyticsKpiData` entries, returned by `searchCollaborationLayers`.")
 
 @JsonPropertyOrder({
 	CollaborationLayersAnalyticsKpiDataResult.JSON_PROPERTY_$_TYPE,

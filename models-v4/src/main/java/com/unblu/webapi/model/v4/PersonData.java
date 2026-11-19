@@ -288,12 +288,12 @@ public class PersonData implements ConversationRecipientData, AgentTargetData {
 
 	/**
 	 * Identifier of the person in its source (defined by &#x60;personSource&#x60;). For &#x60;EPersonSource.USER_DB&#x60; this is the
-	 * &lt;code&gt;userId&lt;/code&gt;, for&#x60;EPersonSource.VIRTUAL&#x60; the propagated user id. Maximum length of 250 characters. Mandatory for virtual
+	 * &lt;code&gt;userId&lt;/code&gt;, for &#x60;EPersonSource.VIRTUAL&#x60; the propagated user id. Maximum length of 250 characters. Mandatory for virtual
 	 * persons.
 	 * 
 	 * @return sourceId
 	 **/
-	@ApiModelProperty(value = "Identifier of the person in its source (defined by `personSource`). For `EPersonSource.USER_DB` this is the <code>userId</code>, for`EPersonSource.VIRTUAL` the propagated user id. Maximum length of 250 characters. Mandatory for virtual persons.")
+	@ApiModelProperty(value = "Identifier of the person in its source (defined by `personSource`). For `EPersonSource.USER_DB` this is the <code>userId</code>, for `EPersonSource.VIRTUAL` the propagated user id. Maximum length of 250 characters. Mandatory for virtual persons.")
 	public String getSourceId() {
 		return sourceId;
 	}

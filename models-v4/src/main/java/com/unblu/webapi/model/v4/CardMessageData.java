@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CardMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	CardMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	CardMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	CardMessageData.JSON_PROPERTY_BATCH_INFO,
 	CardMessageData.JSON_PROPERTY_IMAGE_URL,
 	CardMessageData.JSON_PROPERTY_IMAGE_ALT_TEXT,
 	CardMessageData.JSON_PROPERTY_TITLE,
@@ -184,6 +185,10 @@ public class CardMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_IMAGE_URL = "imageUrl";
 	@JsonProperty(JSON_PROPERTY_IMAGE_URL)
@@ -686,6 +691,25 @@ public class CardMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public CardMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public CardMessageData imageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 		return this;
@@ -897,6 +921,7 @@ public class CardMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, cardMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, cardMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, cardMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, cardMessageData.batchInfo) &&
 				Objects.equals(this.imageUrl, cardMessageData.imageUrl) &&
 				Objects.equals(this.imageAltText, cardMessageData.imageAltText) &&
 				Objects.equals(this.title, cardMessageData.title) &&
@@ -909,7 +934,7 @@ public class CardMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, imageUrl, imageAltText, title, body, bodyTextType, actions, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -940,6 +965,7 @@ public class CardMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
 		sb.append("    imageAltText: ").append(toIndentedString(imageAltText)).append("\n");
 		sb.append("    title: ").append(toIndentedString(title)).append("\n");

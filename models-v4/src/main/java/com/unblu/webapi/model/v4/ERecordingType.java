@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets ERecordingType
+ * The type of a built-in conversation recording: audio and video, or audio only
  */
 public enum ERecordingType {
 
 	/**
-	 * AUDIO: Recording of type AUDIO
+	 * AUDIO: Audio only
 	 */
 	AUDIO("AUDIO"),
 
 	/**
-	 * AUDIO_VIDEO: Recording of type AUDIO and VIDEO
+	 * AUDIO_VIDEO: Audio and video
 	 */
 	AUDIO_VIDEO("AUDIO_VIDEO");
 

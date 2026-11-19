@@ -47,6 +47,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AdaptiveCardMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	AdaptiveCardMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	AdaptiveCardMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	AdaptiveCardMessageData.JSON_PROPERTY_BATCH_INFO,
 	AdaptiveCardMessageData.JSON_PROPERTY_ADAPTIVE_CARD,
 	AdaptiveCardMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
 })
@@ -180,6 +181,10 @@ public class AdaptiveCardMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_ADAPTIVE_CARD = "adaptiveCard";
 	@JsonProperty(JSON_PROPERTY_ADAPTIVE_CARD)
@@ -658,6 +663,25 @@ public class AdaptiveCardMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public AdaptiveCardMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public AdaptiveCardMessageData adaptiveCard(JsonNode adaptiveCard) {
 		this.adaptiveCard = adaptiveCard;
 		return this;
@@ -738,13 +762,14 @@ public class AdaptiveCardMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, adaptiveCardMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, adaptiveCardMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, adaptiveCardMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, adaptiveCardMessageData.batchInfo) &&
 				Objects.equals(this.adaptiveCard, adaptiveCardMessageData.adaptiveCard) &&
 				Objects.equals(this.availableTranslations, adaptiveCardMessageData.availableTranslations);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, adaptiveCard, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, adaptiveCard, availableTranslations);
 	}
 
 	@Override
@@ -775,6 +800,7 @@ public class AdaptiveCardMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    adaptiveCard: ").append(toIndentedString(adaptiveCard)).append("\n");
 		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");
 		sb.append("}");

@@ -18,7 +18,13 @@ public enum EBotDialogTimeoutBehavior {
 	/**
 	 * HAND_OFF: Proceed further in on-boarding the conversation when it comes to timeout. Default for external bots.
 	 */
-	HAND_OFF("HAND_OFF");
+	HAND_OFF("HAND_OFF"),
+
+	/**
+	 * END: End the conversation when it times out. Unlike in the case of &#x60;ABORT&#x60;, the person is not removed, so the conversation is visible to them
+	 * afterwards.
+	 */
+	END("END");
 
 	private String value;
 

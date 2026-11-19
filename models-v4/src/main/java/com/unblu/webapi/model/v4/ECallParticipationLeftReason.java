@@ -50,6 +50,11 @@ public enum ECallParticipationLeftReason {
 	SYSTEM_ABORT("SYSTEM_ABORT"),
 
 	/**
+	 * RECORDING_DENIED: The participant was kept out of the call because the recording servers could not record them
+	 */
+	RECORDING_DENIED("RECORDING_DENIED"),
+
+	/**
 	 * UNKNOWN: The participant left for unknown reason
 	 */
 	UNKNOWN("UNKNOWN");

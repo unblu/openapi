@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = CollaborationLayersCountAnalyticsWidgetData.class, name = "COLLABORATION_LAYERS_COUNT"),
 	@JsonSubTypes.Type(value = ConversationsEndedCountAnalyticsWidgetData.class, name = "CONVERSATIONS_ENDED_COUNT"),
 	@JsonSubTypes.Type(value = MessagesCountAnalyticsWidgetData.class, name = "MESSAGES_COUNT"),
+	@JsonSubTypes.Type(value = QueueEntriesCountAnalyticsWidgetData.class, name = "QUEUE_ENTRIES_COUNT"),
 	@JsonSubTypes.Type(value = QueueInteractionCountAnalyticsWidgetData.class, name = "QUEUE_INTERACTION_COUNT"),
 })
 public interface AnalyticsWidgetData {

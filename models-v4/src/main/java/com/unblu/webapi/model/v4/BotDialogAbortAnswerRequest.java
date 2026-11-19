@@ -27,6 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BotDialogAbortAnswerRequest.JSON_PROPERTY_DIALOG_TOKEN,
 	BotDialogAbortAnswerRequest.JSON_PROPERTY_CONVERSATION_ID,
 	BotDialogAbortAnswerRequest.JSON_PROPERTY_COUNTERPART_PERSON_ID,
+	BotDialogAbortAnswerRequest.JSON_PROPERTY_MESSAGE_ID,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BotDialogAbortAnswerRequest {
@@ -86,6 +87,10 @@ public class BotDialogAbortAnswerRequest {
 	public static final String JSON_PROPERTY_COUNTERPART_PERSON_ID = "counterpartPersonId";
 	@JsonProperty(JSON_PROPERTY_COUNTERPART_PERSON_ID)
 	private String counterpartPersonId;
+
+	public static final String JSON_PROPERTY_MESSAGE_ID = "messageId";
+	@JsonProperty(JSON_PROPERTY_MESSAGE_ID)
+	private String messageId;
 
 	public BotDialogAbortAnswerRequest $type(TypeEnum $type) {
 		this.$type = $type;
@@ -201,6 +206,26 @@ public class BotDialogAbortAnswerRequest {
 		this.counterpartPersonId = counterpartPersonId;
 	}
 
+	public BotDialogAbortAnswerRequest messageId(String messageId) {
+		this.messageId = messageId;
+		return this;
+	}
+
+	/**
+	 * The ID of the streaming message the stop finished, if the bot was streaming a message. The message is stored with the reason &#x60;STOPPED_BY_USER&#x60; and
+	 * the content streamed so far, or discarded if no content was streamed. Updating or finishing it returns the HTTP status code 409, or 404 if it was discarded.
+	 * 
+	 * @return messageId
+	 **/
+	@ApiModelProperty(value = "The ID of the streaming message the stop finished, if the bot was streaming a message. The message is stored with the reason `STOPPED_BY_USER` and the content streamed so far, or discarded if no content was streamed. Updating or finishing it returns the HTTP status code 409, or 404 if it was discarded.")
+	public String getMessageId() {
+		return messageId;
+	}
+
+	public void setMessageId(String messageId) {
+		this.messageId = messageId;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -215,12 +240,13 @@ public class BotDialogAbortAnswerRequest {
 				Objects.equals(this.serviceName, botDialogAbortAnswerRequest.serviceName) &&
 				Objects.equals(this.dialogToken, botDialogAbortAnswerRequest.dialogToken) &&
 				Objects.equals(this.conversationId, botDialogAbortAnswerRequest.conversationId) &&
-				Objects.equals(this.counterpartPersonId, botDialogAbortAnswerRequest.counterpartPersonId);
+				Objects.equals(this.counterpartPersonId, botDialogAbortAnswerRequest.counterpartPersonId) &&
+				Objects.equals(this.messageId, botDialogAbortAnswerRequest.messageId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, accountId, serviceName, dialogToken, conversationId, counterpartPersonId);
+		return Objects.hash($type, accountId, serviceName, dialogToken, conversationId, counterpartPersonId, messageId);
 	}
 
 	@Override
@@ -233,6 +259,7 @@ public class BotDialogAbortAnswerRequest {
 		sb.append("    dialogToken: ").append(toIndentedString(dialogToken)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
 		sb.append("    counterpartPersonId: ").append(toIndentedString(counterpartPersonId)).append("\n");
+		sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

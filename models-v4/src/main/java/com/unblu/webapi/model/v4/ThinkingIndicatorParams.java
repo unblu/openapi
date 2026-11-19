@@ -74,7 +74,7 @@ public class ThinkingIndicatorParams {
 
 	public static final String JSON_PROPERTY_THINKING_INPUT_MODE = "thinkingInputMode";
 	@JsonProperty(JSON_PROPERTY_THINKING_INPUT_MODE)
-	private EThinkingInputMode thinkingInputMode;
+	private EBotTurnInputMode thinkingInputMode;
 
 	public static final String JSON_PROPERTY_INTERNAL = "internal";
 	@JsonProperty(JSON_PROPERTY_INTERNAL)
@@ -137,7 +137,7 @@ public class ThinkingIndicatorParams {
 		this.thinkingAnimation = thinkingAnimation;
 	}
 
-	public ThinkingIndicatorParams thinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public ThinkingIndicatorParams thinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 		return this;
 	}
@@ -148,11 +148,11 @@ public class ThinkingIndicatorParams {
 	 * @return thinkingInputMode
 	 **/
 	@ApiModelProperty(value = "")
-	public EThinkingInputMode getThinkingInputMode() {
+	public EBotTurnInputMode getThinkingInputMode() {
 		return thinkingInputMode;
 	}
 
-	public void setThinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public void setThinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 	}
 

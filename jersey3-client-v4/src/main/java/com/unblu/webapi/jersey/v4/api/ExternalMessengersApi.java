@@ -389,7 +389,7 @@ public class ExternalMessengersApi {
 	/**
 	 * messageSentSuccessfully Indication that a message was successfully sent to the external messenger.&lt;br&gt; &lt;br&gt; This will be visualized in the Unblu
 	 * UI.&lt;br&gt; &lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; This does not mean the message has been delivered to or read by the recipient. These states can be updated
-	 * using the&#x60;messageDelivered&#x60; and &#x60;messageRead&#x60; services.&lt;br&gt;
+	 * using the &#x60;messageDelivered&#x60; and &#x60;messageRead&#x60; services.&lt;br&gt;
 	 * 
 	 * @param channelId The ID of the custom external messenger channel (required)
 	 * @param externalMessengersMessageSentSuccessfullyBody (required)
@@ -403,7 +403,7 @@ public class ExternalMessengersApi {
 	/**
 	 * messageSentSuccessfully Indication that a message was successfully sent to the external messenger.&lt;br&gt; &lt;br&gt; This will be visualized in the Unblu
 	 * UI.&lt;br&gt; &lt;br&gt; &lt;b&gt;Note:&lt;/b&gt; This does not mean the message has been delivered to or read by the recipient. These states can be updated
-	 * using the&#x60;messageDelivered&#x60; and &#x60;messageRead&#x60; services.&lt;br&gt;
+	 * using the &#x60;messageDelivered&#x60; and &#x60;messageRead&#x60; services.&lt;br&gt;
 	 * 
 	 * @param channelId The ID of the custom external messenger channel (required)
 	 * @param externalMessengersMessageSentSuccessfullyBody (required)

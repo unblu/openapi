@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	AriaDialogBotData.JSON_PROPERTY_TYPE,
 	AriaDialogBotData.JSON_PROPERTY_BOT_INDICATOR_TYPE,
 	AriaDialogBotData.JSON_PROPERTY_THINKING_TEXTS,
+	AriaDialogBotData.JSON_PROPERTY_TURN_INPUT_MODE,
 	AriaDialogBotData.JSON_PROPERTY_THINKING_INPUT_MODE,
 	AriaDialogBotData.JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS,
 	AriaDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
@@ -180,9 +181,13 @@ public class AriaDialogBotData implements DialogBotData {
 	@JsonProperty(JSON_PROPERTY_THINKING_TEXTS)
 	private List<BotThinkingTextData> thinkingTexts = null;
 
+	public static final String JSON_PROPERTY_TURN_INPUT_MODE = "turnInputMode";
+	@JsonProperty(JSON_PROPERTY_TURN_INPUT_MODE)
+	private EBotTurnInputMode turnInputMode;
+
 	public static final String JSON_PROPERTY_THINKING_INPUT_MODE = "thinkingInputMode";
 	@JsonProperty(JSON_PROPERTY_THINKING_INPUT_MODE)
-	private EThinkingInputMode thinkingInputMode;
+	private EBotTurnInputMode thinkingInputMode;
 
 	public static final String JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS = "randomizeThinkingTexts";
 	@JsonProperty(JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS)
@@ -667,7 +672,26 @@ public class AriaDialogBotData implements DialogBotData {
 		this.thinkingTexts = thinkingTexts;
 	}
 
-	public AriaDialogBotData thinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public AriaDialogBotData turnInputMode(EBotTurnInputMode turnInputMode) {
+		this.turnInputMode = turnInputMode;
+		return this;
+	}
+
+	/**
+	 * Get turnInputMode
+	 * 
+	 * @return turnInputMode
+	 **/
+	@ApiModelProperty(value = "")
+	public EBotTurnInputMode getTurnInputMode() {
+		return turnInputMode;
+	}
+
+	public void setTurnInputMode(EBotTurnInputMode turnInputMode) {
+		this.turnInputMode = turnInputMode;
+	}
+
+	public AriaDialogBotData thinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 		return this;
 	}
@@ -678,11 +702,11 @@ public class AriaDialogBotData implements DialogBotData {
 	 * @return thinkingInputMode
 	 **/
 	@ApiModelProperty(value = "")
-	public EThinkingInputMode getThinkingInputMode() {
+	public EBotTurnInputMode getThinkingInputMode() {
 		return thinkingInputMode;
 	}
 
-	public void setThinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public void setThinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 	}
 
@@ -958,6 +982,7 @@ public class AriaDialogBotData implements DialogBotData {
 				Objects.equals(this.type, ariaDialogBotData.type) &&
 				Objects.equals(this.botIndicatorType, ariaDialogBotData.botIndicatorType) &&
 				Objects.equals(this.thinkingTexts, ariaDialogBotData.thinkingTexts) &&
+				Objects.equals(this.turnInputMode, ariaDialogBotData.turnInputMode) &&
 				Objects.equals(this.thinkingInputMode, ariaDialogBotData.thinkingInputMode) &&
 				Objects.equals(this.randomizeThinkingTexts, ariaDialogBotData.randomizeThinkingTexts) &&
 				Objects.equals(this.maxThinkingIndicatorTime, ariaDialogBotData.maxThinkingIndicatorTime) &&
@@ -975,7 +1000,7 @@ public class AriaDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, agenticFlowData, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion, ariaDialogBotType, externalConfiguration);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, turnInputMode, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, agenticFlowData, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion, ariaDialogBotType, externalConfiguration);
 	}
 
 	@Override
@@ -1004,6 +1029,7 @@ public class AriaDialogBotData implements DialogBotData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    botIndicatorType: ").append(toIndentedString(botIndicatorType)).append("\n");
 		sb.append("    thinkingTexts: ").append(toIndentedString(thinkingTexts)).append("\n");
+		sb.append("    turnInputMode: ").append(toIndentedString(turnInputMode)).append("\n");
 		sb.append("    thinkingInputMode: ").append(toIndentedString(thinkingInputMode)).append("\n");
 		sb.append("    randomizeThinkingTexts: ").append(toIndentedString(randomizeThinkingTexts)).append("\n");
 		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");

@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Paginated result containing &#x60;QueueInteractionAnalyticsKpiData&#x60; entries returned by&#x60;searchQueueInteraction&#x60;.
+ * Paginated result containing &#x60;QueueInteractionAnalyticsKpiData&#x60; entries returned by &#x60;searchQueueInteraction&#x60;.
  */
-@ApiModel(description = "Paginated result containing `QueueInteractionAnalyticsKpiData` entries returned by`searchQueueInteraction`.")
+@ApiModel(description = "Paginated result containing `QueueInteractionAnalyticsKpiData` entries returned by `searchQueueInteraction`.")
 
 @JsonPropertyOrder({
 	QueueInteractionAnalyticsKpiDataResult.JSON_PROPERTY_$_TYPE,

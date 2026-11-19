@@ -228,12 +228,12 @@ public class ExternalParticipantHistoryData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set
-	 * to&#x60;EConversationParticipationState.OFFBOARDING&#x60;. &#x60;null&#x60; if the participation never started its offboarding.
+	 * Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set to
+	 * &#x60;EConversationParticipationState.OFFBOARDING&#x60;. &#x60;null&#x60; if the participation never started its offboarding.
 	 * 
 	 * @return offboardingTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set to`EConversationParticipationState.OFFBOARDING`. `null` if the participation never started its offboarding.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the person started offboarding, that is, when their participation state was set to `EConversationParticipationState.OFFBOARDING`. `null` if the participation never started its offboarding.")
 	public Long getOffboardingTimestamp() {
 		return offboardingTimestamp;
 	}

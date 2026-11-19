@@ -210,7 +210,7 @@ public class AccountsApi {
 	/**
 	 * disableAccountIngress Disables ingress for the given account. &lt;p&gt; Calling this method triggers the ingress deactivation process. This consists of a
 	 * single step: &lt;ol&gt; &lt;li&gt;Migrate all users of the account to be managed through the built-in Unblu user management system. &lt;/ol&gt; Successfully
-	 * completing the deactivation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_INACTIVE and the&#x60;getIngressStatus&#x60; to
+	 * completing the deactivation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_INACTIVE and the &#x60;getIngressStatus&#x60; to
 	 * GLOBAL&lt;br&gt; If the deactivation process fails, &#x60;getMigrationStatus&#x60; changes to ERROR.&lt;br&gt; In such a case, use
 	 * &#x60;readIngressStatus&#x60; to retrieve the current status and find the potential source of the problems. &lt;p&gt; Once you&#39;ve resolved the issues
 	 * that caused the deactivation process to fail, use &#x60;restartIngressMigration&#x60; to restart the process.&lt;br&gt;
@@ -226,7 +226,7 @@ public class AccountsApi {
 	/**
 	 * disableAccountIngress Disables ingress for the given account. &lt;p&gt; Calling this method triggers the ingress deactivation process. This consists of a
 	 * single step: &lt;ol&gt; &lt;li&gt;Migrate all users of the account to be managed through the built-in Unblu user management system. &lt;/ol&gt; Successfully
-	 * completing the deactivation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_INACTIVE and the&#x60;getIngressStatus&#x60; to
+	 * completing the deactivation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_INACTIVE and the &#x60;getIngressStatus&#x60; to
 	 * GLOBAL&lt;br&gt; If the deactivation process fails, &#x60;getMigrationStatus&#x60; changes to ERROR.&lt;br&gt; In such a case, use
 	 * &#x60;readIngressStatus&#x60; to retrieve the current status and find the potential source of the problems. &lt;p&gt; Once you&#39;ve resolved the issues
 	 * that caused the deactivation process to fail, use &#x60;restartIngressMigration&#x60; to restart the process.&lt;br&gt;
@@ -270,7 +270,7 @@ public class AccountsApi {
 	 * enableAccountIngress Enables ingress for the given account. Before calling this method, you must have configured ingress correctly. &lt;p&gt; Calling this
 	 * method triggers the ingress activation process. The process consists of the following steps: &lt;ol&gt; &lt;li&gt;Migrate all the users of the account to be
 	 * managed through ingress single sign-on (SSO). &lt;li&gt;Check and apply all ingress-related configuration properties. &lt;/ol&gt; Successfully completing the
-	 * activation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_ACTIVE and the&#x60;getIngressStatus&#x60; to ACCOUNT&lt;br&gt; If the
+	 * activation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_ACTIVE and the &#x60;getIngressStatus&#x60; to ACCOUNT&lt;br&gt; If the
 	 * activation process fails, the &#x60;getMigrationStatus&#x60; changes to ERROR.&lt;br&gt; In such a case, use &#x60;readIngressStatus&#x60; to retrieve the
 	 * current status and find the potential source of the problems. &lt;/p&gt; If the process failed because of an invalid configuration, ingress is automatically
 	 * activated once the configuration has been rectified.&lt;br&gt; If there was an issue during migration, use &#x60;restartIngressMigration&#x60; to restart the
@@ -288,7 +288,7 @@ public class AccountsApi {
 	 * enableAccountIngress Enables ingress for the given account. Before calling this method, you must have configured ingress correctly. &lt;p&gt; Calling this
 	 * method triggers the ingress activation process. The process consists of the following steps: &lt;ol&gt; &lt;li&gt;Migrate all the users of the account to be
 	 * managed through ingress single sign-on (SSO). &lt;li&gt;Check and apply all ingress-related configuration properties. &lt;/ol&gt; Successfully completing the
-	 * activation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_ACTIVE and the&#x60;getIngressStatus&#x60; to ACCOUNT&lt;br&gt; If the
+	 * activation process changes the &#x60;getMigrationStatus&#x60; to DONE_INGRESS_ACTIVE and the &#x60;getIngressStatus&#x60; to ACCOUNT&lt;br&gt; If the
 	 * activation process fails, the &#x60;getMigrationStatus&#x60; changes to ERROR.&lt;br&gt; In such a case, use &#x60;readIngressStatus&#x60; to retrieve the
 	 * current status and find the potential source of the problems. &lt;/p&gt; If the process failed because of an invalid configuration, ingress is automatically
 	 * activated once the configuration has been rectified.&lt;br&gt; If there was an issue during migration, use &#x60;restartIngressMigration&#x60; to restart the

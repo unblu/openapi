@@ -452,8 +452,8 @@ public class ExternalMessengerContactsApi {
 	/**
 	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates an external messenger contact. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to. &lt;p&gt;
-	 * &lt;b&gt;Note:&lt;/b&gt; This can&#39;t be used to update the personId. To update the link to a person, use the
-	 * endpoint&#x60;migrateContactPersonWithAllConnectedConversations&#x60; or &#x60;migrateContactPersonWithGivenConversations&#x60;.&lt;br&gt;
+	 * &lt;b&gt;Note:&lt;/b&gt; This can&#39;t be used to update the personId. To update the link to a person, use the endpoint
+	 * &#x60;migrateContactPersonWithAllConnectedConversations&#x60; or &#x60;migrateContactPersonWithGivenConversations&#x60;.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContact to update (required)
 	 * @return ExternalMessengerContact
@@ -466,8 +466,8 @@ public class ExternalMessengerContactsApi {
 	/**
 	 * update &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Updates an external messenger contact. &lt;p&gt; The configuration property
 	 * &#x60;com.unblu.permission.roleAllowed.manageExternalMessengerContacts&#x60; defines which user roles the endpoint is available to. &lt;p&gt;
-	 * &lt;b&gt;Note:&lt;/b&gt; This can&#39;t be used to update the personId. To update the link to a person, use the
-	 * endpoint&#x60;migrateContactPersonWithAllConnectedConversations&#x60; or &#x60;migrateContactPersonWithGivenConversations&#x60;.&lt;br&gt;
+	 * &lt;b&gt;Note:&lt;/b&gt; This can&#39;t be used to update the personId. To update the link to a person, use the endpoint
+	 * &#x60;migrateContactPersonWithAllConnectedConversations&#x60; or &#x60;migrateContactPersonWithGivenConversations&#x60;.&lt;br&gt;
 	 * 
 	 * @param externalMessengerContact to update (required)
 	 * @return ApiResponse&lt;ExternalMessengerContact&gt;

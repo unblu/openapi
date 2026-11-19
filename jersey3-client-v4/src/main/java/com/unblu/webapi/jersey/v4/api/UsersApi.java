@@ -907,7 +907,7 @@ public class UsersApi {
 
 	/**
 	 * transformVirtualToPhysical Converts the user with the given username from a virtual to a physical user. This also changes the related &#x60;Person&#x60;
-	 * entity to a physical&#x60;Person&#x60;. If the user is already physical, the endpoint returns the user unchanged. If no user with the given username exists
+	 * entity to a physical &#x60;Person&#x60;. If the user is already physical, the endpoint returns the user unchanged. If no user with the given username exists
 	 * or the user is a visitor, the endpoint returns an error.&lt;br&gt;
 	 * 
 	 * @param usersTransformVirtualToPhysicalBody (required)
@@ -922,7 +922,7 @@ public class UsersApi {
 
 	/**
 	 * transformVirtualToPhysical Converts the user with the given username from a virtual to a physical user. This also changes the related &#x60;Person&#x60;
-	 * entity to a physical&#x60;Person&#x60;. If the user is already physical, the endpoint returns the user unchanged. If no user with the given username exists
+	 * entity to a physical &#x60;Person&#x60;. If the user is already physical, the endpoint returns the user unchanged. If no user with the given username exists
 	 * or the user is a visitor, the endpoint returns an error.&lt;br&gt;
 	 * 
 	 * @param usersTransformVirtualToPhysicalBody (required)

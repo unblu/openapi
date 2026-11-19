@@ -175,12 +175,12 @@ public class AvailabilitySnapshotEvent {
 	/**
 	 * All agents subscribed to the inbound request queue. An agent is subscribed when they are online and their inbound queue is enabled, meaning they are a target
 	 * for requests that name no specific agent. &lt;p&gt; Whether the agent can currently take such a request does not matter: a busy or otherwise unavailable
-	 * agent is still listed, with&#x60;isAvailableForInboundRequests&#x60; saying which of them can be dispatched to right now. Agents who are configured to only
+	 * agent is still listed, with &#x60;isAvailableForInboundRequests&#x60; saying which of them can be dispatched to right now. Agents who are configured to only
 	 * ever receive invitations and forwardings are not listed at all.
 	 * 
 	 * @return agents
 	 **/
-	@ApiModelProperty(value = "All agents subscribed to the inbound request queue. An agent is subscribed when they are online and their inbound queue is enabled, meaning they are a target for requests that name no specific agent. <p> Whether the agent can currently take such a request does not matter: a busy or otherwise unavailable agent is still listed, with`isAvailableForInboundRequests` saying which of them can be dispatched to right now. Agents who are configured to only ever receive invitations and forwardings are not listed at all.")
+	@ApiModelProperty(value = "All agents subscribed to the inbound request queue. An agent is subscribed when they are online and their inbound queue is enabled, meaning they are a target for requests that name no specific agent. <p> Whether the agent can currently take such a request does not matter: a busy or otherwise unavailable agent is still listed, with `isAvailableForInboundRequests` saying which of them can be dispatched to right now. Agents who are configured to only ever receive invitations and forwardings are not listed at all.")
 	public List<AgentAvailabilityData> getAgents() {
 		return agents;
 	}

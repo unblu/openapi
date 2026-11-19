@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RecordingAvailableMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	RecordingAvailableMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	RecordingAvailableMessageData.JSON_PROPERTY_BATCH_INFO,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_ID,
 	RecordingAvailableMessageData.JSON_PROPERTY_BLOB_SIZE,
 	RecordingAvailableMessageData.JSON_PROPERTY_FILE_NAME,
@@ -181,6 +182,10 @@ public class RecordingAvailableMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_BLOB_ID = "blobId";
 	@JsonProperty(JSON_PROPERTY_BLOB_ID)
@@ -671,6 +676,25 @@ public class RecordingAvailableMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public RecordingAvailableMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public RecordingAvailableMessageData blobId(String blobId) {
 		this.blobId = blobId;
 		return this;
@@ -799,6 +823,7 @@ public class RecordingAvailableMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, recordingAvailableMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, recordingAvailableMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, recordingAvailableMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, recordingAvailableMessageData.batchInfo) &&
 				Objects.equals(this.blobId, recordingAvailableMessageData.blobId) &&
 				Objects.equals(this.blobSize, recordingAvailableMessageData.blobSize) &&
 				Objects.equals(this.fileName, recordingAvailableMessageData.fileName) &&
@@ -808,7 +833,7 @@ public class RecordingAvailableMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, blobId, blobSize, fileName, startTimestamp, endTimestamp);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, blobId, blobSize, fileName, startTimestamp, endTimestamp);
 	}
 
 	@Override
@@ -839,6 +864,7 @@ public class RecordingAvailableMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    blobId: ").append(toIndentedString(blobId)).append("\n");
 		sb.append("    blobSize: ").append(toIndentedString(blobSize)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");

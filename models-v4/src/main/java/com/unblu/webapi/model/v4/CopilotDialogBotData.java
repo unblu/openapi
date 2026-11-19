@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CopilotDialogBotData.JSON_PROPERTY_TYPE,
 	CopilotDialogBotData.JSON_PROPERTY_BOT_INDICATOR_TYPE,
 	CopilotDialogBotData.JSON_PROPERTY_THINKING_TEXTS,
+	CopilotDialogBotData.JSON_PROPERTY_TURN_INPUT_MODE,
 	CopilotDialogBotData.JSON_PROPERTY_THINKING_INPUT_MODE,
 	CopilotDialogBotData.JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS,
 	CopilotDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
@@ -180,9 +181,13 @@ public class CopilotDialogBotData implements DialogBotData {
 	@JsonProperty(JSON_PROPERTY_THINKING_TEXTS)
 	private List<BotThinkingTextData> thinkingTexts = null;
 
+	public static final String JSON_PROPERTY_TURN_INPUT_MODE = "turnInputMode";
+	@JsonProperty(JSON_PROPERTY_TURN_INPUT_MODE)
+	private EBotTurnInputMode turnInputMode;
+
 	public static final String JSON_PROPERTY_THINKING_INPUT_MODE = "thinkingInputMode";
 	@JsonProperty(JSON_PROPERTY_THINKING_INPUT_MODE)
-	private EThinkingInputMode thinkingInputMode;
+	private EBotTurnInputMode thinkingInputMode;
 
 	public static final String JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS = "randomizeThinkingTexts";
 	@JsonProperty(JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS)
@@ -667,7 +672,26 @@ public class CopilotDialogBotData implements DialogBotData {
 		this.thinkingTexts = thinkingTexts;
 	}
 
-	public CopilotDialogBotData thinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public CopilotDialogBotData turnInputMode(EBotTurnInputMode turnInputMode) {
+		this.turnInputMode = turnInputMode;
+		return this;
+	}
+
+	/**
+	 * Get turnInputMode
+	 * 
+	 * @return turnInputMode
+	 **/
+	@ApiModelProperty(value = "")
+	public EBotTurnInputMode getTurnInputMode() {
+		return turnInputMode;
+	}
+
+	public void setTurnInputMode(EBotTurnInputMode turnInputMode) {
+		this.turnInputMode = turnInputMode;
+	}
+
+	public CopilotDialogBotData thinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 		return this;
 	}
@@ -678,11 +702,11 @@ public class CopilotDialogBotData implements DialogBotData {
 	 * @return thinkingInputMode
 	 **/
 	@ApiModelProperty(value = "")
-	public EThinkingInputMode getThinkingInputMode() {
+	public EBotTurnInputMode getThinkingInputMode() {
 		return thinkingInputMode;
 	}
 
-	public void setThinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public void setThinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 	}
 
@@ -956,6 +980,7 @@ public class CopilotDialogBotData implements DialogBotData {
 				Objects.equals(this.type, copilotDialogBotData.type) &&
 				Objects.equals(this.botIndicatorType, copilotDialogBotData.botIndicatorType) &&
 				Objects.equals(this.thinkingTexts, copilotDialogBotData.thinkingTexts) &&
+				Objects.equals(this.turnInputMode, copilotDialogBotData.turnInputMode) &&
 				Objects.equals(this.thinkingInputMode, copilotDialogBotData.thinkingInputMode) &&
 				Objects.equals(this.randomizeThinkingTexts, copilotDialogBotData.randomizeThinkingTexts) &&
 				Objects.equals(this.maxThinkingIndicatorTime, copilotDialogBotData.maxThinkingIndicatorTime) &&
@@ -973,7 +998,7 @@ public class CopilotDialogBotData implements DialogBotData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, turnInputMode, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, authToken, copilotId, copilotEnvironmentId, active, outboundEndpoint, outboundTimeoutMillis, outboundApiVersion);
 	}
 
 	@Override
@@ -1002,6 +1027,7 @@ public class CopilotDialogBotData implements DialogBotData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    botIndicatorType: ").append(toIndentedString(botIndicatorType)).append("\n");
 		sb.append("    thinkingTexts: ").append(toIndentedString(thinkingTexts)).append("\n");
+		sb.append("    turnInputMode: ").append(toIndentedString(turnInputMode)).append("\n");
 		sb.append("    thinkingInputMode: ").append(toIndentedString(thinkingInputMode)).append("\n");
 		sb.append("    randomizeThinkingTexts: ").append(toIndentedString(randomizeThinkingTexts)).append("\n");
 		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");

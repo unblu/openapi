@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ECallSearchFilterField {
 
 	/**
-	 * CONVERSATION_ID: Filter by the &#39;creationTimestamp&#39; attribute
+	 * CONVERSATION_ID: Filter by the &#39;conversationId&#39; attribute
 	 */
 	CONVERSATION_ID("CONVERSATION_ID"),
 

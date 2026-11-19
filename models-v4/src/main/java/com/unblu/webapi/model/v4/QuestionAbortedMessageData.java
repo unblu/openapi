@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	QuestionAbortedMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	QuestionAbortedMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	QuestionAbortedMessageData.JSON_PROPERTY_BATCH_INFO,
 	QuestionAbortedMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	QuestionAbortedMessageData.JSON_PROPERTY_VALUE,
 	QuestionAbortedMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
@@ -180,6 +181,10 @@ public class QuestionAbortedMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
@@ -666,6 +671,25 @@ public class QuestionAbortedMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public QuestionAbortedMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public QuestionAbortedMessageData questionMessageId(String questionMessageId) {
 		this.questionMessageId = questionMessageId;
 		return this;
@@ -784,6 +808,7 @@ public class QuestionAbortedMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, questionAbortedMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, questionAbortedMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, questionAbortedMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, questionAbortedMessageData.batchInfo) &&
 				Objects.equals(this.questionMessageId, questionAbortedMessageData.questionMessageId) &&
 				Objects.equals(this.value, questionAbortedMessageData.value) &&
 				Objects.equals(this.availableTranslations, questionAbortedMessageData.availableTranslations) &&
@@ -792,7 +817,7 @@ public class QuestionAbortedMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, questionMessageId, value, availableTranslations, reason);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, questionMessageId, value, availableTranslations, reason);
 	}
 
 	@Override
@@ -823,6 +848,7 @@ public class QuestionAbortedMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");

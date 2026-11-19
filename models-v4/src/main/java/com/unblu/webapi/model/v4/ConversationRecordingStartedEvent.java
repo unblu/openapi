@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Event emitted when a conversation recording is started &lt;p&gt; Supported filter keys: &lt;ul&gt;
- * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;/ul&gt;
+ * Event emitted when a conversation recording is started. Sent for every recording system; &#x60;recordingSystem&#x60; states the system. &lt;p&gt; Supported
+ * filter keys: &lt;ul&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Event emitted when a conversation recording is started <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>")
+@ApiModel(description = "Event emitted when a conversation recording is started. Sent for every recording system; `recordingSystem` states the system. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>")
 
 @JsonPropertyOrder({
 	ConversationRecordingStartedEvent.JSON_PROPERTY_$_TYPE,
@@ -25,6 +25,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationRecordingStartedEvent.JSON_PROPERTY_EVENT_TYPE,
 	ConversationRecordingStartedEvent.JSON_PROPERTY_ACCOUNT_ID,
 	ConversationRecordingStartedEvent.JSON_PROPERTY_CONVERSATION_ID,
+	ConversationRecordingStartedEvent.JSON_PROPERTY_CONVERSATION_RECORDING_ID,
+	ConversationRecordingStartedEvent.JSON_PROPERTY_RECORDING_SYSTEM,
 	ConversationRecordingStartedEvent.JSON_PROPERTY_RECORDING_TYPE,
 	ConversationRecordingStartedEvent.JSON_PROPERTY_RECORDING_START_TIMESTAMP,
 })
@@ -82,6 +84,14 @@ public class ConversationRecordingStartedEvent {
 	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
 	private String conversationId;
+
+	public static final String JSON_PROPERTY_CONVERSATION_RECORDING_ID = "conversationRecordingId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_RECORDING_ID)
+	private String conversationRecordingId;
+
+	public static final String JSON_PROPERTY_RECORDING_SYSTEM = "recordingSystem";
+	@JsonProperty(JSON_PROPERTY_RECORDING_SYSTEM)
+	private ERecordingSystem recordingSystem;
 
 	public static final String JSON_PROPERTY_RECORDING_TYPE = "recordingType";
 	@JsonProperty(JSON_PROPERTY_RECORDING_TYPE)
@@ -173,17 +183,55 @@ public class ConversationRecordingStartedEvent {
 	}
 
 	/**
-	 * ID of the conversation this recording belongs to
+	 * ID of the conversation that the recording belongs to
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "ID of the conversation this recording belongs to")
+	@ApiModelProperty(value = "ID of the conversation that the recording belongs to")
 	public String getConversationId() {
 		return conversationId;
 	}
 
 	public void setConversationId(String conversationId) {
 		this.conversationId = conversationId;
+	}
+
+	public ConversationRecordingStartedEvent conversationRecordingId(String conversationRecordingId) {
+		this.conversationRecordingId = conversationRecordingId;
+		return this;
+	}
+
+	/**
+	 * The ID of the recording.
+	 * 
+	 * @return conversationRecordingId
+	 **/
+	@ApiModelProperty(value = "The ID of the recording.")
+	public String getConversationRecordingId() {
+		return conversationRecordingId;
+	}
+
+	public void setConversationRecordingId(String conversationRecordingId) {
+		this.conversationRecordingId = conversationRecordingId;
+	}
+
+	public ConversationRecordingStartedEvent recordingSystem(ERecordingSystem recordingSystem) {
+		this.recordingSystem = recordingSystem;
+		return this;
+	}
+
+	/**
+	 * Get recordingSystem
+	 * 
+	 * @return recordingSystem
+	 **/
+	@ApiModelProperty(value = "")
+	public ERecordingSystem getRecordingSystem() {
+		return recordingSystem;
+	}
+
+	public void setRecordingSystem(ERecordingSystem recordingSystem) {
+		this.recordingSystem = recordingSystem;
 	}
 
 	public ConversationRecordingStartedEvent recordingType(ERecordingType recordingType) {
@@ -238,13 +286,15 @@ public class ConversationRecordingStartedEvent {
 				Objects.equals(this.eventType, conversationRecordingStartedEvent.eventType) &&
 				Objects.equals(this.accountId, conversationRecordingStartedEvent.accountId) &&
 				Objects.equals(this.conversationId, conversationRecordingStartedEvent.conversationId) &&
+				Objects.equals(this.conversationRecordingId, conversationRecordingStartedEvent.conversationRecordingId) &&
+				Objects.equals(this.recordingSystem, conversationRecordingStartedEvent.recordingSystem) &&
 				Objects.equals(this.recordingType, conversationRecordingStartedEvent.recordingType) &&
 				Objects.equals(this.recordingStartTimestamp, conversationRecordingStartedEvent.recordingStartTimestamp);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversationId, recordingType, recordingStartTimestamp);
+		return Objects.hash($type, timestamp, eventType, accountId, conversationId, conversationRecordingId, recordingSystem, recordingType, recordingStartTimestamp);
 	}
 
 	@Override
@@ -256,6 +306,8 @@ public class ConversationRecordingStartedEvent {
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+		sb.append("    conversationRecordingId: ").append(toIndentedString(conversationRecordingId)).append("\n");
+		sb.append("    recordingSystem: ").append(toIndentedString(recordingSystem)).append("\n");
 		sb.append("    recordingType: ").append(toIndentedString(recordingType)).append("\n");
 		sb.append("    recordingStartTimestamp: ").append(toIndentedString(recordingStartTimestamp)).append("\n");
 		sb.append("}");

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes.Type(value = RatingQuestionMessageData.class, name = "RATING_QUESTION"),
 	@JsonSubTypes.Type(value = RecordingAvailableMessageData.class, name = "RECORDING_AVAILABLE"),
 	@JsonSubTypes.Type(value = ReplyMessageData.class, name = "REPLY"),
+	@JsonSubTypes.Type(value = StreamingTextMessageData.class, name = "STREAMING_TEXT"),
 	@JsonSubTypes.Type(value = SystemMessageData.class, name = "SYSTEM"),
 	@JsonSubTypes.Type(value = TextMessageData.class, name = "TEXT"),
 	@JsonSubTypes.Type(value = TextQuestionMessageData.class, name = "TEXT_QUESTION"),
@@ -160,5 +161,11 @@ public interface MessageData {
 	Long getLastEditedTimestamp();
 
 	MessageData lastEditedTimestamp(Long lastEditedTimestamp);
+
+	void setBatchInfo(MessageBatchInfo batchInfo);
+
+	MessageBatchInfo getBatchInfo();
+
+	MessageData batchInfo(MessageBatchInfo batchInfo);
 
 }

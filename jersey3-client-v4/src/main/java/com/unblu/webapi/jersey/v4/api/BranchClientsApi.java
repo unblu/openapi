@@ -140,7 +140,10 @@ public class BranchClientsApi {
 	}
 
 	/**
-	 * generateToken Generates a new branch client token&lt;br&gt;
+	 * generateToken Generates a new Branch client token, together with the landing page URL of the Branch client that carries it. The URL is ready to be opened on
+	 * the device the Branch client runs on, and is built from the landing page setup of the Branch client: its base URL, API key, default language, and additional
+	 * landing page parameters. The token isn&#39;t stored, so the token and the URL can only be read from the response. Earlier tokens stay valid until they expire
+	 * or the tokens of the Branch client are invalidated.&lt;br&gt;
 	 * 
 	 * @param branchClientId The ID of the branch client (required)
 	 * @param branchClientsGenerateTokenBody (required)
@@ -152,7 +155,10 @@ public class BranchClientsApi {
 	}
 
 	/**
-	 * generateToken Generates a new branch client token&lt;br&gt;
+	 * generateToken Generates a new Branch client token, together with the landing page URL of the Branch client that carries it. The URL is ready to be opened on
+	 * the device the Branch client runs on, and is built from the landing page setup of the Branch client: its base URL, API key, default language, and additional
+	 * landing page parameters. The token isn&#39;t stored, so the token and the URL can only be read from the response. Earlier tokens stay valid until they expire
+	 * or the tokens of the Branch client are invalidated.&lt;br&gt;
 	 * 
 	 * @param branchClientId The ID of the branch client (required)
 	 * @param branchClientsGenerateTokenBody (required)

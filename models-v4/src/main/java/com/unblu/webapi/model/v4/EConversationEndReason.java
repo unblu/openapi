@@ -55,6 +55,11 @@ public enum EConversationEndReason {
 	NO_AGENT_AVAILABLE("NO_AGENT_AVAILABLE"),
 
 	/**
+	 * ONBOARDING_TIMEOUT: The onboarding timed out and the conversation was ended without removing the onboarded participant
+	 */
+	ONBOARDING_TIMEOUT("ONBOARDING_TIMEOUT"),
+
+	/**
 	 * OTHER: The conversation ended for a reason not covered by the other values
 	 */
 	OTHER("OTHER");

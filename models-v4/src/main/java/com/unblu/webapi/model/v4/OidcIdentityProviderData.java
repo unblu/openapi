@@ -16,10 +16,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Data transfer object for &#x60;OidcIdentityProvider&#x60;. Contains all provider fields except the client secret, which is managed separately
- * via&#x60;OidcIdentityProviderSecretContainer&#x60;.
+ * Data transfer object for &#x60;OidcIdentityProvider&#x60;. Contains all provider fields except the client secret, which is managed separately via
+ * &#x60;OidcIdentityProviderSecretContainer&#x60;.
  */
-@ApiModel(description = "Data transfer object for `OidcIdentityProvider`. Contains all provider fields except the client secret, which is managed separately via`OidcIdentityProviderSecretContainer`.")
+@ApiModel(description = "Data transfer object for `OidcIdentityProvider`. Contains all provider fields except the client secret, which is managed separately via `OidcIdentityProviderSecretContainer`.")
 
 @JsonPropertyOrder({
 	OidcIdentityProviderData.JSON_PROPERTY_$_TYPE,
@@ -32,6 +32,8 @@ import io.swagger.annotations.ApiModelProperty;
 	OidcIdentityProviderData.JSON_PROPERTY_LOGO_IMAGE,
 	OidcIdentityProviderData.JSON_PROPERTY_PATH,
 	OidcIdentityProviderData.JSON_PROPERTY_CLIENT_ID,
+	OidcIdentityProviderData.JSON_PROPERTY_CLIENT_AUTHENTICATION_METHOD,
+	OidcIdentityProviderData.JSON_PROPERTY_KEY_SETTINGS,
 	OidcIdentityProviderData.JSON_PROPERTY_ISSUER_URL,
 	OidcIdentityProviderData.JSON_PROPERTY_USE_AUTO_DISCOVERY,
 	OidcIdentityProviderData.JSON_PROPERTY_AUTHORIZATION_ENDPOINT,
@@ -127,6 +129,14 @@ public class OidcIdentityProviderData {
 	public static final String JSON_PROPERTY_CLIENT_ID = "clientId";
 	@JsonProperty(JSON_PROPERTY_CLIENT_ID)
 	private String clientId;
+
+	public static final String JSON_PROPERTY_CLIENT_AUTHENTICATION_METHOD = "clientAuthenticationMethod";
+	@JsonProperty(JSON_PROPERTY_CLIENT_AUTHENTICATION_METHOD)
+	private EOidcClientAuthenticationMethod clientAuthenticationMethod;
+
+	public static final String JSON_PROPERTY_KEY_SETTINGS = "keySettings";
+	@JsonProperty(JSON_PROPERTY_KEY_SETTINGS)
+	private OidcIdentityProviderKeySettings keySettings = null;
 
 	public static final String JSON_PROPERTY_ISSUER_URL = "issuerUrl";
 	@JsonProperty(JSON_PROPERTY_ISSUER_URL)
@@ -396,6 +406,44 @@ public class OidcIdentityProviderData {
 
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
+	}
+
+	public OidcIdentityProviderData clientAuthenticationMethod(EOidcClientAuthenticationMethod clientAuthenticationMethod) {
+		this.clientAuthenticationMethod = clientAuthenticationMethod;
+		return this;
+	}
+
+	/**
+	 * Get clientAuthenticationMethod
+	 * 
+	 * @return clientAuthenticationMethod
+	 **/
+	@ApiModelProperty(value = "")
+	public EOidcClientAuthenticationMethod getClientAuthenticationMethod() {
+		return clientAuthenticationMethod;
+	}
+
+	public void setClientAuthenticationMethod(EOidcClientAuthenticationMethod clientAuthenticationMethod) {
+		this.clientAuthenticationMethod = clientAuthenticationMethod;
+	}
+
+	public OidcIdentityProviderData keySettings(OidcIdentityProviderKeySettings keySettings) {
+		this.keySettings = keySettings;
+		return this;
+	}
+
+	/**
+	 * Get keySettings
+	 * 
+	 * @return keySettings
+	 **/
+	@ApiModelProperty(value = "")
+	public OidcIdentityProviderKeySettings getKeySettings() {
+		return keySettings;
+	}
+
+	public void setKeySettings(OidcIdentityProviderKeySettings keySettings) {
+		this.keySettings = keySettings;
 	}
 
 	public OidcIdentityProviderData issuerUrl(String issuerUrl) {
@@ -833,6 +881,8 @@ public class OidcIdentityProviderData {
 				Objects.equals(this.logoImage, oidcIdentityProviderData.logoImage) &&
 				Objects.equals(this.path, oidcIdentityProviderData.path) &&
 				Objects.equals(this.clientId, oidcIdentityProviderData.clientId) &&
+				Objects.equals(this.clientAuthenticationMethod, oidcIdentityProviderData.clientAuthenticationMethod) &&
+				Objects.equals(this.keySettings, oidcIdentityProviderData.keySettings) &&
 				Objects.equals(this.issuerUrl, oidcIdentityProviderData.issuerUrl) &&
 				Objects.equals(this.useAutoDiscovery, oidcIdentityProviderData.useAutoDiscovery) &&
 				Objects.equals(this.authorizationEndpoint, oidcIdentityProviderData.authorizationEndpoint) &&
@@ -857,7 +907,7 @@ public class OidcIdentityProviderData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, creationTimestamp, modificationTimestamp, version, name, logoImage, path, clientId, issuerUrl, useAutoDiscovery, authorizationEndpoint, tokenEndpoint, jwksUri, enableSsoLogout, postLogoutRedirectUrl, userNotFoundStrategy, userUpdateStrategy, userMigrationStrategy, allowUnverifiedEmail, scope, authorizationUrlParameters, disablePkce, claimsSource, algorithms, refreshInterval, endSessionEndpoint, logClaims, claimMappings);
+		return Objects.hash($type, id, accountId, creationTimestamp, modificationTimestamp, version, name, logoImage, path, clientId, clientAuthenticationMethod, keySettings, issuerUrl, useAutoDiscovery, authorizationEndpoint, tokenEndpoint, jwksUri, enableSsoLogout, postLogoutRedirectUrl, userNotFoundStrategy, userUpdateStrategy, userMigrationStrategy, allowUnverifiedEmail, scope, authorizationUrlParameters, disablePkce, claimsSource, algorithms, refreshInterval, endSessionEndpoint, logClaims, claimMappings);
 	}
 
 	@Override
@@ -874,6 +924,8 @@ public class OidcIdentityProviderData {
 		sb.append("    logoImage: ").append(toIndentedString(logoImage)).append("\n");
 		sb.append("    path: ").append(toIndentedString(path)).append("\n");
 		sb.append("    clientId: ").append(toIndentedString(clientId)).append("\n");
+		sb.append("    clientAuthenticationMethod: ").append(toIndentedString(clientAuthenticationMethod)).append("\n");
+		sb.append("    keySettings: ").append(toIndentedString(keySettings)).append("\n");
 		sb.append("    issuerUrl: ").append(toIndentedString(issuerUrl)).append("\n");
 		sb.append("    useAutoDiscovery: ").append(toIndentedString(useAutoDiscovery)).append("\n");
 		sb.append("    authorizationEndpoint: ").append(toIndentedString(authorizationEndpoint)).append("\n");

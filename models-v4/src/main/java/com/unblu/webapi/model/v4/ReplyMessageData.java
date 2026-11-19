@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ReplyMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	ReplyMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	ReplyMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	ReplyMessageData.JSON_PROPERTY_BATCH_INFO,
 	ReplyMessageData.JSON_PROPERTY_QUESTION_MESSAGE_ID,
 	ReplyMessageData.JSON_PROPERTY_VALUE,
 	ReplyMessageData.JSON_PROPERTY_AVAILABLE_TRANSLATIONS,
@@ -179,6 +180,10 @@ public class ReplyMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_QUESTION_MESSAGE_ID = "questionMessageId";
 	@JsonProperty(JSON_PROPERTY_QUESTION_MESSAGE_ID)
@@ -661,6 +666,25 @@ public class ReplyMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public ReplyMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public ReplyMessageData questionMessageId(String questionMessageId) {
 		this.questionMessageId = questionMessageId;
 		return this;
@@ -760,6 +784,7 @@ public class ReplyMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, replyMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, replyMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, replyMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, replyMessageData.batchInfo) &&
 				Objects.equals(this.questionMessageId, replyMessageData.questionMessageId) &&
 				Objects.equals(this.value, replyMessageData.value) &&
 				Objects.equals(this.availableTranslations, replyMessageData.availableTranslations);
@@ -767,7 +792,7 @@ public class ReplyMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, questionMessageId, value, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, questionMessageId, value, availableTranslations);
 	}
 
 	@Override
@@ -798,6 +823,7 @@ public class ReplyMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    questionMessageId: ").append(toIndentedString(questionMessageId)).append("\n");
 		sb.append("    value: ").append(toIndentedString(value)).append("\n");
 		sb.append("    availableTranslations: ").append(toIndentedString(availableTranslations)).append("\n");

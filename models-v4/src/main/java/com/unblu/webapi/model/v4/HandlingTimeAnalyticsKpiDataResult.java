@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Paginated result containing &#x60;HandlingTimeAnalyticsKpiData&#x60; entries returned by&#x60;searchHandlingTime&#x60;.
+ * Paginated result containing &#x60;HandlingTimeAnalyticsKpiData&#x60; entries returned by &#x60;searchHandlingTime&#x60;.
  */
-@ApiModel(description = "Paginated result containing `HandlingTimeAnalyticsKpiData` entries returned by`searchHandlingTime`.")
+@ApiModel(description = "Paginated result containing `HandlingTimeAnalyticsKpiData` entries returned by `searchHandlingTime`.")
 
 @JsonPropertyOrder({
 	HandlingTimeAnalyticsKpiDataResult.JSON_PROPERTY_$_TYPE,

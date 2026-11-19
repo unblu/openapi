@@ -34,12 +34,18 @@ public enum EBotOutboundEventType {
 	DIALOG_MESSAGE_STATE("DIALOG_MESSAGE_STATE"),
 
 	/**
+	 * DIALOG_MESSAGE_BATCH: Sent once for the messages of a previously accepted bot dialog that were sent together in one action, instead of
+	 * &#x60;DIALOG_MESSAGE&#x60; for each of them. Only occurs when message batching is enabled on the bot.
+	 */
+	DIALOG_MESSAGE_BATCH("DIALOG_MESSAGE_BATCH"),
+
+	/**
 	 * DIALOG_OPENED: Delivered when a previously accepted bot dialog starts.
 	 */
 	DIALOG_OPENED("DIALOG_OPENED"),
 
 	/**
-	 * DIALOG_MESSAGE: Delivered on each message of a previously accepted bot dialog.
+	 * DIALOG_MESSAGE: Delivered on each message of a previously accepted bot dialog, except the messages sent in a &#x60;DIALOG_MESSAGE_BATCH&#x60; event.
 	 */
 	DIALOG_MESSAGE("DIALOG_MESSAGE"),
 
@@ -73,7 +79,13 @@ public enum EBotOutboundEventType {
 	/**
 	 * DIALOG_LINK_CLICKED: Delivered when a person clicks a link in a message of the bot thread of a previously accepted bot dialog.
 	 */
-	DIALOG_LINK_CLICKED("DIALOG_LINK_CLICKED");
+	DIALOG_LINK_CLICKED("DIALOG_LINK_CLICKED"),
+
+	/**
+	 * DIALOG_STREAMING_MESSAGE_FINISHED: Delivered when Unblu finishes a streaming message of the bot, because a person stopped it, the stream timed out, or the
+	 * dialog ended while it was open. Only occurs for a bot that streams messages.
+	 */
+	DIALOG_STREAMING_MESSAGE_FINISHED("DIALOG_STREAMING_MESSAGE_FINISHED");
 
 	private String value;
 

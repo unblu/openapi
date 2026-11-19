@@ -17,11 +17,11 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Query object for searching analytics KPI data records via the data access web API. &lt;p&gt; Supports filtering by event timestamp range (via
- * &#x60;AnalyticsKpiDataQueryFilter&#x60;), ordering by event timestamp (via&#x60;AnalyticsKpiDataQueryOrderBy&#x60;), and pagination through offset and limit
+ * &#x60;AnalyticsKpiDataQueryFilter&#x60;), ordering by event timestamp (via &#x60;AnalyticsKpiDataQueryOrderBy&#x60;), and pagination through offset and limit
  * inherited from &#x60;AbstractQuery&#x60;.&lt;br&gt;@see AnalyticsKpiDataQueryFilter&lt;br&gt;@see AnalyticsKpiDataQueryOrderBy&lt;br&gt;@see
  * IAnalyticsDataApiService
  */
-@ApiModel(description = "Query object for searching analytics KPI data records via the data access web API. <p> Supports filtering by event timestamp range (via `AnalyticsKpiDataQueryFilter`), ordering by event timestamp (via`AnalyticsKpiDataQueryOrderBy`), and pagination through offset and limit inherited from `AbstractQuery`.<br>@see AnalyticsKpiDataQueryFilter<br>@see AnalyticsKpiDataQueryOrderBy<br>@see IAnalyticsDataApiService")
+@ApiModel(description = "Query object for searching analytics KPI data records via the data access web API. <p> Supports filtering by event timestamp range (via `AnalyticsKpiDataQueryFilter`), ordering by event timestamp (via `AnalyticsKpiDataQueryOrderBy`), and pagination through offset and limit inherited from `AbstractQuery`.<br>@see AnalyticsKpiDataQueryFilter<br>@see AnalyticsKpiDataQueryOrderBy<br>@see IAnalyticsDataApiService")
 
 @JsonPropertyOrder({
 	AnalyticsKpiDataQuery.JSON_PROPERTY_$_TYPE,

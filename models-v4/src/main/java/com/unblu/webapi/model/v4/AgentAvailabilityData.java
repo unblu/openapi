@@ -169,18 +169,18 @@ public class AgentAvailabilityData {
 
 	/**
 	 * Per-priority capacity breakdown: the configured session limit and the free slots of each enabled priority, from the highest to the lowest. Populated while
-	 * the agent is available or busy, empty while they are away. &lt;p&gt; A conversation&#39;s priority follows from its queue sorting order
-	 * through&#x60;com.unblu.agentavailability.queueSortingOrderToPriorityMapping&#x60;, whose entries are the minimum sorting order of each priority. That mapping
-	 * is empty by default, in which case every conversation counts as priority 1 and a single capacity is reported. A priority&#39;s limit is the
-	 * account&#39;s&#x60;com.unblu.agentavailability.busyStateSessionLimitPriority1&#x60; to &#x60;...Priority4&#x60;: the number of ongoing conversations of that
-	 * priority at which the agent switches to BUSY. A limit of 0 disables that priority, and it is left out here. &lt;p&gt; Once a priority is full, Unblu no
-	 * longer dispatches conversations of that priority or of any lower one to the agent until a slot frees up, but a conversation of a higher priority still
-	 * reaches them. That is what lets an agent who is already handling their maximum of asynchronous conversations take on a live conversation, since the
-	 * asynchronous ones can wait a little longer.
+	 * the agent is available or busy, empty while they are away. &lt;p&gt; A conversation&#39;s priority follows from its queue sorting order through
+	 * &#x60;com.unblu.agentavailability.queueSortingOrderToPriorityMapping&#x60;, whose entries are the minimum sorting order of each priority. That mapping is
+	 * empty by default, in which case every conversation counts as priority 1 and a single capacity is reported. A priority&#39;s limit is the account&#39;s
+	 * &#x60;com.unblu.agentavailability.busyStateSessionLimitPriority1&#x60; to &#x60;...Priority4&#x60;: the number of ongoing conversations of that priority at
+	 * which the agent switches to BUSY. A limit of 0 disables that priority, and it is left out here. &lt;p&gt; Once a priority is full, Unblu no longer dispatches
+	 * conversations of that priority or of any lower one to the agent until a slot frees up, but a conversation of a higher priority still reaches them. That is
+	 * what lets an agent who is already handling their maximum of asynchronous conversations take on a live conversation, since the asynchronous ones can wait a
+	 * little longer.
 	 * 
 	 * @return capacities
 	 **/
-	@ApiModelProperty(value = "Per-priority capacity breakdown: the configured session limit and the free slots of each enabled priority, from the highest to the lowest. Populated while the agent is available or busy, empty while they are away. <p> A conversation's priority follows from its queue sorting order through`com.unblu.agentavailability.queueSortingOrderToPriorityMapping`, whose entries are the minimum sorting order of each priority. That mapping is empty by default, in which case every conversation counts as priority 1 and a single capacity is reported. A priority's limit is the account's`com.unblu.agentavailability.busyStateSessionLimitPriority1` to `...Priority4`: the number of ongoing conversations of that priority at which the agent switches to BUSY. A limit of 0 disables that priority, and it is left out here. <p> Once a priority is full, Unblu no longer dispatches conversations of that priority or of any lower one to the agent until a slot frees up, but a conversation of a higher priority still reaches them. That is what lets an agent who is already handling their maximum of asynchronous conversations take on a live conversation, since the asynchronous ones can wait a little longer.")
+	@ApiModelProperty(value = "Per-priority capacity breakdown: the configured session limit and the free slots of each enabled priority, from the highest to the lowest. Populated while the agent is available or busy, empty while they are away. <p> A conversation's priority follows from its queue sorting order through `com.unblu.agentavailability.queueSortingOrderToPriorityMapping`, whose entries are the minimum sorting order of each priority. That mapping is empty by default, in which case every conversation counts as priority 1 and a single capacity is reported. A priority's limit is the account's `com.unblu.agentavailability.busyStateSessionLimitPriority1` to `...Priority4`: the number of ongoing conversations of that priority at which the agent switches to BUSY. A limit of 0 disables that priority, and it is left out here. <p> Once a priority is full, Unblu no longer dispatches conversations of that priority or of any lower one to the agent until a slot frees up, but a conversation of a higher priority still reaches them. That is what lets an agent who is already handling their maximum of asynchronous conversations take on a live conversation, since the asynchronous ones can wait a little longer.")
 	public List<CapacityData> getCapacities() {
 		return capacities;
 	}

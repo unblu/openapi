@@ -17,9 +17,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Success response to an &#x60;ExternalMessengerCreateConversationRequest&#x60; request. &lt;p&gt; This response can be given to let the collaboration server
- * create a conversation based on the data which were send with the request. Only the&#x60;sourceId&#x60; has to be added and some optional fields.
+ * create a conversation based on the data which were send with the request. Only the &#x60;sourceId&#x60; has to be added and some optional fields.
  */
-@ApiModel(description = "Success response to an `ExternalMessengerCreateConversationRequest` request. <p> This response can be given to let the collaboration server create a conversation based on the data which were send with the request. Only the`sourceId` has to be added and some optional fields.")
+@ApiModel(description = "Success response to an `ExternalMessengerCreateConversationRequest` request. <p> This response can be given to let the collaboration server create a conversation based on the data which were send with the request. Only the `sourceId` has to be added and some optional fields.")
 
 @JsonPropertyOrder({
 	ExternalMessengerCreateConversationCreateResponse.JSON_PROPERTY_$_TYPE,

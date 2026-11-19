@@ -53,8 +53,8 @@ public class InvitationsApi {
 	 * and can accept the invitation in their place. &lt;ul&gt; &lt;li&gt;The endpoint may only be called for conversation requests directed at a specific agent.
 	 * &lt;li&gt;The secondary target must be different from the main target of the invitation. &lt;li&gt;Each secondary invitation target may only added to an
 	 * invitation to a particular conversation once. The same secondary invitation target can, however, be added to invitations to multiple conversations.
-	 * &lt;/ul&gt; If any of these prerequisites are violated, the call to the endpoint returns an error response code. To cancel a secondary invitation,
-	 * see&#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * &lt;/ul&gt; If any of these prerequisites are violated, the call to the endpoint returns an error response code. To cancel a secondary invitation, see
+	 * &#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
 	 * 
 	 * @param invitationId The invitation that the secondary target should be added to (required)
 	 * @param invitationsAddSecondaryInvitationTargetBody (required)
@@ -70,8 +70,8 @@ public class InvitationsApi {
 	 * and can accept the invitation in their place. &lt;ul&gt; &lt;li&gt;The endpoint may only be called for conversation requests directed at a specific agent.
 	 * &lt;li&gt;The secondary target must be different from the main target of the invitation. &lt;li&gt;Each secondary invitation target may only added to an
 	 * invitation to a particular conversation once. The same secondary invitation target can, however, be added to invitations to multiple conversations.
-	 * &lt;/ul&gt; If any of these prerequisites are violated, the call to the endpoint returns an error response code. To cancel a secondary invitation,
-	 * see&#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
+	 * &lt;/ul&gt; If any of these prerequisites are violated, the call to the endpoint returns an error response code. To cancel a secondary invitation, see
+	 * &#x60;cancelSecondaryInvitationTarget&#x60;&lt;br&gt;
 	 * 
 	 * @param invitationId The invitation that the secondary target should be added to (required)
 	 * @param invitationsAddSecondaryInvitationTargetBody (required)

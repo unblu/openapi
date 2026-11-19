@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	WhatsAppTemplateMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	WhatsAppTemplateMessageData.JSON_PROPERTY_BATCH_INFO,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_TEMPLATE_ID,
 	WhatsAppTemplateMessageData.JSON_PROPERTY_COMPONENTS,
 })
@@ -178,6 +179,10 @@ public class WhatsAppTemplateMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_TEMPLATE_ID = "templateId";
 	@JsonProperty(JSON_PROPERTY_TEMPLATE_ID)
@@ -656,6 +661,25 @@ public class WhatsAppTemplateMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public WhatsAppTemplateMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public WhatsAppTemplateMessageData templateId(String templateId) {
 		this.templateId = templateId;
 		return this;
@@ -735,13 +759,14 @@ public class WhatsAppTemplateMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, whatsAppTemplateMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, whatsAppTemplateMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, whatsAppTemplateMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, whatsAppTemplateMessageData.batchInfo) &&
 				Objects.equals(this.templateId, whatsAppTemplateMessageData.templateId) &&
 				Objects.equals(this.components, whatsAppTemplateMessageData.components);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, templateId, components);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, templateId, components);
 	}
 
 	@Override
@@ -772,6 +797,7 @@ public class WhatsAppTemplateMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
 		sb.append("    components: ").append(toIndentedString(components)).append("\n");
 		sb.append("}");

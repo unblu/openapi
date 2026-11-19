@@ -11,7 +11,10 @@ import com.unblu.webapi.jersey.v4.invoker.ApiResponse;
 import com.unblu.webapi.jersey.v4.invoker.Configuration;
 import com.unblu.webapi.jersey.v4.invoker.Pair;
 import com.unblu.webapi.model.v4.BotDialogEditMessage;
+import com.unblu.webapi.model.v4.BotDialogFinishStreamingMessage;
 import com.unblu.webapi.model.v4.BotDialogPostMessage;
+import com.unblu.webapi.model.v4.BotDialogStartStreamingMessage;
+import com.unblu.webapi.model.v4.BotDialogUpdateStreamingMessage;
 import com.unblu.webapi.model.v4.BotEditMessage;
 import com.unblu.webapi.model.v4.BotPostMessage;
 import com.unblu.webapi.model.v4.BotsCancelDialogBotThinkingIndicatorBody;
@@ -20,6 +23,7 @@ import com.unblu.webapi.model.v4.BotsCancelPendingDialogQuestionsBody;
 import com.unblu.webapi.model.v4.BotsCancelPendingQuestionBody;
 import com.unblu.webapi.model.v4.BotsDialogMessageDeliveredBody;
 import com.unblu.webapi.model.v4.BotsDialogMessageReadBody;
+import com.unblu.webapi.model.v4.BotsEndDialogTurnBody;
 import com.unblu.webapi.model.v4.BotsFinishDialogBody;
 import com.unblu.webapi.model.v4.BotsRestrictDialogCounterpartBody;
 import com.unblu.webapi.model.v4.BotsStartDialogBotTypingIndicatorBody;
@@ -28,8 +32,10 @@ import com.unblu.webapi.model.v4.DialogBotQuery;
 import com.unblu.webapi.model.v4.DialogBotResult;
 import com.unblu.webapi.model.v4.EditMessageResult;
 import com.unblu.webapi.model.v4.ExpandFields;
+import com.unblu.webapi.model.v4.FinishStreamingMessageResult;
 import com.unblu.webapi.model.v4.PingResponse;
 import com.unblu.webapi.model.v4.SendMessageResult;
+import com.unblu.webapi.model.v4.StartStreamingMessageResult;
 import com.unblu.webapi.model.v4.ThinkingIndicatorParams;
 
 import jakarta.ws.rs.core.GenericType;
@@ -578,6 +584,60 @@ public class BotsApi {
 	}
 
 	/**
+	 * endDialogTurn Ends the bot&#39;s turn without sending a message, which releases the input of the person in the dialog.&lt;br&gt; Use this endpoint when the
+	 * answer ends without a further message, for example after a message sent with &#x60;keepTurnOpen&#x60;. The thinking indicator is hidden, and an open
+	 * streaming message is finished with the reason &#x60;STOPPED_BY_BOT&#x60; and the content streamed so far. If the bot&#39;s turn isn&#39;t open, the call only
+	 * keeps the thinking indicator from being shown automatically.&lt;br&gt;
+	 * 
+	 * @param botsEndDialogTurnBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsEndDialogTurn(BotsEndDialogTurnBody botsEndDialogTurnBody) throws ApiException {
+
+		botsEndDialogTurnWithHttpInfo(botsEndDialogTurnBody);
+	}
+
+	/**
+	 * endDialogTurn Ends the bot&#39;s turn without sending a message, which releases the input of the person in the dialog.&lt;br&gt; Use this endpoint when the
+	 * answer ends without a further message, for example after a message sent with &#x60;keepTurnOpen&#x60;. The thinking indicator is hidden, and an open
+	 * streaming message is finished with the reason &#x60;STOPPED_BY_BOT&#x60; and the content streamed so far. If the bot&#39;s turn isn&#39;t open, the call only
+	 * keeps the thinking indicator from being shown automatically.&lt;br&gt;
+	 * 
+	 * @param botsEndDialogTurnBody (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsEndDialogTurnWithHttpInfo(BotsEndDialogTurnBody botsEndDialogTurnBody) throws ApiException {
+		Object localVarPostBody = botsEndDialogTurnBody;
+
+		// verify the required parameter 'botsEndDialogTurnBody' is set
+		if (botsEndDialogTurnBody == null) {
+			throw new ApiException(400, "Missing the required parameter 'botsEndDialogTurnBody' when calling botsEndDialogTurn");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/endDialogTurn";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
 	 * finishDialog Ends the dialog. Depending on the reason given and whether the dialog takes place during onboarding, reboarding, or offboarding, this will have
 	 * specific effects. See the list below. &lt;p&gt; &lt;b&gt;Reason: &#x60;EBotDialogFinishReason.HAND_OFF&#x60;:&lt;/b&gt;&lt;br&gt; &lt;ul&gt;
 	 * &lt;li&gt;&lt;b&gt;Onboarding:&lt;/b&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Next Bot:&lt;/b&gt; a further bot takes over the onboarding.
@@ -663,6 +723,63 @@ public class BotsApi {
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
+	 * finishDialogStreamingMessage Finishes an open streaming message and stores it as a message of the conversation, with the reason the stream ended. &lt;p&gt;
+	 * The final content, if given, replaces the content streamed so far. A stream can&#39;t be finished without content: if neither the final content nor the
+	 * content streamed so far has any text, an error is returned and the stream stays open. For a stream that is already finished, the HTTP status code 409 is
+	 * returned.&lt;br&gt;
+	 * 
+	 * @param botDialogFinishStreamingMessage The streaming message, the reason it ends and optionally its final content (required)
+	 * @return FinishStreamingMessageResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public FinishStreamingMessageResult botsFinishDialogStreamingMessage(BotDialogFinishStreamingMessage botDialogFinishStreamingMessage) throws ApiException {
+		return botsFinishDialogStreamingMessageWithHttpInfo(botDialogFinishStreamingMessage).getData();
+	}
+
+	/**
+	 * finishDialogStreamingMessage Finishes an open streaming message and stores it as a message of the conversation, with the reason the stream ended. &lt;p&gt;
+	 * The final content, if given, replaces the content streamed so far. A stream can&#39;t be finished without content: if neither the final content nor the
+	 * content streamed so far has any text, an error is returned and the stream stays open. For a stream that is already finished, the HTTP status code 409 is
+	 * returned.&lt;br&gt;
+	 * 
+	 * @param botDialogFinishStreamingMessage The streaming message, the reason it ends and optionally its final content (required)
+	 * @return ApiResponse&lt;FinishStreamingMessageResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<FinishStreamingMessageResult> botsFinishDialogStreamingMessageWithHttpInfo(BotDialogFinishStreamingMessage botDialogFinishStreamingMessage) throws ApiException {
+		Object localVarPostBody = botDialogFinishStreamingMessage;
+
+		// verify the required parameter 'botDialogFinishStreamingMessage' is set
+		if (botDialogFinishStreamingMessage == null) {
+			throw new ApiException(400, "Missing the required parameter 'botDialogFinishStreamingMessage' when calling botsFinishDialogStreamingMessage");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/finishDialogStreamingMessage";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<FinishStreamingMessageResult> localVarReturnType = new GenericType<FinishStreamingMessageResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}
 
 	/**
@@ -875,7 +992,7 @@ public class BotsApi {
 
 	/**
 	 * sendDialogMessage Sends a message as a bot into an ongoing dialog. &lt;p&gt; It can only be used after the bot received the &#x60;BotDialogOpenEvent&#x60;
-	 * webhook for this dialog.&lt;br&gt;
+	 * webhook for this dialog. While a streaming message is open in the dialog, the HTTP status code 409 is returned.&lt;br&gt;
 	 * 
 	 * @param botDialogPostMessage The message to send (required)
 	 * @return SendMessageResult
@@ -887,7 +1004,7 @@ public class BotsApi {
 
 	/**
 	 * sendDialogMessage Sends a message as a bot into an ongoing dialog. &lt;p&gt; It can only be used after the bot received the &#x60;BotDialogOpenEvent&#x60;
-	 * webhook for this dialog.&lt;br&gt;
+	 * webhook for this dialog. While a streaming message is open in the dialog, the HTTP status code 409 is returned.&lt;br&gt;
 	 * 
 	 * @param botDialogPostMessage The message to send (required)
 	 * @return ApiResponse&lt;SendMessageResult&gt;
@@ -1144,6 +1261,71 @@ public class BotsApi {
 	}
 
 	/**
+	 * startDialogStreamingMessage Starts streaming a message as a bot into an ongoing dialog. The message is shown in the conversation as it grows, and is stored
+	 * when the stream is finished with &#x60;finishDialogStreamingMessage&#x60;. &lt;p&gt; It can only be used after the bot received the
+	 * &#x60;BotDialogOpenEvent&#x60; webhook for this dialog. Only one streaming message can be open per dialog: while one is open, starting another one or sending
+	 * a message with &#x60;sendDialogMessage&#x60; returns the HTTP status code 409, with the ID of the open message in the error. &lt;p&gt; Unblu finishes the
+	 * stream if the counterpart stops it (&#x60;STOPPED_BY_USER&#x60;), if the bot sends no update within the time set by
+	 * &#x60;com.unblu.conversation.bot.streamingMessageTimeout&#x60; (&#x60;TIMED_OUT&#x60;), if the bot ends its turn with &#x60;endDialogTurn&#x60;
+	 * (&#x60;STOPPED_BY_BOT&#x60;), or if the dialog closes or its bot thread ends (&#x60;STOPPED_BY_SYSTEM&#x60;). The message keeps the content streamed so
+	 * far.&lt;br&gt;
+	 * 
+	 * @param botDialogStartStreamingMessage The dialog and the first content of the message (required)
+	 * @return StartStreamingMessageResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public StartStreamingMessageResult botsStartDialogStreamingMessage(BotDialogStartStreamingMessage botDialogStartStreamingMessage) throws ApiException {
+		return botsStartDialogStreamingMessageWithHttpInfo(botDialogStartStreamingMessage).getData();
+	}
+
+	/**
+	 * startDialogStreamingMessage Starts streaming a message as a bot into an ongoing dialog. The message is shown in the conversation as it grows, and is stored
+	 * when the stream is finished with &#x60;finishDialogStreamingMessage&#x60;. &lt;p&gt; It can only be used after the bot received the
+	 * &#x60;BotDialogOpenEvent&#x60; webhook for this dialog. Only one streaming message can be open per dialog: while one is open, starting another one or sending
+	 * a message with &#x60;sendDialogMessage&#x60; returns the HTTP status code 409, with the ID of the open message in the error. &lt;p&gt; Unblu finishes the
+	 * stream if the counterpart stops it (&#x60;STOPPED_BY_USER&#x60;), if the bot sends no update within the time set by
+	 * &#x60;com.unblu.conversation.bot.streamingMessageTimeout&#x60; (&#x60;TIMED_OUT&#x60;), if the bot ends its turn with &#x60;endDialogTurn&#x60;
+	 * (&#x60;STOPPED_BY_BOT&#x60;), or if the dialog closes or its bot thread ends (&#x60;STOPPED_BY_SYSTEM&#x60;). The message keeps the content streamed so
+	 * far.&lt;br&gt;
+	 * 
+	 * @param botDialogStartStreamingMessage The dialog and the first content of the message (required)
+	 * @return ApiResponse&lt;StartStreamingMessageResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<StartStreamingMessageResult> botsStartDialogStreamingMessageWithHttpInfo(BotDialogStartStreamingMessage botDialogStartStreamingMessage) throws ApiException {
+		Object localVarPostBody = botDialogStartStreamingMessage;
+
+		// verify the required parameter 'botDialogStartStreamingMessage' is set
+		if (botDialogStartStreamingMessage == null) {
+			throw new ApiException(400, "Missing the required parameter 'botDialogStartStreamingMessage' when calling botsStartDialogStreamingMessage");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/startDialogStreamingMessage";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<StartStreamingMessageResult> localVarReturnType = new GenericType<StartStreamingMessageResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
 	 * update Updates an existing dialog bot. You can only set &#x60;active&#x60; to &#x60;true&#x60; on an Aria bot if its agentic flow has a published version or
 	 * if the &#x60;agenticFlowData&#x60; you provide contains a published version.&lt;br&gt;
 	 * 
@@ -1207,7 +1389,7 @@ public class BotsApi {
 	 * animation.&lt;br&gt; Each call appends the text chunk from &#x60;getThinkingText&#x60; to the accumulated text and resets the auto-hide timer. The text
 	 * chunks are not trimmed: they&#39;re appended exactly as provided. If thinkingData includes a custom animation, that&#39;s what&#39;s used, otherwise the last
 	 * thinking animation used is applied. &lt;p&gt; If the thinking indicator is not currently displayed (e.g., it timed out or was cancelled), this call promotes
-	 * to &#x60;startDialogBotThinkingIndicator&#x60;with the provided parameters, treating them as a fresh start.&lt;br&gt;
+	 * to &#x60;startDialogBotThinkingIndicator&#x60; with the provided parameters, treating them as a fresh start.&lt;br&gt;
 	 * 
 	 * @param thinkingIndicatorParams The thinking indicator parameters containing the text chunk to append and optionally a new custom animation (required)
 	 * @param dialogToken The token that belongs to the bot&#39;s dialog (optional)
@@ -1223,7 +1405,7 @@ public class BotsApi {
 	 * animation.&lt;br&gt; Each call appends the text chunk from &#x60;getThinkingText&#x60; to the accumulated text and resets the auto-hide timer. The text
 	 * chunks are not trimmed: they&#39;re appended exactly as provided. If thinkingData includes a custom animation, that&#39;s what&#39;s used, otherwise the last
 	 * thinking animation used is applied. &lt;p&gt; If the thinking indicator is not currently displayed (e.g., it timed out or was cancelled), this call promotes
-	 * to &#x60;startDialogBotThinkingIndicator&#x60;with the provided parameters, treating them as a fresh start.&lt;br&gt;
+	 * to &#x60;startDialogBotThinkingIndicator&#x60; with the provided parameters, treating them as a fresh start.&lt;br&gt;
 	 * 
 	 * @param thinkingIndicatorParams The thinking indicator parameters containing the text chunk to append and optionally a new custom animation (required)
 	 * @param dialogToken The token that belongs to the bot&#39;s dialog (optional)
@@ -1246,6 +1428,56 @@ public class BotsApi {
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		localVarQueryParams.addAll(apiClient.parameterToPairs("", "dialogToken", dialogToken));
+
+		final String[] localVarAccepts = {
+
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, null);
+	}
+
+	/**
+	 * updateDialogStreamingMessage Replaces the content of an open streaming message with the full content streamed so far. &lt;p&gt; An update whose sequence is
+	 * lower than or equal to one already received for the stream is ignored. For a stream that is already finished, the HTTP status code 409 is returned.&lt;br&gt;
+	 * 
+	 * @param botDialogUpdateStreamingMessage The streaming message and its content so far (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public void botsUpdateDialogStreamingMessage(BotDialogUpdateStreamingMessage botDialogUpdateStreamingMessage) throws ApiException {
+
+		botsUpdateDialogStreamingMessageWithHttpInfo(botDialogUpdateStreamingMessage);
+	}
+
+	/**
+	 * updateDialogStreamingMessage Replaces the content of an open streaming message with the full content streamed so far. &lt;p&gt; An update whose sequence is
+	 * lower than or equal to one already received for the stream is ignored. For a stream that is already finished, the HTTP status code 409 is returned.&lt;br&gt;
+	 * 
+	 * @param botDialogUpdateStreamingMessage The streaming message and its content so far (required)
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<Void> botsUpdateDialogStreamingMessageWithHttpInfo(BotDialogUpdateStreamingMessage botDialogUpdateStreamingMessage) throws ApiException {
+		Object localVarPostBody = botDialogUpdateStreamingMessage;
+
+		// verify the required parameter 'botDialogUpdateStreamingMessage' is set
+		if (botDialogUpdateStreamingMessage == null) {
+			throw new ApiException(400, "Missing the required parameter 'botDialogUpdateStreamingMessage' when calling botsUpdateDialogStreamingMessage");
+		}
+
+		// create path and map variables
+		String localVarPath = "/bots/updateDialogStreamingMessage";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
 		final String[] localVarAccepts = {
 

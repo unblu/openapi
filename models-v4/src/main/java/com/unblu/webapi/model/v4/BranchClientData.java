@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchClientData.JSON_PROPERTY_PUBLIC_KEY,
 	BranchClientData.JSON_PROPERTY_MAIN_CAMERA_MEDIA_DEVICE_LABEL,
 	BranchClientData.JSON_PROPERTY_MICROPHONE_MEDIA_DEVICE_LABEL,
+	BranchClientData.JSON_PROPERTY_MAIN_MEDIA_CONFIGURED_ON_DEVICE,
 	BranchClientData.JSON_PROPERTY_TYPE,
 	BranchClientData.JSON_PROPERTY_ICON_ID,
 	BranchClientData.JSON_PROPERTY_X,
@@ -46,6 +47,10 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchClientData.JSON_PROPERTY_BRANCH_CLIENT_DEVICES,
 	BranchClientData.JSON_PROPERTY_BRANCH_CLIENT_AUXILIARY_CAMERAS,
 	BranchClientData.JSON_PROPERTY_BRANCH_CLIENT_LINKS,
+	BranchClientData.JSON_PROPERTY_LANDING_PAGE_BASE_URL,
+	BranchClientData.JSON_PROPERTY_API_KEY_ID,
+	BranchClientData.JSON_PROPERTY_DEFAULT_LANGUAGE,
+	BranchClientData.JSON_PROPERTY_LANDING_PAGE_PARAMETERS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BranchClientData {
@@ -138,6 +143,10 @@ public class BranchClientData {
 	@JsonProperty(JSON_PROPERTY_MICROPHONE_MEDIA_DEVICE_LABEL)
 	private String microphoneMediaDeviceLabel;
 
+	public static final String JSON_PROPERTY_MAIN_MEDIA_CONFIGURED_ON_DEVICE = "mainMediaConfiguredOnDevice";
+	@JsonProperty(JSON_PROPERTY_MAIN_MEDIA_CONFIGURED_ON_DEVICE)
+	private Boolean mainMediaConfiguredOnDevice;
+
 	public static final String JSON_PROPERTY_TYPE = "type";
 	@JsonProperty(JSON_PROPERTY_TYPE)
 	private EBranchClientType type;
@@ -173,6 +182,22 @@ public class BranchClientData {
 	public static final String JSON_PROPERTY_BRANCH_CLIENT_LINKS = "branchClientLinks";
 	@JsonProperty(JSON_PROPERTY_BRANCH_CLIENT_LINKS)
 	private List<BranchClientLinkData> branchClientLinks = null;
+
+	public static final String JSON_PROPERTY_LANDING_PAGE_BASE_URL = "landingPageBaseUrl";
+	@JsonProperty(JSON_PROPERTY_LANDING_PAGE_BASE_URL)
+	private String landingPageBaseUrl;
+
+	public static final String JSON_PROPERTY_API_KEY_ID = "apiKeyId";
+	@JsonProperty(JSON_PROPERTY_API_KEY_ID)
+	private String apiKeyId;
+
+	public static final String JSON_PROPERTY_DEFAULT_LANGUAGE = "defaultLanguage";
+	@JsonProperty(JSON_PROPERTY_DEFAULT_LANGUAGE)
+	private String defaultLanguage;
+
+	public static final String JSON_PROPERTY_LANDING_PAGE_PARAMETERS = "landingPageParameters";
+	@JsonProperty(JSON_PROPERTY_LANDING_PAGE_PARAMETERS)
+	private List<BranchClientLandingPageParameter> landingPageParameters = null;
 
 	public BranchClientData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -452,6 +477,26 @@ public class BranchClientData {
 		this.microphoneMediaDeviceLabel = microphoneMediaDeviceLabel;
 	}
 
+	public BranchClientData mainMediaConfiguredOnDevice(Boolean mainMediaConfiguredOnDevice) {
+		this.mainMediaConfiguredOnDevice = mainMediaConfiguredOnDevice;
+		return this;
+	}
+
+	/**
+	 * Whether the media device labels of the main camera and the microphone were last set on the device, either on the Branch client setup page or in the device
+	 * setup that the landing page opens with the Unblu Branch JS API. Changing either label in any other way resets it. Ignored in update operations.
+	 * 
+	 * @return mainMediaConfiguredOnDevice
+	 **/
+	@ApiModelProperty(value = "Whether the media device labels of the main camera and the microphone were last set on the device, either on the Branch client setup page or in the device setup that the landing page opens with the Unblu Branch JS API. Changing either label in any other way resets it. Ignored in update operations.")
+	public Boolean isMainMediaConfiguredOnDevice() {
+		return mainMediaConfiguredOnDevice;
+	}
+
+	public void setMainMediaConfiguredOnDevice(Boolean mainMediaConfiguredOnDevice) {
+		this.mainMediaConfiguredOnDevice = mainMediaConfiguredOnDevice;
+	}
+
 	public BranchClientData type(EBranchClientType type) {
 		this.type = type;
 		return this;
@@ -647,6 +692,95 @@ public class BranchClientData {
 		this.branchClientLinks = branchClientLinks;
 	}
 
+	public BranchClientData landingPageBaseUrl(String landingPageBaseUrl) {
+		this.landingPageBaseUrl = landingPageBaseUrl;
+		return this;
+	}
+
+	/**
+	 * Base URL of the landing page the Branch client runs on, for example https://your-company.com/branch/client/index.html. If omitted, the value of the
+	 * configuration property &#x60;com.unblu.branch.client.setup.defaultBranchClientBaseUrl&#x60; is used. Must be an absolute HTTP or HTTPS URL without a
+	 * fragment. Maximum of 2000 characters.
+	 * 
+	 * @return landingPageBaseUrl
+	 **/
+	@ApiModelProperty(value = "Base URL of the landing page the Branch client runs on, for example https://your-company.com/branch/client/index.html. If omitted, the value of the configuration property `com.unblu.branch.client.setup.defaultBranchClientBaseUrl` is used. Must be an absolute HTTP or HTTPS URL without a fragment. Maximum of 2000 characters.")
+	public String getLandingPageBaseUrl() {
+		return landingPageBaseUrl;
+	}
+
+	public void setLandingPageBaseUrl(String landingPageBaseUrl) {
+		this.landingPageBaseUrl = landingPageBaseUrl;
+	}
+
+	public BranchClientData apiKeyId(String apiKeyId) {
+		this.apiKeyId = apiKeyId;
+		return this;
+	}
+
+	/**
+	 * ID of the API key the landing page URL of the Branch client carries. If omitted, the default API key of the account is used. An ID that doesn&#39;t exist in
+	 * the account is kept, but no landing page URL can be created until it is replaced with an existing one.
+	 * 
+	 * @return apiKeyId
+	 **/
+	@ApiModelProperty(value = "ID of the API key the landing page URL of the Branch client carries. If omitted, the default API key of the account is used. An ID that doesn't exist in the account is kept, but no landing page URL can be created until it is replaced with an existing one.")
+	public String getApiKeyId() {
+		return apiKeyId;
+	}
+
+	public void setApiKeyId(String apiKeyId) {
+		this.apiKeyId = apiKeyId;
+	}
+
+	public BranchClientData defaultLanguage(String defaultLanguage) {
+		this.defaultLanguage = defaultLanguage;
+		return this;
+	}
+
+	/**
+	 * Language the landing page URL of the Branch client selects. If omitted, no language is added. Maximum of 20 characters. The language is added to the URL as
+	 * the parameter that the configuration property &#x60;com.unblu.branch.client.setup.languageUrlParameterName&#x60; names.
+	 * 
+	 * @return defaultLanguage
+	 **/
+	@ApiModelProperty(value = "Language the landing page URL of the Branch client selects. If omitted, no language is added. Maximum of 20 characters. The language is added to the URL as the parameter that the configuration property `com.unblu.branch.client.setup.languageUrlParameterName` names.")
+	public String getDefaultLanguage() {
+		return defaultLanguage;
+	}
+
+	public void setDefaultLanguage(String defaultLanguage) {
+		this.defaultLanguage = defaultLanguage;
+	}
+
+	public BranchClientData landingPageParameters(List<BranchClientLandingPageParameter> landingPageParameters) {
+		this.landingPageParameters = landingPageParameters;
+		return this;
+	}
+
+	public BranchClientData addLandingPageParametersItem(BranchClientLandingPageParameter landingPageParametersItem) {
+		if (this.landingPageParameters == null) {
+			this.landingPageParameters = new ArrayList<>();
+		}
+		this.landingPageParameters.add(landingPageParametersItem);
+		return this;
+	}
+
+	/**
+	 * Additional parameters of the landing page URL of the Branch client, in the order they are added to its query or its fragment. The names must be unique and
+	 * must not be &#x60;api-key&#x60;, &#x60;branch-client-token&#x60;, or the language parameter name.
+	 * 
+	 * @return landingPageParameters
+	 **/
+	@ApiModelProperty(value = "Additional parameters of the landing page URL of the Branch client, in the order they are added to its query or its fragment. The names must be unique and must not be `api-key`, `branch-client-token`, or the language parameter name.")
+	public List<BranchClientLandingPageParameter> getLandingPageParameters() {
+		return landingPageParameters;
+	}
+
+	public void setLandingPageParameters(List<BranchClientLandingPageParameter> landingPageParameters) {
+		this.landingPageParameters = landingPageParameters;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -670,6 +804,7 @@ public class BranchClientData {
 				Objects.equals(this.publicKey, branchClientData.publicKey) &&
 				Objects.equals(this.mainCameraMediaDeviceLabel, branchClientData.mainCameraMediaDeviceLabel) &&
 				Objects.equals(this.microphoneMediaDeviceLabel, branchClientData.microphoneMediaDeviceLabel) &&
+				Objects.equals(this.mainMediaConfiguredOnDevice, branchClientData.mainMediaConfiguredOnDevice) &&
 				Objects.equals(this.type, branchClientData.type) &&
 				Objects.equals(this.iconId, branchClientData.iconId) &&
 				Objects.equals(this.x, branchClientData.x) &&
@@ -678,12 +813,16 @@ public class BranchClientData {
 				Objects.equals(this.rotation, branchClientData.rotation) &&
 				Objects.equals(this.branchClientDevices, branchClientData.branchClientDevices) &&
 				Objects.equals(this.branchClientAuxiliaryCameras, branchClientData.branchClientAuxiliaryCameras) &&
-				Objects.equals(this.branchClientLinks, branchClientData.branchClientLinks);
+				Objects.equals(this.branchClientLinks, branchClientData.branchClientLinks) &&
+				Objects.equals(this.landingPageBaseUrl, branchClientData.landingPageBaseUrl) &&
+				Objects.equals(this.apiKeyId, branchClientData.apiKeyId) &&
+				Objects.equals(this.defaultLanguage, branchClientData.defaultLanguage) &&
+				Objects.equals(this.landingPageParameters, branchClientData.landingPageParameters);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, accountId, creationTimestamp, modificationTimestamp, version, name, description, translations, branchId, branchClientKey, publicKey, mainCameraMediaDeviceLabel, microphoneMediaDeviceLabel, type, iconId, x, y, size, rotation, branchClientDevices, branchClientAuxiliaryCameras, branchClientLinks);
+		return Objects.hash($type, id, accountId, creationTimestamp, modificationTimestamp, version, name, description, translations, branchId, branchClientKey, publicKey, mainCameraMediaDeviceLabel, microphoneMediaDeviceLabel, mainMediaConfiguredOnDevice, type, iconId, x, y, size, rotation, branchClientDevices, branchClientAuxiliaryCameras, branchClientLinks, landingPageBaseUrl, apiKeyId, defaultLanguage, landingPageParameters);
 	}
 
 	@Override
@@ -704,6 +843,7 @@ public class BranchClientData {
 		sb.append("    publicKey: ").append(toIndentedString(publicKey)).append("\n");
 		sb.append("    mainCameraMediaDeviceLabel: ").append(toIndentedString(mainCameraMediaDeviceLabel)).append("\n");
 		sb.append("    microphoneMediaDeviceLabel: ").append(toIndentedString(microphoneMediaDeviceLabel)).append("\n");
+		sb.append("    mainMediaConfiguredOnDevice: ").append(toIndentedString(mainMediaConfiguredOnDevice)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    iconId: ").append(toIndentedString(iconId)).append("\n");
 		sb.append("    x: ").append(toIndentedString(x)).append("\n");
@@ -713,6 +853,10 @@ public class BranchClientData {
 		sb.append("    branchClientDevices: ").append(toIndentedString(branchClientDevices)).append("\n");
 		sb.append("    branchClientAuxiliaryCameras: ").append(toIndentedString(branchClientAuxiliaryCameras)).append("\n");
 		sb.append("    branchClientLinks: ").append(toIndentedString(branchClientLinks)).append("\n");
+		sb.append("    landingPageBaseUrl: ").append(toIndentedString(landingPageBaseUrl)).append("\n");
+		sb.append("    apiKeyId: ").append(toIndentedString(apiKeyId)).append("\n");
+		sb.append("    defaultLanguage: ").append(toIndentedString(defaultLanguage)).append("\n");
+		sb.append("    landingPageParameters: ").append(toIndentedString(landingPageParameters)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	FileMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	FileMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	FileMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	FileMessageData.JSON_PROPERTY_BATCH_INFO,
 	FileMessageData.JSON_PROPERTY_FILE_NAME,
 	FileMessageData.JSON_PROPERTY_CAPTION,
 	FileMessageData.JSON_PROPERTY_CAPTION_TYPE,
@@ -188,6 +189,10 @@ public class FileMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_FILE_NAME = "fileName";
 	@JsonProperty(JSON_PROPERTY_FILE_NAME)
@@ -706,6 +711,25 @@ public class FileMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public FileMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public FileMessageData fileName(String fileName) {
 		this.fileName = fileName;
 		return this;
@@ -994,6 +1018,7 @@ public class FileMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, fileMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, fileMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, fileMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, fileMessageData.batchInfo) &&
 				Objects.equals(this.fileName, fileMessageData.fileName) &&
 				Objects.equals(this.caption, fileMessageData.caption) &&
 				Objects.equals(this.captionType, fileMessageData.captionType) &&
@@ -1010,7 +1035,7 @@ public class FileMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, fileName, caption, captionType, mimeType, source, fileStoreId, fileStatus, totalSize, uploadedSize, downloadLinks, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -1041,6 +1066,7 @@ public class FileMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
 		sb.append("    caption: ").append(toIndentedString(caption)).append("\n");
 		sb.append("    captionType: ").append(toIndentedString(captionType)).append("\n");

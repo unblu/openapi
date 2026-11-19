@@ -14,10 +14,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * The Data entity for the API Secret. The secret in clear text can only be found
- * in&#x60;com.unblu.core.shared.storage.authentication.model.ApiSecretCreateResult&#x60;
+ * The Data entity for the API Secret. The secret in clear text can only be found in
+ * &#x60;com.unblu.core.shared.storage.authentication.model.ApiSecretCreateResult&#x60;
  */
-@ApiModel(description = "The Data entity for the API Secret. The secret in clear text can only be found in`com.unblu.core.shared.storage.authentication.model.ApiSecretCreateResult`")
+@ApiModel(description = "The Data entity for the API Secret. The secret in clear text can only be found in `com.unblu.core.shared.storage.authentication.model.ApiSecretCreateResult`")
 
 @JsonPropertyOrder({
 	ApiSecretData.JSON_PROPERTY_$_TYPE,

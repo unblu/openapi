@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BotDialogPostMessage.JSON_PROPERTY_$_TYPE,
 	BotDialogPostMessage.JSON_PROPERTY_DIALOG_TOKEN,
 	BotDialogPostMessage.JSON_PROPERTY_MESSAGE_DATA,
+	BotDialogPostMessage.JSON_PROPERTY_KEEP_TURN_OPEN,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class BotDialogPostMessage {
@@ -69,6 +70,10 @@ public class BotDialogPostMessage {
 	public static final String JSON_PROPERTY_MESSAGE_DATA = "messageData";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_DATA)
 	private PostMessageData messageData = null;
+
+	public static final String JSON_PROPERTY_KEEP_TURN_OPEN = "keepTurnOpen";
+	@JsonProperty(JSON_PROPERTY_KEEP_TURN_OPEN)
+	private Boolean keepTurnOpen;
 
 	public BotDialogPostMessage $type(TypeEnum $type) {
 		this.$type = $type;
@@ -127,6 +132,28 @@ public class BotDialogPostMessage {
 		this.messageData = messageData;
 	}
 
+	public BotDialogPostMessage keepTurnOpen(Boolean keepTurnOpen) {
+		this.keepTurnOpen = keepTurnOpen;
+		return this;
+	}
+
+	/**
+	 * If true, the bot keeps its turn open after this message. The input of the person in the dialog keeps the input mode of the open turn, or the
+	 * &#x60;turnInputMode&#x60; of the dialog bot if this message opens the turn. The turn ends with the next message without this flag, a call to
+	 * &#x60;endDialogTurn&#x60;, or once the time set by &#x60;com.unblu.conversation.bot.dialogTurnTimeout&#x60; passes without a bot action. Once the person has
+	 * stopped the bot, the flag is ignored until the person writes again. If omitted, the default is false.
+	 * 
+	 * @return keepTurnOpen
+	 **/
+	@ApiModelProperty(value = "If true, the bot keeps its turn open after this message. The input of the person in the dialog keeps the input mode of the open turn, or the `turnInputMode` of the dialog bot if this message opens the turn. The turn ends with the next message without this flag, a call to `endDialogTurn`, or once the time set by `com.unblu.conversation.bot.dialogTurnTimeout` passes without a bot action. Once the person has stopped the bot, the flag is ignored until the person writes again. If omitted, the default is false.")
+	public Boolean isKeepTurnOpen() {
+		return keepTurnOpen;
+	}
+
+	public void setKeepTurnOpen(Boolean keepTurnOpen) {
+		this.keepTurnOpen = keepTurnOpen;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -138,12 +165,13 @@ public class BotDialogPostMessage {
 		BotDialogPostMessage botDialogPostMessage = (BotDialogPostMessage) o;
 		return Objects.equals(this.$type, botDialogPostMessage.$type) &&
 				Objects.equals(this.dialogToken, botDialogPostMessage.dialogToken) &&
-				Objects.equals(this.messageData, botDialogPostMessage.messageData);
+				Objects.equals(this.messageData, botDialogPostMessage.messageData) &&
+				Objects.equals(this.keepTurnOpen, botDialogPostMessage.keepTurnOpen);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, dialogToken, messageData);
+		return Objects.hash($type, dialogToken, messageData, keepTurnOpen);
 	}
 
 	@Override
@@ -153,6 +181,7 @@ public class BotDialogPostMessage {
 		sb.append("    $type: ").append(toIndentedString($type)).append("\n");
 		sb.append("    dialogToken: ").append(toIndentedString(dialogToken)).append("\n");
 		sb.append("    messageData: ").append(toIndentedString(messageData)).append("\n");
+		sb.append("    keepTurnOpen: ").append(toIndentedString(keepTurnOpen)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

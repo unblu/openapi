@@ -41,6 +41,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationHistoryMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
 	ConversationHistoryMessageData.JSON_PROPERTY_DELETED_FOR_ALL,
 	ConversationHistoryMessageData.JSON_PROPERTY_DELETED_FOR_SELF,
+	ConversationHistoryMessageData.JSON_PROPERTY_BATCH_INFO,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class ConversationHistoryMessageData {
@@ -156,6 +157,10 @@ public class ConversationHistoryMessageData {
 	public static final String JSON_PROPERTY_DELETED_FOR_SELF = "deletedForSelf";
 	@JsonProperty(JSON_PROPERTY_DELETED_FOR_SELF)
 	private List<MessageDeletionForSelfInfo> deletedForSelf = null;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public ConversationHistoryMessageData $type(TypeEnum $type) {
 		this.$type = $type;
@@ -553,6 +558,25 @@ public class ConversationHistoryMessageData {
 		this.deletedForSelf = deletedForSelf;
 	}
 
+	public ConversationHistoryMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -581,12 +605,13 @@ public class ConversationHistoryMessageData {
 				Objects.equals(this.lastEditedByPersonId, conversationHistoryMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, conversationHistoryMessageData.lastEditedTimestamp) &&
 				Objects.equals(this.deletedForAll, conversationHistoryMessageData.deletedForAll) &&
-				Objects.equals(this.deletedForSelf, conversationHistoryMessageData.deletedForSelf);
+				Objects.equals(this.deletedForSelf, conversationHistoryMessageData.deletedForSelf) &&
+				Objects.equals(this.batchInfo, conversationHistoryMessageData.batchInfo);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, contentOrigin, replyToMessageId, externalMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text, lastEditedByPersonId, lastEditedTimestamp, deletedForAll, deletedForSelf);
+		return Objects.hash($type, id, conversationId, sendTimestamp, serverTimestamp, senderPersonId, type, internal, contentOrigin, replyToMessageId, externalMessageId, recipientPersonIds, botThreadId, rejectionSeverity, rejectionReason, text, lastEditedByPersonId, lastEditedTimestamp, deletedForAll, deletedForSelf, batchInfo);
 	}
 
 	@Override
@@ -613,6 +638,7 @@ public class ConversationHistoryMessageData {
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
 		sb.append("    deletedForAll: ").append(toIndentedString(deletedForAll)).append("\n");
 		sb.append("    deletedForSelf: ").append(toIndentedString(deletedForSelf)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

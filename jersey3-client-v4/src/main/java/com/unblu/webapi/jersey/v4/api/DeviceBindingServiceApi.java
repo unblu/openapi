@@ -46,7 +46,7 @@ public class DeviceBindingServiceApi {
 	 * issueEnrollmentChallenge Proof-of-possession step 1 (enrollment): mobile presents the token plus the locally-generated public key; server validates the token
 	 * and the key, generates a fresh challenge, stores &#x60;(registrationTokenId, publicKeyEncoded, challenge, expiresAt)&#x60; on a
 	 * &#x60;DeviceBindingChallenge&#x60; row, and returns the challenge. If a non-expired enrollment challenge already exists for that token, a new row is created
-	 * — &#x60;register&#x60;reads the most recent one.
+	 * — &#x60;register&#x60; reads the most recent one.
 	 * 
 	 * @param deviceBindingIssueEnrollmentChallengeRequest (required)
 	 * @return DeviceBindingIssueEnrollmentChallengeResponse
@@ -60,7 +60,7 @@ public class DeviceBindingServiceApi {
 	 * issueEnrollmentChallenge Proof-of-possession step 1 (enrollment): mobile presents the token plus the locally-generated public key; server validates the token
 	 * and the key, generates a fresh challenge, stores &#x60;(registrationTokenId, publicKeyEncoded, challenge, expiresAt)&#x60; on a
 	 * &#x60;DeviceBindingChallenge&#x60; row, and returns the challenge. If a non-expired enrollment challenge already exists for that token, a new row is created
-	 * — &#x60;register&#x60;reads the most recent one.
+	 * — &#x60;register&#x60; reads the most recent one.
 	 * 
 	 * @param deviceBindingIssueEnrollmentChallengeRequest (required)
 	 * @return ApiResponse&lt;DeviceBindingIssueEnrollmentChallengeResponse&gt;
@@ -154,8 +154,8 @@ public class DeviceBindingServiceApi {
 
 	/**
 	 * issueVerifyChallenge Verify step 1: requests a one-time challenge for an existing binding. Caller&#39;s session must own the binding (account + person
-	 * match), else BINDING_OWNERSHIP_MISMATCH. The challenge is persisted as a &#x60;DeviceBindingChallenge&#x60; row keyed by &#x60;bindingId&#x60;
-	 * so&#x60;verify&#x60; can read it back.
+	 * match), else BINDING_OWNERSHIP_MISMATCH. The challenge is persisted as a &#x60;DeviceBindingChallenge&#x60; row keyed by &#x60;bindingId&#x60; so
+	 * &#x60;verify&#x60; can read it back.
 	 * 
 	 * @param deviceBindingChallengeRequest (required)
 	 * @return DeviceBindingChallengeResponse
@@ -167,8 +167,8 @@ public class DeviceBindingServiceApi {
 
 	/**
 	 * issueVerifyChallenge Verify step 1: requests a one-time challenge for an existing binding. Caller&#39;s session must own the binding (account + person
-	 * match), else BINDING_OWNERSHIP_MISMATCH. The challenge is persisted as a &#x60;DeviceBindingChallenge&#x60; row keyed by &#x60;bindingId&#x60;
-	 * so&#x60;verify&#x60; can read it back.
+	 * match), else BINDING_OWNERSHIP_MISMATCH. The challenge is persisted as a &#x60;DeviceBindingChallenge&#x60; row keyed by &#x60;bindingId&#x60; so
+	 * &#x60;verify&#x60; can read it back.
 	 * 
 	 * @param deviceBindingChallengeRequest (required)
 	 * @return ApiResponse&lt;DeviceBindingChallengeResponse&gt;
@@ -209,8 +209,8 @@ public class DeviceBindingServiceApi {
 
 	/**
 	 * register Proof-of-possession step 2 (enrollment): mobile submits &#x60;(token, signature)&#x60;. Server loads the most recent non-expired
-	 * &#x60;DeviceBindingChallenge&#x60;for that token, verifies the signature against the stored public key and stored challenge, then creates
-	 * the&#x60;com.unblu.core.shared.storage.authentication.model.devicebinding.DeviceBinding&#x60; for the token&#39;s owner and physically deletes the consumed
+	 * &#x60;DeviceBindingChallenge&#x60; for that token, verifies the signature against the stored public key and stored challenge, then creates the
+	 * &#x60;com.unblu.core.shared.storage.authentication.model.devicebinding.DeviceBinding&#x60; for the token&#39;s owner and physically deletes the consumed
 	 * challenge and the registration token. The public key is NOT taken from the request — it is taken from the challenge row stored at step 1, so a client cannot
 	 * swap keys between the two calls.
 	 * 
@@ -224,8 +224,8 @@ public class DeviceBindingServiceApi {
 
 	/**
 	 * register Proof-of-possession step 2 (enrollment): mobile submits &#x60;(token, signature)&#x60;. Server loads the most recent non-expired
-	 * &#x60;DeviceBindingChallenge&#x60;for that token, verifies the signature against the stored public key and stored challenge, then creates
-	 * the&#x60;com.unblu.core.shared.storage.authentication.model.devicebinding.DeviceBinding&#x60; for the token&#39;s owner and physically deletes the consumed
+	 * &#x60;DeviceBindingChallenge&#x60; for that token, verifies the signature against the stored public key and stored challenge, then creates the
+	 * &#x60;com.unblu.core.shared.storage.authentication.model.devicebinding.DeviceBinding&#x60; for the token&#39;s owner and physically deletes the consumed
 	 * challenge and the registration token. The public key is NOT taken from the request — it is taken from the challenge row stored at step 1, so a client cannot
 	 * swap keys between the two calls.
 	 * 
@@ -317,8 +317,8 @@ public class DeviceBindingServiceApi {
 
 	/**
 	 * verify Verify step 2: verifies the signature against the binding&#39;s stored public key and the most recent non-expired server-issued challenge for that
-	 * binding. The client does not send the challenge — it is read from storage so a replay across two devices cannot succeed. Same ownership requirement
-	 * as&#x60;issueVerifyChallenge&#x60;.
+	 * binding. The client does not send the challenge — it is read from storage so a replay across two devices cannot succeed. Same ownership requirement as
+	 * &#x60;issueVerifyChallenge&#x60;.
 	 * 
 	 * @param deviceBindingVerifyRequest (required)
 	 * @return DeviceBindingVerifyResponse
@@ -330,8 +330,8 @@ public class DeviceBindingServiceApi {
 
 	/**
 	 * verify Verify step 2: verifies the signature against the binding&#39;s stored public key and the most recent non-expired server-issued challenge for that
-	 * binding. The client does not send the challenge — it is read from storage so a replay across two devices cannot succeed. Same ownership requirement
-	 * as&#x60;issueVerifyChallenge&#x60;.
+	 * binding. The client does not send the challenge — it is read from storage so a replay across two devices cannot succeed. Same ownership requirement as
+	 * &#x60;issueVerifyChallenge&#x60;.
 	 * 
 	 * @param deviceBindingVerifyRequest (required)
 	 * @return ApiResponse&lt;DeviceBindingVerifyResponse&gt;

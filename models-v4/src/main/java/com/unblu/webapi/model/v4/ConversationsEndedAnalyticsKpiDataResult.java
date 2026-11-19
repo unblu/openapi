@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Paginated result containing &#x60;ConversationsEndedAnalyticsKpiData&#x60; entries, returned by&#x60;searchConversationsEnded&#x60;.
+ * Paginated result containing &#x60;ConversationsEndedAnalyticsKpiData&#x60; entries, returned by &#x60;searchConversationsEnded&#x60;.
  */
-@ApiModel(description = "Paginated result containing `ConversationsEndedAnalyticsKpiData` entries, returned by`searchConversationsEnded`.")
+@ApiModel(description = "Paginated result containing `ConversationsEndedAnalyticsKpiData` entries, returned by `searchConversationsEnded`.")
 
 @JsonPropertyOrder({
 	ConversationsEndedAnalyticsKpiDataResult.JSON_PROPERTY_$_TYPE,

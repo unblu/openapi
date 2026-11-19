@@ -43,6 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomDialogBotData.JSON_PROPERTY_TYPE,
 	CustomDialogBotData.JSON_PROPERTY_BOT_INDICATOR_TYPE,
 	CustomDialogBotData.JSON_PROPERTY_THINKING_TEXTS,
+	CustomDialogBotData.JSON_PROPERTY_TURN_INPUT_MODE,
 	CustomDialogBotData.JSON_PROPERTY_THINKING_INPUT_MODE,
 	CustomDialogBotData.JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS,
 	CustomDialogBotData.JSON_PROPERTY_MAX_THINKING_INDICATOR_TIME,
@@ -55,6 +56,7 @@ import io.swagger.annotations.ApiModelProperty;
 	CustomDialogBotData.JSON_PROPERTY_WEBHOOK_API_VERSION,
 	CustomDialogBotData.JSON_PROPERTY_WEBHOOK_SECRET,
 	CustomDialogBotData.JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY,
+	CustomDialogBotData.JSON_PROPERTY_MESSAGE_BATCHING_ENABLED,
 	CustomDialogBotData.JSON_PROPERTY_AUTOMATIC_TYPING_STATE_HANDLING_ENABLED,
 	CustomDialogBotData.JSON_PROPERTY_OPTIONAL_OUTBOUND_EVENTS,
 })
@@ -181,9 +183,13 @@ public class CustomDialogBotData implements DialogBotData {
 	@JsonProperty(JSON_PROPERTY_THINKING_TEXTS)
 	private List<BotThinkingTextData> thinkingTexts = null;
 
+	public static final String JSON_PROPERTY_TURN_INPUT_MODE = "turnInputMode";
+	@JsonProperty(JSON_PROPERTY_TURN_INPUT_MODE)
+	private EBotTurnInputMode turnInputMode;
+
 	public static final String JSON_PROPERTY_THINKING_INPUT_MODE = "thinkingInputMode";
 	@JsonProperty(JSON_PROPERTY_THINKING_INPUT_MODE)
-	private EThinkingInputMode thinkingInputMode;
+	private EBotTurnInputMode thinkingInputMode;
 
 	public static final String JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS = "randomizeThinkingTexts";
 	@JsonProperty(JSON_PROPERTY_RANDOMIZE_THINKING_TEXTS)
@@ -228,6 +234,10 @@ public class CustomDialogBotData implements DialogBotData {
 	public static final String JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY = "messageStateHandledExternally";
 	@JsonProperty(JSON_PROPERTY_MESSAGE_STATE_HANDLED_EXTERNALLY)
 	private Boolean messageStateHandledExternally;
+
+	public static final String JSON_PROPERTY_MESSAGE_BATCHING_ENABLED = "messageBatchingEnabled";
+	@JsonProperty(JSON_PROPERTY_MESSAGE_BATCHING_ENABLED)
+	private Boolean messageBatchingEnabled;
 
 	public static final String JSON_PROPERTY_AUTOMATIC_TYPING_STATE_HANDLING_ENABLED = "automaticTypingStateHandlingEnabled";
 	@JsonProperty(JSON_PROPERTY_AUTOMATIC_TYPING_STATE_HANDLING_ENABLED)
@@ -672,7 +682,26 @@ public class CustomDialogBotData implements DialogBotData {
 		this.thinkingTexts = thinkingTexts;
 	}
 
-	public CustomDialogBotData thinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public CustomDialogBotData turnInputMode(EBotTurnInputMode turnInputMode) {
+		this.turnInputMode = turnInputMode;
+		return this;
+	}
+
+	/**
+	 * Get turnInputMode
+	 * 
+	 * @return turnInputMode
+	 **/
+	@ApiModelProperty(value = "")
+	public EBotTurnInputMode getTurnInputMode() {
+		return turnInputMode;
+	}
+
+	public void setTurnInputMode(EBotTurnInputMode turnInputMode) {
+		this.turnInputMode = turnInputMode;
+	}
+
+	public CustomDialogBotData thinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 		return this;
 	}
@@ -683,11 +712,11 @@ public class CustomDialogBotData implements DialogBotData {
 	 * @return thinkingInputMode
 	 **/
 	@ApiModelProperty(value = "")
-	public EThinkingInputMode getThinkingInputMode() {
+	public EBotTurnInputMode getThinkingInputMode() {
 		return thinkingInputMode;
 	}
 
-	public void setThinkingInputMode(EThinkingInputMode thinkingInputMode) {
+	public void setThinkingInputMode(EBotTurnInputMode thinkingInputMode) {
 		this.thinkingInputMode = thinkingInputMode;
 	}
 
@@ -816,21 +845,26 @@ public class CustomDialogBotData implements DialogBotData {
 	/**
 	 * The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. &lt;p&gt; The
 	 * following events are always sent to the endpoint: &lt;ul&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_OPENED&#x60;: When a previously accepted bot dialog
-	 * starts.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_MESSAGE&#x60;: On each message of a previously accepted bot dialog.&lt;/li&gt;
-	 * &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_CLOSED&#x60;: When a previously accepted bot dialog closes.&lt;/li&gt; &lt;/ul&gt; The following events are also always
-	 * sent, but only occur while the setting governing them is active: &lt;ul&gt; &lt;li&gt;&#x60;TypedEvent.BOT_ONBOARDING_OFFER&#x60;: When a person matching the
-	 * onboarding filter joins a conversation.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_REBOARDING_OFFER&#x60;: When a person writes a message to an unassigned
-	 * conversation and the reboardingEnabled flag is set to true.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_OFFBOARDING_OFFER&#x60;: When a person matching the
-	 * offboarding filter leaves a conversation or the conversation ends.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_MESSAGE_STATE&#x60;: On each message
-	 * state update of a previously accepted bot dialog, when messageStateHandledExternally is set to true.&lt;/li&gt; &lt;/ul&gt; The following events are sent
-	 * only when listed in optionalOutboundEvents: &lt;ul&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED&#x60;: When the counterpart person of a
-	 * dialog changes during a dialog.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_ABORT_ANSWER&#x60;: When the counterpart aborts an answer the bot is waiting
-	 * for. Requires web API version 4 or newer.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_LINK_CLICKED&#x60;: When a person clicks a link in a message of
-	 * the bot thread of a previously accepted bot dialog. Requires web API version 4 or newer.&lt;/li&gt; &lt;/ul&gt;
+	 * starts.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_MESSAGE&#x60;: On each message of a previously accepted bot dialog, except the messages delivered in
+	 * a &#x60;TypedEvent.BOT_DIALOG_MESSAGE_BATCH&#x60; event.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_CLOSED&#x60;: When a previously accepted bot dialog
+	 * closes.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_STREAMING_MESSAGE_FINISHED&#x60;: When Unblu finishes a streaming message of the bot, because a
+	 * person stopped it, the stream timed out, or the dialog ended while it was open. Requires web API version 4 or newer.&lt;/li&gt; &lt;/ul&gt; The following
+	 * events are also always sent, but only occur while the setting governing them is active: &lt;ul&gt; &lt;li&gt;&#x60;TypedEvent.BOT_ONBOARDING_OFFER&#x60;:
+	 * When a person matching the onboarding filter joins a conversation.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_REBOARDING_OFFER&#x60;: When a person writes a
+	 * message to an unassigned conversation and the reboardingEnabled flag is set to true.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_OFFBOARDING_OFFER&#x60;: When
+	 * a person matching the offboarding filter leaves a conversation or the conversation ends.&lt;/li&gt;
+	 * &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_MESSAGE_STATE&#x60;: On each message state update of a previously accepted bot dialog, when
+	 * messageStateHandledExternally is set to true.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_MESSAGE_BATCH&#x60;: Once for the messages of a previously
+	 * accepted bot dialog that were sent together in one action, when messageBatchingEnabled is set to true. Requires web API version 4 or newer.&lt;/li&gt;
+	 * &lt;/ul&gt; The following events are sent only when listed in optionalOutboundEvents: &lt;ul&gt;
+	 * &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED&#x60;: When the counterpart person of a dialog changes during a dialog.&lt;/li&gt;
+	 * &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_ABORT_ANSWER&#x60;: When the counterpart aborts an answer the bot is waiting for. Requires web API version 4 or
+	 * newer.&lt;/li&gt; &lt;li&gt;&#x60;TypedEvent.BOT_DIALOG_LINK_CLICKED&#x60;: When a person clicks a link in a message of the bot thread of a previously
+	 * accepted bot dialog. Requires web API version 4 or newer.&lt;/li&gt; &lt;/ul&gt;
 	 * 
 	 * @return webhookEndpoint
 	 **/
-	@ApiModelProperty(value = "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> The following events are always sent to the endpoint: <ul> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a previously accepted bot dialog starts.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> </ul> The following events are also always sent, but only occur while the setting governing them is active: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog, when messageStateHandledExternally is set to true.</li> </ul> The following events are sent only when listed in optionalOutboundEvents: <ul> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of a dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_ABORT_ANSWER`: When the counterpart aborts an answer the bot is waiting for. Requires web API version 4 or newer.</li> <li>`TypedEvent.BOT_DIALOG_LINK_CLICKED`: When a person clicks a link in a message of the bot thread of a previously accepted bot dialog. Requires web API version 4 or newer.</li> </ul>")
+	@ApiModelProperty(value = "The endpoint url of the webhook registration. To this url the requests for the webhook events are done. Maximum length of 4000 characters. <p> The following events are always sent to the endpoint: <ul> <li>`TypedEvent.BOT_DIALOG_OPENED`: When a previously accepted bot dialog starts.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE`: On each message of a previously accepted bot dialog, except the messages delivered in a `TypedEvent.BOT_DIALOG_MESSAGE_BATCH` event.</li> <li>`TypedEvent.BOT_DIALOG_CLOSED`: When a previously accepted bot dialog closes.</li> <li>`TypedEvent.BOT_DIALOG_STREAMING_MESSAGE_FINISHED`: When Unblu finishes a streaming message of the bot, because a person stopped it, the stream timed out, or the dialog ended while it was open. Requires web API version 4 or newer.</li> </ul> The following events are also always sent, but only occur while the setting governing them is active: <ul> <li>`TypedEvent.BOT_ONBOARDING_OFFER`: When a person matching the onboarding filter joins a conversation.</li> <li>`TypedEvent.BOT_REBOARDING_OFFER`: When a person writes a message to an unassigned conversation and the reboardingEnabled flag is set to true.</li> <li>`TypedEvent.BOT_OFFBOARDING_OFFER`: When a person matching the offboarding filter leaves a conversation or the conversation ends.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_STATE`: On each message state update of a previously accepted bot dialog, when messageStateHandledExternally is set to true.</li> <li>`TypedEvent.BOT_DIALOG_MESSAGE_BATCH`: Once for the messages of a previously accepted bot dialog that were sent together in one action, when messageBatchingEnabled is set to true. Requires web API version 4 or newer.</li> </ul> The following events are sent only when listed in optionalOutboundEvents: <ul> <li>`TypedEvent.BOT_DIALOG_COUNTERPART_CHANGED`: When the counterpart person of a dialog changes during a dialog.</li> <li>`TypedEvent.BOT_DIALOG_ABORT_ANSWER`: When the counterpart aborts an answer the bot is waiting for. Requires web API version 4 or newer.</li> <li>`TypedEvent.BOT_DIALOG_LINK_CLICKED`: When a person clicks a link in a message of the bot thread of a previously accepted bot dialog. Requires web API version 4 or newer.</li> </ul>")
 	public String getWebhookEndpoint() {
 		return webhookEndpoint;
 	}
@@ -918,6 +952,27 @@ public class CustomDialogBotData implements DialogBotData {
 		this.messageStateHandledExternally = messageStateHandledExternally;
 	}
 
+	public CustomDialogBotData messageBatchingEnabled(Boolean messageBatchingEnabled) {
+		this.messageBatchingEnabled = messageBatchingEnabled;
+		return this;
+	}
+
+	/**
+	 * Defines if messages sent together in one action, for example a text with files, reach the bot as a single &#x60;TypedEvent.BOT_DIALOG_MESSAGE_BATCH&#x60;
+	 * event instead of one &#x60;TypedEvent.BOT_DIALOG_MESSAGE&#x60; event per message. Requires webhookApiVersion V4 or newer. &lt;p&gt; On update, omitting the
+	 * property leaves the bot&#39;s current setting unchanged. On create, omitting it means &#x60;false&#x60;.
+	 * 
+	 * @return messageBatchingEnabled
+	 **/
+	@ApiModelProperty(value = "Defines if messages sent together in one action, for example a text with files, reach the bot as a single `TypedEvent.BOT_DIALOG_MESSAGE_BATCH` event instead of one `TypedEvent.BOT_DIALOG_MESSAGE` event per message. Requires webhookApiVersion V4 or newer. <p> On update, omitting the property leaves the bot's current setting unchanged. On create, omitting it means `false`.")
+	public Boolean isMessageBatchingEnabled() {
+		return messageBatchingEnabled;
+	}
+
+	public void setMessageBatchingEnabled(Boolean messageBatchingEnabled) {
+		this.messageBatchingEnabled = messageBatchingEnabled;
+	}
+
 	public CustomDialogBotData automaticTypingStateHandlingEnabled(Boolean automaticTypingStateHandlingEnabled) {
 		this.automaticTypingStateHandlingEnabled = automaticTypingStateHandlingEnabled;
 		return this;
@@ -1000,6 +1055,7 @@ public class CustomDialogBotData implements DialogBotData {
 				Objects.equals(this.type, customDialogBotData.type) &&
 				Objects.equals(this.botIndicatorType, customDialogBotData.botIndicatorType) &&
 				Objects.equals(this.thinkingTexts, customDialogBotData.thinkingTexts) &&
+				Objects.equals(this.turnInputMode, customDialogBotData.turnInputMode) &&
 				Objects.equals(this.thinkingInputMode, customDialogBotData.thinkingInputMode) &&
 				Objects.equals(this.randomizeThinkingTexts, customDialogBotData.randomizeThinkingTexts) &&
 				Objects.equals(this.maxThinkingIndicatorTime, customDialogBotData.maxThinkingIndicatorTime) &&
@@ -1012,13 +1068,14 @@ public class CustomDialogBotData implements DialogBotData {
 				Objects.equals(this.webhookApiVersion, customDialogBotData.webhookApiVersion) &&
 				Objects.equals(this.webhookSecret, customDialogBotData.webhookSecret) &&
 				Objects.equals(this.messageStateHandledExternally, customDialogBotData.messageStateHandledExternally) &&
+				Objects.equals(this.messageBatchingEnabled, customDialogBotData.messageBatchingEnabled) &&
 				Objects.equals(this.automaticTypingStateHandlingEnabled, customDialogBotData.automaticTypingStateHandlingEnabled) &&
 				Objects.equals(this.optionalOutboundEvents, customDialogBotData.optionalOutboundEvents);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, webhookStatus, webhookEndpoint, outboundTimeoutMillis, webhookApiVersion, webhookSecret, messageStateHandledExternally, automaticTypingStateHandlingEnabled, optionalOutboundEvents);
+		return Objects.hash($type, id, creationTimestamp, modificationTimestamp, version, accountId, name, description, botPersonId, onboardingOrder, reboardingOrder, offboardingOrder, onboardingFilter, reboardingEnabled, offboardingFilter, needsCounterpartPresence, onTimeoutBehavior, retryCount, retryDelay, type, botIndicatorType, thinkingTexts, turnInputMode, thinkingInputMode, randomizeThinkingTexts, maxThinkingIndicatorTime, autoStartThinkingIndicatorDelay, thinkingIndicatorTextCycleInterval, defaultContentOrigin, webhookStatus, webhookEndpoint, outboundTimeoutMillis, webhookApiVersion, webhookSecret, messageStateHandledExternally, messageBatchingEnabled, automaticTypingStateHandlingEnabled, optionalOutboundEvents);
 	}
 
 	@Override
@@ -1047,6 +1104,7 @@ public class CustomDialogBotData implements DialogBotData {
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
 		sb.append("    botIndicatorType: ").append(toIndentedString(botIndicatorType)).append("\n");
 		sb.append("    thinkingTexts: ").append(toIndentedString(thinkingTexts)).append("\n");
+		sb.append("    turnInputMode: ").append(toIndentedString(turnInputMode)).append("\n");
 		sb.append("    thinkingInputMode: ").append(toIndentedString(thinkingInputMode)).append("\n");
 		sb.append("    randomizeThinkingTexts: ").append(toIndentedString(randomizeThinkingTexts)).append("\n");
 		sb.append("    maxThinkingIndicatorTime: ").append(toIndentedString(maxThinkingIndicatorTime)).append("\n");
@@ -1059,6 +1117,7 @@ public class CustomDialogBotData implements DialogBotData {
 		sb.append("    webhookApiVersion: ").append(toIndentedString(webhookApiVersion)).append("\n");
 		sb.append("    webhookSecret: ").append(toIndentedString(webhookSecret)).append("\n");
 		sb.append("    messageStateHandledExternally: ").append(toIndentedString(messageStateHandledExternally)).append("\n");
+		sb.append("    messageBatchingEnabled: ").append(toIndentedString(messageBatchingEnabled)).append("\n");
 		sb.append("    automaticTypingStateHandlingEnabled: ").append(toIndentedString(automaticTypingStateHandlingEnabled)).append("\n");
 		sb.append("    optionalOutboundEvents: ").append(toIndentedString(optionalOutboundEvents)).append("\n");
 		sb.append("}");

@@ -233,11 +233,11 @@ public class CallsAnalyticsKpiData {
 
 	/**
 	 * UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant&#39;s connection phase. Optional, may be
-	 * &#x60;null&#x60;if the call was never accepted.
+	 * &#x60;null&#x60; if the call was never accepted.
 	 * 
 	 * @return acceptTimestamp
 	 **/
-	@ApiModelProperty(value = "UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant's connection phase. Optional, may be `null`if the call was never accepted.")
+	@ApiModelProperty(value = "UTC timestamp (ms) when the call was first accepted by a participant marking the start of that participant's connection phase. Optional, may be `null` if the call was never accepted.")
 	public Long getAcceptTimestamp() {
 		return acceptTimestamp;
 	}

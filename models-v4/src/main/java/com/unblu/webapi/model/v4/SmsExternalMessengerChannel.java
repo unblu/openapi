@@ -435,12 +435,12 @@ public class SmsExternalMessengerChannel implements ExternalMessengerChannel {
 	}
 
 	/**
-	 * The name of the conversation template for new inbound conversation requests. If no template of that name can be found, the default template
-	 * for&#x60;EInitialEngagementType.OFFLINE_CHAT_REQUEST&#x60; is used.
+	 * The name of the conversation template for new inbound conversation requests. If no template of that name can be found, the default template for
+	 * &#x60;EInitialEngagementType.OFFLINE_CHAT_REQUEST&#x60; is used.
 	 * 
 	 * @return inboundTemplateName
 	 **/
-	@ApiModelProperty(value = "The name of the conversation template for new inbound conversation requests. If no template of that name can be found, the default template for`EInitialEngagementType.OFFLINE_CHAT_REQUEST` is used.")
+	@ApiModelProperty(value = "The name of the conversation template for new inbound conversation requests. If no template of that name can be found, the default template for `EInitialEngagementType.OFFLINE_CHAT_REQUEST` is used.")
 	public String getInboundTemplateName() {
 		return inboundTemplateName;
 	}

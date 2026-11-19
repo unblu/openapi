@@ -16,6 +16,7 @@ import com.unblu.webapi.model.v4.CollaborationLayersAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.ConversationsEndedAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.HandlingTimeAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.MessagesAnalyticsKpiDataResult;
+import com.unblu.webapi.model.v4.QueueEntriesAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.QueueInteractionAnalyticsKpiDataResult;
 import com.unblu.webapi.model.v4.WaitingTimeAnalyticsKpiDataResult;
 
@@ -307,6 +308,63 @@ public class AnalyticsDataApi {
 		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
 
 		GenericType<MessagesAnalyticsKpiDataResult> localVarReturnType = new GenericType<MessagesAnalyticsKpiDataResult>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * searchQueueEntries &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns one record for each time a conversation entered the queue. &lt;p&gt; Each
+	 * record is created as soon as the conversation enters the queue, not when the wait ends. It states why the conversation entered the queue, who it was queued
+	 * for, and which conversation it belongs to. A conversation that enters the queue several times, for example after a forwarding, has several records. A
+	 * record&#39;s invitation ID matches the invitation ID of the waiting time record created when the wait ends.&lt;br&gt;
+	 * 
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
+	 * @return QueueEntriesAnalyticsKpiDataResult
+	 * @throws ApiException if fails to make API call
+	 */
+	public QueueEntriesAnalyticsKpiDataResult analyticsDataSearchQueueEntries(AnalyticsKpiDataQuery analyticsKpiDataQuery) throws ApiException {
+		return analyticsDataSearchQueueEntriesWithHttpInfo(analyticsKpiDataQuery).getData();
+	}
+
+	/**
+	 * searchQueueEntries &lt;p&gt;This endpoint is in preview mode.&lt;/p&gt;Returns one record for each time a conversation entered the queue. &lt;p&gt; Each
+	 * record is created as soon as the conversation enters the queue, not when the wait ends. It states why the conversation entered the queue, who it was queued
+	 * for, and which conversation it belongs to. A conversation that enters the queue several times, for example after a forwarding, has several records. A
+	 * record&#39;s invitation ID matches the invitation ID of the waiting time record created when the wait ends.&lt;br&gt;
+	 * 
+	 * @param analyticsKpiDataQuery the time range, ordering, and paging options for the search (required)
+	 * @return ApiResponse&lt;QueueEntriesAnalyticsKpiDataResult&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<QueueEntriesAnalyticsKpiDataResult> analyticsDataSearchQueueEntriesWithHttpInfo(AnalyticsKpiDataQuery analyticsKpiDataQuery) throws ApiException {
+		Object localVarPostBody = analyticsKpiDataQuery;
+
+		// verify the required parameter 'analyticsKpiDataQuery' is set
+		if (analyticsKpiDataQuery == null) {
+			throw new ApiException(400, "Missing the required parameter 'analyticsKpiDataQuery' when calling analyticsDataSearchQueueEntries");
+		}
+
+		// create path and map variables
+		String localVarPath = "/analytics/data/searchQueueEntries";
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+			"application/json"
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<QueueEntriesAnalyticsKpiDataResult> localVarReturnType = new GenericType<QueueEntriesAnalyticsKpiDataResult>() {
 		};
 		return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
 	}

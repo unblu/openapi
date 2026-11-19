@@ -16,10 +16,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Event emitted when a conversation recording is available &lt;p&gt; Supported filter keys: &lt;ul&gt;
- * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;/ul&gt;
+ * Event emitted when a conversation recording is available. Only sent for built-in conversation recordings, as a SIPREC recording has no file in Unblu.
+ * &lt;p&gt; Supported filter keys: &lt;ul&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "Event emitted when a conversation recording is available <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>")
+@ApiModel(description = "Event emitted when a conversation recording is available. Only sent for built-in conversation recordings, as a SIPREC recording has no file in Unblu. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>")
 
 @JsonPropertyOrder({
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_$_TYPE,
@@ -27,6 +27,8 @@ import io.swagger.annotations.ApiModelProperty;
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_EVENT_TYPE,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_ACCOUNT_ID,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_CONVERSATION_ID,
+	ConversationRecordingAvailableEvent.JSON_PROPERTY_CONVERSATION_RECORDING_ID,
+	ConversationRecordingAvailableEvent.JSON_PROPERTY_RECORDING_SYSTEM,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_BLOB_STORE_ID,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_MIME_TYPE,
 	ConversationRecordingAvailableEvent.JSON_PROPERTY_TOTAL_SIZE,
@@ -89,6 +91,14 @@ public class ConversationRecordingAvailableEvent {
 	public static final String JSON_PROPERTY_CONVERSATION_ID = "conversationId";
 	@JsonProperty(JSON_PROPERTY_CONVERSATION_ID)
 	private String conversationId;
+
+	public static final String JSON_PROPERTY_CONVERSATION_RECORDING_ID = "conversationRecordingId";
+	@JsonProperty(JSON_PROPERTY_CONVERSATION_RECORDING_ID)
+	private String conversationRecordingId;
+
+	public static final String JSON_PROPERTY_RECORDING_SYSTEM = "recordingSystem";
+	@JsonProperty(JSON_PROPERTY_RECORDING_SYSTEM)
+	private ERecordingSystem recordingSystem;
 
 	public static final String JSON_PROPERTY_BLOB_STORE_ID = "blobStoreId";
 	@JsonProperty(JSON_PROPERTY_BLOB_STORE_ID)
@@ -200,11 +210,11 @@ public class ConversationRecordingAvailableEvent {
 	}
 
 	/**
-	 * Id of the conversation this recording belongs to
+	 * ID of the conversation that the recording belongs to
 	 * 
 	 * @return conversationId
 	 **/
-	@ApiModelProperty(value = "Id of the conversation this recording belongs to")
+	@ApiModelProperty(value = "ID of the conversation that the recording belongs to")
 	public String getConversationId() {
 		return conversationId;
 	}
@@ -213,17 +223,55 @@ public class ConversationRecordingAvailableEvent {
 		this.conversationId = conversationId;
 	}
 
+	public ConversationRecordingAvailableEvent conversationRecordingId(String conversationRecordingId) {
+		this.conversationRecordingId = conversationRecordingId;
+		return this;
+	}
+
+	/**
+	 * The ID of the recording.
+	 * 
+	 * @return conversationRecordingId
+	 **/
+	@ApiModelProperty(value = "The ID of the recording.")
+	public String getConversationRecordingId() {
+		return conversationRecordingId;
+	}
+
+	public void setConversationRecordingId(String conversationRecordingId) {
+		this.conversationRecordingId = conversationRecordingId;
+	}
+
+	public ConversationRecordingAvailableEvent recordingSystem(ERecordingSystem recordingSystem) {
+		this.recordingSystem = recordingSystem;
+		return this;
+	}
+
+	/**
+	 * Get recordingSystem
+	 * 
+	 * @return recordingSystem
+	 **/
+	@ApiModelProperty(value = "")
+	public ERecordingSystem getRecordingSystem() {
+		return recordingSystem;
+	}
+
+	public void setRecordingSystem(ERecordingSystem recordingSystem) {
+		this.recordingSystem = recordingSystem;
+	}
+
 	public ConversationRecordingAvailableEvent blobStoreId(String blobStoreId) {
 		this.blobStoreId = blobStoreId;
 		return this;
 	}
 
 	/**
-	 * The blob store id of the actual recording.
+	 * The blob store ID of the actual recording.
 	 * 
 	 * @return blobStoreId
 	 **/
-	@ApiModelProperty(value = "The blob store id of the actual recording.")
+	@ApiModelProperty(value = "The blob store ID of the actual recording.")
 	public String getBlobStoreId() {
 		return blobStoreId;
 	}
@@ -238,11 +286,11 @@ public class ConversationRecordingAvailableEvent {
 	}
 
 	/**
-	 * The mime type of the recording
+	 * The MIME type of the recording
 	 * 
 	 * @return mimeType
 	 **/
-	@ApiModelProperty(value = "The mime type of the recording")
+	@ApiModelProperty(value = "The MIME type of the recording")
 	public String getMimeType() {
 		return mimeType;
 	}
@@ -257,11 +305,11 @@ public class ConversationRecordingAvailableEvent {
 	}
 
 	/**
-	 * The total size in bytes of this recording
+	 * The total size in bytes of the recording
 	 * 
 	 * @return totalSize
 	 **/
-	@ApiModelProperty(value = "The total size in bytes of this recording")
+	@ApiModelProperty(value = "The total size in bytes of the recording")
 	public Long getTotalSize() {
 		return totalSize;
 	}
@@ -369,6 +417,8 @@ public class ConversationRecordingAvailableEvent {
 				Objects.equals(this.eventType, conversationRecordingAvailableEvent.eventType) &&
 				Objects.equals(this.accountId, conversationRecordingAvailableEvent.accountId) &&
 				Objects.equals(this.conversationId, conversationRecordingAvailableEvent.conversationId) &&
+				Objects.equals(this.conversationRecordingId, conversationRecordingAvailableEvent.conversationRecordingId) &&
+				Objects.equals(this.recordingSystem, conversationRecordingAvailableEvent.recordingSystem) &&
 				Objects.equals(this.blobStoreId, conversationRecordingAvailableEvent.blobStoreId) &&
 				Objects.equals(this.mimeType, conversationRecordingAvailableEvent.mimeType) &&
 				Objects.equals(this.totalSize, conversationRecordingAvailableEvent.totalSize) &&
@@ -380,7 +430,7 @@ public class ConversationRecordingAvailableEvent {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, timestamp, eventType, accountId, conversationId, blobStoreId, mimeType, totalSize, downloadLinks, recordingStartTimestamp, recordingEndTimestamp, endReason);
+		return Objects.hash($type, timestamp, eventType, accountId, conversationId, conversationRecordingId, recordingSystem, blobStoreId, mimeType, totalSize, downloadLinks, recordingStartTimestamp, recordingEndTimestamp, endReason);
 	}
 
 	@Override
@@ -392,6 +442,8 @@ public class ConversationRecordingAvailableEvent {
 		sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
 		sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
 		sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+		sb.append("    conversationRecordingId: ").append(toIndentedString(conversationRecordingId)).append("\n");
+		sb.append("    recordingSystem: ").append(toIndentedString(recordingSystem)).append("\n");
 		sb.append("    blobStoreId: ").append(toIndentedString(blobStoreId)).append("\n");
 		sb.append("    mimeType: ").append(toIndentedString(mimeType)).append("\n");
 		sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");

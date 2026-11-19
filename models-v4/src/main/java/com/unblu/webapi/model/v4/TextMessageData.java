@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TextMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	TextMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	TextMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	TextMessageData.JSON_PROPERTY_BATCH_INFO,
 	TextMessageData.JSON_PROPERTY_TEXT,
 	TextMessageData.JSON_PROPERTY_TEXT_TYPE,
 	TextMessageData.JSON_PROPERTY_QUICK_REPLIES,
@@ -180,6 +181,10 @@ public class TextMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -666,6 +671,25 @@ public class TextMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public TextMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public TextMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -792,6 +816,7 @@ public class TextMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, textMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, textMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, textMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, textMessageData.batchInfo) &&
 				Objects.equals(this.text, textMessageData.text) &&
 				Objects.equals(this.textType, textMessageData.textType) &&
 				Objects.equals(this.quickReplies, textMessageData.quickReplies) &&
@@ -800,7 +825,7 @@ public class TextMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text, textType, quickReplies, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, text, textType, quickReplies, availableTranslations);
 	}
 
 	@Override
@@ -831,6 +856,7 @@ public class TextMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    quickReplies: ").append(toIndentedString(quickReplies)).append("\n");

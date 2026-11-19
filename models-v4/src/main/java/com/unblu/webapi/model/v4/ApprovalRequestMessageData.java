@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	ApprovalRequestMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	ApprovalRequestMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	ApprovalRequestMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	ApprovalRequestMessageData.JSON_PROPERTY_BATCH_INFO,
 	ApprovalRequestMessageData.JSON_PROPERTY_TEXT,
 	ApprovalRequestMessageData.JSON_PROPERTY_TEXT_TYPE,
 	ApprovalRequestMessageData.JSON_PROPERTY_OPTIONS,
@@ -181,6 +182,10 @@ public class ApprovalRequestMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -671,6 +676,25 @@ public class ApprovalRequestMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public ApprovalRequestMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public ApprovalRequestMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -816,6 +840,7 @@ public class ApprovalRequestMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, approvalRequestMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, approvalRequestMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, approvalRequestMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, approvalRequestMessageData.batchInfo) &&
 				Objects.equals(this.text, approvalRequestMessageData.text) &&
 				Objects.equals(this.textType, approvalRequestMessageData.textType) &&
 				Objects.equals(this.options, approvalRequestMessageData.options) &&
@@ -825,7 +850,7 @@ public class ApprovalRequestMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text, textType, options, answerStatus, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, text, textType, options, answerStatus, availableTranslations);
 	}
 
 	@Override
@@ -856,6 +881,7 @@ public class ApprovalRequestMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

@@ -97,7 +97,7 @@ public class AccountIngressesApi {
 
 	/**
 	 * delete Deletes the account ingress with the specified ID. The primary &#x60;EAccountIngressEntryPath.PUBLIC&#x60; ingress can&#39;t be deleted as long as
-	 * other&#x60;EAccountIngressEntryPath.PUBLIC&#x60; ingresses exist.&lt;br&gt;
+	 * other &#x60;EAccountIngressEntryPath.PUBLIC&#x60; ingresses exist.&lt;br&gt;
 	 * 
 	 * @param accountIngressId The ID of the account ingress to delete (required)
 	 * @throws ApiException if fails to make API call
@@ -109,7 +109,7 @@ public class AccountIngressesApi {
 
 	/**
 	 * delete Deletes the account ingress with the specified ID. The primary &#x60;EAccountIngressEntryPath.PUBLIC&#x60; ingress can&#39;t be deleted as long as
-	 * other&#x60;EAccountIngressEntryPath.PUBLIC&#x60; ingresses exist.&lt;br&gt;
+	 * other &#x60;EAccountIngressEntryPath.PUBLIC&#x60; ingresses exist.&lt;br&gt;
 	 * 
 	 * @param accountIngressId The ID of the account ingress to delete (required)
 	 * @throws ApiException if fails to make API call

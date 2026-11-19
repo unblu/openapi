@@ -15,10 +15,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Ordering criterion for analytics KPI data queries. &lt;p&gt; Defines the sort order of KPI data records. The order-by field is selected from
- * &#x60;EAnalyticsKpiDataQueryOrderByField&#x60; and defaults to&#x60;EAnalyticsKpiDataQueryOrderByField.EVENT_TIMESTAMP EVENT_TIMESTAMP&#x60; in
+ * &#x60;EAnalyticsKpiDataQueryOrderByField&#x60; and defaults to &#x60;EAnalyticsKpiDataQueryOrderByField.EVENT_TIMESTAMP EVENT_TIMESTAMP&#x60; in
  * &#x60;AbstractOrderBy.Order#ASCENDING ASCENDING&#x60; order.&lt;br&gt;@see AnalyticsKpiDataQuery&lt;br&gt;@see EAnalyticsKpiDataQueryOrderByField
  */
-@ApiModel(description = "Ordering criterion for analytics KPI data queries. <p> Defines the sort order of KPI data records. The order-by field is selected from `EAnalyticsKpiDataQueryOrderByField` and defaults to`EAnalyticsKpiDataQueryOrderByField.EVENT_TIMESTAMP EVENT_TIMESTAMP` in `AbstractOrderBy.Order#ASCENDING ASCENDING` order.<br>@see AnalyticsKpiDataQuery<br>@see EAnalyticsKpiDataQueryOrderByField")
+@ApiModel(description = "Ordering criterion for analytics KPI data queries. <p> Defines the sort order of KPI data records. The order-by field is selected from `EAnalyticsKpiDataQueryOrderByField` and defaults to `EAnalyticsKpiDataQueryOrderByField.EVENT_TIMESTAMP EVENT_TIMESTAMP` in `AbstractOrderBy.Order#ASCENDING ASCENDING` order.<br>@see AnalyticsKpiDataQuery<br>@see EAnalyticsKpiDataQueryOrderByField")
 
 @JsonPropertyOrder({
 	AnalyticsKpiDataQueryOrderBy.JSON_PROPERTY_$_TYPE,

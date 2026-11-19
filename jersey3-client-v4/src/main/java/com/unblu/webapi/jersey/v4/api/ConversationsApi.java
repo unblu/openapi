@@ -36,6 +36,7 @@ import com.unblu.webapi.model.v4.ConversationsSetVisibilityBody;
 import com.unblu.webapi.model.v4.ConversationsSetVisitorDataBody;
 import com.unblu.webapi.model.v4.ExpandFields;
 import com.unblu.webapi.model.v4.MessageData;
+import com.unblu.webapi.model.v4.MessageDataList;
 
 import jakarta.ws.rs.core.GenericType;
 
@@ -692,23 +693,91 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * getRecordingState Retrieve the current recording state of the given conversation&lt;br&gt;
+	 * getMessageBatch Returns the messages of a conversation that were sent together in one action, ordered by their position within the batch. Messages rejected
+	 * by a message interceptor are left out.&lt;br&gt;
+	 * 
+	 * @param conversationId the ID of the conversation that the messages belong to (required)
+	 * @param batchId the batch ID from the batch information of a message (required)
+	 * @return MessageDataList
+	 * @throws ApiException if fails to make API call
+	 */
+	public MessageDataList conversationsGetMessageBatch(String conversationId, String batchId) throws ApiException {
+		return conversationsGetMessageBatchWithHttpInfo(conversationId, batchId).getData();
+	}
+
+	/**
+	 * getMessageBatch Returns the messages of a conversation that were sent together in one action, ordered by their position within the batch. Messages rejected
+	 * by a message interceptor are left out.&lt;br&gt;
+	 * 
+	 * @param conversationId the ID of the conversation that the messages belong to (required)
+	 * @param batchId the batch ID from the batch information of a message (required)
+	 * @return ApiResponse&lt;MessageDataList&gt;
+	 * @throws ApiException if fails to make API call
+	 */
+	public ApiResponse<MessageDataList> conversationsGetMessageBatchWithHttpInfo(String conversationId, String batchId) throws ApiException {
+		Object localVarPostBody = new HashMap<>();
+
+		// verify the required parameter 'conversationId' is set
+		if (conversationId == null) {
+			throw new ApiException(400, "Missing the required parameter 'conversationId' when calling conversationsGetMessageBatch");
+		}
+
+		// verify the required parameter 'batchId' is set
+		if (batchId == null) {
+			throw new ApiException(400, "Missing the required parameter 'batchId' when calling conversationsGetMessageBatch");
+		}
+
+		// create path and map variables
+		String localVarPath = "/conversations/{conversationId}/getMessageBatch/{batchId}"
+				.replaceAll("\\{" + "conversationId" + "\\}", apiClient.escapeString(conversationId.toString()))
+				.replaceAll("\\{" + "batchId" + "\\}", apiClient.escapeString(batchId.toString()));
+
+		// query params
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {
+			"application/json"
+		};
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		final String[] localVarContentTypes = {
+
+		};
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+		String[] localVarAuthNames = new String[] { "basicAuth", "bearerAuth" };
+
+		GenericType<MessageDataList> localVarReturnType = new GenericType<MessageDataList>() {
+		};
+		return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+	}
+
+	/**
+	 * getRecordingState &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Retrieve the current recording state of the given conversation. Use
+	 * &lt;code&gt;/conversationrecordings/getRecordingState&lt;/code&gt; instead.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation to retrieve the recording state for (required)
 	 * @return ConversationRecordingState
 	 * @throws ApiException if fails to make API call
+	 * @deprecated
 	 */
+	@Deprecated
 	public ConversationRecordingState conversationsGetRecordingState(String conversationId) throws ApiException {
 		return conversationsGetRecordingStateWithHttpInfo(conversationId).getData();
 	}
 
 	/**
-	 * getRecordingState Retrieve the current recording state of the given conversation&lt;br&gt;
+	 * getRecordingState &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Retrieve the current recording state of the given conversation. Use
+	 * &lt;code&gt;/conversationrecordings/getRecordingState&lt;/code&gt; instead.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation to retrieve the recording state for (required)
 	 * @return ApiResponse&lt;ConversationRecordingState&gt;
 	 * @throws ApiException if fails to make API call
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ConversationRecordingState> conversationsGetRecordingStateWithHttpInfo(String conversationId) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
@@ -1888,30 +1957,34 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * startRecording Manually start a conversation recording. The recording is only started if: &lt;ul&gt; &lt;li&gt;A compatible blob store is configured
-	 * &lt;li&gt;Manually starting and stopping a recording is allowed &lt;li&gt;There is an active call or collaboration layer &lt;li&gt;There isn&#39;t already a
-	 * conversation recording running &lt;/ul&gt; The recording is started asynchronously, and there may be a brief delay before it starts. The type of the
-	 * recording (audio only or audio and video) is determined by the configuration. If an error occurs, a &lt;code&gt;conversation.recording_failed&lt;/code&gt;
-	 * webhook is triggered.&lt;br&gt;
+	 * startRecording &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Manually start a conversation recording. The recording is only started if: &lt;ul&gt;
+	 * &lt;li&gt;A compatible blob store is configured &lt;li&gt;Manually starting and stopping a recording is allowed &lt;li&gt;There is an active call or
+	 * collaboration layer &lt;li&gt;There isn&#39;t already a conversation recording running &lt;/ul&gt; The recording is started asynchronously, and there may be
+	 * a brief delay before it starts. The type of the recording (audio only or audio and video) is determined by the configuration. If an error occurs, a
+	 * &lt;code&gt;conversation.recording_failed&lt;/code&gt; webhook is triggered. Use &lt;code&gt;/conversationrecordings/start&lt;/code&gt; instead.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be started (required)
 	 * @throws ApiException if fails to make API call
+	 * @deprecated
 	 */
+	@Deprecated
 	public void conversationsStartRecording(String conversationId) throws ApiException {
 
 		conversationsStartRecordingWithHttpInfo(conversationId);
 	}
 
 	/**
-	 * startRecording Manually start a conversation recording. The recording is only started if: &lt;ul&gt; &lt;li&gt;A compatible blob store is configured
-	 * &lt;li&gt;Manually starting and stopping a recording is allowed &lt;li&gt;There is an active call or collaboration layer &lt;li&gt;There isn&#39;t already a
-	 * conversation recording running &lt;/ul&gt; The recording is started asynchronously, and there may be a brief delay before it starts. The type of the
-	 * recording (audio only or audio and video) is determined by the configuration. If an error occurs, a &lt;code&gt;conversation.recording_failed&lt;/code&gt;
-	 * webhook is triggered.&lt;br&gt;
+	 * startRecording &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Manually start a conversation recording. The recording is only started if: &lt;ul&gt;
+	 * &lt;li&gt;A compatible blob store is configured &lt;li&gt;Manually starting and stopping a recording is allowed &lt;li&gt;There is an active call or
+	 * collaboration layer &lt;li&gt;There isn&#39;t already a conversation recording running &lt;/ul&gt; The recording is started asynchronously, and there may be
+	 * a brief delay before it starts. The type of the recording (audio only or audio and video) is determined by the configuration. If an error occurs, a
+	 * &lt;code&gt;conversation.recording_failed&lt;/code&gt; webhook is triggered. Use &lt;code&gt;/conversationrecordings/start&lt;/code&gt; instead.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be started (required)
 	 * @throws ApiException if fails to make API call
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<Void> conversationsStartRecordingWithHttpInfo(String conversationId) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 
@@ -1945,24 +2018,30 @@ public class ConversationsApi {
 	}
 
 	/**
-	 * stopRecording Manually stop a conversation recording. The recording is stopped if: &lt;ul&gt; &lt;li&gt;There is a running conversation recording
-	 * &lt;li&gt;Manually starting and stopping the recording is allowed &lt;/ul&gt;&lt;br&gt;
+	 * stopRecording &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Manually stop a conversation recording. The recording is stopped if: &lt;ul&gt; &lt;li&gt;There
+	 * is a running conversation recording &lt;li&gt;Manually starting and stopping the recording is allowed &lt;/ul&gt; Use
+	 * &lt;code&gt;/conversationrecordings/stop&lt;/code&gt; instead.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be stopped (required)
 	 * @throws ApiException if fails to make API call
+	 * @deprecated
 	 */
+	@Deprecated
 	public void conversationsStopRecording(String conversationId) throws ApiException {
 
 		conversationsStopRecordingWithHttpInfo(conversationId);
 	}
 
 	/**
-	 * stopRecording Manually stop a conversation recording. The recording is stopped if: &lt;ul&gt; &lt;li&gt;There is a running conversation recording
-	 * &lt;li&gt;Manually starting and stopping the recording is allowed &lt;/ul&gt;&lt;br&gt;
+	 * stopRecording &lt;p&gt;This endpoint is deprecated.&lt;/p&gt;Manually stop a conversation recording. The recording is stopped if: &lt;ul&gt; &lt;li&gt;There
+	 * is a running conversation recording &lt;li&gt;Manually starting and stopping the recording is allowed &lt;/ul&gt; Use
+	 * &lt;code&gt;/conversationrecordings/stop&lt;/code&gt; instead.&lt;br&gt;
 	 * 
 	 * @param conversationId The conversation for which a recording should be stopped (required)
 	 * @throws ApiException if fails to make API call
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<Void> conversationsStopRecordingWithHttpInfo(String conversationId) throws ApiException {
 		Object localVarPostBody = new HashMap<>();
 

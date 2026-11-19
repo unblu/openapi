@@ -37,6 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 	BranchClientAuxiliaryCameraData.JSON_PROPERTY_ALWAYS_DISPLAY_DURING_CALL,
 	BranchClientAuxiliaryCameraData.JSON_PROPERTY_DISPLAY_IN_FLOOR_PLAN,
 	BranchClientAuxiliaryCameraData.JSON_PROPERTY_MEDIA_DEVICE_LABEL,
+	BranchClientAuxiliaryCameraData.JSON_PROPERTY_CONFIGURED_ON_DEVICE,
 	BranchClientAuxiliaryCameraData.JSON_PROPERTY_PTZ_PRESETS,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -129,6 +130,10 @@ public class BranchClientAuxiliaryCameraData {
 	public static final String JSON_PROPERTY_MEDIA_DEVICE_LABEL = "mediaDeviceLabel";
 	@JsonProperty(JSON_PROPERTY_MEDIA_DEVICE_LABEL)
 	private String mediaDeviceLabel;
+
+	public static final String JSON_PROPERTY_CONFIGURED_ON_DEVICE = "configuredOnDevice";
+	@JsonProperty(JSON_PROPERTY_CONFIGURED_ON_DEVICE)
+	private Boolean configuredOnDevice;
 
 	public static final String JSON_PROPERTY_PTZ_PRESETS = "ptzPresets";
 	@JsonProperty(JSON_PROPERTY_PTZ_PRESETS)
@@ -409,6 +414,27 @@ public class BranchClientAuxiliaryCameraData {
 		this.mediaDeviceLabel = mediaDeviceLabel;
 	}
 
+	public BranchClientAuxiliaryCameraData configuredOnDevice(Boolean configuredOnDevice) {
+		this.configuredOnDevice = configuredOnDevice;
+		return this;
+	}
+
+	/**
+	 * Whether the media device label or the PTZ presets of the camera were last set on the device, either on the Branch client setup page or in the device setup
+	 * that the landing page opens with the Unblu Branch JS API. Changing the label or the PTZ presets in any other way resets it, except renaming a preset or
+	 * changing the default preset. Ignored in update operations.
+	 * 
+	 * @return configuredOnDevice
+	 **/
+	@ApiModelProperty(value = "Whether the media device label or the PTZ presets of the camera were last set on the device, either on the Branch client setup page or in the device setup that the landing page opens with the Unblu Branch JS API. Changing the label or the PTZ presets in any other way resets it, except renaming a preset or changing the default preset. Ignored in update operations.")
+	public Boolean isConfiguredOnDevice() {
+		return configuredOnDevice;
+	}
+
+	public void setConfiguredOnDevice(Boolean configuredOnDevice) {
+		this.configuredOnDevice = configuredOnDevice;
+	}
+
 	public BranchClientAuxiliaryCameraData ptzPresets(List<BranchClientAuxiliaryCameraPtzPresetData> ptzPresets) {
 		this.ptzPresets = ptzPresets;
 		return this;
@@ -459,12 +485,13 @@ public class BranchClientAuxiliaryCameraData {
 				Objects.equals(this.alwaysDisplayDuringCall, branchClientAuxiliaryCameraData.alwaysDisplayDuringCall) &&
 				Objects.equals(this.displayInFloorPlan, branchClientAuxiliaryCameraData.displayInFloorPlan) &&
 				Objects.equals(this.mediaDeviceLabel, branchClientAuxiliaryCameraData.mediaDeviceLabel) &&
+				Objects.equals(this.configuredOnDevice, branchClientAuxiliaryCameraData.configuredOnDevice) &&
 				Objects.equals(this.ptzPresets, branchClientAuxiliaryCameraData.ptzPresets);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, name, type, description, translations, x, y, size, rotation, iconId, alwaysDisplayDuringCall, displayInFloorPlan, mediaDeviceLabel, ptzPresets);
+		return Objects.hash($type, id, name, type, description, translations, x, y, size, rotation, iconId, alwaysDisplayDuringCall, displayInFloorPlan, mediaDeviceLabel, configuredOnDevice, ptzPresets);
 	}
 
 	@Override
@@ -485,6 +512,7 @@ public class BranchClientAuxiliaryCameraData {
 		sb.append("    alwaysDisplayDuringCall: ").append(toIndentedString(alwaysDisplayDuringCall)).append("\n");
 		sb.append("    displayInFloorPlan: ").append(toIndentedString(displayInFloorPlan)).append("\n");
 		sb.append("    mediaDeviceLabel: ").append(toIndentedString(mediaDeviceLabel)).append("\n");
+		sb.append("    configuredOnDevice: ").append(toIndentedString(configuredOnDevice)).append("\n");
 		sb.append("    ptzPresets: ").append(toIndentedString(ptzPresets)).append("\n");
 		sb.append("}");
 		return sb.toString();

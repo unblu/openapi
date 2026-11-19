@@ -46,6 +46,7 @@ import io.swagger.annotations.ApiModelProperty;
 	RatingQuestionMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	RatingQuestionMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	RatingQuestionMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	RatingQuestionMessageData.JSON_PROPERTY_BATCH_INFO,
 	RatingQuestionMessageData.JSON_PROPERTY_TEXT,
 	RatingQuestionMessageData.JSON_PROPERTY_TEXT_TYPE,
 	RatingQuestionMessageData.JSON_PROPERTY_OPTIONS,
@@ -185,6 +186,10 @@ public class RatingQuestionMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -687,6 +692,25 @@ public class RatingQuestionMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public RatingQuestionMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public RatingQuestionMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -889,6 +913,7 @@ public class RatingQuestionMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, ratingQuestionMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, ratingQuestionMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, ratingQuestionMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, ratingQuestionMessageData.batchInfo) &&
 				Objects.equals(this.text, ratingQuestionMessageData.text) &&
 				Objects.equals(this.textType, ratingQuestionMessageData.textType) &&
 				Objects.equals(this.options, ratingQuestionMessageData.options) &&
@@ -901,7 +926,7 @@ public class RatingQuestionMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text, textType, options, answerStatus, declinable, declineLabel, declineValue, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, text, textType, options, answerStatus, declinable, declineLabel, declineValue, availableTranslations);
 	}
 
 	@Override
@@ -932,6 +957,7 @@ public class RatingQuestionMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    options: ").append(toIndentedString(options)).append("\n");

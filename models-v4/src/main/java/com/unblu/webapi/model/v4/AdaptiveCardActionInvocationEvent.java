@@ -15,11 +15,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * An event triggered every time an action on an Adaptive Card message is executed. &lt;p&gt;&#x60;Action.ToggleVisibility&#x60; is handled by the card renderer
- * in the browser and never produces this event. &lt;p&gt; Supported filter keys: &lt;ul&gt; &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;:
- * conversation ID&lt;/li&gt; &lt;/ul&gt;
+ * An event triggered every time an action on an Adaptive Card message is executed. &lt;p&gt; &#x60;Action.ToggleVisibility&#x60; is handled by the card
+ * renderer in the browser and never produces this event. &lt;p&gt; Supported filter keys: &lt;ul&gt;
+ * &lt;li&gt;&#x60;ETypedEventFilterKey.CONVERSATION_ID&#x60;: conversation ID&lt;/li&gt; &lt;/ul&gt;
  */
-@ApiModel(description = "An event triggered every time an action on an Adaptive Card message is executed. <p>`Action.ToggleVisibility` is handled by the card renderer in the browser and never produces this event. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>")
+@ApiModel(description = "An event triggered every time an action on an Adaptive Card message is executed. <p> `Action.ToggleVisibility` is handled by the card renderer in the browser and never produces this event. <p> Supported filter keys: <ul> <li>`ETypedEventFilterKey.CONVERSATION_ID`: conversation ID</li> </ul>")
 
 @JsonPropertyOrder({
 	AdaptiveCardActionInvocationEvent.JSON_PROPERTY_$_TYPE,

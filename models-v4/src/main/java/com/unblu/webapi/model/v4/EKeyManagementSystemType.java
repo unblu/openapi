@@ -15,9 +15,14 @@ public enum EKeyManagementSystemType {
 	GCP_KMS("GCP_KMS"),
 
 	/**
-	 * IBM_KEY_PROTECT: IBM Key Protect
+	 * IBM_KEY_PROTECT: IBM Key Protect. The root key lives in a Standard instance, which is reached at the regional host.
 	 */
 	IBM_KEY_PROTECT("IBM_KEY_PROTECT"),
+
+	/**
+	 * IBM_KEY_PROTECT_DEDICATED: IBM Key Protect Dedicated. The root key lives in a Dedicated instance, which is reached at a host of its own.
+	 */
+	IBM_KEY_PROTECT_DEDICATED("IBM_KEY_PROTECT_DEDICATED"),
 
 	/**
 	 * HASHICORP_VAULT: HashiCorp Vault transit secrets engine

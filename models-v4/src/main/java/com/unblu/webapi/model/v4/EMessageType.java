@@ -77,7 +77,12 @@ public enum EMessageType {
 	/**
 	 * WHATS_APP_TEMPLATE: A message sent as a pre-approved WhatsApp message template
 	 */
-	WHATS_APP_TEMPLATE("WHATS_APP_TEMPLATE");
+	WHATS_APP_TEMPLATE("WHATS_APP_TEMPLATE"),
+
+	/**
+	 * STREAMING_TEXT: A text message a dialog bot streamed, shown to the recipients while it was written and stored once the stream was finished
+	 */
+	STREAMING_TEXT("STREAMING_TEXT");
 
 	private String value;
 

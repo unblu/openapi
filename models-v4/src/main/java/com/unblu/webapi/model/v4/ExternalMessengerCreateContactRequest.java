@@ -196,11 +196,11 @@ public class ExternalMessengerCreateContactRequest {
 
 	/**
 	 * The identifier of the person in the external messenger. The identifier value is based on the configured values of the
-	 * &#x60;CustomExternalMessengerChannel&#x60;contact identifier field name and type.
+	 * &#x60;CustomExternalMessengerChannel&#x60; contact identifier field name and type.
 	 * 
 	 * @return contactIdentifier
 	 **/
-	@ApiModelProperty(value = "The identifier of the person in the external messenger. The identifier value is based on the configured values of the `CustomExternalMessengerChannel`contact identifier field name and type.")
+	@ApiModelProperty(value = "The identifier of the person in the external messenger. The identifier value is based on the configured values of the `CustomExternalMessengerChannel` contact identifier field name and type.")
 	public String getContactIdentifier() {
 		return contactIdentifier;
 	}

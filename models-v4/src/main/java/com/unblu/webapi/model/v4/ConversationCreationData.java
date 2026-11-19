@@ -209,12 +209,12 @@ public class ConversationCreationData {
 	}
 
 	/**
-	 * Unix timestamp (ms) when the conversation is scheduled. Can only be set for conversations with the initial engagement
-	 * type&#x60;EInitialEngagementType.SCHEDULED_CONVERSATION&#x60;.
+	 * Unix timestamp (ms) when the conversation is scheduled. Can only be set for conversations with the initial engagement type
+	 * &#x60;EInitialEngagementType.SCHEDULED_CONVERSATION&#x60;.
 	 * 
 	 * @return scheduledTimestamp
 	 **/
-	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation is scheduled. Can only be set for conversations with the initial engagement type`EInitialEngagementType.SCHEDULED_CONVERSATION`.")
+	@ApiModelProperty(value = "Unix timestamp (ms) when the conversation is scheduled. Can only be set for conversations with the initial engagement type `EInitialEngagementType.SCHEDULED_CONVERSATION`.")
 	public Long getScheduledTimestamp() {
 		return scheduledTimestamp;
 	}
@@ -284,12 +284,12 @@ public class ConversationCreationData {
 	}
 
 	/**
-	 * Participants taking part in the conversation through an external messenger. There must be at least one participant in this list or in
-	 * the&#x60;participants&#x60; list. It must be omitted if &#x60;externalMessengerChannelId&#x60; is not set.
+	 * Participants taking part in the conversation through an external messenger. There must be at least one participant in this list or in the
+	 * &#x60;participants&#x60; list. It must be omitted if &#x60;externalMessengerChannelId&#x60; is not set.
 	 * 
 	 * @return externalParticipants
 	 **/
-	@ApiModelProperty(value = "Participants taking part in the conversation through an external messenger. There must be at least one participant in this list or in the`participants` list. It must be omitted if `externalMessengerChannelId` is not set.")
+	@ApiModelProperty(value = "Participants taking part in the conversation through an external messenger. There must be at least one participant in this list or in the `participants` list. It must be omitted if `externalMessengerChannelId` is not set.")
 	public List<ConversationCreationExternalParticipantData> getExternalParticipants() {
 		return externalParticipants;
 	}
@@ -408,12 +408,12 @@ public class ConversationCreationData {
 	}
 
 	/**
-	 * Template ID of the conversation. If omitted, the default conversation template is retrieved based on the initial engagement type. If provided the value
-	 * of&#x60;initialEngagementType&#x60; has to match the initial engagement type of the template.
+	 * Template ID of the conversation. If omitted, the default conversation template is retrieved based on the initial engagement type. If provided the value of
+	 * &#x60;initialEngagementType&#x60; has to match the initial engagement type of the template.
 	 * 
 	 * @return conversationTemplateId
 	 **/
-	@ApiModelProperty(value = "Template ID of the conversation. If omitted, the default conversation template is retrieved based on the initial engagement type. If provided the value of`initialEngagementType` has to match the initial engagement type of the template.")
+	@ApiModelProperty(value = "Template ID of the conversation. If omitted, the default conversation template is retrieved based on the initial engagement type. If provided the value of `initialEngagementType` has to match the initial engagement type of the template.")
 	public String getConversationTemplateId() {
 		return conversationTemplateId;
 	}
@@ -428,12 +428,12 @@ public class ConversationCreationData {
 	}
 
 	/**
-	 * True if the conversation inherits all configuration and text properties from its conversation template. If omitted, the
-	 * value&#x60;ConversationTemplate.inheritConfigurationAndTexts&#x60; from its conversation template is used.
+	 * True if the conversation inherits all configuration and text properties from its conversation template. If omitted, the value
+	 * &#x60;ConversationTemplate.inheritConfigurationAndTexts&#x60; from its conversation template is used.
 	 * 
 	 * @return inheritConfigurationAndTexts
 	 **/
-	@ApiModelProperty(value = "True if the conversation inherits all configuration and text properties from its conversation template. If omitted, the value`ConversationTemplate.inheritConfigurationAndTexts` from its conversation template is used.")
+	@ApiModelProperty(value = "True if the conversation inherits all configuration and text properties from its conversation template. If omitted, the value `ConversationTemplate.inheritConfigurationAndTexts` from its conversation template is used.")
 	public Boolean isInheritConfigurationAndTexts() {
 		return inheritConfigurationAndTexts;
 	}

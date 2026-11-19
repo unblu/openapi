@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	TextQuestionMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	TextQuestionMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	TextQuestionMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	TextQuestionMessageData.JSON_PROPERTY_BATCH_INFO,
 	TextQuestionMessageData.JSON_PROPERTY_TEXT,
 	TextQuestionMessageData.JSON_PROPERTY_TEXT_TYPE,
 	TextQuestionMessageData.JSON_PROPERTY_QUESTION_TYPE,
@@ -188,6 +189,10 @@ public class TextQuestionMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -706,6 +711,25 @@ public class TextQuestionMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public TextQuestionMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public TextQuestionMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -976,6 +1000,7 @@ public class TextQuestionMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, textQuestionMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, textQuestionMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, textQuestionMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, textQuestionMessageData.batchInfo) &&
 				Objects.equals(this.text, textQuestionMessageData.text) &&
 				Objects.equals(this.textType, textQuestionMessageData.textType) &&
 				Objects.equals(this.questionType, textQuestionMessageData.questionType) &&
@@ -992,7 +1017,7 @@ public class TextQuestionMessageData implements MessageData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text, textType, questionType, hint, minCharacters, maxCharacters, additionalRegex, declinable, declineLabel, declineValue, answerStatus, availableTranslations);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, text, textType, questionType, hint, minCharacters, maxCharacters, additionalRegex, declinable, declineLabel, declineValue, answerStatus, availableTranslations);
 	}
 
 	@Override
@@ -1023,6 +1048,7 @@ public class TextQuestionMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("    textType: ").append(toIndentedString(textType)).append("\n");
 		sb.append("    questionType: ").append(toIndentedString(questionType)).append("\n");

@@ -138,11 +138,17 @@ public interface DialogBotData {
 
 	DialogBotData thinkingTexts(List<BotThinkingTextData> thinkingTexts);
 
-	void setThinkingInputMode(EThinkingInputMode thinkingInputMode);
+	void setTurnInputMode(EBotTurnInputMode turnInputMode);
 
-	EThinkingInputMode getThinkingInputMode();
+	EBotTurnInputMode getTurnInputMode();
 
-	DialogBotData thinkingInputMode(EThinkingInputMode thinkingInputMode);
+	DialogBotData turnInputMode(EBotTurnInputMode turnInputMode);
+
+	void setThinkingInputMode(EBotTurnInputMode thinkingInputMode);
+
+	EBotTurnInputMode getThinkingInputMode();
+
+	DialogBotData thinkingInputMode(EBotTurnInputMode thinkingInputMode);
 
 	void setRandomizeThinkingTexts(Boolean randomizeThinkingTexts);
 

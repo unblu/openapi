@@ -47,7 +47,12 @@ public enum EAnalyticsKpiType {
 	/**
 	 * AVG_RESERVATION_TIME: KPI for the average reservation time of a queue interaction.
 	 */
-	AVG_RESERVATION_TIME("AVG_RESERVATION_TIME");
+	AVG_RESERVATION_TIME("AVG_RESERVATION_TIME"),
+
+	/**
+	 * QUEUE_ENTRIES_COUNT: KPI for the number of times a conversation entered the queue.
+	 */
+	QUEUE_ENTRIES_COUNT("QUEUE_ENTRIES_COUNT");
 
 	private String value;
 

@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 	WaitingTimeAnalyticsKpiData.JSON_PROPERTY_ID,
 	WaitingTimeAnalyticsKpiData.JSON_PROPERTY_EVENT_TIMESTAMP,
 	WaitingTimeAnalyticsKpiData.JSON_PROPERTY_REDACTED,
+	WaitingTimeAnalyticsKpiData.JSON_PROPERTY_INVITATION_ID,
 	WaitingTimeAnalyticsKpiData.JSON_PROPERTY_START_TIMESTAMP,
 	WaitingTimeAnalyticsKpiData.JSON_PROPERTY_END_TIMESTAMP,
 	WaitingTimeAnalyticsKpiData.JSON_PROPERTY_WAITING_TIME_DURATION_MS,
@@ -82,6 +83,10 @@ public class WaitingTimeAnalyticsKpiData {
 	public static final String JSON_PROPERTY_REDACTED = "redacted";
 	@JsonProperty(JSON_PROPERTY_REDACTED)
 	private Boolean redacted;
+
+	public static final String JSON_PROPERTY_INVITATION_ID = "invitationId";
+	@JsonProperty(JSON_PROPERTY_INVITATION_ID)
+	private String invitationId;
 
 	public static final String JSON_PROPERTY_START_TIMESTAMP = "startTimestamp";
 	@JsonProperty(JSON_PROPERTY_START_TIMESTAMP)
@@ -186,6 +191,25 @@ public class WaitingTimeAnalyticsKpiData {
 
 	public void setRedacted(Boolean redacted) {
 		this.redacted = redacted;
+	}
+
+	public WaitingTimeAnalyticsKpiData invitationId(String invitationId) {
+		this.invitationId = invitationId;
+		return this;
+	}
+
+	/**
+	 * The ID of the invitation whose wait this record measures. The record of the matching queue entry carries the same ID.
+	 * 
+	 * @return invitationId
+	 **/
+	@ApiModelProperty(value = "The ID of the invitation whose wait this record measures. The record of the matching queue entry carries the same ID.")
+	public String getInvitationId() {
+		return invitationId;
+	}
+
+	public void setInvitationId(String invitationId) {
+		this.invitationId = invitationId;
 	}
 
 	public WaitingTimeAnalyticsKpiData startTimestamp(Long startTimestamp) {
@@ -334,6 +358,7 @@ public class WaitingTimeAnalyticsKpiData {
 				Objects.equals(this.id, waitingTimeAnalyticsKpiData.id) &&
 				Objects.equals(this.eventTimestamp, waitingTimeAnalyticsKpiData.eventTimestamp) &&
 				Objects.equals(this.redacted, waitingTimeAnalyticsKpiData.redacted) &&
+				Objects.equals(this.invitationId, waitingTimeAnalyticsKpiData.invitationId) &&
 				Objects.equals(this.startTimestamp, waitingTimeAnalyticsKpiData.startTimestamp) &&
 				Objects.equals(this.endTimestamp, waitingTimeAnalyticsKpiData.endTimestamp) &&
 				Objects.equals(this.waitingTimeDurationMs, waitingTimeAnalyticsKpiData.waitingTimeDurationMs) &&
@@ -345,7 +370,7 @@ public class WaitingTimeAnalyticsKpiData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, eventTimestamp, redacted, startTimestamp, endTimestamp, waitingTimeDurationMs, outcome, type, target, conversation);
+		return Objects.hash($type, id, eventTimestamp, redacted, invitationId, startTimestamp, endTimestamp, waitingTimeDurationMs, outcome, type, target, conversation);
 	}
 
 	@Override
@@ -356,6 +381,7 @@ public class WaitingTimeAnalyticsKpiData {
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    eventTimestamp: ").append(toIndentedString(eventTimestamp)).append("\n");
 		sb.append("    redacted: ").append(toIndentedString(redacted)).append("\n");
+		sb.append("    invitationId: ").append(toIndentedString(invitationId)).append("\n");
 		sb.append("    startTimestamp: ").append(toIndentedString(startTimestamp)).append("\n");
 		sb.append("    endTimestamp: ").append(toIndentedString(endTimestamp)).append("\n");
 		sb.append("    waitingTimeDurationMs: ").append(toIndentedString(waitingTimeDurationMs)).append("\n");

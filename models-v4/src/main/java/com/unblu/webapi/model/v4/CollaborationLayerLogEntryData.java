@@ -398,12 +398,12 @@ public class CollaborationLayerLogEntryData {
 	}
 
 	/**
-	 * The persons who had an active conversation presence at any point while the collaboration layer was displayed. This is the per-person view
-	 * of&#x60;activeConversationPresenceIds&#x60;: it lists the distinct persons behind those conversation presences.
+	 * The persons who had an active conversation presence at any point while the collaboration layer was displayed. This is the per-person view of
+	 * &#x60;activeConversationPresenceIds&#x60;: it lists the distinct persons behind those conversation presences.
 	 * 
 	 * @return participantPersonData
 	 **/
-	@ApiModelProperty(value = "The persons who had an active conversation presence at any point while the collaboration layer was displayed. This is the per-person view of`activeConversationPresenceIds`: it lists the distinct persons behind those conversation presences.")
+	@ApiModelProperty(value = "The persons who had an active conversation presence at any point while the collaboration layer was displayed. This is the per-person view of `activeConversationPresenceIds`: it lists the distinct persons behind those conversation presences.")
 	public List<PersonData> getParticipantPersonData() {
 		return participantPersonData;
 	}
@@ -455,12 +455,12 @@ public class CollaborationLayerLogEntryData {
 	/**
 	 * The IDs of the conversation presences that were active at least once while this layer was displayed. A conversation presence indicates that a person was
 	 * connected to the conversation (through a person presence) while the layer was active; it does not prove that the person actually saw the layer. A single
-	 * person can have multiple parallel conversation presences if they are connected with multiple devices. The persons behind these presences are exposed
-	 * as&#x60;participantPersonData&#x60;.
+	 * person can have multiple parallel conversation presences if they are connected with multiple devices. The persons behind these presences are exposed as
+	 * &#x60;participantPersonData&#x60;.
 	 * 
 	 * @return activeConversationPresenceIds
 	 **/
-	@ApiModelProperty(value = "The IDs of the conversation presences that were active at least once while this layer was displayed. A conversation presence indicates that a person was connected to the conversation (through a person presence) while the layer was active; it does not prove that the person actually saw the layer. A single person can have multiple parallel conversation presences if they are connected with multiple devices. The persons behind these presences are exposed as`participantPersonData`.")
+	@ApiModelProperty(value = "The IDs of the conversation presences that were active at least once while this layer was displayed. A conversation presence indicates that a person was connected to the conversation (through a person presence) while the layer was active; it does not prove that the person actually saw the layer. A single person can have multiple parallel conversation presences if they are connected with multiple devices. The persons behind these presences are exposed as `participantPersonData`.")
 	public List<String> getActiveConversationPresenceIds() {
 		return activeConversationPresenceIds;
 	}

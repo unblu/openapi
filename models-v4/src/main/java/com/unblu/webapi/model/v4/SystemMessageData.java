@@ -45,6 +45,7 @@ import io.swagger.annotations.ApiModelProperty;
 	SystemMessageData.JSON_PROPERTY_CONVERSATION_LOCALE,
 	SystemMessageData.JSON_PROPERTY_LAST_EDITED_BY_PERSON_ID,
 	SystemMessageData.JSON_PROPERTY_LAST_EDITED_TIMESTAMP,
+	SystemMessageData.JSON_PROPERTY_BATCH_INFO,
 	SystemMessageData.JSON_PROPERTY_TEXT,
 })
 @JsonAutoDetect(creatorVisibility = Visibility.NONE, fieldVisibility = Visibility.NONE, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -177,6 +178,10 @@ public class SystemMessageData implements MessageData {
 	public static final String JSON_PROPERTY_LAST_EDITED_TIMESTAMP = "lastEditedTimestamp";
 	@JsonProperty(JSON_PROPERTY_LAST_EDITED_TIMESTAMP)
 	private Long lastEditedTimestamp;
+
+	public static final String JSON_PROPERTY_BATCH_INFO = "batchInfo";
+	@JsonProperty(JSON_PROPERTY_BATCH_INFO)
+	private MessageBatchInfo batchInfo = null;
 
 	public static final String JSON_PROPERTY_TEXT = "text";
 	@JsonProperty(JSON_PROPERTY_TEXT)
@@ -651,6 +656,25 @@ public class SystemMessageData implements MessageData {
 		this.lastEditedTimestamp = lastEditedTimestamp;
 	}
 
+	public SystemMessageData batchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+		return this;
+	}
+
+	/**
+	 * Get batchInfo
+	 * 
+	 * @return batchInfo
+	 **/
+	@ApiModelProperty(value = "")
+	public MessageBatchInfo getBatchInfo() {
+		return batchInfo;
+	}
+
+	public void setBatchInfo(MessageBatchInfo batchInfo) {
+		this.batchInfo = batchInfo;
+	}
+
 	public SystemMessageData text(String text) {
 		this.text = text;
 		return this;
@@ -703,12 +727,13 @@ public class SystemMessageData implements MessageData {
 				Objects.equals(this.conversationLocale, systemMessageData.conversationLocale) &&
 				Objects.equals(this.lastEditedByPersonId, systemMessageData.lastEditedByPersonId) &&
 				Objects.equals(this.lastEditedTimestamp, systemMessageData.lastEditedTimestamp) &&
+				Objects.equals(this.batchInfo, systemMessageData.batchInfo) &&
 				Objects.equals(this.text, systemMessageData.text);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, text);
+		return Objects.hash($type, id, conversationId, externalMessengerChannelId, accountId, senderPerson, senderPersonPresenceId, serverTimestamp, sendTimestamp, type, recipientPersonIds, fallbackText, actionId, sourceId, botThreadId, internal, contentOrigin, replyToMessageId, externalMessageId, replyToExternalMessageId, locale, conversationLocale, lastEditedByPersonId, lastEditedTimestamp, batchInfo, text);
 	}
 
 	@Override
@@ -739,6 +764,7 @@ public class SystemMessageData implements MessageData {
 		sb.append("    conversationLocale: ").append(toIndentedString(conversationLocale)).append("\n");
 		sb.append("    lastEditedByPersonId: ").append(toIndentedString(lastEditedByPersonId)).append("\n");
 		sb.append("    lastEditedTimestamp: ").append(toIndentedString(lastEditedTimestamp)).append("\n");
+		sb.append("    batchInfo: ").append(toIndentedString(batchInfo)).append("\n");
 		sb.append("    text: ").append(toIndentedString(text)).append("\n");
 		sb.append("}");
 		return sb.toString();
